@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2015  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -57,17 +57,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaTagListResponse : KalturaObjectBase
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaTag elements
-@property (nonatomic,assign,readonly) int totalCount;
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-- (KalturaFieldType)getTypeOfTotalCount;
-- (void)setTotalCountFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaIndexTagsByPrivacyContextJobData : KalturaJobData
 @property (nonatomic,assign) int changedCategoryId;
 @property (nonatomic,copy) NSString* deletedPrivacyContexts;
@@ -93,6 +82,14 @@
 - (KalturaFieldType)getTypeOfInstanceCountIn;
 - (void)setInstanceCountEqualFromString:(NSString*)aPropVal;
 - (void)setInstanceCountInFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaTagListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaTag elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
 @end
 
 ///////////////////////// services /////////////////////////

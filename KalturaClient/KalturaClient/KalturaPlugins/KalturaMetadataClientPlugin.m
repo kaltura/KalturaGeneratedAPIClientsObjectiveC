@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2015  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -86,10 +86,6 @@
 {
     return @"codeCuePointMetadata.CodeCuePoint";
 }
-+ (NSString*)THUMB_CUE_POINT
-{
-    return @"thumbCuePointMetadata.thumbCuePoint";
-}
 + (NSString*)ENTRY
 {
     return @"1";
@@ -105,6 +101,10 @@
 + (NSString*)PARTNER
 {
     return @"4";
+}
++ (NSString*)DYNAMIC_OBJECT
+{
+    return @"5";
 }
 @end
 
@@ -313,59 +313,6 @@
     [self->_metadataObjectType release];
     [self->_objectId release];
     [self->_xml release];
-    [super dealloc];
-}
-
-@end
-
-@interface KalturaMetadataListResponse()
-@property (nonatomic,retain) NSMutableArray* objects;
-@property (nonatomic,assign) int totalCount;
-@end
-
-@implementation KalturaMetadataListResponse
-@synthesize objects = _objects;
-@synthesize totalCount = _totalCount;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_totalCount = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaMetadata";
-}
-
-- (KalturaFieldType)getTypeOfTotalCount
-{
-    return KFT_Int;
-}
-
-- (void)setTotalCountFromString:(NSString*)aPropVal
-{
-    self.totalCount = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaMetadataListResponse"];
-}
-
-- (void)dealloc
-{
-    [self->_objects release];
     [super dealloc];
 }
 
@@ -609,112 +556,6 @@
 
 @end
 
-@interface KalturaMetadataProfileFieldListResponse()
-@property (nonatomic,retain) NSMutableArray* objects;
-@property (nonatomic,assign) int totalCount;
-@end
-
-@implementation KalturaMetadataProfileFieldListResponse
-@synthesize objects = _objects;
-@synthesize totalCount = _totalCount;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_totalCount = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaMetadataProfileField";
-}
-
-- (KalturaFieldType)getTypeOfTotalCount
-{
-    return KFT_Int;
-}
-
-- (void)setTotalCountFromString:(NSString*)aPropVal
-{
-    self.totalCount = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaMetadataProfileFieldListResponse"];
-}
-
-- (void)dealloc
-{
-    [self->_objects release];
-    [super dealloc];
-}
-
-@end
-
-@interface KalturaMetadataProfileListResponse()
-@property (nonatomic,retain) NSMutableArray* objects;
-@property (nonatomic,assign) int totalCount;
-@end
-
-@implementation KalturaMetadataProfileListResponse
-@synthesize objects = _objects;
-@synthesize totalCount = _totalCount;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_totalCount = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaMetadataProfile";
-}
-
-- (KalturaFieldType)getTypeOfTotalCount
-{
-    return KFT_Int;
-}
-
-- (void)setTotalCountFromString:(NSString*)aPropVal
-{
-    self.totalCount = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaMetadataProfileListResponse"];
-}
-
-- (void)dealloc
-{
-    [self->_objects release];
-    [super dealloc];
-}
-
-@end
-
 @implementation KalturaImportMetadataJobData
 @synthesize srcFileUrl = _srcFileUrl;
 @synthesize destFileLocalPath = _destFileLocalPath;
@@ -763,6 +604,515 @@
 {
     [self->_srcFileUrl release];
     [self->_destFileLocalPath release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaMetadataListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
+
+@implementation KalturaMetadataListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfObjects
+{
+    return @"KalturaMetadata";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaMetadataListResponse"];
+}
+
+- (void)dealloc
+{
+    [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaMetadataProfileBaseFilter
+@synthesize idEqual = _idEqual;
+@synthesize partnerIdEqual = _partnerIdEqual;
+@synthesize metadataObjectTypeEqual = _metadataObjectTypeEqual;
+@synthesize metadataObjectTypeIn = _metadataObjectTypeIn;
+@synthesize versionEqual = _versionEqual;
+@synthesize nameEqual = _nameEqual;
+@synthesize systemNameEqual = _systemNameEqual;
+@synthesize systemNameIn = _systemNameIn;
+@synthesize createdAtGreaterThanOrEqual = _createdAtGreaterThanOrEqual;
+@synthesize createdAtLessThanOrEqual = _createdAtLessThanOrEqual;
+@synthesize updatedAtGreaterThanOrEqual = _updatedAtGreaterThanOrEqual;
+@synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
+@synthesize statusEqual = _statusEqual;
+@synthesize statusIn = _statusIn;
+@synthesize createModeEqual = _createModeEqual;
+@synthesize createModeNotEqual = _createModeNotEqual;
+@synthesize createModeIn = _createModeIn;
+@synthesize createModeNotIn = _createModeNotIn;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_idEqual = KALTURA_UNDEF_INT;
+    self->_partnerIdEqual = KALTURA_UNDEF_INT;
+    self->_versionEqual = KALTURA_UNDEF_INT;
+    self->_createdAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_createdAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_updatedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_updatedAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_statusEqual = KALTURA_UNDEF_INT;
+    self->_createModeEqual = KALTURA_UNDEF_INT;
+    self->_createModeNotEqual = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfIdEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfPartnerIdEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfMetadataObjectTypeEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfMetadataObjectTypeIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfVersionEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfNameEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSystemNameEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSystemNameIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfStatusEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfStatusIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCreateModeEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCreateModeNotEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCreateModeIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCreateModeNotIn
+{
+    return KFT_String;
+}
+
+- (void)setIdEqualFromString:(NSString*)aPropVal
+{
+    self.idEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setPartnerIdEqualFromString:(NSString*)aPropVal
+{
+    self.partnerIdEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setVersionEqualFromString:(NSString*)aPropVal
+{
+    self.versionEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.createdAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.createdAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.updatedAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.updatedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setStatusEqualFromString:(NSString*)aPropVal
+{
+    self.statusEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreateModeEqualFromString:(NSString*)aPropVal
+{
+    self.createModeEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreateModeNotEqualFromString:(NSString*)aPropVal
+{
+    self.createModeNotEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaMetadataProfileBaseFilter"];
+    [aParams addIfDefinedKey:@"idEqual" withInt:self.idEqual];
+    [aParams addIfDefinedKey:@"partnerIdEqual" withInt:self.partnerIdEqual];
+    [aParams addIfDefinedKey:@"metadataObjectTypeEqual" withString:self.metadataObjectTypeEqual];
+    [aParams addIfDefinedKey:@"metadataObjectTypeIn" withString:self.metadataObjectTypeIn];
+    [aParams addIfDefinedKey:@"versionEqual" withInt:self.versionEqual];
+    [aParams addIfDefinedKey:@"nameEqual" withString:self.nameEqual];
+    [aParams addIfDefinedKey:@"systemNameEqual" withString:self.systemNameEqual];
+    [aParams addIfDefinedKey:@"systemNameIn" withString:self.systemNameIn];
+    [aParams addIfDefinedKey:@"createdAtGreaterThanOrEqual" withInt:self.createdAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
+    [aParams addIfDefinedKey:@"updatedAtGreaterThanOrEqual" withInt:self.updatedAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
+    [aParams addIfDefinedKey:@"statusEqual" withInt:self.statusEqual];
+    [aParams addIfDefinedKey:@"statusIn" withString:self.statusIn];
+    [aParams addIfDefinedKey:@"createModeEqual" withInt:self.createModeEqual];
+    [aParams addIfDefinedKey:@"createModeNotEqual" withInt:self.createModeNotEqual];
+    [aParams addIfDefinedKey:@"createModeIn" withString:self.createModeIn];
+    [aParams addIfDefinedKey:@"createModeNotIn" withString:self.createModeNotIn];
+}
+
+- (void)dealloc
+{
+    [self->_metadataObjectTypeEqual release];
+    [self->_metadataObjectTypeIn release];
+    [self->_nameEqual release];
+    [self->_systemNameEqual release];
+    [self->_systemNameIn release];
+    [self->_statusIn release];
+    [self->_createModeIn release];
+    [self->_createModeNotIn release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaMetadataProfileFieldListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
+
+@implementation KalturaMetadataProfileFieldListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfObjects
+{
+    return @"KalturaMetadataProfileField";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaMetadataProfileFieldListResponse"];
+}
+
+- (void)dealloc
+{
+    [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaMetadataProfileListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
+
+@implementation KalturaMetadataProfileListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfObjects
+{
+    return @"KalturaMetadataProfile";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaMetadataProfileListResponse"];
+}
+
+- (void)dealloc
+{
+    [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaMetadataResponseProfileMapping
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaMetadataResponseProfileMapping"];
+}
+
+@end
+
+@implementation KalturaTransformMetadataJobData
+@synthesize srcXslPath = _srcXslPath;
+@synthesize srcVersion = _srcVersion;
+@synthesize destVersion = _destVersion;
+@synthesize destXsdPath = _destXsdPath;
+@synthesize metadataProfileId = _metadataProfileId;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_srcVersion = KALTURA_UNDEF_INT;
+    self->_destVersion = KALTURA_UNDEF_INT;
+    self->_metadataProfileId = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfSrcXslPath
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSrcVersion
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfDestVersion
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfDestXsdPath
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfMetadataProfileId
+{
+    return KFT_Int;
+}
+
+- (void)setSrcVersionFromString:(NSString*)aPropVal
+{
+    self.srcVersion = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setDestVersionFromString:(NSString*)aPropVal
+{
+    self.destVersion = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setMetadataProfileIdFromString:(NSString*)aPropVal
+{
+    self.metadataProfileId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaTransformMetadataJobData"];
+    [aParams addIfDefinedKey:@"srcXslPath" withString:self.srcXslPath];
+    [aParams addIfDefinedKey:@"srcVersion" withInt:self.srcVersion];
+    [aParams addIfDefinedKey:@"destVersion" withInt:self.destVersion];
+    [aParams addIfDefinedKey:@"destXsdPath" withString:self.destXsdPath];
+    [aParams addIfDefinedKey:@"metadataProfileId" withInt:self.metadataProfileId];
+}
+
+- (void)dealloc
+{
+    [self->_srcXslPath release];
+    [self->_destXsdPath release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaCompareMetadataCondition
+@synthesize xPath = _xPath;
+@synthesize profileId = _profileId;
+@synthesize profileSystemName = _profileSystemName;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_profileId = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfXPath
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfProfileId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfProfileSystemName
+{
+    return KFT_String;
+}
+
+- (void)setProfileIdFromString:(NSString*)aPropVal
+{
+    self.profileId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaCompareMetadataCondition"];
+    [aParams addIfDefinedKey:@"xPath" withString:self.xPath];
+    [aParams addIfDefinedKey:@"profileId" withInt:self.profileId];
+    [aParams addIfDefinedKey:@"profileSystemName" withString:self.profileSystemName];
+}
+
+- (void)dealloc
+{
+    [self->_xPath release];
+    [self->_profileSystemName release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaMatchMetadataCondition
+@synthesize xPath = _xPath;
+@synthesize profileId = _profileId;
+@synthesize profileSystemName = _profileSystemName;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_profileId = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfXPath
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfProfileId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfProfileSystemName
+{
+    return KFT_String;
+}
+
+- (void)setProfileIdFromString:(NSString*)aPropVal
+{
+    self.profileId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaMatchMetadataCondition"];
+    [aParams addIfDefinedKey:@"xPath" withString:self.xPath];
+    [aParams addIfDefinedKey:@"profileId" withInt:self.profileId];
+    [aParams addIfDefinedKey:@"profileSystemName" withString:self.profileSystemName];
+}
+
+- (void)dealloc
+{
+    [self->_xPath release];
+    [self->_profileSystemName release];
     [super dealloc];
 }
 
@@ -993,409 +1343,6 @@
 
 @end
 
-@implementation KalturaMetadataProfileBaseFilter
-@synthesize idEqual = _idEqual;
-@synthesize partnerIdEqual = _partnerIdEqual;
-@synthesize metadataObjectTypeEqual = _metadataObjectTypeEqual;
-@synthesize metadataObjectTypeIn = _metadataObjectTypeIn;
-@synthesize versionEqual = _versionEqual;
-@synthesize nameEqual = _nameEqual;
-@synthesize systemNameEqual = _systemNameEqual;
-@synthesize systemNameIn = _systemNameIn;
-@synthesize createdAtGreaterThanOrEqual = _createdAtGreaterThanOrEqual;
-@synthesize createdAtLessThanOrEqual = _createdAtLessThanOrEqual;
-@synthesize updatedAtGreaterThanOrEqual = _updatedAtGreaterThanOrEqual;
-@synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
-@synthesize statusEqual = _statusEqual;
-@synthesize statusIn = _statusIn;
-@synthesize createModeEqual = _createModeEqual;
-@synthesize createModeNotEqual = _createModeNotEqual;
-@synthesize createModeIn = _createModeIn;
-@synthesize createModeNotIn = _createModeNotIn;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_idEqual = KALTURA_UNDEF_INT;
-    self->_partnerIdEqual = KALTURA_UNDEF_INT;
-    self->_versionEqual = KALTURA_UNDEF_INT;
-    self->_createdAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_createdAtLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_updatedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_updatedAtLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_statusEqual = KALTURA_UNDEF_INT;
-    self->_createModeEqual = KALTURA_UNDEF_INT;
-    self->_createModeNotEqual = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfIdEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfPartnerIdEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfMetadataObjectTypeEqual
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfMetadataObjectTypeIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfVersionEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfNameEqual
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfSystemNameEqual
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfSystemNameIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfStatusEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfStatusIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfCreateModeEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCreateModeNotEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCreateModeIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfCreateModeNotIn
-{
-    return KFT_String;
-}
-
-- (void)setIdEqualFromString:(NSString*)aPropVal
-{
-    self.idEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setPartnerIdEqualFromString:(NSString*)aPropVal
-{
-    self.partnerIdEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setVersionEqualFromString:(NSString*)aPropVal
-{
-    self.versionEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.createdAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.createdAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.updatedAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.updatedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setStatusEqualFromString:(NSString*)aPropVal
-{
-    self.statusEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCreateModeEqualFromString:(NSString*)aPropVal
-{
-    self.createModeEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCreateModeNotEqualFromString:(NSString*)aPropVal
-{
-    self.createModeNotEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaMetadataProfileBaseFilter"];
-    [aParams addIfDefinedKey:@"idEqual" withInt:self.idEqual];
-    [aParams addIfDefinedKey:@"partnerIdEqual" withInt:self.partnerIdEqual];
-    [aParams addIfDefinedKey:@"metadataObjectTypeEqual" withString:self.metadataObjectTypeEqual];
-    [aParams addIfDefinedKey:@"metadataObjectTypeIn" withString:self.metadataObjectTypeIn];
-    [aParams addIfDefinedKey:@"versionEqual" withInt:self.versionEqual];
-    [aParams addIfDefinedKey:@"nameEqual" withString:self.nameEqual];
-    [aParams addIfDefinedKey:@"systemNameEqual" withString:self.systemNameEqual];
-    [aParams addIfDefinedKey:@"systemNameIn" withString:self.systemNameIn];
-    [aParams addIfDefinedKey:@"createdAtGreaterThanOrEqual" withInt:self.createdAtGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
-    [aParams addIfDefinedKey:@"updatedAtGreaterThanOrEqual" withInt:self.updatedAtGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
-    [aParams addIfDefinedKey:@"statusEqual" withInt:self.statusEqual];
-    [aParams addIfDefinedKey:@"statusIn" withString:self.statusIn];
-    [aParams addIfDefinedKey:@"createModeEqual" withInt:self.createModeEqual];
-    [aParams addIfDefinedKey:@"createModeNotEqual" withInt:self.createModeNotEqual];
-    [aParams addIfDefinedKey:@"createModeIn" withString:self.createModeIn];
-    [aParams addIfDefinedKey:@"createModeNotIn" withString:self.createModeNotIn];
-}
-
-- (void)dealloc
-{
-    [self->_metadataObjectTypeEqual release];
-    [self->_metadataObjectTypeIn release];
-    [self->_nameEqual release];
-    [self->_systemNameEqual release];
-    [self->_systemNameIn release];
-    [self->_statusIn release];
-    [self->_createModeIn release];
-    [self->_createModeNotIn release];
-    [super dealloc];
-}
-
-@end
-
-@implementation KalturaTransformMetadataJobData
-@synthesize srcXslPath = _srcXslPath;
-@synthesize srcVersion = _srcVersion;
-@synthesize destVersion = _destVersion;
-@synthesize destXsdPath = _destXsdPath;
-@synthesize metadataProfileId = _metadataProfileId;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_srcVersion = KALTURA_UNDEF_INT;
-    self->_destVersion = KALTURA_UNDEF_INT;
-    self->_metadataProfileId = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfSrcXslPath
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfSrcVersion
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfDestVersion
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfDestXsdPath
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfMetadataProfileId
-{
-    return KFT_Int;
-}
-
-- (void)setSrcVersionFromString:(NSString*)aPropVal
-{
-    self.srcVersion = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setDestVersionFromString:(NSString*)aPropVal
-{
-    self.destVersion = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setMetadataProfileIdFromString:(NSString*)aPropVal
-{
-    self.metadataProfileId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaTransformMetadataJobData"];
-    [aParams addIfDefinedKey:@"srcXslPath" withString:self.srcXslPath];
-    [aParams addIfDefinedKey:@"srcVersion" withInt:self.srcVersion];
-    [aParams addIfDefinedKey:@"destVersion" withInt:self.destVersion];
-    [aParams addIfDefinedKey:@"destXsdPath" withString:self.destXsdPath];
-    [aParams addIfDefinedKey:@"metadataProfileId" withInt:self.metadataProfileId];
-}
-
-- (void)dealloc
-{
-    [self->_srcXslPath release];
-    [self->_destXsdPath release];
-    [super dealloc];
-}
-
-@end
-
-@implementation KalturaCompareMetadataCondition
-@synthesize xPath = _xPath;
-@synthesize profileId = _profileId;
-@synthesize profileSystemName = _profileSystemName;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_profileId = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfXPath
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfProfileId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfProfileSystemName
-{
-    return KFT_String;
-}
-
-- (void)setProfileIdFromString:(NSString*)aPropVal
-{
-    self.profileId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaCompareMetadataCondition"];
-    [aParams addIfDefinedKey:@"xPath" withString:self.xPath];
-    [aParams addIfDefinedKey:@"profileId" withInt:self.profileId];
-    [aParams addIfDefinedKey:@"profileSystemName" withString:self.profileSystemName];
-}
-
-- (void)dealloc
-{
-    [self->_xPath release];
-    [self->_profileSystemName release];
-    [super dealloc];
-}
-
-@end
-
-@implementation KalturaMatchMetadataCondition
-@synthesize xPath = _xPath;
-@synthesize profileId = _profileId;
-@synthesize profileSystemName = _profileSystemName;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_profileId = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfXPath
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfProfileId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfProfileSystemName
-{
-    return KFT_String;
-}
-
-- (void)setProfileIdFromString:(NSString*)aPropVal
-{
-    self.profileId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaMatchMetadataCondition"];
-    [aParams addIfDefinedKey:@"xPath" withString:self.xPath];
-    [aParams addIfDefinedKey:@"profileId" withInt:self.profileId];
-    [aParams addIfDefinedKey:@"profileSystemName" withString:self.profileSystemName];
-}
-
-- (void)dealloc
-{
-    [self->_xPath release];
-    [self->_profileSystemName release];
-    [super dealloc];
-}
-
-@end
-
 @implementation KalturaMetadataFieldChangedCondition
 @synthesize xPath = _xPath;
 @synthesize profileId = _profileId;
@@ -1465,16 +1412,6 @@
 
 @end
 
-@implementation KalturaMetadataFilter
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaMetadataFilter"];
-}
-
-@end
-
 @implementation KalturaMetadataProfileFilter
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
@@ -1526,6 +1463,16 @@
 {
     [self->_orderBy release];
     [super dealloc];
+}
+
+@end
+
+@implementation KalturaMetadataFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaMetadataFilter"];
 }
 
 @end
@@ -1637,6 +1584,13 @@
 - (void)invalidateWithId:(int)aId
 {
     [self invalidateWithId:aId withVersion:KALTURA_UNDEF_INT];
+}
+
+- (int)indexWithId:(NSString*)aId withShouldUpdate:(KALTURA_BOOL)aShouldUpdate
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"shouldUpdate" withBool:aShouldUpdate];
+    return [self.client queueIntService:@"metadata_metadata" withAction:@"index"];
 }
 
 - (NSString*)serveWithId:(int)aId

@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2015  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -60,11 +60,11 @@
 + (NSString*)AD_CUE_POINT;
 + (NSString*)ANNOTATION;
 + (NSString*)CODE_CUE_POINT;
-+ (NSString*)THUMB_CUE_POINT;
 + (NSString*)ENTRY;
 + (NSString*)CATEGORY;
 + (NSString*)USER;
 + (NSString*)PARTNER;
++ (NSString*)DYNAMIC_OBJECT;
 @end
 
 // @package Kaltura
@@ -127,17 +127,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaMetadataListResponse : KalturaObjectBase
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaMetadata elements
-@property (nonatomic,assign,readonly) int totalCount;
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-- (KalturaFieldType)getTypeOfTotalCount;
-- (void)setTotalCountFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaMetadataProfile : KalturaObjectBase
 @property (nonatomic,assign,readonly) int id;
 @property (nonatomic,assign,readonly) int partnerId;
@@ -192,28 +181,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaMetadataProfileFieldListResponse : KalturaObjectBase
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaMetadataProfileField elements
-@property (nonatomic,assign,readonly) int totalCount;
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-- (KalturaFieldType)getTypeOfTotalCount;
-- (void)setTotalCountFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaMetadataProfileListResponse : KalturaObjectBase
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaMetadataProfile elements
-@property (nonatomic,assign,readonly) int totalCount;
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-- (KalturaFieldType)getTypeOfTotalCount;
-- (void)setTotalCountFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaImportMetadataJobData : KalturaJobData
 @property (nonatomic,copy) NSString* srcFileUrl;
 @property (nonatomic,copy) NSString* destFileLocalPath;
@@ -226,54 +193,10 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaMetadataBaseFilter : KalturaFilter
-@property (nonatomic,assign) int partnerIdEqual;
-@property (nonatomic,assign) int metadataProfileIdEqual;
-@property (nonatomic,assign) int metadataProfileVersionEqual;
-@property (nonatomic,assign) int metadataProfileVersionGreaterThanOrEqual;
-@property (nonatomic,assign) int metadataProfileVersionLessThanOrEqual;
-@property (nonatomic,copy) NSString* metadataObjectTypeEqual;	// enum KalturaMetadataObjectType
-@property (nonatomic,copy) NSString* objectIdEqual;
-@property (nonatomic,copy) NSString* objectIdIn;
-@property (nonatomic,assign) int versionEqual;
-@property (nonatomic,assign) int versionGreaterThanOrEqual;
-@property (nonatomic,assign) int versionLessThanOrEqual;
-@property (nonatomic,assign) int createdAtGreaterThanOrEqual;
-@property (nonatomic,assign) int createdAtLessThanOrEqual;
-@property (nonatomic,assign) int updatedAtGreaterThanOrEqual;
-@property (nonatomic,assign) int updatedAtLessThanOrEqual;
-@property (nonatomic,assign) int statusEqual;	// enum KalturaMetadataStatus
-@property (nonatomic,copy) NSString* statusIn;
-- (KalturaFieldType)getTypeOfPartnerIdEqual;
-- (KalturaFieldType)getTypeOfMetadataProfileIdEqual;
-- (KalturaFieldType)getTypeOfMetadataProfileVersionEqual;
-- (KalturaFieldType)getTypeOfMetadataProfileVersionGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfMetadataProfileVersionLessThanOrEqual;
-- (KalturaFieldType)getTypeOfMetadataObjectTypeEqual;
-- (KalturaFieldType)getTypeOfObjectIdEqual;
-- (KalturaFieldType)getTypeOfObjectIdIn;
-- (KalturaFieldType)getTypeOfVersionEqual;
-- (KalturaFieldType)getTypeOfVersionGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfVersionLessThanOrEqual;
-- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual;
-- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
-- (KalturaFieldType)getTypeOfStatusEqual;
-- (KalturaFieldType)getTypeOfStatusIn;
-- (void)setPartnerIdEqualFromString:(NSString*)aPropVal;
-- (void)setMetadataProfileIdEqualFromString:(NSString*)aPropVal;
-- (void)setMetadataProfileVersionEqualFromString:(NSString*)aPropVal;
-- (void)setMetadataProfileVersionGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setMetadataProfileVersionLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setVersionEqualFromString:(NSString*)aPropVal;
-- (void)setVersionGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setVersionLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setStatusEqualFromString:(NSString*)aPropVal;
+@interface KalturaMetadataListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaMetadata elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
 @end
 
 // @package Kaltura
@@ -325,6 +248,27 @@
 - (void)setStatusEqualFromString:(NSString*)aPropVal;
 - (void)setCreateModeEqualFromString:(NSString*)aPropVal;
 - (void)setCreateModeNotEqualFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaMetadataProfileFieldListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaMetadataProfileField elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaMetadataProfileListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaMetadataProfile elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaMetadataResponseProfileMapping : KalturaResponseProfileMapping
 @end
 
 // @package Kaltura
@@ -383,6 +327,59 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaMetadataBaseFilter : KalturaRelatedFilter
+@property (nonatomic,assign) int partnerIdEqual;
+@property (nonatomic,assign) int metadataProfileIdEqual;
+@property (nonatomic,assign) int metadataProfileVersionEqual;
+@property (nonatomic,assign) int metadataProfileVersionGreaterThanOrEqual;
+@property (nonatomic,assign) int metadataProfileVersionLessThanOrEqual;
+// When null, default is KalturaMetadataObjectType::ENTRY
+@property (nonatomic,copy) NSString* metadataObjectTypeEqual;	// enum KalturaMetadataObjectType
+@property (nonatomic,copy) NSString* objectIdEqual;
+@property (nonatomic,copy) NSString* objectIdIn;
+@property (nonatomic,assign) int versionEqual;
+@property (nonatomic,assign) int versionGreaterThanOrEqual;
+@property (nonatomic,assign) int versionLessThanOrEqual;
+@property (nonatomic,assign) int createdAtGreaterThanOrEqual;
+@property (nonatomic,assign) int createdAtLessThanOrEqual;
+@property (nonatomic,assign) int updatedAtGreaterThanOrEqual;
+@property (nonatomic,assign) int updatedAtLessThanOrEqual;
+@property (nonatomic,assign) int statusEqual;	// enum KalturaMetadataStatus
+@property (nonatomic,copy) NSString* statusIn;
+- (KalturaFieldType)getTypeOfPartnerIdEqual;
+- (KalturaFieldType)getTypeOfMetadataProfileIdEqual;
+- (KalturaFieldType)getTypeOfMetadataProfileVersionEqual;
+- (KalturaFieldType)getTypeOfMetadataProfileVersionGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfMetadataProfileVersionLessThanOrEqual;
+- (KalturaFieldType)getTypeOfMetadataObjectTypeEqual;
+- (KalturaFieldType)getTypeOfObjectIdEqual;
+- (KalturaFieldType)getTypeOfObjectIdIn;
+- (KalturaFieldType)getTypeOfVersionEqual;
+- (KalturaFieldType)getTypeOfVersionGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfVersionLessThanOrEqual;
+- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfStatusEqual;
+- (KalturaFieldType)getTypeOfStatusIn;
+- (void)setPartnerIdEqualFromString:(NSString*)aPropVal;
+- (void)setMetadataProfileIdEqualFromString:(NSString*)aPropVal;
+- (void)setMetadataProfileVersionEqualFromString:(NSString*)aPropVal;
+- (void)setMetadataProfileVersionGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setMetadataProfileVersionLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setVersionEqualFromString:(NSString*)aPropVal;
+- (void)setVersionGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setVersionLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setStatusEqualFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaMetadataFieldChangedCondition : KalturaMatchCondition
 // May contain the full xpath to the field in three formats
 // 	 1. Slashed xPath, e.g. /metadata/myElementName
@@ -405,11 +402,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaMetadataFilter : KalturaMetadataBaseFilter
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaMetadataProfileFilter : KalturaMetadataProfileBaseFilter
 @end
 
@@ -421,6 +413,11 @@
 - (KalturaFieldType)getTypeOfMetadataProfileId;
 - (KalturaFieldType)getTypeOfOrderBy;
 - (void)setMetadataProfileIdFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaMetadataFilter : KalturaMetadataBaseFilter
 @end
 
 ///////////////////////// services /////////////////////////
@@ -456,6 +453,8 @@
 // 	 Used by batch metadata transform
 - (void)invalidateWithId:(int)aId withVersion:(int)aVersion;
 - (void)invalidateWithId:(int)aId;
+// Index metadata by id, will also index the related object
+- (int)indexWithId:(NSString*)aId withShouldUpdate:(KALTURA_BOOL)aShouldUpdate;
 // Serves metadata XML file
 - (NSString*)serveWithId:(int)aId;
 // Action transforms current metadata object XML using a provided XSL.

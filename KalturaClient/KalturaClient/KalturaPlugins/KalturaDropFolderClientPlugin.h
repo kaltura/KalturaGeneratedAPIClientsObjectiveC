@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2015  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -156,7 +156,7 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaDropFolderType : NSObject
-+ (NSString*)WEBEX;
++ (NSString*)FEED;
 + (NSString*)LOCAL;
 + (NSString*)FTP;
 + (NSString*)SCP;
@@ -263,12 +263,12 @@
 @property (nonatomic,assign,readonly) int createdAt;
 @property (nonatomic,assign,readonly) int updatedAt;
 @property (nonatomic,assign) int lastAccessedAt;
-@property (nonatomic,assign) BOOL incremental;
+@property (nonatomic,assign) KALTURA_BOOL incremental;
 @property (nonatomic,assign) int lastFileTimestamp;
 @property (nonatomic,assign) int metadataProfileId;
 @property (nonatomic,copy) NSString* categoriesMetadataFieldName;
-@property (nonatomic,assign) BOOL enforceEntitlement;
-@property (nonatomic,assign) BOOL shouldValidateKS;
+@property (nonatomic,assign) KALTURA_BOOL enforceEntitlement;
+@property (nonatomic,assign) KALTURA_BOOL shouldValidateKS;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfPartnerId;
 - (KalturaFieldType)getTypeOfName;
@@ -382,28 +382,6 @@
 - (void)setImportStartedAtFromString:(NSString*)aPropVal;
 - (void)setImportEndedAtFromString:(NSString*)aPropVal;
 - (void)setBatchJobIdFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaDropFolderFileListResponse : KalturaObjectBase
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaDropFolderFile elements
-@property (nonatomic,assign,readonly) int totalCount;
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-- (KalturaFieldType)getTypeOfTotalCount;
-- (void)setTotalCountFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaDropFolderListResponse : KalturaObjectBase
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaDropFolder elements
-@property (nonatomic,assign,readonly) int totalCount;
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-- (KalturaFieldType)getTypeOfTotalCount;
-- (void)setTotalCountFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -579,6 +557,22 @@
 - (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaDropFolderFileListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaDropFolderFile elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaDropFolderListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaDropFolder elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
 @end
 
 // @package Kaltura

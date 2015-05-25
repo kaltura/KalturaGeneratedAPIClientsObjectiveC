@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2015  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -175,32 +175,7 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaDistributionProviderType : NSObject
-+ (NSString*)ATT_UVERSE;
-+ (NSString*)AVN;
-+ (NSString*)COMCAST_MRSS;
-+ (NSString*)CROSS_KALTURA;
-+ (NSString*)DAILYMOTION;
-+ (NSString*)DOUBLECLICK;
-+ (NSString*)FREEWHEEL;
-+ (NSString*)FREEWHEEL_GENERIC;
-+ (NSString*)FTP;
-+ (NSString*)FTP_SCHEDULED;
-+ (NSString*)HULU;
 + (NSString*)IDETIC;
-+ (NSString*)METRO_PCS;
-+ (NSString*)MSN;
-+ (NSString*)NDN;
-+ (NSString*)PODCAST;
-+ (NSString*)QUICKPLAY;
-+ (NSString*)SYNACOR_HBO;
-+ (NSString*)TIME_WARNER;
-+ (NSString*)TVCOM;
-+ (NSString*)TVINCI;
-+ (NSString*)UVERSE_CLICK_TO_ORDER;
-+ (NSString*)UVERSE;
-+ (NSString*)VERIZON_VCAST;
-+ (NSString*)YAHOO;
-+ (NSString*)YOUTUBE;
 + (NSString*)YOUTUBE_API;
 + (NSString*)GENERIC;
 + (NSString*)SYNDICATION;
@@ -257,11 +232,6 @@
 + (NSString*)UPDATED_AT_DESC;
 @end
 
-// @package Kaltura
-// @subpackage Client
-@interface KalturaSyndicationDistributionProviderOrderBy : NSObject
-@end
-
 ///////////////////////// classes /////////////////////////
 // @package Kaltura
 // @subpackage Client
@@ -295,11 +265,11 @@
 // Is the field required to have a value for submission ?
 @property (nonatomic,assign) int isRequired;	// enum KalturaDistributionFieldRequiredStatus
 // Trigger distribution update when this field changes or not ?
-@property (nonatomic,assign) BOOL updateOnChange;
+@property (nonatomic,assign) KALTURA_BOOL updateOnChange;
 // Entry column or metadata xpath that should trigger an update
 @property (nonatomic,retain) NSMutableArray* updateParams;	// of KalturaString elements
 // Is this field config is the default for the distribution provider?
-@property (nonatomic,assign,readonly) BOOL isDefault;
+@property (nonatomic,assign,readonly) KALTURA_BOOL isDefault;
 - (KalturaFieldType)getTypeOfFieldName;
 - (KalturaFieldType)getTypeOfUserFriendlyFieldName;
 - (KalturaFieldType)getTypeOfEntryMrssXslt;
@@ -418,23 +388,12 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaDistributionProfileListResponse : KalturaObjectBase
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaDistributionProfile elements
-@property (nonatomic,assign,readonly) int totalCount;
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-- (KalturaFieldType)getTypeOfTotalCount;
-- (void)setTotalCountFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaDistributionProvider : KalturaObjectBase
 @property (nonatomic,copy,readonly) NSString* type;	// enum KalturaDistributionProviderType
 @property (nonatomic,copy) NSString* name;
-@property (nonatomic,assign) BOOL scheduleUpdateEnabled;
-@property (nonatomic,assign) BOOL availabilityUpdateEnabled;
-@property (nonatomic,assign) BOOL deleteInsteadUpdate;
+@property (nonatomic,assign) KALTURA_BOOL scheduleUpdateEnabled;
+@property (nonatomic,assign) KALTURA_BOOL availabilityUpdateEnabled;
+@property (nonatomic,assign) KALTURA_BOOL deleteInsteadUpdate;
 @property (nonatomic,assign) int intervalBeforeSunrise;
 @property (nonatomic,assign) int intervalBeforeSunset;
 @property (nonatomic,copy) NSString* updateRequiredEntryFields;
@@ -453,17 +412,6 @@
 - (void)setDeleteInsteadUpdateFromString:(NSString*)aPropVal;
 - (void)setIntervalBeforeSunriseFromString:(NSString*)aPropVal;
 - (void)setIntervalBeforeSunsetFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaDistributionProviderListResponse : KalturaObjectBase
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaDistributionProvider elements
-@property (nonatomic,assign,readonly) int totalCount;
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-- (KalturaFieldType)getTypeOfTotalCount;
-- (void)setTotalCountFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -587,24 +535,13 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaEntryDistributionListResponse : KalturaObjectBase
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaEntryDistribution elements
-@property (nonatomic,assign,readonly) int totalCount;
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-- (KalturaFieldType)getTypeOfTotalCount;
-- (void)setTotalCountFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaGenericDistributionProfileAction : KalturaObjectBase
 @property (nonatomic,assign) int protocol;	// enum KalturaDistributionProtocol
 @property (nonatomic,copy) NSString* serverUrl;
 @property (nonatomic,copy) NSString* serverPath;
 @property (nonatomic,copy) NSString* username;
 @property (nonatomic,copy) NSString* password;
-@property (nonatomic,assign) BOOL ftpPassiveMode;
+@property (nonatomic,assign) KALTURA_BOOL ftpPassiveMode;
 @property (nonatomic,copy) NSString* httpFieldName;
 @property (nonatomic,copy) NSString* httpFileName;
 - (KalturaFieldType)getTypeOfProtocol;
@@ -671,17 +608,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaGenericDistributionProviderActionListResponse : KalturaObjectBase
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaGenericDistributionProviderAction elements
-@property (nonatomic,assign,readonly) int totalCount;
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-- (KalturaFieldType)getTypeOfTotalCount;
-- (void)setTotalCountFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaGenericDistributionProvider : KalturaDistributionProvider
 // Auto generated
 @property (nonatomic,assign,readonly) int id;
@@ -690,7 +616,7 @@
 // Generic distribution provider last update date as Unix timestamp (In seconds)
 @property (nonatomic,assign,readonly) int updatedAt;
 @property (nonatomic,assign,readonly) int partnerId;
-@property (nonatomic,assign) BOOL isDefault;
+@property (nonatomic,assign) KALTURA_BOOL isDefault;
 @property (nonatomic,assign,readonly) int status;	// enum KalturaGenericDistributionProviderStatus
 @property (nonatomic,copy) NSString* optionalFlavorParamsIds;
 @property (nonatomic,copy) NSString* requiredFlavorParamsIds;
@@ -718,17 +644,6 @@
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setIsDefaultFromString:(NSString*)aPropVal;
 - (void)setStatusFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaGenericDistributionProviderListResponse : KalturaObjectBase
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaGenericDistributionProvider elements
-@property (nonatomic,assign,readonly) int totalCount;
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-- (KalturaFieldType)getTypeOfTotalCount;
-- (void)setTotalCountFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -765,12 +680,12 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaContentDistributionSearchItem : KalturaSearchItem
-@property (nonatomic,assign) BOOL noDistributionProfiles;
+@property (nonatomic,assign) KALTURA_BOOL noDistributionProfiles;
 @property (nonatomic,assign) int distributionProfileId;
 @property (nonatomic,assign) int distributionSunStatus;	// enum KalturaEntryDistributionSunStatus
 @property (nonatomic,assign) int entryDistributionFlag;	// enum KalturaEntryDistributionFlag
 @property (nonatomic,assign) int entryDistributionStatus;	// enum KalturaEntryDistributionStatus
-@property (nonatomic,assign) BOOL hasEntryDistributionValidationErrors;
+@property (nonatomic,assign) KALTURA_BOOL hasEntryDistributionValidationErrors;
 // Comma seperated validation error types
 @property (nonatomic,copy) NSString* entryDistributionValidationErrors;
 - (KalturaFieldType)getTypeOfNoDistributionProfiles;
@@ -854,11 +769,27 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaDistributionProfileListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaDistributionProfile elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaDistributionProviderBaseFilter : KalturaFilter
 @property (nonatomic,copy) NSString* typeEqual;	// enum KalturaDistributionProviderType
 @property (nonatomic,copy) NSString* typeIn;
 - (KalturaFieldType)getTypeOfTypeEqual;
 - (KalturaFieldType)getTypeOfTypeIn;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaDistributionProviderListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaDistributionProvider elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
 @end
 
 // @package Kaltura
@@ -913,61 +844,10 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaEntryDistributionBaseFilter : KalturaFilter
-@property (nonatomic,assign) int idEqual;
-@property (nonatomic,copy) NSString* idIn;
-@property (nonatomic,assign) int createdAtGreaterThanOrEqual;
-@property (nonatomic,assign) int createdAtLessThanOrEqual;
-@property (nonatomic,assign) int updatedAtGreaterThanOrEqual;
-@property (nonatomic,assign) int updatedAtLessThanOrEqual;
-@property (nonatomic,assign) int submittedAtGreaterThanOrEqual;
-@property (nonatomic,assign) int submittedAtLessThanOrEqual;
-@property (nonatomic,copy) NSString* entryIdEqual;
-@property (nonatomic,copy) NSString* entryIdIn;
-@property (nonatomic,assign) int distributionProfileIdEqual;
-@property (nonatomic,copy) NSString* distributionProfileIdIn;
-@property (nonatomic,assign) int statusEqual;	// enum KalturaEntryDistributionStatus
-@property (nonatomic,copy) NSString* statusIn;
-@property (nonatomic,assign) int dirtyStatusEqual;	// enum KalturaEntryDistributionFlag
-@property (nonatomic,copy) NSString* dirtyStatusIn;
-@property (nonatomic,assign) int sunriseGreaterThanOrEqual;
-@property (nonatomic,assign) int sunriseLessThanOrEqual;
-@property (nonatomic,assign) int sunsetGreaterThanOrEqual;
-@property (nonatomic,assign) int sunsetLessThanOrEqual;
-- (KalturaFieldType)getTypeOfIdEqual;
-- (KalturaFieldType)getTypeOfIdIn;
-- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual;
-- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
-- (KalturaFieldType)getTypeOfSubmittedAtGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfSubmittedAtLessThanOrEqual;
-- (KalturaFieldType)getTypeOfEntryIdEqual;
-- (KalturaFieldType)getTypeOfEntryIdIn;
-- (KalturaFieldType)getTypeOfDistributionProfileIdEqual;
-- (KalturaFieldType)getTypeOfDistributionProfileIdIn;
-- (KalturaFieldType)getTypeOfStatusEqual;
-- (KalturaFieldType)getTypeOfStatusIn;
-- (KalturaFieldType)getTypeOfDirtyStatusEqual;
-- (KalturaFieldType)getTypeOfDirtyStatusIn;
-- (KalturaFieldType)getTypeOfSunriseGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfSunriseLessThanOrEqual;
-- (KalturaFieldType)getTypeOfSunsetGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfSunsetLessThanOrEqual;
-- (void)setIdEqualFromString:(NSString*)aPropVal;
-- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setSubmittedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setSubmittedAtLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setDistributionProfileIdEqualFromString:(NSString*)aPropVal;
-- (void)setStatusEqualFromString:(NSString*)aPropVal;
-- (void)setDirtyStatusEqualFromString:(NSString*)aPropVal;
-- (void)setSunriseGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setSunriseLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setSunsetGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setSunsetLessThanOrEqualFromString:(NSString*)aPropVal;
+@interface KalturaEntryDistributionListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaEntryDistribution elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
 @end
 
 // @package Kaltura
@@ -1040,6 +920,22 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaGenericDistributionProviderActionListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaGenericDistributionProviderAction elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaGenericDistributionProviderListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaGenericDistributionProvider elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaSyndicationDistributionProfile : KalturaDistributionProfile
 @property (nonatomic,copy) NSString* xsl;
 @property (nonatomic,copy,readonly) NSString* feedId;
@@ -1098,7 +994,61 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaEntryDistributionFilter : KalturaEntryDistributionBaseFilter
+@interface KalturaEntryDistributionBaseFilter : KalturaRelatedFilter
+@property (nonatomic,assign) int idEqual;
+@property (nonatomic,copy) NSString* idIn;
+@property (nonatomic,assign) int createdAtGreaterThanOrEqual;
+@property (nonatomic,assign) int createdAtLessThanOrEqual;
+@property (nonatomic,assign) int updatedAtGreaterThanOrEqual;
+@property (nonatomic,assign) int updatedAtLessThanOrEqual;
+@property (nonatomic,assign) int submittedAtGreaterThanOrEqual;
+@property (nonatomic,assign) int submittedAtLessThanOrEqual;
+@property (nonatomic,copy) NSString* entryIdEqual;
+@property (nonatomic,copy) NSString* entryIdIn;
+@property (nonatomic,assign) int distributionProfileIdEqual;
+@property (nonatomic,copy) NSString* distributionProfileIdIn;
+@property (nonatomic,assign) int statusEqual;	// enum KalturaEntryDistributionStatus
+@property (nonatomic,copy) NSString* statusIn;
+@property (nonatomic,assign) int dirtyStatusEqual;	// enum KalturaEntryDistributionFlag
+@property (nonatomic,copy) NSString* dirtyStatusIn;
+@property (nonatomic,assign) int sunriseGreaterThanOrEqual;
+@property (nonatomic,assign) int sunriseLessThanOrEqual;
+@property (nonatomic,assign) int sunsetGreaterThanOrEqual;
+@property (nonatomic,assign) int sunsetLessThanOrEqual;
+- (KalturaFieldType)getTypeOfIdEqual;
+- (KalturaFieldType)getTypeOfIdIn;
+- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfSubmittedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfSubmittedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfEntryIdEqual;
+- (KalturaFieldType)getTypeOfEntryIdIn;
+- (KalturaFieldType)getTypeOfDistributionProfileIdEqual;
+- (KalturaFieldType)getTypeOfDistributionProfileIdIn;
+- (KalturaFieldType)getTypeOfStatusEqual;
+- (KalturaFieldType)getTypeOfStatusIn;
+- (KalturaFieldType)getTypeOfDirtyStatusEqual;
+- (KalturaFieldType)getTypeOfDirtyStatusIn;
+- (KalturaFieldType)getTypeOfSunriseGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfSunriseLessThanOrEqual;
+- (KalturaFieldType)getTypeOfSunsetGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfSunsetLessThanOrEqual;
+- (void)setIdEqualFromString:(NSString*)aPropVal;
+- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setSubmittedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setSubmittedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setDistributionProfileIdEqualFromString:(NSString*)aPropVal;
+- (void)setStatusEqualFromString:(NSString*)aPropVal;
+- (void)setDirtyStatusEqualFromString:(NSString*)aPropVal;
+- (void)setSunriseGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setSunriseLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setSunsetGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setSunsetLessThanOrEqualFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -1119,6 +1069,11 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaDistributionEnableJobData : KalturaDistributionUpdateJobData
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaEntryDistributionFilter : KalturaEntryDistributionBaseFilter
 @end
 
 // @package Kaltura
@@ -1193,11 +1148,6 @@
 @interface KalturaSyndicationDistributionProfileFilter : KalturaSyndicationDistributionProfileBaseFilter
 @end
 
-// @package Kaltura
-// @subpackage Client
-@interface KalturaSyndicationDistributionProviderFilter : KalturaSyndicationDistributionProviderBaseFilter
-@end
-
 ///////////////////////// services /////////////////////////
 // @package Kaltura
 // @subpackage Client
@@ -1241,7 +1191,7 @@
 - (KalturaEntryDistributionListResponse*)listWithFilter:(KalturaEntryDistributionFilter*)aFilter;
 - (KalturaEntryDistributionListResponse*)list;
 // Submits Entry Distribution to the remote destination
-- (KalturaEntryDistribution*)submitAddWithId:(int)aId withSubmitWhenReady:(BOOL)aSubmitWhenReady;
+- (KalturaEntryDistribution*)submitAddWithId:(int)aId withSubmitWhenReady:(KALTURA_BOOL)aSubmitWhenReady;
 - (KalturaEntryDistribution*)submitAddWithId:(int)aId;
 // Submits Entry Distribution changes to the remote destination
 - (KalturaEntryDistribution*)submitUpdateWithId:(int)aId;

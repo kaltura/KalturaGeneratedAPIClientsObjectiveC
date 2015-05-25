@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2015  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -85,18 +85,6 @@
 + (NSString*)CLAMAV_SCAN_ENGINE
 {
     return @"clamAVScanEngine.ClamAV";
-}
-+ (NSString*)SYMANTEC_SCAN_DIRECT_ENGINE
-{
-    return @"symantecScanEngine.SymantecScanDirectEngine";
-}
-+ (NSString*)SYMANTEC_SCAN_ENGINE
-{
-    return @"symantecScanEngine.SymantecScanEngine";
-}
-+ (NSString*)SYMANTEC_SCAN_JAVA_ENGINE
-{
-    return @"symantecScanEngine.SymantecScanJavaEngine";
 }
 @end
 
@@ -249,59 +237,6 @@
     [self->_name release];
     [self->_engineType release];
     [self->_entryFilter release];
-    [super dealloc];
-}
-
-@end
-
-@interface KalturaVirusScanProfileListResponse()
-@property (nonatomic,retain) NSMutableArray* objects;
-@property (nonatomic,assign) int totalCount;
-@end
-
-@implementation KalturaVirusScanProfileListResponse
-@synthesize objects = _objects;
-@synthesize totalCount = _totalCount;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_totalCount = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaVirusScanProfile";
-}
-
-- (KalturaFieldType)getTypeOfTotalCount
-{
-    return KFT_Int;
-}
-
-- (void)setTotalCountFromString:(NSString*)aPropVal
-{
-    self.totalCount = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaVirusScanProfileListResponse"];
-}
-
-- (void)dealloc
-{
-    [self->_objects release];
     [super dealloc];
 }
 
@@ -563,6 +498,38 @@
     [self->_statusIn release];
     [self->_engineTypeEqual release];
     [self->_engineTypeIn release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaVirusScanProfileListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
+
+@implementation KalturaVirusScanProfileListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfObjects
+{
+    return @"KalturaVirusScanProfile";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaVirusScanProfileListResponse"];
+}
+
+- (void)dealloc
+{
+    [self->_objects release];
     [super dealloc];
 }
 

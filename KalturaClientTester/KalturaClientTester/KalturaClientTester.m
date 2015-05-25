@@ -33,8 +33,8 @@
 
 // Account specific constants
 // TODO: update this
-#define ADMIN_SECRET (@"YOUR_ADMIN_SECRET")
-#define PARTNER_ID (54321)
+#define ADMIN_SECRET (@"83c3d4449a3abbe92ca5966f5f010eb4")
+#define PARTNER_ID (1931861)
 #define USER_ID (@"testUser")
 
 // Fixed constants
@@ -165,7 +165,7 @@
     
     self->_delegate = aDelegate;
     
-    KalturaClientConfiguration* config = [[KalturaClientConfiguration alloc] init];
+    KalturaConfiguration* config = [[KalturaConfiguration alloc] init];
     KalturaNSLogger* logger = [[KalturaNSLogger alloc] init];
     config.logger = logger;
     config.serviceUrl = DEFAULT_SERVICE_URL;
@@ -605,7 +605,7 @@
 - (void)testPremadeRequest
 {
     // init a client with fixed values
-    KalturaClientConfiguration* config = [[KalturaClientConfiguration alloc] init];
+    KalturaConfiguration* config = [[KalturaConfiguration alloc] init];
     KalturaNSLogger* logger = [[KalturaNSLogger alloc] init];
     config.logger = logger;
     config.serviceUrl = DEFAULT_SERVICE_URL;

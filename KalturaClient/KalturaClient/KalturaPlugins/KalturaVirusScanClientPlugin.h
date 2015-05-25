@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2015  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -60,9 +60,6 @@
 // @subpackage Client
 @interface KalturaVirusScanEngineType : NSObject
 + (NSString*)CLAMAV_SCAN_ENGINE;
-+ (NSString*)SYMANTEC_SCAN_DIRECT_ENGINE;
-+ (NSString*)SYMANTEC_SCAN_ENGINE;
-+ (NSString*)SYMANTEC_SCAN_JAVA_ENGINE;
 @end
 
 // @package Kaltura
@@ -103,17 +100,6 @@
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setStatusFromString:(NSString*)aPropVal;
 - (void)setActionIfInfectedFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaVirusScanProfileListResponse : KalturaObjectBase
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaVirusScanProfile elements
-@property (nonatomic,assign,readonly) int totalCount;
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-- (KalturaFieldType)getTypeOfTotalCount;
-- (void)setTotalCountFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -176,6 +162,14 @@
 - (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setPartnerIdEqualFromString:(NSString*)aPropVal;
 - (void)setStatusEqualFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaVirusScanProfileListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaVirusScanProfile elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
 @end
 
 // @package Kaltura

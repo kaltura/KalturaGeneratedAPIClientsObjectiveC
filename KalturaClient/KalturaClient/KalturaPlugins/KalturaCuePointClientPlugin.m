@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2015  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -41,16 +41,9 @@
 {
     return 3;
 }
-@end
-
-@implementation KalturaThumbCuePointSubType
-+ (int)SLIDE
++ (int)PENDING
 {
-    return 1;
-}
-+ (int)CHAPTER
-{
-    return 2;
+    return 4;
 }
 @end
 
@@ -113,10 +106,6 @@
 + (NSString*)EVENT
 {
     return @"eventCuePoint.Event";
-}
-+ (NSString*)THUMB
-{
-    return @"thumbCuePoint.Thumb";
 }
 @end
 
@@ -323,21 +312,10 @@
 
 @interface KalturaCuePointListResponse()
 @property (nonatomic,retain) NSMutableArray* objects;
-@property (nonatomic,assign) int totalCount;
 @end
 
 @implementation KalturaCuePointListResponse
 @synthesize objects = _objects;
-@synthesize totalCount = _totalCount;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_totalCount = KALTURA_UNDEF_INT;
-    return self;
-}
 
 - (KalturaFieldType)getTypeOfObjects
 {
@@ -347,16 +325,6 @@
 - (NSString*)getObjectTypeOfObjects
 {
     return @"KalturaCuePoint";
-}
-
-- (KalturaFieldType)getTypeOfTotalCount
-{
-    return KFT_Int;
-}
-
-- (void)setTotalCountFromString:(NSString*)aPropVal
-{
-    self.totalCount = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -688,11 +656,25 @@
 @end
 
 @implementation KalturaCuePointFilter
+@synthesize freeText = _freeText;
+
+- (KalturaFieldType)getTypeOfFreeText
+{
+    return KFT_String;
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaCuePointFilter"];
+    [aParams addIfDefinedKey:@"freeText" withString:self.freeText];
+}
+
+- (void)dealloc
+{
+    [self->_freeText release];
+    [super dealloc];
 }
 
 @end

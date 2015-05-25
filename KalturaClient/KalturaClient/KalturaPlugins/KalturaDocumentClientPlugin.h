@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2015  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -120,13 +120,10 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaDocumentListResponse : KalturaObjectBase
+@interface KalturaDocumentListResponse : KalturaListResponse
 @property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaDocumentEntry elements
-@property (nonatomic,assign,readonly) int totalCount;
 - (KalturaFieldType)getTypeOfObjects;
 - (NSString*)getObjectTypeOfObjects;
-- (KalturaFieldType)getTypeOfTotalCount;
-- (void)setTotalCountFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -157,7 +154,7 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaPdfFlavorParams : KalturaFlavorParams
-@property (nonatomic,assign) BOOL readonly;
+@property (nonatomic,assign) KALTURA_BOOL readonly;
 - (KalturaFieldType)getTypeOfReadonly;
 - (void)setReadonlyFromString:(NSString*)aPropVal;
 @end
@@ -166,25 +163,11 @@
 // @subpackage Client
 @interface KalturaSwfFlavorParams : KalturaFlavorParams
 @property (nonatomic,assign) int flashVersion;
-@property (nonatomic,assign) BOOL poly2Bitmap;
+@property (nonatomic,assign) KALTURA_BOOL poly2Bitmap;
 - (KalturaFieldType)getTypeOfFlashVersion;
 - (KalturaFieldType)getTypeOfPoly2Bitmap;
 - (void)setFlashVersionFromString:(NSString*)aPropVal;
 - (void)setPoly2BitmapFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaDocumentEntryBaseFilter : KalturaBaseEntryFilter
-@property (nonatomic,assign) int documentTypeEqual;	// enum KalturaDocumentType
-@property (nonatomic,copy) NSString* documentTypeIn;
-@property (nonatomic,copy) NSString* assetParamsIdsMatchOr;
-@property (nonatomic,copy) NSString* assetParamsIdsMatchAnd;
-- (KalturaFieldType)getTypeOfDocumentTypeEqual;
-- (KalturaFieldType)getTypeOfDocumentTypeIn;
-- (KalturaFieldType)getTypeOfAssetParamsIdsMatchOr;
-- (KalturaFieldType)getTypeOfAssetParamsIdsMatchAnd;
-- (void)setDocumentTypeEqualFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -215,7 +198,7 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaPdfFlavorParamsOutput : KalturaFlavorParamsOutput
-@property (nonatomic,assign) BOOL readonly;
+@property (nonatomic,assign) KALTURA_BOOL readonly;
 - (KalturaFieldType)getTypeOfReadonly;
 - (void)setReadonlyFromString:(NSString*)aPropVal;
 @end
@@ -224,11 +207,25 @@
 // @subpackage Client
 @interface KalturaSwfFlavorParamsOutput : KalturaFlavorParamsOutput
 @property (nonatomic,assign) int flashVersion;
-@property (nonatomic,assign) BOOL poly2Bitmap;
+@property (nonatomic,assign) KALTURA_BOOL poly2Bitmap;
 - (KalturaFieldType)getTypeOfFlashVersion;
 - (KalturaFieldType)getTypeOfPoly2Bitmap;
 - (void)setFlashVersionFromString:(NSString*)aPropVal;
 - (void)setPoly2BitmapFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaDocumentEntryBaseFilter : KalturaBaseEntryFilter
+@property (nonatomic,assign) int documentTypeEqual;	// enum KalturaDocumentType
+@property (nonatomic,copy) NSString* documentTypeIn;
+@property (nonatomic,copy) NSString* assetParamsIdsMatchOr;
+@property (nonatomic,copy) NSString* assetParamsIdsMatchAnd;
+- (KalturaFieldType)getTypeOfDocumentTypeEqual;
+- (KalturaFieldType)getTypeOfDocumentTypeIn;
+- (KalturaFieldType)getTypeOfAssetParamsIdsMatchOr;
+- (KalturaFieldType)getTypeOfAssetParamsIdsMatchAnd;
+- (void)setDocumentTypeEqualFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -351,11 +348,11 @@
 // 	 Returns the URL where the new swf will be available
 - (NSString*)convertPptToSwfWithEntryId:(NSString*)aEntryId;
 // Serves the file content
-- (NSString*)serveWithEntryId:(NSString*)aEntryId withFlavorAssetId:(NSString*)aFlavorAssetId withForceProxy:(BOOL)aForceProxy;
+- (NSString*)serveWithEntryId:(NSString*)aEntryId withFlavorAssetId:(NSString*)aFlavorAssetId withForceProxy:(KALTURA_BOOL)aForceProxy;
 - (NSString*)serveWithEntryId:(NSString*)aEntryId withFlavorAssetId:(NSString*)aFlavorAssetId;
 - (NSString*)serveWithEntryId:(NSString*)aEntryId;
 // Serves the file content
-- (NSString*)serveByFlavorParamsIdWithEntryId:(NSString*)aEntryId withFlavorParamsId:(NSString*)aFlavorParamsId withForceProxy:(BOOL)aForceProxy;
+- (NSString*)serveByFlavorParamsIdWithEntryId:(NSString*)aEntryId withFlavorParamsId:(NSString*)aFlavorParamsId withForceProxy:(KALTURA_BOOL)aForceProxy;
 - (NSString*)serveByFlavorParamsIdWithEntryId:(NSString*)aEntryId withFlavorParamsId:(NSString*)aFlavorParamsId;
 - (NSString*)serveByFlavorParamsIdWithEntryId:(NSString*)aEntryId;
 // Replace content associated with the given document entry.

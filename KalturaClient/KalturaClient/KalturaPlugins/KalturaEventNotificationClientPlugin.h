@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2015  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -48,6 +48,8 @@
 + (NSString*)DISTRIBUTION_PROFILE;
 + (NSString*)ENTRY_DISTRIBUTION;
 + (NSString*)CUE_POINT;
++ (NSString*)DROP_FOLDER;
++ (NSString*)DROP_FOLDER_FILE;
 + (NSString*)METADATA;
 + (NSString*)ENTRY;
 + (NSString*)CATEGORY;
@@ -148,9 +150,9 @@
 @property (nonatomic,assign,readonly) int createdAt;
 @property (nonatomic,assign,readonly) int updatedAt;
 // Define that the template could be dispatched manually from the API
-@property (nonatomic,assign) BOOL manualDispatchEnabled;
+@property (nonatomic,assign) KALTURA_BOOL manualDispatchEnabled;
 // Define that the template could be dispatched automatically by the system
-@property (nonatomic,assign) BOOL automaticDispatchEnabled;
+@property (nonatomic,assign) KALTURA_BOOL automaticDispatchEnabled;
 // Define the event that should trigger this notification
 @property (nonatomic,copy) NSString* eventType;	// enum KalturaEventNotificationEventType
 // Define the object that raied the event that should trigger this notification
@@ -187,17 +189,6 @@
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
 - (void)setManualDispatchEnabledFromString:(NSString*)aPropVal;
 - (void)setAutomaticDispatchEnabledFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaEventNotificationTemplateListResponse : KalturaObjectBase
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaEventNotificationTemplate elements
-@property (nonatomic,assign,readonly) int totalCount;
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-- (KalturaFieldType)getTypeOfTotalCount;
-- (void)setTotalCountFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -280,6 +271,14 @@
 - (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaEventNotificationTemplateListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaEventNotificationTemplate elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
 @end
 
 // @package Kaltura

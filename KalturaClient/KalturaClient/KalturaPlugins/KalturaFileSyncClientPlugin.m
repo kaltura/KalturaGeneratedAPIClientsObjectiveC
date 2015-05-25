@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2015  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -118,6 +118,292 @@
 @end
 
 ///////////////////////// classes /////////////////////////
+@interface KalturaFileSync()
+@property (nonatomic,assign) int id;
+@property (nonatomic,assign) int partnerId;
+@property (nonatomic,copy) NSString* fileObjectType;
+@property (nonatomic,copy) NSString* objectId;
+@property (nonatomic,copy) NSString* version;
+@property (nonatomic,assign) int objectSubType;
+@property (nonatomic,copy) NSString* dc;
+@property (nonatomic,assign) int original;
+@property (nonatomic,assign) int createdAt;
+@property (nonatomic,assign) int updatedAt;
+@property (nonatomic,assign) int readyAt;
+@property (nonatomic,assign) int syncTime;
+@property (nonatomic,assign) int status;
+@property (nonatomic,assign) int fileType;
+@property (nonatomic,assign) int linkedId;
+@property (nonatomic,assign) int linkCount;
+@property (nonatomic,copy) NSString* fileRoot;
+@property (nonatomic,copy) NSString* filePath;
+@property (nonatomic,assign) double fileSize;
+@property (nonatomic,copy) NSString* fileUrl;
+@property (nonatomic,copy) NSString* fileContent;
+@property (nonatomic,assign) double fileDiscSize;
+@property (nonatomic,assign) KALTURA_BOOL isCurrentDc;
+@end
+
+@implementation KalturaFileSync
+@synthesize id = _id;
+@synthesize partnerId = _partnerId;
+@synthesize fileObjectType = _fileObjectType;
+@synthesize objectId = _objectId;
+@synthesize version = _version;
+@synthesize objectSubType = _objectSubType;
+@synthesize dc = _dc;
+@synthesize original = _original;
+@synthesize createdAt = _createdAt;
+@synthesize updatedAt = _updatedAt;
+@synthesize readyAt = _readyAt;
+@synthesize syncTime = _syncTime;
+@synthesize status = _status;
+@synthesize fileType = _fileType;
+@synthesize linkedId = _linkedId;
+@synthesize linkCount = _linkCount;
+@synthesize fileRoot = _fileRoot;
+@synthesize filePath = _filePath;
+@synthesize fileSize = _fileSize;
+@synthesize fileUrl = _fileUrl;
+@synthesize fileContent = _fileContent;
+@synthesize fileDiscSize = _fileDiscSize;
+@synthesize isCurrentDc = _isCurrentDc;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_id = KALTURA_UNDEF_INT;
+    self->_partnerId = KALTURA_UNDEF_INT;
+    self->_objectSubType = KALTURA_UNDEF_INT;
+    self->_original = KALTURA_UNDEF_INT;
+    self->_createdAt = KALTURA_UNDEF_INT;
+    self->_updatedAt = KALTURA_UNDEF_INT;
+    self->_readyAt = KALTURA_UNDEF_INT;
+    self->_syncTime = KALTURA_UNDEF_INT;
+    self->_status = KALTURA_UNDEF_INT;
+    self->_fileType = KALTURA_UNDEF_INT;
+    self->_linkedId = KALTURA_UNDEF_INT;
+    self->_linkCount = KALTURA_UNDEF_INT;
+    self->_fileSize = KALTURA_UNDEF_FLOAT;
+    self->_fileDiscSize = KALTURA_UNDEF_FLOAT;
+    self->_isCurrentDc = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfPartnerId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfFileObjectType
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfObjectId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfVersion
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfObjectSubType
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfDc
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfOriginal
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAt
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedAt
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfReadyAt
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfSyncTime
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfStatus
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfFileType
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfLinkedId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfLinkCount
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfFileRoot
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfFilePath
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfFileSize
+{
+    return KFT_Float;
+}
+
+- (KalturaFieldType)getTypeOfFileUrl
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfFileContent
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfFileDiscSize
+{
+    return KFT_Float;
+}
+
+- (KalturaFieldType)getTypeOfIsCurrentDc
+{
+    return KFT_Bool;
+}
+
+- (void)setIdFromString:(NSString*)aPropVal
+{
+    self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setPartnerIdFromString:(NSString*)aPropVal
+{
+    self.partnerId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setObjectSubTypeFromString:(NSString*)aPropVal
+{
+    self.objectSubType = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setOriginalFromString:(NSString*)aPropVal
+{
+    self.original = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtFromString:(NSString*)aPropVal
+{
+    self.createdAt = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUpdatedAtFromString:(NSString*)aPropVal
+{
+    self.updatedAt = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setReadyAtFromString:(NSString*)aPropVal
+{
+    self.readyAt = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setSyncTimeFromString:(NSString*)aPropVal
+{
+    self.syncTime = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setStatusFromString:(NSString*)aPropVal
+{
+    self.status = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setFileTypeFromString:(NSString*)aPropVal
+{
+    self.fileType = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setLinkedIdFromString:(NSString*)aPropVal
+{
+    self.linkedId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setLinkCountFromString:(NSString*)aPropVal
+{
+    self.linkCount = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setFileSizeFromString:(NSString*)aPropVal
+{
+    self.fileSize = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
+- (void)setFileDiscSizeFromString:(NSString*)aPropVal
+{
+    self.fileDiscSize = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
+- (void)setIsCurrentDcFromString:(NSString*)aPropVal
+{
+    self.isCurrentDc = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaFileSync"];
+}
+
+- (void)dealloc
+{
+    [self->_fileObjectType release];
+    [self->_objectId release];
+    [self->_version release];
+    [self->_dc release];
+    [self->_fileRoot release];
+    [self->_filePath release];
+    [self->_fileUrl release];
+    [self->_fileContent release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaFileSyncBaseFilter
 @synthesize partnerIdEqual = _partnerIdEqual;
 @synthesize fileObjectTypeEqual = _fileObjectTypeEqual;
@@ -459,6 +745,38 @@
     [self->_dcIn release];
     [self->_statusIn release];
     [self->_fileTypeIn release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaFileSyncListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
+
+@implementation KalturaFileSyncListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfObjects
+{
+    return @"KalturaFileSync";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaFileSyncListResponse"];
+}
+
+- (void)dealloc
+{
+    [self->_objects release];
     [super dealloc];
 }
 

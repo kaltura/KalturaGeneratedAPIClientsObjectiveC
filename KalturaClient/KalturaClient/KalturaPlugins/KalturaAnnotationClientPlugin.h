@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2015  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -66,6 +66,10 @@
 @property (nonatomic,assign,readonly) int childrenCount;
 // Number of children, first generation only.
 @property (nonatomic,assign,readonly) int directChildrenCount;
+// Is the annotation public.
+@property (nonatomic,assign) int isPublic;	// enum KalturaNullableBoolean
+// Should the cue point get indexed on the entry.
+@property (nonatomic,assign) int searchableOnEntry;	// enum KalturaNullableBoolean
 - (KalturaFieldType)getTypeOfParentId;
 - (KalturaFieldType)getTypeOfText;
 - (KalturaFieldType)getTypeOfEndTime;
@@ -73,22 +77,23 @@
 - (KalturaFieldType)getTypeOfDepth;
 - (KalturaFieldType)getTypeOfChildrenCount;
 - (KalturaFieldType)getTypeOfDirectChildrenCount;
+- (KalturaFieldType)getTypeOfIsPublic;
+- (KalturaFieldType)getTypeOfSearchableOnEntry;
 - (void)setEndTimeFromString:(NSString*)aPropVal;
 - (void)setDurationFromString:(NSString*)aPropVal;
 - (void)setDepthFromString:(NSString*)aPropVal;
 - (void)setChildrenCountFromString:(NSString*)aPropVal;
 - (void)setDirectChildrenCountFromString:(NSString*)aPropVal;
+- (void)setIsPublicFromString:(NSString*)aPropVal;
+- (void)setSearchableOnEntryFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaAnnotationListResponse : KalturaObjectBase
+@interface KalturaAnnotationListResponse : KalturaListResponse
 @property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaAnnotation elements
-@property (nonatomic,assign,readonly) int totalCount;
 - (KalturaFieldType)getTypeOfObjects;
 - (NSString*)getObjectTypeOfObjects;
-- (KalturaFieldType)getTypeOfTotalCount;
-- (void)setTotalCountFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -103,6 +108,7 @@
 @property (nonatomic,assign) int endTimeLessThanOrEqual;
 @property (nonatomic,assign) int durationGreaterThanOrEqual;
 @property (nonatomic,assign) int durationLessThanOrEqual;
+@property (nonatomic,assign) int isPublicEqual;	// enum KalturaNullableBoolean
 - (KalturaFieldType)getTypeOfParentIdEqual;
 - (KalturaFieldType)getTypeOfParentIdIn;
 - (KalturaFieldType)getTypeOfTextLike;
@@ -112,10 +118,12 @@
 - (KalturaFieldType)getTypeOfEndTimeLessThanOrEqual;
 - (KalturaFieldType)getTypeOfDurationGreaterThanOrEqual;
 - (KalturaFieldType)getTypeOfDurationLessThanOrEqual;
+- (KalturaFieldType)getTypeOfIsPublicEqual;
 - (void)setEndTimeGreaterThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setEndTimeLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setDurationGreaterThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setDurationLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setIsPublicEqualFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2015  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -115,21 +115,10 @@
 
 @interface KalturaCaptionAssetItemListResponse()
 @property (nonatomic,retain) NSMutableArray* objects;
-@property (nonatomic,assign) int totalCount;
 @end
 
 @implementation KalturaCaptionAssetItemListResponse
 @synthesize objects = _objects;
-@synthesize totalCount = _totalCount;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_totalCount = KALTURA_UNDEF_INT;
-    return self;
-}
 
 - (KalturaFieldType)getTypeOfObjects
 {
@@ -139,16 +128,6 @@
 - (NSString*)getObjectTypeOfObjects
 {
     return @"KalturaCaptionAssetItem";
-}
-
-- (KalturaFieldType)getTypeOfTotalCount
-{
-    return KFT_Int;
-}
-
-- (void)setTotalCountFromString:(NSString*)aPropVal
-{
-    self.totalCount = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -161,6 +140,46 @@
 - (void)dealloc
 {
     [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaEntryCaptionAssetSearchItem
+@synthesize contentLike = _contentLike;
+@synthesize contentMultiLikeOr = _contentMultiLikeOr;
+@synthesize contentMultiLikeAnd = _contentMultiLikeAnd;
+
+- (KalturaFieldType)getTypeOfContentLike
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfContentMultiLikeOr
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfContentMultiLikeAnd
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaEntryCaptionAssetSearchItem"];
+    [aParams addIfDefinedKey:@"contentLike" withString:self.contentLike];
+    [aParams addIfDefinedKey:@"contentMultiLikeOr" withString:self.contentMultiLikeOr];
+    [aParams addIfDefinedKey:@"contentMultiLikeAnd" withString:self.contentMultiLikeAnd];
+}
+
+- (void)dealloc
+{
+    [self->_contentLike release];
+    [self->_contentMultiLikeOr release];
+    [self->_contentMultiLikeAnd release];
     [super dealloc];
 }
 

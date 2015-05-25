@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2015  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -36,10 +36,10 @@
 // @subpackage Client
 // Allows user to 'like' or 'unlike' and entry
 @interface KalturaLikeService : KalturaServiceBase
-- (BOOL)likeWithEntryId:(NSString*)aEntryId;
-- (BOOL)unlikeWithEntryId:(NSString*)aEntryId;
-- (BOOL)checkLikeExistsWithEntryId:(NSString*)aEntryId withUserId:(NSString*)aUserId;
-- (BOOL)checkLikeExistsWithEntryId:(NSString*)aEntryId;
+- (KALTURA_BOOL)likeWithEntryId:(NSString*)aEntryId;
+- (KALTURA_BOOL)unlikeWithEntryId:(NSString*)aEntryId;
+- (KALTURA_BOOL)checkLikeExistsWithEntryId:(NSString*)aEntryId withUserId:(NSString*)aUserId;
+- (KALTURA_BOOL)checkLikeExistsWithEntryId:(NSString*)aEntryId;
 @end
 
 @interface KalturaLikeClientPlugin : KalturaClientPlugin
