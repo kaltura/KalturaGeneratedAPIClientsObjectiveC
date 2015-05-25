@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2015  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -103,6 +103,8 @@
 @synthesize depth = _depth;
 @synthesize childrenCount = _childrenCount;
 @synthesize directChildrenCount = _directChildrenCount;
+@synthesize isPublic = _isPublic;
+@synthesize searchableOnEntry = _searchableOnEntry;
 
 - (id)init
 {
@@ -114,6 +116,8 @@
     self->_depth = KALTURA_UNDEF_INT;
     self->_childrenCount = KALTURA_UNDEF_INT;
     self->_directChildrenCount = KALTURA_UNDEF_INT;
+    self->_isPublic = KALTURA_UNDEF_INT;
+    self->_searchableOnEntry = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -152,6 +156,16 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfIsPublic
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfSearchableOnEntry
+{
+    return KFT_Int;
+}
+
 - (void)setEndTimeFromString:(NSString*)aPropVal
 {
     self.endTime = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -177,6 +191,16 @@
     self.directChildrenCount = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setIsPublicFromString:(NSString*)aPropVal
+{
+    self.isPublic = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setSearchableOnEntryFromString:(NSString*)aPropVal
+{
+    self.searchableOnEntry = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -185,6 +209,8 @@
     [aParams addIfDefinedKey:@"parentId" withString:self.parentId];
     [aParams addIfDefinedKey:@"text" withString:self.text];
     [aParams addIfDefinedKey:@"endTime" withInt:self.endTime];
+    [aParams addIfDefinedKey:@"isPublic" withInt:self.isPublic];
+    [aParams addIfDefinedKey:@"searchableOnEntry" withInt:self.searchableOnEntry];
 }
 
 - (void)dealloc
@@ -198,21 +224,10 @@
 
 @interface KalturaAnnotationListResponse()
 @property (nonatomic,retain) NSMutableArray* objects;
-@property (nonatomic,assign) int totalCount;
 @end
 
 @implementation KalturaAnnotationListResponse
 @synthesize objects = _objects;
-@synthesize totalCount = _totalCount;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_totalCount = KALTURA_UNDEF_INT;
-    return self;
-}
 
 - (KalturaFieldType)getTypeOfObjects
 {
@@ -222,16 +237,6 @@
 - (NSString*)getObjectTypeOfObjects
 {
     return @"KalturaAnnotation";
-}
-
-- (KalturaFieldType)getTypeOfTotalCount
-{
-    return KFT_Int;
-}
-
-- (void)setTotalCountFromString:(NSString*)aPropVal
-{
-    self.totalCount = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -259,6 +264,7 @@
 @synthesize endTimeLessThanOrEqual = _endTimeLessThanOrEqual;
 @synthesize durationGreaterThanOrEqual = _durationGreaterThanOrEqual;
 @synthesize durationLessThanOrEqual = _durationLessThanOrEqual;
+@synthesize isPublicEqual = _isPublicEqual;
 
 - (id)init
 {
@@ -269,6 +275,7 @@
     self->_endTimeLessThanOrEqual = KALTURA_UNDEF_INT;
     self->_durationGreaterThanOrEqual = KALTURA_UNDEF_INT;
     self->_durationLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_isPublicEqual = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -317,6 +324,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfIsPublicEqual
+{
+    return KFT_Int;
+}
+
 - (void)setEndTimeGreaterThanOrEqualFromString:(NSString*)aPropVal
 {
     self.endTimeGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -337,6 +349,11 @@
     self.durationLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setIsPublicEqualFromString:(NSString*)aPropVal
+{
+    self.isPublicEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -351,6 +368,7 @@
     [aParams addIfDefinedKey:@"endTimeLessThanOrEqual" withInt:self.endTimeLessThanOrEqual];
     [aParams addIfDefinedKey:@"durationGreaterThanOrEqual" withInt:self.durationGreaterThanOrEqual];
     [aParams addIfDefinedKey:@"durationLessThanOrEqual" withInt:self.durationLessThanOrEqual];
+    [aParams addIfDefinedKey:@"isPublicEqual" withInt:self.isPublicEqual];
 }
 
 - (void)dealloc

@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2015  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -338,109 +338,9 @@
 @end
 
 @implementation KalturaDistributionProviderType
-+ (NSString*)ATT_UVERSE
-{
-    return @"attUverseDistribution.ATT_UVERSE";
-}
-+ (NSString*)AVN
-{
-    return @"avnDistribution.AVN";
-}
-+ (NSString*)COMCAST_MRSS
-{
-    return @"comcastMrssDistribution.COMCAST_MRSS";
-}
-+ (NSString*)CROSS_KALTURA
-{
-    return @"crossKalturaDistribution.CROSS_KALTURA";
-}
-+ (NSString*)DAILYMOTION
-{
-    return @"dailymotionDistribution.DAILYMOTION";
-}
-+ (NSString*)DOUBLECLICK
-{
-    return @"doubleClickDistribution.DOUBLECLICK";
-}
-+ (NSString*)FREEWHEEL
-{
-    return @"freewheelDistribution.FREEWHEEL";
-}
-+ (NSString*)FREEWHEEL_GENERIC
-{
-    return @"freewheelGenericDistribution.FREEWHEEL_GENERIC";
-}
-+ (NSString*)FTP
-{
-    return @"ftpDistribution.FTP";
-}
-+ (NSString*)FTP_SCHEDULED
-{
-    return @"ftpDistribution.FTP_SCHEDULED";
-}
-+ (NSString*)HULU
-{
-    return @"huluDistribution.HULU";
-}
 + (NSString*)IDETIC
 {
     return @"ideticDistribution.IDETIC";
-}
-+ (NSString*)METRO_PCS
-{
-    return @"metroPcsDistribution.METRO_PCS";
-}
-+ (NSString*)MSN
-{
-    return @"msnDistribution.MSN";
-}
-+ (NSString*)NDN
-{
-    return @"ndnDistribution.NDN";
-}
-+ (NSString*)PODCAST
-{
-    return @"podcastDistribution.PODCAST";
-}
-+ (NSString*)QUICKPLAY
-{
-    return @"quickPlayDistribution.QUICKPLAY";
-}
-+ (NSString*)SYNACOR_HBO
-{
-    return @"synacorHboDistribution.SYNACOR_HBO";
-}
-+ (NSString*)TIME_WARNER
-{
-    return @"timeWarnerDistribution.TIME_WARNER";
-}
-+ (NSString*)TVCOM
-{
-    return @"tvComDistribution.TVCOM";
-}
-+ (NSString*)TVINCI
-{
-    return @"tvinciDistribution.TVINCI";
-}
-+ (NSString*)UVERSE_CLICK_TO_ORDER
-{
-    return @"uverseClickToOrderDistribution.UVERSE_CLICK_TO_ORDER";
-}
-+ (NSString*)UVERSE
-{
-    return @"uverseDistribution.UVERSE";
-}
-+ (NSString*)VERIZON_VCAST
-{
-    return @"verizonVcastDistribution.VERIZON_VCAST";
-}
-+ (NSString*)YAHOO
-{
-    return @"yahooDistribution.YAHOO";
-}
-+ (NSString*)YOUTUBE
-{
-    return @"youTubeDistribution.YOUTUBE";
 }
 + (NSString*)YOUTUBE_API
 {
@@ -575,9 +475,6 @@
 }
 @end
 
-@implementation KalturaSyndicationDistributionProviderOrderBy
-@end
-
 ///////////////////////// classes /////////////////////////
 @implementation KalturaAssetDistributionCondition
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -627,7 +524,7 @@
 @end
 
 @interface KalturaDistributionFieldConfig()
-@property (nonatomic,assign) BOOL isDefault;
+@property (nonatomic,assign) KALTURA_BOOL isDefault;
 @end
 
 @implementation KalturaDistributionFieldConfig
@@ -1093,59 +990,6 @@
 
 @end
 
-@interface KalturaDistributionProfileListResponse()
-@property (nonatomic,retain) NSMutableArray* objects;
-@property (nonatomic,assign) int totalCount;
-@end
-
-@implementation KalturaDistributionProfileListResponse
-@synthesize objects = _objects;
-@synthesize totalCount = _totalCount;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_totalCount = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaDistributionProfile";
-}
-
-- (KalturaFieldType)getTypeOfTotalCount
-{
-    return KFT_Int;
-}
-
-- (void)setTotalCountFromString:(NSString*)aPropVal
-{
-    self.totalCount = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaDistributionProfileListResponse"];
-}
-
-- (void)dealloc
-{
-    [self->_objects release];
-    [super dealloc];
-}
-
-@end
-
 @interface KalturaDistributionProvider()
 @property (nonatomic,copy) NSString* type;
 @end
@@ -1265,59 +1109,6 @@
     [self->_name release];
     [self->_updateRequiredEntryFields release];
     [self->_updateRequiredMetadataXPaths release];
-    [super dealloc];
-}
-
-@end
-
-@interface KalturaDistributionProviderListResponse()
-@property (nonatomic,retain) NSMutableArray* objects;
-@property (nonatomic,assign) int totalCount;
-@end
-
-@implementation KalturaDistributionProviderListResponse
-@synthesize objects = _objects;
-@synthesize totalCount = _totalCount;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_totalCount = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaDistributionProvider";
-}
-
-- (KalturaFieldType)getTypeOfTotalCount
-{
-    return KFT_Int;
-}
-
-- (void)setTotalCountFromString:(NSString*)aPropVal
-{
-    self.totalCount = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaDistributionProviderListResponse"];
-}
-
-- (void)dealloc
-{
-    [self->_objects release];
     [super dealloc];
 }
 
@@ -1782,59 +1573,6 @@
 
 @end
 
-@interface KalturaEntryDistributionListResponse()
-@property (nonatomic,retain) NSMutableArray* objects;
-@property (nonatomic,assign) int totalCount;
-@end
-
-@implementation KalturaEntryDistributionListResponse
-@synthesize objects = _objects;
-@synthesize totalCount = _totalCount;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_totalCount = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaEntryDistribution";
-}
-
-- (KalturaFieldType)getTypeOfTotalCount
-{
-    return KFT_Int;
-}
-
-- (void)setTotalCountFromString:(NSString*)aPropVal
-{
-    self.totalCount = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaEntryDistributionListResponse"];
-}
-
-- (void)dealloc
-{
-    [self->_objects release];
-    [super dealloc];
-}
-
-@end
-
 @implementation KalturaGenericDistributionProfileAction
 @synthesize protocol = _protocol;
 @synthesize serverUrl = _serverUrl;
@@ -2136,59 +1874,6 @@
 
 @end
 
-@interface KalturaGenericDistributionProviderActionListResponse()
-@property (nonatomic,retain) NSMutableArray* objects;
-@property (nonatomic,assign) int totalCount;
-@end
-
-@implementation KalturaGenericDistributionProviderActionListResponse
-@synthesize objects = _objects;
-@synthesize totalCount = _totalCount;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_totalCount = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaGenericDistributionProviderAction";
-}
-
-- (KalturaFieldType)getTypeOfTotalCount
-{
-    return KFT_Int;
-}
-
-- (void)setTotalCountFromString:(NSString*)aPropVal
-{
-    self.totalCount = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaGenericDistributionProviderActionListResponse"];
-}
-
-- (void)dealloc
-{
-    [self->_objects release];
-    [super dealloc];
-}
-
-@end
-
 @interface KalturaGenericDistributionProvider()
 @property (nonatomic,assign) int id;
 @property (nonatomic,assign) int createdAt;
@@ -2347,59 +2032,6 @@
     [self->_requiredThumbDimensions release];
     [self->_editableFields release];
     [self->_mandatoryFields release];
-    [super dealloc];
-}
-
-@end
-
-@interface KalturaGenericDistributionProviderListResponse()
-@property (nonatomic,retain) NSMutableArray* objects;
-@property (nonatomic,assign) int totalCount;
-@end
-
-@implementation KalturaGenericDistributionProviderListResponse
-@synthesize objects = _objects;
-@synthesize totalCount = _totalCount;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_totalCount = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaGenericDistributionProvider";
-}
-
-- (KalturaFieldType)getTypeOfTotalCount
-{
-    return KFT_Int;
-}
-
-- (void)setTotalCountFromString:(NSString*)aPropVal
-{
-    self.totalCount = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaGenericDistributionProviderListResponse"];
-}
-
-- (void)dealloc
-{
-    [self->_objects release];
     [super dealloc];
 }
 
@@ -2865,6 +2497,38 @@
 
 @end
 
+@interface KalturaDistributionProfileListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
+
+@implementation KalturaDistributionProfileListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfObjects
+{
+    return @"KalturaDistributionProfile";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaDistributionProfileListResponse"];
+}
+
+- (void)dealloc
+{
+    [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaDistributionProviderBaseFilter
 @synthesize typeEqual = _typeEqual;
 @synthesize typeIn = _typeIn;
@@ -2892,6 +2556,38 @@
 {
     [self->_typeEqual release];
     [self->_typeIn release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaDistributionProviderListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
+
+@implementation KalturaDistributionProviderListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfObjects
+{
+    return @"KalturaDistributionProvider";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaDistributionProviderListResponse"];
+}
+
+- (void)dealloc
+{
+    [self->_objects release];
     [super dealloc];
 }
 
@@ -3075,255 +2771,33 @@
 
 @end
 
-@implementation KalturaEntryDistributionBaseFilter
-@synthesize idEqual = _idEqual;
-@synthesize idIn = _idIn;
-@synthesize createdAtGreaterThanOrEqual = _createdAtGreaterThanOrEqual;
-@synthesize createdAtLessThanOrEqual = _createdAtLessThanOrEqual;
-@synthesize updatedAtGreaterThanOrEqual = _updatedAtGreaterThanOrEqual;
-@synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
-@synthesize submittedAtGreaterThanOrEqual = _submittedAtGreaterThanOrEqual;
-@synthesize submittedAtLessThanOrEqual = _submittedAtLessThanOrEqual;
-@synthesize entryIdEqual = _entryIdEqual;
-@synthesize entryIdIn = _entryIdIn;
-@synthesize distributionProfileIdEqual = _distributionProfileIdEqual;
-@synthesize distributionProfileIdIn = _distributionProfileIdIn;
-@synthesize statusEqual = _statusEqual;
-@synthesize statusIn = _statusIn;
-@synthesize dirtyStatusEqual = _dirtyStatusEqual;
-@synthesize dirtyStatusIn = _dirtyStatusIn;
-@synthesize sunriseGreaterThanOrEqual = _sunriseGreaterThanOrEqual;
-@synthesize sunriseLessThanOrEqual = _sunriseLessThanOrEqual;
-@synthesize sunsetGreaterThanOrEqual = _sunsetGreaterThanOrEqual;
-@synthesize sunsetLessThanOrEqual = _sunsetLessThanOrEqual;
+@interface KalturaEntryDistributionListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
 
-- (id)init
+@implementation KalturaEntryDistributionListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
 {
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_idEqual = KALTURA_UNDEF_INT;
-    self->_createdAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_createdAtLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_updatedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_updatedAtLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_submittedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_submittedAtLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_distributionProfileIdEqual = KALTURA_UNDEF_INT;
-    self->_statusEqual = KALTURA_UNDEF_INT;
-    self->_dirtyStatusEqual = KALTURA_UNDEF_INT;
-    self->_sunriseGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_sunriseLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_sunsetGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_sunsetLessThanOrEqual = KALTURA_UNDEF_INT;
-    return self;
+    return KFT_Array;
 }
 
-- (KalturaFieldType)getTypeOfIdEqual
+- (NSString*)getObjectTypeOfObjects
 {
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfIdIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfSubmittedAtGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfSubmittedAtLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfEntryIdEqual
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfEntryIdIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfDistributionProfileIdEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfDistributionProfileIdIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfStatusEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfStatusIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfDirtyStatusEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfDirtyStatusIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfSunriseGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfSunriseLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfSunsetGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfSunsetLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (void)setIdEqualFromString:(NSString*)aPropVal
-{
-    self.idEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.createdAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.createdAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.updatedAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.updatedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setSubmittedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.submittedAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setSubmittedAtLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.submittedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setDistributionProfileIdEqualFromString:(NSString*)aPropVal
-{
-    self.distributionProfileIdEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setStatusEqualFromString:(NSString*)aPropVal
-{
-    self.statusEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setDirtyStatusEqualFromString:(NSString*)aPropVal
-{
-    self.dirtyStatusEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setSunriseGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.sunriseGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setSunriseLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.sunriseLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setSunsetGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.sunsetGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setSunsetLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.sunsetLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+    return @"KalturaEntryDistribution";
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaEntryDistributionBaseFilter"];
-    [aParams addIfDefinedKey:@"idEqual" withInt:self.idEqual];
-    [aParams addIfDefinedKey:@"idIn" withString:self.idIn];
-    [aParams addIfDefinedKey:@"createdAtGreaterThanOrEqual" withInt:self.createdAtGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
-    [aParams addIfDefinedKey:@"updatedAtGreaterThanOrEqual" withInt:self.updatedAtGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
-    [aParams addIfDefinedKey:@"submittedAtGreaterThanOrEqual" withInt:self.submittedAtGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"submittedAtLessThanOrEqual" withInt:self.submittedAtLessThanOrEqual];
-    [aParams addIfDefinedKey:@"entryIdEqual" withString:self.entryIdEqual];
-    [aParams addIfDefinedKey:@"entryIdIn" withString:self.entryIdIn];
-    [aParams addIfDefinedKey:@"distributionProfileIdEqual" withInt:self.distributionProfileIdEqual];
-    [aParams addIfDefinedKey:@"distributionProfileIdIn" withString:self.distributionProfileIdIn];
-    [aParams addIfDefinedKey:@"statusEqual" withInt:self.statusEqual];
-    [aParams addIfDefinedKey:@"statusIn" withString:self.statusIn];
-    [aParams addIfDefinedKey:@"dirtyStatusEqual" withInt:self.dirtyStatusEqual];
-    [aParams addIfDefinedKey:@"dirtyStatusIn" withString:self.dirtyStatusIn];
-    [aParams addIfDefinedKey:@"sunriseGreaterThanOrEqual" withInt:self.sunriseGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"sunriseLessThanOrEqual" withInt:self.sunriseLessThanOrEqual];
-    [aParams addIfDefinedKey:@"sunsetGreaterThanOrEqual" withInt:self.sunsetGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"sunsetLessThanOrEqual" withInt:self.sunsetLessThanOrEqual];
+        [aParams putKey:@"objectType" withString:@"KalturaEntryDistributionListResponse"];
 }
 
 - (void)dealloc
 {
-    [self->_idIn release];
-    [self->_entryIdEqual release];
-    [self->_entryIdIn release];
-    [self->_distributionProfileIdIn release];
-    [self->_statusIn release];
-    [self->_dirtyStatusIn release];
+    [self->_objects release];
     [super dealloc];
 }
 
@@ -3626,6 +3100,70 @@
 
 @end
 
+@interface KalturaGenericDistributionProviderActionListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
+
+@implementation KalturaGenericDistributionProviderActionListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfObjects
+{
+    return @"KalturaGenericDistributionProviderAction";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaGenericDistributionProviderActionListResponse"];
+}
+
+- (void)dealloc
+{
+    [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaGenericDistributionProviderListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
+
+@implementation KalturaGenericDistributionProviderListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfObjects
+{
+    return @"KalturaGenericDistributionProvider";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaGenericDistributionProviderListResponse"];
+}
+
+- (void)dealloc
+{
+    [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
 @interface KalturaSyndicationDistributionProfile()
 @property (nonatomic,copy) NSString* feedId;
 @end
@@ -3798,12 +3336,256 @@
 
 @end
 
-@implementation KalturaEntryDistributionFilter
+@implementation KalturaEntryDistributionBaseFilter
+@synthesize idEqual = _idEqual;
+@synthesize idIn = _idIn;
+@synthesize createdAtGreaterThanOrEqual = _createdAtGreaterThanOrEqual;
+@synthesize createdAtLessThanOrEqual = _createdAtLessThanOrEqual;
+@synthesize updatedAtGreaterThanOrEqual = _updatedAtGreaterThanOrEqual;
+@synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
+@synthesize submittedAtGreaterThanOrEqual = _submittedAtGreaterThanOrEqual;
+@synthesize submittedAtLessThanOrEqual = _submittedAtLessThanOrEqual;
+@synthesize entryIdEqual = _entryIdEqual;
+@synthesize entryIdIn = _entryIdIn;
+@synthesize distributionProfileIdEqual = _distributionProfileIdEqual;
+@synthesize distributionProfileIdIn = _distributionProfileIdIn;
+@synthesize statusEqual = _statusEqual;
+@synthesize statusIn = _statusIn;
+@synthesize dirtyStatusEqual = _dirtyStatusEqual;
+@synthesize dirtyStatusIn = _dirtyStatusIn;
+@synthesize sunriseGreaterThanOrEqual = _sunriseGreaterThanOrEqual;
+@synthesize sunriseLessThanOrEqual = _sunriseLessThanOrEqual;
+@synthesize sunsetGreaterThanOrEqual = _sunsetGreaterThanOrEqual;
+@synthesize sunsetLessThanOrEqual = _sunsetLessThanOrEqual;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_idEqual = KALTURA_UNDEF_INT;
+    self->_createdAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_createdAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_updatedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_updatedAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_submittedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_submittedAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_distributionProfileIdEqual = KALTURA_UNDEF_INT;
+    self->_statusEqual = KALTURA_UNDEF_INT;
+    self->_dirtyStatusEqual = KALTURA_UNDEF_INT;
+    self->_sunriseGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_sunriseLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_sunsetGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_sunsetLessThanOrEqual = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfIdEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfIdIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfSubmittedAtGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfSubmittedAtLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfEntryIdEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEntryIdIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfDistributionProfileIdEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfDistributionProfileIdIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfStatusEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfStatusIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfDirtyStatusEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfDirtyStatusIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSunriseGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfSunriseLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfSunsetGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfSunsetLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (void)setIdEqualFromString:(NSString*)aPropVal
+{
+    self.idEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.createdAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.createdAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.updatedAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.updatedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setSubmittedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.submittedAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setSubmittedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.submittedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setDistributionProfileIdEqualFromString:(NSString*)aPropVal
+{
+    self.distributionProfileIdEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setStatusEqualFromString:(NSString*)aPropVal
+{
+    self.statusEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setDirtyStatusEqualFromString:(NSString*)aPropVal
+{
+    self.dirtyStatusEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setSunriseGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.sunriseGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setSunriseLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.sunriseLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setSunsetGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.sunsetGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setSunsetLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.sunsetLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaEntryDistributionFilter"];
+        [aParams putKey:@"objectType" withString:@"KalturaEntryDistributionBaseFilter"];
+    [aParams addIfDefinedKey:@"idEqual" withInt:self.idEqual];
+    [aParams addIfDefinedKey:@"idIn" withString:self.idIn];
+    [aParams addIfDefinedKey:@"createdAtGreaterThanOrEqual" withInt:self.createdAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
+    [aParams addIfDefinedKey:@"updatedAtGreaterThanOrEqual" withInt:self.updatedAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
+    [aParams addIfDefinedKey:@"submittedAtGreaterThanOrEqual" withInt:self.submittedAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"submittedAtLessThanOrEqual" withInt:self.submittedAtLessThanOrEqual];
+    [aParams addIfDefinedKey:@"entryIdEqual" withString:self.entryIdEqual];
+    [aParams addIfDefinedKey:@"entryIdIn" withString:self.entryIdIn];
+    [aParams addIfDefinedKey:@"distributionProfileIdEqual" withInt:self.distributionProfileIdEqual];
+    [aParams addIfDefinedKey:@"distributionProfileIdIn" withString:self.distributionProfileIdIn];
+    [aParams addIfDefinedKey:@"statusEqual" withInt:self.statusEqual];
+    [aParams addIfDefinedKey:@"statusIn" withString:self.statusIn];
+    [aParams addIfDefinedKey:@"dirtyStatusEqual" withInt:self.dirtyStatusEqual];
+    [aParams addIfDefinedKey:@"dirtyStatusIn" withString:self.dirtyStatusIn];
+    [aParams addIfDefinedKey:@"sunriseGreaterThanOrEqual" withInt:self.sunriseGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"sunriseLessThanOrEqual" withInt:self.sunriseLessThanOrEqual];
+    [aParams addIfDefinedKey:@"sunsetGreaterThanOrEqual" withInt:self.sunsetGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"sunsetLessThanOrEqual" withInt:self.sunsetLessThanOrEqual];
+}
+
+- (void)dealloc
+{
+    [self->_idIn release];
+    [self->_entryIdEqual release];
+    [self->_entryIdIn release];
+    [self->_distributionProfileIdIn release];
+    [self->_statusIn release];
+    [self->_dirtyStatusIn release];
+    [super dealloc];
 }
 
 @end
@@ -3844,6 +3626,16 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaDistributionEnableJobData"];
+}
+
+@end
+
+@implementation KalturaEntryDistributionFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaEntryDistributionFilter"];
 }
 
 @end
@@ -4078,16 +3870,6 @@
 
 @end
 
-@implementation KalturaSyndicationDistributionProviderFilter
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaSyndicationDistributionProviderFilter"];
-}
-
-@end
-
 ///////////////////////// services /////////////////////////
 @implementation KalturaDistributionProfileService
 - (KalturaDistributionProfile*)addWithDistributionProfile:(KalturaDistributionProfile*)aDistributionProfile
@@ -4207,7 +3989,7 @@
     return [self listWithFilter:nil];
 }
 
-- (KalturaEntryDistribution*)submitAddWithId:(int)aId withSubmitWhenReady:(BOOL)aSubmitWhenReady
+- (KalturaEntryDistribution*)submitAddWithId:(int)aId withSubmitWhenReady:(KALTURA_BOOL)aSubmitWhenReady
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     [self.client.params addIfDefinedKey:@"submitWhenReady" withBool:aSubmitWhenReady];

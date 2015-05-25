@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2015  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -36,13 +36,7 @@
 + (int)READY;
 + (int)DELETED;
 + (int)HANDLED;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaThumbCuePointSubType : NSObject
-+ (int)SLIDE;
-+ (int)CHAPTER;
++ (int)PENDING;
 @end
 
 // @package Kaltura
@@ -67,7 +61,6 @@
 + (NSString*)ANNOTATION;
 + (NSString*)CODE;
 + (NSString*)EVENT;
-+ (NSString*)THUMB;
 @end
 
 ///////////////////////// classes /////////////////////////
@@ -120,18 +113,15 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaCuePointListResponse : KalturaObjectBase
+@interface KalturaCuePointListResponse : KalturaListResponse
 @property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaCuePoint elements
-@property (nonatomic,assign,readonly) int totalCount;
 - (KalturaFieldType)getTypeOfObjects;
 - (NSString*)getObjectTypeOfObjects;
-- (KalturaFieldType)getTypeOfTotalCount;
-- (void)setTotalCountFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaCuePointBaseFilter : KalturaFilter
+@interface KalturaCuePointBaseFilter : KalturaRelatedFilter
 @property (nonatomic,copy) NSString* idEqual;
 @property (nonatomic,copy) NSString* idIn;
 @property (nonatomic,copy) NSString* cuePointTypeEqual;	// enum KalturaCuePointType
@@ -206,6 +196,8 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaCuePointFilter : KalturaCuePointBaseFilter
+@property (nonatomic,copy) NSString* freeText;
+- (KalturaFieldType)getTypeOfFreeText;
 @end
 
 ///////////////////////// services /////////////////////////

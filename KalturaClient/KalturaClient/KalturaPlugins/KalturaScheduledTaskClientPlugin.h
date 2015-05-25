@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2015  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -64,6 +64,7 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaObjectTaskType : NSObject
++ (NSString*)DISTRIBUTE;
 + (NSString*)DISPATCH_EVENT_NOTIFICATION;
 + (NSString*)EXECUTE_METADATA_XSLT;
 + (NSString*)DELETE_ENTRY;
@@ -71,6 +72,7 @@
 + (NSString*)DELETE_ENTRY_FLAVORS;
 + (NSString*)CONVERT_ENTRY_FLAVORS;
 + (NSString*)DELETE_LOCAL_CONTENT;
++ (NSString*)STORAGE_EXPORT;
 @end
 
 // @package Kaltura
@@ -91,7 +93,10 @@
 // @subpackage Client
 @interface KalturaObjectTask : KalturaObjectBase
 @property (nonatomic,copy,readonly) NSString* type;	// enum KalturaObjectTaskType
+@property (nonatomic,assign) KALTURA_BOOL stopProcessingOnError;
 - (KalturaFieldType)getTypeOfType;
+- (KalturaFieldType)getTypeOfStopProcessingOnError;
+- (void)setStopProcessingOnErrorFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -140,22 +145,11 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaScheduledTaskProfileListResponse : KalturaObjectBase
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaScheduledTaskProfile elements
-@property (nonatomic,assign,readonly) int totalCount;
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-- (KalturaFieldType)getTypeOfTotalCount;
-- (void)setTotalCountFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaConvertEntryFlavorsObjectTask : KalturaObjectTask
 // Comma separated list of flavor param ids to convert
 @property (nonatomic,copy) NSString* flavorParamsIds;
 // Should reconvert when flavor already exists?
-@property (nonatomic,assign) BOOL reconvert;
+@property (nonatomic,assign) KALTURA_BOOL reconvert;
 - (KalturaFieldType)getTypeOfFlavorParamsIds;
 - (KalturaFieldType)getTypeOfReconvert;
 - (void)setReconvertFromString:(NSString*)aPropVal;
@@ -249,6 +243,22 @@
 - (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setLastExecutionStartedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setLastExecutionStartedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaScheduledTaskProfileListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaScheduledTaskProfile elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaStorageExportObjectTask : KalturaObjectTask
+// Storage profile id
+@property (nonatomic,copy) NSString* storageId;
+- (KalturaFieldType)getTypeOfStorageId;
 @end
 
 // @package Kaltura

@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2015  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -332,16 +332,6 @@
 @implementation KalturaPartnerUsageListResponse
 @synthesize total = _total;
 @synthesize objects = _objects;
-@synthesize totalCount = _totalCount;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_totalCount = KALTURA_UNDEF_INT;
-    return self;
-}
 
 - (KalturaFieldType)getTypeOfTotal
 {
@@ -363,16 +353,6 @@
     return @"KalturaVarPartnerUsageItem";
 }
 
-- (KalturaFieldType)getTypeOfTotalCount
-{
-    return KFT_Int;
-}
-
-- (void)setTotalCountFromString:(NSString*)aPropVal
-{
-    self.totalCount = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -380,7 +360,6 @@
         [aParams putKey:@"objectType" withString:@"KalturaPartnerUsageListResponse"];
     [aParams addIfDefinedKey:@"total" withObject:self.total];
     [aParams addIfDefinedKey:@"objects" withArray:self.objects];
-    [aParams addIfDefinedKey:@"totalCount" withInt:self.totalCount];
 }
 
 - (void)dealloc

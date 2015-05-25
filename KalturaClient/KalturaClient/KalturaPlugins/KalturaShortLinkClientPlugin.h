@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2015  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -83,17 +83,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaShortLinkListResponse : KalturaObjectBase
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaShortLink elements
-@property (nonatomic,assign,readonly) int totalCount;
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-- (KalturaFieldType)getTypeOfTotalCount;
-- (void)setTotalCountFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaShortLinkBaseFilter : KalturaFilter
 @property (nonatomic,assign) int idEqual;
 @property (nonatomic,copy) NSString* idIn;
@@ -140,6 +129,14 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaShortLinkListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaShortLink elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaShortLinkFilter : KalturaShortLinkBaseFilter
 @end
 
@@ -161,7 +158,7 @@
 // Mark the short link as deleted
 - (KalturaShortLink*)deleteWithId:(NSString*)aId;
 // Serves short link
-- (NSString*)gotoWithId:(NSString*)aId withProxy:(BOOL)aProxy;
+- (NSString*)gotoWithId:(NSString*)aId withProxy:(KALTURA_BOOL)aProxy;
 - (NSString*)gotoWithId:(NSString*)aId;
 @end
 

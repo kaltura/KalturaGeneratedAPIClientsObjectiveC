@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2015  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -66,6 +66,72 @@
 @end
 
 ///////////////////////// classes /////////////////////////
+// @package Kaltura
+// @subpackage Client
+@interface KalturaFileSync : KalturaObjectBase
+@property (nonatomic,assign,readonly) int id;
+@property (nonatomic,assign,readonly) int partnerId;
+@property (nonatomic,copy,readonly) NSString* fileObjectType;	// enum KalturaFileSyncObjectType
+@property (nonatomic,copy,readonly) NSString* objectId;
+@property (nonatomic,copy,readonly) NSString* version;
+@property (nonatomic,assign,readonly) int objectSubType;
+@property (nonatomic,copy,readonly) NSString* dc;
+@property (nonatomic,assign,readonly) int original;
+@property (nonatomic,assign,readonly) int createdAt;
+@property (nonatomic,assign,readonly) int updatedAt;
+@property (nonatomic,assign,readonly) int readyAt;
+@property (nonatomic,assign,readonly) int syncTime;
+@property (nonatomic,assign,readonly) int status;	// enum KalturaFileSyncStatus
+@property (nonatomic,assign,readonly) int fileType;	// enum KalturaFileSyncType
+@property (nonatomic,assign,readonly) int linkedId;
+@property (nonatomic,assign,readonly) int linkCount;
+@property (nonatomic,copy,readonly) NSString* fileRoot;
+@property (nonatomic,copy,readonly) NSString* filePath;
+@property (nonatomic,assign,readonly) double fileSize;
+@property (nonatomic,copy,readonly) NSString* fileUrl;
+@property (nonatomic,copy,readonly) NSString* fileContent;
+@property (nonatomic,assign,readonly) double fileDiscSize;
+@property (nonatomic,assign,readonly) KALTURA_BOOL isCurrentDc;
+- (KalturaFieldType)getTypeOfId;
+- (KalturaFieldType)getTypeOfPartnerId;
+- (KalturaFieldType)getTypeOfFileObjectType;
+- (KalturaFieldType)getTypeOfObjectId;
+- (KalturaFieldType)getTypeOfVersion;
+- (KalturaFieldType)getTypeOfObjectSubType;
+- (KalturaFieldType)getTypeOfDc;
+- (KalturaFieldType)getTypeOfOriginal;
+- (KalturaFieldType)getTypeOfCreatedAt;
+- (KalturaFieldType)getTypeOfUpdatedAt;
+- (KalturaFieldType)getTypeOfReadyAt;
+- (KalturaFieldType)getTypeOfSyncTime;
+- (KalturaFieldType)getTypeOfStatus;
+- (KalturaFieldType)getTypeOfFileType;
+- (KalturaFieldType)getTypeOfLinkedId;
+- (KalturaFieldType)getTypeOfLinkCount;
+- (KalturaFieldType)getTypeOfFileRoot;
+- (KalturaFieldType)getTypeOfFilePath;
+- (KalturaFieldType)getTypeOfFileSize;
+- (KalturaFieldType)getTypeOfFileUrl;
+- (KalturaFieldType)getTypeOfFileContent;
+- (KalturaFieldType)getTypeOfFileDiscSize;
+- (KalturaFieldType)getTypeOfIsCurrentDc;
+- (void)setIdFromString:(NSString*)aPropVal;
+- (void)setPartnerIdFromString:(NSString*)aPropVal;
+- (void)setObjectSubTypeFromString:(NSString*)aPropVal;
+- (void)setOriginalFromString:(NSString*)aPropVal;
+- (void)setCreatedAtFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtFromString:(NSString*)aPropVal;
+- (void)setReadyAtFromString:(NSString*)aPropVal;
+- (void)setSyncTimeFromString:(NSString*)aPropVal;
+- (void)setStatusFromString:(NSString*)aPropVal;
+- (void)setFileTypeFromString:(NSString*)aPropVal;
+- (void)setLinkedIdFromString:(NSString*)aPropVal;
+- (void)setLinkCountFromString:(NSString*)aPropVal;
+- (void)setFileSizeFromString:(NSString*)aPropVal;
+- (void)setFileDiscSizeFromString:(NSString*)aPropVal;
+- (void)setIsCurrentDcFromString:(NSString*)aPropVal;
+@end
+
 // @package Kaltura
 // @subpackage Client
 @interface KalturaFileSyncBaseFilter : KalturaFilter
@@ -145,6 +211,14 @@
 - (void)setLinkCountLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setFileSizeGreaterThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setFileSizeLessThanOrEqualFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaFileSyncListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaFileSync elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
 @end
 
 // @package Kaltura

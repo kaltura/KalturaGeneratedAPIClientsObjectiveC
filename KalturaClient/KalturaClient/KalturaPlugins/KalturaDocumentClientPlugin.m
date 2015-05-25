@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2015  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -209,21 +209,10 @@
 
 @interface KalturaDocumentListResponse()
 @property (nonatomic,retain) NSMutableArray* objects;
-@property (nonatomic,assign) int totalCount;
 @end
 
 @implementation KalturaDocumentListResponse
 @synthesize objects = _objects;
-@synthesize totalCount = _totalCount;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_totalCount = KALTURA_UNDEF_INT;
-    return self;
-}
 
 - (KalturaFieldType)getTypeOfObjects
 {
@@ -233,16 +222,6 @@
 - (NSString*)getObjectTypeOfObjects
 {
     return @"KalturaDocumentEntry";
-}
-
-- (KalturaFieldType)getTypeOfTotalCount
-{
-    return KFT_Int;
-}
-
-- (void)setTotalCountFromString:(NSString*)aPropVal
-{
-    self.totalCount = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -431,67 +410,6 @@
 
 @end
 
-@implementation KalturaDocumentEntryBaseFilter
-@synthesize documentTypeEqual = _documentTypeEqual;
-@synthesize documentTypeIn = _documentTypeIn;
-@synthesize assetParamsIdsMatchOr = _assetParamsIdsMatchOr;
-@synthesize assetParamsIdsMatchAnd = _assetParamsIdsMatchAnd;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_documentTypeEqual = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfDocumentTypeEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfDocumentTypeIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfAssetParamsIdsMatchOr
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfAssetParamsIdsMatchAnd
-{
-    return KFT_String;
-}
-
-- (void)setDocumentTypeEqualFromString:(NSString*)aPropVal
-{
-    self.documentTypeEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaDocumentEntryBaseFilter"];
-    [aParams addIfDefinedKey:@"documentTypeEqual" withInt:self.documentTypeEqual];
-    [aParams addIfDefinedKey:@"documentTypeIn" withString:self.documentTypeIn];
-    [aParams addIfDefinedKey:@"assetParamsIdsMatchOr" withString:self.assetParamsIdsMatchOr];
-    [aParams addIfDefinedKey:@"assetParamsIdsMatchAnd" withString:self.assetParamsIdsMatchAnd];
-}
-
-- (void)dealloc
-{
-    [self->_documentTypeIn release];
-    [self->_assetParamsIdsMatchOr release];
-    [self->_assetParamsIdsMatchAnd release];
-    [super dealloc];
-}
-
-@end
-
 @implementation KalturaDocumentFlavorParamsOutput
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
@@ -659,6 +577,67 @@
         [aParams putKey:@"objectType" withString:@"KalturaSwfFlavorParamsOutput"];
     [aParams addIfDefinedKey:@"flashVersion" withInt:self.flashVersion];
     [aParams addIfDefinedKey:@"poly2Bitmap" withBool:self.poly2Bitmap];
+}
+
+@end
+
+@implementation KalturaDocumentEntryBaseFilter
+@synthesize documentTypeEqual = _documentTypeEqual;
+@synthesize documentTypeIn = _documentTypeIn;
+@synthesize assetParamsIdsMatchOr = _assetParamsIdsMatchOr;
+@synthesize assetParamsIdsMatchAnd = _assetParamsIdsMatchAnd;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_documentTypeEqual = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfDocumentTypeEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfDocumentTypeIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfAssetParamsIdsMatchOr
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfAssetParamsIdsMatchAnd
+{
+    return KFT_String;
+}
+
+- (void)setDocumentTypeEqualFromString:(NSString*)aPropVal
+{
+    self.documentTypeEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaDocumentEntryBaseFilter"];
+    [aParams addIfDefinedKey:@"documentTypeEqual" withInt:self.documentTypeEqual];
+    [aParams addIfDefinedKey:@"documentTypeIn" withString:self.documentTypeIn];
+    [aParams addIfDefinedKey:@"assetParamsIdsMatchOr" withString:self.assetParamsIdsMatchOr];
+    [aParams addIfDefinedKey:@"assetParamsIdsMatchAnd" withString:self.assetParamsIdsMatchAnd];
+}
+
+- (void)dealloc
+{
+    [self->_documentTypeIn release];
+    [self->_assetParamsIdsMatchOr release];
+    [self->_assetParamsIdsMatchAnd release];
+    [super dealloc];
 }
 
 @end
@@ -944,7 +923,7 @@
     return [self.client queueStringService:@"document_documents" withAction:@"convertPptToSwf"];
 }
 
-- (NSString*)serveWithEntryId:(NSString*)aEntryId withFlavorAssetId:(NSString*)aFlavorAssetId withForceProxy:(BOOL)aForceProxy
+- (NSString*)serveWithEntryId:(NSString*)aEntryId withFlavorAssetId:(NSString*)aFlavorAssetId withForceProxy:(KALTURA_BOOL)aForceProxy
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
     [self.client.params addIfDefinedKey:@"flavorAssetId" withString:aFlavorAssetId];
@@ -962,7 +941,7 @@
     return [self serveWithEntryId:aEntryId withFlavorAssetId:nil];
 }
 
-- (NSString*)serveByFlavorParamsIdWithEntryId:(NSString*)aEntryId withFlavorParamsId:(NSString*)aFlavorParamsId withForceProxy:(BOOL)aForceProxy
+- (NSString*)serveByFlavorParamsIdWithEntryId:(NSString*)aEntryId withFlavorParamsId:(NSString*)aFlavorParamsId withForceProxy:(KALTURA_BOOL)aForceProxy
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
     [self.client.params addIfDefinedKey:@"flavorParamsId" withString:aFlavorParamsId];
