@@ -1,2 +1,2 @@
 language: objective-c
-xcode_project: KalturaClient/KalturaClient.xcodeproj
+script: xcodebuild -project KalturaClient/KalturaClient.xcodeproj  -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
