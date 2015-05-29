@@ -7485,6 +7485,10 @@
 {
     return @"4";
 }
++ (NSString*)LIMIT_DELIVERY_PROFILES
+{
+    return @"5";
+}
 @end
 
 @implementation KalturaSchemaType
@@ -23634,6 +23638,51 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaAccessControlBlockAction"];
+}
+
+@end
+
+@implementation KalturaAccessControlLimitDeliveryProfilesAction
+@synthesize deliveryProfileIds = _deliveryProfileIds;
+@synthesize isBlockedList = _isBlockedList;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_isBlockedList = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfDeliveryProfileIds
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfIsBlockedList
+{
+    return KFT_Bool;
+}
+
+- (void)setIsBlockedListFromString:(NSString*)aPropVal
+{
+    self.isBlockedList = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaAccessControlLimitDeliveryProfilesAction"];
+    [aParams addIfDefinedKey:@"deliveryProfileIds" withString:self.deliveryProfileIds];
+    [aParams addIfDefinedKey:@"isBlockedList" withBool:self.isBlockedList];
+}
+
+- (void)dealloc
+{
+    [self->_deliveryProfileIds release];
+    [super dealloc];
 }
 
 @end

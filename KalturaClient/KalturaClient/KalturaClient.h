@@ -2698,6 +2698,7 @@
 + (NSString*)PREVIEW;
 + (NSString*)LIMIT_FLAVORS;
 + (NSString*)ADD_TO_STORAGE;
++ (NSString*)LIMIT_DELIVERY_PROFILES;
 @end
 
 // @package Kaltura
@@ -7217,6 +7218,17 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaAccessControlBlockAction : KalturaRuleAction
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaAccessControlLimitDeliveryProfilesAction : KalturaRuleAction
+// Comma separated list of delivery profile ids
+@property (nonatomic,copy) NSString* deliveryProfileIds;
+@property (nonatomic,assign) KALTURA_BOOL isBlockedList;
+- (KalturaFieldType)getTypeOfDeliveryProfileIds;
+- (KalturaFieldType)getTypeOfIsBlockedList;
+- (void)setIsBlockedListFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
