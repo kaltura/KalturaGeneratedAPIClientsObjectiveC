@@ -209,6 +209,14 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaEdgeServerStatus : NSObject
++ (int)ACTIVE;
++ (int)DISABLED;
++ (int)DELETED;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaEditorType : NSObject
 + (int)SIMPLE;
 + (int)ADVANCED;
@@ -1125,6 +1133,7 @@
 // @subpackage Client
 @interface KalturaBatchJobType : NSObject
 + (NSString*)CONVERT;
++ (NSString*)PARSE_MULTI_LANGUAGE_CAPTION_ASSET;
 + (NSString*)PARSE_CAPTION_ASSET;
 + (NSString*)DISTRIBUTION_DELETE;
 + (NSString*)DISTRIBUTION_DISABLE;
@@ -1306,6 +1315,7 @@
 + (NSString*)USER_ROLE;
 + (NSString*)GEO_DISTANCE;
 + (NSString*)OR_OPERATOR;
++ (NSString*)HASH;
 @end
 
 // @package Kaltura
@@ -1318,6 +1328,7 @@
 + (NSString*)COPY;
 + (NSString*)FLV;
 + (NSString*)HLS;
++ (NSString*)ISMA;
 + (NSString*)ISMV;
 + (NSString*)JPG;
 + (NSString*)M2TS;
@@ -1574,6 +1585,15 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaDynamicEnum : NSObject
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaEdgeServerOrderBy : NSObject
++ (NSString*)CREATED_AT_ASC;
++ (NSString*)UPDATED_AT_ASC;
++ (NSString*)CREATED_AT_DESC;
++ (NSString*)UPDATED_AT_DESC;
 @end
 
 // @package Kaltura
@@ -1942,6 +1962,7 @@
 + (NSString*)MR;
 + (NSString*)MO;
 + (NSString*)MN;
++ (NSString*)MU;
 + (NSString*)NA;
 + (NSString*)NE;
 + (NSString*)NO_;
@@ -1996,8 +2017,8 @@
 + (NSString*)CY;
 + (NSString*)WO;
 + (NSString*)XH;
-+ (NSString*)YI;
 + (NSString*)JI;
++ (NSString*)YI;
 + (NSString*)YO;
 + (NSString*)ZU;
 @end
@@ -2088,6 +2109,7 @@
 + (NSString*)MR;
 + (NSString*)MS;
 + (NSString*)MT;
++ (NSString*)MU;
 + (NSString*)MY;
 + (NSString*)NA;
 + (NSString*)NE;
@@ -4456,6 +4478,51 @@
 - (KalturaFieldType)getTypeOfMappings;
 - (NSString*)getObjectTypeOfMappings;
 - (void)setTypeFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaEdgeServer : KalturaObjectBase
+@property (nonatomic,assign,readonly) int id;
+@property (nonatomic,assign,readonly) int createdAt;
+@property (nonatomic,assign,readonly) int updatedAt;
+@property (nonatomic,assign,readonly) int partnerId;
+// edgeServer name
+@property (nonatomic,copy) NSString* name;
+// edgeServer uniqe system name
+@property (nonatomic,copy) NSString* systemName;
+// edgeServer description
+@property (nonatomic,copy) NSString* desciption;
+@property (nonatomic,assign) int status;	// enum KalturaEdgeServerStatus
+// edgeServer tags
+@property (nonatomic,copy) NSString* tags;
+// edgeServer host name
+@property (nonatomic,copy) NSString* hostName;
+// edgeServer playback hostName
+@property (nonatomic,copy) NSString* playbackHostName;
+// Delivery profile ids comma seperated
+@property (nonatomic,copy) NSString* deliveryProfileIds;
+// Id of the parent edge server
+@property (nonatomic,assign) int parentId;
+- (KalturaFieldType)getTypeOfId;
+- (KalturaFieldType)getTypeOfCreatedAt;
+- (KalturaFieldType)getTypeOfUpdatedAt;
+- (KalturaFieldType)getTypeOfPartnerId;
+- (KalturaFieldType)getTypeOfName;
+- (KalturaFieldType)getTypeOfSystemName;
+- (KalturaFieldType)getTypeOfDesciption;
+- (KalturaFieldType)getTypeOfStatus;
+- (KalturaFieldType)getTypeOfTags;
+- (KalturaFieldType)getTypeOfHostName;
+- (KalturaFieldType)getTypeOfPlaybackHostName;
+- (KalturaFieldType)getTypeOfDeliveryProfileIds;
+- (KalturaFieldType)getTypeOfParentId;
+- (void)setIdFromString:(NSString*)aPropVal;
+- (void)setCreatedAtFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtFromString:(NSString*)aPropVal;
+- (void)setPartnerIdFromString:(NSString*)aPropVal;
+- (void)setStatusFromString:(NSString*)aPropVal;
+- (void)setParentIdFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -8289,6 +8356,72 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaEdgeServerBaseFilter : KalturaFilter
+@property (nonatomic,assign) int idEqual;
+@property (nonatomic,copy) NSString* idIn;
+@property (nonatomic,assign) int createdAtGreaterThanOrEqual;
+@property (nonatomic,assign) int createdAtLessThanOrEqual;
+@property (nonatomic,assign) int updatedAtGreaterThanOrEqual;
+@property (nonatomic,assign) int updatedAtLessThanOrEqual;
+@property (nonatomic,copy) NSString* nameEqual;
+@property (nonatomic,copy) NSString* nameIn;
+@property (nonatomic,copy) NSString* systemNameEqual;
+@property (nonatomic,copy) NSString* systemNameIn;
+@property (nonatomic,assign) int statusEqual;	// enum KalturaEdgeServerStatus
+@property (nonatomic,copy) NSString* statusIn;
+@property (nonatomic,copy) NSString* tagsLike;
+@property (nonatomic,copy) NSString* tagsMultiLikeOr;
+@property (nonatomic,copy) NSString* tagsMultiLikeAnd;
+@property (nonatomic,copy) NSString* hostNameLike;
+@property (nonatomic,copy) NSString* hostNameMultiLikeOr;
+@property (nonatomic,copy) NSString* hostNameMultiLikeAnd;
+@property (nonatomic,copy) NSString* playbackHostNameLike;
+@property (nonatomic,copy) NSString* playbackHostNameMultiLikeOr;
+@property (nonatomic,copy) NSString* playbackHostNameMultiLikeAnd;
+@property (nonatomic,assign) int parentIdEqual;
+@property (nonatomic,copy) NSString* parentIdIn;
+- (KalturaFieldType)getTypeOfIdEqual;
+- (KalturaFieldType)getTypeOfIdIn;
+- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfNameEqual;
+- (KalturaFieldType)getTypeOfNameIn;
+- (KalturaFieldType)getTypeOfSystemNameEqual;
+- (KalturaFieldType)getTypeOfSystemNameIn;
+- (KalturaFieldType)getTypeOfStatusEqual;
+- (KalturaFieldType)getTypeOfStatusIn;
+- (KalturaFieldType)getTypeOfTagsLike;
+- (KalturaFieldType)getTypeOfTagsMultiLikeOr;
+- (KalturaFieldType)getTypeOfTagsMultiLikeAnd;
+- (KalturaFieldType)getTypeOfHostNameLike;
+- (KalturaFieldType)getTypeOfHostNameMultiLikeOr;
+- (KalturaFieldType)getTypeOfHostNameMultiLikeAnd;
+- (KalturaFieldType)getTypeOfPlaybackHostNameLike;
+- (KalturaFieldType)getTypeOfPlaybackHostNameMultiLikeOr;
+- (KalturaFieldType)getTypeOfPlaybackHostNameMultiLikeAnd;
+- (KalturaFieldType)getTypeOfParentIdEqual;
+- (KalturaFieldType)getTypeOfParentIdIn;
+- (void)setIdEqualFromString:(NSString*)aPropVal;
+- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setStatusEqualFromString:(NSString*)aPropVal;
+- (void)setParentIdEqualFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaEdgeServerListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaStorageProfile elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaCategoryUserBaseFilter : KalturaRelatedFilter
 @property (nonatomic,assign) int categoryIdEqual;
 @property (nonatomic,copy) NSString* categoryIdIn;
@@ -8615,6 +8748,17 @@
 @property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaGroupUser elements
 - (KalturaFieldType)getTypeOfObjects;
 - (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaHashCondition : KalturaCondition
+// hash name
+@property (nonatomic,copy) NSString* hashName;
+// hash secret
+@property (nonatomic,copy) NSString* hashSecret;
+- (KalturaFieldType)getTypeOfHashName;
+- (KalturaFieldType)getTypeOfHashSecret;
 @end
 
 // @package Kaltura
@@ -10111,6 +10255,11 @@
 @property (nonatomic,copy) NSString* rendererClass;
 - (KalturaFieldType)getTypeOfPattern;
 - (KalturaFieldType)getTypeOfRendererClass;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaEdgeServerFilter : KalturaEdgeServerBaseFilter
 @end
 
 // @package Kaltura
@@ -11636,6 +11785,23 @@
 
 // @package Kaltura
 // @subpackage Client
+// Edge Server service
+@interface KalturaEdgeServerService : KalturaServiceBase
+// Adds a edge server to the Kaltura DB.
+- (KalturaEdgeServer*)addWithEdgeServer:(KalturaEdgeServer*)aEdgeServer;
+// Get edge server by id
+- (KalturaEdgeServer*)getWithEdgeServerId:(int)aEdgeServerId;
+// Update edge server by id
+- (KalturaEdgeServer*)updateWithEdgeServerId:(int)aEdgeServerId withEdgeServer:(KalturaEdgeServer*)aEdgeServer;
+// delete edge server by id
+- (void)deleteWithEdgeServerId:(NSString*)aEdgeServerId;
+- (KalturaEdgeServerListResponse*)listWithFilter:(KalturaEdgeServerFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
+- (KalturaEdgeServerListResponse*)listWithFilter:(KalturaEdgeServerFilter*)aFilter;
+- (KalturaEdgeServerListResponse*)list;
+@end
+
+// @package Kaltura
+// @subpackage Client
 // EmailIngestionProfile service lets you manage email ingestion profile records
 @interface KalturaEmailIngestionProfileService : KalturaServiceBase
 // EmailIngestionProfile Add action allows you to add a EmailIngestionProfile to Kaltura DB
@@ -12645,6 +12811,7 @@
 	KalturaConversionProfileService* _conversionProfile;
 	KalturaDataService* _data;
 	KalturaDeliveryProfileService* _deliveryProfile;
+	KalturaEdgeServerService* _edgeServer;
 	KalturaEmailIngestionProfileService* _EmailIngestionProfile;
 	KalturaFileAssetService* _fileAsset;
 	KalturaFlavorAssetService* _flavorAsset;
@@ -12698,6 +12865,7 @@
 @property (nonatomic, readonly) KalturaConversionProfileService* conversionProfile;
 @property (nonatomic, readonly) KalturaDataService* data;
 @property (nonatomic, readonly) KalturaDeliveryProfileService* deliveryProfile;
+@property (nonatomic, readonly) KalturaEdgeServerService* edgeServer;
 @property (nonatomic, readonly) KalturaEmailIngestionProfileService* EmailIngestionProfile;
 @property (nonatomic, readonly) KalturaFileAssetService* fileAsset;
 @property (nonatomic, readonly) KalturaFlavorAssetService* flavorAsset;

@@ -122,6 +122,7 @@
 @synthesize label = _label;
 @synthesize format = _format;
 @synthesize status = _status;
+@synthesize parentId = _parentId;
 
 - (id)init
 {
@@ -169,6 +170,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfParentId
+{
+    return KFT_String;
+}
+
 - (void)setCaptionParamsIdFromString:(NSString*)aPropVal
 {
     self.captionParamsId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -194,6 +200,7 @@
     [aParams addIfDefinedKey:@"isDefault" withInt:self.isDefault];
     [aParams addIfDefinedKey:@"label" withString:self.label];
     [aParams addIfDefinedKey:@"format" withString:self.format];
+    [aParams addIfDefinedKey:@"parentId" withString:self.parentId];
 }
 
 - (void)dealloc
@@ -202,6 +209,7 @@
     [self->_languageCode release];
     [self->_label release];
     [self->_format release];
+    [self->_parentId release];
     [super dealloc];
 }
 
@@ -340,6 +348,46 @@
 - (void)dealloc
 {
     [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaParseMultiLanguageCaptionAssetJobData
+@synthesize multiLanaguageCaptionAssetId = _multiLanaguageCaptionAssetId;
+@synthesize entryId = _entryId;
+@synthesize fileLocation = _fileLocation;
+
+- (KalturaFieldType)getTypeOfMultiLanaguageCaptionAssetId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEntryId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfFileLocation
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaParseMultiLanguageCaptionAssetJobData"];
+    [aParams addIfDefinedKey:@"multiLanaguageCaptionAssetId" withString:self.multiLanaguageCaptionAssetId];
+    [aParams addIfDefinedKey:@"entryId" withString:self.entryId];
+    [aParams addIfDefinedKey:@"fileLocation" withString:self.fileLocation];
+}
+
+- (void)dealloc
+{
+    [self->_multiLanaguageCaptionAssetId release];
+    [self->_entryId release];
+    [self->_fileLocation release];
     [super dealloc];
 }
 

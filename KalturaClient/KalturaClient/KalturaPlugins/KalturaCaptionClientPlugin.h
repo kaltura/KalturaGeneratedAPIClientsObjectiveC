@@ -85,6 +85,8 @@
 @property (nonatomic,copy) NSString* format;	// enum KalturaCaptionType, insertonly
 // The status of the asset
 @property (nonatomic,assign,readonly) int status;	// enum KalturaCaptionAssetStatus
+// The parent id of the asset
+@property (nonatomic,copy) NSString* parentId;	// insertonly
 - (KalturaFieldType)getTypeOfCaptionParamsId;
 - (KalturaFieldType)getTypeOfLanguage;
 - (KalturaFieldType)getTypeOfLanguageCode;
@@ -92,6 +94,7 @@
 - (KalturaFieldType)getTypeOfLabel;
 - (KalturaFieldType)getTypeOfFormat;
 - (KalturaFieldType)getTypeOfStatus;
+- (KalturaFieldType)getTypeOfParentId;
 - (void)setCaptionParamsIdFromString:(NSString*)aPropVal;
 - (void)setIsDefaultFromString:(NSString*)aPropVal;
 - (void)setStatusFromString:(NSString*)aPropVal;
@@ -133,6 +136,17 @@
 @property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaCaptionParams elements
 - (KalturaFieldType)getTypeOfObjects;
 - (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaParseMultiLanguageCaptionAssetJobData : KalturaJobData
+@property (nonatomic,copy) NSString* multiLanaguageCaptionAssetId;
+@property (nonatomic,copy) NSString* entryId;
+@property (nonatomic,copy) NSString* fileLocation;
+- (KalturaFieldType)getTypeOfMultiLanaguageCaptionAssetId;
+- (KalturaFieldType)getTypeOfEntryId;
+- (KalturaFieldType)getTypeOfFileLocation;
 @end
 
 // @package Kaltura

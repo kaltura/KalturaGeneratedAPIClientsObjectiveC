@@ -388,6 +388,21 @@
 }
 @end
 
+@implementation KalturaEdgeServerStatus
++ (int)ACTIVE
+{
+    return 1;
+}
++ (int)DISABLED
+{
+    return 2;
+}
++ (int)DELETED
+{
+    return 3;
+}
+@end
+
 @implementation KalturaEditorType
 + (int)SIMPLE
 {
@@ -2689,6 +2704,10 @@
 {
     return @"0";
 }
++ (NSString*)PARSE_MULTI_LANGUAGE_CAPTION_ASSET
+{
+    return @"caption.parsemultilanguagecaptionasset";
+}
 + (NSString*)PARSE_CAPTION_ASSET
 {
     return @"captionSearch.parseCaptionAsset";
@@ -3209,6 +3228,10 @@
 {
     return @"11";
 }
++ (NSString*)HASH
+{
+    return @"12";
+}
 @end
 
 @implementation KalturaContainerFormat
@@ -3239,6 +3262,10 @@
 + (NSString*)HLS
 {
     return @"hls";
+}
++ (NSString*)ISMA
+{
+    return @"isma";
 }
 + (NSString*)ISMV
 {
@@ -3907,6 +3934,25 @@
 @end
 
 @implementation KalturaDynamicEnum
+@end
+
+@implementation KalturaEdgeServerOrderBy
++ (NSString*)CREATED_AT_ASC
+{
+    return @"+createdAt";
+}
++ (NSString*)UPDATED_AT_ASC
+{
+    return @"+updatedAt";
+}
++ (NSString*)CREATED_AT_DESC
+{
+    return @"-createdAt";
+}
++ (NSString*)UPDATED_AT_DESC
+{
+    return @"-updatedAt";
+}
 @end
 
 @implementation KalturaEntryIdentifierField
@@ -5022,6 +5068,10 @@
 {
     return @"Mongolian";
 }
++ (NSString*)MU
+{
+    return @"Multilingual";
+}
 + (NSString*)NA
 {
     return @"Nauru";
@@ -5238,11 +5288,11 @@
 {
     return @"Xhosa";
 }
-+ (NSString*)YI
++ (NSString*)JI
 {
     return @"Yiddish";
 }
-+ (NSString*)JI
++ (NSString*)YI
 {
     return @"Yiddish";
 }
@@ -5588,6 +5638,10 @@
 + (NSString*)MT
 {
     return @"mt";
+}
++ (NSString*)MU
+{
+    return @"multilingual";
 }
 + (NSString*)MY
 {
@@ -13372,6 +13426,167 @@
     [self->_pager release];
     [self->_relatedProfiles release];
     [self->_mappings release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaEdgeServer()
+@property (nonatomic,assign) int id;
+@property (nonatomic,assign) int createdAt;
+@property (nonatomic,assign) int updatedAt;
+@property (nonatomic,assign) int partnerId;
+@end
+
+@implementation KalturaEdgeServer
+@synthesize id = _id;
+@synthesize createdAt = _createdAt;
+@synthesize updatedAt = _updatedAt;
+@synthesize partnerId = _partnerId;
+@synthesize name = _name;
+@synthesize systemName = _systemName;
+@synthesize desciption = _desciption;
+@synthesize status = _status;
+@synthesize tags = _tags;
+@synthesize hostName = _hostName;
+@synthesize playbackHostName = _playbackHostName;
+@synthesize deliveryProfileIds = _deliveryProfileIds;
+@synthesize parentId = _parentId;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_id = KALTURA_UNDEF_INT;
+    self->_createdAt = KALTURA_UNDEF_INT;
+    self->_updatedAt = KALTURA_UNDEF_INT;
+    self->_partnerId = KALTURA_UNDEF_INT;
+    self->_status = KALTURA_UNDEF_INT;
+    self->_parentId = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAt
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedAt
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfPartnerId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSystemName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfDesciption
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfStatus
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfTags
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfHostName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfPlaybackHostName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfDeliveryProfileIds
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfParentId
+{
+    return KFT_Int;
+}
+
+- (void)setIdFromString:(NSString*)aPropVal
+{
+    self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtFromString:(NSString*)aPropVal
+{
+    self.createdAt = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUpdatedAtFromString:(NSString*)aPropVal
+{
+    self.updatedAt = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setPartnerIdFromString:(NSString*)aPropVal
+{
+    self.partnerId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setStatusFromString:(NSString*)aPropVal
+{
+    self.status = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setParentIdFromString:(NSString*)aPropVal
+{
+    self.parentId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaEdgeServer"];
+    [aParams addIfDefinedKey:@"name" withString:self.name];
+    [aParams addIfDefinedKey:@"systemName" withString:self.systemName];
+    [aParams addIfDefinedKey:@"desciption" withString:self.desciption];
+    [aParams addIfDefinedKey:@"status" withInt:self.status];
+    [aParams addIfDefinedKey:@"tags" withString:self.tags];
+    [aParams addIfDefinedKey:@"hostName" withString:self.hostName];
+    [aParams addIfDefinedKey:@"playbackHostName" withString:self.playbackHostName];
+    [aParams addIfDefinedKey:@"deliveryProfileIds" withString:self.deliveryProfileIds];
+    [aParams addIfDefinedKey:@"parentId" withInt:self.parentId];
+}
+
+- (void)dealloc
+{
+    [self->_name release];
+    [self->_systemName release];
+    [self->_desciption release];
+    [self->_tags release];
+    [self->_hostName release];
+    [self->_playbackHostName release];
+    [self->_deliveryProfileIds release];
     [super dealloc];
 }
 
@@ -27687,6 +27902,281 @@
 
 @end
 
+@implementation KalturaEdgeServerBaseFilter
+@synthesize idEqual = _idEqual;
+@synthesize idIn = _idIn;
+@synthesize createdAtGreaterThanOrEqual = _createdAtGreaterThanOrEqual;
+@synthesize createdAtLessThanOrEqual = _createdAtLessThanOrEqual;
+@synthesize updatedAtGreaterThanOrEqual = _updatedAtGreaterThanOrEqual;
+@synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
+@synthesize nameEqual = _nameEqual;
+@synthesize nameIn = _nameIn;
+@synthesize systemNameEqual = _systemNameEqual;
+@synthesize systemNameIn = _systemNameIn;
+@synthesize statusEqual = _statusEqual;
+@synthesize statusIn = _statusIn;
+@synthesize tagsLike = _tagsLike;
+@synthesize tagsMultiLikeOr = _tagsMultiLikeOr;
+@synthesize tagsMultiLikeAnd = _tagsMultiLikeAnd;
+@synthesize hostNameLike = _hostNameLike;
+@synthesize hostNameMultiLikeOr = _hostNameMultiLikeOr;
+@synthesize hostNameMultiLikeAnd = _hostNameMultiLikeAnd;
+@synthesize playbackHostNameLike = _playbackHostNameLike;
+@synthesize playbackHostNameMultiLikeOr = _playbackHostNameMultiLikeOr;
+@synthesize playbackHostNameMultiLikeAnd = _playbackHostNameMultiLikeAnd;
+@synthesize parentIdEqual = _parentIdEqual;
+@synthesize parentIdIn = _parentIdIn;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_idEqual = KALTURA_UNDEF_INT;
+    self->_createdAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_createdAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_updatedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_updatedAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_statusEqual = KALTURA_UNDEF_INT;
+    self->_parentIdEqual = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfIdEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfIdIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfNameEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfNameIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSystemNameEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSystemNameIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfStatusEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfStatusIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfTagsLike
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfTagsMultiLikeOr
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfTagsMultiLikeAnd
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfHostNameLike
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfHostNameMultiLikeOr
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfHostNameMultiLikeAnd
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfPlaybackHostNameLike
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfPlaybackHostNameMultiLikeOr
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfPlaybackHostNameMultiLikeAnd
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfParentIdEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfParentIdIn
+{
+    return KFT_String;
+}
+
+- (void)setIdEqualFromString:(NSString*)aPropVal
+{
+    self.idEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.createdAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.createdAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.updatedAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.updatedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setStatusEqualFromString:(NSString*)aPropVal
+{
+    self.statusEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setParentIdEqualFromString:(NSString*)aPropVal
+{
+    self.parentIdEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaEdgeServerBaseFilter"];
+    [aParams addIfDefinedKey:@"idEqual" withInt:self.idEqual];
+    [aParams addIfDefinedKey:@"idIn" withString:self.idIn];
+    [aParams addIfDefinedKey:@"createdAtGreaterThanOrEqual" withInt:self.createdAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
+    [aParams addIfDefinedKey:@"updatedAtGreaterThanOrEqual" withInt:self.updatedAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
+    [aParams addIfDefinedKey:@"nameEqual" withString:self.nameEqual];
+    [aParams addIfDefinedKey:@"nameIn" withString:self.nameIn];
+    [aParams addIfDefinedKey:@"systemNameEqual" withString:self.systemNameEqual];
+    [aParams addIfDefinedKey:@"systemNameIn" withString:self.systemNameIn];
+    [aParams addIfDefinedKey:@"statusEqual" withInt:self.statusEqual];
+    [aParams addIfDefinedKey:@"statusIn" withString:self.statusIn];
+    [aParams addIfDefinedKey:@"tagsLike" withString:self.tagsLike];
+    [aParams addIfDefinedKey:@"tagsMultiLikeOr" withString:self.tagsMultiLikeOr];
+    [aParams addIfDefinedKey:@"tagsMultiLikeAnd" withString:self.tagsMultiLikeAnd];
+    [aParams addIfDefinedKey:@"hostNameLike" withString:self.hostNameLike];
+    [aParams addIfDefinedKey:@"hostNameMultiLikeOr" withString:self.hostNameMultiLikeOr];
+    [aParams addIfDefinedKey:@"hostNameMultiLikeAnd" withString:self.hostNameMultiLikeAnd];
+    [aParams addIfDefinedKey:@"playbackHostNameLike" withString:self.playbackHostNameLike];
+    [aParams addIfDefinedKey:@"playbackHostNameMultiLikeOr" withString:self.playbackHostNameMultiLikeOr];
+    [aParams addIfDefinedKey:@"playbackHostNameMultiLikeAnd" withString:self.playbackHostNameMultiLikeAnd];
+    [aParams addIfDefinedKey:@"parentIdEqual" withInt:self.parentIdEqual];
+    [aParams addIfDefinedKey:@"parentIdIn" withString:self.parentIdIn];
+}
+
+- (void)dealloc
+{
+    [self->_idIn release];
+    [self->_nameEqual release];
+    [self->_nameIn release];
+    [self->_systemNameEqual release];
+    [self->_systemNameIn release];
+    [self->_statusIn release];
+    [self->_tagsLike release];
+    [self->_tagsMultiLikeOr release];
+    [self->_tagsMultiLikeAnd release];
+    [self->_hostNameLike release];
+    [self->_hostNameMultiLikeOr release];
+    [self->_hostNameMultiLikeAnd release];
+    [self->_playbackHostNameLike release];
+    [self->_playbackHostNameMultiLikeOr release];
+    [self->_playbackHostNameMultiLikeAnd release];
+    [self->_parentIdIn release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaEdgeServerListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
+
+@implementation KalturaEdgeServerListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfObjects
+{
+    return @"KalturaStorageProfile";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaEdgeServerListResponse"];
+}
+
+- (void)dealloc
+{
+    [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaCategoryUserBaseFilter
 @synthesize categoryIdEqual = _categoryIdEqual;
 @synthesize categoryIdIn = _categoryIdIn;
@@ -28942,6 +29432,38 @@
 - (void)dealloc
 {
     [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaHashCondition
+@synthesize hashName = _hashName;
+@synthesize hashSecret = _hashSecret;
+
+- (KalturaFieldType)getTypeOfHashName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfHashSecret
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaHashCondition"];
+    [aParams addIfDefinedKey:@"hashName" withString:self.hashName];
+    [aParams addIfDefinedKey:@"hashSecret" withString:self.hashSecret];
+}
+
+- (void)dealloc
+{
+    [self->_hashName release];
+    [self->_hashSecret release];
     [super dealloc];
 }
 
@@ -34785,6 +35307,16 @@
 
 @end
 
+@implementation KalturaEdgeServerFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaEdgeServerFilter"];
+}
+
+@end
+
 @implementation KalturaEndUserReportInputFilter
 @synthesize application = _application;
 @synthesize userIds = _userIds;
@@ -39319,6 +39851,51 @@
 
 @end
 
+@implementation KalturaEdgeServerService
+- (KalturaEdgeServer*)addWithEdgeServer:(KalturaEdgeServer*)aEdgeServer
+{
+    [self.client.params addIfDefinedKey:@"edgeServer" withObject:aEdgeServer];
+    return [self.client queueObjectService:@"edgeserver" withAction:@"add" withExpectedType:@"KalturaEdgeServer"];
+}
+
+- (KalturaEdgeServer*)getWithEdgeServerId:(int)aEdgeServerId
+{
+    [self.client.params addIfDefinedKey:@"edgeServerId" withInt:aEdgeServerId];
+    return [self.client queueObjectService:@"edgeserver" withAction:@"get" withExpectedType:@"KalturaEdgeServer"];
+}
+
+- (KalturaEdgeServer*)updateWithEdgeServerId:(int)aEdgeServerId withEdgeServer:(KalturaEdgeServer*)aEdgeServer
+{
+    [self.client.params addIfDefinedKey:@"edgeServerId" withInt:aEdgeServerId];
+    [self.client.params addIfDefinedKey:@"edgeServer" withObject:aEdgeServer];
+    return [self.client queueObjectService:@"edgeserver" withAction:@"update" withExpectedType:@"KalturaEdgeServer"];
+}
+
+- (void)deleteWithEdgeServerId:(NSString*)aEdgeServerId
+{
+    [self.client.params addIfDefinedKey:@"edgeServerId" withString:aEdgeServerId];
+    [self.client queueVoidService:@"edgeserver" withAction:@"delete"];
+}
+
+- (KalturaEdgeServerListResponse*)listWithFilter:(KalturaEdgeServerFilter*)aFilter withPager:(KalturaFilterPager*)aPager
+{
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    return [self.client queueObjectService:@"edgeserver" withAction:@"list" withExpectedType:@"KalturaEdgeServerListResponse"];
+}
+
+- (KalturaEdgeServerListResponse*)listWithFilter:(KalturaEdgeServerFilter*)aFilter
+{
+    return [self listWithFilter:aFilter withPager:nil];
+}
+
+- (KalturaEdgeServerListResponse*)list
+{
+    return [self listWithFilter:nil];
+}
+
+@end
+
 @implementation KalturaEmailIngestionProfileService
 - (KalturaEmailIngestionProfile*)addWithEmailIP:(KalturaEmailIngestionProfile*)aEmailIP
 {
@@ -42229,6 +42806,13 @@
     return self->_deliveryProfile;
 }
 
+- (KalturaEdgeServerService*)edgeServer
+{
+    if (self->_edgeServer == nil)
+    	self->_edgeServer = [[KalturaEdgeServerService alloc] initWithClient:self];
+    return self->_edgeServer;
+}
+
 - (KalturaEmailIngestionProfileService*)EmailIngestionProfile
 {
     if (self->_EmailIngestionProfile == nil)
@@ -42516,6 +43100,7 @@
     [self->_conversionProfile release];
     [self->_data release];
     [self->_deliveryProfile release];
+    [self->_edgeServer release];
     [self->_EmailIngestionProfile release];
     [self->_fileAsset release];
     [self->_flavorAsset release];
