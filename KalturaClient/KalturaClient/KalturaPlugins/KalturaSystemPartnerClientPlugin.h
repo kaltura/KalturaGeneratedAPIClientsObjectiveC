@@ -70,6 +70,7 @@
 @property (nonatomic,copy) NSString* adminEmail;
 @property (nonatomic,copy) NSString* host;
 @property (nonatomic,copy) NSString* cdnHost;
+@property (nonatomic,copy) NSString* cdnHostWhiteList;
 @property (nonatomic,copy) NSString* thumbnailHost;
 @property (nonatomic,assign) int partnerPackage;
 @property (nonatomic,assign) int monitorUsage;
@@ -134,6 +135,7 @@
 - (KalturaFieldType)getTypeOfAdminEmail;
 - (KalturaFieldType)getTypeOfHost;
 - (KalturaFieldType)getTypeOfCdnHost;
+- (KalturaFieldType)getTypeOfCdnHostWhiteList;
 - (KalturaFieldType)getTypeOfThumbnailHost;
 - (KalturaFieldType)getTypeOfPartnerPackage;
 - (KalturaFieldType)getTypeOfMonitorUsage;

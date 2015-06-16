@@ -145,6 +145,7 @@
 @synthesize adminEmail = _adminEmail;
 @synthesize host = _host;
 @synthesize cdnHost = _cdnHost;
+@synthesize cdnHostWhiteList = _cdnHostWhiteList;
 @synthesize thumbnailHost = _thumbnailHost;
 @synthesize partnerPackage = _partnerPackage;
 @synthesize monitorUsage = _monitorUsage;
@@ -269,6 +270,11 @@
 }
 
 - (KalturaFieldType)getTypeOfCdnHost
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCdnHostWhiteList
 {
     return KFT_String;
 }
@@ -724,6 +730,7 @@
     [aParams addIfDefinedKey:@"adminEmail" withString:self.adminEmail];
     [aParams addIfDefinedKey:@"host" withString:self.host];
     [aParams addIfDefinedKey:@"cdnHost" withString:self.cdnHost];
+    [aParams addIfDefinedKey:@"cdnHostWhiteList" withString:self.cdnHostWhiteList];
     [aParams addIfDefinedKey:@"thumbnailHost" withString:self.thumbnailHost];
     [aParams addIfDefinedKey:@"partnerPackage" withInt:self.partnerPackage];
     [aParams addIfDefinedKey:@"monitorUsage" withInt:self.monitorUsage];
@@ -788,6 +795,7 @@
     [self->_adminEmail release];
     [self->_host release];
     [self->_cdnHost release];
+    [self->_cdnHostWhiteList release];
     [self->_thumbnailHost release];
     [self->_alwaysAllowedPermissionNames release];
     [self->_permissions release];
