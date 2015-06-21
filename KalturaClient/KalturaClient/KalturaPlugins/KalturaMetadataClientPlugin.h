@@ -142,6 +142,7 @@
 @property (nonatomic,copy,readonly) NSString* views;
 @property (nonatomic,copy,readonly) NSString* xslt;
 @property (nonatomic,assign) int createMode;	// enum KalturaMetadataProfileCreateMode
+@property (nonatomic,assign) KALTURA_BOOL disableReIndexing;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfPartnerId;
 - (KalturaFieldType)getTypeOfMetadataObjectType;
@@ -156,6 +157,7 @@
 - (KalturaFieldType)getTypeOfViews;
 - (KalturaFieldType)getTypeOfXslt;
 - (KalturaFieldType)getTypeOfCreateMode;
+- (KalturaFieldType)getTypeOfDisableReIndexing;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setVersionFromString:(NSString*)aPropVal;
@@ -163,6 +165,7 @@
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
 - (void)setStatusFromString:(NSString*)aPropVal;
 - (void)setCreateModeFromString:(NSString*)aPropVal;
+- (void)setDisableReIndexingFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -305,6 +308,13 @@
 - (KalturaFieldType)getTypeOfProfileId;
 - (KalturaFieldType)getTypeOfProfileSystemName;
 - (void)setProfileIdFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaDynamicObjectSearchItem : KalturaSearchOperator
+@property (nonatomic,copy) NSString* field;
+- (KalturaFieldType)getTypeOfField;
 @end
 
 // @package Kaltura

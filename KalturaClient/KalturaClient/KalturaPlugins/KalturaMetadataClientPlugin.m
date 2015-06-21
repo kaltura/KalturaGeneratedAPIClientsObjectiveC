@@ -345,6 +345,7 @@
 @synthesize views = _views;
 @synthesize xslt = _xslt;
 @synthesize createMode = _createMode;
+@synthesize disableReIndexing = _disableReIndexing;
 
 - (id)init
 {
@@ -358,6 +359,7 @@
     self->_updatedAt = KALTURA_UNDEF_INT;
     self->_status = KALTURA_UNDEF_INT;
     self->_createMode = KALTURA_UNDEF_INT;
+    self->_disableReIndexing = KALTURA_UNDEF_BOOL;
     return self;
 }
 
@@ -431,6 +433,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfDisableReIndexing
+{
+    return KFT_Bool;
+}
+
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -466,6 +473,11 @@
     self.createMode = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setDisableReIndexingFromString:(NSString*)aPropVal
+{
+    self.disableReIndexing = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -476,6 +488,7 @@
     [aParams addIfDefinedKey:@"systemName" withString:self.systemName];
     [aParams addIfDefinedKey:@"description" withString:self.description];
     [aParams addIfDefinedKey:@"createMode" withInt:self.createMode];
+    [aParams addIfDefinedKey:@"disableReIndexing" withBool:self.disableReIndexing];
 }
 
 - (void)dealloc
@@ -1060,6 +1073,30 @@
 {
     [self->_xPath release];
     [self->_profileSystemName release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaDynamicObjectSearchItem
+@synthesize field = _field;
+
+- (KalturaFieldType)getTypeOfField
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaDynamicObjectSearchItem"];
+    [aParams addIfDefinedKey:@"field" withString:self.field];
+}
+
+- (void)dealloc
+{
+    [self->_field release];
     [super dealloc];
 }
 

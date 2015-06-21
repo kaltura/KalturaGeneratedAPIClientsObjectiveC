@@ -54,6 +54,43 @@
 ///////////////////////// classes /////////////////////////
 // @package Kaltura
 // @subpackage Client
+@interface KalturaInvestigateFlavorAssetData : KalturaObjectBase
+@property (nonatomic,retain,readonly) KalturaFlavorAsset* flavorAsset;
+@property (nonatomic,retain,readonly) KalturaFileSyncListResponse* fileSyncs;
+@property (nonatomic,retain,readonly) KalturaMediaInfoListResponse* mediaInfos;
+@property (nonatomic,retain,readonly) KalturaFlavorParams* flavorParams;
+@property (nonatomic,retain,readonly) KalturaFlavorParamsOutputListResponse* flavorParamsOutputs;
+- (KalturaFieldType)getTypeOfFlavorAsset;
+- (NSString*)getObjectTypeOfFlavorAsset;
+- (KalturaFieldType)getTypeOfFileSyncs;
+- (NSString*)getObjectTypeOfFileSyncs;
+- (KalturaFieldType)getTypeOfMediaInfos;
+- (NSString*)getObjectTypeOfMediaInfos;
+- (KalturaFieldType)getTypeOfFlavorParams;
+- (NSString*)getObjectTypeOfFlavorParams;
+- (KalturaFieldType)getTypeOfFlavorParamsOutputs;
+- (NSString*)getObjectTypeOfFlavorParamsOutputs;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaInvestigateThumbAssetData : KalturaObjectBase
+@property (nonatomic,retain,readonly) KalturaThumbAsset* thumbAsset;
+@property (nonatomic,retain,readonly) KalturaFileSyncListResponse* fileSyncs;
+@property (nonatomic,retain,readonly) KalturaThumbParams* thumbParams;
+@property (nonatomic,retain,readonly) KalturaThumbParamsOutputListResponse* thumbParamsOutputs;
+- (KalturaFieldType)getTypeOfThumbAsset;
+- (NSString*)getObjectTypeOfThumbAsset;
+- (KalturaFieldType)getTypeOfFileSyncs;
+- (NSString*)getObjectTypeOfFileSyncs;
+- (KalturaFieldType)getTypeOfThumbParams;
+- (NSString*)getObjectTypeOfThumbParams;
+- (KalturaFieldType)getTypeOfThumbParamsOutputs;
+- (NSString*)getObjectTypeOfThumbParamsOutputs;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaTrackEntry : KalturaObjectBase
 @property (nonatomic,assign) int id;
 @property (nonatomic,assign) int trackEventType;	// enum KalturaTrackEntryEventType

@@ -312,6 +312,16 @@
 @end
 
 ///////////////////////// classes /////////////////////////
+@implementation KalturaEventCondition
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaEventCondition"];
+}
+
+@end
+
 @implementation KalturaEventNotificationParameter
 @synthesize key = _key;
 @synthesize description = _description;

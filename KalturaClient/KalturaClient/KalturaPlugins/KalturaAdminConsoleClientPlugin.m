@@ -75,6 +75,161 @@
 @end
 
 ///////////////////////// classes /////////////////////////
+@interface KalturaInvestigateFlavorAssetData()
+@property (nonatomic,retain) KalturaFlavorAsset* flavorAsset;
+@property (nonatomic,retain) KalturaFileSyncListResponse* fileSyncs;
+@property (nonatomic,retain) KalturaMediaInfoListResponse* mediaInfos;
+@property (nonatomic,retain) KalturaFlavorParams* flavorParams;
+@property (nonatomic,retain) KalturaFlavorParamsOutputListResponse* flavorParamsOutputs;
+@end
+
+@implementation KalturaInvestigateFlavorAssetData
+@synthesize flavorAsset = _flavorAsset;
+@synthesize fileSyncs = _fileSyncs;
+@synthesize mediaInfos = _mediaInfos;
+@synthesize flavorParams = _flavorParams;
+@synthesize flavorParamsOutputs = _flavorParamsOutputs;
+
+- (KalturaFieldType)getTypeOfFlavorAsset
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfFlavorAsset
+{
+    return @"KalturaFlavorAsset";
+}
+
+- (KalturaFieldType)getTypeOfFileSyncs
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfFileSyncs
+{
+    return @"KalturaFileSyncListResponse";
+}
+
+- (KalturaFieldType)getTypeOfMediaInfos
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfMediaInfos
+{
+    return @"KalturaMediaInfoListResponse";
+}
+
+- (KalturaFieldType)getTypeOfFlavorParams
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfFlavorParams
+{
+    return @"KalturaFlavorParams";
+}
+
+- (KalturaFieldType)getTypeOfFlavorParamsOutputs
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfFlavorParamsOutputs
+{
+    return @"KalturaFlavorParamsOutputListResponse";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaInvestigateFlavorAssetData"];
+}
+
+- (void)dealloc
+{
+    [self->_flavorAsset release];
+    [self->_fileSyncs release];
+    [self->_mediaInfos release];
+    [self->_flavorParams release];
+    [self->_flavorParamsOutputs release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaInvestigateThumbAssetData()
+@property (nonatomic,retain) KalturaThumbAsset* thumbAsset;
+@property (nonatomic,retain) KalturaFileSyncListResponse* fileSyncs;
+@property (nonatomic,retain) KalturaThumbParams* thumbParams;
+@property (nonatomic,retain) KalturaThumbParamsOutputListResponse* thumbParamsOutputs;
+@end
+
+@implementation KalturaInvestigateThumbAssetData
+@synthesize thumbAsset = _thumbAsset;
+@synthesize fileSyncs = _fileSyncs;
+@synthesize thumbParams = _thumbParams;
+@synthesize thumbParamsOutputs = _thumbParamsOutputs;
+
+- (KalturaFieldType)getTypeOfThumbAsset
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfThumbAsset
+{
+    return @"KalturaThumbAsset";
+}
+
+- (KalturaFieldType)getTypeOfFileSyncs
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfFileSyncs
+{
+    return @"KalturaFileSyncListResponse";
+}
+
+- (KalturaFieldType)getTypeOfThumbParams
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfThumbParams
+{
+    return @"KalturaThumbParams";
+}
+
+- (KalturaFieldType)getTypeOfThumbParamsOutputs
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfThumbParamsOutputs
+{
+    return @"KalturaThumbParamsOutputListResponse";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaInvestigateThumbAssetData"];
+}
+
+- (void)dealloc
+{
+    [self->_thumbAsset release];
+    [self->_fileSyncs release];
+    [self->_thumbParams release];
+    [self->_thumbParamsOutputs release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaTrackEntry
 @synthesize id = _id;
 @synthesize trackEventType = _trackEventType;
