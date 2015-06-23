@@ -35,13 +35,11 @@
 // @subpackage Client
 @interface KalturaAnswerCuePointOrderBy : NSObject
 + (NSString*)CREATED_AT_ASC;
-+ (NSString*)IS_CORRECT_ASC;
 + (NSString*)PARTNER_SORT_VALUE_ASC;
 + (NSString*)START_TIME_ASC;
 + (NSString*)TRIGGERED_AT_ASC;
 + (NSString*)UPDATED_AT_ASC;
 + (NSString*)CREATED_AT_DESC;
-+ (NSString*)IS_CORRECT_DESC;
 + (NSString*)PARTNER_SORT_VALUE_DESC;
 + (NSString*)START_TIME_DESC;
 + (NSString*)TRIGGERED_AT_DESC;
@@ -53,13 +51,11 @@
 @interface KalturaQuestionCuePointOrderBy : NSObject
 + (NSString*)CREATED_AT_ASC;
 + (NSString*)PARTNER_SORT_VALUE_ASC;
-+ (NSString*)QUESTION_ASC;
 + (NSString*)START_TIME_ASC;
 + (NSString*)TRIGGERED_AT_ASC;
 + (NSString*)UPDATED_AT_ASC;
 + (NSString*)CREATED_AT_DESC;
 + (NSString*)PARTNER_SORT_VALUE_DESC;
-+ (NSString*)QUESTION_DESC;
 + (NSString*)START_TIME_DESC;
 + (NSString*)TRIGGERED_AT_DESC;
 + (NSString*)UPDATED_AT_DESC;
@@ -195,3 +191,28 @@
 @end
 
 ///////////////////////// services /////////////////////////
+// @package Kaltura
+// @subpackage Client
+// Allows user to handle quizzes
+@interface KalturaQuizService : KalturaServiceBase
+// Allows to add a quiz to an entry
+- (KalturaQuiz*)addWithEntryId:(NSString*)aEntryId withQuiz:(KalturaQuiz*)aQuiz;
+// Allows to update a quiz
+- (KalturaQuiz*)updateWithEntryId:(NSString*)aEntryId withQuiz:(KalturaQuiz*)aQuiz;
+// Allows to get a quiz
+- (KalturaQuiz*)getWithEntryId:(NSString*)aEntryId;
+// List quiz objects by filter and pager
+- (KalturaQuizListResponse*)listWithFilter:(KalturaQuizFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
+- (KalturaQuizListResponse*)listWithFilter:(KalturaQuizFilter*)aFilter;
+- (KalturaQuizListResponse*)list;
+@end
+
+@interface KalturaQuizClientPlugin : KalturaClientPlugin
+{
+	KalturaQuizService* _quiz;
+}
+
+@property (nonatomic, assign) KalturaClientBase* client;
+@property (nonatomic, readonly) KalturaQuizService* quiz;
+@end
+

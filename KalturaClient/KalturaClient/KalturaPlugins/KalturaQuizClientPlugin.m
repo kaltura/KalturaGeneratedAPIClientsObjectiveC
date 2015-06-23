@@ -33,10 +33,6 @@
 {
     return @"+createdAt";
 }
-+ (NSString*)IS_CORRECT_ASC
-{
-    return @"+isCorrect";
-}
 + (NSString*)PARTNER_SORT_VALUE_ASC
 {
     return @"+partnerSortValue";
@@ -56,10 +52,6 @@
 + (NSString*)CREATED_AT_DESC
 {
     return @"-createdAt";
-}
-+ (NSString*)IS_CORRECT_DESC
-{
-    return @"-isCorrect";
 }
 + (NSString*)PARTNER_SORT_VALUE_DESC
 {
@@ -88,10 +80,6 @@
 {
     return @"+partnerSortValue";
 }
-+ (NSString*)QUESTION_ASC
-{
-    return @"+question";
-}
 + (NSString*)START_TIME_ASC
 {
     return @"+startTime";
@@ -111,10 +99,6 @@
 + (NSString*)PARTNER_SORT_VALUE_DESC
 {
     return @"-partnerSortValue";
-}
-+ (NSString*)QUESTION_DESC
-{
-    return @"-question";
 }
 + (NSString*)START_TIME_DESC
 {
@@ -607,3 +591,70 @@
 @end
 
 ///////////////////////// services /////////////////////////
+@implementation KalturaQuizService
+- (KalturaQuiz*)addWithEntryId:(NSString*)aEntryId withQuiz:(KalturaQuiz*)aQuiz
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"quiz" withObject:aQuiz];
+    return [self.client queueObjectService:@"quiz_quiz" withAction:@"add" withExpectedType:@"KalturaQuiz"];
+}
+
+- (KalturaQuiz*)updateWithEntryId:(NSString*)aEntryId withQuiz:(KalturaQuiz*)aQuiz
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"quiz" withObject:aQuiz];
+    return [self.client queueObjectService:@"quiz_quiz" withAction:@"update" withExpectedType:@"KalturaQuiz"];
+}
+
+- (KalturaQuiz*)getWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    return [self.client queueObjectService:@"quiz_quiz" withAction:@"get" withExpectedType:@"KalturaQuiz"];
+}
+
+- (KalturaQuizListResponse*)listWithFilter:(KalturaQuizFilter*)aFilter withPager:(KalturaFilterPager*)aPager
+{
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    return [self.client queueObjectService:@"quiz_quiz" withAction:@"list" withExpectedType:@"KalturaQuizListResponse"];
+}
+
+- (KalturaQuizListResponse*)listWithFilter:(KalturaQuizFilter*)aFilter
+{
+    return [self listWithFilter:aFilter withPager:nil];
+}
+
+- (KalturaQuizListResponse*)list
+{
+    return [self listWithFilter:nil];
+}
+
+@end
+
+@implementation KalturaQuizClientPlugin
+@synthesize client = _client;
+
+- (id)initWithClient:(KalturaClient*)aClient
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self.client = aClient;
+    return self;
+}
+
+- (KalturaQuizService*)quiz
+{
+    if (self->_quiz == nil)
+    	self->_quiz = [[KalturaQuizService alloc] initWithClient:self.client];
+    return self->_quiz;
+}
+
+- (void)dealloc
+{
+    [self->_quiz release];
+	[super dealloc];
+}
+
+@end
+

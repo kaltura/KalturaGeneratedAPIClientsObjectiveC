@@ -937,6 +937,7 @@
 + (NSString*)LIMIT_FLAVORS;
 + (NSString*)ADD_TO_STORAGE;
 + (NSString*)LIMIT_DELIVERY_PROFILES;
++ (NSString*)SERVE_FROM_REMOTE_SERVER;
 @end
 
 // @package Kaltura
@@ -2704,10 +2705,8 @@
 // @subpackage Client
 @interface KalturaQuizUserEntryOrderBy : NSObject
 + (NSString*)CREATED_AT_ASC;
-+ (NSString*)SCORE_ASC;
 + (NSString*)UPDATED_AT_ASC;
 + (NSString*)CREATED_AT_DESC;
-+ (NSString*)SCORE_DESC;
 + (NSString*)UPDATED_AT_DESC;
 @end
 
@@ -2742,6 +2741,7 @@
 + (NSString*)LIMIT_FLAVORS;
 + (NSString*)ADD_TO_STORAGE;
 + (NSString*)LIMIT_DELIVERY_PROFILES;
++ (NSString*)SERVE_FROM_REMOTE_SERVER;
 @end
 
 // @package Kaltura
@@ -2904,6 +2904,7 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaUserEntryStatus : NSObject
++ (NSString*)QUIZ_SUBMITTED;
 + (NSString*)ACTIVE;
 + (NSString*)DELETED;
 @end
@@ -7616,6 +7617,14 @@
 @property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaAccessControlProfile elements
 - (KalturaFieldType)getTypeOfObjects;
 - (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaAccessControlServeRemoteEdgeServerAction : KalturaRuleAction
+// Comma separated list of edge servers playBack should be done from
+@property (nonatomic,copy) NSString* edgeServerIds;
+- (KalturaFieldType)getTypeOfEdgeServerIds;
 @end
 
 // @package Kaltura
@@ -12875,6 +12884,8 @@
 - (KalturaUserEntryListResponse*)listWithFilter:(KalturaUserEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaUserEntryListResponse*)listWithFilter:(KalturaUserEntryFilter*)aFilter;
 - (KalturaUserEntry*)getWithId:(NSString*)aId;
+// Submits the quiz so that it's status will be submitted and calculates the score for the quiz
+- (KalturaQuizUserEntry*)submitQuizWithId:(int)aId;
 @end
 
 // @package Kaltura

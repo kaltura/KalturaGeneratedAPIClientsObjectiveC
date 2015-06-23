@@ -107,6 +107,14 @@
 {
     return @"eventCuePoint.Event";
 }
++ (NSString*)QUIZ_ANSWER
+{
+    return @"quiz.QUIZ_ANSWER";
+}
++ (NSString*)QUIZ_QUESTION
+{
+    return @"quiz.QUIZ_QUESTION";
+}
 @end
 
 ///////////////////////// classes /////////////////////////

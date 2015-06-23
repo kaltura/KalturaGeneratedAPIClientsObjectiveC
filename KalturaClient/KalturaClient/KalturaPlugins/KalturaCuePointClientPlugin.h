@@ -61,6 +61,8 @@
 + (NSString*)ANNOTATION;
 + (NSString*)CODE;
 + (NSString*)EVENT;
++ (NSString*)QUIZ_ANSWER;
++ (NSString*)QUIZ_QUESTION;
 @end
 
 ///////////////////////// classes /////////////////////////

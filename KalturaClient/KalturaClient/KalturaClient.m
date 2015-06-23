@@ -2209,6 +2209,10 @@
 {
     return @"5";
 }
++ (NSString*)SERVE_FROM_REMOTE_SERVER
+{
+    return @"6";
+}
 @end
 
 @implementation KalturaAccessControlOrderBy
@@ -7509,10 +7513,6 @@
 {
     return @"+createdAt";
 }
-+ (NSString*)SCORE_ASC
-{
-    return @"+score";
-}
 + (NSString*)UPDATED_AT_ASC
 {
     return @"+updatedAt";
@@ -7520,10 +7520,6 @@
 + (NSString*)CREATED_AT_DESC
 {
     return @"-createdAt";
-}
-+ (NSString*)SCORE_DESC
-{
-    return @"-score";
 }
 + (NSString*)UPDATED_AT_DESC
 {
@@ -7592,6 +7588,10 @@
 + (NSString*)LIMIT_DELIVERY_PROFILES
 {
     return @"5";
+}
++ (NSString*)SERVE_FROM_REMOTE_SERVER
+{
+    return @"6";
 }
 @end
 
@@ -7969,6 +7969,10 @@
 @end
 
 @implementation KalturaUserEntryStatus
++ (NSString*)QUIZ_SUBMITTED
+{
+    return @"quiz.3";
+}
 + (NSString*)ACTIVE
 {
     return @"1";
@@ -25123,6 +25127,30 @@
 - (void)dealloc
 {
     [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaAccessControlServeRemoteEdgeServerAction
+@synthesize edgeServerIds = _edgeServerIds;
+
+- (KalturaFieldType)getTypeOfEdgeServerIds
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaAccessControlServeRemoteEdgeServerAction"];
+    [aParams addIfDefinedKey:@"edgeServerIds" withString:self.edgeServerIds];
+}
+
+- (void)dealloc
+{
+    [self->_edgeServerIds release];
     [super dealloc];
 }
 
@@ -43092,6 +43120,12 @@
 {
     [self.client.params addIfDefinedKey:@"id" withString:aId];
     return [self.client queueObjectService:@"userentry" withAction:@"get" withExpectedType:@"KalturaUserEntry"];
+}
+
+- (KalturaQuizUserEntry*)submitQuizWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    return [self.client queueObjectService:@"userentry" withAction:@"submitQuiz" withExpectedType:@"KalturaQuizUserEntry"];
 }
 
 @end
