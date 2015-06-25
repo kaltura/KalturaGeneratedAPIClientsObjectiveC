@@ -10634,6 +10634,13 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaIpAddressCondition : KalturaMatchCondition
+// allow internal ips
+@property (nonatomic,assign) KALTURA_BOOL acceptInternalIps;
+// http header name for extracting the ip
+@property (nonatomic,copy) NSString* httpHeader;
+- (KalturaFieldType)getTypeOfAcceptInternalIps;
+- (KalturaFieldType)getTypeOfHttpHeader;
+- (void)setAcceptInternalIpsFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

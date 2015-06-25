@@ -36656,11 +36656,46 @@
 @end
 
 @implementation KalturaIpAddressCondition
+@synthesize acceptInternalIps = _acceptInternalIps;
+@synthesize httpHeader = _httpHeader;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_acceptInternalIps = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfAcceptInternalIps
+{
+    return KFT_Bool;
+}
+
+- (KalturaFieldType)getTypeOfHttpHeader
+{
+    return KFT_String;
+}
+
+- (void)setAcceptInternalIpsFromString:(NSString*)aPropVal
+{
+    self.acceptInternalIps = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaIpAddressCondition"];
+    [aParams addIfDefinedKey:@"acceptInternalIps" withBool:self.acceptInternalIps];
+    [aParams addIfDefinedKey:@"httpHeader" withString:self.httpHeader];
+}
+
+- (void)dealloc
+{
+    [self->_httpHeader release];
+    [super dealloc];
 }
 
 @end
