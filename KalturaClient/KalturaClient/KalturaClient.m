@@ -28,6 +28,21 @@
 #import "KalturaClient.h"
 
 ///////////////////////// enums /////////////////////////
+@implementation KalturaAppTokenStatus
++ (int)DISABLED
+{
+    return 1;
+}
++ (int)ACTIVE
+{
+    return 2;
+}
++ (int)DELETED
+{
+    return 3;
+}
+@end
+
 @implementation KalturaAppearInListType
 + (int)PARTNER_ONLY
 {
@@ -2386,6 +2401,25 @@
 }
 @end
 
+@implementation KalturaAppTokenOrderBy
++ (NSString*)CREATED_AT_ASC
+{
+    return @"+createdAt";
+}
++ (NSString*)UPDATED_AT_ASC
+{
+    return @"+updatedAt";
+}
++ (NSString*)CREATED_AT_DESC
+{
+    return @"-createdAt";
+}
++ (NSString*)UPDATED_AT_DESC
+{
+    return @"-updatedAt";
+}
+@end
+
 @implementation KalturaAssetOrderBy
 + (NSString*)CREATED_AT_ASC
 {
@@ -3259,6 +3293,10 @@
 {
     return @"12";
 }
++ (NSString*)DELIVERY_PROFILE
+{
+    return @"13";
+}
 @end
 
 @implementation KalturaContainerFormat
@@ -3400,6 +3438,10 @@
 + (NSString*)EXPORT
 {
     return @"5";
+}
++ (NSString*)SERVE
+{
+    return @"6";
 }
 @end
 
@@ -7983,6 +8025,13 @@
 }
 @end
 
+@implementation KalturaUserEntryType
++ (NSString*)QUIZ
+{
+    return @"quiz.QUIZ";
+}
+@end
+
 @implementation KalturaUserLoginDataOrderBy
 @end
 
@@ -8973,6 +9022,156 @@
 {
     [self->_name release];
     [self->_value release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaAppToken()
+@property (nonatomic,copy) NSString* id;
+@property (nonatomic,copy) NSString* token;
+@property (nonatomic,assign) int partnerId;
+@property (nonatomic,assign) int createdAt;
+@property (nonatomic,assign) int updatedAt;
+@property (nonatomic,assign) int status;
+@end
+
+@implementation KalturaAppToken
+@synthesize id = _id;
+@synthesize token = _token;
+@synthesize partnerId = _partnerId;
+@synthesize createdAt = _createdAt;
+@synthesize updatedAt = _updatedAt;
+@synthesize status = _status;
+@synthesize expiry = _expiry;
+@synthesize sessionType = _sessionType;
+@synthesize sessionUserId = _sessionUserId;
+@synthesize sessionDuration = _sessionDuration;
+@synthesize sessionPrivileges = _sessionPrivileges;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_partnerId = KALTURA_UNDEF_INT;
+    self->_createdAt = KALTURA_UNDEF_INT;
+    self->_updatedAt = KALTURA_UNDEF_INT;
+    self->_status = KALTURA_UNDEF_INT;
+    self->_expiry = KALTURA_UNDEF_INT;
+    self->_sessionType = KALTURA_UNDEF_INT;
+    self->_sessionDuration = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfToken
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfPartnerId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAt
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedAt
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfStatus
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfExpiry
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfSessionType
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfSessionUserId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSessionDuration
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfSessionPrivileges
+{
+    return KFT_String;
+}
+
+- (void)setPartnerIdFromString:(NSString*)aPropVal
+{
+    self.partnerId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtFromString:(NSString*)aPropVal
+{
+    self.createdAt = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUpdatedAtFromString:(NSString*)aPropVal
+{
+    self.updatedAt = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setStatusFromString:(NSString*)aPropVal
+{
+    self.status = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setExpiryFromString:(NSString*)aPropVal
+{
+    self.expiry = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setSessionTypeFromString:(NSString*)aPropVal
+{
+    self.sessionType = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setSessionDurationFromString:(NSString*)aPropVal
+{
+    self.sessionDuration = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaAppToken"];
+    [aParams addIfDefinedKey:@"expiry" withInt:self.expiry];
+    [aParams addIfDefinedKey:@"sessionType" withInt:self.sessionType];
+    [aParams addIfDefinedKey:@"sessionUserId" withString:self.sessionUserId];
+    [aParams addIfDefinedKey:@"sessionDuration" withInt:self.sessionDuration];
+    [aParams addIfDefinedKey:@"sessionPrivileges" withString:self.sessionPrivileges];
+}
+
+- (void)dealloc
+{
+    [self->_id release];
+    [self->_token release];
+    [self->_sessionUserId release];
+    [self->_sessionPrivileges release];
     [super dealloc];
 }
 
@@ -15457,6 +15656,10 @@
 
 @end
 
+@interface KalturaObject()
+@property (nonatomic,retain) NSMutableDictionary* relatedObjects;
+@end
+
 @implementation KalturaObject
 @synthesize relatedObjects = _relatedObjects;
 
@@ -15475,7 +15678,6 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaObject"];
-    [aParams addIfDefinedKey:@"relatedObjects" withDictionary:self.relatedObjects];
 }
 
 - (void)dealloc
@@ -23873,6 +24075,7 @@
 @property (nonatomic,copy) NSString* status;
 @property (nonatomic,assign) int createdAt;
 @property (nonatomic,assign) int updatedAt;
+@property (nonatomic,copy) NSString* type;
 @end
 
 @implementation KalturaUserEntry
@@ -23883,6 +24086,7 @@
 @synthesize status = _status;
 @synthesize createdAt = _createdAt;
 @synthesize updatedAt = _updatedAt;
+@synthesize type = _type;
 
 - (id)init
 {
@@ -23890,7 +24094,6 @@
     if (self == nil)
         return nil;
     self->_id = KALTURA_UNDEF_INT;
-    self->_userId = KALTURA_UNDEF_INT;
     self->_partnerId = KALTURA_UNDEF_INT;
     self->_createdAt = KALTURA_UNDEF_INT;
     self->_updatedAt = KALTURA_UNDEF_INT;
@@ -23909,7 +24112,7 @@
 
 - (KalturaFieldType)getTypeOfUserId
 {
-    return KFT_Int;
+    return KFT_String;
 }
 
 - (KalturaFieldType)getTypeOfPartnerId
@@ -23932,14 +24135,14 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfType
+{
+    return KFT_String;
+}
+
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setUserIdFromString:(NSString*)aPropVal
-{
-    self.userId = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)setPartnerIdFromString:(NSString*)aPropVal
@@ -23963,13 +24166,15 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaUserEntry"];
     [aParams addIfDefinedKey:@"entryId" withString:self.entryId];
-    [aParams addIfDefinedKey:@"userId" withInt:self.userId];
+    [aParams addIfDefinedKey:@"userId" withString:self.userId];
 }
 
 - (void)dealloc
 {
     [self->_entryId release];
+    [self->_userId release];
     [self->_status release];
+    [self->_type release];
     [super dealloc];
 }
 
@@ -25265,6 +25470,135 @@
     [self->_object release];
     [self->_parameter release];
     [self->_action release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaAppTokenBaseFilter
+@synthesize idEqual = _idEqual;
+@synthesize idIn = _idIn;
+@synthesize createdAtGreaterThanOrEqual = _createdAtGreaterThanOrEqual;
+@synthesize createdAtLessThanOrEqual = _createdAtLessThanOrEqual;
+@synthesize updatedAtGreaterThanOrEqual = _updatedAtGreaterThanOrEqual;
+@synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_idEqual = KALTURA_UNDEF_INT;
+    self->_createdAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_createdAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_updatedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_updatedAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfIdEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfIdIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (void)setIdEqualFromString:(NSString*)aPropVal
+{
+    self.idEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.createdAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.createdAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.updatedAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.updatedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaAppTokenBaseFilter"];
+    [aParams addIfDefinedKey:@"idEqual" withInt:self.idEqual];
+    [aParams addIfDefinedKey:@"idIn" withString:self.idIn];
+    [aParams addIfDefinedKey:@"createdAtGreaterThanOrEqual" withInt:self.createdAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
+    [aParams addIfDefinedKey:@"updatedAtGreaterThanOrEqual" withInt:self.updatedAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
+}
+
+- (void)dealloc
+{
+    [self->_idIn release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaAppTokenListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
+
+@implementation KalturaAppTokenListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfObjects
+{
+    return @"KalturaAppToken";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaAppTokenListResponse"];
+}
+
+- (void)dealloc
+{
+    [self->_objects release];
     [super dealloc];
 }
 
@@ -28138,6 +28472,35 @@
     [self->_systemNameIn release];
     [self->_streamerTypeEqual release];
     [self->_statusIn release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaDeliveryProfileCondition
+@synthesize deliveryProfileIds = _deliveryProfileIds;
+
+- (KalturaFieldType)getTypeOfDeliveryProfileIds
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfDeliveryProfileIds
+{
+    return @"KalturaIntegerValue";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaDeliveryProfileCondition"];
+    [aParams addIfDefinedKey:@"deliveryProfileIds" withArray:self.deliveryProfileIds];
+}
+
+- (void)dealloc
+{
+    [self->_deliveryProfileIds release];
     [super dealloc];
 }
 
@@ -33713,10 +34076,12 @@
 @synthesize userIdEqual = _userIdEqual;
 @synthesize userIdIn = _userIdIn;
 @synthesize userIdNotIn = _userIdNotIn;
+@synthesize statusEqual = _statusEqual;
 @synthesize createdAtLessThanOrEqual = _createdAtLessThanOrEqual;
 @synthesize createdAtGreaterThanOrEqual = _createdAtGreaterThanOrEqual;
 @synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
 @synthesize updatedAtGreaterThanOrEqual = _updatedAtGreaterThanOrEqual;
+@synthesize typeEqual = _typeEqual;
 
 - (id)init
 {
@@ -33777,6 +34142,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfStatusEqual
+{
+    return KFT_String;
+}
+
 - (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual
 {
     return KFT_Int;
@@ -33795,6 +34165,11 @@
 - (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual
 {
     return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfTypeEqual
+{
+    return KFT_String;
 }
 
 - (void)setIdEqualFromString:(NSString*)aPropVal
@@ -33841,10 +34216,12 @@
     [aParams addIfDefinedKey:@"userIdEqual" withInt:self.userIdEqual];
     [aParams addIfDefinedKey:@"userIdIn" withString:self.userIdIn];
     [aParams addIfDefinedKey:@"userIdNotIn" withString:self.userIdNotIn];
+    [aParams addIfDefinedKey:@"statusEqual" withString:self.statusEqual];
     [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
     [aParams addIfDefinedKey:@"createdAtGreaterThanOrEqual" withInt:self.createdAtGreaterThanOrEqual];
     [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
     [aParams addIfDefinedKey:@"updatedAtGreaterThanOrEqual" withInt:self.updatedAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"typeEqual" withString:self.typeEqual];
 }
 
 - (void)dealloc
@@ -33856,6 +34233,8 @@
     [self->_entryIdNotIn release];
     [self->_userIdIn release];
     [self->_userIdNotIn release];
+    [self->_statusEqual release];
+    [self->_typeEqual release];
     [super dealloc];
 }
 
@@ -34625,6 +35004,16 @@
     [self->_streamType release];
     [self->_notificationEmail release];
     [super dealloc];
+}
+
+@end
+
+@implementation KalturaAppTokenFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaAppTokenFilter"];
 }
 
 @end
@@ -39827,6 +40216,76 @@
 
 @end
 
+@implementation KalturaAppTokenService
+- (KalturaAppToken*)addWithAppToken:(KalturaAppToken*)aAppToken
+{
+    [self.client.params addIfDefinedKey:@"appToken" withObject:aAppToken];
+    return [self.client queueObjectService:@"apptoken" withAction:@"add" withExpectedType:@"KalturaAppToken"];
+}
+
+- (KalturaAppToken*)getWithId:(NSString*)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    return [self.client queueObjectService:@"apptoken" withAction:@"get" withExpectedType:@"KalturaAppToken"];
+}
+
+- (KalturaAppToken*)updateWithId:(NSString*)aId withAppToken:(KalturaAppToken*)aAppToken
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"appToken" withObject:aAppToken];
+    return [self.client queueObjectService:@"apptoken" withAction:@"update" withExpectedType:@"KalturaAppToken"];
+}
+
+- (void)deleteWithId:(NSString*)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client queueVoidService:@"apptoken" withAction:@"delete"];
+}
+
+- (KalturaAppTokenListResponse*)listWithFilter:(KalturaAppTokenFilter*)aFilter withPager:(KalturaFilterPager*)aPager
+{
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    return [self.client queueObjectService:@"apptoken" withAction:@"list" withExpectedType:@"KalturaAppTokenListResponse"];
+}
+
+- (KalturaAppTokenListResponse*)listWithFilter:(KalturaAppTokenFilter*)aFilter
+{
+    return [self listWithFilter:aFilter withPager:nil];
+}
+
+- (KalturaAppTokenListResponse*)list
+{
+    return [self listWithFilter:nil];
+}
+
+- (KalturaSessionInfo*)startSessionWithId:(NSString*)aId withTokenHash:(NSString*)aTokenHash withUserId:(NSString*)aUserId withType:(int)aType withExpiry:(int)aExpiry
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"tokenHash" withString:aTokenHash];
+    [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
+    [self.client.params addIfDefinedKey:@"type" withInt:aType];
+    [self.client.params addIfDefinedKey:@"expiry" withInt:aExpiry];
+    return [self.client queueObjectService:@"apptoken" withAction:@"startSession" withExpectedType:@"KalturaSessionInfo"];
+}
+
+- (KalturaSessionInfo*)startSessionWithId:(NSString*)aId withTokenHash:(NSString*)aTokenHash withUserId:(NSString*)aUserId withType:(int)aType
+{
+    return [self startSessionWithId:aId withTokenHash:aTokenHash withUserId:aUserId withType:aType withExpiry:KALTURA_UNDEF_INT];
+}
+
+- (KalturaSessionInfo*)startSessionWithId:(NSString*)aId withTokenHash:(NSString*)aTokenHash withUserId:(NSString*)aUserId
+{
+    return [self startSessionWithId:aId withTokenHash:aTokenHash withUserId:aUserId withType:KALTURA_UNDEF_INT];
+}
+
+- (KalturaSessionInfo*)startSessionWithId:(NSString*)aId withTokenHash:(NSString*)aTokenHash
+{
+    return [self startSessionWithId:aId withTokenHash:aTokenHash withUserId:nil];
+}
+
+@end
+
 @implementation KalturaBaseEntryService
 - (KalturaBaseEntry*)addWithEntry:(KalturaBaseEntry*)aEntry withType:(NSString*)aType
 {
@@ -43525,6 +43984,13 @@
     return self->_adminUser;
 }
 
+- (KalturaAppTokenService*)appToken
+{
+    if (self->_appToken == nil)
+    	self->_appToken = [[KalturaAppTokenService alloc] initWithClient:self];
+    return self->_appToken;
+}
+
 - (KalturaBaseEntryService*)baseEntry
 {
     if (self->_baseEntry == nil)
@@ -43880,6 +44346,7 @@
     [self->_accessControlProfile release];
     [self->_accessControl release];
     [self->_adminUser release];
+    [self->_appToken release];
     [self->_baseEntry release];
     [self->_bulkUpload release];
     [self->_categoryEntry release];

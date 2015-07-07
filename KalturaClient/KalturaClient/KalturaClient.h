@@ -34,6 +34,14 @@
 ///////////////////////// enums /////////////////////////
 // @package Kaltura
 // @subpackage Client
+@interface KalturaAppTokenStatus : NSObject
++ (int)DISABLED;
++ (int)ACTIVE;
++ (int)DELETED;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaAppearInListType : NSObject
 + (int)PARTNER_ONLY;
 + (int)CATEGORY_MEMBERS_ONLY;
@@ -1023,6 +1031,15 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaAppTokenOrderBy : NSObject
++ (NSString*)CREATED_AT_ASC;
++ (NSString*)UPDATED_AT_ASC;
++ (NSString*)CREATED_AT_DESC;
++ (NSString*)UPDATED_AT_DESC;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaAssetOrderBy : NSObject
 + (NSString*)CREATED_AT_ASC;
 + (NSString*)DELETED_AT_ASC;
@@ -1327,6 +1344,7 @@
 + (NSString*)GEO_DISTANCE;
 + (NSString*)OR_OPERATOR;
 + (NSString*)HASH;
++ (NSString*)DELIVERY_PROFILE;
 @end
 
 // @package Kaltura
@@ -1371,6 +1389,7 @@
 + (NSString*)THUMBNAIL;
 + (NSString*)METADATA;
 + (NSString*)EXPORT;
++ (NSString*)SERVE;
 @end
 
 // @package Kaltura
@@ -2911,6 +2930,12 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaUserEntryType : NSObject
++ (NSString*)QUIZ;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaUserLoginDataOrderBy : NSObject
 @end
 
@@ -3219,6 +3244,50 @@
 @property (nonatomic,copy) NSString* value;
 - (KalturaFieldType)getTypeOfName;
 - (KalturaFieldType)getTypeOfValue;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaAppToken : KalturaObjectBase
+// The id of the application token
+@property (nonatomic,copy,readonly) NSString* id;
+// The application token
+@property (nonatomic,copy,readonly) NSString* token;
+@property (nonatomic,assign,readonly) int partnerId;
+// Creation time as Unix timestamp (In seconds)
+@property (nonatomic,assign,readonly) int createdAt;
+// Update time as Unix timestamp (In seconds)
+@property (nonatomic,assign,readonly) int updatedAt;
+// Application token status
+@property (nonatomic,assign,readonly) int status;	// enum KalturaAppTokenStatus
+// Expiry time of current token (unix timestamp in seconds)
+@property (nonatomic,assign) int expiry;
+// Type of KS (Kaltura Session) that created using the current token
+@property (nonatomic,assign) int sessionType;	// enum KalturaSessionType
+// User id of KS (Kaltura Session) that created using the current token
+@property (nonatomic,copy) NSString* sessionUserId;
+// Expiry duration of KS (Kaltura Session) that created using the current token (in seconds)
+@property (nonatomic,assign) int sessionDuration;
+// Comma separated privileges to be applied on KS (Kaltura Session) that created using the current token
+@property (nonatomic,copy) NSString* sessionPrivileges;
+- (KalturaFieldType)getTypeOfId;
+- (KalturaFieldType)getTypeOfToken;
+- (KalturaFieldType)getTypeOfPartnerId;
+- (KalturaFieldType)getTypeOfCreatedAt;
+- (KalturaFieldType)getTypeOfUpdatedAt;
+- (KalturaFieldType)getTypeOfStatus;
+- (KalturaFieldType)getTypeOfExpiry;
+- (KalturaFieldType)getTypeOfSessionType;
+- (KalturaFieldType)getTypeOfSessionUserId;
+- (KalturaFieldType)getTypeOfSessionDuration;
+- (KalturaFieldType)getTypeOfSessionPrivileges;
+- (void)setPartnerIdFromString:(NSString*)aPropVal;
+- (void)setCreatedAtFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtFromString:(NSString*)aPropVal;
+- (void)setStatusFromString:(NSString*)aPropVal;
+- (void)setExpiryFromString:(NSString*)aPropVal;
+- (void)setSessionTypeFromString:(NSString*)aPropVal;
+- (void)setSessionDurationFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -5048,7 +5117,7 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaObject : KalturaObjectBase
-@property (nonatomic,retain) NSMutableDictionary* relatedObjects;	// of KalturaListResponse elements
+@property (nonatomic,retain,readonly) NSMutableDictionary* relatedObjects;	// of KalturaListResponse elements
 - (KalturaFieldType)getTypeOfRelatedObjects;
 - (NSString*)getObjectTypeOfRelatedObjects;
 @end
@@ -7318,11 +7387,12 @@
 // unique auto-generated identifier
 @property (nonatomic,assign,readonly) int id;
 @property (nonatomic,copy) NSString* entryId;	// insertonly
-@property (nonatomic,assign) int userId;	// insertonly
+@property (nonatomic,copy) NSString* userId;	// insertonly
 @property (nonatomic,assign,readonly) int partnerId;
 @property (nonatomic,copy,readonly) NSString* status;	// enum KalturaUserEntryStatus
 @property (nonatomic,assign,readonly) int createdAt;
 @property (nonatomic,assign,readonly) int updatedAt;
+@property (nonatomic,copy,readonly) NSString* type;	// enum KalturaUserEntryType
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfEntryId;
 - (KalturaFieldType)getTypeOfUserId;
@@ -7330,8 +7400,8 @@
 - (KalturaFieldType)getTypeOfStatus;
 - (KalturaFieldType)getTypeOfCreatedAt;
 - (KalturaFieldType)getTypeOfUpdatedAt;
+- (KalturaFieldType)getTypeOfType;
 - (void)setIdFromString:(NSString*)aPropVal;
-- (void)setUserIdFromString:(NSString*)aPropVal;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
@@ -7659,6 +7729,36 @@
 - (KalturaFieldType)getTypeOfObject;
 - (KalturaFieldType)getTypeOfParameter;
 - (KalturaFieldType)getTypeOfAction;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaAppTokenBaseFilter : KalturaFilter
+@property (nonatomic,assign) int idEqual;
+@property (nonatomic,copy) NSString* idIn;
+@property (nonatomic,assign) int createdAtGreaterThanOrEqual;
+@property (nonatomic,assign) int createdAtLessThanOrEqual;
+@property (nonatomic,assign) int updatedAtGreaterThanOrEqual;
+@property (nonatomic,assign) int updatedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfIdEqual;
+- (KalturaFieldType)getTypeOfIdIn;
+- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
+- (void)setIdEqualFromString:(NSString*)aPropVal;
+- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaAppTokenListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaAppToken elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
 @end
 
 // @package Kaltura
@@ -8426,6 +8526,15 @@
 - (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setStatusEqualFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaDeliveryProfileCondition : KalturaCondition
+// The delivery ids that are accepted by this condition
+@property (nonatomic,retain) NSMutableArray* deliveryProfileIds;	// of KalturaIntegerValue elements
+- (KalturaFieldType)getTypeOfDeliveryProfileIds;
+- (NSString*)getObjectTypeOfDeliveryProfileIds;
 @end
 
 // @package Kaltura
@@ -9888,10 +9997,12 @@
 @property (nonatomic,assign) int userIdEqual;
 @property (nonatomic,copy) NSString* userIdIn;
 @property (nonatomic,copy) NSString* userIdNotIn;
+@property (nonatomic,copy) NSString* statusEqual;	// enum KalturaUserEntryStatus
 @property (nonatomic,assign) int createdAtLessThanOrEqual;
 @property (nonatomic,assign) int createdAtGreaterThanOrEqual;
 @property (nonatomic,assign) int updatedAtLessThanOrEqual;
 @property (nonatomic,assign) int updatedAtGreaterThanOrEqual;
+@property (nonatomic,copy) NSString* typeEqual;	// enum KalturaUserEntryType
 - (KalturaFieldType)getTypeOfIdEqual;
 - (KalturaFieldType)getTypeOfIdIn;
 - (KalturaFieldType)getTypeOfIdNotIn;
@@ -9901,10 +10012,12 @@
 - (KalturaFieldType)getTypeOfUserIdEqual;
 - (KalturaFieldType)getTypeOfUserIdIn;
 - (KalturaFieldType)getTypeOfUserIdNotIn;
+- (KalturaFieldType)getTypeOfStatusEqual;
 - (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual;
 - (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
 - (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
 - (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfTypeEqual;
 - (void)setIdEqualFromString:(NSString*)aPropVal;
 - (void)setUserIdEqualFromString:(NSString*)aPropVal;
 - (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
@@ -10100,6 +10213,11 @@
 - (void)setStreamIdFromString:(NSString*)aPropVal;
 - (void)setDvrEnabledFromString:(NSString*)aPropVal;
 - (void)setDvrWindowFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaAppTokenFilter : KalturaAppTokenBaseFilter
 @end
 
 // @package Kaltura
@@ -11741,6 +11859,29 @@
 
 // @package Kaltura
 // @subpackage Client
+// Manage application authentication tokens
+@interface KalturaAppTokenService : KalturaServiceBase
+// Add new application authentication token
+- (KalturaAppToken*)addWithAppToken:(KalturaAppToken*)aAppToken;
+// Get application authentication token by id
+- (KalturaAppToken*)getWithId:(NSString*)aId;
+// Update application authentication token by id
+- (KalturaAppToken*)updateWithId:(NSString*)aId withAppToken:(KalturaAppToken*)aAppToken;
+// Delete application authentication token by id
+- (void)deleteWithId:(NSString*)aId;
+// List application authentication tokens by filter and pager
+- (KalturaAppTokenListResponse*)listWithFilter:(KalturaAppTokenFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
+- (KalturaAppTokenListResponse*)listWithFilter:(KalturaAppTokenFilter*)aFilter;
+- (KalturaAppTokenListResponse*)list;
+// Starts a new KS (kaltura Session) based on application authentication token id
+- (KalturaSessionInfo*)startSessionWithId:(NSString*)aId withTokenHash:(NSString*)aTokenHash withUserId:(NSString*)aUserId withType:(int)aType withExpiry:(int)aExpiry;
+- (KalturaSessionInfo*)startSessionWithId:(NSString*)aId withTokenHash:(NSString*)aTokenHash withUserId:(NSString*)aUserId withType:(int)aType;
+- (KalturaSessionInfo*)startSessionWithId:(NSString*)aId withTokenHash:(NSString*)aTokenHash withUserId:(NSString*)aUserId;
+- (KalturaSessionInfo*)startSessionWithId:(NSString*)aId withTokenHash:(NSString*)aTokenHash;
+@end
+
+// @package Kaltura
+// @subpackage Client
 // Base Entry Service
 @interface KalturaBaseEntryService : KalturaServiceBase
 // Generic add entry, should be used when the uploaded entry type is not known.
@@ -13023,6 +13164,7 @@
 	KalturaAccessControlProfileService* _accessControlProfile;
 	KalturaAccessControlService* _accessControl;
 	KalturaAdminUserService* _adminUser;
+	KalturaAppTokenService* _appToken;
 	KalturaBaseEntryService* _baseEntry;
 	KalturaBulkUploadService* _bulkUpload;
 	KalturaCategoryEntryService* _categoryEntry;
@@ -13078,6 +13220,7 @@
 @property (nonatomic, readonly) KalturaAccessControlProfileService* accessControlProfile;
 @property (nonatomic, readonly) KalturaAccessControlService* accessControl;
 @property (nonatomic, readonly) KalturaAdminUserService* adminUser;
+@property (nonatomic, readonly) KalturaAppTokenService* appToken;
 @property (nonatomic, readonly) KalturaBaseEntryService* baseEntry;
 @property (nonatomic, readonly) KalturaBulkUploadService* bulkUpload;
 @property (nonatomic, readonly) KalturaCategoryEntryService* categoryEntry;
