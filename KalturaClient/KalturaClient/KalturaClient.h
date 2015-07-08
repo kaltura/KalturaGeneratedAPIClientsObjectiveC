@@ -1600,6 +1600,7 @@
 + (NSString*)LIVE_HDS;
 + (NSString*)LIVE_DASH;
 + (NSString*)LIVE_RTMP;
++ (NSString*)LIVE_HLS_TO_MULTICAST;
 + (NSString*)LIVE_AKAMAI_HDS;
 @end
 
@@ -2680,6 +2681,7 @@
 // @subpackage Client
 @interface KalturaPlaybackProtocol : NSObject
 + (NSString*)APPLE_HTTP;
++ (NSString*)APPLE_HTTP_TO_MC;
 + (NSString*)AUTO;
 + (NSString*)AKAMAI_HD;
 + (NSString*)AKAMAI_HDS;

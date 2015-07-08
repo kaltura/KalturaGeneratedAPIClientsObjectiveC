@@ -131,17 +131,16 @@
 @property (nonatomic,assign) int updatedAt;
 @property (nonatomic,assign) int readyAt;
 @property (nonatomic,assign) int syncTime;
-@property (nonatomic,assign) int status;
 @property (nonatomic,assign) int fileType;
 @property (nonatomic,assign) int linkedId;
 @property (nonatomic,assign) int linkCount;
-@property (nonatomic,copy) NSString* fileRoot;
-@property (nonatomic,copy) NSString* filePath;
 @property (nonatomic,assign) double fileSize;
 @property (nonatomic,copy) NSString* fileUrl;
 @property (nonatomic,copy) NSString* fileContent;
 @property (nonatomic,assign) double fileDiscSize;
 @property (nonatomic,assign) KALTURA_BOOL isCurrentDc;
+@property (nonatomic,assign) KALTURA_BOOL isDir;
+@property (nonatomic,assign) int originalId;
 @end
 
 @implementation KalturaFileSync
@@ -168,6 +167,8 @@
 @synthesize fileContent = _fileContent;
 @synthesize fileDiscSize = _fileDiscSize;
 @synthesize isCurrentDc = _isCurrentDc;
+@synthesize isDir = _isDir;
+@synthesize originalId = _originalId;
 
 - (id)init
 {
@@ -189,6 +190,8 @@
     self->_fileSize = KALTURA_UNDEF_FLOAT;
     self->_fileDiscSize = KALTURA_UNDEF_FLOAT;
     self->_isCurrentDc = KALTURA_UNDEF_BOOL;
+    self->_isDir = KALTURA_UNDEF_BOOL;
+    self->_originalId = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -307,6 +310,16 @@
     return KFT_Bool;
 }
 
+- (KalturaFieldType)getTypeOfIsDir
+{
+    return KFT_Bool;
+}
+
+- (KalturaFieldType)getTypeOfOriginalId
+{
+    return KFT_Int;
+}
+
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -382,11 +395,24 @@
     self.isCurrentDc = [KalturaSimpleTypeParser parseBool:aPropVal];
 }
 
+- (void)setIsDirFromString:(NSString*)aPropVal
+{
+    self.isDir = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)setOriginalIdFromString:(NSString*)aPropVal
+{
+    self.originalId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaFileSync"];
+    [aParams addIfDefinedKey:@"status" withInt:self.status];
+    [aParams addIfDefinedKey:@"fileRoot" withString:self.fileRoot];
+    [aParams addIfDefinedKey:@"filePath" withString:self.filePath];
 }
 
 - (void)dealloc

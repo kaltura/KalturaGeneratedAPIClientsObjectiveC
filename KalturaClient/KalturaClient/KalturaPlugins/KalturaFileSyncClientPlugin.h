@@ -81,17 +81,19 @@
 @property (nonatomic,assign,readonly) int updatedAt;
 @property (nonatomic,assign,readonly) int readyAt;
 @property (nonatomic,assign,readonly) int syncTime;
-@property (nonatomic,assign,readonly) int status;	// enum KalturaFileSyncStatus
+@property (nonatomic,assign) int status;	// enum KalturaFileSyncStatus
 @property (nonatomic,assign,readonly) int fileType;	// enum KalturaFileSyncType
 @property (nonatomic,assign,readonly) int linkedId;
 @property (nonatomic,assign,readonly) int linkCount;
-@property (nonatomic,copy,readonly) NSString* fileRoot;
-@property (nonatomic,copy,readonly) NSString* filePath;
+@property (nonatomic,copy) NSString* fileRoot;
+@property (nonatomic,copy) NSString* filePath;
 @property (nonatomic,assign,readonly) double fileSize;
 @property (nonatomic,copy,readonly) NSString* fileUrl;
 @property (nonatomic,copy,readonly) NSString* fileContent;
 @property (nonatomic,assign,readonly) double fileDiscSize;
 @property (nonatomic,assign,readonly) KALTURA_BOOL isCurrentDc;
+@property (nonatomic,assign,readonly) KALTURA_BOOL isDir;
+@property (nonatomic,assign,readonly) int originalId;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfPartnerId;
 - (KalturaFieldType)getTypeOfFileObjectType;
@@ -115,6 +117,8 @@
 - (KalturaFieldType)getTypeOfFileContent;
 - (KalturaFieldType)getTypeOfFileDiscSize;
 - (KalturaFieldType)getTypeOfIsCurrentDc;
+- (KalturaFieldType)getTypeOfIsDir;
+- (KalturaFieldType)getTypeOfOriginalId;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setObjectSubTypeFromString:(NSString*)aPropVal;
@@ -130,6 +134,8 @@
 - (void)setFileSizeFromString:(NSString*)aPropVal;
 - (void)setFileDiscSizeFromString:(NSString*)aPropVal;
 - (void)setIsCurrentDcFromString:(NSString*)aPropVal;
+- (void)setIsDirFromString:(NSString*)aPropVal;
+- (void)setOriginalIdFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

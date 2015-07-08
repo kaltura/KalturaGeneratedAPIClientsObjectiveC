@@ -3977,6 +3977,10 @@
 {
     return @"1005";
 }
++ (NSString*)LIVE_HLS_TO_MULTICAST
+{
+    return @"1006";
+}
 + (NSString*)LIVE_AKAMAI_HDS
 {
     return @"1013";
@@ -7412,6 +7416,10 @@
 + (NSString*)APPLE_HTTP
 {
     return @"applehttp";
+}
++ (NSString*)APPLE_HTTP_TO_MC
+{
+    return @"applehttp_to_mc";
 }
 + (NSString*)AUTO
 {
