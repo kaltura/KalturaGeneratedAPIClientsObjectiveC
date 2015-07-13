@@ -36,82 +36,84 @@
 		291334C6149648C2006D8A8C /* KalturaClientBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2913347D149648C2006D8A8C /* KalturaClientBase.m */; };
 		291334F3149648C2006D8A8C /* KalturaXmlParsers.h in Headers */ = {isa = PBXBuildFile; fileRef = 291334AB149648C2006D8A8C /* KalturaXmlParsers.h */; };
 		291334F4149648C2006D8A8C /* KalturaXmlParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 291334AC149648C2006D8A8C /* KalturaXmlParsers.m */; };
-		DA8CB40549D55D5205594784 /* KalturaMetadataClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = EB5E89E7BFDA3301C463623D /* KalturaMetadataClientPlugin.h */; };
-		A3027814ADDA8522D33832D9 /* KalturaMetadataClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CBF0ED2BAACB3C171171CA /* KalturaMetadataClientPlugin.m */; };
-		C469CB46C1A1DEEFFB9D032B /* KalturaDocumentClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E2E68817AE2DE3EC9164CBC /* KalturaDocumentClientPlugin.h */; };
-		80E4B5654BD9EDCD1AFB3A0C /* KalturaDocumentClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0B5CC6DC6388CE84E73AC0 /* KalturaDocumentClientPlugin.m */; };
-		95A2749BA5164FDB1ED6F299 /* KalturaFileSyncClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EA44D4A7C107E720147DA53 /* KalturaFileSyncClientPlugin.h */; };
-		1CAB8671BE689317CBA10516 /* KalturaFileSyncClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C08EF39E3F8A738684E75DC /* KalturaFileSyncClientPlugin.m */; };
-		6B7D1CE7B368228EE5B9E4C1 /* KalturaSystemPartnerClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = C0B619241F49DD25AA3E1F2F /* KalturaSystemPartnerClientPlugin.h */; };
-		604A2FC490095DF0CC0163C4 /* KalturaSystemPartnerClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F3CB3B8B1F93DF715D2C45B /* KalturaSystemPartnerClientPlugin.m */; };
-		4FE54EC1F2A6E4C7CD089BBB /* KalturaAdminConsoleClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E565FA1A97E3041224E89E5 /* KalturaAdminConsoleClientPlugin.h */; };
-		35E314D83AF489B7ABE92376 /* KalturaAdminConsoleClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD4B4FBBBBDCFA2BECEF194 /* KalturaAdminConsoleClientPlugin.m */; };
-		7768042A067A65838BED5E65 /* KalturaKalturaInternalToolsClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 5359A46EE285808BF5E0CFA9 /* KalturaKalturaInternalToolsClientPlugin.h */; };
-		B0C83D0E24C82FC5FA10A8DB /* KalturaKalturaInternalToolsClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA68F0B33C8B6189239D18D /* KalturaKalturaInternalToolsClientPlugin.m */; };
-		8C50CDCB6415F9EC53FF65CE /* KalturaVirusScanClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = EEE41B1D105B76B2D72CE4D0 /* KalturaVirusScanClientPlugin.h */; };
-		06DAC090636382C92B63BBED /* KalturaVirusScanClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = FFABD583AC0313D363283021 /* KalturaVirusScanClientPlugin.m */; };
-		86AB8FA5A3DAA8D0E56112CC /* KalturaContentDistributionClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 8584F0C990C61208BFA5E595 /* KalturaContentDistributionClientPlugin.h */; };
-		838D46C401ACF0B8715644CE /* KalturaContentDistributionClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B67FDF6827B1A51F29FF89 /* KalturaContentDistributionClientPlugin.m */; };
-		E13EB737CF0FD72331FEBE57 /* KalturaCuePointClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = DB523CBB6EF4AC398D222754 /* KalturaCuePointClientPlugin.h */; };
-		6986F73A11261A98E503F34B /* KalturaCuePointClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = A309CC923D2DA851CF3AB6C1 /* KalturaCuePointClientPlugin.m */; };
-		A4B6725620A5DF28D58FC8EC /* KalturaEventCuePointClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A8AEF3D273728E2FDD77CB7 /* KalturaEventCuePointClientPlugin.h */; };
-		B2EF4A1058B08F62165E8FF3 /* KalturaEventCuePointClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 50626925976ED38543333931 /* KalturaEventCuePointClientPlugin.m */; };
-		FB27062BA2F9F1A305A6DC87 /* KalturaAdCuePointClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = C053F62DA04BDBE8D81D7392 /* KalturaAdCuePointClientPlugin.h */; };
-		56BD043B7EA1A91C507411D1 /* KalturaAdCuePointClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4D7A46BF03A8E7CE996F2A /* KalturaAdCuePointClientPlugin.m */; };
-		3BBCF5C37C8AE1FF441FEF97 /* KalturaCodeCuePointClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C6CC3980CBC0F9EC0A70369 /* KalturaCodeCuePointClientPlugin.h */; };
-		AB9A294B8416D513EC34ADFB /* KalturaCodeCuePointClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = C1F5FB460E59D2A1AB5A3294 /* KalturaCodeCuePointClientPlugin.m */; };
-		D28D7172A2F05923F3CB0E29 /* KalturaAnnotationClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 42926F9A9C355070758C7BEF /* KalturaAnnotationClientPlugin.h */; };
-		EC9056956C311EE280AA7B83 /* KalturaAnnotationClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7910D8D74292437B94FEF534 /* KalturaAnnotationClientPlugin.m */; };
-		8C396CE391EA12929449C7AA /* KalturaQuizClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = A00034F24DFE47AD954FB42C /* KalturaQuizClientPlugin.h */; };
-		B4E5B21DD158D51B18020DFA /* KalturaQuizClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 74814336E1C80385C6FAE90C /* KalturaQuizClientPlugin.m */; };
-		A39E637C506CCAFE766CAA41 /* KalturaShortLinkClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = C9889638A837307373B130CB /* KalturaShortLinkClientPlugin.h */; };
-		805B7334B41D6EA9DB77281F /* KalturaShortLinkClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 8533A8E9ABE32FC37643C670 /* KalturaShortLinkClientPlugin.m */; };
-		63F7EFE38E617A1CA192AA08 /* KalturaBulkUploadClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = E761BAC92FEE4139BCFAE033 /* KalturaBulkUploadClientPlugin.h */; };
-		EC45D8A15D70B875C0122E63 /* KalturaBulkUploadClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF7289E7ACD3AD35E0B546E /* KalturaBulkUploadClientPlugin.m */; };
-		712DF10686F4685892DFB9BC /* KalturaBulkUploadCsvClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DB940C247E1499445A5F5F2 /* KalturaBulkUploadCsvClientPlugin.h */; };
-		25F0665C6720B8A01266B3FC /* KalturaBulkUploadCsvClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 002EB0164BC3A2CFAF0E86BB /* KalturaBulkUploadCsvClientPlugin.m */; };
-		7E8506E0F522EA62472B6C17 /* KalturaBulkUploadXmlClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 2713A0C4E4744D4A8AE648D7 /* KalturaBulkUploadXmlClientPlugin.h */; };
-		0BFB2B8C4FE5BFB64CC41AD4 /* KalturaBulkUploadXmlClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB3EE01CAAA986C7C537C7E /* KalturaBulkUploadXmlClientPlugin.m */; };
-		32A3E0C72EF6CD039D96E113 /* KalturaBulkUploadFilterClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = FF93E3294D65D5920DF1946D /* KalturaBulkUploadFilterClientPlugin.h */; };
-		E6CD6DD06CDEFD2F99CB8AD2 /* KalturaBulkUploadFilterClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 9325BC05DBAC81F27BB53629 /* KalturaBulkUploadFilterClientPlugin.m */; };
-		A256106669743975EA898FB8 /* KalturaDropFolderClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A796530DBB13E2B6F577528 /* KalturaDropFolderClientPlugin.h */; };
-		1FF20E4B391D251D1142B6B0 /* KalturaDropFolderClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E67C1DDBE28D5BA16373D3 /* KalturaDropFolderClientPlugin.m */; };
-		6D1516838470F74059059497 /* KalturaDropFolderXmlBulkUploadClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 1438BD608563BDE919ADD036 /* KalturaDropFolderXmlBulkUploadClientPlugin.h */; };
-		BE2BA4977099B8716E725F52 /* KalturaDropFolderXmlBulkUploadClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D74291E23E73D21BF0FCD30 /* KalturaDropFolderXmlBulkUploadClientPlugin.m */; };
-		7E429F5F2FFEA78ABAF07D64 /* KalturaCaptionClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 7399B3D649EAB32FE9D940BA /* KalturaCaptionClientPlugin.h */; };
-		647AA708407162EA4E369B91 /* KalturaCaptionClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBF7281CCC23808667CDAA8 /* KalturaCaptionClientPlugin.m */; };
-		3E2DFC1A4F9D2DB6D6D7952E /* KalturaCaptionSearchClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 5345B78CA15D0FF4C657D11C /* KalturaCaptionSearchClientPlugin.h */; };
-		4F8B8BF252F2651F26DDC122 /* KalturaCaptionSearchClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 232AA402D75A36C82C387888 /* KalturaCaptionSearchClientPlugin.m */; };
-		BF8A6C92FDBD784D2E16B225 /* KalturaAttachmentClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AB8C7921D001A5A6E6EB665 /* KalturaAttachmentClientPlugin.h */; };
-		42609DE3D51036F6BE6A54F7 /* KalturaAttachmentClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 318AD840B51209473B33094F /* KalturaAttachmentClientPlugin.m */; };
-		984187ABDC9784BED5643DE2 /* KalturaTagSearchClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 25409D3AD13FEC977C935F43 /* KalturaTagSearchClientPlugin.h */; };
-		E2B2863B161899DA8669110E /* KalturaTagSearchClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C20EC92A6A765BF28230A0 /* KalturaTagSearchClientPlugin.m */; };
-		2A8DDEB0D98135FDB20A813D /* KalturaLikeClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 4762F318412D923704782E53 /* KalturaLikeClientPlugin.h */; };
-		788EB64844E2E7DD25A16C06 /* KalturaLikeClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9983B6A99ACC62BA35E896 /* KalturaLikeClientPlugin.m */; };
-		10B11E43B4325D76F7E36B8B /* KalturaVarConsoleClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = A7F6227F2A1C79F04DD30C75 /* KalturaVarConsoleClientPlugin.h */; };
-		0E7C5E6F9798AF3814B92F57 /* KalturaVarConsoleClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FB4F9821C5BB2A371F36EF /* KalturaVarConsoleClientPlugin.m */; };
-		9AC89271268CF87FBD174AF9 /* KalturaEventNotificationClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = ACE254B3C1C29F4DEE7B413F /* KalturaEventNotificationClientPlugin.h */; };
-		A9CFDDF2A7E8E3458C4AAC46 /* KalturaEventNotificationClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8F7987DF81770AE7FB2C4E /* KalturaEventNotificationClientPlugin.m */; };
-		D026C897EAB718AC92974FD7 /* KalturaEmailNotificationClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0808E340D9E31EE59C526F /* KalturaEmailNotificationClientPlugin.h */; };
-		90C2F30A99591F7E41622B95 /* KalturaEmailNotificationClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = C43580D869302AEC01AC3613 /* KalturaEmailNotificationClientPlugin.m */; };
-		5DCF2F1F53A2A57581F8F5EF /* KalturaHttpNotificationClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EADE49664229D5336D72848 /* KalturaHttpNotificationClientPlugin.h */; };
-		E2F44D49A5B6632DFCB44C17 /* KalturaHttpNotificationClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E3C48B02DC8811D130FF36 /* KalturaHttpNotificationClientPlugin.m */; };
-		9A13E5A5A2FDAE6D4AE1C2C0 /* KalturaExternalMediaClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = B0FC3D318AB76C62B4394475 /* KalturaExternalMediaClientPlugin.h */; };
-		3DC5C50589E570FE381716C1 /* KalturaExternalMediaClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 161A05F564E63FBDE657BE4A /* KalturaExternalMediaClientPlugin.m */; };
-		7A76DFAA2AC4BF806A6A5328 /* KalturaKontikiClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = A36C2B975BC8B3CFB43EA15B /* KalturaKontikiClientPlugin.h */; };
-		CB150E50EEB95B05A2E4FE89 /* KalturaKontikiClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4266BC752D596D9D066AEE54 /* KalturaKontikiClientPlugin.m */; };
-		401B0941A0E6518A6B731C34 /* KalturaVelocixClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 15340939098AF71F3ED816F0 /* KalturaVelocixClientPlugin.h */; };
-		35C9C138A963881EC7F0E5F0 /* KalturaVelocixClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 2793F9042CBD1AD2101B03FD /* KalturaVelocixClientPlugin.m */; };
-		C3E5DA0ECED3B7F646E36F0A /* KalturaScheduledTaskClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BB59A8DF7FB00822BDC9257 /* KalturaScheduledTaskClientPlugin.h */; };
-		D2CB8B6787BECE8AEA91FDFC /* KalturaScheduledTaskClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFC5BE43101F485560A1D3E /* KalturaScheduledTaskClientPlugin.m */; };
-		E711A3BD0CEC9AE607D7DD9C /* KalturaScheduledTaskMetadataClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = F504142B9FD4965D8ED31277 /* KalturaScheduledTaskMetadataClientPlugin.h */; };
-		8589801A41D4D6C90F031DD2 /* KalturaScheduledTaskMetadataClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 48ABF0BC09FC8526ACA25D94 /* KalturaScheduledTaskMetadataClientPlugin.m */; };
-		096137800DA794C69B691011 /* KalturaScheduledTaskEventNotificationClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A28174B6A4B82F81C20C23D /* KalturaScheduledTaskEventNotificationClientPlugin.h */; };
-		9A947570B6E0DEF28B13E83F /* KalturaScheduledTaskEventNotificationClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 05198970FD8A317358341BC2 /* KalturaScheduledTaskEventNotificationClientPlugin.m */; };
-		761CC1587BF2AC3275E37771 /* KalturaScheduledTaskContentDistributionClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 28B71221572A4CB84E839F86 /* KalturaScheduledTaskContentDistributionClientPlugin.h */; };
-		D57075E16FB401DD80FB000F /* KalturaScheduledTaskContentDistributionClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 490DFCD36F52A048AA6A1158 /* KalturaScheduledTaskContentDistributionClientPlugin.m */; };
-		C6E98CECD7DC4A6339BC06FF /* KalturaFeedDropFolderClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = CC412EE2F26BA026D3518675 /* KalturaFeedDropFolderClientPlugin.h */; };
-		EEB5B5616931D2DB78948271 /* KalturaFeedDropFolderClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = E468B372C6CB71AE19634FF8 /* KalturaFeedDropFolderClientPlugin.m */; };
+		1913694C7FCAD30F1FBF3CE7 /* KalturaMetadataClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = C0F79FB64CC023E66D5EF016 /* KalturaMetadataClientPlugin.h */; };
+		EBC028E7C9599D7571765288 /* KalturaMetadataClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = E00DB1EC0363C0C02B6965F1 /* KalturaMetadataClientPlugin.m */; };
+		47EBEAF387BE8F26B39A3196 /* KalturaDocumentClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 6545B26656A13B713DC0A0CC /* KalturaDocumentClientPlugin.h */; };
+		B626A1A0ACD7D9B6A51BA7F8 /* KalturaDocumentClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B212C0DCF78E56C9B3436A7 /* KalturaDocumentClientPlugin.m */; };
+		ADE653EFBE35FC569DB4B137 /* KalturaFileSyncClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = ACF8428EADAD56B3BA08023B /* KalturaFileSyncClientPlugin.h */; };
+		117260BA905839780B2C3E6D /* KalturaFileSyncClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 489D231F08E8D06835334C93 /* KalturaFileSyncClientPlugin.m */; };
+		023AF5E5D5C455612D04D3F7 /* KalturaSystemPartnerClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 1AE5F2DC0BC1779F15BCA966 /* KalturaSystemPartnerClientPlugin.h */; };
+		FD92A51836B9D7DECCAA07B7 /* KalturaSystemPartnerClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 627B5C8A12B1924585BF726A /* KalturaSystemPartnerClientPlugin.m */; };
+		CF93C9C65B103DF2276EE5F6 /* KalturaAdminConsoleClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 27E34D805DCF826AB20257D0 /* KalturaAdminConsoleClientPlugin.h */; };
+		A0DD4ED87D341974E3974A5F /* KalturaAdminConsoleClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 9043DC5A8B5BA09AC48389E5 /* KalturaAdminConsoleClientPlugin.m */; };
+		B2CE09DD97DCE868446C76F3 /* KalturaKalturaInternalToolsClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 2919318F3E113ABD24FDC6E0 /* KalturaKalturaInternalToolsClientPlugin.h */; };
+		693319FF28C024905CE11F8B /* KalturaKalturaInternalToolsClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF059B0B69A4B93879232F6 /* KalturaKalturaInternalToolsClientPlugin.m */; };
+		3B2B07A76AA69FEB1B2555BE /* KalturaVirusScanClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 28B23CA399046134D1C8AFE0 /* KalturaVirusScanClientPlugin.h */; };
+		F0412016BE24B476B471B25B /* KalturaVirusScanClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 729EEB75CDB32628E7C0D382 /* KalturaVirusScanClientPlugin.m */; };
+		617436800840F249AAB83E7A /* KalturaContentDistributionClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DB5C978A5D76C8119795747 /* KalturaContentDistributionClientPlugin.h */; };
+		CB444B16F68840D211BE7995 /* KalturaContentDistributionClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DD33E0199F66092CD156DE60 /* KalturaContentDistributionClientPlugin.m */; };
+		89AB8539C4F3B4ED17AF935E /* KalturaCuePointClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 6786C8B148F71E4865E5110D /* KalturaCuePointClientPlugin.h */; };
+		79D12DD24F0CCE5CC37DE1B8 /* KalturaCuePointClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = D881287909966042CB0764B9 /* KalturaCuePointClientPlugin.m */; };
+		51EC2E3F3533AC1EFCD45AA3 /* KalturaEventCuePointClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = B842E8B5534E8C37CD2362FF /* KalturaEventCuePointClientPlugin.h */; };
+		1CE47C4ABF3593386CA34871 /* KalturaEventCuePointClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DF4FFE76E2299E23CFF5E4F1 /* KalturaEventCuePointClientPlugin.m */; };
+		A44339761B7732A056B49FBD /* KalturaAdCuePointClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B78A88143E0865A7413DA3C /* KalturaAdCuePointClientPlugin.h */; };
+		F20B638CCB12657659328A4A /* KalturaAdCuePointClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1042F8166A9992440ABE45 /* KalturaAdCuePointClientPlugin.m */; };
+		84F32CC2CA45FF5ACDEEED22 /* KalturaCodeCuePointClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 233B34DE001A7F37B56CFB59 /* KalturaCodeCuePointClientPlugin.h */; };
+		3F117C6F90CE83F81566D48D /* KalturaCodeCuePointClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A310CC0DD078CE40D88AED4 /* KalturaCodeCuePointClientPlugin.m */; };
+		C22754B041DBE2B416AB5FF2 /* KalturaThumbCuePointClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = E2054439CA1E6F8E4602CF92 /* KalturaThumbCuePointClientPlugin.h */; };
+		1942CCDEF31C7DA9EF280712 /* KalturaThumbCuePointClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 567AA521A74822541284A57B /* KalturaThumbCuePointClientPlugin.m */; };
+		6BD6674E58530624E84FEB0F /* KalturaAnnotationClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F2F1F2C3E3CD306D0201678 /* KalturaAnnotationClientPlugin.h */; };
+		8C31D6DE5491E4D18B4C62BA /* KalturaAnnotationClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB94E6ACBFFA65AF03A7D55 /* KalturaAnnotationClientPlugin.m */; };
+		B760D40CB4C453BBEA5D2421 /* KalturaQuizClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = CC9F818D0CD3FC5C43DB4DD7 /* KalturaQuizClientPlugin.h */; };
+		01558FA6DFCF05122C1AF88A /* KalturaQuizClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EC78C8DFADE94F5398C15C /* KalturaQuizClientPlugin.m */; };
+		07676480E1D3A50ADB24949F /* KalturaShortLinkClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = FC662F038C7C57256D810BCB /* KalturaShortLinkClientPlugin.h */; };
+		6152280E915D594FA732311A /* KalturaShortLinkClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = C8BF748B7E9599194E4CA096 /* KalturaShortLinkClientPlugin.m */; };
+		DFB667A0A4A16DCB8AD99EA7 /* KalturaBulkUploadClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = C0F70B169180645B09FE1BD0 /* KalturaBulkUploadClientPlugin.h */; };
+		A29C32E604EA6F305DB2B0AD /* KalturaBulkUploadClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = BB11A224520026F915FBA141 /* KalturaBulkUploadClientPlugin.m */; };
+		6BB5253F37F9C58858F059AD /* KalturaBulkUploadCsvClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = B8612CFC278DE9BB8A09DA51 /* KalturaBulkUploadCsvClientPlugin.h */; };
+		1D7C9A5D4480D38270D5E043 /* KalturaBulkUploadCsvClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C3430DF5DB76B240C0C7AE /* KalturaBulkUploadCsvClientPlugin.m */; };
+		D4A37065A2F9240F11B4E573 /* KalturaBulkUploadXmlClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BF4AF42AC3D9D84715C8A7B /* KalturaBulkUploadXmlClientPlugin.h */; };
+		280E642F60E0E74A4DAC4DE1 /* KalturaBulkUploadXmlClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A62AED1871FC607ABCED8DD /* KalturaBulkUploadXmlClientPlugin.m */; };
+		BA20BEC19FFE5EFD69AD3338 /* KalturaBulkUploadFilterClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 6088478A2D2B6BF25A9D8AA5 /* KalturaBulkUploadFilterClientPlugin.h */; };
+		8FED178D25173574ABF6A543 /* KalturaBulkUploadFilterClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = F5AA21017CD3C850834D2A0C /* KalturaBulkUploadFilterClientPlugin.m */; };
+		98C7B1CF2F8C3CBD6C086E2F /* KalturaDropFolderClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 967181788DFA9698AD48F6E4 /* KalturaDropFolderClientPlugin.h */; };
+		900DDA11686167F00344A55E /* KalturaDropFolderClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 09067A1E0D071386692B106A /* KalturaDropFolderClientPlugin.m */; };
+		43035AF2DF6EDCB34FB9C36B /* KalturaDropFolderXmlBulkUploadClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = B742D03B40ADA7739F2A474A /* KalturaDropFolderXmlBulkUploadClientPlugin.h */; };
+		ACCCC8E216D92A658C3EAD94 /* KalturaDropFolderXmlBulkUploadClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 618CB7DC81AEBDCD995402F6 /* KalturaDropFolderXmlBulkUploadClientPlugin.m */; };
+		392515BBD251048D63CAFA05 /* KalturaCaptionClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 82C98847287DE0825713FE1C /* KalturaCaptionClientPlugin.h */; };
+		F4D8F5A8B71114887D79BBD6 /* KalturaCaptionClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB9B26E81D9ECA7E444C2D1 /* KalturaCaptionClientPlugin.m */; };
+		FA06A47E0251B2DD64D0DCF3 /* KalturaCaptionSearchClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C37AC04A93ABD0E156C5E1F /* KalturaCaptionSearchClientPlugin.h */; };
+		31F2C8614E0AB1A6749A0020 /* KalturaCaptionSearchClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 180C1CCFBF3B076358F8917B /* KalturaCaptionSearchClientPlugin.m */; };
+		7C2F767AC0885E913FE0CFAF /* KalturaAttachmentClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = CF876B4BB794E57D78E0FCD1 /* KalturaAttachmentClientPlugin.h */; };
+		5982425891BF659A053C3CFC /* KalturaAttachmentClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF91EECC4C3F306C06CE4BB /* KalturaAttachmentClientPlugin.m */; };
+		7B92782815DD5079B1CA8CAD /* KalturaTagSearchClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 63779093F34D16D8B17994B7 /* KalturaTagSearchClientPlugin.h */; };
+		46A0DFDE043717BB22C3BBF8 /* KalturaTagSearchClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 82AB07AC26F8B9E34C695E46 /* KalturaTagSearchClientPlugin.m */; };
+		A22C9CEFFCE872F5A2A8692A /* KalturaLikeClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = F89E3153DEA9470401A3263E /* KalturaLikeClientPlugin.h */; };
+		1CE0CCFDFC490863795FFF3B /* KalturaLikeClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D381DAA7C8677079FE8EB3F /* KalturaLikeClientPlugin.m */; };
+		4D94E3A79A326FBBD15F03A7 /* KalturaVarConsoleClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 76C73E9D1BF215249134AB9F /* KalturaVarConsoleClientPlugin.h */; };
+		11F7B65FD9A7917C0430CD55 /* KalturaVarConsoleClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9CEA65CE6611738521E70 /* KalturaVarConsoleClientPlugin.m */; };
+		FB8FD35F81156DFCC1CB4ABF /* KalturaEventNotificationClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 813196B590FC3CBD500F0713 /* KalturaEventNotificationClientPlugin.h */; };
+		D710732C366A600D79EAE74E /* KalturaEventNotificationClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 42FD90E9161E742C72B6E35D /* KalturaEventNotificationClientPlugin.m */; };
+		D1C80006F59EE52FEC26D1FF /* KalturaEmailNotificationClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = FD74868327BDFBD46B721A5C /* KalturaEmailNotificationClientPlugin.h */; };
+		5074523A46E52DE905740A8F /* KalturaEmailNotificationClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECFFDCCE83B12074E9FF78A /* KalturaEmailNotificationClientPlugin.m */; };
+		D33D1081E9697FAB3B583A06 /* KalturaHttpNotificationClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 016B62DAD5CE757AF549EE84 /* KalturaHttpNotificationClientPlugin.h */; };
+		C38AB9B571CF35B2503E5722 /* KalturaHttpNotificationClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F40C661F67CE0BE57F08CF /* KalturaHttpNotificationClientPlugin.m */; };
+		6EEB1647811C095F4C7A18C6 /* KalturaExternalMediaClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = B0AA79F5B97140BA215CED5E /* KalturaExternalMediaClientPlugin.h */; };
+		DAA0ED9BCB7592213B8932C3 /* KalturaExternalMediaClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E2B5C5FAA6153187B122A5 /* KalturaExternalMediaClientPlugin.m */; };
+		6D6BD40744585BDA9B6ABE3F /* KalturaKontikiClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E413815FDDFEE30A73DC0AB /* KalturaKontikiClientPlugin.h */; };
+		DE01C33017ADFD5F62FB5D5D /* KalturaKontikiClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1259B0284947CA1D9D48AF /* KalturaKontikiClientPlugin.m */; };
+		581CFBE0271CD79635CFBA52 /* KalturaVelocixClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = BCFB64D619EDC81E374935C4 /* KalturaVelocixClientPlugin.h */; };
+		CCDFEFE6AA46023F075D954D /* KalturaVelocixClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C54E5F45C0350F05DBDC9C2 /* KalturaVelocixClientPlugin.m */; };
+		147AAB61F064D572A04ACA4D /* KalturaScheduledTaskClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 419E2DCD979DFC21926D263B /* KalturaScheduledTaskClientPlugin.h */; };
+		D6427981DD1FDA38E638EC30 /* KalturaScheduledTaskClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA8D72B08D030A6D1FFEE97 /* KalturaScheduledTaskClientPlugin.m */; };
+		227FB621F5BA615176840B9A /* KalturaScheduledTaskMetadataClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D9D5B74ADBF1C4F99548C0E /* KalturaScheduledTaskMetadataClientPlugin.h */; };
+		86C9301A48D74D6E920B0EB0 /* KalturaScheduledTaskMetadataClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = C9757BDC63D6E4EA26A52EE3 /* KalturaScheduledTaskMetadataClientPlugin.m */; };
+		5EC7EE9639B4BFC6ED459556 /* KalturaScheduledTaskEventNotificationClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 04721DB406EA6D0709ADE845 /* KalturaScheduledTaskEventNotificationClientPlugin.h */; };
+		6ED1E6206E883BFE20E09981 /* KalturaScheduledTaskEventNotificationClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E4032A1E400A3363291B1DD /* KalturaScheduledTaskEventNotificationClientPlugin.m */; };
+		7F17D74B28498184069227E8 /* KalturaScheduledTaskContentDistributionClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F25765A01B8A1DF88995094 /* KalturaScheduledTaskContentDistributionClientPlugin.h */; };
+		4EECFFE9D0E96FB53D3A7C92 /* KalturaScheduledTaskContentDistributionClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB099BA31E976FFD65ED375 /* KalturaScheduledTaskContentDistributionClientPlugin.m */; };
+		4A755D5498D3E46411EDD229 /* KalturaFeedDropFolderClientPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = DFDB538C59B0C659D530D407 /* KalturaFeedDropFolderClientPlugin.h */; };
+		DD3BAF4FE30F5603A45ACCC1 /* KalturaFeedDropFolderClientPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BADDA38D54F50D588190F4D /* KalturaFeedDropFolderClientPlugin.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -147,82 +149,84 @@
 		2913347D149648C2006D8A8C /* KalturaClientBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaClientBase.m; sourceTree = "<group>"; };
 		291334AB149648C2006D8A8C /* KalturaXmlParsers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaXmlParsers.h; sourceTree = "<group>"; };
 		291334AC149648C2006D8A8C /* KalturaXmlParsers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaXmlParsers.m; sourceTree = "<group>"; };
-		EB5E89E7BFDA3301C463623D /* KalturaMetadataClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaMetadataClientPlugin.h; sourceTree = "<group>"; };
-		65CBF0ED2BAACB3C171171CA /* KalturaMetadataClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaMetadataClientPlugin.m; sourceTree = "<group>"; };
-		3E2E68817AE2DE3EC9164CBC /* KalturaDocumentClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaDocumentClientPlugin.h; sourceTree = "<group>"; };
-		4F0B5CC6DC6388CE84E73AC0 /* KalturaDocumentClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaDocumentClientPlugin.m; sourceTree = "<group>"; };
-		6EA44D4A7C107E720147DA53 /* KalturaFileSyncClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaFileSyncClientPlugin.h; sourceTree = "<group>"; };
-		5C08EF39E3F8A738684E75DC /* KalturaFileSyncClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaFileSyncClientPlugin.m; sourceTree = "<group>"; };
-		C0B619241F49DD25AA3E1F2F /* KalturaSystemPartnerClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaSystemPartnerClientPlugin.h; sourceTree = "<group>"; };
-		2F3CB3B8B1F93DF715D2C45B /* KalturaSystemPartnerClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaSystemPartnerClientPlugin.m; sourceTree = "<group>"; };
-		4E565FA1A97E3041224E89E5 /* KalturaAdminConsoleClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaAdminConsoleClientPlugin.h; sourceTree = "<group>"; };
-		8CD4B4FBBBBDCFA2BECEF194 /* KalturaAdminConsoleClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaAdminConsoleClientPlugin.m; sourceTree = "<group>"; };
-		5359A46EE285808BF5E0CFA9 /* KalturaKalturaInternalToolsClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaKalturaInternalToolsClientPlugin.h; sourceTree = "<group>"; };
-		BEA68F0B33C8B6189239D18D /* KalturaKalturaInternalToolsClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaKalturaInternalToolsClientPlugin.m; sourceTree = "<group>"; };
-		EEE41B1D105B76B2D72CE4D0 /* KalturaVirusScanClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaVirusScanClientPlugin.h; sourceTree = "<group>"; };
-		FFABD583AC0313D363283021 /* KalturaVirusScanClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaVirusScanClientPlugin.m; sourceTree = "<group>"; };
-		8584F0C990C61208BFA5E595 /* KalturaContentDistributionClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaContentDistributionClientPlugin.h; sourceTree = "<group>"; };
-		70B67FDF6827B1A51F29FF89 /* KalturaContentDistributionClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaContentDistributionClientPlugin.m; sourceTree = "<group>"; };
-		DB523CBB6EF4AC398D222754 /* KalturaCuePointClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaCuePointClientPlugin.h; sourceTree = "<group>"; };
-		A309CC923D2DA851CF3AB6C1 /* KalturaCuePointClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaCuePointClientPlugin.m; sourceTree = "<group>"; };
-		6A8AEF3D273728E2FDD77CB7 /* KalturaEventCuePointClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaEventCuePointClientPlugin.h; sourceTree = "<group>"; };
-		50626925976ED38543333931 /* KalturaEventCuePointClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaEventCuePointClientPlugin.m; sourceTree = "<group>"; };
-		C053F62DA04BDBE8D81D7392 /* KalturaAdCuePointClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaAdCuePointClientPlugin.h; sourceTree = "<group>"; };
-		CF4D7A46BF03A8E7CE996F2A /* KalturaAdCuePointClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaAdCuePointClientPlugin.m; sourceTree = "<group>"; };
-		3C6CC3980CBC0F9EC0A70369 /* KalturaCodeCuePointClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaCodeCuePointClientPlugin.h; sourceTree = "<group>"; };
-		C1F5FB460E59D2A1AB5A3294 /* KalturaCodeCuePointClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaCodeCuePointClientPlugin.m; sourceTree = "<group>"; };
-		42926F9A9C355070758C7BEF /* KalturaAnnotationClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaAnnotationClientPlugin.h; sourceTree = "<group>"; };
-		7910D8D74292437B94FEF534 /* KalturaAnnotationClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaAnnotationClientPlugin.m; sourceTree = "<group>"; };
-		A00034F24DFE47AD954FB42C /* KalturaQuizClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaQuizClientPlugin.h; sourceTree = "<group>"; };
-		74814336E1C80385C6FAE90C /* KalturaQuizClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaQuizClientPlugin.m; sourceTree = "<group>"; };
-		C9889638A837307373B130CB /* KalturaShortLinkClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaShortLinkClientPlugin.h; sourceTree = "<group>"; };
-		8533A8E9ABE32FC37643C670 /* KalturaShortLinkClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaShortLinkClientPlugin.m; sourceTree = "<group>"; };
-		E761BAC92FEE4139BCFAE033 /* KalturaBulkUploadClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaBulkUploadClientPlugin.h; sourceTree = "<group>"; };
-		5AF7289E7ACD3AD35E0B546E /* KalturaBulkUploadClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaBulkUploadClientPlugin.m; sourceTree = "<group>"; };
-		8DB940C247E1499445A5F5F2 /* KalturaBulkUploadCsvClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaBulkUploadCsvClientPlugin.h; sourceTree = "<group>"; };
-		002EB0164BC3A2CFAF0E86BB /* KalturaBulkUploadCsvClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaBulkUploadCsvClientPlugin.m; sourceTree = "<group>"; };
-		2713A0C4E4744D4A8AE648D7 /* KalturaBulkUploadXmlClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaBulkUploadXmlClientPlugin.h; sourceTree = "<group>"; };
-		BDB3EE01CAAA986C7C537C7E /* KalturaBulkUploadXmlClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaBulkUploadXmlClientPlugin.m; sourceTree = "<group>"; };
-		FF93E3294D65D5920DF1946D /* KalturaBulkUploadFilterClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaBulkUploadFilterClientPlugin.h; sourceTree = "<group>"; };
-		9325BC05DBAC81F27BB53629 /* KalturaBulkUploadFilterClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaBulkUploadFilterClientPlugin.m; sourceTree = "<group>"; };
-		4A796530DBB13E2B6F577528 /* KalturaDropFolderClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaDropFolderClientPlugin.h; sourceTree = "<group>"; };
-		86E67C1DDBE28D5BA16373D3 /* KalturaDropFolderClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaDropFolderClientPlugin.m; sourceTree = "<group>"; };
-		1438BD608563BDE919ADD036 /* KalturaDropFolderXmlBulkUploadClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaDropFolderXmlBulkUploadClientPlugin.h; sourceTree = "<group>"; };
-		8D74291E23E73D21BF0FCD30 /* KalturaDropFolderXmlBulkUploadClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaDropFolderXmlBulkUploadClientPlugin.m; sourceTree = "<group>"; };
-		7399B3D649EAB32FE9D940BA /* KalturaCaptionClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaCaptionClientPlugin.h; sourceTree = "<group>"; };
-		DEBF7281CCC23808667CDAA8 /* KalturaCaptionClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaCaptionClientPlugin.m; sourceTree = "<group>"; };
-		5345B78CA15D0FF4C657D11C /* KalturaCaptionSearchClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaCaptionSearchClientPlugin.h; sourceTree = "<group>"; };
-		232AA402D75A36C82C387888 /* KalturaCaptionSearchClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaCaptionSearchClientPlugin.m; sourceTree = "<group>"; };
-		6AB8C7921D001A5A6E6EB665 /* KalturaAttachmentClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaAttachmentClientPlugin.h; sourceTree = "<group>"; };
-		318AD840B51209473B33094F /* KalturaAttachmentClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaAttachmentClientPlugin.m; sourceTree = "<group>"; };
-		25409D3AD13FEC977C935F43 /* KalturaTagSearchClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaTagSearchClientPlugin.h; sourceTree = "<group>"; };
-		D4C20EC92A6A765BF28230A0 /* KalturaTagSearchClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaTagSearchClientPlugin.m; sourceTree = "<group>"; };
-		4762F318412D923704782E53 /* KalturaLikeClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaLikeClientPlugin.h; sourceTree = "<group>"; };
-		4C9983B6A99ACC62BA35E896 /* KalturaLikeClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaLikeClientPlugin.m; sourceTree = "<group>"; };
-		A7F6227F2A1C79F04DD30C75 /* KalturaVarConsoleClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaVarConsoleClientPlugin.h; sourceTree = "<group>"; };
-		32FB4F9821C5BB2A371F36EF /* KalturaVarConsoleClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaVarConsoleClientPlugin.m; sourceTree = "<group>"; };
-		ACE254B3C1C29F4DEE7B413F /* KalturaEventNotificationClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaEventNotificationClientPlugin.h; sourceTree = "<group>"; };
-		1E8F7987DF81770AE7FB2C4E /* KalturaEventNotificationClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaEventNotificationClientPlugin.m; sourceTree = "<group>"; };
-		8E0808E340D9E31EE59C526F /* KalturaEmailNotificationClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaEmailNotificationClientPlugin.h; sourceTree = "<group>"; };
-		C43580D869302AEC01AC3613 /* KalturaEmailNotificationClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaEmailNotificationClientPlugin.m; sourceTree = "<group>"; };
-		3EADE49664229D5336D72848 /* KalturaHttpNotificationClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaHttpNotificationClientPlugin.h; sourceTree = "<group>"; };
-		43E3C48B02DC8811D130FF36 /* KalturaHttpNotificationClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaHttpNotificationClientPlugin.m; sourceTree = "<group>"; };
-		B0FC3D318AB76C62B4394475 /* KalturaExternalMediaClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaExternalMediaClientPlugin.h; sourceTree = "<group>"; };
-		161A05F564E63FBDE657BE4A /* KalturaExternalMediaClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaExternalMediaClientPlugin.m; sourceTree = "<group>"; };
-		A36C2B975BC8B3CFB43EA15B /* KalturaKontikiClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaKontikiClientPlugin.h; sourceTree = "<group>"; };
-		4266BC752D596D9D066AEE54 /* KalturaKontikiClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaKontikiClientPlugin.m; sourceTree = "<group>"; };
-		15340939098AF71F3ED816F0 /* KalturaVelocixClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaVelocixClientPlugin.h; sourceTree = "<group>"; };
-		2793F9042CBD1AD2101B03FD /* KalturaVelocixClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaVelocixClientPlugin.m; sourceTree = "<group>"; };
-		0BB59A8DF7FB00822BDC9257 /* KalturaScheduledTaskClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaScheduledTaskClientPlugin.h; sourceTree = "<group>"; };
-		DFFC5BE43101F485560A1D3E /* KalturaScheduledTaskClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaScheduledTaskClientPlugin.m; sourceTree = "<group>"; };
-		F504142B9FD4965D8ED31277 /* KalturaScheduledTaskMetadataClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaScheduledTaskMetadataClientPlugin.h; sourceTree = "<group>"; };
-		48ABF0BC09FC8526ACA25D94 /* KalturaScheduledTaskMetadataClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaScheduledTaskMetadataClientPlugin.m; sourceTree = "<group>"; };
-		6A28174B6A4B82F81C20C23D /* KalturaScheduledTaskEventNotificationClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaScheduledTaskEventNotificationClientPlugin.h; sourceTree = "<group>"; };
-		05198970FD8A317358341BC2 /* KalturaScheduledTaskEventNotificationClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaScheduledTaskEventNotificationClientPlugin.m; sourceTree = "<group>"; };
-		28B71221572A4CB84E839F86 /* KalturaScheduledTaskContentDistributionClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaScheduledTaskContentDistributionClientPlugin.h; sourceTree = "<group>"; };
-		490DFCD36F52A048AA6A1158 /* KalturaScheduledTaskContentDistributionClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaScheduledTaskContentDistributionClientPlugin.m; sourceTree = "<group>"; };
-		CC412EE2F26BA026D3518675 /* KalturaFeedDropFolderClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaFeedDropFolderClientPlugin.h; sourceTree = "<group>"; };
-		E468B372C6CB71AE19634FF8 /* KalturaFeedDropFolderClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaFeedDropFolderClientPlugin.m; sourceTree = "<group>"; };
+		C0F79FB64CC023E66D5EF016 /* KalturaMetadataClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaMetadataClientPlugin.h; sourceTree = "<group>"; };
+		E00DB1EC0363C0C02B6965F1 /* KalturaMetadataClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaMetadataClientPlugin.m; sourceTree = "<group>"; };
+		6545B26656A13B713DC0A0CC /* KalturaDocumentClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaDocumentClientPlugin.h; sourceTree = "<group>"; };
+		6B212C0DCF78E56C9B3436A7 /* KalturaDocumentClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaDocumentClientPlugin.m; sourceTree = "<group>"; };
+		ACF8428EADAD56B3BA08023B /* KalturaFileSyncClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaFileSyncClientPlugin.h; sourceTree = "<group>"; };
+		489D231F08E8D06835334C93 /* KalturaFileSyncClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaFileSyncClientPlugin.m; sourceTree = "<group>"; };
+		1AE5F2DC0BC1779F15BCA966 /* KalturaSystemPartnerClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaSystemPartnerClientPlugin.h; sourceTree = "<group>"; };
+		627B5C8A12B1924585BF726A /* KalturaSystemPartnerClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaSystemPartnerClientPlugin.m; sourceTree = "<group>"; };
+		27E34D805DCF826AB20257D0 /* KalturaAdminConsoleClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaAdminConsoleClientPlugin.h; sourceTree = "<group>"; };
+		9043DC5A8B5BA09AC48389E5 /* KalturaAdminConsoleClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaAdminConsoleClientPlugin.m; sourceTree = "<group>"; };
+		2919318F3E113ABD24FDC6E0 /* KalturaKalturaInternalToolsClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaKalturaInternalToolsClientPlugin.h; sourceTree = "<group>"; };
+		7AF059B0B69A4B93879232F6 /* KalturaKalturaInternalToolsClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaKalturaInternalToolsClientPlugin.m; sourceTree = "<group>"; };
+		28B23CA399046134D1C8AFE0 /* KalturaVirusScanClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaVirusScanClientPlugin.h; sourceTree = "<group>"; };
+		729EEB75CDB32628E7C0D382 /* KalturaVirusScanClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaVirusScanClientPlugin.m; sourceTree = "<group>"; };
+		2DB5C978A5D76C8119795747 /* KalturaContentDistributionClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaContentDistributionClientPlugin.h; sourceTree = "<group>"; };
+		DD33E0199F66092CD156DE60 /* KalturaContentDistributionClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaContentDistributionClientPlugin.m; sourceTree = "<group>"; };
+		6786C8B148F71E4865E5110D /* KalturaCuePointClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaCuePointClientPlugin.h; sourceTree = "<group>"; };
+		D881287909966042CB0764B9 /* KalturaCuePointClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaCuePointClientPlugin.m; sourceTree = "<group>"; };
+		B842E8B5534E8C37CD2362FF /* KalturaEventCuePointClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaEventCuePointClientPlugin.h; sourceTree = "<group>"; };
+		DF4FFE76E2299E23CFF5E4F1 /* KalturaEventCuePointClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaEventCuePointClientPlugin.m; sourceTree = "<group>"; };
+		7B78A88143E0865A7413DA3C /* KalturaAdCuePointClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaAdCuePointClientPlugin.h; sourceTree = "<group>"; };
+		FD1042F8166A9992440ABE45 /* KalturaAdCuePointClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaAdCuePointClientPlugin.m; sourceTree = "<group>"; };
+		233B34DE001A7F37B56CFB59 /* KalturaCodeCuePointClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaCodeCuePointClientPlugin.h; sourceTree = "<group>"; };
+		1A310CC0DD078CE40D88AED4 /* KalturaCodeCuePointClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaCodeCuePointClientPlugin.m; sourceTree = "<group>"; };
+		E2054439CA1E6F8E4602CF92 /* KalturaThumbCuePointClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaThumbCuePointClientPlugin.h; sourceTree = "<group>"; };
+		567AA521A74822541284A57B /* KalturaThumbCuePointClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaThumbCuePointClientPlugin.m; sourceTree = "<group>"; };
+		7F2F1F2C3E3CD306D0201678 /* KalturaAnnotationClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaAnnotationClientPlugin.h; sourceTree = "<group>"; };
+		1BB94E6ACBFFA65AF03A7D55 /* KalturaAnnotationClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaAnnotationClientPlugin.m; sourceTree = "<group>"; };
+		CC9F818D0CD3FC5C43DB4DD7 /* KalturaQuizClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaQuizClientPlugin.h; sourceTree = "<group>"; };
+		A5EC78C8DFADE94F5398C15C /* KalturaQuizClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaQuizClientPlugin.m; sourceTree = "<group>"; };
+		FC662F038C7C57256D810BCB /* KalturaShortLinkClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaShortLinkClientPlugin.h; sourceTree = "<group>"; };
+		C8BF748B7E9599194E4CA096 /* KalturaShortLinkClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaShortLinkClientPlugin.m; sourceTree = "<group>"; };
+		C0F70B169180645B09FE1BD0 /* KalturaBulkUploadClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaBulkUploadClientPlugin.h; sourceTree = "<group>"; };
+		BB11A224520026F915FBA141 /* KalturaBulkUploadClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaBulkUploadClientPlugin.m; sourceTree = "<group>"; };
+		B8612CFC278DE9BB8A09DA51 /* KalturaBulkUploadCsvClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaBulkUploadCsvClientPlugin.h; sourceTree = "<group>"; };
+		04C3430DF5DB76B240C0C7AE /* KalturaBulkUploadCsvClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaBulkUploadCsvClientPlugin.m; sourceTree = "<group>"; };
+		1BF4AF42AC3D9D84715C8A7B /* KalturaBulkUploadXmlClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaBulkUploadXmlClientPlugin.h; sourceTree = "<group>"; };
+		9A62AED1871FC607ABCED8DD /* KalturaBulkUploadXmlClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaBulkUploadXmlClientPlugin.m; sourceTree = "<group>"; };
+		6088478A2D2B6BF25A9D8AA5 /* KalturaBulkUploadFilterClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaBulkUploadFilterClientPlugin.h; sourceTree = "<group>"; };
+		F5AA21017CD3C850834D2A0C /* KalturaBulkUploadFilterClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaBulkUploadFilterClientPlugin.m; sourceTree = "<group>"; };
+		967181788DFA9698AD48F6E4 /* KalturaDropFolderClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaDropFolderClientPlugin.h; sourceTree = "<group>"; };
+		09067A1E0D071386692B106A /* KalturaDropFolderClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaDropFolderClientPlugin.m; sourceTree = "<group>"; };
+		B742D03B40ADA7739F2A474A /* KalturaDropFolderXmlBulkUploadClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaDropFolderXmlBulkUploadClientPlugin.h; sourceTree = "<group>"; };
+		618CB7DC81AEBDCD995402F6 /* KalturaDropFolderXmlBulkUploadClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaDropFolderXmlBulkUploadClientPlugin.m; sourceTree = "<group>"; };
+		82C98847287DE0825713FE1C /* KalturaCaptionClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaCaptionClientPlugin.h; sourceTree = "<group>"; };
+		0EB9B26E81D9ECA7E444C2D1 /* KalturaCaptionClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaCaptionClientPlugin.m; sourceTree = "<group>"; };
+		5C37AC04A93ABD0E156C5E1F /* KalturaCaptionSearchClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaCaptionSearchClientPlugin.h; sourceTree = "<group>"; };
+		180C1CCFBF3B076358F8917B /* KalturaCaptionSearchClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaCaptionSearchClientPlugin.m; sourceTree = "<group>"; };
+		CF876B4BB794E57D78E0FCD1 /* KalturaAttachmentClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaAttachmentClientPlugin.h; sourceTree = "<group>"; };
+		3DF91EECC4C3F306C06CE4BB /* KalturaAttachmentClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaAttachmentClientPlugin.m; sourceTree = "<group>"; };
+		63779093F34D16D8B17994B7 /* KalturaTagSearchClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaTagSearchClientPlugin.h; sourceTree = "<group>"; };
+		82AB07AC26F8B9E34C695E46 /* KalturaTagSearchClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaTagSearchClientPlugin.m; sourceTree = "<group>"; };
+		F89E3153DEA9470401A3263E /* KalturaLikeClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaLikeClientPlugin.h; sourceTree = "<group>"; };
+		8D381DAA7C8677079FE8EB3F /* KalturaLikeClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaLikeClientPlugin.m; sourceTree = "<group>"; };
+		76C73E9D1BF215249134AB9F /* KalturaVarConsoleClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaVarConsoleClientPlugin.h; sourceTree = "<group>"; };
+		6BD9CEA65CE6611738521E70 /* KalturaVarConsoleClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaVarConsoleClientPlugin.m; sourceTree = "<group>"; };
+		813196B590FC3CBD500F0713 /* KalturaEventNotificationClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaEventNotificationClientPlugin.h; sourceTree = "<group>"; };
+		42FD90E9161E742C72B6E35D /* KalturaEventNotificationClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaEventNotificationClientPlugin.m; sourceTree = "<group>"; };
+		FD74868327BDFBD46B721A5C /* KalturaEmailNotificationClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaEmailNotificationClientPlugin.h; sourceTree = "<group>"; };
+		9ECFFDCCE83B12074E9FF78A /* KalturaEmailNotificationClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaEmailNotificationClientPlugin.m; sourceTree = "<group>"; };
+		016B62DAD5CE757AF549EE84 /* KalturaHttpNotificationClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaHttpNotificationClientPlugin.h; sourceTree = "<group>"; };
+		85F40C661F67CE0BE57F08CF /* KalturaHttpNotificationClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaHttpNotificationClientPlugin.m; sourceTree = "<group>"; };
+		B0AA79F5B97140BA215CED5E /* KalturaExternalMediaClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaExternalMediaClientPlugin.h; sourceTree = "<group>"; };
+		F0E2B5C5FAA6153187B122A5 /* KalturaExternalMediaClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaExternalMediaClientPlugin.m; sourceTree = "<group>"; };
+		3E413815FDDFEE30A73DC0AB /* KalturaKontikiClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaKontikiClientPlugin.h; sourceTree = "<group>"; };
+		8C1259B0284947CA1D9D48AF /* KalturaKontikiClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaKontikiClientPlugin.m; sourceTree = "<group>"; };
+		BCFB64D619EDC81E374935C4 /* KalturaVelocixClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaVelocixClientPlugin.h; sourceTree = "<group>"; };
+		7C54E5F45C0350F05DBDC9C2 /* KalturaVelocixClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaVelocixClientPlugin.m; sourceTree = "<group>"; };
+		419E2DCD979DFC21926D263B /* KalturaScheduledTaskClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaScheduledTaskClientPlugin.h; sourceTree = "<group>"; };
+		DEA8D72B08D030A6D1FFEE97 /* KalturaScheduledTaskClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaScheduledTaskClientPlugin.m; sourceTree = "<group>"; };
+		7D9D5B74ADBF1C4F99548C0E /* KalturaScheduledTaskMetadataClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaScheduledTaskMetadataClientPlugin.h; sourceTree = "<group>"; };
+		C9757BDC63D6E4EA26A52EE3 /* KalturaScheduledTaskMetadataClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaScheduledTaskMetadataClientPlugin.m; sourceTree = "<group>"; };
+		04721DB406EA6D0709ADE845 /* KalturaScheduledTaskEventNotificationClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaScheduledTaskEventNotificationClientPlugin.h; sourceTree = "<group>"; };
+		6E4032A1E400A3363291B1DD /* KalturaScheduledTaskEventNotificationClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaScheduledTaskEventNotificationClientPlugin.m; sourceTree = "<group>"; };
+		7F25765A01B8A1DF88995094 /* KalturaScheduledTaskContentDistributionClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaScheduledTaskContentDistributionClientPlugin.h; sourceTree = "<group>"; };
+		0DB099BA31E976FFD65ED375 /* KalturaScheduledTaskContentDistributionClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaScheduledTaskContentDistributionClientPlugin.m; sourceTree = "<group>"; };
+		DFDB538C59B0C659D530D407 /* KalturaFeedDropFolderClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalturaFeedDropFolderClientPlugin.h; sourceTree = "<group>"; };
+		1BADDA38D54F50D588190F4D /* KalturaFeedDropFolderClientPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalturaFeedDropFolderClientPlugin.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,82 +323,84 @@
 		2913347E149648C2006D8A8C /* KalturaPlugins */ = {
 			isa = PBXGroup;
 			children = (
-				EB5E89E7BFDA3301C463623D /* KalturaMetadataClientPlugin.h */,
-				65CBF0ED2BAACB3C171171CA /* KalturaMetadataClientPlugin.m */,
-				3E2E68817AE2DE3EC9164CBC /* KalturaDocumentClientPlugin.h */,
-				4F0B5CC6DC6388CE84E73AC0 /* KalturaDocumentClientPlugin.m */,
-				6EA44D4A7C107E720147DA53 /* KalturaFileSyncClientPlugin.h */,
-				5C08EF39E3F8A738684E75DC /* KalturaFileSyncClientPlugin.m */,
-				C0B619241F49DD25AA3E1F2F /* KalturaSystemPartnerClientPlugin.h */,
-				2F3CB3B8B1F93DF715D2C45B /* KalturaSystemPartnerClientPlugin.m */,
-				4E565FA1A97E3041224E89E5 /* KalturaAdminConsoleClientPlugin.h */,
-				8CD4B4FBBBBDCFA2BECEF194 /* KalturaAdminConsoleClientPlugin.m */,
-				5359A46EE285808BF5E0CFA9 /* KalturaKalturaInternalToolsClientPlugin.h */,
-				BEA68F0B33C8B6189239D18D /* KalturaKalturaInternalToolsClientPlugin.m */,
-				EEE41B1D105B76B2D72CE4D0 /* KalturaVirusScanClientPlugin.h */,
-				FFABD583AC0313D363283021 /* KalturaVirusScanClientPlugin.m */,
-				8584F0C990C61208BFA5E595 /* KalturaContentDistributionClientPlugin.h */,
-				70B67FDF6827B1A51F29FF89 /* KalturaContentDistributionClientPlugin.m */,
-				DB523CBB6EF4AC398D222754 /* KalturaCuePointClientPlugin.h */,
-				A309CC923D2DA851CF3AB6C1 /* KalturaCuePointClientPlugin.m */,
-				6A8AEF3D273728E2FDD77CB7 /* KalturaEventCuePointClientPlugin.h */,
-				50626925976ED38543333931 /* KalturaEventCuePointClientPlugin.m */,
-				C053F62DA04BDBE8D81D7392 /* KalturaAdCuePointClientPlugin.h */,
-				CF4D7A46BF03A8E7CE996F2A /* KalturaAdCuePointClientPlugin.m */,
-				3C6CC3980CBC0F9EC0A70369 /* KalturaCodeCuePointClientPlugin.h */,
-				C1F5FB460E59D2A1AB5A3294 /* KalturaCodeCuePointClientPlugin.m */,
-				42926F9A9C355070758C7BEF /* KalturaAnnotationClientPlugin.h */,
-				7910D8D74292437B94FEF534 /* KalturaAnnotationClientPlugin.m */,
-				A00034F24DFE47AD954FB42C /* KalturaQuizClientPlugin.h */,
-				74814336E1C80385C6FAE90C /* KalturaQuizClientPlugin.m */,
-				C9889638A837307373B130CB /* KalturaShortLinkClientPlugin.h */,
-				8533A8E9ABE32FC37643C670 /* KalturaShortLinkClientPlugin.m */,
-				E761BAC92FEE4139BCFAE033 /* KalturaBulkUploadClientPlugin.h */,
-				5AF7289E7ACD3AD35E0B546E /* KalturaBulkUploadClientPlugin.m */,
-				8DB940C247E1499445A5F5F2 /* KalturaBulkUploadCsvClientPlugin.h */,
-				002EB0164BC3A2CFAF0E86BB /* KalturaBulkUploadCsvClientPlugin.m */,
-				2713A0C4E4744D4A8AE648D7 /* KalturaBulkUploadXmlClientPlugin.h */,
-				BDB3EE01CAAA986C7C537C7E /* KalturaBulkUploadXmlClientPlugin.m */,
-				FF93E3294D65D5920DF1946D /* KalturaBulkUploadFilterClientPlugin.h */,
-				9325BC05DBAC81F27BB53629 /* KalturaBulkUploadFilterClientPlugin.m */,
-				4A796530DBB13E2B6F577528 /* KalturaDropFolderClientPlugin.h */,
-				86E67C1DDBE28D5BA16373D3 /* KalturaDropFolderClientPlugin.m */,
-				1438BD608563BDE919ADD036 /* KalturaDropFolderXmlBulkUploadClientPlugin.h */,
-				8D74291E23E73D21BF0FCD30 /* KalturaDropFolderXmlBulkUploadClientPlugin.m */,
-				7399B3D649EAB32FE9D940BA /* KalturaCaptionClientPlugin.h */,
-				DEBF7281CCC23808667CDAA8 /* KalturaCaptionClientPlugin.m */,
-				5345B78CA15D0FF4C657D11C /* KalturaCaptionSearchClientPlugin.h */,
-				232AA402D75A36C82C387888 /* KalturaCaptionSearchClientPlugin.m */,
-				6AB8C7921D001A5A6E6EB665 /* KalturaAttachmentClientPlugin.h */,
-				318AD840B51209473B33094F /* KalturaAttachmentClientPlugin.m */,
-				25409D3AD13FEC977C935F43 /* KalturaTagSearchClientPlugin.h */,
-				D4C20EC92A6A765BF28230A0 /* KalturaTagSearchClientPlugin.m */,
-				4762F318412D923704782E53 /* KalturaLikeClientPlugin.h */,
-				4C9983B6A99ACC62BA35E896 /* KalturaLikeClientPlugin.m */,
-				A7F6227F2A1C79F04DD30C75 /* KalturaVarConsoleClientPlugin.h */,
-				32FB4F9821C5BB2A371F36EF /* KalturaVarConsoleClientPlugin.m */,
-				ACE254B3C1C29F4DEE7B413F /* KalturaEventNotificationClientPlugin.h */,
-				1E8F7987DF81770AE7FB2C4E /* KalturaEventNotificationClientPlugin.m */,
-				8E0808E340D9E31EE59C526F /* KalturaEmailNotificationClientPlugin.h */,
-				C43580D869302AEC01AC3613 /* KalturaEmailNotificationClientPlugin.m */,
-				3EADE49664229D5336D72848 /* KalturaHttpNotificationClientPlugin.h */,
-				43E3C48B02DC8811D130FF36 /* KalturaHttpNotificationClientPlugin.m */,
-				B0FC3D318AB76C62B4394475 /* KalturaExternalMediaClientPlugin.h */,
-				161A05F564E63FBDE657BE4A /* KalturaExternalMediaClientPlugin.m */,
-				A36C2B975BC8B3CFB43EA15B /* KalturaKontikiClientPlugin.h */,
-				4266BC752D596D9D066AEE54 /* KalturaKontikiClientPlugin.m */,
-				15340939098AF71F3ED816F0 /* KalturaVelocixClientPlugin.h */,
-				2793F9042CBD1AD2101B03FD /* KalturaVelocixClientPlugin.m */,
-				0BB59A8DF7FB00822BDC9257 /* KalturaScheduledTaskClientPlugin.h */,
-				DFFC5BE43101F485560A1D3E /* KalturaScheduledTaskClientPlugin.m */,
-				F504142B9FD4965D8ED31277 /* KalturaScheduledTaskMetadataClientPlugin.h */,
-				48ABF0BC09FC8526ACA25D94 /* KalturaScheduledTaskMetadataClientPlugin.m */,
-				6A28174B6A4B82F81C20C23D /* KalturaScheduledTaskEventNotificationClientPlugin.h */,
-				05198970FD8A317358341BC2 /* KalturaScheduledTaskEventNotificationClientPlugin.m */,
-				28B71221572A4CB84E839F86 /* KalturaScheduledTaskContentDistributionClientPlugin.h */,
-				490DFCD36F52A048AA6A1158 /* KalturaScheduledTaskContentDistributionClientPlugin.m */,
-				CC412EE2F26BA026D3518675 /* KalturaFeedDropFolderClientPlugin.h */,
-				E468B372C6CB71AE19634FF8 /* KalturaFeedDropFolderClientPlugin.m */,
+				C0F79FB64CC023E66D5EF016 /* KalturaMetadataClientPlugin.h */,
+				E00DB1EC0363C0C02B6965F1 /* KalturaMetadataClientPlugin.m */,
+				6545B26656A13B713DC0A0CC /* KalturaDocumentClientPlugin.h */,
+				6B212C0DCF78E56C9B3436A7 /* KalturaDocumentClientPlugin.m */,
+				ACF8428EADAD56B3BA08023B /* KalturaFileSyncClientPlugin.h */,
+				489D231F08E8D06835334C93 /* KalturaFileSyncClientPlugin.m */,
+				1AE5F2DC0BC1779F15BCA966 /* KalturaSystemPartnerClientPlugin.h */,
+				627B5C8A12B1924585BF726A /* KalturaSystemPartnerClientPlugin.m */,
+				27E34D805DCF826AB20257D0 /* KalturaAdminConsoleClientPlugin.h */,
+				9043DC5A8B5BA09AC48389E5 /* KalturaAdminConsoleClientPlugin.m */,
+				2919318F3E113ABD24FDC6E0 /* KalturaKalturaInternalToolsClientPlugin.h */,
+				7AF059B0B69A4B93879232F6 /* KalturaKalturaInternalToolsClientPlugin.m */,
+				28B23CA399046134D1C8AFE0 /* KalturaVirusScanClientPlugin.h */,
+				729EEB75CDB32628E7C0D382 /* KalturaVirusScanClientPlugin.m */,
+				2DB5C978A5D76C8119795747 /* KalturaContentDistributionClientPlugin.h */,
+				DD33E0199F66092CD156DE60 /* KalturaContentDistributionClientPlugin.m */,
+				6786C8B148F71E4865E5110D /* KalturaCuePointClientPlugin.h */,
+				D881287909966042CB0764B9 /* KalturaCuePointClientPlugin.m */,
+				B842E8B5534E8C37CD2362FF /* KalturaEventCuePointClientPlugin.h */,
+				DF4FFE76E2299E23CFF5E4F1 /* KalturaEventCuePointClientPlugin.m */,
+				7B78A88143E0865A7413DA3C /* KalturaAdCuePointClientPlugin.h */,
+				FD1042F8166A9992440ABE45 /* KalturaAdCuePointClientPlugin.m */,
+				233B34DE001A7F37B56CFB59 /* KalturaCodeCuePointClientPlugin.h */,
+				1A310CC0DD078CE40D88AED4 /* KalturaCodeCuePointClientPlugin.m */,
+				E2054439CA1E6F8E4602CF92 /* KalturaThumbCuePointClientPlugin.h */,
+				567AA521A74822541284A57B /* KalturaThumbCuePointClientPlugin.m */,
+				7F2F1F2C3E3CD306D0201678 /* KalturaAnnotationClientPlugin.h */,
+				1BB94E6ACBFFA65AF03A7D55 /* KalturaAnnotationClientPlugin.m */,
+				CC9F818D0CD3FC5C43DB4DD7 /* KalturaQuizClientPlugin.h */,
+				A5EC78C8DFADE94F5398C15C /* KalturaQuizClientPlugin.m */,
+				FC662F038C7C57256D810BCB /* KalturaShortLinkClientPlugin.h */,
+				C8BF748B7E9599194E4CA096 /* KalturaShortLinkClientPlugin.m */,
+				C0F70B169180645B09FE1BD0 /* KalturaBulkUploadClientPlugin.h */,
+				BB11A224520026F915FBA141 /* KalturaBulkUploadClientPlugin.m */,
+				B8612CFC278DE9BB8A09DA51 /* KalturaBulkUploadCsvClientPlugin.h */,
+				04C3430DF5DB76B240C0C7AE /* KalturaBulkUploadCsvClientPlugin.m */,
+				1BF4AF42AC3D9D84715C8A7B /* KalturaBulkUploadXmlClientPlugin.h */,
+				9A62AED1871FC607ABCED8DD /* KalturaBulkUploadXmlClientPlugin.m */,
+				6088478A2D2B6BF25A9D8AA5 /* KalturaBulkUploadFilterClientPlugin.h */,
+				F5AA21017CD3C850834D2A0C /* KalturaBulkUploadFilterClientPlugin.m */,
+				967181788DFA9698AD48F6E4 /* KalturaDropFolderClientPlugin.h */,
+				09067A1E0D071386692B106A /* KalturaDropFolderClientPlugin.m */,
+				B742D03B40ADA7739F2A474A /* KalturaDropFolderXmlBulkUploadClientPlugin.h */,
+				618CB7DC81AEBDCD995402F6 /* KalturaDropFolderXmlBulkUploadClientPlugin.m */,
+				82C98847287DE0825713FE1C /* KalturaCaptionClientPlugin.h */,
+				0EB9B26E81D9ECA7E444C2D1 /* KalturaCaptionClientPlugin.m */,
+				5C37AC04A93ABD0E156C5E1F /* KalturaCaptionSearchClientPlugin.h */,
+				180C1CCFBF3B076358F8917B /* KalturaCaptionSearchClientPlugin.m */,
+				CF876B4BB794E57D78E0FCD1 /* KalturaAttachmentClientPlugin.h */,
+				3DF91EECC4C3F306C06CE4BB /* KalturaAttachmentClientPlugin.m */,
+				63779093F34D16D8B17994B7 /* KalturaTagSearchClientPlugin.h */,
+				82AB07AC26F8B9E34C695E46 /* KalturaTagSearchClientPlugin.m */,
+				F89E3153DEA9470401A3263E /* KalturaLikeClientPlugin.h */,
+				8D381DAA7C8677079FE8EB3F /* KalturaLikeClientPlugin.m */,
+				76C73E9D1BF215249134AB9F /* KalturaVarConsoleClientPlugin.h */,
+				6BD9CEA65CE6611738521E70 /* KalturaVarConsoleClientPlugin.m */,
+				813196B590FC3CBD500F0713 /* KalturaEventNotificationClientPlugin.h */,
+				42FD90E9161E742C72B6E35D /* KalturaEventNotificationClientPlugin.m */,
+				FD74868327BDFBD46B721A5C /* KalturaEmailNotificationClientPlugin.h */,
+				9ECFFDCCE83B12074E9FF78A /* KalturaEmailNotificationClientPlugin.m */,
+				016B62DAD5CE757AF549EE84 /* KalturaHttpNotificationClientPlugin.h */,
+				85F40C661F67CE0BE57F08CF /* KalturaHttpNotificationClientPlugin.m */,
+				B0AA79F5B97140BA215CED5E /* KalturaExternalMediaClientPlugin.h */,
+				F0E2B5C5FAA6153187B122A5 /* KalturaExternalMediaClientPlugin.m */,
+				3E413815FDDFEE30A73DC0AB /* KalturaKontikiClientPlugin.h */,
+				8C1259B0284947CA1D9D48AF /* KalturaKontikiClientPlugin.m */,
+				BCFB64D619EDC81E374935C4 /* KalturaVelocixClientPlugin.h */,
+				7C54E5F45C0350F05DBDC9C2 /* KalturaVelocixClientPlugin.m */,
+				419E2DCD979DFC21926D263B /* KalturaScheduledTaskClientPlugin.h */,
+				DEA8D72B08D030A6D1FFEE97 /* KalturaScheduledTaskClientPlugin.m */,
+				7D9D5B74ADBF1C4F99548C0E /* KalturaScheduledTaskMetadataClientPlugin.h */,
+				C9757BDC63D6E4EA26A52EE3 /* KalturaScheduledTaskMetadataClientPlugin.m */,
+				04721DB406EA6D0709ADE845 /* KalturaScheduledTaskEventNotificationClientPlugin.h */,
+				6E4032A1E400A3363291B1DD /* KalturaScheduledTaskEventNotificationClientPlugin.m */,
+				7F25765A01B8A1DF88995094 /* KalturaScheduledTaskContentDistributionClientPlugin.h */,
+				0DB099BA31E976FFD65ED375 /* KalturaScheduledTaskContentDistributionClientPlugin.m */,
+				DFDB538C59B0C659D530D407 /* KalturaFeedDropFolderClientPlugin.h */,
+				1BADDA38D54F50D588190F4D /* KalturaFeedDropFolderClientPlugin.m */,
 			);
 			path = KalturaPlugins;
 			sourceTree = "<group>";
@@ -422,44 +428,45 @@
 				291334C3149648C2006D8A8C /* KalturaClient.h in Headers */,
 				291334C5149648C2006D8A8C /* KalturaClientBase.h in Headers */,
 				291334F3149648C2006D8A8C /* KalturaXmlParsers.h in Headers */,
-				DA8CB40549D55D5205594784 /* KalturaMetadataClientPlugin.h in Headers */,
-				C469CB46C1A1DEEFFB9D032B /* KalturaDocumentClientPlugin.h in Headers */,
-				95A2749BA5164FDB1ED6F299 /* KalturaFileSyncClientPlugin.h in Headers */,
-				6B7D1CE7B368228EE5B9E4C1 /* KalturaSystemPartnerClientPlugin.h in Headers */,
-				4FE54EC1F2A6E4C7CD089BBB /* KalturaAdminConsoleClientPlugin.h in Headers */,
-				7768042A067A65838BED5E65 /* KalturaKalturaInternalToolsClientPlugin.h in Headers */,
-				8C50CDCB6415F9EC53FF65CE /* KalturaVirusScanClientPlugin.h in Headers */,
-				86AB8FA5A3DAA8D0E56112CC /* KalturaContentDistributionClientPlugin.h in Headers */,
-				E13EB737CF0FD72331FEBE57 /* KalturaCuePointClientPlugin.h in Headers */,
-				A4B6725620A5DF28D58FC8EC /* KalturaEventCuePointClientPlugin.h in Headers */,
-				FB27062BA2F9F1A305A6DC87 /* KalturaAdCuePointClientPlugin.h in Headers */,
-				3BBCF5C37C8AE1FF441FEF97 /* KalturaCodeCuePointClientPlugin.h in Headers */,
-				D28D7172A2F05923F3CB0E29 /* KalturaAnnotationClientPlugin.h in Headers */,
-				8C396CE391EA12929449C7AA /* KalturaQuizClientPlugin.h in Headers */,
-				A39E637C506CCAFE766CAA41 /* KalturaShortLinkClientPlugin.h in Headers */,
-				63F7EFE38E617A1CA192AA08 /* KalturaBulkUploadClientPlugin.h in Headers */,
-				712DF10686F4685892DFB9BC /* KalturaBulkUploadCsvClientPlugin.h in Headers */,
-				7E8506E0F522EA62472B6C17 /* KalturaBulkUploadXmlClientPlugin.h in Headers */,
-				32A3E0C72EF6CD039D96E113 /* KalturaBulkUploadFilterClientPlugin.h in Headers */,
-				A256106669743975EA898FB8 /* KalturaDropFolderClientPlugin.h in Headers */,
-				6D1516838470F74059059497 /* KalturaDropFolderXmlBulkUploadClientPlugin.h in Headers */,
-				7E429F5F2FFEA78ABAF07D64 /* KalturaCaptionClientPlugin.h in Headers */,
-				3E2DFC1A4F9D2DB6D6D7952E /* KalturaCaptionSearchClientPlugin.h in Headers */,
-				BF8A6C92FDBD784D2E16B225 /* KalturaAttachmentClientPlugin.h in Headers */,
-				984187ABDC9784BED5643DE2 /* KalturaTagSearchClientPlugin.h in Headers */,
-				2A8DDEB0D98135FDB20A813D /* KalturaLikeClientPlugin.h in Headers */,
-				10B11E43B4325D76F7E36B8B /* KalturaVarConsoleClientPlugin.h in Headers */,
-				9AC89271268CF87FBD174AF9 /* KalturaEventNotificationClientPlugin.h in Headers */,
-				D026C897EAB718AC92974FD7 /* KalturaEmailNotificationClientPlugin.h in Headers */,
-				5DCF2F1F53A2A57581F8F5EF /* KalturaHttpNotificationClientPlugin.h in Headers */,
-				9A13E5A5A2FDAE6D4AE1C2C0 /* KalturaExternalMediaClientPlugin.h in Headers */,
-				7A76DFAA2AC4BF806A6A5328 /* KalturaKontikiClientPlugin.h in Headers */,
-				401B0941A0E6518A6B731C34 /* KalturaVelocixClientPlugin.h in Headers */,
-				C3E5DA0ECED3B7F646E36F0A /* KalturaScheduledTaskClientPlugin.h in Headers */,
-				E711A3BD0CEC9AE607D7DD9C /* KalturaScheduledTaskMetadataClientPlugin.h in Headers */,
-				096137800DA794C69B691011 /* KalturaScheduledTaskEventNotificationClientPlugin.h in Headers */,
-				761CC1587BF2AC3275E37771 /* KalturaScheduledTaskContentDistributionClientPlugin.h in Headers */,
-				C6E98CECD7DC4A6339BC06FF /* KalturaFeedDropFolderClientPlugin.h in Headers */,
+				1913694C7FCAD30F1FBF3CE7 /* KalturaMetadataClientPlugin.h in Headers */,
+				47EBEAF387BE8F26B39A3196 /* KalturaDocumentClientPlugin.h in Headers */,
+				ADE653EFBE35FC569DB4B137 /* KalturaFileSyncClientPlugin.h in Headers */,
+				023AF5E5D5C455612D04D3F7 /* KalturaSystemPartnerClientPlugin.h in Headers */,
+				CF93C9C65B103DF2276EE5F6 /* KalturaAdminConsoleClientPlugin.h in Headers */,
+				B2CE09DD97DCE868446C76F3 /* KalturaKalturaInternalToolsClientPlugin.h in Headers */,
+				3B2B07A76AA69FEB1B2555BE /* KalturaVirusScanClientPlugin.h in Headers */,
+				617436800840F249AAB83E7A /* KalturaContentDistributionClientPlugin.h in Headers */,
+				89AB8539C4F3B4ED17AF935E /* KalturaCuePointClientPlugin.h in Headers */,
+				51EC2E3F3533AC1EFCD45AA3 /* KalturaEventCuePointClientPlugin.h in Headers */,
+				A44339761B7732A056B49FBD /* KalturaAdCuePointClientPlugin.h in Headers */,
+				84F32CC2CA45FF5ACDEEED22 /* KalturaCodeCuePointClientPlugin.h in Headers */,
+				C22754B041DBE2B416AB5FF2 /* KalturaThumbCuePointClientPlugin.h in Headers */,
+				6BD6674E58530624E84FEB0F /* KalturaAnnotationClientPlugin.h in Headers */,
+				B760D40CB4C453BBEA5D2421 /* KalturaQuizClientPlugin.h in Headers */,
+				07676480E1D3A50ADB24949F /* KalturaShortLinkClientPlugin.h in Headers */,
+				DFB667A0A4A16DCB8AD99EA7 /* KalturaBulkUploadClientPlugin.h in Headers */,
+				6BB5253F37F9C58858F059AD /* KalturaBulkUploadCsvClientPlugin.h in Headers */,
+				D4A37065A2F9240F11B4E573 /* KalturaBulkUploadXmlClientPlugin.h in Headers */,
+				BA20BEC19FFE5EFD69AD3338 /* KalturaBulkUploadFilterClientPlugin.h in Headers */,
+				98C7B1CF2F8C3CBD6C086E2F /* KalturaDropFolderClientPlugin.h in Headers */,
+				43035AF2DF6EDCB34FB9C36B /* KalturaDropFolderXmlBulkUploadClientPlugin.h in Headers */,
+				392515BBD251048D63CAFA05 /* KalturaCaptionClientPlugin.h in Headers */,
+				FA06A47E0251B2DD64D0DCF3 /* KalturaCaptionSearchClientPlugin.h in Headers */,
+				7C2F767AC0885E913FE0CFAF /* KalturaAttachmentClientPlugin.h in Headers */,
+				7B92782815DD5079B1CA8CAD /* KalturaTagSearchClientPlugin.h in Headers */,
+				A22C9CEFFCE872F5A2A8692A /* KalturaLikeClientPlugin.h in Headers */,
+				4D94E3A79A326FBBD15F03A7 /* KalturaVarConsoleClientPlugin.h in Headers */,
+				FB8FD35F81156DFCC1CB4ABF /* KalturaEventNotificationClientPlugin.h in Headers */,
+				D1C80006F59EE52FEC26D1FF /* KalturaEmailNotificationClientPlugin.h in Headers */,
+				D33D1081E9697FAB3B583A06 /* KalturaHttpNotificationClientPlugin.h in Headers */,
+				6EEB1647811C095F4C7A18C6 /* KalturaExternalMediaClientPlugin.h in Headers */,
+				6D6BD40744585BDA9B6ABE3F /* KalturaKontikiClientPlugin.h in Headers */,
+				581CFBE0271CD79635CFBA52 /* KalturaVelocixClientPlugin.h in Headers */,
+				147AAB61F064D572A04ACA4D /* KalturaScheduledTaskClientPlugin.h in Headers */,
+				227FB621F5BA615176840B9A /* KalturaScheduledTaskMetadataClientPlugin.h in Headers */,
+				5EC7EE9639B4BFC6ED459556 /* KalturaScheduledTaskEventNotificationClientPlugin.h in Headers */,
+				7F17D74B28498184069227E8 /* KalturaScheduledTaskContentDistributionClientPlugin.h in Headers */,
+				4A755D5498D3E46411EDD229 /* KalturaFeedDropFolderClientPlugin.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,44 +532,45 @@
 				291334C4149648C2006D8A8C /* KalturaClient.m in Sources */,
 				291334C6149648C2006D8A8C /* KalturaClientBase.m in Sources */,
 				291334F4149648C2006D8A8C /* KalturaXmlParsers.m in Sources */,
-				A3027814ADDA8522D33832D9 /* KalturaMetadataClientPlugin.m in Sources */,
-				80E4B5654BD9EDCD1AFB3A0C /* KalturaDocumentClientPlugin.m in Sources */,
-				1CAB8671BE689317CBA10516 /* KalturaFileSyncClientPlugin.m in Sources */,
-				604A2FC490095DF0CC0163C4 /* KalturaSystemPartnerClientPlugin.m in Sources */,
-				35E314D83AF489B7ABE92376 /* KalturaAdminConsoleClientPlugin.m in Sources */,
-				B0C83D0E24C82FC5FA10A8DB /* KalturaKalturaInternalToolsClientPlugin.m in Sources */,
-				06DAC090636382C92B63BBED /* KalturaVirusScanClientPlugin.m in Sources */,
-				838D46C401ACF0B8715644CE /* KalturaContentDistributionClientPlugin.m in Sources */,
-				6986F73A11261A98E503F34B /* KalturaCuePointClientPlugin.m in Sources */,
-				B2EF4A1058B08F62165E8FF3 /* KalturaEventCuePointClientPlugin.m in Sources */,
-				56BD043B7EA1A91C507411D1 /* KalturaAdCuePointClientPlugin.m in Sources */,
-				AB9A294B8416D513EC34ADFB /* KalturaCodeCuePointClientPlugin.m in Sources */,
-				EC9056956C311EE280AA7B83 /* KalturaAnnotationClientPlugin.m in Sources */,
-				B4E5B21DD158D51B18020DFA /* KalturaQuizClientPlugin.m in Sources */,
-				805B7334B41D6EA9DB77281F /* KalturaShortLinkClientPlugin.m in Sources */,
-				EC45D8A15D70B875C0122E63 /* KalturaBulkUploadClientPlugin.m in Sources */,
-				25F0665C6720B8A01266B3FC /* KalturaBulkUploadCsvClientPlugin.m in Sources */,
-				0BFB2B8C4FE5BFB64CC41AD4 /* KalturaBulkUploadXmlClientPlugin.m in Sources */,
-				E6CD6DD06CDEFD2F99CB8AD2 /* KalturaBulkUploadFilterClientPlugin.m in Sources */,
-				1FF20E4B391D251D1142B6B0 /* KalturaDropFolderClientPlugin.m in Sources */,
-				BE2BA4977099B8716E725F52 /* KalturaDropFolderXmlBulkUploadClientPlugin.m in Sources */,
-				647AA708407162EA4E369B91 /* KalturaCaptionClientPlugin.m in Sources */,
-				4F8B8BF252F2651F26DDC122 /* KalturaCaptionSearchClientPlugin.m in Sources */,
-				42609DE3D51036F6BE6A54F7 /* KalturaAttachmentClientPlugin.m in Sources */,
-				E2B2863B161899DA8669110E /* KalturaTagSearchClientPlugin.m in Sources */,
-				788EB64844E2E7DD25A16C06 /* KalturaLikeClientPlugin.m in Sources */,
-				0E7C5E6F9798AF3814B92F57 /* KalturaVarConsoleClientPlugin.m in Sources */,
-				A9CFDDF2A7E8E3458C4AAC46 /* KalturaEventNotificationClientPlugin.m in Sources */,
-				90C2F30A99591F7E41622B95 /* KalturaEmailNotificationClientPlugin.m in Sources */,
-				E2F44D49A5B6632DFCB44C17 /* KalturaHttpNotificationClientPlugin.m in Sources */,
-				3DC5C50589E570FE381716C1 /* KalturaExternalMediaClientPlugin.m in Sources */,
-				CB150E50EEB95B05A2E4FE89 /* KalturaKontikiClientPlugin.m in Sources */,
-				35C9C138A963881EC7F0E5F0 /* KalturaVelocixClientPlugin.m in Sources */,
-				D2CB8B6787BECE8AEA91FDFC /* KalturaScheduledTaskClientPlugin.m in Sources */,
-				8589801A41D4D6C90F031DD2 /* KalturaScheduledTaskMetadataClientPlugin.m in Sources */,
-				9A947570B6E0DEF28B13E83F /* KalturaScheduledTaskEventNotificationClientPlugin.m in Sources */,
-				D57075E16FB401DD80FB000F /* KalturaScheduledTaskContentDistributionClientPlugin.m in Sources */,
-				EEB5B5616931D2DB78948271 /* KalturaFeedDropFolderClientPlugin.m in Sources */,
+				EBC028E7C9599D7571765288 /* KalturaMetadataClientPlugin.m in Sources */,
+				B626A1A0ACD7D9B6A51BA7F8 /* KalturaDocumentClientPlugin.m in Sources */,
+				117260BA905839780B2C3E6D /* KalturaFileSyncClientPlugin.m in Sources */,
+				FD92A51836B9D7DECCAA07B7 /* KalturaSystemPartnerClientPlugin.m in Sources */,
+				A0DD4ED87D341974E3974A5F /* KalturaAdminConsoleClientPlugin.m in Sources */,
+				693319FF28C024905CE11F8B /* KalturaKalturaInternalToolsClientPlugin.m in Sources */,
+				F0412016BE24B476B471B25B /* KalturaVirusScanClientPlugin.m in Sources */,
+				CB444B16F68840D211BE7995 /* KalturaContentDistributionClientPlugin.m in Sources */,
+				79D12DD24F0CCE5CC37DE1B8 /* KalturaCuePointClientPlugin.m in Sources */,
+				1CE47C4ABF3593386CA34871 /* KalturaEventCuePointClientPlugin.m in Sources */,
+				F20B638CCB12657659328A4A /* KalturaAdCuePointClientPlugin.m in Sources */,
+				3F117C6F90CE83F81566D48D /* KalturaCodeCuePointClientPlugin.m in Sources */,
+				1942CCDEF31C7DA9EF280712 /* KalturaThumbCuePointClientPlugin.m in Sources */,
+				8C31D6DE5491E4D18B4C62BA /* KalturaAnnotationClientPlugin.m in Sources */,
+				01558FA6DFCF05122C1AF88A /* KalturaQuizClientPlugin.m in Sources */,
+				6152280E915D594FA732311A /* KalturaShortLinkClientPlugin.m in Sources */,
+				A29C32E604EA6F305DB2B0AD /* KalturaBulkUploadClientPlugin.m in Sources */,
+				1D7C9A5D4480D38270D5E043 /* KalturaBulkUploadCsvClientPlugin.m in Sources */,
+				280E642F60E0E74A4DAC4DE1 /* KalturaBulkUploadXmlClientPlugin.m in Sources */,
+				8FED178D25173574ABF6A543 /* KalturaBulkUploadFilterClientPlugin.m in Sources */,
+				900DDA11686167F00344A55E /* KalturaDropFolderClientPlugin.m in Sources */,
+				ACCCC8E216D92A658C3EAD94 /* KalturaDropFolderXmlBulkUploadClientPlugin.m in Sources */,
+				F4D8F5A8B71114887D79BBD6 /* KalturaCaptionClientPlugin.m in Sources */,
+				31F2C8614E0AB1A6749A0020 /* KalturaCaptionSearchClientPlugin.m in Sources */,
+				5982425891BF659A053C3CFC /* KalturaAttachmentClientPlugin.m in Sources */,
+				46A0DFDE043717BB22C3BBF8 /* KalturaTagSearchClientPlugin.m in Sources */,
+				1CE0CCFDFC490863795FFF3B /* KalturaLikeClientPlugin.m in Sources */,
+				11F7B65FD9A7917C0430CD55 /* KalturaVarConsoleClientPlugin.m in Sources */,
+				D710732C366A600D79EAE74E /* KalturaEventNotificationClientPlugin.m in Sources */,
+				5074523A46E52DE905740A8F /* KalturaEmailNotificationClientPlugin.m in Sources */,
+				C38AB9B571CF35B2503E5722 /* KalturaHttpNotificationClientPlugin.m in Sources */,
+				DAA0ED9BCB7592213B8932C3 /* KalturaExternalMediaClientPlugin.m in Sources */,
+				DE01C33017ADFD5F62FB5D5D /* KalturaKontikiClientPlugin.m in Sources */,
+				CCDFEFE6AA46023F075D954D /* KalturaVelocixClientPlugin.m in Sources */,
+				D6427981DD1FDA38E638EC30 /* KalturaScheduledTaskClientPlugin.m in Sources */,
+				86C9301A48D74D6E920B0EB0 /* KalturaScheduledTaskMetadataClientPlugin.m in Sources */,
+				6ED1E6206E883BFE20E09981 /* KalturaScheduledTaskEventNotificationClientPlugin.m in Sources */,
+				4EECFFE9D0E96FB53D3A7C92 /* KalturaScheduledTaskContentDistributionClientPlugin.m in Sources */,
+				DD3BAF4FE30F5603A45ACCC1 /* KalturaFeedDropFolderClientPlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

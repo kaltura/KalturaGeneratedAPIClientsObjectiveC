@@ -86,6 +86,10 @@
 {
     return @"codeCuePointMetadata.CodeCuePoint";
 }
++ (NSString*)THUMB_CUE_POINT
+{
+    return @"thumbCuePointMetadata.thumbCuePoint";
+}
 + (NSString*)ENTRY
 {
     return @"1";

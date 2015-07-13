@@ -41,6 +41,13 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaThumbCuePointSubType : NSObject
++ (int)SLIDE;
++ (int)CHAPTER;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaCuePointOrderBy : NSObject
 + (NSString*)CREATED_AT_ASC;
 + (NSString*)PARTNER_SORT_VALUE_ASC;
@@ -63,6 +70,7 @@
 + (NSString*)EVENT;
 + (NSString*)QUIZ_ANSWER;
 + (NSString*)QUIZ_QUESTION;
++ (NSString*)THUMB;
 @end
 
 ///////////////////////// classes /////////////////////////
@@ -199,7 +207,13 @@
 // @subpackage Client
 @interface KalturaCuePointFilter : KalturaCuePointBaseFilter
 @property (nonatomic,copy) NSString* freeText;
+@property (nonatomic,assign) int userIdEqualCurrent;	// enum KalturaNullableBoolean
+@property (nonatomic,assign) int userIdCurrent;	// enum KalturaNullableBoolean
 - (KalturaFieldType)getTypeOfFreeText;
+- (KalturaFieldType)getTypeOfUserIdEqualCurrent;
+- (KalturaFieldType)getTypeOfUserIdCurrent;
+- (void)setUserIdEqualCurrentFromString:(NSString*)aPropVal;
+- (void)setUserIdCurrentFromString:(NSString*)aPropVal;
 @end
 
 ///////////////////////// services /////////////////////////

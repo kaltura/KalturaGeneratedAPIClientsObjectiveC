@@ -47,6 +47,17 @@
 }
 @end
 
+@implementation KalturaThumbCuePointSubType
++ (int)SLIDE
+{
+    return 1;
+}
++ (int)CHAPTER
+{
+    return 2;
+}
+@end
+
 @implementation KalturaCuePointOrderBy
 + (NSString*)CREATED_AT_ASC
 {
@@ -114,6 +125,10 @@
 + (NSString*)QUIZ_QUESTION
 {
     return @"quiz.QUIZ_QUESTION";
+}
++ (NSString*)THUMB
+{
+    return @"thumbCuePoint.Thumb";
 }
 @end
 
@@ -665,10 +680,42 @@
 
 @implementation KalturaCuePointFilter
 @synthesize freeText = _freeText;
+@synthesize userIdEqualCurrent = _userIdEqualCurrent;
+@synthesize userIdCurrent = _userIdCurrent;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_userIdEqualCurrent = KALTURA_UNDEF_INT;
+    self->_userIdCurrent = KALTURA_UNDEF_INT;
+    return self;
+}
 
 - (KalturaFieldType)getTypeOfFreeText
 {
     return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfUserIdEqualCurrent
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUserIdCurrent
+{
+    return KFT_Int;
+}
+
+- (void)setUserIdEqualCurrentFromString:(NSString*)aPropVal
+{
+    self.userIdEqualCurrent = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUserIdCurrentFromString:(NSString*)aPropVal
+{
+    self.userIdCurrent = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -677,6 +724,8 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaCuePointFilter"];
     [aParams addIfDefinedKey:@"freeText" withString:self.freeText];
+    [aParams addIfDefinedKey:@"userIdEqualCurrent" withInt:self.userIdEqualCurrent];
+    [aParams addIfDefinedKey:@"userIdCurrent" withInt:self.userIdCurrent];
 }
 
 - (void)dealloc

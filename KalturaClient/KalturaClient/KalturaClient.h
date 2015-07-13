@@ -534,34 +534,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaReportType : NSObject
-+ (int)TOP_CONTENT;
-+ (int)CONTENT_DROPOFF;
-+ (int)CONTENT_INTERACTIONS;
-+ (int)MAP_OVERLAY;
-+ (int)TOP_CONTRIBUTORS;
-+ (int)TOP_SYNDICATION;
-+ (int)CONTENT_CONTRIBUTIONS;
-+ (int)USER_ENGAGEMENT;
-+ (int)SPEFICIC_USER_ENGAGEMENT;
-+ (int)USER_TOP_CONTENT;
-+ (int)USER_CONTENT_DROPOFF;
-+ (int)USER_CONTENT_INTERACTIONS;
-+ (int)APPLICATIONS;
-+ (int)USER_USAGE;
-+ (int)SPECIFIC_USER_USAGE;
-+ (int)VAR_USAGE;
-+ (int)TOP_CREATORS;
-+ (int)PLATFORMS;
-+ (int)OPERATION_SYSTEM;
-+ (int)BROWSERS;
-+ (int)LIVE;
-+ (int)TOP_PLAYBACK_CONTEXT;
-+ (int)PARTNER_USAGE;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaResponseProfileStatus : NSObject
 + (int)DISABLED;
 + (int)ENABLED;
@@ -1070,6 +1042,7 @@
 + (NSString*)IMAGE;
 + (NSString*)PDF;
 + (NSString*)SWF;
++ (NSString*)TIMED_THUMB_ASSET;
 + (NSString*)FLAVOR;
 + (NSString*)THUMBNAIL;
 + (NSString*)LIVE;
@@ -1213,6 +1186,7 @@
 + (NSString*)VALIDATE_LIVE_MEDIA_SERVERS;
 + (NSString*)SYNC_CATEGORY_PRIVACY_CONTEXT;
 + (NSString*)LIVE_REPORT_EXPORT;
++ (NSString*)RECALCULATE_CACHE;
 @end
 
 // @package Kaltura
@@ -2743,6 +2717,36 @@
 @interface KalturaReportOrderBy : NSObject
 + (NSString*)CREATED_AT_ASC;
 + (NSString*)CREATED_AT_DESC;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaReportType : NSObject
++ (NSString*)QUIZ;
++ (NSString*)QUIZ_USER_PERCENTAGE;
++ (NSString*)TOP_CONTENT;
++ (NSString*)CONTENT_DROPOFF;
++ (NSString*)CONTENT_INTERACTIONS;
++ (NSString*)MAP_OVERLAY;
++ (NSString*)TOP_CONTRIBUTORS;
++ (NSString*)TOP_SYNDICATION;
++ (NSString*)CONTENT_CONTRIBUTIONS;
++ (NSString*)USER_ENGAGEMENT;
++ (NSString*)SPEFICIC_USER_ENGAGEMENT;
++ (NSString*)USER_TOP_CONTENT;
++ (NSString*)USER_CONTENT_DROPOFF;
++ (NSString*)USER_CONTENT_INTERACTIONS;
++ (NSString*)APPLICATIONS;
++ (NSString*)USER_USAGE;
++ (NSString*)SPECIFIC_USER_USAGE;
++ (NSString*)VAR_USAGE;
++ (NSString*)TOP_CREATORS;
++ (NSString*)PLATFORMS;
++ (NSString*)OPERATION_SYSTEM;
++ (NSString*)BROWSERS;
++ (NSString*)LIVE;
++ (NSString*)TOP_PLAYBACK_CONTEXT;
++ (NSString*)PARTNER_USAGE;
 @end
 
 // @package Kaltura
@@ -6565,7 +6569,7 @@
 @property (nonatomic,assign) int partnerId;
 // Kaltura API session
 @property (nonatomic,copy) NSString* ks;
-// Response profile
+// Response profile - this attribute will be automatically unset after every API call.
 @property (nonatomic,retain) KalturaBaseResponseProfile* responseProfile;
 - (KalturaFieldType)getTypeOfPartnerId;
 - (KalturaFieldType)getTypeOfKs;
@@ -6587,17 +6591,56 @@
 // Update time as Unix timestamp (In seconds)
 @property (nonatomic,assign,readonly) int updatedAt;
 @property (nonatomic,assign,readonly) int status;	// enum KalturaResponseProfileStatus
+@property (nonatomic,assign,readonly) int version;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfSystemName;
 - (KalturaFieldType)getTypeOfPartnerId;
 - (KalturaFieldType)getTypeOfCreatedAt;
 - (KalturaFieldType)getTypeOfUpdatedAt;
 - (KalturaFieldType)getTypeOfStatus;
+- (KalturaFieldType)getTypeOfVersion;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
 - (void)setStatusFromString:(NSString*)aPropVal;
+- (void)setVersionFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaResponseProfileCacheRecalculateOptions : KalturaObjectBase
+// Maximum number of keys to recalculate
+@property (nonatomic,assign) int limit;
+// Class name
+@property (nonatomic,copy) NSString* cachedObjectType;
+@property (nonatomic,copy) NSString* objectId;
+@property (nonatomic,copy) NSString* startObjectKey;
+@property (nonatomic,copy) NSString* endObjectKey;
+@property (nonatomic,assign) int jobCreatedAt;
+@property (nonatomic,assign) KALTURA_BOOL isFirstLoop;
+- (KalturaFieldType)getTypeOfLimit;
+- (KalturaFieldType)getTypeOfCachedObjectType;
+- (KalturaFieldType)getTypeOfObjectId;
+- (KalturaFieldType)getTypeOfStartObjectKey;
+- (KalturaFieldType)getTypeOfEndObjectKey;
+- (KalturaFieldType)getTypeOfJobCreatedAt;
+- (KalturaFieldType)getTypeOfIsFirstLoop;
+- (void)setLimitFromString:(NSString*)aPropVal;
+- (void)setJobCreatedAtFromString:(NSString*)aPropVal;
+- (void)setIsFirstLoopFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaResponseProfileCacheRecalculateResults : KalturaObjectBase
+// Last recalculated id
+@property (nonatomic,copy) NSString* lastObjectKey;
+// Number of recalculated keys
+@property (nonatomic,assign) int recalculated;
+- (KalturaFieldType)getTypeOfLastObjectKey;
+- (KalturaFieldType)getTypeOfRecalculated;
+- (void)setRecalculatedFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -9480,6 +9523,11 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaRecalculateCacheJobData : KalturaJobData
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaRemotePathListResponse : KalturaListResponse
 @property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaRemotePath elements
 - (KalturaFieldType)getTypeOfObjects;
@@ -9996,7 +10044,7 @@
 @property (nonatomic,copy) NSString* entryIdEqual;
 @property (nonatomic,copy) NSString* entryIdIn;
 @property (nonatomic,copy) NSString* entryIdNotIn;
-@property (nonatomic,assign) int userIdEqual;
+@property (nonatomic,copy) NSString* userIdEqual;
 @property (nonatomic,copy) NSString* userIdIn;
 @property (nonatomic,copy) NSString* userIdNotIn;
 @property (nonatomic,copy) NSString* statusEqual;	// enum KalturaUserEntryStatus
@@ -10021,7 +10069,6 @@
 - (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual;
 - (KalturaFieldType)getTypeOfTypeEqual;
 - (void)setIdEqualFromString:(NSString*)aPropVal;
-- (void)setUserIdEqualFromString:(NSString*)aPropVal;
 - (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
@@ -10971,6 +11018,29 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaRecalculateResponseProfileCacheJobData : KalturaRecalculateCacheJobData
+// http / https
+@property (nonatomic,copy) NSString* protocol;
+@property (nonatomic,assign) int ksType;	// enum KalturaSessionType
+@property (nonatomic,retain) NSMutableArray* userRoles;	// of KalturaIntegerValue elements
+// Class name
+@property (nonatomic,copy) NSString* cachedObjectType;
+@property (nonatomic,copy) NSString* objectId;
+@property (nonatomic,copy) NSString* startObjectKey;
+@property (nonatomic,copy) NSString* endObjectKey;
+- (KalturaFieldType)getTypeOfProtocol;
+- (KalturaFieldType)getTypeOfKsType;
+- (KalturaFieldType)getTypeOfUserRoles;
+- (NSString*)getObjectTypeOfUserRoles;
+- (KalturaFieldType)getTypeOfCachedObjectType;
+- (KalturaFieldType)getTypeOfObjectId;
+- (KalturaFieldType)getTypeOfStartObjectKey;
+- (KalturaFieldType)getTypeOfEndObjectKey;
+- (void)setKsTypeFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaRegexCondition : KalturaMatchCondition
 @end
 
@@ -11060,6 +11130,9 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaUserEntryFilter : KalturaUserEntryBaseFilter
+@property (nonatomic,assign) int userIdEqualCurrent;	// enum KalturaNullableBoolean
+- (KalturaFieldType)getTypeOfUserIdEqualCurrent;
+- (void)setUserIdEqualCurrentFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -12697,25 +12770,25 @@
 // api for getting reports data by the report type and some inputFilter
 @interface KalturaReportService : KalturaServiceBase
 // report getGraphs action allows to get a graph data for a specific report.
-- (NSMutableArray*)getGraphsWithReportType:(int)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withObjectIds:(NSString*)aObjectIds;
-- (NSMutableArray*)getGraphsWithReportType:(int)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension;
-- (NSMutableArray*)getGraphsWithReportType:(int)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter;
+- (NSMutableArray*)getGraphsWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withObjectIds:(NSString*)aObjectIds;
+- (NSMutableArray*)getGraphsWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension;
+- (NSMutableArray*)getGraphsWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter;
 // report getTotal action allows to get a graph data for a specific report.
-- (KalturaReportTotal*)getTotalWithReportType:(int)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withObjectIds:(NSString*)aObjectIds;
-- (KalturaReportTotal*)getTotalWithReportType:(int)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter;
+- (KalturaReportTotal*)getTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withObjectIds:(NSString*)aObjectIds;
+- (KalturaReportTotal*)getTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter;
 // report getBaseTotal action allows to get a the total base for storage reports
-- (NSMutableArray*)getBaseTotalWithReportType:(int)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withObjectIds:(NSString*)aObjectIds;
-- (NSMutableArray*)getBaseTotalWithReportType:(int)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter;
+- (NSMutableArray*)getBaseTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withObjectIds:(NSString*)aObjectIds;
+- (NSMutableArray*)getBaseTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter;
 // report getTable action allows to get a graph data for a specific report.
-- (KalturaReportTable*)getTableWithReportType:(int)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder withObjectIds:(NSString*)aObjectIds;
-- (KalturaReportTable*)getTableWithReportType:(int)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder;
-- (KalturaReportTable*)getTableWithReportType:(int)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withPager:(KalturaFilterPager*)aPager;
+- (KalturaReportTable*)getTableWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder withObjectIds:(NSString*)aObjectIds;
+- (KalturaReportTable*)getTableWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder;
+- (KalturaReportTable*)getTableWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withPager:(KalturaFilterPager*)aPager;
 // will create a Csv file for the given report and return the URL to access it
-- (NSString*)getUrlForReportAsCsvWithReportTitle:(NSString*)aReportTitle withReportText:(NSString*)aReportText withHeaders:(NSString*)aHeaders withReportType:(int)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder withObjectIds:(NSString*)aObjectIds;
-- (NSString*)getUrlForReportAsCsvWithReportTitle:(NSString*)aReportTitle withReportText:(NSString*)aReportText withHeaders:(NSString*)aHeaders withReportType:(int)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder;
-- (NSString*)getUrlForReportAsCsvWithReportTitle:(NSString*)aReportTitle withReportText:(NSString*)aReportText withHeaders:(NSString*)aHeaders withReportType:(int)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withPager:(KalturaFilterPager*)aPager;
-- (NSString*)getUrlForReportAsCsvWithReportTitle:(NSString*)aReportTitle withReportText:(NSString*)aReportText withHeaders:(NSString*)aHeaders withReportType:(int)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension;
-- (NSString*)getUrlForReportAsCsvWithReportTitle:(NSString*)aReportTitle withReportText:(NSString*)aReportText withHeaders:(NSString*)aHeaders withReportType:(int)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter;
+- (NSString*)getUrlForReportAsCsvWithReportTitle:(NSString*)aReportTitle withReportText:(NSString*)aReportText withHeaders:(NSString*)aHeaders withReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder withObjectIds:(NSString*)aObjectIds;
+- (NSString*)getUrlForReportAsCsvWithReportTitle:(NSString*)aReportTitle withReportText:(NSString*)aReportText withHeaders:(NSString*)aHeaders withReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder;
+- (NSString*)getUrlForReportAsCsvWithReportTitle:(NSString*)aReportTitle withReportText:(NSString*)aReportText withHeaders:(NSString*)aHeaders withReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withPager:(KalturaFilterPager*)aPager;
+- (NSString*)getUrlForReportAsCsvWithReportTitle:(NSString*)aReportTitle withReportText:(NSString*)aReportText withHeaders:(NSString*)aHeaders withReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension;
+- (NSString*)getUrlForReportAsCsvWithReportTitle:(NSString*)aReportTitle withReportText:(NSString*)aReportText withHeaders:(NSString*)aHeaders withReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter;
 // Will serve a requested report
 - (NSString*)serveWithId:(NSString*)aId;
 - (KalturaReportResponse*)executeWithId:(int)aId withParams:(NSArray*)aParams;
@@ -12745,6 +12818,8 @@
 - (KalturaResponseProfileListResponse*)listWithFilter:(KalturaResponseProfileFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaResponseProfileListResponse*)listWithFilter:(KalturaResponseProfileFilter*)aFilter;
 - (KalturaResponseProfileListResponse*)list;
+// Recalculate response profile cached objects
+- (KalturaResponseProfileCacheRecalculateResults*)recalculateWithOptions:(KalturaResponseProfileCacheRecalculateOptions*)aOptions;
 @end
 
 // @package Kaltura
