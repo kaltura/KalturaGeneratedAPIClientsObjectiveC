@@ -13922,7 +13922,7 @@
 @synthesize partnerId = _partnerId;
 @synthesize name = _name;
 @synthesize systemName = _systemName;
-@synthesize desciption = _desciption;
+@synthesize description = _description;
 @synthesize status = _status;
 @synthesize tags = _tags;
 @synthesize hostName = _hostName;
@@ -13974,7 +13974,7 @@
     return KFT_String;
 }
 
-- (KalturaFieldType)getTypeOfDesciption
+- (KalturaFieldType)getTypeOfDescription
 {
     return KFT_String;
 }
@@ -14046,7 +14046,7 @@
         [aParams putKey:@"objectType" withString:@"KalturaEdgeServer"];
     [aParams addIfDefinedKey:@"name" withString:self.name];
     [aParams addIfDefinedKey:@"systemName" withString:self.systemName];
-    [aParams addIfDefinedKey:@"desciption" withString:self.desciption];
+    [aParams addIfDefinedKey:@"description" withString:self.description];
     [aParams addIfDefinedKey:@"status" withInt:self.status];
     [aParams addIfDefinedKey:@"tags" withString:self.tags];
     [aParams addIfDefinedKey:@"hostName" withString:self.hostName];
@@ -14059,7 +14059,7 @@
 {
     [self->_name release];
     [self->_systemName release];
-    [self->_desciption release];
+    [self->_description release];
     [self->_tags release];
     [self->_hostName release];
     [self->_playbackHostName release];

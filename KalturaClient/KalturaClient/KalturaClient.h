@@ -4655,7 +4655,7 @@
 // edgeServer uniqe system name
 @property (nonatomic,copy) NSString* systemName;
 // edgeServer description
-@property (nonatomic,copy) NSString* desciption;
+@property (nonatomic,copy) NSString* description;
 @property (nonatomic,assign) int status;	// enum KalturaEdgeServerStatus
 // edgeServer tags
 @property (nonatomic,copy) NSString* tags;
@@ -4673,7 +4673,7 @@
 - (KalturaFieldType)getTypeOfPartnerId;
 - (KalturaFieldType)getTypeOfName;
 - (KalturaFieldType)getTypeOfSystemName;
-- (KalturaFieldType)getTypeOfDesciption;
+- (KalturaFieldType)getTypeOfDescription;
 - (KalturaFieldType)getTypeOfStatus;
 - (KalturaFieldType)getTypeOfTags;
 - (KalturaFieldType)getTypeOfHostName;
