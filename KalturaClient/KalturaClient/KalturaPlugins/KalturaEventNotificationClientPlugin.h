@@ -304,9 +304,9 @@
 // @subpackage Client
 // Event notification template service lets you create and manage event notification templates
 @interface KalturaEventNotificationTemplateService : KalturaServiceBase
-// Allows you to add a new event notification template object
+// This action allows for the creation of new backend event types in the system. This action requires access to the Kaltura server Admin Console. If you’re looking to register to existing event types, please use the clone action instead.
 - (KalturaEventNotificationTemplate*)addWithEventNotificationTemplate:(KalturaEventNotificationTemplate*)aEventNotificationTemplate;
-// Allows you to clone exiting event notification template object and create a new one with similar configuration
+// This action allows registering to various backend event. Use this action to create notifications that will react to events such as new video was uploaded or metadata field was updated. To see the list of available event types, call the listTemplates action.
 - (KalturaEventNotificationTemplate*)cloneWithId:(int)aId withEventNotificationTemplate:(KalturaEventNotificationTemplate*)aEventNotificationTemplate;
 - (KalturaEventNotificationTemplate*)cloneWithId:(int)aId;
 // Retrieve an event notification template object by id

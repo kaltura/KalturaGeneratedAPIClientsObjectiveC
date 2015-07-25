@@ -4830,6 +4830,14 @@
 {
     return @"English";
 }
++ (NSString*)EN_US
+{
+    return @"English (American)";
+}
++ (NSString*)EN_GB
+{
+    return @"English (British)";
+}
 + (NSString*)EO
 {
     return @"Esperanto";
@@ -4902,11 +4910,11 @@
 {
     return @"Hausa";
 }
-+ (NSString*)IW
++ (NSString*)HE
 {
     return @"Hebrew";
 }
-+ (NSString*)HE
++ (NSString*)IW
 {
     return @"Hebrew";
 }
@@ -4922,11 +4930,11 @@
 {
     return @"Icelandic";
 }
-+ (NSString*)IN
++ (NSString*)ID
 {
     return @"Indonesian";
 }
-+ (NSString*)ID
++ (NSString*)IN
 {
     return @"Indonesian";
 }
@@ -5392,6 +5400,14 @@
 + (NSString*)EN
 {
     return @"en";
+}
++ (NSString*)EN_GB
+{
+    return @"en_gb";
+}
++ (NSString*)EN_US
+{
+    return @"en_us";
 }
 + (NSString*)EO
 {

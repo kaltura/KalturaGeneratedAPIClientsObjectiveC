@@ -1911,6 +1911,8 @@
 + (NSString*)DA;
 + (NSString*)NL;
 + (NSString*)EN;
++ (NSString*)EN_US;
++ (NSString*)EN_GB;
 + (NSString*)EO;
 + (NSString*)ET;
 + (NSString*)FO;
@@ -1929,13 +1931,13 @@
 + (NSString*)GN;
 + (NSString*)GU;
 + (NSString*)HA;
-+ (NSString*)IW;
 + (NSString*)HE;
++ (NSString*)IW;
 + (NSString*)HI;
 + (NSString*)HU;
 + (NSString*)IS;
-+ (NSString*)IN;
 + (NSString*)ID;
++ (NSString*)IN;
 + (NSString*)IA;
 + (NSString*)IE;
 + (NSString*)IU;
@@ -2056,6 +2058,8 @@
 + (NSString*)DZ;
 + (NSString*)EL;
 + (NSString*)EN;
++ (NSString*)EN_GB;
++ (NSString*)EN_US;
 + (NSString*)EO;
 + (NSString*)ES;
 + (NSString*)ET;
