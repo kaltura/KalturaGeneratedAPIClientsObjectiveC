@@ -110,7 +110,7 @@
 @property (nonatomic,copy) NSString* answerKey;
 @property (nonatomic,assign,readonly) int isCorrect;	// enum KalturaNullableBoolean
 // Array of string
-@property (nonatomic,retain,readonly) KalturaTypedArray* correctAnswerKeys;
+@property (nonatomic,retain,readonly) NSMutableArray* correctAnswerKeys;	// of KalturaString elements
 @property (nonatomic,copy,readonly) NSString* explanation;
 - (KalturaFieldType)getTypeOfParentId;
 - (KalturaFieldType)getTypeOfQuizUserEntryId;
@@ -167,6 +167,10 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaAnswerCuePointBaseFilter : KalturaCuePointFilter
+@property (nonatomic,copy) NSString* parentIdEqual;
+@property (nonatomic,copy) NSString* parentIdIn;
+- (KalturaFieldType)getTypeOfParentIdEqual;
+- (KalturaFieldType)getTypeOfParentIdIn;
 @end
 
 // @package Kaltura

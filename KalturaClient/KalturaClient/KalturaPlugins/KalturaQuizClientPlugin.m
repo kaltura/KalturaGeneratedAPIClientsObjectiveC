@@ -288,7 +288,7 @@
 
 @interface KalturaAnswerCuePoint()
 @property (nonatomic,assign) int isCorrect;
-@property (nonatomic,retain) KalturaTypedArray* correctAnswerKeys;
+@property (nonatomic,retain) NSMutableArray* correctAnswerKeys;
 @property (nonatomic,copy) NSString* explanation;
 @end
 
@@ -331,12 +331,12 @@
 
 - (KalturaFieldType)getTypeOfCorrectAnswerKeys
 {
-    return KFT_Object;
+    return KFT_Array;
 }
 
 - (NSString*)getObjectTypeOfCorrectAnswerKeys
 {
-    return @"KalturaTypedArray";
+    return @"KalturaString";
 }
 
 - (KalturaFieldType)getTypeOfExplanation
@@ -521,11 +521,33 @@
 @end
 
 @implementation KalturaAnswerCuePointBaseFilter
+@synthesize parentIdEqual = _parentIdEqual;
+@synthesize parentIdIn = _parentIdIn;
+
+- (KalturaFieldType)getTypeOfParentIdEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfParentIdIn
+{
+    return KFT_String;
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaAnswerCuePointBaseFilter"];
+    [aParams addIfDefinedKey:@"parentIdEqual" withString:self.parentIdEqual];
+    [aParams addIfDefinedKey:@"parentIdIn" withString:self.parentIdIn];
+}
+
+- (void)dealloc
+{
+    [self->_parentIdEqual release];
+    [self->_parentIdIn release];
+    [super dealloc];
 }
 
 @end

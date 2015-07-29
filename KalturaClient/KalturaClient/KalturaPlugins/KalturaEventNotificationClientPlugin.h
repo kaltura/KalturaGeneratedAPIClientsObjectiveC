@@ -125,11 +125,6 @@
 ///////////////////////// classes /////////////////////////
 // @package Kaltura
 // @subpackage Client
-@interface KalturaEventCondition : KalturaObjectBase
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaEventNotificationParameter : KalturaObjectBase
 // The key in the subject and body to be replaced with the dynamic value
 @property (nonatomic,copy) NSString* key;

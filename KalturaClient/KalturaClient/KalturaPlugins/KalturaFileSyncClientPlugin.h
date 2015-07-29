@@ -140,14 +140,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaFileSyncListResponse : KalturaListResponse
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaFileSync elements
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaFileSyncBaseFilter : KalturaFilter
 @property (nonatomic,assign) int partnerIdEqual;
 @property (nonatomic,copy) NSString* fileObjectTypeEqual;	// enum KalturaFileSyncObjectType
@@ -225,6 +217,14 @@
 - (void)setLinkCountLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setFileSizeGreaterThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setFileSizeLessThanOrEqualFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaFileSyncListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaFileSync elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
 @end
 
 // @package Kaltura

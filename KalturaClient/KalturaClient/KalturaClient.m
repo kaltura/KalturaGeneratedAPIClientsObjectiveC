@@ -2108,33 +2108,6 @@
 }
 @end
 
-@implementation KalturaAccessControlActionType
-+ (NSString*)BLOCK
-{
-    return @"1";
-}
-+ (NSString*)PREVIEW
-{
-    return @"2";
-}
-+ (NSString*)LIMIT_FLAVORS
-{
-    return @"3";
-}
-+ (NSString*)ADD_TO_STORAGE
-{
-    return @"4";
-}
-+ (NSString*)LIMIT_DELIVERY_PROFILES
-{
-    return @"5";
-}
-+ (NSString*)SERVE_FROM_REMOTE_SERVER
-{
-    return @"6";
-}
-@end
-
 @implementation KalturaAccessControlOrderBy
 + (NSString*)CREATED_AT_ASC
 {
@@ -7535,7 +7508,7 @@
 }
 + (NSString*)QUIZ_USER_PERCENTAGE
 {
-    return @"quiz.self::QUIZ_USER_PERCENTAGE";
+    return @"quiz.QUIZ_USER_PERCENTAGE";
 }
 + (NSString*)TOP_CONTENT
 {
@@ -8546,33 +8519,6 @@
     [self->_systemName release];
     [self->_description release];
     [self->_restrictions release];
-    [super dealloc];
-}
-
-@end
-
-@interface KalturaAccessControlAction()
-@property (nonatomic,copy) NSString* type;
-@end
-
-@implementation KalturaAccessControlAction
-@synthesize type = _type;
-
-- (KalturaFieldType)getTypeOfType
-{
-    return KFT_String;
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaAccessControlAction"];
-}
-
-- (void)dealloc
-{
-    [self->_type release];
     [super dealloc];
 }
 
@@ -10984,141 +10930,6 @@
     [self->_history release];
     [self->_jobObjectId release];
     [super dealloc];
-}
-
-@end
-
-@implementation KalturaBatchQueuesStatus
-@synthesize jobType = _jobType;
-@synthesize workerId = _workerId;
-@synthesize typeName = _typeName;
-@synthesize size = _size;
-@synthesize waitTime = _waitTime;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_workerId = KALTURA_UNDEF_INT;
-    self->_size = KALTURA_UNDEF_INT;
-    self->_waitTime = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfJobType
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfWorkerId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfTypeName
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfSize
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfWaitTime
-{
-    return KFT_Int;
-}
-
-- (void)setWorkerIdFromString:(NSString*)aPropVal
-{
-    self.workerId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setSizeFromString:(NSString*)aPropVal
-{
-    self.size = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setWaitTimeFromString:(NSString*)aPropVal
-{
-    self.waitTime = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaBatchQueuesStatus"];
-    [aParams addIfDefinedKey:@"jobType" withString:self.jobType];
-    [aParams addIfDefinedKey:@"workerId" withInt:self.workerId];
-    [aParams addIfDefinedKey:@"typeName" withString:self.typeName];
-    [aParams addIfDefinedKey:@"size" withInt:self.size];
-    [aParams addIfDefinedKey:@"waitTime" withInt:self.waitTime];
-}
-
-- (void)dealloc
-{
-    [self->_jobType release];
-    [self->_typeName release];
-    [super dealloc];
-}
-
-@end
-
-@implementation KalturaValue
-@synthesize description = _description;
-
-- (KalturaFieldType)getTypeOfDescription
-{
-    return KFT_String;
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaValue"];
-    [aParams addIfDefinedKey:@"description" withString:self.description];
-}
-
-- (void)dealloc
-{
-    [self->_description release];
-    [super dealloc];
-}
-
-@end
-
-@implementation KalturaBooleanValue
-@synthesize value = _value;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_value = KALTURA_UNDEF_BOOL;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfValue
-{
-    return KFT_Bool;
-}
-
-- (void)setValueFromString:(NSString*)aPropVal
-{
-    self.value = [KalturaSimpleTypeParser parseBool:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaBooleanValue"];
-    [aParams addIfDefinedKey:@"value" withBool:self.value];
 }
 
 @end
@@ -14275,6 +14086,30 @@
 
 @end
 
+@implementation KalturaValue
+@synthesize description = _description;
+
+- (KalturaFieldType)getTypeOfDescription
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaValue"];
+    [aParams addIfDefinedKey:@"description" withString:self.description];
+}
+
+- (void)dealloc
+{
+    [self->_description release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaStringValue
 @synthesize value = _value;
 
@@ -15756,876 +15591,6 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaIntegerValue"];
     [aParams addIfDefinedKey:@"value" withInt:self.value];
-}
-
-@end
-
-@interface KalturaMediaInfo()
-@property (nonatomic,assign) int id;
-@end
-
-@implementation KalturaMediaInfo
-@synthesize id = _id;
-@synthesize flavorAssetId = _flavorAssetId;
-@synthesize fileSize = _fileSize;
-@synthesize containerFormat = _containerFormat;
-@synthesize containerId = _containerId;
-@synthesize containerProfile = _containerProfile;
-@synthesize containerDuration = _containerDuration;
-@synthesize containerBitRate = _containerBitRate;
-@synthesize videoFormat = _videoFormat;
-@synthesize videoCodecId = _videoCodecId;
-@synthesize videoDuration = _videoDuration;
-@synthesize videoBitRate = _videoBitRate;
-@synthesize videoBitRateMode = _videoBitRateMode;
-@synthesize videoWidth = _videoWidth;
-@synthesize videoHeight = _videoHeight;
-@synthesize videoFrameRate = _videoFrameRate;
-@synthesize videoDar = _videoDar;
-@synthesize videoRotation = _videoRotation;
-@synthesize audioFormat = _audioFormat;
-@synthesize audioCodecId = _audioCodecId;
-@synthesize audioDuration = _audioDuration;
-@synthesize audioBitRate = _audioBitRate;
-@synthesize audioBitRateMode = _audioBitRateMode;
-@synthesize audioChannels = _audioChannels;
-@synthesize audioSamplingRate = _audioSamplingRate;
-@synthesize audioResolution = _audioResolution;
-@synthesize writingLib = _writingLib;
-@synthesize rawData = _rawData;
-@synthesize multiStreamInfo = _multiStreamInfo;
-@synthesize scanType = _scanType;
-@synthesize multiStream = _multiStream;
-@synthesize isFastStart = _isFastStart;
-@synthesize contentStreams = _contentStreams;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_id = KALTURA_UNDEF_INT;
-    self->_fileSize = KALTURA_UNDEF_INT;
-    self->_containerDuration = KALTURA_UNDEF_INT;
-    self->_containerBitRate = KALTURA_UNDEF_INT;
-    self->_videoDuration = KALTURA_UNDEF_INT;
-    self->_videoBitRate = KALTURA_UNDEF_INT;
-    self->_videoBitRateMode = KALTURA_UNDEF_INT;
-    self->_videoWidth = KALTURA_UNDEF_INT;
-    self->_videoHeight = KALTURA_UNDEF_INT;
-    self->_videoFrameRate = KALTURA_UNDEF_FLOAT;
-    self->_videoDar = KALTURA_UNDEF_FLOAT;
-    self->_videoRotation = KALTURA_UNDEF_INT;
-    self->_audioDuration = KALTURA_UNDEF_INT;
-    self->_audioBitRate = KALTURA_UNDEF_INT;
-    self->_audioBitRateMode = KALTURA_UNDEF_INT;
-    self->_audioChannels = KALTURA_UNDEF_INT;
-    self->_audioSamplingRate = KALTURA_UNDEF_INT;
-    self->_audioResolution = KALTURA_UNDEF_INT;
-    self->_scanType = KALTURA_UNDEF_INT;
-    self->_isFastStart = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfFlavorAssetId
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfFileSize
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfContainerFormat
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfContainerId
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfContainerProfile
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfContainerDuration
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfContainerBitRate
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfVideoFormat
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfVideoCodecId
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfVideoDuration
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfVideoBitRate
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfVideoBitRateMode
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfVideoWidth
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfVideoHeight
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfVideoFrameRate
-{
-    return KFT_Float;
-}
-
-- (KalturaFieldType)getTypeOfVideoDar
-{
-    return KFT_Float;
-}
-
-- (KalturaFieldType)getTypeOfVideoRotation
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfAudioFormat
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfAudioCodecId
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfAudioDuration
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfAudioBitRate
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfAudioBitRateMode
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfAudioChannels
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfAudioSamplingRate
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfAudioResolution
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfWritingLib
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfRawData
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfMultiStreamInfo
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfScanType
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfMultiStream
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfIsFastStart
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfContentStreams
-{
-    return KFT_String;
-}
-
-- (void)setIdFromString:(NSString*)aPropVal
-{
-    self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setFileSizeFromString:(NSString*)aPropVal
-{
-    self.fileSize = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setContainerDurationFromString:(NSString*)aPropVal
-{
-    self.containerDuration = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setContainerBitRateFromString:(NSString*)aPropVal
-{
-    self.containerBitRate = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setVideoDurationFromString:(NSString*)aPropVal
-{
-    self.videoDuration = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setVideoBitRateFromString:(NSString*)aPropVal
-{
-    self.videoBitRate = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setVideoBitRateModeFromString:(NSString*)aPropVal
-{
-    self.videoBitRateMode = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setVideoWidthFromString:(NSString*)aPropVal
-{
-    self.videoWidth = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setVideoHeightFromString:(NSString*)aPropVal
-{
-    self.videoHeight = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setVideoFrameRateFromString:(NSString*)aPropVal
-{
-    self.videoFrameRate = [KalturaSimpleTypeParser parseFloat:aPropVal];
-}
-
-- (void)setVideoDarFromString:(NSString*)aPropVal
-{
-    self.videoDar = [KalturaSimpleTypeParser parseFloat:aPropVal];
-}
-
-- (void)setVideoRotationFromString:(NSString*)aPropVal
-{
-    self.videoRotation = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setAudioDurationFromString:(NSString*)aPropVal
-{
-    self.audioDuration = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setAudioBitRateFromString:(NSString*)aPropVal
-{
-    self.audioBitRate = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setAudioBitRateModeFromString:(NSString*)aPropVal
-{
-    self.audioBitRateMode = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setAudioChannelsFromString:(NSString*)aPropVal
-{
-    self.audioChannels = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setAudioSamplingRateFromString:(NSString*)aPropVal
-{
-    self.audioSamplingRate = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setAudioResolutionFromString:(NSString*)aPropVal
-{
-    self.audioResolution = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setScanTypeFromString:(NSString*)aPropVal
-{
-    self.scanType = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setIsFastStartFromString:(NSString*)aPropVal
-{
-    self.isFastStart = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaMediaInfo"];
-    [aParams addIfDefinedKey:@"flavorAssetId" withString:self.flavorAssetId];
-    [aParams addIfDefinedKey:@"fileSize" withInt:self.fileSize];
-    [aParams addIfDefinedKey:@"containerFormat" withString:self.containerFormat];
-    [aParams addIfDefinedKey:@"containerId" withString:self.containerId];
-    [aParams addIfDefinedKey:@"containerProfile" withString:self.containerProfile];
-    [aParams addIfDefinedKey:@"containerDuration" withInt:self.containerDuration];
-    [aParams addIfDefinedKey:@"containerBitRate" withInt:self.containerBitRate];
-    [aParams addIfDefinedKey:@"videoFormat" withString:self.videoFormat];
-    [aParams addIfDefinedKey:@"videoCodecId" withString:self.videoCodecId];
-    [aParams addIfDefinedKey:@"videoDuration" withInt:self.videoDuration];
-    [aParams addIfDefinedKey:@"videoBitRate" withInt:self.videoBitRate];
-    [aParams addIfDefinedKey:@"videoBitRateMode" withInt:self.videoBitRateMode];
-    [aParams addIfDefinedKey:@"videoWidth" withInt:self.videoWidth];
-    [aParams addIfDefinedKey:@"videoHeight" withInt:self.videoHeight];
-    [aParams addIfDefinedKey:@"videoFrameRate" withFloat:self.videoFrameRate];
-    [aParams addIfDefinedKey:@"videoDar" withFloat:self.videoDar];
-    [aParams addIfDefinedKey:@"videoRotation" withInt:self.videoRotation];
-    [aParams addIfDefinedKey:@"audioFormat" withString:self.audioFormat];
-    [aParams addIfDefinedKey:@"audioCodecId" withString:self.audioCodecId];
-    [aParams addIfDefinedKey:@"audioDuration" withInt:self.audioDuration];
-    [aParams addIfDefinedKey:@"audioBitRate" withInt:self.audioBitRate];
-    [aParams addIfDefinedKey:@"audioBitRateMode" withInt:self.audioBitRateMode];
-    [aParams addIfDefinedKey:@"audioChannels" withInt:self.audioChannels];
-    [aParams addIfDefinedKey:@"audioSamplingRate" withInt:self.audioSamplingRate];
-    [aParams addIfDefinedKey:@"audioResolution" withInt:self.audioResolution];
-    [aParams addIfDefinedKey:@"writingLib" withString:self.writingLib];
-    [aParams addIfDefinedKey:@"rawData" withString:self.rawData];
-    [aParams addIfDefinedKey:@"multiStreamInfo" withString:self.multiStreamInfo];
-    [aParams addIfDefinedKey:@"scanType" withInt:self.scanType];
-    [aParams addIfDefinedKey:@"multiStream" withString:self.multiStream];
-    [aParams addIfDefinedKey:@"isFastStart" withInt:self.isFastStart];
-    [aParams addIfDefinedKey:@"contentStreams" withString:self.contentStreams];
-}
-
-- (void)dealloc
-{
-    [self->_flavorAssetId release];
-    [self->_containerFormat release];
-    [self->_containerId release];
-    [self->_containerProfile release];
-    [self->_videoFormat release];
-    [self->_videoCodecId release];
-    [self->_audioFormat release];
-    [self->_audioCodecId release];
-    [self->_writingLib release];
-    [self->_rawData release];
-    [self->_multiStreamInfo release];
-    [self->_multiStream release];
-    [self->_contentStreams release];
-    [super dealloc];
-}
-
-@end
-
-@interface KalturaMediaInfoListResponse()
-@property (nonatomic,retain) NSMutableArray* objects;
-@end
-
-@implementation KalturaMediaInfoListResponse
-@synthesize objects = _objects;
-
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaMediaInfo";
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaMediaInfoListResponse"];
-}
-
-- (void)dealloc
-{
-    [self->_objects release];
-    [super dealloc];
-}
-
-@end
-
-@interface KalturaFlavorParamsOutputListResponse()
-@property (nonatomic,retain) NSMutableArray* objects;
-@end
-
-@implementation KalturaFlavorParamsOutputListResponse
-@synthesize objects = _objects;
-
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaFlavorParamsOutput";
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaFlavorParamsOutputListResponse"];
-}
-
-- (void)dealloc
-{
-    [self->_objects release];
-    [super dealloc];
-}
-
-@end
-
-@interface KalturaThumbAsset()
-@property (nonatomic,assign) int width;
-@property (nonatomic,assign) int height;
-@property (nonatomic,assign) int status;
-@end
-
-@implementation KalturaThumbAsset
-@synthesize thumbParamsId = _thumbParamsId;
-@synthesize width = _width;
-@synthesize height = _height;
-@synthesize status = _status;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_thumbParamsId = KALTURA_UNDEF_INT;
-    self->_width = KALTURA_UNDEF_INT;
-    self->_height = KALTURA_UNDEF_INT;
-    self->_status = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfThumbParamsId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfWidth
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfHeight
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfStatus
-{
-    return KFT_Int;
-}
-
-- (void)setThumbParamsIdFromString:(NSString*)aPropVal
-{
-    self.thumbParamsId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setWidthFromString:(NSString*)aPropVal
-{
-    self.width = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setHeightFromString:(NSString*)aPropVal
-{
-    self.height = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setStatusFromString:(NSString*)aPropVal
-{
-    self.status = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaThumbAsset"];
-    [aParams addIfDefinedKey:@"thumbParamsId" withInt:self.thumbParamsId];
-}
-
-@end
-
-@implementation KalturaThumbParams
-@synthesize cropType = _cropType;
-@synthesize quality = _quality;
-@synthesize cropX = _cropX;
-@synthesize cropY = _cropY;
-@synthesize cropWidth = _cropWidth;
-@synthesize cropHeight = _cropHeight;
-@synthesize videoOffset = _videoOffset;
-@synthesize width = _width;
-@synthesize height = _height;
-@synthesize scaleWidth = _scaleWidth;
-@synthesize scaleHeight = _scaleHeight;
-@synthesize backgroundColor = _backgroundColor;
-@synthesize sourceParamsId = _sourceParamsId;
-@synthesize format = _format;
-@synthesize density = _density;
-@synthesize stripProfiles = _stripProfiles;
-@synthesize videoOffsetInPercentage = _videoOffsetInPercentage;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_cropType = KALTURA_UNDEF_INT;
-    self->_quality = KALTURA_UNDEF_INT;
-    self->_cropX = KALTURA_UNDEF_INT;
-    self->_cropY = KALTURA_UNDEF_INT;
-    self->_cropWidth = KALTURA_UNDEF_INT;
-    self->_cropHeight = KALTURA_UNDEF_INT;
-    self->_videoOffset = KALTURA_UNDEF_FLOAT;
-    self->_width = KALTURA_UNDEF_INT;
-    self->_height = KALTURA_UNDEF_INT;
-    self->_scaleWidth = KALTURA_UNDEF_FLOAT;
-    self->_scaleHeight = KALTURA_UNDEF_FLOAT;
-    self->_sourceParamsId = KALTURA_UNDEF_INT;
-    self->_density = KALTURA_UNDEF_INT;
-    self->_stripProfiles = KALTURA_UNDEF_BOOL;
-    self->_videoOffsetInPercentage = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfCropType
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfQuality
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCropX
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCropY
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCropWidth
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCropHeight
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfVideoOffset
-{
-    return KFT_Float;
-}
-
-- (KalturaFieldType)getTypeOfWidth
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfHeight
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfScaleWidth
-{
-    return KFT_Float;
-}
-
-- (KalturaFieldType)getTypeOfScaleHeight
-{
-    return KFT_Float;
-}
-
-- (KalturaFieldType)getTypeOfBackgroundColor
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfSourceParamsId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfFormat
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfDensity
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfStripProfiles
-{
-    return KFT_Bool;
-}
-
-- (KalturaFieldType)getTypeOfVideoOffsetInPercentage
-{
-    return KFT_Int;
-}
-
-- (void)setCropTypeFromString:(NSString*)aPropVal
-{
-    self.cropType = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setQualityFromString:(NSString*)aPropVal
-{
-    self.quality = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCropXFromString:(NSString*)aPropVal
-{
-    self.cropX = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCropYFromString:(NSString*)aPropVal
-{
-    self.cropY = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCropWidthFromString:(NSString*)aPropVal
-{
-    self.cropWidth = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCropHeightFromString:(NSString*)aPropVal
-{
-    self.cropHeight = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setVideoOffsetFromString:(NSString*)aPropVal
-{
-    self.videoOffset = [KalturaSimpleTypeParser parseFloat:aPropVal];
-}
-
-- (void)setWidthFromString:(NSString*)aPropVal
-{
-    self.width = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setHeightFromString:(NSString*)aPropVal
-{
-    self.height = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setScaleWidthFromString:(NSString*)aPropVal
-{
-    self.scaleWidth = [KalturaSimpleTypeParser parseFloat:aPropVal];
-}
-
-- (void)setScaleHeightFromString:(NSString*)aPropVal
-{
-    self.scaleHeight = [KalturaSimpleTypeParser parseFloat:aPropVal];
-}
-
-- (void)setSourceParamsIdFromString:(NSString*)aPropVal
-{
-    self.sourceParamsId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setDensityFromString:(NSString*)aPropVal
-{
-    self.density = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setStripProfilesFromString:(NSString*)aPropVal
-{
-    self.stripProfiles = [KalturaSimpleTypeParser parseBool:aPropVal];
-}
-
-- (void)setVideoOffsetInPercentageFromString:(NSString*)aPropVal
-{
-    self.videoOffsetInPercentage = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaThumbParams"];
-    [aParams addIfDefinedKey:@"cropType" withInt:self.cropType];
-    [aParams addIfDefinedKey:@"quality" withInt:self.quality];
-    [aParams addIfDefinedKey:@"cropX" withInt:self.cropX];
-    [aParams addIfDefinedKey:@"cropY" withInt:self.cropY];
-    [aParams addIfDefinedKey:@"cropWidth" withInt:self.cropWidth];
-    [aParams addIfDefinedKey:@"cropHeight" withInt:self.cropHeight];
-    [aParams addIfDefinedKey:@"videoOffset" withFloat:self.videoOffset];
-    [aParams addIfDefinedKey:@"width" withInt:self.width];
-    [aParams addIfDefinedKey:@"height" withInt:self.height];
-    [aParams addIfDefinedKey:@"scaleWidth" withFloat:self.scaleWidth];
-    [aParams addIfDefinedKey:@"scaleHeight" withFloat:self.scaleHeight];
-    [aParams addIfDefinedKey:@"backgroundColor" withString:self.backgroundColor];
-    [aParams addIfDefinedKey:@"sourceParamsId" withInt:self.sourceParamsId];
-    [aParams addIfDefinedKey:@"format" withString:self.format];
-    [aParams addIfDefinedKey:@"density" withInt:self.density];
-    [aParams addIfDefinedKey:@"stripProfiles" withBool:self.stripProfiles];
-    [aParams addIfDefinedKey:@"videoOffsetInPercentage" withInt:self.videoOffsetInPercentage];
-}
-
-- (void)dealloc
-{
-    [self->_backgroundColor release];
-    [self->_format release];
-    [super dealloc];
-}
-
-@end
-
-@implementation KalturaThumbParamsOutput
-@synthesize thumbParamsId = _thumbParamsId;
-@synthesize thumbParamsVersion = _thumbParamsVersion;
-@synthesize thumbAssetId = _thumbAssetId;
-@synthesize thumbAssetVersion = _thumbAssetVersion;
-@synthesize rotate = _rotate;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_thumbParamsId = KALTURA_UNDEF_INT;
-    self->_rotate = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfThumbParamsId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfThumbParamsVersion
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfThumbAssetId
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfThumbAssetVersion
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfRotate
-{
-    return KFT_Int;
-}
-
-- (void)setThumbParamsIdFromString:(NSString*)aPropVal
-{
-    self.thumbParamsId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setRotateFromString:(NSString*)aPropVal
-{
-    self.rotate = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaThumbParamsOutput"];
-    [aParams addIfDefinedKey:@"thumbParamsId" withInt:self.thumbParamsId];
-    [aParams addIfDefinedKey:@"thumbParamsVersion" withString:self.thumbParamsVersion];
-    [aParams addIfDefinedKey:@"thumbAssetId" withString:self.thumbAssetId];
-    [aParams addIfDefinedKey:@"thumbAssetVersion" withString:self.thumbAssetVersion];
-    [aParams addIfDefinedKey:@"rotate" withInt:self.rotate];
-}
-
-- (void)dealloc
-{
-    [self->_thumbParamsVersion release];
-    [self->_thumbAssetId release];
-    [self->_thumbAssetVersion release];
-    [super dealloc];
-}
-
-@end
-
-@interface KalturaThumbParamsOutputListResponse()
-@property (nonatomic,retain) NSMutableArray* objects;
-@end
-
-@implementation KalturaThumbParamsOutputListResponse
-@synthesize objects = _objects;
-
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaThumbParamsOutput";
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaThumbParamsOutputListResponse"];
-}
-
-- (void)dealloc
-{
-    [self->_objects release];
-    [super dealloc];
 }
 
 @end
@@ -18951,6 +17916,397 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaMediaEntryFilterForPlaylist"];
     [aParams addIfDefinedKey:@"limit" withInt:self.limit];
+}
+
+@end
+
+@interface KalturaMediaInfo()
+@property (nonatomic,assign) int id;
+@end
+
+@implementation KalturaMediaInfo
+@synthesize id = _id;
+@synthesize flavorAssetId = _flavorAssetId;
+@synthesize fileSize = _fileSize;
+@synthesize containerFormat = _containerFormat;
+@synthesize containerId = _containerId;
+@synthesize containerProfile = _containerProfile;
+@synthesize containerDuration = _containerDuration;
+@synthesize containerBitRate = _containerBitRate;
+@synthesize videoFormat = _videoFormat;
+@synthesize videoCodecId = _videoCodecId;
+@synthesize videoDuration = _videoDuration;
+@synthesize videoBitRate = _videoBitRate;
+@synthesize videoBitRateMode = _videoBitRateMode;
+@synthesize videoWidth = _videoWidth;
+@synthesize videoHeight = _videoHeight;
+@synthesize videoFrameRate = _videoFrameRate;
+@synthesize videoDar = _videoDar;
+@synthesize videoRotation = _videoRotation;
+@synthesize audioFormat = _audioFormat;
+@synthesize audioCodecId = _audioCodecId;
+@synthesize audioDuration = _audioDuration;
+@synthesize audioBitRate = _audioBitRate;
+@synthesize audioBitRateMode = _audioBitRateMode;
+@synthesize audioChannels = _audioChannels;
+@synthesize audioSamplingRate = _audioSamplingRate;
+@synthesize audioResolution = _audioResolution;
+@synthesize writingLib = _writingLib;
+@synthesize rawData = _rawData;
+@synthesize multiStreamInfo = _multiStreamInfo;
+@synthesize scanType = _scanType;
+@synthesize multiStream = _multiStream;
+@synthesize isFastStart = _isFastStart;
+@synthesize contentStreams = _contentStreams;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_id = KALTURA_UNDEF_INT;
+    self->_fileSize = KALTURA_UNDEF_INT;
+    self->_containerDuration = KALTURA_UNDEF_INT;
+    self->_containerBitRate = KALTURA_UNDEF_INT;
+    self->_videoDuration = KALTURA_UNDEF_INT;
+    self->_videoBitRate = KALTURA_UNDEF_INT;
+    self->_videoBitRateMode = KALTURA_UNDEF_INT;
+    self->_videoWidth = KALTURA_UNDEF_INT;
+    self->_videoHeight = KALTURA_UNDEF_INT;
+    self->_videoFrameRate = KALTURA_UNDEF_FLOAT;
+    self->_videoDar = KALTURA_UNDEF_FLOAT;
+    self->_videoRotation = KALTURA_UNDEF_INT;
+    self->_audioDuration = KALTURA_UNDEF_INT;
+    self->_audioBitRate = KALTURA_UNDEF_INT;
+    self->_audioBitRateMode = KALTURA_UNDEF_INT;
+    self->_audioChannels = KALTURA_UNDEF_INT;
+    self->_audioSamplingRate = KALTURA_UNDEF_INT;
+    self->_audioResolution = KALTURA_UNDEF_INT;
+    self->_scanType = KALTURA_UNDEF_INT;
+    self->_isFastStart = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfFlavorAssetId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfFileSize
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfContainerFormat
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfContainerId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfContainerProfile
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfContainerDuration
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfContainerBitRate
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfVideoFormat
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfVideoCodecId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfVideoDuration
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfVideoBitRate
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfVideoBitRateMode
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfVideoWidth
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfVideoHeight
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfVideoFrameRate
+{
+    return KFT_Float;
+}
+
+- (KalturaFieldType)getTypeOfVideoDar
+{
+    return KFT_Float;
+}
+
+- (KalturaFieldType)getTypeOfVideoRotation
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfAudioFormat
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfAudioCodecId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfAudioDuration
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfAudioBitRate
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfAudioBitRateMode
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfAudioChannels
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfAudioSamplingRate
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfAudioResolution
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfWritingLib
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfRawData
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfMultiStreamInfo
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfScanType
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfMultiStream
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfIsFastStart
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfContentStreams
+{
+    return KFT_String;
+}
+
+- (void)setIdFromString:(NSString*)aPropVal
+{
+    self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setFileSizeFromString:(NSString*)aPropVal
+{
+    self.fileSize = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setContainerDurationFromString:(NSString*)aPropVal
+{
+    self.containerDuration = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setContainerBitRateFromString:(NSString*)aPropVal
+{
+    self.containerBitRate = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setVideoDurationFromString:(NSString*)aPropVal
+{
+    self.videoDuration = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setVideoBitRateFromString:(NSString*)aPropVal
+{
+    self.videoBitRate = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setVideoBitRateModeFromString:(NSString*)aPropVal
+{
+    self.videoBitRateMode = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setVideoWidthFromString:(NSString*)aPropVal
+{
+    self.videoWidth = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setVideoHeightFromString:(NSString*)aPropVal
+{
+    self.videoHeight = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setVideoFrameRateFromString:(NSString*)aPropVal
+{
+    self.videoFrameRate = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
+- (void)setVideoDarFromString:(NSString*)aPropVal
+{
+    self.videoDar = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
+- (void)setVideoRotationFromString:(NSString*)aPropVal
+{
+    self.videoRotation = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAudioDurationFromString:(NSString*)aPropVal
+{
+    self.audioDuration = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAudioBitRateFromString:(NSString*)aPropVal
+{
+    self.audioBitRate = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAudioBitRateModeFromString:(NSString*)aPropVal
+{
+    self.audioBitRateMode = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAudioChannelsFromString:(NSString*)aPropVal
+{
+    self.audioChannels = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAudioSamplingRateFromString:(NSString*)aPropVal
+{
+    self.audioSamplingRate = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAudioResolutionFromString:(NSString*)aPropVal
+{
+    self.audioResolution = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setScanTypeFromString:(NSString*)aPropVal
+{
+    self.scanType = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setIsFastStartFromString:(NSString*)aPropVal
+{
+    self.isFastStart = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaMediaInfo"];
+    [aParams addIfDefinedKey:@"flavorAssetId" withString:self.flavorAssetId];
+    [aParams addIfDefinedKey:@"fileSize" withInt:self.fileSize];
+    [aParams addIfDefinedKey:@"containerFormat" withString:self.containerFormat];
+    [aParams addIfDefinedKey:@"containerId" withString:self.containerId];
+    [aParams addIfDefinedKey:@"containerProfile" withString:self.containerProfile];
+    [aParams addIfDefinedKey:@"containerDuration" withInt:self.containerDuration];
+    [aParams addIfDefinedKey:@"containerBitRate" withInt:self.containerBitRate];
+    [aParams addIfDefinedKey:@"videoFormat" withString:self.videoFormat];
+    [aParams addIfDefinedKey:@"videoCodecId" withString:self.videoCodecId];
+    [aParams addIfDefinedKey:@"videoDuration" withInt:self.videoDuration];
+    [aParams addIfDefinedKey:@"videoBitRate" withInt:self.videoBitRate];
+    [aParams addIfDefinedKey:@"videoBitRateMode" withInt:self.videoBitRateMode];
+    [aParams addIfDefinedKey:@"videoWidth" withInt:self.videoWidth];
+    [aParams addIfDefinedKey:@"videoHeight" withInt:self.videoHeight];
+    [aParams addIfDefinedKey:@"videoFrameRate" withFloat:self.videoFrameRate];
+    [aParams addIfDefinedKey:@"videoDar" withFloat:self.videoDar];
+    [aParams addIfDefinedKey:@"videoRotation" withInt:self.videoRotation];
+    [aParams addIfDefinedKey:@"audioFormat" withString:self.audioFormat];
+    [aParams addIfDefinedKey:@"audioCodecId" withString:self.audioCodecId];
+    [aParams addIfDefinedKey:@"audioDuration" withInt:self.audioDuration];
+    [aParams addIfDefinedKey:@"audioBitRate" withInt:self.audioBitRate];
+    [aParams addIfDefinedKey:@"audioBitRateMode" withInt:self.audioBitRateMode];
+    [aParams addIfDefinedKey:@"audioChannels" withInt:self.audioChannels];
+    [aParams addIfDefinedKey:@"audioSamplingRate" withInt:self.audioSamplingRate];
+    [aParams addIfDefinedKey:@"audioResolution" withInt:self.audioResolution];
+    [aParams addIfDefinedKey:@"writingLib" withString:self.writingLib];
+    [aParams addIfDefinedKey:@"rawData" withString:self.rawData];
+    [aParams addIfDefinedKey:@"multiStreamInfo" withString:self.multiStreamInfo];
+    [aParams addIfDefinedKey:@"scanType" withInt:self.scanType];
+    [aParams addIfDefinedKey:@"multiStream" withString:self.multiStream];
+    [aParams addIfDefinedKey:@"isFastStart" withInt:self.isFastStart];
+    [aParams addIfDefinedKey:@"contentStreams" withString:self.contentStreams];
+}
+
+- (void)dealloc
+{
+    [self->_flavorAssetId release];
+    [self->_containerFormat release];
+    [self->_containerId release];
+    [self->_containerProfile release];
+    [self->_videoFormat release];
+    [self->_videoCodecId release];
+    [self->_audioFormat release];
+    [self->_audioCodecId release];
+    [self->_writingLib release];
+    [self->_rawData release];
+    [self->_multiStreamInfo release];
+    [self->_multiStream release];
+    [self->_contentStreams release];
+    [super dealloc];
 }
 
 @end
@@ -23275,6 +22631,389 @@
 
 @end
 
+@interface KalturaThumbAsset()
+@property (nonatomic,assign) int width;
+@property (nonatomic,assign) int height;
+@property (nonatomic,assign) int status;
+@end
+
+@implementation KalturaThumbAsset
+@synthesize thumbParamsId = _thumbParamsId;
+@synthesize width = _width;
+@synthesize height = _height;
+@synthesize status = _status;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_thumbParamsId = KALTURA_UNDEF_INT;
+    self->_width = KALTURA_UNDEF_INT;
+    self->_height = KALTURA_UNDEF_INT;
+    self->_status = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfThumbParamsId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfWidth
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfHeight
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfStatus
+{
+    return KFT_Int;
+}
+
+- (void)setThumbParamsIdFromString:(NSString*)aPropVal
+{
+    self.thumbParamsId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setWidthFromString:(NSString*)aPropVal
+{
+    self.width = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setHeightFromString:(NSString*)aPropVal
+{
+    self.height = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setStatusFromString:(NSString*)aPropVal
+{
+    self.status = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaThumbAsset"];
+    [aParams addIfDefinedKey:@"thumbParamsId" withInt:self.thumbParamsId];
+}
+
+@end
+
+@implementation KalturaThumbParams
+@synthesize cropType = _cropType;
+@synthesize quality = _quality;
+@synthesize cropX = _cropX;
+@synthesize cropY = _cropY;
+@synthesize cropWidth = _cropWidth;
+@synthesize cropHeight = _cropHeight;
+@synthesize videoOffset = _videoOffset;
+@synthesize width = _width;
+@synthesize height = _height;
+@synthesize scaleWidth = _scaleWidth;
+@synthesize scaleHeight = _scaleHeight;
+@synthesize backgroundColor = _backgroundColor;
+@synthesize sourceParamsId = _sourceParamsId;
+@synthesize format = _format;
+@synthesize density = _density;
+@synthesize stripProfiles = _stripProfiles;
+@synthesize videoOffsetInPercentage = _videoOffsetInPercentage;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_cropType = KALTURA_UNDEF_INT;
+    self->_quality = KALTURA_UNDEF_INT;
+    self->_cropX = KALTURA_UNDEF_INT;
+    self->_cropY = KALTURA_UNDEF_INT;
+    self->_cropWidth = KALTURA_UNDEF_INT;
+    self->_cropHeight = KALTURA_UNDEF_INT;
+    self->_videoOffset = KALTURA_UNDEF_FLOAT;
+    self->_width = KALTURA_UNDEF_INT;
+    self->_height = KALTURA_UNDEF_INT;
+    self->_scaleWidth = KALTURA_UNDEF_FLOAT;
+    self->_scaleHeight = KALTURA_UNDEF_FLOAT;
+    self->_sourceParamsId = KALTURA_UNDEF_INT;
+    self->_density = KALTURA_UNDEF_INT;
+    self->_stripProfiles = KALTURA_UNDEF_BOOL;
+    self->_videoOffsetInPercentage = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfCropType
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfQuality
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCropX
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCropY
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCropWidth
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCropHeight
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfVideoOffset
+{
+    return KFT_Float;
+}
+
+- (KalturaFieldType)getTypeOfWidth
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfHeight
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfScaleWidth
+{
+    return KFT_Float;
+}
+
+- (KalturaFieldType)getTypeOfScaleHeight
+{
+    return KFT_Float;
+}
+
+- (KalturaFieldType)getTypeOfBackgroundColor
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSourceParamsId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfFormat
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfDensity
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfStripProfiles
+{
+    return KFT_Bool;
+}
+
+- (KalturaFieldType)getTypeOfVideoOffsetInPercentage
+{
+    return KFT_Int;
+}
+
+- (void)setCropTypeFromString:(NSString*)aPropVal
+{
+    self.cropType = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setQualityFromString:(NSString*)aPropVal
+{
+    self.quality = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCropXFromString:(NSString*)aPropVal
+{
+    self.cropX = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCropYFromString:(NSString*)aPropVal
+{
+    self.cropY = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCropWidthFromString:(NSString*)aPropVal
+{
+    self.cropWidth = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCropHeightFromString:(NSString*)aPropVal
+{
+    self.cropHeight = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setVideoOffsetFromString:(NSString*)aPropVal
+{
+    self.videoOffset = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
+- (void)setWidthFromString:(NSString*)aPropVal
+{
+    self.width = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setHeightFromString:(NSString*)aPropVal
+{
+    self.height = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setScaleWidthFromString:(NSString*)aPropVal
+{
+    self.scaleWidth = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
+- (void)setScaleHeightFromString:(NSString*)aPropVal
+{
+    self.scaleHeight = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
+- (void)setSourceParamsIdFromString:(NSString*)aPropVal
+{
+    self.sourceParamsId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setDensityFromString:(NSString*)aPropVal
+{
+    self.density = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setStripProfilesFromString:(NSString*)aPropVal
+{
+    self.stripProfiles = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)setVideoOffsetInPercentageFromString:(NSString*)aPropVal
+{
+    self.videoOffsetInPercentage = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaThumbParams"];
+    [aParams addIfDefinedKey:@"cropType" withInt:self.cropType];
+    [aParams addIfDefinedKey:@"quality" withInt:self.quality];
+    [aParams addIfDefinedKey:@"cropX" withInt:self.cropX];
+    [aParams addIfDefinedKey:@"cropY" withInt:self.cropY];
+    [aParams addIfDefinedKey:@"cropWidth" withInt:self.cropWidth];
+    [aParams addIfDefinedKey:@"cropHeight" withInt:self.cropHeight];
+    [aParams addIfDefinedKey:@"videoOffset" withFloat:self.videoOffset];
+    [aParams addIfDefinedKey:@"width" withInt:self.width];
+    [aParams addIfDefinedKey:@"height" withInt:self.height];
+    [aParams addIfDefinedKey:@"scaleWidth" withFloat:self.scaleWidth];
+    [aParams addIfDefinedKey:@"scaleHeight" withFloat:self.scaleHeight];
+    [aParams addIfDefinedKey:@"backgroundColor" withString:self.backgroundColor];
+    [aParams addIfDefinedKey:@"sourceParamsId" withInt:self.sourceParamsId];
+    [aParams addIfDefinedKey:@"format" withString:self.format];
+    [aParams addIfDefinedKey:@"density" withInt:self.density];
+    [aParams addIfDefinedKey:@"stripProfiles" withBool:self.stripProfiles];
+    [aParams addIfDefinedKey:@"videoOffsetInPercentage" withInt:self.videoOffsetInPercentage];
+}
+
+- (void)dealloc
+{
+    [self->_backgroundColor release];
+    [self->_format release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaThumbParamsOutput
+@synthesize thumbParamsId = _thumbParamsId;
+@synthesize thumbParamsVersion = _thumbParamsVersion;
+@synthesize thumbAssetId = _thumbAssetId;
+@synthesize thumbAssetVersion = _thumbAssetVersion;
+@synthesize rotate = _rotate;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_thumbParamsId = KALTURA_UNDEF_INT;
+    self->_rotate = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfThumbParamsId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfThumbParamsVersion
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfThumbAssetId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfThumbAssetVersion
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfRotate
+{
+    return KFT_Int;
+}
+
+- (void)setThumbParamsIdFromString:(NSString*)aPropVal
+{
+    self.thumbParamsId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setRotateFromString:(NSString*)aPropVal
+{
+    self.rotate = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaThumbParamsOutput"];
+    [aParams addIfDefinedKey:@"thumbParamsId" withInt:self.thumbParamsId];
+    [aParams addIfDefinedKey:@"thumbParamsVersion" withString:self.thumbParamsVersion];
+    [aParams addIfDefinedKey:@"thumbAssetId" withString:self.thumbAssetId];
+    [aParams addIfDefinedKey:@"thumbAssetVersion" withString:self.thumbAssetVersion];
+    [aParams addIfDefinedKey:@"rotate" withInt:self.rotate];
+}
+
+- (void)dealloc
+{
+    [self->_thumbParamsVersion release];
+    [self->_thumbAssetId release];
+    [self->_thumbAssetVersion release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaThumbnailServeOptions
 @synthesize download = _download;
 
@@ -23303,38 +23042,6 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaThumbnailServeOptions"];
     [aParams addIfDefinedKey:@"download" withBool:self.download];
-}
-
-@end
-
-@implementation KalturaTypedArray
-@synthesize count = _count;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_count = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfCount
-{
-    return KFT_Int;
-}
-
-- (void)setCountFromString:(NSString*)aPropVal
-{
-    self.count = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaTypedArray"];
-    [aParams addIfDefinedKey:@"count" withInt:self.count];
 }
 
 @end
@@ -24724,616 +24431,6 @@
 
 @end
 
-@implementation KalturaBatchJobBaseFilter
-@synthesize idEqual = _idEqual;
-@synthesize idGreaterThanOrEqual = _idGreaterThanOrEqual;
-@synthesize partnerIdEqual = _partnerIdEqual;
-@synthesize partnerIdIn = _partnerIdIn;
-@synthesize partnerIdNotIn = _partnerIdNotIn;
-@synthesize createdAtGreaterThanOrEqual = _createdAtGreaterThanOrEqual;
-@synthesize createdAtLessThanOrEqual = _createdAtLessThanOrEqual;
-@synthesize updatedAtGreaterThanOrEqual = _updatedAtGreaterThanOrEqual;
-@synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
-@synthesize executionAttemptsGreaterThanOrEqual = _executionAttemptsGreaterThanOrEqual;
-@synthesize executionAttemptsLessThanOrEqual = _executionAttemptsLessThanOrEqual;
-@synthesize lockVersionGreaterThanOrEqual = _lockVersionGreaterThanOrEqual;
-@synthesize lockVersionLessThanOrEqual = _lockVersionLessThanOrEqual;
-@synthesize entryIdEqual = _entryIdEqual;
-@synthesize jobTypeEqual = _jobTypeEqual;
-@synthesize jobTypeIn = _jobTypeIn;
-@synthesize jobTypeNotIn = _jobTypeNotIn;
-@synthesize jobSubTypeEqual = _jobSubTypeEqual;
-@synthesize jobSubTypeIn = _jobSubTypeIn;
-@synthesize jobSubTypeNotIn = _jobSubTypeNotIn;
-@synthesize statusEqual = _statusEqual;
-@synthesize statusIn = _statusIn;
-@synthesize statusNotIn = _statusNotIn;
-@synthesize priorityGreaterThanOrEqual = _priorityGreaterThanOrEqual;
-@synthesize priorityLessThanOrEqual = _priorityLessThanOrEqual;
-@synthesize priorityEqual = _priorityEqual;
-@synthesize priorityIn = _priorityIn;
-@synthesize priorityNotIn = _priorityNotIn;
-@synthesize batchVersionGreaterThanOrEqual = _batchVersionGreaterThanOrEqual;
-@synthesize batchVersionLessThanOrEqual = _batchVersionLessThanOrEqual;
-@synthesize batchVersionEqual = _batchVersionEqual;
-@synthesize queueTimeGreaterThanOrEqual = _queueTimeGreaterThanOrEqual;
-@synthesize queueTimeLessThanOrEqual = _queueTimeLessThanOrEqual;
-@synthesize finishTimeGreaterThanOrEqual = _finishTimeGreaterThanOrEqual;
-@synthesize finishTimeLessThanOrEqual = _finishTimeLessThanOrEqual;
-@synthesize errTypeEqual = _errTypeEqual;
-@synthesize errTypeIn = _errTypeIn;
-@synthesize errTypeNotIn = _errTypeNotIn;
-@synthesize errNumberEqual = _errNumberEqual;
-@synthesize errNumberIn = _errNumberIn;
-@synthesize errNumberNotIn = _errNumberNotIn;
-@synthesize estimatedEffortLessThan = _estimatedEffortLessThan;
-@synthesize estimatedEffortGreaterThan = _estimatedEffortGreaterThan;
-@synthesize urgencyLessThanOrEqual = _urgencyLessThanOrEqual;
-@synthesize urgencyGreaterThanOrEqual = _urgencyGreaterThanOrEqual;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_idEqual = KALTURA_UNDEF_INT;
-    self->_idGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_partnerIdEqual = KALTURA_UNDEF_INT;
-    self->_createdAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_createdAtLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_updatedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_updatedAtLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_executionAttemptsGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_executionAttemptsLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_lockVersionGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_lockVersionLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_jobSubTypeEqual = KALTURA_UNDEF_INT;
-    self->_statusEqual = KALTURA_UNDEF_INT;
-    self->_priorityGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_priorityLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_priorityEqual = KALTURA_UNDEF_INT;
-    self->_batchVersionGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_batchVersionLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_batchVersionEqual = KALTURA_UNDEF_INT;
-    self->_queueTimeGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_queueTimeLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_finishTimeGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_finishTimeLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_errTypeEqual = KALTURA_UNDEF_INT;
-    self->_errNumberEqual = KALTURA_UNDEF_INT;
-    self->_estimatedEffortLessThan = KALTURA_UNDEF_INT;
-    self->_estimatedEffortGreaterThan = KALTURA_UNDEF_INT;
-    self->_urgencyLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_urgencyGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfIdEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfIdGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfPartnerIdEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfPartnerIdIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfPartnerIdNotIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfExecutionAttemptsGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfExecutionAttemptsLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfLockVersionGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfLockVersionLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfEntryIdEqual
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfJobTypeEqual
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfJobTypeIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfJobTypeNotIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfJobSubTypeEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfJobSubTypeIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfJobSubTypeNotIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfStatusEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfStatusIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfStatusNotIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfPriorityGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfPriorityLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfPriorityEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfPriorityIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfPriorityNotIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfBatchVersionGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfBatchVersionLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfBatchVersionEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfQueueTimeGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfQueueTimeLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfFinishTimeGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfFinishTimeLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfErrTypeEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfErrTypeIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfErrTypeNotIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfErrNumberEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfErrNumberIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfErrNumberNotIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfEstimatedEffortLessThan
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfEstimatedEffortGreaterThan
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfUrgencyLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfUrgencyGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (void)setIdEqualFromString:(NSString*)aPropVal
-{
-    self.idEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setIdGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.idGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setPartnerIdEqualFromString:(NSString*)aPropVal
-{
-    self.partnerIdEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.createdAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.createdAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.updatedAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.updatedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setExecutionAttemptsGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.executionAttemptsGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setExecutionAttemptsLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.executionAttemptsLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setLockVersionGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.lockVersionGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setLockVersionLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.lockVersionLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setJobSubTypeEqualFromString:(NSString*)aPropVal
-{
-    self.jobSubTypeEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setStatusEqualFromString:(NSString*)aPropVal
-{
-    self.statusEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setPriorityGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.priorityGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setPriorityLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.priorityLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setPriorityEqualFromString:(NSString*)aPropVal
-{
-    self.priorityEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setBatchVersionGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.batchVersionGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setBatchVersionLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.batchVersionLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setBatchVersionEqualFromString:(NSString*)aPropVal
-{
-    self.batchVersionEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setQueueTimeGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.queueTimeGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setQueueTimeLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.queueTimeLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setFinishTimeGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.finishTimeGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setFinishTimeLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.finishTimeLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setErrTypeEqualFromString:(NSString*)aPropVal
-{
-    self.errTypeEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setErrNumberEqualFromString:(NSString*)aPropVal
-{
-    self.errNumberEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setEstimatedEffortLessThanFromString:(NSString*)aPropVal
-{
-    self.estimatedEffortLessThan = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setEstimatedEffortGreaterThanFromString:(NSString*)aPropVal
-{
-    self.estimatedEffortGreaterThan = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setUrgencyLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.urgencyLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setUrgencyGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.urgencyGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaBatchJobBaseFilter"];
-    [aParams addIfDefinedKey:@"idEqual" withInt:self.idEqual];
-    [aParams addIfDefinedKey:@"idGreaterThanOrEqual" withInt:self.idGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"partnerIdEqual" withInt:self.partnerIdEqual];
-    [aParams addIfDefinedKey:@"partnerIdIn" withString:self.partnerIdIn];
-    [aParams addIfDefinedKey:@"partnerIdNotIn" withString:self.partnerIdNotIn];
-    [aParams addIfDefinedKey:@"createdAtGreaterThanOrEqual" withInt:self.createdAtGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
-    [aParams addIfDefinedKey:@"updatedAtGreaterThanOrEqual" withInt:self.updatedAtGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
-    [aParams addIfDefinedKey:@"executionAttemptsGreaterThanOrEqual" withInt:self.executionAttemptsGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"executionAttemptsLessThanOrEqual" withInt:self.executionAttemptsLessThanOrEqual];
-    [aParams addIfDefinedKey:@"lockVersionGreaterThanOrEqual" withInt:self.lockVersionGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"lockVersionLessThanOrEqual" withInt:self.lockVersionLessThanOrEqual];
-    [aParams addIfDefinedKey:@"entryIdEqual" withString:self.entryIdEqual];
-    [aParams addIfDefinedKey:@"jobTypeEqual" withString:self.jobTypeEqual];
-    [aParams addIfDefinedKey:@"jobTypeIn" withString:self.jobTypeIn];
-    [aParams addIfDefinedKey:@"jobTypeNotIn" withString:self.jobTypeNotIn];
-    [aParams addIfDefinedKey:@"jobSubTypeEqual" withInt:self.jobSubTypeEqual];
-    [aParams addIfDefinedKey:@"jobSubTypeIn" withString:self.jobSubTypeIn];
-    [aParams addIfDefinedKey:@"jobSubTypeNotIn" withString:self.jobSubTypeNotIn];
-    [aParams addIfDefinedKey:@"statusEqual" withInt:self.statusEqual];
-    [aParams addIfDefinedKey:@"statusIn" withString:self.statusIn];
-    [aParams addIfDefinedKey:@"statusNotIn" withString:self.statusNotIn];
-    [aParams addIfDefinedKey:@"priorityGreaterThanOrEqual" withInt:self.priorityGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"priorityLessThanOrEqual" withInt:self.priorityLessThanOrEqual];
-    [aParams addIfDefinedKey:@"priorityEqual" withInt:self.priorityEqual];
-    [aParams addIfDefinedKey:@"priorityIn" withString:self.priorityIn];
-    [aParams addIfDefinedKey:@"priorityNotIn" withString:self.priorityNotIn];
-    [aParams addIfDefinedKey:@"batchVersionGreaterThanOrEqual" withInt:self.batchVersionGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"batchVersionLessThanOrEqual" withInt:self.batchVersionLessThanOrEqual];
-    [aParams addIfDefinedKey:@"batchVersionEqual" withInt:self.batchVersionEqual];
-    [aParams addIfDefinedKey:@"queueTimeGreaterThanOrEqual" withInt:self.queueTimeGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"queueTimeLessThanOrEqual" withInt:self.queueTimeLessThanOrEqual];
-    [aParams addIfDefinedKey:@"finishTimeGreaterThanOrEqual" withInt:self.finishTimeGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"finishTimeLessThanOrEqual" withInt:self.finishTimeLessThanOrEqual];
-    [aParams addIfDefinedKey:@"errTypeEqual" withInt:self.errTypeEqual];
-    [aParams addIfDefinedKey:@"errTypeIn" withString:self.errTypeIn];
-    [aParams addIfDefinedKey:@"errTypeNotIn" withString:self.errTypeNotIn];
-    [aParams addIfDefinedKey:@"errNumberEqual" withInt:self.errNumberEqual];
-    [aParams addIfDefinedKey:@"errNumberIn" withString:self.errNumberIn];
-    [aParams addIfDefinedKey:@"errNumberNotIn" withString:self.errNumberNotIn];
-    [aParams addIfDefinedKey:@"estimatedEffortLessThan" withInt:self.estimatedEffortLessThan];
-    [aParams addIfDefinedKey:@"estimatedEffortGreaterThan" withInt:self.estimatedEffortGreaterThan];
-    [aParams addIfDefinedKey:@"urgencyLessThanOrEqual" withInt:self.urgencyLessThanOrEqual];
-    [aParams addIfDefinedKey:@"urgencyGreaterThanOrEqual" withInt:self.urgencyGreaterThanOrEqual];
-}
-
-- (void)dealloc
-{
-    [self->_partnerIdIn release];
-    [self->_partnerIdNotIn release];
-    [self->_entryIdEqual release];
-    [self->_jobTypeEqual release];
-    [self->_jobTypeIn release];
-    [self->_jobTypeNotIn release];
-    [self->_jobSubTypeIn release];
-    [self->_jobSubTypeNotIn release];
-    [self->_statusIn release];
-    [self->_statusNotIn release];
-    [self->_priorityIn release];
-    [self->_priorityNotIn release];
-    [self->_errTypeIn release];
-    [self->_errTypeNotIn release];
-    [self->_errNumberIn release];
-    [self->_errNumberNotIn release];
-    [super dealloc];
-}
-
-@end
-
-@implementation KalturaBatchJobFilter
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaBatchJobFilter"];
-}
-
-@end
-
-@implementation KalturaWorkerQueueFilter
-@synthesize schedulerId = _schedulerId;
-@synthesize workerId = _workerId;
-@synthesize jobType = _jobType;
-@synthesize filter = _filter;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_schedulerId = KALTURA_UNDEF_INT;
-    self->_workerId = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfSchedulerId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfWorkerId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfJobType
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfFilter
-{
-    return KFT_Object;
-}
-
-- (NSString*)getObjectTypeOfFilter
-{
-    return @"KalturaBatchJobFilter";
-}
-
-- (void)setSchedulerIdFromString:(NSString*)aPropVal
-{
-    self.schedulerId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setWorkerIdFromString:(NSString*)aPropVal
-{
-    self.workerId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaWorkerQueueFilter"];
-    [aParams addIfDefinedKey:@"schedulerId" withInt:self.schedulerId];
-    [aParams addIfDefinedKey:@"workerId" withInt:self.workerId];
-    [aParams addIfDefinedKey:@"jobType" withString:self.jobType];
-    [aParams addIfDefinedKey:@"filter" withObject:self.filter];
-}
-
-- (void)dealloc
-{
-    [self->_jobType release];
-    [self->_filter release];
-    [super dealloc];
-}
-
-@end
-
 @implementation KalturaAccessControlBlockAction
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
@@ -26040,6 +25137,535 @@
 
 @end
 
+@implementation KalturaBatchJobBaseFilter
+@synthesize idEqual = _idEqual;
+@synthesize idGreaterThanOrEqual = _idGreaterThanOrEqual;
+@synthesize partnerIdEqual = _partnerIdEqual;
+@synthesize partnerIdIn = _partnerIdIn;
+@synthesize partnerIdNotIn = _partnerIdNotIn;
+@synthesize createdAtGreaterThanOrEqual = _createdAtGreaterThanOrEqual;
+@synthesize createdAtLessThanOrEqual = _createdAtLessThanOrEqual;
+@synthesize updatedAtGreaterThanOrEqual = _updatedAtGreaterThanOrEqual;
+@synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
+@synthesize executionAttemptsGreaterThanOrEqual = _executionAttemptsGreaterThanOrEqual;
+@synthesize executionAttemptsLessThanOrEqual = _executionAttemptsLessThanOrEqual;
+@synthesize lockVersionGreaterThanOrEqual = _lockVersionGreaterThanOrEqual;
+@synthesize lockVersionLessThanOrEqual = _lockVersionLessThanOrEqual;
+@synthesize entryIdEqual = _entryIdEqual;
+@synthesize jobTypeEqual = _jobTypeEqual;
+@synthesize jobTypeIn = _jobTypeIn;
+@synthesize jobTypeNotIn = _jobTypeNotIn;
+@synthesize jobSubTypeEqual = _jobSubTypeEqual;
+@synthesize jobSubTypeIn = _jobSubTypeIn;
+@synthesize jobSubTypeNotIn = _jobSubTypeNotIn;
+@synthesize statusEqual = _statusEqual;
+@synthesize statusIn = _statusIn;
+@synthesize statusNotIn = _statusNotIn;
+@synthesize priorityGreaterThanOrEqual = _priorityGreaterThanOrEqual;
+@synthesize priorityLessThanOrEqual = _priorityLessThanOrEqual;
+@synthesize priorityEqual = _priorityEqual;
+@synthesize priorityIn = _priorityIn;
+@synthesize priorityNotIn = _priorityNotIn;
+@synthesize batchVersionGreaterThanOrEqual = _batchVersionGreaterThanOrEqual;
+@synthesize batchVersionLessThanOrEqual = _batchVersionLessThanOrEqual;
+@synthesize batchVersionEqual = _batchVersionEqual;
+@synthesize queueTimeGreaterThanOrEqual = _queueTimeGreaterThanOrEqual;
+@synthesize queueTimeLessThanOrEqual = _queueTimeLessThanOrEqual;
+@synthesize finishTimeGreaterThanOrEqual = _finishTimeGreaterThanOrEqual;
+@synthesize finishTimeLessThanOrEqual = _finishTimeLessThanOrEqual;
+@synthesize errTypeEqual = _errTypeEqual;
+@synthesize errTypeIn = _errTypeIn;
+@synthesize errTypeNotIn = _errTypeNotIn;
+@synthesize errNumberEqual = _errNumberEqual;
+@synthesize errNumberIn = _errNumberIn;
+@synthesize errNumberNotIn = _errNumberNotIn;
+@synthesize estimatedEffortLessThan = _estimatedEffortLessThan;
+@synthesize estimatedEffortGreaterThan = _estimatedEffortGreaterThan;
+@synthesize urgencyLessThanOrEqual = _urgencyLessThanOrEqual;
+@synthesize urgencyGreaterThanOrEqual = _urgencyGreaterThanOrEqual;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_idEqual = KALTURA_UNDEF_INT;
+    self->_idGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_partnerIdEqual = KALTURA_UNDEF_INT;
+    self->_createdAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_createdAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_updatedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_updatedAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_executionAttemptsGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_executionAttemptsLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_lockVersionGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_lockVersionLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_jobSubTypeEqual = KALTURA_UNDEF_INT;
+    self->_statusEqual = KALTURA_UNDEF_INT;
+    self->_priorityGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_priorityLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_priorityEqual = KALTURA_UNDEF_INT;
+    self->_batchVersionGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_batchVersionLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_batchVersionEqual = KALTURA_UNDEF_INT;
+    self->_queueTimeGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_queueTimeLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_finishTimeGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_finishTimeLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_errTypeEqual = KALTURA_UNDEF_INT;
+    self->_errNumberEqual = KALTURA_UNDEF_INT;
+    self->_estimatedEffortLessThan = KALTURA_UNDEF_INT;
+    self->_estimatedEffortGreaterThan = KALTURA_UNDEF_INT;
+    self->_urgencyLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_urgencyGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfIdEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfIdGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfPartnerIdEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfPartnerIdIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfPartnerIdNotIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfExecutionAttemptsGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfExecutionAttemptsLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfLockVersionGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfLockVersionLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfEntryIdEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfJobTypeEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfJobTypeIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfJobTypeNotIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfJobSubTypeEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfJobSubTypeIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfJobSubTypeNotIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfStatusEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfStatusIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfStatusNotIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfPriorityGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfPriorityLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfPriorityEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfPriorityIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfPriorityNotIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfBatchVersionGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfBatchVersionLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfBatchVersionEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfQueueTimeGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfQueueTimeLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfFinishTimeGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfFinishTimeLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfErrTypeEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfErrTypeIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfErrTypeNotIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfErrNumberEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfErrNumberIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfErrNumberNotIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEstimatedEffortLessThan
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfEstimatedEffortGreaterThan
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUrgencyLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUrgencyGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (void)setIdEqualFromString:(NSString*)aPropVal
+{
+    self.idEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setIdGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.idGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setPartnerIdEqualFromString:(NSString*)aPropVal
+{
+    self.partnerIdEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.createdAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.createdAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.updatedAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.updatedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setExecutionAttemptsGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.executionAttemptsGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setExecutionAttemptsLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.executionAttemptsLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setLockVersionGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.lockVersionGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setLockVersionLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.lockVersionLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setJobSubTypeEqualFromString:(NSString*)aPropVal
+{
+    self.jobSubTypeEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setStatusEqualFromString:(NSString*)aPropVal
+{
+    self.statusEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setPriorityGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.priorityGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setPriorityLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.priorityLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setPriorityEqualFromString:(NSString*)aPropVal
+{
+    self.priorityEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setBatchVersionGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.batchVersionGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setBatchVersionLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.batchVersionLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setBatchVersionEqualFromString:(NSString*)aPropVal
+{
+    self.batchVersionEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setQueueTimeGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.queueTimeGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setQueueTimeLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.queueTimeLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setFinishTimeGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.finishTimeGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setFinishTimeLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.finishTimeLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setErrTypeEqualFromString:(NSString*)aPropVal
+{
+    self.errTypeEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setErrNumberEqualFromString:(NSString*)aPropVal
+{
+    self.errNumberEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setEstimatedEffortLessThanFromString:(NSString*)aPropVal
+{
+    self.estimatedEffortLessThan = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setEstimatedEffortGreaterThanFromString:(NSString*)aPropVal
+{
+    self.estimatedEffortGreaterThan = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUrgencyLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.urgencyLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUrgencyGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.urgencyGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaBatchJobBaseFilter"];
+    [aParams addIfDefinedKey:@"idEqual" withInt:self.idEqual];
+    [aParams addIfDefinedKey:@"idGreaterThanOrEqual" withInt:self.idGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"partnerIdEqual" withInt:self.partnerIdEqual];
+    [aParams addIfDefinedKey:@"partnerIdIn" withString:self.partnerIdIn];
+    [aParams addIfDefinedKey:@"partnerIdNotIn" withString:self.partnerIdNotIn];
+    [aParams addIfDefinedKey:@"createdAtGreaterThanOrEqual" withInt:self.createdAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
+    [aParams addIfDefinedKey:@"updatedAtGreaterThanOrEqual" withInt:self.updatedAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
+    [aParams addIfDefinedKey:@"executionAttemptsGreaterThanOrEqual" withInt:self.executionAttemptsGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"executionAttemptsLessThanOrEqual" withInt:self.executionAttemptsLessThanOrEqual];
+    [aParams addIfDefinedKey:@"lockVersionGreaterThanOrEqual" withInt:self.lockVersionGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"lockVersionLessThanOrEqual" withInt:self.lockVersionLessThanOrEqual];
+    [aParams addIfDefinedKey:@"entryIdEqual" withString:self.entryIdEqual];
+    [aParams addIfDefinedKey:@"jobTypeEqual" withString:self.jobTypeEqual];
+    [aParams addIfDefinedKey:@"jobTypeIn" withString:self.jobTypeIn];
+    [aParams addIfDefinedKey:@"jobTypeNotIn" withString:self.jobTypeNotIn];
+    [aParams addIfDefinedKey:@"jobSubTypeEqual" withInt:self.jobSubTypeEqual];
+    [aParams addIfDefinedKey:@"jobSubTypeIn" withString:self.jobSubTypeIn];
+    [aParams addIfDefinedKey:@"jobSubTypeNotIn" withString:self.jobSubTypeNotIn];
+    [aParams addIfDefinedKey:@"statusEqual" withInt:self.statusEqual];
+    [aParams addIfDefinedKey:@"statusIn" withString:self.statusIn];
+    [aParams addIfDefinedKey:@"statusNotIn" withString:self.statusNotIn];
+    [aParams addIfDefinedKey:@"priorityGreaterThanOrEqual" withInt:self.priorityGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"priorityLessThanOrEqual" withInt:self.priorityLessThanOrEqual];
+    [aParams addIfDefinedKey:@"priorityEqual" withInt:self.priorityEqual];
+    [aParams addIfDefinedKey:@"priorityIn" withString:self.priorityIn];
+    [aParams addIfDefinedKey:@"priorityNotIn" withString:self.priorityNotIn];
+    [aParams addIfDefinedKey:@"batchVersionGreaterThanOrEqual" withInt:self.batchVersionGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"batchVersionLessThanOrEqual" withInt:self.batchVersionLessThanOrEqual];
+    [aParams addIfDefinedKey:@"batchVersionEqual" withInt:self.batchVersionEqual];
+    [aParams addIfDefinedKey:@"queueTimeGreaterThanOrEqual" withInt:self.queueTimeGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"queueTimeLessThanOrEqual" withInt:self.queueTimeLessThanOrEqual];
+    [aParams addIfDefinedKey:@"finishTimeGreaterThanOrEqual" withInt:self.finishTimeGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"finishTimeLessThanOrEqual" withInt:self.finishTimeLessThanOrEqual];
+    [aParams addIfDefinedKey:@"errTypeEqual" withInt:self.errTypeEqual];
+    [aParams addIfDefinedKey:@"errTypeIn" withString:self.errTypeIn];
+    [aParams addIfDefinedKey:@"errTypeNotIn" withString:self.errTypeNotIn];
+    [aParams addIfDefinedKey:@"errNumberEqual" withInt:self.errNumberEqual];
+    [aParams addIfDefinedKey:@"errNumberIn" withString:self.errNumberIn];
+    [aParams addIfDefinedKey:@"errNumberNotIn" withString:self.errNumberNotIn];
+    [aParams addIfDefinedKey:@"estimatedEffortLessThan" withInt:self.estimatedEffortLessThan];
+    [aParams addIfDefinedKey:@"estimatedEffortGreaterThan" withInt:self.estimatedEffortGreaterThan];
+    [aParams addIfDefinedKey:@"urgencyLessThanOrEqual" withInt:self.urgencyLessThanOrEqual];
+    [aParams addIfDefinedKey:@"urgencyGreaterThanOrEqual" withInt:self.urgencyGreaterThanOrEqual];
+}
+
+- (void)dealloc
+{
+    [self->_partnerIdIn release];
+    [self->_partnerIdNotIn release];
+    [self->_entryIdEqual release];
+    [self->_jobTypeEqual release];
+    [self->_jobTypeIn release];
+    [self->_jobTypeNotIn release];
+    [self->_jobSubTypeIn release];
+    [self->_jobSubTypeNotIn release];
+    [self->_statusIn release];
+    [self->_statusNotIn release];
+    [self->_priorityIn release];
+    [self->_priorityNotIn release];
+    [self->_errTypeIn release];
+    [self->_errTypeNotIn release];
+    [self->_errNumberIn release];
+    [self->_errNumberNotIn release];
+    [super dealloc];
+}
+
+@end
+
 @interface KalturaBatchJobListResponse()
 @property (nonatomic,retain) NSMutableArray* objects;
 @end
@@ -26068,6 +25694,38 @@
 {
     [self->_objects release];
     [super dealloc];
+}
+
+@end
+
+@implementation KalturaBooleanValue
+@synthesize value = _value;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_value = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfValue
+{
+    return KFT_Bool;
+}
+
+- (void)setValueFromString:(NSString*)aPropVal
+{
+    self.value = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaBooleanValue"];
+    [aParams addIfDefinedKey:@"value" withBool:self.value];
 }
 
 @end
@@ -30425,6 +30083,38 @@
 
 @end
 
+@interface KalturaFlavorParamsOutputListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
+
+@implementation KalturaFlavorParamsOutputListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfObjects
+{
+    return @"KalturaFlavorParamsOutput";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaFlavorParamsOutputListResponse"];
+}
+
+- (void)dealloc
+{
+    [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaGenericSyndicationFeed
 @synthesize feedDescription = _feedDescription;
 @synthesize feedLandingPage = _feedLandingPage;
@@ -31380,6 +31070,38 @@
 - (void)dealloc
 {
     [self->_flavorAssetIdEqual release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaMediaInfoListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
+
+@implementation KalturaMediaInfoListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfObjects
+{
+    return @"KalturaMediaInfo";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaMediaInfoListResponse"];
+}
+
+- (void)dealloc
+{
+    [self->_objects release];
     [super dealloc];
 }
 
@@ -33408,6 +33130,38 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaThumbParamsListResponse"];
+}
+
+- (void)dealloc
+{
+    [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaThumbParamsOutputListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
+
+@implementation KalturaThumbParamsOutputListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfObjects
+{
+    return @"KalturaThumbParamsOutput";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaThumbParamsOutputListResponse"];
 }
 
 - (void)dealloc
@@ -35512,6 +35266,16 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaBaseSyndicationFeedFilter"];
+}
+
+@end
+
+@implementation KalturaBatchJobFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaBatchJobFilter"];
 }
 
 @end
@@ -43165,6 +42929,13 @@
 {
     [self.client.params addIfDefinedKey:@"options" withObject:aOptions];
     return [self.client queueObjectService:@"responseprofile" withAction:@"recalculate" withExpectedType:@"KalturaResponseProfileCacheRecalculateResults"];
+}
+
+- (KalturaResponseProfile*)cloneWithId:(int)aId withProfile:(KalturaResponseProfile*)aProfile
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"profile" withObject:aProfile];
+    return [self.client queueObjectService:@"responseprofile" withAction:@"clone" withExpectedType:@"KalturaResponseProfile"];
 }
 
 @end
