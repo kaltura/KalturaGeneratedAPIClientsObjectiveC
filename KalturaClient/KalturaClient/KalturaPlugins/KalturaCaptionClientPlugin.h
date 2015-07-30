@@ -87,6 +87,8 @@
 @property (nonatomic,assign,readonly) int status;	// enum KalturaCaptionAssetStatus
 // The parent id of the asset
 @property (nonatomic,copy) NSString* parentId;	// insertonly
+// The Accuracy of the caption content
+@property (nonatomic,assign) int accuracy;
 - (KalturaFieldType)getTypeOfCaptionParamsId;
 - (KalturaFieldType)getTypeOfLanguage;
 - (KalturaFieldType)getTypeOfLanguageCode;
@@ -95,9 +97,11 @@
 - (KalturaFieldType)getTypeOfFormat;
 - (KalturaFieldType)getTypeOfStatus;
 - (KalturaFieldType)getTypeOfParentId;
+- (KalturaFieldType)getTypeOfAccuracy;
 - (void)setCaptionParamsIdFromString:(NSString*)aPropVal;
 - (void)setIsDefaultFromString:(NSString*)aPropVal;
 - (void)setStatusFromString:(NSString*)aPropVal;
+- (void)setAccuracyFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
