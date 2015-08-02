@@ -1,9 +1,0 @@
-language: objective-c
-script: xcodebuild -project KalturaClient/KalturaClient.xcodeproj  && touch ~/codesign && chmod +x ~/codesign && export PATH=~/:$PATH &&  xcodebuild -project KalturaClientTester/KalturaClientTester.xcodeproj -sdk iphonesimulator 
-notifications:
-  email:
-    recipients:
-      - moshe.maor@kaltura.com
-      - jess.portnoy@kaltura.com
-    on_success: change
-    on_failure: always
