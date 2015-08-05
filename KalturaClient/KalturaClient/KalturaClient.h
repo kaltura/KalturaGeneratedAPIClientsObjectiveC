@@ -2716,6 +2716,8 @@
 // @subpackage Client
 @interface KalturaReportType : NSObject
 + (NSString*)QUIZ;
++ (NSString*)QUIZ_AGGREGATE_BY_QUESTION;
++ (NSString*)QUIZ_USER_AGGREGATE_BY_QUESTION;
 + (NSString*)QUIZ_USER_PERCENTAGE;
 + (NSString*)TOP_CONTENT;
 + (NSString*)CONTENT_DROPOFF;
@@ -2781,6 +2783,7 @@
 + (NSString*)GREATER_THAN_OR_EQUAL;
 + (NSString*)LESS_THAN;
 + (NSString*)LESS_THAN_OR_EQUAL;
++ (NSString*)NOT_EQUAL;
 @end
 
 // @package Kaltura
@@ -11008,6 +11011,14 @@
 @interface KalturaSearchComparableCondition : KalturaSearchCondition
 @property (nonatomic,copy) NSString* comparison;	// enum KalturaSearchConditionComparison
 - (KalturaFieldType)getTypeOfComparison;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaSearchMatchCondition : KalturaSearchCondition
+@property (nonatomic,assign) KALTURA_BOOL not;
+- (KalturaFieldType)getTypeOfNot;
+- (void)setNotFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

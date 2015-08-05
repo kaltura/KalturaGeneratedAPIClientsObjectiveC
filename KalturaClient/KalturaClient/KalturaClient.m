@@ -7506,6 +7506,14 @@
 {
     return @"quiz.QUIZ";
 }
++ (NSString*)QUIZ_AGGREGATE_BY_QUESTION
+{
+    return @"quiz.QUIZ_AGGREGATE_BY_QUESTION";
+}
++ (NSString*)QUIZ_USER_AGGREGATE_BY_QUESTION
+{
+    return @"quiz.QUIZ_USER_AGGREGATE_BY_QUESTION";
+}
 + (NSString*)QUIZ_USER_PERCENTAGE
 {
     return @"quiz.QUIZ_USER_PERCENTAGE";
@@ -7697,6 +7705,10 @@
 + (NSString*)LESS_THAN_OR_EQUAL
 {
     return @"5";
+}
++ (NSString*)NOT_EQUAL
+{
+    return @"6";
 }
 @end
 
@@ -38022,6 +38034,38 @@
 {
     [self->_comparison release];
     [super dealloc];
+}
+
+@end
+
+@implementation KalturaSearchMatchCondition
+@synthesize not = _not;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_not = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfNot
+{
+    return KFT_Bool;
+}
+
+- (void)setNotFromString:(NSString*)aPropVal
+{
+    self.not = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaSearchMatchCondition"];
+    [aParams addIfDefinedKey:@"not" withBool:self.not];
 }
 
 @end
