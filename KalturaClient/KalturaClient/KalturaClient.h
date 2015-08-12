@@ -992,6 +992,15 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaAppTokenHashType : NSObject
++ (NSString*)MD5;
++ (NSString*)SHA1;
++ (NSString*)SHA256;
++ (NSString*)SHA512;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaAppTokenOrderBy : NSObject
 + (NSString*)CREATED_AT_ASC;
 + (NSString*)UPDATED_AT_ASC;
@@ -3264,6 +3273,7 @@
 @property (nonatomic,assign) int sessionDuration;
 // Comma separated privileges to be applied on KS (Kaltura Session) that created using the current token
 @property (nonatomic,copy) NSString* sessionPrivileges;
+@property (nonatomic,copy) NSString* hashType;	// enum KalturaAppTokenHashType
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfToken;
 - (KalturaFieldType)getTypeOfPartnerId;
@@ -3275,6 +3285,7 @@
 - (KalturaFieldType)getTypeOfSessionUserId;
 - (KalturaFieldType)getTypeOfSessionDuration;
 - (KalturaFieldType)getTypeOfSessionPrivileges;
+- (KalturaFieldType)getTypeOfHashType;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
