@@ -992,15 +992,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaAppTokenHashType : NSObject
-+ (NSString*)MD5;
-+ (NSString*)SHA1;
-+ (NSString*)SHA256;
-+ (NSString*)SHA512;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaAppTokenOrderBy : NSObject
 + (NSString*)CREATED_AT_ASC;
 + (NSString*)UPDATED_AT_ASC;
@@ -1061,6 +1052,43 @@
 + (NSString*)VORBIS;
 + (NSString*)WMA;
 + (NSString*)WMAPRO;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaBaseEntryCompareAttribute : NSObject
++ (NSString*)ACCESS_CONTROL_ID;
++ (NSString*)CREATED_AT;
++ (NSString*)END_DATE;
++ (NSString*)MODERATION_COUNT;
++ (NSString*)MODERATION_STATUS;
++ (NSString*)PARTNER_ID;
++ (NSString*)PARTNER_SORT_VALUE;
++ (NSString*)RANK;
++ (NSString*)REPLACEMENT_STATUS;
++ (NSString*)START_DATE;
++ (NSString*)STATUS;
++ (NSString*)TOTAL_RANK;
++ (NSString*)TYPE;
++ (NSString*)UPDATED_AT;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaBaseEntryMatchAttribute : NSObject
++ (NSString*)ADMIN_TAGS;
++ (NSString*)CATEGORIES_IDS;
++ (NSString*)CREATOR_ID;
++ (NSString*)DESCRIPTION;
++ (NSString*)GROUP_ID;
++ (NSString*)ID;
++ (NSString*)NAME;
++ (NSString*)REFERENCE_ID;
++ (NSString*)REPLACED_ENTRY_ID;
++ (NSString*)REPLACING_ENTRY_ID;
++ (NSString*)SEARCH_TEXT;
++ (NSString*)TAGS;
++ (NSString*)USER_ID;
 @end
 
 // @package Kaltura
@@ -1402,6 +1430,43 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaDataEntryCompareAttribute : NSObject
++ (NSString*)ACCESS_CONTROL_ID;
++ (NSString*)CREATED_AT;
++ (NSString*)END_DATE;
++ (NSString*)MODERATION_COUNT;
++ (NSString*)MODERATION_STATUS;
++ (NSString*)PARTNER_ID;
++ (NSString*)PARTNER_SORT_VALUE;
++ (NSString*)RANK;
++ (NSString*)REPLACEMENT_STATUS;
++ (NSString*)START_DATE;
++ (NSString*)STATUS;
++ (NSString*)TOTAL_RANK;
++ (NSString*)TYPE;
++ (NSString*)UPDATED_AT;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaDataEntryMatchAttribute : NSObject
++ (NSString*)ADMIN_TAGS;
++ (NSString*)CATEGORIES_IDS;
++ (NSString*)CREATOR_ID;
++ (NSString*)DESCRIPTION;
++ (NSString*)GROUP_ID;
++ (NSString*)ID;
++ (NSString*)NAME;
++ (NSString*)REFERENCE_ID;
++ (NSString*)REPLACED_ENTRY_ID;
++ (NSString*)REPLACING_ENTRY_ID;
++ (NSString*)SEARCH_TEXT;
++ (NSString*)TAGS;
++ (NSString*)USER_ID;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaDataEntryOrderBy : NSObject
 + (NSString*)CREATED_AT_ASC;
 + (NSString*)END_DATE_ASC;
@@ -1578,6 +1643,43 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaDocumentEntryCompareAttribute : NSObject
++ (NSString*)ACCESS_CONTROL_ID;
++ (NSString*)CREATED_AT;
++ (NSString*)END_DATE;
++ (NSString*)MODERATION_COUNT;
++ (NSString*)MODERATION_STATUS;
++ (NSString*)PARTNER_ID;
++ (NSString*)PARTNER_SORT_VALUE;
++ (NSString*)RANK;
++ (NSString*)REPLACEMENT_STATUS;
++ (NSString*)START_DATE;
++ (NSString*)STATUS;
++ (NSString*)TOTAL_RANK;
++ (NSString*)TYPE;
++ (NSString*)UPDATED_AT;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaDocumentEntryMatchAttribute : NSObject
++ (NSString*)ADMIN_TAGS;
++ (NSString*)CATEGORIES_IDS;
++ (NSString*)CREATOR_ID;
++ (NSString*)DESCRIPTION;
++ (NSString*)GROUP_ID;
++ (NSString*)ID;
++ (NSString*)NAME;
++ (NSString*)REFERENCE_ID;
++ (NSString*)REPLACED_ENTRY_ID;
++ (NSString*)REPLACING_ENTRY_ID;
++ (NSString*)SEARCH_TEXT;
++ (NSString*)TAGS;
++ (NSString*)USER_ID;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaDurationType : NSObject
 + (NSString*)LONG;
 + (NSString*)MEDIUM;
@@ -1645,6 +1747,51 @@
 + (NSString*)LIVE_STREAM;
 + (NSString*)LIVE_CHANNEL;
 + (NSString*)DOCUMENT;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaExternalMediaEntryCompareAttribute : NSObject
++ (NSString*)ACCESS_CONTROL_ID;
++ (NSString*)CREATED_AT;
++ (NSString*)END_DATE;
++ (NSString*)LAST_PLAYED_AT;
++ (NSString*)MEDIA_DATE;
++ (NSString*)MEDIA_TYPE;
++ (NSString*)MODERATION_COUNT;
++ (NSString*)MODERATION_STATUS;
++ (NSString*)MS_DURATION;
++ (NSString*)PARTNER_ID;
++ (NSString*)PARTNER_SORT_VALUE;
++ (NSString*)PLAYS;
++ (NSString*)RANK;
++ (NSString*)REPLACEMENT_STATUS;
++ (NSString*)START_DATE;
++ (NSString*)STATUS;
++ (NSString*)TOTAL_RANK;
++ (NSString*)TYPE;
++ (NSString*)UPDATED_AT;
++ (NSString*)VIEWS;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaExternalMediaEntryMatchAttribute : NSObject
++ (NSString*)ADMIN_TAGS;
++ (NSString*)CATEGORIES_IDS;
++ (NSString*)CREATOR_ID;
++ (NSString*)DESCRIPTION;
++ (NSString*)DURATION_TYPE;
++ (NSString*)FLAVOR_PARAMS_IDS;
++ (NSString*)GROUP_ID;
++ (NSString*)ID;
++ (NSString*)NAME;
++ (NSString*)REFERENCE_ID;
++ (NSString*)REPLACED_ENTRY_ID;
++ (NSString*)REPLACING_ENTRY_ID;
++ (NSString*)SEARCH_TEXT;
++ (NSString*)TAGS;
++ (NSString*)USER_ID;
 @end
 
 // @package Kaltura
@@ -2194,6 +2341,51 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaLiveChannelCompareAttribute : NSObject
++ (NSString*)ACCESS_CONTROL_ID;
++ (NSString*)CREATED_AT;
++ (NSString*)END_DATE;
++ (NSString*)LAST_PLAYED_AT;
++ (NSString*)MEDIA_DATE;
++ (NSString*)MEDIA_TYPE;
++ (NSString*)MODERATION_COUNT;
++ (NSString*)MODERATION_STATUS;
++ (NSString*)MS_DURATION;
++ (NSString*)PARTNER_ID;
++ (NSString*)PARTNER_SORT_VALUE;
++ (NSString*)PLAYS;
++ (NSString*)RANK;
++ (NSString*)REPLACEMENT_STATUS;
++ (NSString*)START_DATE;
++ (NSString*)STATUS;
++ (NSString*)TOTAL_RANK;
++ (NSString*)TYPE;
++ (NSString*)UPDATED_AT;
++ (NSString*)VIEWS;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaLiveChannelMatchAttribute : NSObject
++ (NSString*)ADMIN_TAGS;
++ (NSString*)CATEGORIES_IDS;
++ (NSString*)CREATOR_ID;
++ (NSString*)DESCRIPTION;
++ (NSString*)DURATION_TYPE;
++ (NSString*)FLAVOR_PARAMS_IDS;
++ (NSString*)GROUP_ID;
++ (NSString*)ID;
++ (NSString*)NAME;
++ (NSString*)REFERENCE_ID;
++ (NSString*)REPLACED_ENTRY_ID;
++ (NSString*)REPLACING_ENTRY_ID;
++ (NSString*)SEARCH_TEXT;
++ (NSString*)TAGS;
++ (NSString*)USER_ID;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaLiveChannelOrderBy : NSObject
 + (NSString*)CREATED_AT_ASC;
 + (NSString*)DURATION_ASC;
@@ -2268,6 +2460,51 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaLiveEntryCompareAttribute : NSObject
++ (NSString*)ACCESS_CONTROL_ID;
++ (NSString*)CREATED_AT;
++ (NSString*)END_DATE;
++ (NSString*)LAST_PLAYED_AT;
++ (NSString*)MEDIA_DATE;
++ (NSString*)MEDIA_TYPE;
++ (NSString*)MODERATION_COUNT;
++ (NSString*)MODERATION_STATUS;
++ (NSString*)MS_DURATION;
++ (NSString*)PARTNER_ID;
++ (NSString*)PARTNER_SORT_VALUE;
++ (NSString*)PLAYS;
++ (NSString*)RANK;
++ (NSString*)REPLACEMENT_STATUS;
++ (NSString*)START_DATE;
++ (NSString*)STATUS;
++ (NSString*)TOTAL_RANK;
++ (NSString*)TYPE;
++ (NSString*)UPDATED_AT;
++ (NSString*)VIEWS;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaLiveEntryMatchAttribute : NSObject
++ (NSString*)ADMIN_TAGS;
++ (NSString*)CATEGORIES_IDS;
++ (NSString*)CREATOR_ID;
++ (NSString*)DESCRIPTION;
++ (NSString*)DURATION_TYPE;
++ (NSString*)FLAVOR_PARAMS_IDS;
++ (NSString*)GROUP_ID;
++ (NSString*)ID;
++ (NSString*)NAME;
++ (NSString*)REFERENCE_ID;
++ (NSString*)REPLACED_ENTRY_ID;
++ (NSString*)REPLACING_ENTRY_ID;
++ (NSString*)SEARCH_TEXT;
++ (NSString*)TAGS;
++ (NSString*)USER_ID;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaLiveEntryOrderBy : NSObject
 + (NSString*)CREATED_AT_ASC;
 + (NSString*)DURATION_ASC;
@@ -2333,6 +2570,51 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaLiveStreamAdminEntryCompareAttribute : NSObject
++ (NSString*)ACCESS_CONTROL_ID;
++ (NSString*)CREATED_AT;
++ (NSString*)END_DATE;
++ (NSString*)LAST_PLAYED_AT;
++ (NSString*)MEDIA_DATE;
++ (NSString*)MEDIA_TYPE;
++ (NSString*)MODERATION_COUNT;
++ (NSString*)MODERATION_STATUS;
++ (NSString*)MS_DURATION;
++ (NSString*)PARTNER_ID;
++ (NSString*)PARTNER_SORT_VALUE;
++ (NSString*)PLAYS;
++ (NSString*)RANK;
++ (NSString*)REPLACEMENT_STATUS;
++ (NSString*)START_DATE;
++ (NSString*)STATUS;
++ (NSString*)TOTAL_RANK;
++ (NSString*)TYPE;
++ (NSString*)UPDATED_AT;
++ (NSString*)VIEWS;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaLiveStreamAdminEntryMatchAttribute : NSObject
++ (NSString*)ADMIN_TAGS;
++ (NSString*)CATEGORIES_IDS;
++ (NSString*)CREATOR_ID;
++ (NSString*)DESCRIPTION;
++ (NSString*)DURATION_TYPE;
++ (NSString*)FLAVOR_PARAMS_IDS;
++ (NSString*)GROUP_ID;
++ (NSString*)ID;
++ (NSString*)NAME;
++ (NSString*)REFERENCE_ID;
++ (NSString*)REPLACED_ENTRY_ID;
++ (NSString*)REPLACING_ENTRY_ID;
++ (NSString*)SEARCH_TEXT;
++ (NSString*)TAGS;
++ (NSString*)USER_ID;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaLiveStreamAdminEntryOrderBy : NSObject
 + (NSString*)CREATED_AT_ASC;
 + (NSString*)DURATION_ASC;
@@ -2370,6 +2652,51 @@
 + (NSString*)UPDATED_AT_DESC;
 + (NSString*)VIEWS_DESC;
 + (NSString*)WEIGHT_DESC;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaLiveStreamEntryCompareAttribute : NSObject
++ (NSString*)ACCESS_CONTROL_ID;
++ (NSString*)CREATED_AT;
++ (NSString*)END_DATE;
++ (NSString*)LAST_PLAYED_AT;
++ (NSString*)MEDIA_DATE;
++ (NSString*)MEDIA_TYPE;
++ (NSString*)MODERATION_COUNT;
++ (NSString*)MODERATION_STATUS;
++ (NSString*)MS_DURATION;
++ (NSString*)PARTNER_ID;
++ (NSString*)PARTNER_SORT_VALUE;
++ (NSString*)PLAYS;
++ (NSString*)RANK;
++ (NSString*)REPLACEMENT_STATUS;
++ (NSString*)START_DATE;
++ (NSString*)STATUS;
++ (NSString*)TOTAL_RANK;
++ (NSString*)TYPE;
++ (NSString*)UPDATED_AT;
++ (NSString*)VIEWS;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaLiveStreamEntryMatchAttribute : NSObject
++ (NSString*)ADMIN_TAGS;
++ (NSString*)CATEGORIES_IDS;
++ (NSString*)CREATOR_ID;
++ (NSString*)DESCRIPTION;
++ (NSString*)DURATION_TYPE;
++ (NSString*)FLAVOR_PARAMS_IDS;
++ (NSString*)GROUP_ID;
++ (NSString*)ID;
++ (NSString*)NAME;
++ (NSString*)REFERENCE_ID;
++ (NSString*)REPLACED_ENTRY_ID;
++ (NSString*)REPLACING_ENTRY_ID;
++ (NSString*)SEARCH_TEXT;
++ (NSString*)TAGS;
++ (NSString*)USER_ID;
 @end
 
 // @package Kaltura
@@ -2462,6 +2789,51 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaMediaEntryCompareAttribute : NSObject
++ (NSString*)ACCESS_CONTROL_ID;
++ (NSString*)CREATED_AT;
++ (NSString*)END_DATE;
++ (NSString*)LAST_PLAYED_AT;
++ (NSString*)MEDIA_DATE;
++ (NSString*)MEDIA_TYPE;
++ (NSString*)MODERATION_COUNT;
++ (NSString*)MODERATION_STATUS;
++ (NSString*)MS_DURATION;
++ (NSString*)PARTNER_ID;
++ (NSString*)PARTNER_SORT_VALUE;
++ (NSString*)PLAYS;
++ (NSString*)RANK;
++ (NSString*)REPLACEMENT_STATUS;
++ (NSString*)START_DATE;
++ (NSString*)STATUS;
++ (NSString*)TOTAL_RANK;
++ (NSString*)TYPE;
++ (NSString*)UPDATED_AT;
++ (NSString*)VIEWS;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaMediaEntryMatchAttribute : NSObject
++ (NSString*)ADMIN_TAGS;
++ (NSString*)CATEGORIES_IDS;
++ (NSString*)CREATOR_ID;
++ (NSString*)DESCRIPTION;
++ (NSString*)DURATION_TYPE;
++ (NSString*)FLAVOR_PARAMS_IDS;
++ (NSString*)GROUP_ID;
++ (NSString*)ID;
++ (NSString*)NAME;
++ (NSString*)REFERENCE_ID;
++ (NSString*)REPLACED_ENTRY_ID;
++ (NSString*)REPLACING_ENTRY_ID;
++ (NSString*)SEARCH_TEXT;
++ (NSString*)TAGS;
++ (NSString*)USER_ID;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaMediaEntryOrderBy : NSObject
 + (NSString*)CREATED_AT_ASC;
 + (NSString*)DURATION_ASC;
@@ -2517,6 +2889,48 @@
 @interface KalturaMediaParserType : NSObject
 + (NSString*)MEDIAINFO;
 + (NSString*)FFMPEG;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaMixEntryCompareAttribute : NSObject
++ (NSString*)ACCESS_CONTROL_ID;
++ (NSString*)CREATED_AT;
++ (NSString*)END_DATE;
++ (NSString*)LAST_PLAYED_AT;
++ (NSString*)MODERATION_COUNT;
++ (NSString*)MODERATION_STATUS;
++ (NSString*)MS_DURATION;
++ (NSString*)PARTNER_ID;
++ (NSString*)PARTNER_SORT_VALUE;
++ (NSString*)PLAYS;
++ (NSString*)RANK;
++ (NSString*)REPLACEMENT_STATUS;
++ (NSString*)START_DATE;
++ (NSString*)STATUS;
++ (NSString*)TOTAL_RANK;
++ (NSString*)TYPE;
++ (NSString*)UPDATED_AT;
++ (NSString*)VIEWS;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaMixEntryMatchAttribute : NSObject
++ (NSString*)ADMIN_TAGS;
++ (NSString*)CATEGORIES_IDS;
++ (NSString*)CREATOR_ID;
++ (NSString*)DESCRIPTION;
++ (NSString*)DURATION_TYPE;
++ (NSString*)GROUP_ID;
++ (NSString*)ID;
++ (NSString*)NAME;
++ (NSString*)REFERENCE_ID;
++ (NSString*)REPLACED_ENTRY_ID;
++ (NSString*)REPLACING_ENTRY_ID;
++ (NSString*)SEARCH_TEXT;
++ (NSString*)TAGS;
++ (NSString*)USER_ID;
 @end
 
 // @package Kaltura
@@ -2620,6 +3034,48 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaPlayableEntryCompareAttribute : NSObject
++ (NSString*)ACCESS_CONTROL_ID;
++ (NSString*)CREATED_AT;
++ (NSString*)END_DATE;
++ (NSString*)LAST_PLAYED_AT;
++ (NSString*)MODERATION_COUNT;
++ (NSString*)MODERATION_STATUS;
++ (NSString*)MS_DURATION;
++ (NSString*)PARTNER_ID;
++ (NSString*)PARTNER_SORT_VALUE;
++ (NSString*)PLAYS;
++ (NSString*)RANK;
++ (NSString*)REPLACEMENT_STATUS;
++ (NSString*)START_DATE;
++ (NSString*)STATUS;
++ (NSString*)TOTAL_RANK;
++ (NSString*)TYPE;
++ (NSString*)UPDATED_AT;
++ (NSString*)VIEWS;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaPlayableEntryMatchAttribute : NSObject
++ (NSString*)ADMIN_TAGS;
++ (NSString*)CATEGORIES_IDS;
++ (NSString*)CREATOR_ID;
++ (NSString*)DESCRIPTION;
++ (NSString*)DURATION_TYPE;
++ (NSString*)GROUP_ID;
++ (NSString*)ID;
++ (NSString*)NAME;
++ (NSString*)REFERENCE_ID;
++ (NSString*)REPLACED_ENTRY_ID;
++ (NSString*)REPLACING_ENTRY_ID;
++ (NSString*)SEARCH_TEXT;
++ (NSString*)TAGS;
++ (NSString*)USER_ID;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaPlayableEntryOrderBy : NSObject
 + (NSString*)CREATED_AT_ASC;
 + (NSString*)DURATION_ASC;
@@ -2669,6 +3125,43 @@
 + (NSString*)RTMP;
 + (NSString*)RTSP;
 + (NSString*)SILVER_LIGHT;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaPlaylistCompareAttribute : NSObject
++ (NSString*)ACCESS_CONTROL_ID;
++ (NSString*)CREATED_AT;
++ (NSString*)END_DATE;
++ (NSString*)MODERATION_COUNT;
++ (NSString*)MODERATION_STATUS;
++ (NSString*)PARTNER_ID;
++ (NSString*)PARTNER_SORT_VALUE;
++ (NSString*)RANK;
++ (NSString*)REPLACEMENT_STATUS;
++ (NSString*)START_DATE;
++ (NSString*)STATUS;
++ (NSString*)TOTAL_RANK;
++ (NSString*)TYPE;
++ (NSString*)UPDATED_AT;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaPlaylistMatchAttribute : NSObject
++ (NSString*)ADMIN_TAGS;
++ (NSString*)CATEGORIES_IDS;
++ (NSString*)CREATOR_ID;
++ (NSString*)DESCRIPTION;
++ (NSString*)GROUP_ID;
++ (NSString*)ID;
++ (NSString*)NAME;
++ (NSString*)REFERENCE_ID;
++ (NSString*)REPLACED_ENTRY_ID;
++ (NSString*)REPLACING_ENTRY_ID;
++ (NSString*)SEARCH_TEXT;
++ (NSString*)TAGS;
++ (NSString*)USER_ID;
 @end
 
 // @package Kaltura
@@ -3273,7 +3766,6 @@
 @property (nonatomic,assign) int sessionDuration;
 // Comma separated privileges to be applied on KS (Kaltura Session) that created using the current token
 @property (nonatomic,copy) NSString* sessionPrivileges;
-@property (nonatomic,copy) NSString* hashType;	// enum KalturaAppTokenHashType
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfToken;
 - (KalturaFieldType)getTypeOfPartnerId;
@@ -3285,7 +3777,6 @@
 - (KalturaFieldType)getTypeOfSessionUserId;
 - (KalturaFieldType)getTypeOfSessionDuration;
 - (KalturaFieldType)getTypeOfSessionPrivileges;
-- (KalturaFieldType)getTypeOfHashType;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
@@ -7637,6 +8128,13 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaAttributeCondition : KalturaSearchItem
+@property (nonatomic,copy) NSString* value;
+- (KalturaFieldType)getTypeOfValue;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaAuthenticatedCondition : KalturaCondition
 // The privelege needed to remove the restriction
 @property (nonatomic,retain) NSMutableArray* privileges;	// of KalturaStringValue elements
@@ -11019,9 +11517,24 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaSearchComparableAttributeCondition : KalturaAttributeCondition
+@property (nonatomic,copy) NSString* comparison;	// enum KalturaSearchConditionComparison
+- (KalturaFieldType)getTypeOfComparison;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaSearchComparableCondition : KalturaSearchCondition
 @property (nonatomic,copy) NSString* comparison;	// enum KalturaSearchConditionComparison
 - (KalturaFieldType)getTypeOfComparison;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaSearchMatchAttributeCondition : KalturaAttributeCondition
+@property (nonatomic,assign) KALTURA_BOOL not;
+- (KalturaFieldType)getTypeOfNot;
+- (void)setNotFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -11190,6 +11703,26 @@
 
 // @package Kaltura
 // @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaBaseEntry attributes. Use KalturaBaseEntryCompareAttribute enum to provide attribute name.
+// /
+@interface KalturaBaseEntryCompareAttributeCondition : KalturaSearchComparableAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaBaseEntryCompareAttribute
+- (KalturaFieldType)getTypeOfAttribute;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaBaseEntry attributes. Use KalturaBaseEntryMatchAttribute enum to provide attribute name.
+// /
+@interface KalturaBaseEntryMatchAttributeCondition : KalturaSearchMatchAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaBaseEntryMatchAttribute
+- (KalturaFieldType)getTypeOfAttribute;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaBatchJobFilterExt : KalturaBatchJobFilter
 @property (nonatomic,copy) NSString* jobTypeAndSubTypeIn;
 - (KalturaFieldType)getTypeOfJobTypeAndSubTypeIn;
@@ -11258,6 +11791,26 @@
 
 // @package Kaltura
 // @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaDataEntry attributes. Use KalturaDataEntryCompareAttribute enum to provide attribute name.
+// /
+@interface KalturaDataEntryCompareAttributeCondition : KalturaSearchComparableAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaDataEntryCompareAttribute
+- (KalturaFieldType)getTypeOfAttribute;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaDataEntry attributes. Use KalturaDataEntryMatchAttribute enum to provide attribute name.
+// /
+@interface KalturaDataEntryMatchAttributeCondition : KalturaSearchMatchAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaDataEntryMatchAttribute
+- (KalturaFieldType)getTypeOfAttribute;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaDeliveryProfileAkamaiAppleHttpManifestBaseFilter : KalturaDeliveryProfileFilter
 @end
 
@@ -11303,6 +11856,26 @@
 
 // @package Kaltura
 // @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaDocumentEntry attributes. Use KalturaDocumentEntryCompareAttribute enum to provide attribute name.
+// /
+@interface KalturaDocumentEntryCompareAttributeCondition : KalturaSearchComparableAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaDocumentEntryCompareAttribute
+- (KalturaFieldType)getTypeOfAttribute;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaDocumentEntry attributes. Use KalturaDocumentEntryMatchAttribute enum to provide attribute name.
+// /
+@interface KalturaDocumentEntryMatchAttributeCondition : KalturaSearchMatchAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaDocumentEntryMatchAttribute
+- (KalturaFieldType)getTypeOfAttribute;
+@end
+
+// @package Kaltura
+// @subpackage Client
 // Evaluates PHP statement, depends on the execution context
 @interface KalturaEvalBooleanField : KalturaBooleanField
 // PHP code
@@ -11317,6 +11890,26 @@
 // PHP code
 @property (nonatomic,copy) NSString* code;
 - (KalturaFieldType)getTypeOfCode;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaExternalMediaEntry attributes. Use KalturaExternalMediaEntryCompareAttribute enum to provide attribute name.
+// /
+@interface KalturaExternalMediaEntryCompareAttributeCondition : KalturaSearchComparableAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaExternalMediaEntryCompareAttribute
+- (KalturaFieldType)getTypeOfAttribute;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaExternalMediaEntry attributes. Use KalturaExternalMediaEntryMatchAttribute enum to provide attribute name.
+// /
+@interface KalturaExternalMediaEntryMatchAttributeCondition : KalturaSearchMatchAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaExternalMediaEntryMatchAttribute
+- (KalturaFieldType)getTypeOfAttribute;
 @end
 
 // @package Kaltura
@@ -11352,12 +11945,132 @@
 
 // @package Kaltura
 // @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaLiveChannel attributes. Use KalturaLiveChannelCompareAttribute enum to provide attribute name.
+// /
+@interface KalturaLiveChannelCompareAttributeCondition : KalturaSearchComparableAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaLiveChannelCompareAttribute
+- (KalturaFieldType)getTypeOfAttribute;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaLiveChannel attributes. Use KalturaLiveChannelMatchAttribute enum to provide attribute name.
+// /
+@interface KalturaLiveChannelMatchAttributeCondition : KalturaSearchMatchAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaLiveChannelMatchAttribute
+- (KalturaFieldType)getTypeOfAttribute;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaLiveChannelSegmentFilter : KalturaLiveChannelSegmentBaseFilter
 @end
 
 // @package Kaltura
 // @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaLiveEntry attributes. Use KalturaLiveEntryCompareAttribute enum to provide attribute name.
+// /
+@interface KalturaLiveEntryCompareAttributeCondition : KalturaSearchComparableAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaLiveEntryCompareAttribute
+- (KalturaFieldType)getTypeOfAttribute;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaLiveEntry attributes. Use KalturaLiveEntryMatchAttribute enum to provide attribute name.
+// /
+@interface KalturaLiveEntryMatchAttributeCondition : KalturaSearchMatchAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaLiveEntryMatchAttribute
+- (KalturaFieldType)getTypeOfAttribute;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaLiveStreamAdminEntry attributes. Use KalturaLiveStreamAdminEntryCompareAttribute enum to provide attribute name.
+// /
+@interface KalturaLiveStreamAdminEntryCompareAttributeCondition : KalturaSearchComparableAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaLiveStreamAdminEntryCompareAttribute
+- (KalturaFieldType)getTypeOfAttribute;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaLiveStreamAdminEntry attributes. Use KalturaLiveStreamAdminEntryMatchAttribute enum to provide attribute name.
+// /
+@interface KalturaLiveStreamAdminEntryMatchAttributeCondition : KalturaSearchMatchAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaLiveStreamAdminEntryMatchAttribute
+- (KalturaFieldType)getTypeOfAttribute;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaLiveStreamEntry attributes. Use KalturaLiveStreamEntryCompareAttribute enum to provide attribute name.
+// /
+@interface KalturaLiveStreamEntryCompareAttributeCondition : KalturaSearchComparableAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaLiveStreamEntryCompareAttribute
+- (KalturaFieldType)getTypeOfAttribute;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaLiveStreamEntry attributes. Use KalturaLiveStreamEntryMatchAttribute enum to provide attribute name.
+// /
+@interface KalturaLiveStreamEntryMatchAttributeCondition : KalturaSearchMatchAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaLiveStreamEntryMatchAttribute
+- (KalturaFieldType)getTypeOfAttribute;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaMediaEntry attributes. Use KalturaMediaEntryCompareAttribute enum to provide attribute name.
+// /
+@interface KalturaMediaEntryCompareAttributeCondition : KalturaSearchComparableAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaMediaEntryCompareAttribute
+- (KalturaFieldType)getTypeOfAttribute;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaMediaEntry attributes. Use KalturaMediaEntryMatchAttribute enum to provide attribute name.
+// /
+@interface KalturaMediaEntryMatchAttributeCondition : KalturaSearchMatchAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaMediaEntryMatchAttribute
+- (KalturaFieldType)getTypeOfAttribute;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaMediaFlavorParamsOutput : KalturaFlavorParamsOutput
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaMixEntry attributes. Use KalturaMixEntryCompareAttribute enum to provide attribute name.
+// /
+@interface KalturaMixEntryCompareAttributeCondition : KalturaSearchComparableAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaMixEntryCompareAttribute
+- (KalturaFieldType)getTypeOfAttribute;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaMixEntry attributes. Use KalturaMixEntryMatchAttribute enum to provide attribute name.
+// /
+@interface KalturaMixEntryMatchAttributeCondition : KalturaSearchMatchAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaMixEntryMatchAttribute
+- (KalturaFieldType)getTypeOfAttribute;
 @end
 
 // @package Kaltura
@@ -11374,6 +12087,46 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaPermissionItemFilter : KalturaPermissionItemBaseFilter
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaPlayableEntry attributes. Use KalturaPlayableEntryCompareAttribute enum to provide attribute name.
+// /
+@interface KalturaPlayableEntryCompareAttributeCondition : KalturaSearchComparableAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaPlayableEntryCompareAttribute
+- (KalturaFieldType)getTypeOfAttribute;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaPlayableEntry attributes. Use KalturaPlayableEntryMatchAttribute enum to provide attribute name.
+// /
+@interface KalturaPlayableEntryMatchAttributeCondition : KalturaSearchMatchAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaPlayableEntryMatchAttribute
+- (KalturaFieldType)getTypeOfAttribute;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaPlaylist attributes. Use KalturaPlaylistCompareAttribute enum to provide attribute name.
+// /
+@interface KalturaPlaylistCompareAttributeCondition : KalturaSearchComparableAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaPlaylistCompareAttribute
+- (KalturaFieldType)getTypeOfAttribute;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Auto-generated class.
+//  Used to search KalturaPlaylist attributes. Use KalturaPlaylistMatchAttribute enum to provide attribute name.
+// /
+@interface KalturaPlaylistMatchAttributeCondition : KalturaSearchMatchAttributeCondition
+@property (nonatomic,copy) NSString* attribute;	// enum KalturaPlaylistMatchAttribute
+- (KalturaFieldType)getTypeOfAttribute;
 @end
 
 // @package Kaltura

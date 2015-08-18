@@ -2279,25 +2279,6 @@
 }
 @end
 
-@implementation KalturaAppTokenHashType
-+ (NSString*)MD5
-{
-    return @"MD5";
-}
-+ (NSString*)SHA1
-{
-    return @"SHA1";
-}
-+ (NSString*)SHA256
-{
-    return @"SHA256";
-}
-+ (NSString*)SHA512
-{
-    return @"SHA512";
-}
-@end
-
 @implementation KalturaAppTokenOrderBy
 + (NSString*)CREATED_AT_ASC
 {
@@ -2449,6 +2430,120 @@
 + (NSString*)WMAPRO
 {
     return @"wmapro";
+}
+@end
+
+@implementation KalturaBaseEntryCompareAttribute
++ (NSString*)ACCESS_CONTROL_ID
+{
+    return @"accessControlId";
+}
++ (NSString*)CREATED_AT
+{
+    return @"createdAt";
+}
++ (NSString*)END_DATE
+{
+    return @"endDate";
+}
++ (NSString*)MODERATION_COUNT
+{
+    return @"moderationCount";
+}
++ (NSString*)MODERATION_STATUS
+{
+    return @"moderationStatus";
+}
++ (NSString*)PARTNER_ID
+{
+    return @"partnerId";
+}
++ (NSString*)PARTNER_SORT_VALUE
+{
+    return @"partnerSortValue";
+}
++ (NSString*)RANK
+{
+    return @"rank";
+}
++ (NSString*)REPLACEMENT_STATUS
+{
+    return @"replacementStatus";
+}
++ (NSString*)START_DATE
+{
+    return @"startDate";
+}
++ (NSString*)STATUS
+{
+    return @"status";
+}
++ (NSString*)TOTAL_RANK
+{
+    return @"totalRank";
+}
++ (NSString*)TYPE
+{
+    return @"type";
+}
++ (NSString*)UPDATED_AT
+{
+    return @"updatedAt";
+}
+@end
+
+@implementation KalturaBaseEntryMatchAttribute
++ (NSString*)ADMIN_TAGS
+{
+    return @"adminTags";
+}
++ (NSString*)CATEGORIES_IDS
+{
+    return @"categoriesIds";
+}
++ (NSString*)CREATOR_ID
+{
+    return @"creatorId";
+}
++ (NSString*)DESCRIPTION
+{
+    return @"description";
+}
++ (NSString*)GROUP_ID
+{
+    return @"groupId";
+}
++ (NSString*)ID
+{
+    return @"id";
+}
++ (NSString*)NAME
+{
+    return @"name";
+}
++ (NSString*)REFERENCE_ID
+{
+    return @"referenceId";
+}
++ (NSString*)REPLACED_ENTRY_ID
+{
+    return @"replacedEntryId";
+}
++ (NSString*)REPLACING_ENTRY_ID
+{
+    return @"replacingEntryId";
+}
++ (NSString*)SEARCH_TEXT
+{
+    return @"searchText";
+}
++ (NSString*)TAGS
+{
+    return @"tags";
+}
++ (NSString*)USER_ID
+{
+    return @"userId";
 }
 @end
 
@@ -3409,6 +3504,120 @@
 }
 @end
 
+@implementation KalturaDataEntryCompareAttribute
++ (NSString*)ACCESS_CONTROL_ID
+{
+    return @"accessControlId";
+}
++ (NSString*)CREATED_AT
+{
+    return @"createdAt";
+}
++ (NSString*)END_DATE
+{
+    return @"endDate";
+}
++ (NSString*)MODERATION_COUNT
+{
+    return @"moderationCount";
+}
++ (NSString*)MODERATION_STATUS
+{
+    return @"moderationStatus";
+}
++ (NSString*)PARTNER_ID
+{
+    return @"partnerId";
+}
++ (NSString*)PARTNER_SORT_VALUE
+{
+    return @"partnerSortValue";
+}
++ (NSString*)RANK
+{
+    return @"rank";
+}
++ (NSString*)REPLACEMENT_STATUS
+{
+    return @"replacementStatus";
+}
++ (NSString*)START_DATE
+{
+    return @"startDate";
+}
++ (NSString*)STATUS
+{
+    return @"status";
+}
++ (NSString*)TOTAL_RANK
+{
+    return @"totalRank";
+}
++ (NSString*)TYPE
+{
+    return @"type";
+}
++ (NSString*)UPDATED_AT
+{
+    return @"updatedAt";
+}
+@end
+
+@implementation KalturaDataEntryMatchAttribute
++ (NSString*)ADMIN_TAGS
+{
+    return @"adminTags";
+}
++ (NSString*)CATEGORIES_IDS
+{
+    return @"categoriesIds";
+}
++ (NSString*)CREATOR_ID
+{
+    return @"creatorId";
+}
++ (NSString*)DESCRIPTION
+{
+    return @"description";
+}
++ (NSString*)GROUP_ID
+{
+    return @"groupId";
+}
++ (NSString*)ID
+{
+    return @"id";
+}
++ (NSString*)NAME
+{
+    return @"name";
+}
++ (NSString*)REFERENCE_ID
+{
+    return @"referenceId";
+}
++ (NSString*)REPLACED_ENTRY_ID
+{
+    return @"replacedEntryId";
+}
++ (NSString*)REPLACING_ENTRY_ID
+{
+    return @"replacingEntryId";
+}
++ (NSString*)SEARCH_TEXT
+{
+    return @"searchText";
+}
++ (NSString*)TAGS
+{
+    return @"tags";
+}
++ (NSString*)USER_ID
+{
+    return @"userId";
+}
+@end
+
 @implementation KalturaDataEntryOrderBy
 + (NSString*)CREATED_AT_ASC
 {
@@ -3892,6 +4101,120 @@
 }
 @end
 
+@implementation KalturaDocumentEntryCompareAttribute
++ (NSString*)ACCESS_CONTROL_ID
+{
+    return @"accessControlId";
+}
++ (NSString*)CREATED_AT
+{
+    return @"createdAt";
+}
++ (NSString*)END_DATE
+{
+    return @"endDate";
+}
++ (NSString*)MODERATION_COUNT
+{
+    return @"moderationCount";
+}
++ (NSString*)MODERATION_STATUS
+{
+    return @"moderationStatus";
+}
++ (NSString*)PARTNER_ID
+{
+    return @"partnerId";
+}
++ (NSString*)PARTNER_SORT_VALUE
+{
+    return @"partnerSortValue";
+}
++ (NSString*)RANK
+{
+    return @"rank";
+}
++ (NSString*)REPLACEMENT_STATUS
+{
+    return @"replacementStatus";
+}
++ (NSString*)START_DATE
+{
+    return @"startDate";
+}
++ (NSString*)STATUS
+{
+    return @"status";
+}
++ (NSString*)TOTAL_RANK
+{
+    return @"totalRank";
+}
++ (NSString*)TYPE
+{
+    return @"type";
+}
++ (NSString*)UPDATED_AT
+{
+    return @"updatedAt";
+}
+@end
+
+@implementation KalturaDocumentEntryMatchAttribute
++ (NSString*)ADMIN_TAGS
+{
+    return @"adminTags";
+}
++ (NSString*)CATEGORIES_IDS
+{
+    return @"categoriesIds";
+}
++ (NSString*)CREATOR_ID
+{
+    return @"creatorId";
+}
++ (NSString*)DESCRIPTION
+{
+    return @"description";
+}
++ (NSString*)GROUP_ID
+{
+    return @"groupId";
+}
++ (NSString*)ID
+{
+    return @"id";
+}
++ (NSString*)NAME
+{
+    return @"name";
+}
++ (NSString*)REFERENCE_ID
+{
+    return @"referenceId";
+}
++ (NSString*)REPLACED_ENTRY_ID
+{
+    return @"replacedEntryId";
+}
++ (NSString*)REPLACING_ENTRY_ID
+{
+    return @"replacingEntryId";
+}
++ (NSString*)SEARCH_TEXT
+{
+    return @"searchText";
+}
++ (NSString*)TAGS
+{
+    return @"tags";
+}
++ (NSString*)USER_ID
+{
+    return @"userId";
+}
+@end
+
 @implementation KalturaDurationType
 + (NSString*)LONG
 {
@@ -4054,6 +4377,152 @@
 + (NSString*)DOCUMENT
 {
     return @"10";
+}
+@end
+
+@implementation KalturaExternalMediaEntryCompareAttribute
++ (NSString*)ACCESS_CONTROL_ID
+{
+    return @"accessControlId";
+}
++ (NSString*)CREATED_AT
+{
+    return @"createdAt";
+}
++ (NSString*)END_DATE
+{
+    return @"endDate";
+}
++ (NSString*)LAST_PLAYED_AT
+{
+    return @"lastPlayedAt";
+}
++ (NSString*)MEDIA_DATE
+{
+    return @"mediaDate";
+}
++ (NSString*)MEDIA_TYPE
+{
+    return @"mediaType";
+}
++ (NSString*)MODERATION_COUNT
+{
+    return @"moderationCount";
+}
++ (NSString*)MODERATION_STATUS
+{
+    return @"moderationStatus";
+}
++ (NSString*)MS_DURATION
+{
+    return @"msDuration";
+}
++ (NSString*)PARTNER_ID
+{
+    return @"partnerId";
+}
++ (NSString*)PARTNER_SORT_VALUE
+{
+    return @"partnerSortValue";
+}
++ (NSString*)PLAYS
+{
+    return @"plays";
+}
++ (NSString*)RANK
+{
+    return @"rank";
+}
++ (NSString*)REPLACEMENT_STATUS
+{
+    return @"replacementStatus";
+}
++ (NSString*)START_DATE
+{
+    return @"startDate";
+}
++ (NSString*)STATUS
+{
+    return @"status";
+}
++ (NSString*)TOTAL_RANK
+{
+    return @"totalRank";
+}
++ (NSString*)TYPE
+{
+    return @"type";
+}
++ (NSString*)UPDATED_AT
+{
+    return @"updatedAt";
+}
++ (NSString*)VIEWS
+{
+    return @"views";
+}
+@end
+
+@implementation KalturaExternalMediaEntryMatchAttribute
++ (NSString*)ADMIN_TAGS
+{
+    return @"adminTags";
+}
++ (NSString*)CATEGORIES_IDS
+{
+    return @"categoriesIds";
+}
++ (NSString*)CREATOR_ID
+{
+    return @"creatorId";
+}
++ (NSString*)DESCRIPTION
+{
+    return @"description";
+}
++ (NSString*)DURATION_TYPE
+{
+    return @"durationType";
+}
++ (NSString*)FLAVOR_PARAMS_IDS
+{
+    return @"flavorParamsIds";
+}
++ (NSString*)GROUP_ID
+{
+    return @"groupId";
+}
++ (NSString*)ID
+{
+    return @"id";
+}
++ (NSString*)NAME
+{
+    return @"name";
+}
++ (NSString*)REFERENCE_ID
+{
+    return @"referenceId";
+}
++ (NSString*)REPLACED_ENTRY_ID
+{
+    return @"replacedEntryId";
+}
++ (NSString*)REPLACING_ENTRY_ID
+{
+    return @"replacingEntryId";
+}
++ (NSString*)SEARCH_TEXT
+{
+    return @"searchText";
+}
++ (NSString*)TAGS
+{
+    return @"tags";
+}
++ (NSString*)USER_ID
+{
+    return @"userId";
 }
 @end
 
@@ -5914,6 +6383,152 @@
 }
 @end
 
+@implementation KalturaLiveChannelCompareAttribute
++ (NSString*)ACCESS_CONTROL_ID
+{
+    return @"accessControlId";
+}
++ (NSString*)CREATED_AT
+{
+    return @"createdAt";
+}
++ (NSString*)END_DATE
+{
+    return @"endDate";
+}
++ (NSString*)LAST_PLAYED_AT
+{
+    return @"lastPlayedAt";
+}
++ (NSString*)MEDIA_DATE
+{
+    return @"mediaDate";
+}
++ (NSString*)MEDIA_TYPE
+{
+    return @"mediaType";
+}
++ (NSString*)MODERATION_COUNT
+{
+    return @"moderationCount";
+}
++ (NSString*)MODERATION_STATUS
+{
+    return @"moderationStatus";
+}
++ (NSString*)MS_DURATION
+{
+    return @"msDuration";
+}
++ (NSString*)PARTNER_ID
+{
+    return @"partnerId";
+}
++ (NSString*)PARTNER_SORT_VALUE
+{
+    return @"partnerSortValue";
+}
++ (NSString*)PLAYS
+{
+    return @"plays";
+}
++ (NSString*)RANK
+{
+    return @"rank";
+}
++ (NSString*)REPLACEMENT_STATUS
+{
+    return @"replacementStatus";
+}
++ (NSString*)START_DATE
+{
+    return @"startDate";
+}
++ (NSString*)STATUS
+{
+    return @"status";
+}
++ (NSString*)TOTAL_RANK
+{
+    return @"totalRank";
+}
++ (NSString*)TYPE
+{
+    return @"type";
+}
++ (NSString*)UPDATED_AT
+{
+    return @"updatedAt";
+}
++ (NSString*)VIEWS
+{
+    return @"views";
+}
+@end
+
+@implementation KalturaLiveChannelMatchAttribute
++ (NSString*)ADMIN_TAGS
+{
+    return @"adminTags";
+}
++ (NSString*)CATEGORIES_IDS
+{
+    return @"categoriesIds";
+}
++ (NSString*)CREATOR_ID
+{
+    return @"creatorId";
+}
++ (NSString*)DESCRIPTION
+{
+    return @"description";
+}
++ (NSString*)DURATION_TYPE
+{
+    return @"durationType";
+}
++ (NSString*)FLAVOR_PARAMS_IDS
+{
+    return @"flavorParamsIds";
+}
++ (NSString*)GROUP_ID
+{
+    return @"groupId";
+}
++ (NSString*)ID
+{
+    return @"id";
+}
++ (NSString*)NAME
+{
+    return @"name";
+}
++ (NSString*)REFERENCE_ID
+{
+    return @"referenceId";
+}
++ (NSString*)REPLACED_ENTRY_ID
+{
+    return @"replacedEntryId";
+}
++ (NSString*)REPLACING_ENTRY_ID
+{
+    return @"replacingEntryId";
+}
++ (NSString*)SEARCH_TEXT
+{
+    return @"searchText";
+}
++ (NSString*)TAGS
+{
+    return @"tags";
+}
++ (NSString*)USER_ID
+{
+    return @"userId";
+}
+@end
+
 @implementation KalturaLiveChannelOrderBy
 + (NSString*)CREATED_AT_ASC
 {
@@ -6125,6 +6740,152 @@
 }
 @end
 
+@implementation KalturaLiveEntryCompareAttribute
++ (NSString*)ACCESS_CONTROL_ID
+{
+    return @"accessControlId";
+}
++ (NSString*)CREATED_AT
+{
+    return @"createdAt";
+}
++ (NSString*)END_DATE
+{
+    return @"endDate";
+}
++ (NSString*)LAST_PLAYED_AT
+{
+    return @"lastPlayedAt";
+}
++ (NSString*)MEDIA_DATE
+{
+    return @"mediaDate";
+}
++ (NSString*)MEDIA_TYPE
+{
+    return @"mediaType";
+}
++ (NSString*)MODERATION_COUNT
+{
+    return @"moderationCount";
+}
++ (NSString*)MODERATION_STATUS
+{
+    return @"moderationStatus";
+}
++ (NSString*)MS_DURATION
+{
+    return @"msDuration";
+}
++ (NSString*)PARTNER_ID
+{
+    return @"partnerId";
+}
++ (NSString*)PARTNER_SORT_VALUE
+{
+    return @"partnerSortValue";
+}
++ (NSString*)PLAYS
+{
+    return @"plays";
+}
++ (NSString*)RANK
+{
+    return @"rank";
+}
++ (NSString*)REPLACEMENT_STATUS
+{
+    return @"replacementStatus";
+}
++ (NSString*)START_DATE
+{
+    return @"startDate";
+}
++ (NSString*)STATUS
+{
+    return @"status";
+}
++ (NSString*)TOTAL_RANK
+{
+    return @"totalRank";
+}
++ (NSString*)TYPE
+{
+    return @"type";
+}
++ (NSString*)UPDATED_AT
+{
+    return @"updatedAt";
+}
++ (NSString*)VIEWS
+{
+    return @"views";
+}
+@end
+
+@implementation KalturaLiveEntryMatchAttribute
++ (NSString*)ADMIN_TAGS
+{
+    return @"adminTags";
+}
++ (NSString*)CATEGORIES_IDS
+{
+    return @"categoriesIds";
+}
++ (NSString*)CREATOR_ID
+{
+    return @"creatorId";
+}
++ (NSString*)DESCRIPTION
+{
+    return @"description";
+}
++ (NSString*)DURATION_TYPE
+{
+    return @"durationType";
+}
++ (NSString*)FLAVOR_PARAMS_IDS
+{
+    return @"flavorParamsIds";
+}
++ (NSString*)GROUP_ID
+{
+    return @"groupId";
+}
++ (NSString*)ID
+{
+    return @"id";
+}
++ (NSString*)NAME
+{
+    return @"name";
+}
++ (NSString*)REFERENCE_ID
+{
+    return @"referenceId";
+}
++ (NSString*)REPLACED_ENTRY_ID
+{
+    return @"replacedEntryId";
+}
++ (NSString*)REPLACING_ENTRY_ID
+{
+    return @"replacingEntryId";
+}
++ (NSString*)SEARCH_TEXT
+{
+    return @"searchText";
+}
++ (NSString*)TAGS
+{
+    return @"tags";
+}
++ (NSString*)USER_ID
+{
+    return @"userId";
+}
+@end
+
 @implementation KalturaLiveEntryOrderBy
 + (NSString*)CREATED_AT_ASC
 {
@@ -6317,6 +7078,152 @@
 }
 @end
 
+@implementation KalturaLiveStreamAdminEntryCompareAttribute
++ (NSString*)ACCESS_CONTROL_ID
+{
+    return @"accessControlId";
+}
++ (NSString*)CREATED_AT
+{
+    return @"createdAt";
+}
++ (NSString*)END_DATE
+{
+    return @"endDate";
+}
++ (NSString*)LAST_PLAYED_AT
+{
+    return @"lastPlayedAt";
+}
++ (NSString*)MEDIA_DATE
+{
+    return @"mediaDate";
+}
++ (NSString*)MEDIA_TYPE
+{
+    return @"mediaType";
+}
++ (NSString*)MODERATION_COUNT
+{
+    return @"moderationCount";
+}
++ (NSString*)MODERATION_STATUS
+{
+    return @"moderationStatus";
+}
++ (NSString*)MS_DURATION
+{
+    return @"msDuration";
+}
++ (NSString*)PARTNER_ID
+{
+    return @"partnerId";
+}
++ (NSString*)PARTNER_SORT_VALUE
+{
+    return @"partnerSortValue";
+}
++ (NSString*)PLAYS
+{
+    return @"plays";
+}
++ (NSString*)RANK
+{
+    return @"rank";
+}
++ (NSString*)REPLACEMENT_STATUS
+{
+    return @"replacementStatus";
+}
++ (NSString*)START_DATE
+{
+    return @"startDate";
+}
++ (NSString*)STATUS
+{
+    return @"status";
+}
++ (NSString*)TOTAL_RANK
+{
+    return @"totalRank";
+}
++ (NSString*)TYPE
+{
+    return @"type";
+}
++ (NSString*)UPDATED_AT
+{
+    return @"updatedAt";
+}
++ (NSString*)VIEWS
+{
+    return @"views";
+}
+@end
+
+@implementation KalturaLiveStreamAdminEntryMatchAttribute
++ (NSString*)ADMIN_TAGS
+{
+    return @"adminTags";
+}
++ (NSString*)CATEGORIES_IDS
+{
+    return @"categoriesIds";
+}
++ (NSString*)CREATOR_ID
+{
+    return @"creatorId";
+}
++ (NSString*)DESCRIPTION
+{
+    return @"description";
+}
++ (NSString*)DURATION_TYPE
+{
+    return @"durationType";
+}
++ (NSString*)FLAVOR_PARAMS_IDS
+{
+    return @"flavorParamsIds";
+}
++ (NSString*)GROUP_ID
+{
+    return @"groupId";
+}
++ (NSString*)ID
+{
+    return @"id";
+}
++ (NSString*)NAME
+{
+    return @"name";
+}
++ (NSString*)REFERENCE_ID
+{
+    return @"referenceId";
+}
++ (NSString*)REPLACED_ENTRY_ID
+{
+    return @"replacedEntryId";
+}
++ (NSString*)REPLACING_ENTRY_ID
+{
+    return @"replacingEntryId";
+}
++ (NSString*)SEARCH_TEXT
+{
+    return @"searchText";
+}
++ (NSString*)TAGS
+{
+    return @"tags";
+}
++ (NSString*)USER_ID
+{
+    return @"userId";
+}
+@end
+
 @implementation KalturaLiveStreamAdminEntryOrderBy
 + (NSString*)CREATED_AT_ASC
 {
@@ -6461,6 +7368,152 @@
 + (NSString*)WEIGHT_DESC
 {
     return @"-weight";
+}
+@end
+
+@implementation KalturaLiveStreamEntryCompareAttribute
++ (NSString*)ACCESS_CONTROL_ID
+{
+    return @"accessControlId";
+}
++ (NSString*)CREATED_AT
+{
+    return @"createdAt";
+}
++ (NSString*)END_DATE
+{
+    return @"endDate";
+}
++ (NSString*)LAST_PLAYED_AT
+{
+    return @"lastPlayedAt";
+}
++ (NSString*)MEDIA_DATE
+{
+    return @"mediaDate";
+}
++ (NSString*)MEDIA_TYPE
+{
+    return @"mediaType";
+}
++ (NSString*)MODERATION_COUNT
+{
+    return @"moderationCount";
+}
++ (NSString*)MODERATION_STATUS
+{
+    return @"moderationStatus";
+}
++ (NSString*)MS_DURATION
+{
+    return @"msDuration";
+}
++ (NSString*)PARTNER_ID
+{
+    return @"partnerId";
+}
++ (NSString*)PARTNER_SORT_VALUE
+{
+    return @"partnerSortValue";
+}
++ (NSString*)PLAYS
+{
+    return @"plays";
+}
++ (NSString*)RANK
+{
+    return @"rank";
+}
++ (NSString*)REPLACEMENT_STATUS
+{
+    return @"replacementStatus";
+}
++ (NSString*)START_DATE
+{
+    return @"startDate";
+}
++ (NSString*)STATUS
+{
+    return @"status";
+}
++ (NSString*)TOTAL_RANK
+{
+    return @"totalRank";
+}
++ (NSString*)TYPE
+{
+    return @"type";
+}
++ (NSString*)UPDATED_AT
+{
+    return @"updatedAt";
+}
++ (NSString*)VIEWS
+{
+    return @"views";
+}
+@end
+
+@implementation KalturaLiveStreamEntryMatchAttribute
++ (NSString*)ADMIN_TAGS
+{
+    return @"adminTags";
+}
++ (NSString*)CATEGORIES_IDS
+{
+    return @"categoriesIds";
+}
++ (NSString*)CREATOR_ID
+{
+    return @"creatorId";
+}
++ (NSString*)DESCRIPTION
+{
+    return @"description";
+}
++ (NSString*)DURATION_TYPE
+{
+    return @"durationType";
+}
++ (NSString*)FLAVOR_PARAMS_IDS
+{
+    return @"flavorParamsIds";
+}
++ (NSString*)GROUP_ID
+{
+    return @"groupId";
+}
++ (NSString*)ID
+{
+    return @"id";
+}
++ (NSString*)NAME
+{
+    return @"name";
+}
++ (NSString*)REFERENCE_ID
+{
+    return @"referenceId";
+}
++ (NSString*)REPLACED_ENTRY_ID
+{
+    return @"replacedEntryId";
+}
++ (NSString*)REPLACING_ENTRY_ID
+{
+    return @"replacingEntryId";
+}
++ (NSString*)SEARCH_TEXT
+{
+    return @"searchText";
+}
++ (NSString*)TAGS
+{
+    return @"tags";
+}
++ (NSString*)USER_ID
+{
+    return @"userId";
 }
 @end
 
@@ -6782,6 +7835,152 @@
 }
 @end
 
+@implementation KalturaMediaEntryCompareAttribute
++ (NSString*)ACCESS_CONTROL_ID
+{
+    return @"accessControlId";
+}
++ (NSString*)CREATED_AT
+{
+    return @"createdAt";
+}
++ (NSString*)END_DATE
+{
+    return @"endDate";
+}
++ (NSString*)LAST_PLAYED_AT
+{
+    return @"lastPlayedAt";
+}
++ (NSString*)MEDIA_DATE
+{
+    return @"mediaDate";
+}
++ (NSString*)MEDIA_TYPE
+{
+    return @"mediaType";
+}
++ (NSString*)MODERATION_COUNT
+{
+    return @"moderationCount";
+}
++ (NSString*)MODERATION_STATUS
+{
+    return @"moderationStatus";
+}
++ (NSString*)MS_DURATION
+{
+    return @"msDuration";
+}
++ (NSString*)PARTNER_ID
+{
+    return @"partnerId";
+}
++ (NSString*)PARTNER_SORT_VALUE
+{
+    return @"partnerSortValue";
+}
++ (NSString*)PLAYS
+{
+    return @"plays";
+}
++ (NSString*)RANK
+{
+    return @"rank";
+}
++ (NSString*)REPLACEMENT_STATUS
+{
+    return @"replacementStatus";
+}
++ (NSString*)START_DATE
+{
+    return @"startDate";
+}
++ (NSString*)STATUS
+{
+    return @"status";
+}
++ (NSString*)TOTAL_RANK
+{
+    return @"totalRank";
+}
++ (NSString*)TYPE
+{
+    return @"type";
+}
++ (NSString*)UPDATED_AT
+{
+    return @"updatedAt";
+}
++ (NSString*)VIEWS
+{
+    return @"views";
+}
+@end
+
+@implementation KalturaMediaEntryMatchAttribute
++ (NSString*)ADMIN_TAGS
+{
+    return @"adminTags";
+}
++ (NSString*)CATEGORIES_IDS
+{
+    return @"categoriesIds";
+}
++ (NSString*)CREATOR_ID
+{
+    return @"creatorId";
+}
++ (NSString*)DESCRIPTION
+{
+    return @"description";
+}
++ (NSString*)DURATION_TYPE
+{
+    return @"durationType";
+}
++ (NSString*)FLAVOR_PARAMS_IDS
+{
+    return @"flavorParamsIds";
+}
++ (NSString*)GROUP_ID
+{
+    return @"groupId";
+}
++ (NSString*)ID
+{
+    return @"id";
+}
++ (NSString*)NAME
+{
+    return @"name";
+}
++ (NSString*)REFERENCE_ID
+{
+    return @"referenceId";
+}
++ (NSString*)REPLACED_ENTRY_ID
+{
+    return @"replacedEntryId";
+}
++ (NSString*)REPLACING_ENTRY_ID
+{
+    return @"replacingEntryId";
+}
++ (NSString*)SEARCH_TEXT
+{
+    return @"searchText";
+}
++ (NSString*)TAGS
+{
+    return @"tags";
+}
++ (NSString*)USER_ID
+{
+    return @"userId";
+}
+@end
+
 @implementation KalturaMediaEntryOrderBy
 + (NSString*)CREATED_AT_ASC
 {
@@ -6930,6 +8129,140 @@
 + (NSString*)FFMPEG
 {
     return @"1";
+}
+@end
+
+@implementation KalturaMixEntryCompareAttribute
++ (NSString*)ACCESS_CONTROL_ID
+{
+    return @"accessControlId";
+}
++ (NSString*)CREATED_AT
+{
+    return @"createdAt";
+}
++ (NSString*)END_DATE
+{
+    return @"endDate";
+}
++ (NSString*)LAST_PLAYED_AT
+{
+    return @"lastPlayedAt";
+}
++ (NSString*)MODERATION_COUNT
+{
+    return @"moderationCount";
+}
++ (NSString*)MODERATION_STATUS
+{
+    return @"moderationStatus";
+}
++ (NSString*)MS_DURATION
+{
+    return @"msDuration";
+}
++ (NSString*)PARTNER_ID
+{
+    return @"partnerId";
+}
++ (NSString*)PARTNER_SORT_VALUE
+{
+    return @"partnerSortValue";
+}
++ (NSString*)PLAYS
+{
+    return @"plays";
+}
++ (NSString*)RANK
+{
+    return @"rank";
+}
++ (NSString*)REPLACEMENT_STATUS
+{
+    return @"replacementStatus";
+}
++ (NSString*)START_DATE
+{
+    return @"startDate";
+}
++ (NSString*)STATUS
+{
+    return @"status";
+}
++ (NSString*)TOTAL_RANK
+{
+    return @"totalRank";
+}
++ (NSString*)TYPE
+{
+    return @"type";
+}
++ (NSString*)UPDATED_AT
+{
+    return @"updatedAt";
+}
++ (NSString*)VIEWS
+{
+    return @"views";
+}
+@end
+
+@implementation KalturaMixEntryMatchAttribute
++ (NSString*)ADMIN_TAGS
+{
+    return @"adminTags";
+}
++ (NSString*)CATEGORIES_IDS
+{
+    return @"categoriesIds";
+}
++ (NSString*)CREATOR_ID
+{
+    return @"creatorId";
+}
++ (NSString*)DESCRIPTION
+{
+    return @"description";
+}
++ (NSString*)DURATION_TYPE
+{
+    return @"durationType";
+}
++ (NSString*)GROUP_ID
+{
+    return @"groupId";
+}
++ (NSString*)ID
+{
+    return @"id";
+}
++ (NSString*)NAME
+{
+    return @"name";
+}
++ (NSString*)REFERENCE_ID
+{
+    return @"referenceId";
+}
++ (NSString*)REPLACED_ENTRY_ID
+{
+    return @"replacedEntryId";
+}
++ (NSString*)REPLACING_ENTRY_ID
+{
+    return @"replacingEntryId";
+}
++ (NSString*)SEARCH_TEXT
+{
+    return @"searchText";
+}
++ (NSString*)TAGS
+{
+    return @"tags";
+}
++ (NSString*)USER_ID
+{
+    return @"userId";
 }
 @end
 
@@ -7210,6 +8543,140 @@
 }
 @end
 
+@implementation KalturaPlayableEntryCompareAttribute
++ (NSString*)ACCESS_CONTROL_ID
+{
+    return @"accessControlId";
+}
++ (NSString*)CREATED_AT
+{
+    return @"createdAt";
+}
++ (NSString*)END_DATE
+{
+    return @"endDate";
+}
++ (NSString*)LAST_PLAYED_AT
+{
+    return @"lastPlayedAt";
+}
++ (NSString*)MODERATION_COUNT
+{
+    return @"moderationCount";
+}
++ (NSString*)MODERATION_STATUS
+{
+    return @"moderationStatus";
+}
++ (NSString*)MS_DURATION
+{
+    return @"msDuration";
+}
++ (NSString*)PARTNER_ID
+{
+    return @"partnerId";
+}
++ (NSString*)PARTNER_SORT_VALUE
+{
+    return @"partnerSortValue";
+}
++ (NSString*)PLAYS
+{
+    return @"plays";
+}
++ (NSString*)RANK
+{
+    return @"rank";
+}
++ (NSString*)REPLACEMENT_STATUS
+{
+    return @"replacementStatus";
+}
++ (NSString*)START_DATE
+{
+    return @"startDate";
+}
++ (NSString*)STATUS
+{
+    return @"status";
+}
++ (NSString*)TOTAL_RANK
+{
+    return @"totalRank";
+}
++ (NSString*)TYPE
+{
+    return @"type";
+}
++ (NSString*)UPDATED_AT
+{
+    return @"updatedAt";
+}
++ (NSString*)VIEWS
+{
+    return @"views";
+}
+@end
+
+@implementation KalturaPlayableEntryMatchAttribute
++ (NSString*)ADMIN_TAGS
+{
+    return @"adminTags";
+}
++ (NSString*)CATEGORIES_IDS
+{
+    return @"categoriesIds";
+}
++ (NSString*)CREATOR_ID
+{
+    return @"creatorId";
+}
++ (NSString*)DESCRIPTION
+{
+    return @"description";
+}
++ (NSString*)DURATION_TYPE
+{
+    return @"durationType";
+}
++ (NSString*)GROUP_ID
+{
+    return @"groupId";
+}
++ (NSString*)ID
+{
+    return @"id";
+}
++ (NSString*)NAME
+{
+    return @"name";
+}
++ (NSString*)REFERENCE_ID
+{
+    return @"referenceId";
+}
++ (NSString*)REPLACED_ENTRY_ID
+{
+    return @"replacedEntryId";
+}
++ (NSString*)REPLACING_ENTRY_ID
+{
+    return @"replacingEntryId";
+}
++ (NSString*)SEARCH_TEXT
+{
+    return @"searchText";
+}
++ (NSString*)TAGS
+{
+    return @"tags";
+}
++ (NSString*)USER_ID
+{
+    return @"userId";
+}
+@end
+
 @implementation KalturaPlayableEntryOrderBy
 + (NSString*)CREATED_AT_ASC
 {
@@ -7385,6 +8852,120 @@
 + (NSString*)SILVER_LIGHT
 {
     return @"sl";
+}
+@end
+
+@implementation KalturaPlaylistCompareAttribute
++ (NSString*)ACCESS_CONTROL_ID
+{
+    return @"accessControlId";
+}
++ (NSString*)CREATED_AT
+{
+    return @"createdAt";
+}
++ (NSString*)END_DATE
+{
+    return @"endDate";
+}
++ (NSString*)MODERATION_COUNT
+{
+    return @"moderationCount";
+}
++ (NSString*)MODERATION_STATUS
+{
+    return @"moderationStatus";
+}
++ (NSString*)PARTNER_ID
+{
+    return @"partnerId";
+}
++ (NSString*)PARTNER_SORT_VALUE
+{
+    return @"partnerSortValue";
+}
++ (NSString*)RANK
+{
+    return @"rank";
+}
++ (NSString*)REPLACEMENT_STATUS
+{
+    return @"replacementStatus";
+}
++ (NSString*)START_DATE
+{
+    return @"startDate";
+}
++ (NSString*)STATUS
+{
+    return @"status";
+}
++ (NSString*)TOTAL_RANK
+{
+    return @"totalRank";
+}
++ (NSString*)TYPE
+{
+    return @"type";
+}
++ (NSString*)UPDATED_AT
+{
+    return @"updatedAt";
+}
+@end
+
+@implementation KalturaPlaylistMatchAttribute
++ (NSString*)ADMIN_TAGS
+{
+    return @"adminTags";
+}
++ (NSString*)CATEGORIES_IDS
+{
+    return @"categoriesIds";
+}
++ (NSString*)CREATOR_ID
+{
+    return @"creatorId";
+}
++ (NSString*)DESCRIPTION
+{
+    return @"description";
+}
++ (NSString*)GROUP_ID
+{
+    return @"groupId";
+}
++ (NSString*)ID
+{
+    return @"id";
+}
++ (NSString*)NAME
+{
+    return @"name";
+}
++ (NSString*)REFERENCE_ID
+{
+    return @"referenceId";
+}
++ (NSString*)REPLACED_ENTRY_ID
+{
+    return @"replacedEntryId";
+}
++ (NSString*)REPLACING_ENTRY_ID
+{
+    return @"replacingEntryId";
+}
++ (NSString*)SEARCH_TEXT
+{
+    return @"searchText";
+}
++ (NSString*)TAGS
+{
+    return @"tags";
+}
++ (NSString*)USER_ID
+{
+    return @"userId";
 }
 @end
 
@@ -9065,7 +10646,6 @@
 @synthesize sessionUserId = _sessionUserId;
 @synthesize sessionDuration = _sessionDuration;
 @synthesize sessionPrivileges = _sessionPrivileges;
-@synthesize hashType = _hashType;
 
 - (id)init
 {
@@ -9137,11 +10717,6 @@
     return KFT_String;
 }
 
-- (KalturaFieldType)getTypeOfHashType
-{
-    return KFT_String;
-}
-
 - (void)setPartnerIdFromString:(NSString*)aPropVal
 {
     self.partnerId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -9187,7 +10762,6 @@
     [aParams addIfDefinedKey:@"sessionUserId" withString:self.sessionUserId];
     [aParams addIfDefinedKey:@"sessionDuration" withInt:self.sessionDuration];
     [aParams addIfDefinedKey:@"sessionPrivileges" withString:self.sessionPrivileges];
-    [aParams addIfDefinedKey:@"hashType" withString:self.hashType];
 }
 
 - (void)dealloc
@@ -9196,7 +10770,6 @@
     [self->_token release];
     [self->_sessionUserId release];
     [self->_sessionPrivileges release];
-    [self->_hashType release];
     [super dealloc];
 }
 
@@ -25073,6 +26646,30 @@
 
 @end
 
+@implementation KalturaAttributeCondition
+@synthesize value = _value;
+
+- (KalturaFieldType)getTypeOfValue
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaAttributeCondition"];
+    [aParams addIfDefinedKey:@"value" withString:self.value];
+}
+
+- (void)dealloc
+{
+    [self->_value release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaAuthenticatedCondition
 @synthesize privileges = _privileges;
 
@@ -38041,6 +39638,30 @@
 
 @end
 
+@implementation KalturaSearchComparableAttributeCondition
+@synthesize comparison = _comparison;
+
+- (KalturaFieldType)getTypeOfComparison
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaSearchComparableAttributeCondition"];
+    [aParams addIfDefinedKey:@"comparison" withString:self.comparison];
+}
+
+- (void)dealloc
+{
+    [self->_comparison release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaSearchComparableCondition
 @synthesize comparison = _comparison;
 
@@ -38061,6 +39682,38 @@
 {
     [self->_comparison release];
     [super dealloc];
+}
+
+@end
+
+@implementation KalturaSearchMatchAttributeCondition
+@synthesize not = _not;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_not = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfNot
+{
+    return KFT_Bool;
+}
+
+- (void)setNotFromString:(NSString*)aPropVal
+{
+    self.not = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaSearchMatchAttributeCondition"];
+    [aParams addIfDefinedKey:@"not" withBool:self.not];
 }
 
 @end
@@ -38599,6 +40252,54 @@
 
 @end
 
+@implementation KalturaBaseEntryCompareAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaBaseEntryCompareAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaBaseEntryMatchAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaBaseEntryMatchAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaBatchJobFilterExt
 @synthesize jobTypeAndSubTypeIn = _jobTypeAndSubTypeIn;
 
@@ -38813,6 +40514,54 @@
 
 @end
 
+@implementation KalturaDataEntryCompareAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaDataEntryCompareAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaDataEntryMatchAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaDataEntryMatchAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaDeliveryProfileAkamaiAppleHttpManifestBaseFilter
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
@@ -38903,6 +40652,54 @@
 
 @end
 
+@implementation KalturaDocumentEntryCompareAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaDocumentEntryCompareAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaDocumentEntryMatchAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaDocumentEntryMatchAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaEvalBooleanField
 @synthesize code = _code;
 
@@ -38946,6 +40743,54 @@
 - (void)dealloc
 {
     [self->_code release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaExternalMediaEntryCompareAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaExternalMediaEntryCompareAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaExternalMediaEntryMatchAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaExternalMediaEntryMatchAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
     [super dealloc];
 }
 
@@ -39011,6 +40856,54 @@
 
 @end
 
+@implementation KalturaLiveChannelCompareAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaLiveChannelCompareAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaLiveChannelMatchAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaLiveChannelMatchAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaLiveChannelSegmentFilter
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
@@ -39021,12 +40914,252 @@
 
 @end
 
+@implementation KalturaLiveEntryCompareAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaLiveEntryCompareAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaLiveEntryMatchAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaLiveEntryMatchAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaLiveStreamAdminEntryCompareAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaLiveStreamAdminEntryCompareAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaLiveStreamAdminEntryMatchAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaLiveStreamAdminEntryMatchAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaLiveStreamEntryCompareAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaLiveStreamEntryCompareAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaLiveStreamEntryMatchAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaLiveStreamEntryMatchAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaMediaEntryCompareAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaMediaEntryCompareAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaMediaEntryMatchAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaMediaEntryMatchAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaMediaFlavorParamsOutput
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaMediaFlavorParamsOutput"];
+}
+
+@end
+
+@implementation KalturaMixEntryCompareAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaMixEntryCompareAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaMixEntryMatchAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaMixEntryMatchAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
 }
 
 @end
@@ -39057,6 +41190,102 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaPermissionItemFilter"];
+}
+
+@end
+
+@implementation KalturaPlayableEntryCompareAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaPlayableEntryCompareAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaPlayableEntryMatchAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaPlayableEntryMatchAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaPlaylistCompareAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaPlaylistCompareAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaPlaylistMatchAttributeCondition
+@synthesize attribute = _attribute;
+
+- (KalturaFieldType)getTypeOfAttribute
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaPlaylistMatchAttributeCondition"];
+    [aParams addIfDefinedKey:@"attribute" withString:self.attribute];
+}
+
+- (void)dealloc
+{
+    [self->_attribute release];
+    [super dealloc];
 }
 
 @end
