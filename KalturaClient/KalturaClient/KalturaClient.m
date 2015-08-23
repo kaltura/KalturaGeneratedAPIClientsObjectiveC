@@ -2681,6 +2681,45 @@
 }
 @end
 
+@implementation KalturaBatchJobObjectType
++ (NSString*)ENTRY_DISTRIBUTION
+{
+    return @"contentDistribution.EntryDistribution";
+}
++ (NSString*)DROP_FOLDER_FILE
+{
+    return @"dropFolderXmlBulkUpload.DropFolderFile";
+}
++ (NSString*)METADATA
+{
+    return @"metadata.Metadata";
+}
++ (NSString*)METADATA_PROFILE
+{
+    return @"metadata.MetadataProfile";
+}
++ (NSString*)SCHEDULED_TASK_PROFILE
+{
+    return @"scheduledTask.ScheduledTaskProfile";
+}
++ (NSString*)ENTRY
+{
+    return @"1";
+}
++ (NSString*)CATEGORY
+{
+    return @"2";
+}
++ (NSString*)FILE_SYNC
+{
+    return @"3";
+}
++ (NSString*)ASSET
+{
+    return @"4";
+}
+@end
+
 @implementation KalturaBatchJobOrderBy
 + (NSString*)CREATED_AT_ASC
 {
@@ -2808,6 +2847,10 @@
 + (NSString*)EVENT_NOTIFICATION_HANDLER
 {
     return @"eventNotification.EventNotificationHandler";
+}
++ (NSString*)INTEGRATION
+{
+    return @"integration.Integration";
 }
 + (NSString*)SCHEDULED_TASK
 {

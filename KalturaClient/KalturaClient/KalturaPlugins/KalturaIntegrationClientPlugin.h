@@ -74,3 +74,21 @@
 @end
 
 ///////////////////////// services /////////////////////////
+// @package Kaltura
+// @subpackage Client
+// Integration service lets you dispatch integration tasks
+@interface KalturaIntegrationService : KalturaServiceBase
+// Dispatch integration task
+- (int)dispatchWithData:(KalturaIntegrationJobData*)aData withObjectType:(NSString*)aObjectType withObjectId:(NSString*)aObjectId;
+- (void)notifyWithId:(int)aId;
+@end
+
+@interface KalturaIntegrationClientPlugin : KalturaClientPlugin
+{
+	KalturaIntegrationService* _integration;
+}
+
+@property (nonatomic, assign) KalturaClientBase* client;
+@property (nonatomic, readonly) KalturaIntegrationService* integration;
+@end
+

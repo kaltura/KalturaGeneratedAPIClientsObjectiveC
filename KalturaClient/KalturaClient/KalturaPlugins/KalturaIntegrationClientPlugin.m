@@ -133,3 +133,47 @@
 @end
 
 ///////////////////////// services /////////////////////////
+@implementation KalturaIntegrationService
+- (int)dispatchWithData:(KalturaIntegrationJobData*)aData withObjectType:(NSString*)aObjectType withObjectId:(NSString*)aObjectId
+{
+    [self.client.params addIfDefinedKey:@"data" withObject:aData];
+    [self.client.params addIfDefinedKey:@"objectType" withString:aObjectType];
+    [self.client.params addIfDefinedKey:@"objectId" withString:aObjectId];
+    return [self.client queueIntService:@"integration_integration" withAction:@"dispatch"];
+}
+
+- (void)notifyWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client queueVoidService:@"integration_integration" withAction:@"notify"];
+}
+
+@end
+
+@implementation KalturaIntegrationClientPlugin
+@synthesize client = _client;
+
+- (id)initWithClient:(KalturaClient*)aClient
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self.client = aClient;
+    return self;
+}
+
+- (KalturaIntegrationService*)integration
+{
+    if (self->_integration == nil)
+    	self->_integration = [[KalturaIntegrationService alloc] initWithClient:self.client];
+    return self->_integration;
+}
+
+- (void)dealloc
+{
+    [self->_integration release];
+	[super dealloc];
+}
+
+@end
+

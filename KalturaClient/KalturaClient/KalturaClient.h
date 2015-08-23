@@ -1135,6 +1135,20 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaBatchJobObjectType : NSObject
++ (NSString*)ENTRY_DISTRIBUTION;
++ (NSString*)DROP_FOLDER_FILE;
++ (NSString*)METADATA;
++ (NSString*)METADATA_PROFILE;
++ (NSString*)SCHEDULED_TASK_PROFILE;
++ (NSString*)ENTRY;
++ (NSString*)CATEGORY;
++ (NSString*)FILE_SYNC;
++ (NSString*)ASSET;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaBatchJobOrderBy : NSObject
 + (NSString*)CREATED_AT_ASC;
 + (NSString*)ESTIMATED_EFFORT_ASC;
@@ -1172,6 +1186,7 @@
 + (NSString*)DROP_FOLDER_CONTENT_PROCESSOR;
 + (NSString*)DROP_FOLDER_WATCHER;
 + (NSString*)EVENT_NOTIFICATION_HANDLER;
++ (NSString*)INTEGRATION;
 + (NSString*)SCHEDULED_TASK;
 + (NSString*)INDEX_TAGS;
 + (NSString*)TAG_RESOLVE;
