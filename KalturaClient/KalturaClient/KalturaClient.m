@@ -2279,6 +2279,25 @@
 }
 @end
 
+@implementation KalturaAppTokenHashType
++ (NSString*)MD5
+{
+    return @"MD5";
+}
++ (NSString*)SHA1
+{
+    return @"SHA1";
+}
++ (NSString*)SHA256
+{
+    return @"SHA256";
+}
++ (NSString*)SHA512
+{
+    return @"SHA512";
+}
+@end
+
 @implementation KalturaAppTokenOrderBy
 + (NSString*)CREATED_AT_ASC
 {
@@ -10689,6 +10708,7 @@
 @synthesize sessionUserId = _sessionUserId;
 @synthesize sessionDuration = _sessionDuration;
 @synthesize sessionPrivileges = _sessionPrivileges;
+@synthesize hashType = _hashType;
 
 - (id)init
 {
@@ -10760,6 +10780,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfHashType
+{
+    return KFT_String;
+}
+
 - (void)setPartnerIdFromString:(NSString*)aPropVal
 {
     self.partnerId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -10805,6 +10830,7 @@
     [aParams addIfDefinedKey:@"sessionUserId" withString:self.sessionUserId];
     [aParams addIfDefinedKey:@"sessionDuration" withInt:self.sessionDuration];
     [aParams addIfDefinedKey:@"sessionPrivileges" withString:self.sessionPrivileges];
+    [aParams addIfDefinedKey:@"hashType" withString:self.hashType];
 }
 
 - (void)dealloc
@@ -10813,6 +10839,7 @@
     [self->_token release];
     [self->_sessionUserId release];
     [self->_sessionPrivileges release];
+    [self->_hashType release];
     [super dealloc];
 }
 
