@@ -128,6 +128,7 @@
 @property (nonatomic,copy) NSString* language;	// enum KalturaLanguageCode
 @property (nonatomic,copy) NSString* audioThumbEntryId;
 @property (nonatomic,copy) NSString* liveThumbEntryId;
+@property (nonatomic,assign) KALTURA_BOOL timeAlignedRenditions;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfPartnerName;
 - (KalturaFieldType)getTypeOfDescription;
@@ -194,6 +195,7 @@
 - (KalturaFieldType)getTypeOfLanguage;
 - (KalturaFieldType)getTypeOfAudioThumbEntryId;
 - (KalturaFieldType)getTypeOfLiveThumbEntryId;
+- (KalturaFieldType)getTypeOfTimeAlignedRenditions;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setPartnerPackageFromString:(NSString*)aPropVal;
 - (void)setMonitorUsageFromString:(NSString*)aPropVal;
@@ -224,6 +226,7 @@
 - (void)setCacheFlavorVersionFromString:(NSString*)aPropVal;
 - (void)setApiAccessControlIdFromString:(NSString*)aPropVal;
 - (void)setRestrictEntryByMetadataFromString:(NSString*)aPropVal;
+- (void)setTimeAlignedRenditionsFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

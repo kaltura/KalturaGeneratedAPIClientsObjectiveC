@@ -20450,6 +20450,7 @@
 @property (nonatomic,copy) NSString* logoutUrl;
 @property (nonatomic,assign) int partnerParentId;
 @property (nonatomic,copy) NSString* crmId;
+@property (nonatomic,assign) KALTURA_BOOL timeAlignedRenditions;
 @end
 
 @implementation KalturaPartner
@@ -20505,6 +20506,7 @@
 @synthesize partnerParentId = _partnerParentId;
 @synthesize crmId = _crmId;
 @synthesize referenceId = _referenceId;
+@synthesize timeAlignedRenditions = _timeAlignedRenditions;
 
 - (id)init
 {
@@ -20532,6 +20534,7 @@
     self->_ignoreSeoLinks = KALTURA_UNDEF_BOOL;
     self->_isFirstLogin = KALTURA_UNDEF_BOOL;
     self->_partnerParentId = KALTURA_UNDEF_INT;
+    self->_timeAlignedRenditions = KALTURA_UNDEF_BOOL;
     return self;
 }
 
@@ -20810,6 +20813,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfTimeAlignedRenditions
+{
+    return KFT_Bool;
+}
+
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -20913,6 +20921,11 @@
 - (void)setPartnerParentIdFromString:(NSString*)aPropVal
 {
     self.partnerParentId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setTimeAlignedRenditionsFromString:(NSString*)aPropVal
+{
+    self.timeAlignedRenditions = [KalturaSimpleTypeParser parseBool:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -33293,6 +33306,7 @@
 @synthesize partnerPackageEqual = _partnerPackageEqual;
 @synthesize partnerPackageGreaterThanOrEqual = _partnerPackageGreaterThanOrEqual;
 @synthesize partnerPackageLessThanOrEqual = _partnerPackageLessThanOrEqual;
+@synthesize partnerPackageIn = _partnerPackageIn;
 @synthesize partnerGroupTypeEqual = _partnerGroupTypeEqual;
 @synthesize partnerNameDescriptionWebsiteAdminNameAdminEmailLike = _partnerNameDescriptionWebsiteAdminNameAdminEmailLike;
 
@@ -33370,6 +33384,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfPartnerPackageIn
+{
+    return KFT_String;
+}
+
 - (KalturaFieldType)getTypeOfPartnerGroupTypeEqual
 {
     return KFT_Int;
@@ -33427,6 +33446,7 @@
     [aParams addIfDefinedKey:@"partnerPackageEqual" withInt:self.partnerPackageEqual];
     [aParams addIfDefinedKey:@"partnerPackageGreaterThanOrEqual" withInt:self.partnerPackageGreaterThanOrEqual];
     [aParams addIfDefinedKey:@"partnerPackageLessThanOrEqual" withInt:self.partnerPackageLessThanOrEqual];
+    [aParams addIfDefinedKey:@"partnerPackageIn" withString:self.partnerPackageIn];
     [aParams addIfDefinedKey:@"partnerGroupTypeEqual" withInt:self.partnerGroupTypeEqual];
     [aParams addIfDefinedKey:@"partnerNameDescriptionWebsiteAdminNameAdminEmailLike" withString:self.partnerNameDescriptionWebsiteAdminNameAdminEmailLike];
 }
@@ -33440,6 +33460,7 @@
     [self->_nameMultiLikeAnd release];
     [self->_nameEqual release];
     [self->_statusIn release];
+    [self->_partnerPackageIn release];
     [self->_partnerNameDescriptionWebsiteAdminNameAdminEmailLike release];
     [super dealloc];
 }

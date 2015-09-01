@@ -200,6 +200,7 @@
 @synthesize language = _language;
 @synthesize audioThumbEntryId = _audioThumbEntryId;
 @synthesize liveThumbEntryId = _liveThumbEntryId;
+@synthesize timeAlignedRenditions = _timeAlignedRenditions;
 
 - (id)init
 {
@@ -236,6 +237,7 @@
     self->_cacheFlavorVersion = KALTURA_UNDEF_INT;
     self->_apiAccessControlId = KALTURA_UNDEF_INT;
     self->_restrictEntryByMetadata = KALTURA_UNDEF_BOOL;
+    self->_timeAlignedRenditions = KALTURA_UNDEF_BOOL;
     return self;
 }
 
@@ -569,6 +571,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfTimeAlignedRenditions
+{
+    return KFT_Bool;
+}
+
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -719,6 +726,11 @@
     self.restrictEntryByMetadata = [KalturaSimpleTypeParser parseBool:aPropVal];
 }
 
+- (void)setTimeAlignedRenditionsFromString:(NSString*)aPropVal
+{
+    self.timeAlignedRenditions = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -785,6 +797,7 @@
     [aParams addIfDefinedKey:@"language" withString:self.language];
     [aParams addIfDefinedKey:@"audioThumbEntryId" withString:self.audioThumbEntryId];
     [aParams addIfDefinedKey:@"liveThumbEntryId" withString:self.liveThumbEntryId];
+    [aParams addIfDefinedKey:@"timeAlignedRenditions" withBool:self.timeAlignedRenditions];
 }
 
 - (void)dealloc

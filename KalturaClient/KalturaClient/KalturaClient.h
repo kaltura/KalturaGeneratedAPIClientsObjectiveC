@@ -6552,6 +6552,7 @@
 @property (nonatomic,assign,readonly) int partnerParentId;
 @property (nonatomic,copy,readonly) NSString* crmId;
 @property (nonatomic,copy) NSString* referenceId;
+@property (nonatomic,assign,readonly) KALTURA_BOOL timeAlignedRenditions;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfName;
 - (KalturaFieldType)getTypeOfWebsite;
@@ -6607,6 +6608,7 @@
 - (KalturaFieldType)getTypeOfPartnerParentId;
 - (KalturaFieldType)getTypeOfCrmId;
 - (KalturaFieldType)getTypeOfReferenceId;
+- (KalturaFieldType)getTypeOfTimeAlignedRenditions;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setAppearInSearchFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
@@ -6628,6 +6630,7 @@
 - (void)setIgnoreSeoLinksFromString:(NSString*)aPropVal;
 - (void)setIsFirstLoginFromString:(NSString*)aPropVal;
 - (void)setPartnerParentIdFromString:(NSString*)aPropVal;
+- (void)setTimeAlignedRenditionsFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -9888,6 +9891,7 @@
 @property (nonatomic,assign) int partnerPackageEqual;
 @property (nonatomic,assign) int partnerPackageGreaterThanOrEqual;
 @property (nonatomic,assign) int partnerPackageLessThanOrEqual;
+@property (nonatomic,copy) NSString* partnerPackageIn;
 @property (nonatomic,assign) int partnerGroupTypeEqual;	// enum KalturaPartnerGroupType
 @property (nonatomic,copy) NSString* partnerNameDescriptionWebsiteAdminNameAdminEmailLike;
 - (KalturaFieldType)getTypeOfIdEqual;
@@ -9902,6 +9906,7 @@
 - (KalturaFieldType)getTypeOfPartnerPackageEqual;
 - (KalturaFieldType)getTypeOfPartnerPackageGreaterThanOrEqual;
 - (KalturaFieldType)getTypeOfPartnerPackageLessThanOrEqual;
+- (KalturaFieldType)getTypeOfPartnerPackageIn;
 - (KalturaFieldType)getTypeOfPartnerGroupTypeEqual;
 - (KalturaFieldType)getTypeOfPartnerNameDescriptionWebsiteAdminNameAdminEmailLike;
 - (void)setIdEqualFromString:(NSString*)aPropVal;
