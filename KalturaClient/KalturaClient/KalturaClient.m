@@ -9318,6 +9318,10 @@
 {
     return @"6";
 }
++ (NSString*)REQUEST_HOST_REGEX
+{
+    return @"7";
+}
 @end
 
 @implementation KalturaSchemaType
@@ -26253,6 +26257,38 @@
 - (void)dealloc
 {
     [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaAccessControlModifyRequestHostRegexAction
+@synthesize pattern = _pattern;
+@synthesize replacement = _replacement;
+
+- (KalturaFieldType)getTypeOfPattern
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfReplacement
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaAccessControlModifyRequestHostRegexAction"];
+    [aParams addIfDefinedKey:@"pattern" withString:self.pattern];
+    [aParams addIfDefinedKey:@"replacement" withString:self.replacement];
+}
+
+- (void)dealloc
+{
+    [self->_pattern release];
+    [self->_replacement release];
     [super dealloc];
 }
 

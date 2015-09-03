@@ -3288,6 +3288,7 @@
 + (NSString*)ADD_TO_STORAGE;
 + (NSString*)LIMIT_DELIVERY_PROFILES;
 + (NSString*)SERVE_FROM_REMOTE_SERVER;
++ (NSString*)REQUEST_HOST_REGEX;
 @end
 
 // @package Kaltura
@@ -8027,6 +8028,17 @@
 @property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaAccessControl elements
 - (KalturaFieldType)getTypeOfObjects;
 - (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaAccessControlModifyRequestHostRegexAction : KalturaRuleAction
+// Request host regex pattern
+@property (nonatomic,copy) NSString* pattern;
+// Request host regex replacment
+@property (nonatomic,copy) NSString* replacement;
+- (KalturaFieldType)getTypeOfPattern;
+- (KalturaFieldType)getTypeOfReplacement;
 @end
 
 // @package Kaltura
