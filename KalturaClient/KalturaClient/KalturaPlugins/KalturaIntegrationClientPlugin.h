@@ -34,6 +34,7 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaIntegrationProviderType : NSObject
++ (NSString*)CIELO24;
 + (NSString*)VOICEBASE;
 @end
 

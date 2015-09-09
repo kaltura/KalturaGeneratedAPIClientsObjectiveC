@@ -29,6 +29,10 @@
 
 ///////////////////////// enums /////////////////////////
 @implementation KalturaIntegrationProviderType
++ (NSString*)CIELO24
+{
+    return @"cielo24.Cielo24";
+}
 + (NSString*)VOICEBASE
 {
     return @"voicebase.Voicebase";
