@@ -12594,8 +12594,10 @@
 @interface KalturaLiveEntryFilter : KalturaLiveEntryBaseFilter
 @property (nonatomic,assign) int isLive;	// enum KalturaNullableBoolean
 @property (nonatomic,assign) int isRecordedEntryIdEmpty;	// enum KalturaNullableBoolean
+@property (nonatomic,copy) NSString* hasMediaServerHostname;
 - (KalturaFieldType)getTypeOfIsLive;
 - (KalturaFieldType)getTypeOfIsRecordedEntryIdEmpty;
+- (KalturaFieldType)getTypeOfHasMediaServerHostname;
 - (void)setIsLiveFromString:(NSString*)aPropVal;
 - (void)setIsRecordedEntryIdEmptyFromString:(NSString*)aPropVal;
 @end

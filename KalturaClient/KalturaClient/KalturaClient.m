@@ -42466,6 +42466,7 @@
 @implementation KalturaLiveEntryFilter
 @synthesize isLive = _isLive;
 @synthesize isRecordedEntryIdEmpty = _isRecordedEntryIdEmpty;
+@synthesize hasMediaServerHostname = _hasMediaServerHostname;
 
 - (id)init
 {
@@ -42487,6 +42488,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfHasMediaServerHostname
+{
+    return KFT_String;
+}
+
 - (void)setIsLiveFromString:(NSString*)aPropVal
 {
     self.isLive = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -42504,6 +42510,13 @@
         [aParams putKey:@"objectType" withString:@"KalturaLiveEntryFilter"];
     [aParams addIfDefinedKey:@"isLive" withInt:self.isLive];
     [aParams addIfDefinedKey:@"isRecordedEntryIdEmpty" withInt:self.isRecordedEntryIdEmpty];
+    [aParams addIfDefinedKey:@"hasMediaServerHostname" withString:self.hasMediaServerHostname];
+}
+
+- (void)dealloc
+{
+    [self->_hasMediaServerHostname release];
+    [super dealloc];
 }
 
 @end
