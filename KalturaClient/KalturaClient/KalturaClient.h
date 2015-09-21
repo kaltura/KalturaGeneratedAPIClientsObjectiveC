@@ -10475,8 +10475,11 @@
 @interface KalturaUrlTokenizerCloudFront : KalturaUrlTokenizer
 @property (nonatomic,copy) NSString* keyPairId;
 @property (nonatomic,copy) NSString* rootDir;
+@property (nonatomic,assign) KALTURA_BOOL limitIpAddress;
 - (KalturaFieldType)getTypeOfKeyPairId;
 - (KalturaFieldType)getTypeOfRootDir;
+- (KalturaFieldType)getTypeOfLimitIpAddress;
+- (void)setLimitIpAddressFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
