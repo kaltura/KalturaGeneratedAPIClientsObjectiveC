@@ -169,8 +169,12 @@
 @interface KalturaAnswerCuePointBaseFilter : KalturaCuePointFilter
 @property (nonatomic,copy) NSString* parentIdEqual;
 @property (nonatomic,copy) NSString* parentIdIn;
+@property (nonatomic,copy) NSString* quizUserEntryIdEqual;
+@property (nonatomic,copy) NSString* quizUserEntryIdIn;
 - (KalturaFieldType)getTypeOfParentIdEqual;
 - (KalturaFieldType)getTypeOfParentIdIn;
+- (KalturaFieldType)getTypeOfQuizUserEntryIdEqual;
+- (KalturaFieldType)getTypeOfQuizUserEntryIdIn;
 @end
 
 // @package Kaltura
@@ -209,6 +213,8 @@
 - (KalturaQuizListResponse*)listWithFilter:(KalturaQuizFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaQuizListResponse*)listWithFilter:(KalturaQuizFilter*)aFilter;
 - (KalturaQuizListResponse*)list;
+// creates a pdf from quiz object
+- (KalturaQuiz*)servePdfWithEntryId:(NSString*)aEntryId;
 @end
 
 @interface KalturaQuizClientPlugin : KalturaClientPlugin

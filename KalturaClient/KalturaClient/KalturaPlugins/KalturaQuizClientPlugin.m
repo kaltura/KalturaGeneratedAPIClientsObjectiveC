@@ -523,6 +523,8 @@
 @implementation KalturaAnswerCuePointBaseFilter
 @synthesize parentIdEqual = _parentIdEqual;
 @synthesize parentIdIn = _parentIdIn;
+@synthesize quizUserEntryIdEqual = _quizUserEntryIdEqual;
+@synthesize quizUserEntryIdIn = _quizUserEntryIdIn;
 
 - (KalturaFieldType)getTypeOfParentIdEqual
 {
@@ -534,6 +536,16 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfQuizUserEntryIdEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfQuizUserEntryIdIn
+{
+    return KFT_String;
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -541,12 +553,16 @@
         [aParams putKey:@"objectType" withString:@"KalturaAnswerCuePointBaseFilter"];
     [aParams addIfDefinedKey:@"parentIdEqual" withString:self.parentIdEqual];
     [aParams addIfDefinedKey:@"parentIdIn" withString:self.parentIdIn];
+    [aParams addIfDefinedKey:@"quizUserEntryIdEqual" withString:self.quizUserEntryIdEqual];
+    [aParams addIfDefinedKey:@"quizUserEntryIdIn" withString:self.quizUserEntryIdIn];
 }
 
 - (void)dealloc
 {
     [self->_parentIdEqual release];
     [self->_parentIdIn release];
+    [self->_quizUserEntryIdEqual release];
+    [self->_quizUserEntryIdIn release];
     [super dealloc];
 }
 
@@ -649,6 +665,12 @@
 - (KalturaQuizListResponse*)list
 {
     return [self listWithFilter:nil];
+}
+
+- (KalturaQuiz*)servePdfWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    return [self.client queueObjectService:@"quiz_quiz" withAction:@"servePdf" withExpectedType:@"KalturaQuiz"];
 }
 
 @end
