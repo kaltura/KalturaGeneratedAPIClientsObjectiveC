@@ -88,6 +88,7 @@
 @property (nonatomic,assign) int showCorrectKeyOnAnswer;	// enum KalturaNullableBoolean
 @property (nonatomic,assign) int allowAnswerUpdate;	// enum KalturaNullableBoolean
 @property (nonatomic,assign) int showCorrectAfterSubmission;	// enum KalturaNullableBoolean
+@property (nonatomic,assign) int allowDownload;	// enum KalturaNullableBoolean
 - (KalturaFieldType)getTypeOfVersion;
 - (KalturaFieldType)getTypeOfUiAttributes;
 - (NSString*)getObjectTypeOfUiAttributes;
@@ -95,11 +96,13 @@
 - (KalturaFieldType)getTypeOfShowCorrectKeyOnAnswer;
 - (KalturaFieldType)getTypeOfAllowAnswerUpdate;
 - (KalturaFieldType)getTypeOfShowCorrectAfterSubmission;
+- (KalturaFieldType)getTypeOfAllowDownload;
 - (void)setVersionFromString:(NSString*)aPropVal;
 - (void)setShowResultOnAnswerFromString:(NSString*)aPropVal;
 - (void)setShowCorrectKeyOnAnswerFromString:(NSString*)aPropVal;
 - (void)setAllowAnswerUpdateFromString:(NSString*)aPropVal;
 - (void)setShowCorrectAfterSubmissionFromString:(NSString*)aPropVal;
+- (void)setAllowDownloadFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -214,7 +217,7 @@
 - (KalturaQuizListResponse*)listWithFilter:(KalturaQuizFilter*)aFilter;
 - (KalturaQuizListResponse*)list;
 // creates a pdf from quiz object
-- (KalturaQuiz*)servePdfWithEntryId:(NSString*)aEntryId;
+- (NSString*)servePdfWithEntryId:(NSString*)aEntryId;
 @end
 
 @interface KalturaQuizClientPlugin : KalturaClientPlugin

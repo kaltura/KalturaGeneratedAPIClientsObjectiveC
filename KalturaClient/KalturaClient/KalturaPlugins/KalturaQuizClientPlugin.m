@@ -192,6 +192,7 @@
 @synthesize showCorrectKeyOnAnswer = _showCorrectKeyOnAnswer;
 @synthesize allowAnswerUpdate = _allowAnswerUpdate;
 @synthesize showCorrectAfterSubmission = _showCorrectAfterSubmission;
+@synthesize allowDownload = _allowDownload;
 
 - (id)init
 {
@@ -203,6 +204,7 @@
     self->_showCorrectKeyOnAnswer = KALTURA_UNDEF_INT;
     self->_allowAnswerUpdate = KALTURA_UNDEF_INT;
     self->_showCorrectAfterSubmission = KALTURA_UNDEF_INT;
+    self->_allowDownload = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -241,6 +243,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfAllowDownload
+{
+    return KFT_Int;
+}
+
 - (void)setVersionFromString:(NSString*)aPropVal
 {
     self.version = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -266,6 +273,11 @@
     self.showCorrectAfterSubmission = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setAllowDownloadFromString:(NSString*)aPropVal
+{
+    self.allowDownload = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -276,6 +288,7 @@
     [aParams addIfDefinedKey:@"showCorrectKeyOnAnswer" withInt:self.showCorrectKeyOnAnswer];
     [aParams addIfDefinedKey:@"allowAnswerUpdate" withInt:self.allowAnswerUpdate];
     [aParams addIfDefinedKey:@"showCorrectAfterSubmission" withInt:self.showCorrectAfterSubmission];
+    [aParams addIfDefinedKey:@"allowDownload" withInt:self.allowDownload];
 }
 
 - (void)dealloc
@@ -667,10 +680,10 @@
     return [self listWithFilter:nil];
 }
 
-- (KalturaQuiz*)servePdfWithEntryId:(NSString*)aEntryId
+- (NSString*)servePdfWithEntryId:(NSString*)aEntryId
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    return [self.client queueObjectService:@"quiz_quiz" withAction:@"servePdf" withExpectedType:@"KalturaQuiz"];
+    return [self.client queueServeService:@"quiz_quiz" withAction:@"servePdf"];
 }
 
 @end
