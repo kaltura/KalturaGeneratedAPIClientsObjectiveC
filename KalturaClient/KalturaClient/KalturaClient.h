@@ -13293,6 +13293,7 @@
 - (KalturaMediaEntry*)getWithEntryId:(NSString*)aEntryId;
 // Get MRSS by entry id
 //      XML will return as an escaped string
+- (NSString*)getMrssWithEntryId:(NSString*)aEntryId withExtendingItemsArray:(NSArray*)aExtendingItemsArray withFeatures:(NSString*)aFeatures;
 - (NSString*)getMrssWithEntryId:(NSString*)aEntryId withExtendingItemsArray:(NSArray*)aExtendingItemsArray;
 - (NSString*)getMrssWithEntryId:(NSString*)aEntryId;
 // Update media entry. Only the properties that were set will be updated.

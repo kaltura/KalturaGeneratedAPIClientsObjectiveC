@@ -44501,11 +44501,17 @@
     return [self getWithEntryId:aEntryId withVersion:KALTURA_UNDEF_INT];
 }
 
-- (NSString*)getMrssWithEntryId:(NSString*)aEntryId withExtendingItemsArray:(NSArray*)aExtendingItemsArray
+- (NSString*)getMrssWithEntryId:(NSString*)aEntryId withExtendingItemsArray:(NSArray*)aExtendingItemsArray withFeatures:(NSString*)aFeatures
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
     [self.client.params addIfDefinedKey:@"extendingItemsArray" withArray:aExtendingItemsArray];
+    [self.client.params addIfDefinedKey:@"features" withString:aFeatures];
     return [self.client queueStringService:@"media" withAction:@"getMrss"];
+}
+
+- (NSString*)getMrssWithEntryId:(NSString*)aEntryId withExtendingItemsArray:(NSArray*)aExtendingItemsArray
+{
+    return [self getMrssWithEntryId:aEntryId withExtendingItemsArray:aExtendingItemsArray withFeatures:nil];
 }
 
 - (NSString*)getMrssWithEntryId:(NSString*)aEntryId

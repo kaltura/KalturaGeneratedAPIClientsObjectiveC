@@ -671,10 +671,14 @@
 @interface KalturaConfigurableDistributionProfile : KalturaDistributionProfile
 @property (nonatomic,retain) NSMutableArray* fieldConfigArray;	// of KalturaDistributionFieldConfig elements
 @property (nonatomic,retain) NSMutableArray* itemXpathsToExtend;	// of KalturaExtendingItemMrssParameter elements
+// When checking custom XSLT conditions using the fieldConfigArray - address only categories associated with the entry via the categoryEntry object
+@property (nonatomic,assign) KALTURA_BOOL useCategoryEntries;
 - (KalturaFieldType)getTypeOfFieldConfigArray;
 - (NSString*)getObjectTypeOfFieldConfigArray;
 - (KalturaFieldType)getTypeOfItemXpathsToExtend;
 - (NSString*)getObjectTypeOfItemXpathsToExtend;
+- (KalturaFieldType)getTypeOfUseCategoryEntries;
+- (void)setUseCategoryEntriesFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

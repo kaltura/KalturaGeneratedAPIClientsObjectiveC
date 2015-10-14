@@ -2096,6 +2096,16 @@
 @implementation KalturaConfigurableDistributionProfile
 @synthesize fieldConfigArray = _fieldConfigArray;
 @synthesize itemXpathsToExtend = _itemXpathsToExtend;
+@synthesize useCategoryEntries = _useCategoryEntries;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_useCategoryEntries = KALTURA_UNDEF_BOOL;
+    return self;
+}
 
 - (KalturaFieldType)getTypeOfFieldConfigArray
 {
@@ -2117,6 +2127,16 @@
     return @"KalturaExtendingItemMrssParameter";
 }
 
+- (KalturaFieldType)getTypeOfUseCategoryEntries
+{
+    return KFT_Bool;
+}
+
+- (void)setUseCategoryEntriesFromString:(NSString*)aPropVal
+{
+    self.useCategoryEntries = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -2124,6 +2144,7 @@
         [aParams putKey:@"objectType" withString:@"KalturaConfigurableDistributionProfile"];
     [aParams addIfDefinedKey:@"fieldConfigArray" withArray:self.fieldConfigArray];
     [aParams addIfDefinedKey:@"itemXpathsToExtend" withArray:self.itemXpathsToExtend];
+    [aParams addIfDefinedKey:@"useCategoryEntries" withBool:self.useCategoryEntries];
 }
 
 - (void)dealloc
