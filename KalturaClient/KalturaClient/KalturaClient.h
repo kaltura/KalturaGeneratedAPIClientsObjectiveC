@@ -1041,6 +1041,7 @@
 + (NSString*)PDF;
 + (NSString*)SWF;
 + (NSString*)TIMED_THUMB_ASSET;
++ (NSString*)TRANSCRIPT;
 + (NSString*)FLAVOR;
 + (NSString*)THUMBNAIL;
 + (NSString*)LIVE;

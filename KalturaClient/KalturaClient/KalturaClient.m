@@ -2387,6 +2387,10 @@
 {
     return @"thumbCuePoint.timedThumb";
 }
++ (NSString*)TRANSCRIPT
+{
+    return @"transcript.Transcript";
+}
 + (NSString*)FLAVOR
 {
     return @"1";
