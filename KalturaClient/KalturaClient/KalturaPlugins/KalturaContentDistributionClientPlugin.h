@@ -270,6 +270,8 @@
 @property (nonatomic,retain) NSMutableArray* updateParams;	// of KalturaString elements
 // Is this field config is the default for the distribution provider?
 @property (nonatomic,assign,readonly) KALTURA_BOOL isDefault;
+// Is an error on this field going to trigger deletion of distributed content?
+@property (nonatomic,assign) KALTURA_BOOL triggerDeleteOnError;
 - (KalturaFieldType)getTypeOfFieldName;
 - (KalturaFieldType)getTypeOfUserFriendlyFieldName;
 - (KalturaFieldType)getTypeOfEntryMrssXslt;
@@ -278,9 +280,11 @@
 - (KalturaFieldType)getTypeOfUpdateParams;
 - (NSString*)getObjectTypeOfUpdateParams;
 - (KalturaFieldType)getTypeOfIsDefault;
+- (KalturaFieldType)getTypeOfTriggerDeleteOnError;
 - (void)setIsRequiredFromString:(NSString*)aPropVal;
 - (void)setUpdateOnChangeFromString:(NSString*)aPropVal;
 - (void)setIsDefaultFromString:(NSString*)aPropVal;
+- (void)setTriggerDeleteOnErrorFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

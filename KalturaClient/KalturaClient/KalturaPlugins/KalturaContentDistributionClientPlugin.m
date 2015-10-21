@@ -535,6 +535,7 @@
 @synthesize updateOnChange = _updateOnChange;
 @synthesize updateParams = _updateParams;
 @synthesize isDefault = _isDefault;
+@synthesize triggerDeleteOnError = _triggerDeleteOnError;
 
 - (id)init
 {
@@ -544,6 +545,7 @@
     self->_isRequired = KALTURA_UNDEF_INT;
     self->_updateOnChange = KALTURA_UNDEF_BOOL;
     self->_isDefault = KALTURA_UNDEF_BOOL;
+    self->_triggerDeleteOnError = KALTURA_UNDEF_BOOL;
     return self;
 }
 
@@ -587,6 +589,11 @@
     return KFT_Bool;
 }
 
+- (KalturaFieldType)getTypeOfTriggerDeleteOnError
+{
+    return KFT_Bool;
+}
+
 - (void)setIsRequiredFromString:(NSString*)aPropVal
 {
     self.isRequired = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -602,6 +609,11 @@
     self.isDefault = [KalturaSimpleTypeParser parseBool:aPropVal];
 }
 
+- (void)setTriggerDeleteOnErrorFromString:(NSString*)aPropVal
+{
+    self.triggerDeleteOnError = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -613,6 +625,7 @@
     [aParams addIfDefinedKey:@"isRequired" withInt:self.isRequired];
     [aParams addIfDefinedKey:@"updateOnChange" withBool:self.updateOnChange];
     [aParams addIfDefinedKey:@"updateParams" withArray:self.updateParams];
+    [aParams addIfDefinedKey:@"triggerDeleteOnError" withBool:self.triggerDeleteOnError];
 }
 
 - (void)dealloc
