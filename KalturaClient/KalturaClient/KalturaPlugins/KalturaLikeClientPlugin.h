@@ -30,7 +30,45 @@
 #import "../KalturaClient.h"
 
 ///////////////////////// enums /////////////////////////
+// @package Kaltura
+// @subpackage Client
+@interface KalturaLikeOrderBy : NSObject
+@end
+
 ///////////////////////// classes /////////////////////////
+// @package Kaltura
+// @subpackage Client
+@interface KalturaLike : KalturaObjectBase
+// The id of the entry that the like belongs to
+@property (nonatomic,copy) NSString* entryId;
+// The id of user that the like belongs to
+@property (nonatomic,copy) NSString* userId;
+- (KalturaFieldType)getTypeOfEntryId;
+- (KalturaFieldType)getTypeOfUserId;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaLikeListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaLike elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaLikeBaseFilter : KalturaRelatedFilter
+@property (nonatomic,copy) NSString* entryIdEqual;
+@property (nonatomic,copy) NSString* userIdEqual;
+- (KalturaFieldType)getTypeOfEntryIdEqual;
+- (KalturaFieldType)getTypeOfUserIdEqual;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaLikeFilter : KalturaLikeBaseFilter
+@end
+
 ///////////////////////// services /////////////////////////
 // @package Kaltura
 // @subpackage Client
@@ -40,6 +78,9 @@
 - (KALTURA_BOOL)unlikeWithEntryId:(NSString*)aEntryId;
 - (KALTURA_BOOL)checkLikeExistsWithEntryId:(NSString*)aEntryId withUserId:(NSString*)aUserId;
 - (KALTURA_BOOL)checkLikeExistsWithEntryId:(NSString*)aEntryId;
+- (KalturaLikeListResponse*)listWithFilter:(KalturaLikeFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
+- (KalturaLikeListResponse*)listWithFilter:(KalturaLikeFilter*)aFilter;
+- (KalturaLikeListResponse*)list;
 @end
 
 @interface KalturaLikeClientPlugin : KalturaClientPlugin

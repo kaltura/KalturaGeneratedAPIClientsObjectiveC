@@ -28,7 +28,116 @@
 #import "KalturaLikeClientPlugin.h"
 
 ///////////////////////// enums /////////////////////////
+@implementation KalturaLikeOrderBy
+@end
+
 ///////////////////////// classes /////////////////////////
+@implementation KalturaLike
+@synthesize entryId = _entryId;
+@synthesize userId = _userId;
+
+- (KalturaFieldType)getTypeOfEntryId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfUserId
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaLike"];
+    [aParams addIfDefinedKey:@"entryId" withString:self.entryId];
+    [aParams addIfDefinedKey:@"userId" withString:self.userId];
+}
+
+- (void)dealloc
+{
+    [self->_entryId release];
+    [self->_userId release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaLikeListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
+
+@implementation KalturaLikeListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfObjects
+{
+    return @"KalturaLike";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaLikeListResponse"];
+}
+
+- (void)dealloc
+{
+    [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaLikeBaseFilter
+@synthesize entryIdEqual = _entryIdEqual;
+@synthesize userIdEqual = _userIdEqual;
+
+- (KalturaFieldType)getTypeOfEntryIdEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfUserIdEqual
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaLikeBaseFilter"];
+    [aParams addIfDefinedKey:@"entryIdEqual" withString:self.entryIdEqual];
+    [aParams addIfDefinedKey:@"userIdEqual" withString:self.userIdEqual];
+}
+
+- (void)dealloc
+{
+    [self->_entryIdEqual release];
+    [self->_userIdEqual release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaLikeFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaLikeFilter"];
+}
+
+@end
+
 ///////////////////////// services /////////////////////////
 @implementation KalturaLikeService
 - (KALTURA_BOOL)likeWithEntryId:(NSString*)aEntryId
@@ -53,6 +162,23 @@
 - (KALTURA_BOOL)checkLikeExistsWithEntryId:(NSString*)aEntryId
 {
     return [self checkLikeExistsWithEntryId:aEntryId withUserId:nil];
+}
+
+- (KalturaLikeListResponse*)listWithFilter:(KalturaLikeFilter*)aFilter withPager:(KalturaFilterPager*)aPager
+{
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    return [self.client queueObjectService:@"like_like" withAction:@"list" withExpectedType:@"KalturaLikeListResponse"];
+}
+
+- (KalturaLikeListResponse*)listWithFilter:(KalturaLikeFilter*)aFilter
+{
+    return [self listWithFilter:aFilter withPager:nil];
+}
+
+- (KalturaLikeListResponse*)list
+{
+    return [self listWithFilter:nil];
 }
 
 @end
