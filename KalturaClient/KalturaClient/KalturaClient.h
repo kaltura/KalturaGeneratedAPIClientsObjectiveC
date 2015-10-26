@@ -5454,7 +5454,7 @@
 // The desired height of the Flavor Params
 @property (nonatomic,assign) int height;
 // The frame rate of the Flavor Params
-@property (nonatomic,assign) int frameRate;
+@property (nonatomic,assign) double frameRate;
 // The gop size of the Flavor Params
 @property (nonatomic,assign) int gopSize;
 // The list of conversion engines (comma separated)

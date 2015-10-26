@@ -16603,7 +16603,7 @@
     self->_audioSampleRate = KALTURA_UNDEF_INT;
     self->_width = KALTURA_UNDEF_INT;
     self->_height = KALTURA_UNDEF_INT;
-    self->_frameRate = KALTURA_UNDEF_INT;
+    self->_frameRate = KALTURA_UNDEF_FLOAT;
     self->_gopSize = KALTURA_UNDEF_INT;
     self->_twoPass = KALTURA_UNDEF_BOOL;
     self->_deinterlice = KALTURA_UNDEF_INT;
@@ -16669,7 +16669,7 @@
 
 - (KalturaFieldType)getTypeOfFrameRate
 {
-    return KFT_Int;
+    return KFT_Float;
 }
 
 - (KalturaFieldType)getTypeOfGopSize
@@ -16834,7 +16834,7 @@
 
 - (void)setFrameRateFromString:(NSString*)aPropVal
 {
-    self.frameRate = [KalturaSimpleTypeParser parseInt:aPropVal];
+    self.frameRate = [KalturaSimpleTypeParser parseFloat:aPropVal];
 }
 
 - (void)setGopSizeFromString:(NSString*)aPropVal
@@ -16950,7 +16950,7 @@
     [aParams addIfDefinedKey:@"audioSampleRate" withInt:self.audioSampleRate];
     [aParams addIfDefinedKey:@"width" withInt:self.width];
     [aParams addIfDefinedKey:@"height" withInt:self.height];
-    [aParams addIfDefinedKey:@"frameRate" withInt:self.frameRate];
+    [aParams addIfDefinedKey:@"frameRate" withFloat:self.frameRate];
     [aParams addIfDefinedKey:@"gopSize" withInt:self.gopSize];
     [aParams addIfDefinedKey:@"conversionEngines" withString:self.conversionEngines];
     [aParams addIfDefinedKey:@"conversionEnginesExtraParams" withString:self.conversionEnginesExtraParams];
