@@ -41,6 +41,12 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaQuizFileType : NSObject
++ (int)PDF;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaThumbCuePointSubType : NSObject
 + (int)SLIDE;
 + (int)CHAPTER;

@@ -47,6 +47,13 @@
 }
 @end
 
+@implementation KalturaQuizFileType
++ (int)PDF
+{
+    return 1;
+}
+@end
+
 @implementation KalturaThumbCuePointSubType
 + (int)SLIDE
 {
