@@ -217,6 +217,8 @@
 - (KalturaQuizListResponse*)listWithFilter:(KalturaQuizFilter*)aFilter;
 - (KalturaQuizListResponse*)list;
 // creates a pdf from quiz object
+// 	 The Output type defines the file format in which the quiz will be generated
+// 	 Currently only PDF files are supported
 - (NSString*)serveWithEntryId:(NSString*)aEntryId withQuizOutputType:(int)aQuizOutputType;
 // sends a with an api request for pdf from quiz object
 - (NSString*)getUrlWithEntryId:(NSString*)aEntryId withQuizOutputType:(int)aQuizOutputType;
