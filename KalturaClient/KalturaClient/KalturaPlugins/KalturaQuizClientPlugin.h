@@ -217,9 +217,9 @@
 - (KalturaQuizListResponse*)listWithFilter:(KalturaQuizFilter*)aFilter;
 - (KalturaQuizListResponse*)list;
 // creates a pdf from quiz object
-- (NSString*)serveWithEntryId:(NSString*)aEntryId withQuizFileType:(int)aQuizFileType;
+- (NSString*)serveWithEntryId:(NSString*)aEntryId withQuizOutputType:(int)aQuizOutputType;
 // sends a with an api request for pdf from quiz object
-- (NSString*)getUrlWithEntryId:(NSString*)aEntryId withQuizFileType:(int)aQuizFileType;
+- (NSString*)getUrlWithEntryId:(NSString*)aEntryId withQuizOutputType:(int)aQuizOutputType;
 @end
 
 @interface KalturaQuizClientPlugin : KalturaClientPlugin

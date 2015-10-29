@@ -680,17 +680,17 @@
     return [self listWithFilter:nil];
 }
 
-- (NSString*)serveWithEntryId:(NSString*)aEntryId withQuizFileType:(int)aQuizFileType
+- (NSString*)serveWithEntryId:(NSString*)aEntryId withQuizOutputType:(int)aQuizOutputType
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"quizFileType" withInt:aQuizFileType];
+    [self.client.params addIfDefinedKey:@"quizOutputType" withInt:aQuizOutputType];
     return [self.client queueServeService:@"quiz_quiz" withAction:@"serve"];
 }
 
-- (NSString*)getUrlWithEntryId:(NSString*)aEntryId withQuizFileType:(int)aQuizFileType
+- (NSString*)getUrlWithEntryId:(NSString*)aEntryId withQuizOutputType:(int)aQuizOutputType
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"quizFileType" withInt:aQuizFileType];
+    [self.client.params addIfDefinedKey:@"quizOutputType" withInt:aQuizOutputType];
     return [self.client queueStringService:@"quiz_quiz" withAction:@"getUrl"];
 }
 

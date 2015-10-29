@@ -47,7 +47,7 @@
 }
 @end
 
-@implementation KalturaQuizFileType
+@implementation KalturaQuizOutputType
 + (int)PDF
 {
     return 1;

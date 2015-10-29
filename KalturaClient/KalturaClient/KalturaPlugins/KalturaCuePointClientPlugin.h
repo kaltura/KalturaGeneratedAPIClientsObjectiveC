@@ -41,7 +41,7 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaQuizFileType : NSObject
+@interface KalturaQuizOutputType : NSObject
 + (int)PDF;
 @end
 
