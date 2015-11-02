@@ -35,6 +35,16 @@
 @implementation KalturaLike
 @synthesize entryId = _entryId;
 @synthesize userId = _userId;
+@synthesize createdAt = _createdAt;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_createdAt = KALTURA_UNDEF_INT;
+    return self;
+}
 
 - (KalturaFieldType)getTypeOfEntryId
 {
@@ -46,6 +56,16 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfCreatedAt
+{
+    return KFT_Int;
+}
+
+- (void)setCreatedAtFromString:(NSString*)aPropVal
+{
+    self.createdAt = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -53,6 +73,7 @@
         [aParams putKey:@"objectType" withString:@"KalturaLike"];
     [aParams addIfDefinedKey:@"entryId" withString:self.entryId];
     [aParams addIfDefinedKey:@"userId" withString:self.userId];
+    [aParams addIfDefinedKey:@"createdAt" withInt:self.createdAt];
 }
 
 - (void)dealloc
@@ -99,6 +120,18 @@
 @implementation KalturaLikeBaseFilter
 @synthesize entryIdEqual = _entryIdEqual;
 @synthesize userIdEqual = _userIdEqual;
+@synthesize createdAtGreaterThanOrEqual = _createdAtGreaterThanOrEqual;
+@synthesize createdAtLessThanOrEqual = _createdAtLessThanOrEqual;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_createdAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_createdAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    return self;
+}
 
 - (KalturaFieldType)getTypeOfEntryIdEqual
 {
@@ -110,6 +143,26 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.createdAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.createdAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -117,6 +170,8 @@
         [aParams putKey:@"objectType" withString:@"KalturaLikeBaseFilter"];
     [aParams addIfDefinedKey:@"entryIdEqual" withString:self.entryIdEqual];
     [aParams addIfDefinedKey:@"userIdEqual" withString:self.userIdEqual];
+    [aParams addIfDefinedKey:@"createdAtGreaterThanOrEqual" withInt:self.createdAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
 }
 
 - (void)dealloc

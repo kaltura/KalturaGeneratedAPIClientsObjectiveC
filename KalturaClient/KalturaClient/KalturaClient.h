@@ -1184,7 +1184,6 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaBatchJobType : NSObject
-+ (NSString*)CONVERT;
 + (NSString*)PARSE_MULTI_LANGUAGE_CAPTION_ASSET;
 + (NSString*)PARSE_CAPTION_ASSET;
 + (NSString*)DISTRIBUTION_DELETE;
@@ -1194,6 +1193,7 @@
 + (NSString*)DISTRIBUTION_SUBMIT;
 + (NSString*)DISTRIBUTION_SYNC;
 + (NSString*)DISTRIBUTION_UPDATE;
++ (NSString*)CONVERT;
 + (NSString*)DROP_FOLDER_CONTENT_PROCESSOR;
 + (NSString*)DROP_FOLDER_WATCHER;
 + (NSString*)EVENT_NOTIFICATION_HANDLER;

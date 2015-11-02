@@ -43,8 +43,12 @@
 @property (nonatomic,copy) NSString* entryId;
 // The id of user that the like belongs to
 @property (nonatomic,copy) NSString* userId;
+// The date of the like's creation
+@property (nonatomic,assign) int createdAt;
 - (KalturaFieldType)getTypeOfEntryId;
 - (KalturaFieldType)getTypeOfUserId;
+- (KalturaFieldType)getTypeOfCreatedAt;
+- (void)setCreatedAtFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -60,8 +64,14 @@
 @interface KalturaLikeBaseFilter : KalturaRelatedFilter
 @property (nonatomic,copy) NSString* entryIdEqual;
 @property (nonatomic,copy) NSString* userIdEqual;
+@property (nonatomic,assign) int createdAtGreaterThanOrEqual;
+@property (nonatomic,assign) int createdAtLessThanOrEqual;
 - (KalturaFieldType)getTypeOfEntryIdEqual;
 - (KalturaFieldType)getTypeOfUserIdEqual;
+- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual;
+- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

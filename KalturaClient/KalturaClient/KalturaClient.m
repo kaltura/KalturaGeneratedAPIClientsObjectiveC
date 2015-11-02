@@ -2823,10 +2823,6 @@
 @end
 
 @implementation KalturaBatchJobType
-+ (NSString*)CONVERT
-{
-    return @"0";
-}
 + (NSString*)PARSE_MULTI_LANGUAGE_CAPTION_ASSET
 {
     return @"caption.parsemultilanguagecaptionasset";
@@ -2862,6 +2858,10 @@
 + (NSString*)DISTRIBUTION_UPDATE
 {
     return @"contentDistribution.DistributionUpdate";
+}
++ (NSString*)CONVERT
+{
+    return @"0";
 }
 + (NSString*)DROP_FOLDER_CONTENT_PROCESSOR
 {
