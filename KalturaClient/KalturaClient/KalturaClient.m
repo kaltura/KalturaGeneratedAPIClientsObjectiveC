@@ -11844,6 +11844,38 @@
 
 @end
 
+@implementation KalturaBaseEntryCloneOptions
+@synthesize shouldCopyEntitlement = _shouldCopyEntitlement;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_shouldCopyEntitlement = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfShouldCopyEntitlement
+{
+    return KFT_Int;
+}
+
+- (void)setShouldCopyEntitlementFromString:(NSString*)aPropVal
+{
+    self.shouldCopyEntitlement = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaBaseEntryCloneOptions"];
+    [aParams addIfDefinedKey:@"shouldCopyEntitlement" withInt:self.shouldCopyEntitlement];
+}
+
+@end
+
 @implementation KalturaBaseResponseProfile
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
@@ -43212,9 +43244,10 @@
     return [self indexWithId:aId withShouldUpdate:KALTURA_UNDEF_BOOL];
 }
 
-- (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId
+- (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId withCloneOptions:(KalturaBaseEntryCloneOptions*)aCloneOptions
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"cloneOptions" withObject:aCloneOptions];
     return [self.client queueObjectService:@"baseentry" withAction:@"clone" withExpectedType:@"KalturaBaseEntry"];
 }
 

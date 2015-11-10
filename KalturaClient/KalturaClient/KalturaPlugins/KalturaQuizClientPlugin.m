@@ -193,6 +193,7 @@
 @synthesize allowAnswerUpdate = _allowAnswerUpdate;
 @synthesize showCorrectAfterSubmission = _showCorrectAfterSubmission;
 @synthesize allowDownload = _allowDownload;
+@synthesize showGradeAfterSubmission = _showGradeAfterSubmission;
 
 - (id)init
 {
@@ -205,6 +206,7 @@
     self->_allowAnswerUpdate = KALTURA_UNDEF_INT;
     self->_showCorrectAfterSubmission = KALTURA_UNDEF_INT;
     self->_allowDownload = KALTURA_UNDEF_INT;
+    self->_showGradeAfterSubmission = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -248,6 +250,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfShowGradeAfterSubmission
+{
+    return KFT_Int;
+}
+
 - (void)setVersionFromString:(NSString*)aPropVal
 {
     self.version = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -278,6 +285,11 @@
     self.allowDownload = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setShowGradeAfterSubmissionFromString:(NSString*)aPropVal
+{
+    self.showGradeAfterSubmission = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -289,6 +301,7 @@
     [aParams addIfDefinedKey:@"allowAnswerUpdate" withInt:self.allowAnswerUpdate];
     [aParams addIfDefinedKey:@"showCorrectAfterSubmission" withInt:self.showCorrectAfterSubmission];
     [aParams addIfDefinedKey:@"allowDownload" withInt:self.allowDownload];
+    [aParams addIfDefinedKey:@"showGradeAfterSubmission" withInt:self.showGradeAfterSubmission];
 }
 
 - (void)dealloc
