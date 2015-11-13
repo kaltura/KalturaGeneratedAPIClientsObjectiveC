@@ -4142,15 +4142,6 @@
 
 // @package Kaltura
 // @subpackage Client
-// A representation of a live stream recording entry configuration
-@interface KalturaBaseEntryCloneOptions : KalturaObjectBase
-@property (nonatomic,assign) int shouldCopyEntitlement;	// enum KalturaNullableBoolean
-- (KalturaFieldType)getTypeOfShouldCopyEntitlement;
-- (void)setShouldCopyEntitlementFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaBaseResponseProfile : KalturaObjectBase
 @end
 
@@ -12863,7 +12854,7 @@
 - (int)indexWithId:(NSString*)aId withShouldUpdate:(KALTURA_BOOL)aShouldUpdate;
 - (int)indexWithId:(NSString*)aId;
 // Clone an entry with optional attributes to apply to the clone
-- (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId withCloneOptions:(KalturaBaseEntryCloneOptions*)aCloneOptions;
+- (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId;
 @end
 
 // @package Kaltura
