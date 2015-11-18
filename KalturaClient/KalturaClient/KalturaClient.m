@@ -11884,6 +11884,7 @@
 @synthesize enforceEntitlement = _enforceEntitlement;
 @synthesize privacyContext = _privacyContext;
 @synthesize updatedAt = _updatedAt;
+@synthesize useCategoryEntries = _useCategoryEntries;
 
 - (id)init
 {
@@ -11902,6 +11903,7 @@
     self->_storageId = KALTURA_UNDEF_INT;
     self->_enforceEntitlement = KALTURA_UNDEF_BOOL;
     self->_updatedAt = KALTURA_UNDEF_INT;
+    self->_useCategoryEntries = KALTURA_UNDEF_BOOL;
     return self;
 }
 
@@ -12005,6 +12007,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfUseCategoryEntries
+{
+    return KFT_Bool;
+}
+
 - (void)setPartnerIdFromString:(NSString*)aPropVal
 {
     self.partnerId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -12065,6 +12072,11 @@
     self.updatedAt = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setUseCategoryEntriesFromString:(NSString*)aPropVal
+{
+    self.useCategoryEntries = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -12084,6 +12096,7 @@
     [aParams addIfDefinedKey:@"entriesOrderBy" withString:self.entriesOrderBy];
     [aParams addIfDefinedKey:@"enforceEntitlement" withBool:self.enforceEntitlement];
     [aParams addIfDefinedKey:@"privacyContext" withString:self.privacyContext];
+    [aParams addIfDefinedKey:@"useCategoryEntries" withBool:self.useCategoryEntries];
 }
 
 - (void)dealloc

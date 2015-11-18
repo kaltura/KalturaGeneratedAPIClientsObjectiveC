@@ -4184,6 +4184,7 @@
 @property (nonatomic,copy) NSString* privacyContext;
 // Update date as Unix timestamp (In seconds)
 @property (nonatomic,assign,readonly) int updatedAt;
+@property (nonatomic,assign) KALTURA_BOOL useCategoryEntries;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfFeedUrl;
 - (KalturaFieldType)getTypeOfPartnerId;
@@ -4204,6 +4205,7 @@
 - (KalturaFieldType)getTypeOfEnforceEntitlement;
 - (KalturaFieldType)getTypeOfPrivacyContext;
 - (KalturaFieldType)getTypeOfUpdatedAt;
+- (KalturaFieldType)getTypeOfUseCategoryEntries;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setStatusFromString:(NSString*)aPropVal;
 - (void)setTypeFromString:(NSString*)aPropVal;
@@ -4216,6 +4218,7 @@
 - (void)setStorageIdFromString:(NSString*)aPropVal;
 - (void)setEnforceEntitlementFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
+- (void)setUseCategoryEntriesFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
