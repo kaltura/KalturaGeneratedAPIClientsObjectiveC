@@ -38148,11 +38148,30 @@
 @end
 
 @implementation KalturaEdgeServerNode
+@synthesize deliveryProfileIds = _deliveryProfileIds;
+
+- (KalturaFieldType)getTypeOfDeliveryProfileIds
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfDeliveryProfileIds
+{
+    return @"KalturaKeyValue";
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaEdgeServerNode"];
+    [aParams addIfDefinedKey:@"deliveryProfileIds" withArray:self.deliveryProfileIds];
+}
+
+- (void)dealloc
+{
+    [self->_deliveryProfileIds release];
+    [super dealloc];
 }
 
 @end

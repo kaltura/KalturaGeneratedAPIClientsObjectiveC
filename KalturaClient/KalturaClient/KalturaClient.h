@@ -11129,6 +11129,10 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaEdgeServerNode : KalturaDeliveryServerNode
+// Delivery profile ids
+@property (nonatomic,retain) NSMutableArray* deliveryProfileIds;	// of KalturaKeyValue elements
+- (KalturaFieldType)getTypeOfDeliveryProfileIds;
+- (NSString*)getObjectTypeOfDeliveryProfileIds;
 @end
 
 // @package Kaltura
