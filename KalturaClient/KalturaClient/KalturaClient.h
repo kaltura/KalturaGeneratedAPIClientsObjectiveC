@@ -3293,6 +3293,7 @@
 + (NSString*)BROWSERS;
 + (NSString*)LIVE;
 + (NSString*)TOP_PLAYBACK_CONTEXT;
++ (NSString*)VPAAS_USAGE;
 + (NSString*)PARTNER_USAGE;
 @end
 

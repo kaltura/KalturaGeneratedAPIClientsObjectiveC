@@ -9338,6 +9338,10 @@
 {
     return @"25";
 }
++ (NSString*)VPAAS_USAGE
+{
+    return @"26";
+}
 + (NSString*)PARTNER_USAGE
 {
     return @"201";
