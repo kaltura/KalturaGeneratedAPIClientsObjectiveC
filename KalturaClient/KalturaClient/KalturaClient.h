@@ -8796,12 +8796,15 @@
 @property (nonatomic,assign) double offset;
 // Clipping duration in seconds
 @property (nonatomic,assign) double duration;
+@property (nonatomic,retain) NSMutableArray* amfArray;	// of KalturaKeyValue elements
 - (KalturaFieldType)getTypeOfSrcFiles;
 - (NSString*)getObjectTypeOfSrcFiles;
 - (KalturaFieldType)getTypeOfDestFilePath;
 - (KalturaFieldType)getTypeOfFlavorAssetId;
 - (KalturaFieldType)getTypeOfOffset;
 - (KalturaFieldType)getTypeOfDuration;
+- (KalturaFieldType)getTypeOfAmfArray;
+- (NSString*)getObjectTypeOfAmfArray;
 - (void)setOffsetFromString:(NSString*)aPropVal;
 - (void)setDurationFromString:(NSString*)aPropVal;
 @end
@@ -8916,6 +8919,7 @@
 @property (nonatomic,copy) NSString* destFilePath;
 // Duration of the live entry including all recorded segments including the current
 @property (nonatomic,assign) double endTime;
+@property (nonatomic,retain) NSMutableArray* amfArray;	// of KalturaKeyValue elements
 - (KalturaFieldType)getTypeOfEntryId;
 - (KalturaFieldType)getTypeOfAssetId;
 - (KalturaFieldType)getTypeOfMediaServerIndex;
@@ -8923,6 +8927,8 @@
 - (KalturaFieldType)getTypeOfSrcFilePath;
 - (KalturaFieldType)getTypeOfDestFilePath;
 - (KalturaFieldType)getTypeOfEndTime;
+- (KalturaFieldType)getTypeOfAmfArray;
+- (NSString*)getObjectTypeOfAmfArray;
 - (void)setMediaServerIndexFromString:(NSString*)aPropVal;
 - (void)setFileIndexFromString:(NSString*)aPropVal;
 - (void)setEndTimeFromString:(NSString*)aPropVal;
@@ -11132,8 +11138,11 @@
 @interface KalturaEdgeServerNode : KalturaDeliveryServerNode
 // Delivery profile ids
 @property (nonatomic,retain) NSMutableArray* deliveryProfileIds;	// of KalturaKeyValue elements
+// Overdie edge server default configuration - json format
+@property (nonatomic,copy) NSString* config;
 - (KalturaFieldType)getTypeOfDeliveryProfileIds;
 - (NSString*)getObjectTypeOfDeliveryProfileIds;
+- (KalturaFieldType)getTypeOfConfig;
 @end
 
 // @package Kaltura

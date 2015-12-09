@@ -29074,6 +29074,7 @@
 @synthesize flavorAssetId = _flavorAssetId;
 @synthesize offset = _offset;
 @synthesize duration = _duration;
+@synthesize amfArray = _amfArray;
 
 - (id)init
 {
@@ -29115,6 +29116,16 @@
     return KFT_Float;
 }
 
+- (KalturaFieldType)getTypeOfAmfArray
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfAmfArray
+{
+    return @"KalturaKeyValue";
+}
+
 - (void)setOffsetFromString:(NSString*)aPropVal
 {
     self.offset = [KalturaSimpleTypeParser parseFloat:aPropVal];
@@ -29135,6 +29146,7 @@
     [aParams addIfDefinedKey:@"flavorAssetId" withString:self.flavorAssetId];
     [aParams addIfDefinedKey:@"offset" withFloat:self.offset];
     [aParams addIfDefinedKey:@"duration" withFloat:self.duration];
+    [aParams addIfDefinedKey:@"amfArray" withArray:self.amfArray];
 }
 
 - (void)dealloc
@@ -29142,6 +29154,7 @@
     [self->_srcFiles release];
     [self->_destFilePath release];
     [self->_flavorAssetId release];
+    [self->_amfArray release];
     [super dealloc];
 }
 
@@ -29550,6 +29563,7 @@
 @synthesize srcFilePath = _srcFilePath;
 @synthesize destFilePath = _destFilePath;
 @synthesize endTime = _endTime;
+@synthesize amfArray = _amfArray;
 
 - (id)init
 {
@@ -29597,6 +29611,16 @@
     return KFT_Float;
 }
 
+- (KalturaFieldType)getTypeOfAmfArray
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfAmfArray
+{
+    return @"KalturaKeyValue";
+}
+
 - (void)setMediaServerIndexFromString:(NSString*)aPropVal
 {
     self.mediaServerIndex = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -29624,6 +29648,7 @@
     [aParams addIfDefinedKey:@"srcFilePath" withString:self.srcFilePath];
     [aParams addIfDefinedKey:@"destFilePath" withString:self.destFilePath];
     [aParams addIfDefinedKey:@"endTime" withFloat:self.endTime];
+    [aParams addIfDefinedKey:@"amfArray" withArray:self.amfArray];
 }
 
 - (void)dealloc
@@ -29632,6 +29657,7 @@
     [self->_assetId release];
     [self->_srcFilePath release];
     [self->_destFilePath release];
+    [self->_amfArray release];
     [super dealloc];
 }
 
@@ -38153,6 +38179,7 @@
 
 @implementation KalturaEdgeServerNode
 @synthesize deliveryProfileIds = _deliveryProfileIds;
+@synthesize config = _config;
 
 - (KalturaFieldType)getTypeOfDeliveryProfileIds
 {
@@ -38164,17 +38191,24 @@
     return @"KalturaKeyValue";
 }
 
+- (KalturaFieldType)getTypeOfConfig
+{
+    return KFT_String;
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaEdgeServerNode"];
     [aParams addIfDefinedKey:@"deliveryProfileIds" withArray:self.deliveryProfileIds];
+    [aParams addIfDefinedKey:@"config" withString:self.config];
 }
 
 - (void)dealloc
 {
     [self->_deliveryProfileIds release];
+    [self->_config release];
     [super dealloc];
 }
 
