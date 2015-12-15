@@ -8796,17 +8796,18 @@
 @property (nonatomic,assign) double offset;
 // Clipping duration in seconds
 @property (nonatomic,assign) double duration;
-@property (nonatomic,retain) NSMutableArray* amfArray;	// of KalturaKeyValue elements
+// duration of the concated video
+@property (nonatomic,assign) double concatenatedDuration;
 - (KalturaFieldType)getTypeOfSrcFiles;
 - (NSString*)getObjectTypeOfSrcFiles;
 - (KalturaFieldType)getTypeOfDestFilePath;
 - (KalturaFieldType)getTypeOfFlavorAssetId;
 - (KalturaFieldType)getTypeOfOffset;
 - (KalturaFieldType)getTypeOfDuration;
-- (KalturaFieldType)getTypeOfAmfArray;
-- (NSString*)getObjectTypeOfAmfArray;
+- (KalturaFieldType)getTypeOfConcatenatedDuration;
 - (void)setOffsetFromString:(NSString*)aPropVal;
 - (void)setDurationFromString:(NSString*)aPropVal;
+- (void)setConcatenatedDurationFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -8920,6 +8921,9 @@
 // Duration of the live entry including all recorded segments including the current
 @property (nonatomic,assign) double endTime;
 @property (nonatomic,retain) NSMutableArray* amfArray;	// of KalturaKeyValue elements
+// Duration of the live segment.
+// 	 filled by the ConvertLiveSegment job
+@property (nonatomic,assign) double duration;
 - (KalturaFieldType)getTypeOfEntryId;
 - (KalturaFieldType)getTypeOfAssetId;
 - (KalturaFieldType)getTypeOfMediaServerIndex;
@@ -8929,9 +8933,11 @@
 - (KalturaFieldType)getTypeOfEndTime;
 - (KalturaFieldType)getTypeOfAmfArray;
 - (NSString*)getObjectTypeOfAmfArray;
+- (KalturaFieldType)getTypeOfDuration;
 - (void)setMediaServerIndexFromString:(NSString*)aPropVal;
 - (void)setFileIndexFromString:(NSString*)aPropVal;
 - (void)setEndTimeFromString:(NSString*)aPropVal;
+- (void)setDurationFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

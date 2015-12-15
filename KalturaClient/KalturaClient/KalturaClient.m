@@ -29074,7 +29074,7 @@
 @synthesize flavorAssetId = _flavorAssetId;
 @synthesize offset = _offset;
 @synthesize duration = _duration;
-@synthesize amfArray = _amfArray;
+@synthesize concatenatedDuration = _concatenatedDuration;
 
 - (id)init
 {
@@ -29083,6 +29083,7 @@
         return nil;
     self->_offset = KALTURA_UNDEF_FLOAT;
     self->_duration = KALTURA_UNDEF_FLOAT;
+    self->_concatenatedDuration = KALTURA_UNDEF_FLOAT;
     return self;
 }
 
@@ -29116,14 +29117,9 @@
     return KFT_Float;
 }
 
-- (KalturaFieldType)getTypeOfAmfArray
+- (KalturaFieldType)getTypeOfConcatenatedDuration
 {
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfAmfArray
-{
-    return @"KalturaKeyValue";
+    return KFT_Float;
 }
 
 - (void)setOffsetFromString:(NSString*)aPropVal
@@ -29136,6 +29132,11 @@
     self.duration = [KalturaSimpleTypeParser parseFloat:aPropVal];
 }
 
+- (void)setConcatenatedDurationFromString:(NSString*)aPropVal
+{
+    self.concatenatedDuration = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -29146,7 +29147,7 @@
     [aParams addIfDefinedKey:@"flavorAssetId" withString:self.flavorAssetId];
     [aParams addIfDefinedKey:@"offset" withFloat:self.offset];
     [aParams addIfDefinedKey:@"duration" withFloat:self.duration];
-    [aParams addIfDefinedKey:@"amfArray" withArray:self.amfArray];
+    [aParams addIfDefinedKey:@"concatenatedDuration" withFloat:self.concatenatedDuration];
 }
 
 - (void)dealloc
@@ -29154,7 +29155,6 @@
     [self->_srcFiles release];
     [self->_destFilePath release];
     [self->_flavorAssetId release];
-    [self->_amfArray release];
     [super dealloc];
 }
 
@@ -29564,6 +29564,7 @@
 @synthesize destFilePath = _destFilePath;
 @synthesize endTime = _endTime;
 @synthesize amfArray = _amfArray;
+@synthesize duration = _duration;
 
 - (id)init
 {
@@ -29573,6 +29574,7 @@
     self->_mediaServerIndex = KALTURA_UNDEF_INT;
     self->_fileIndex = KALTURA_UNDEF_INT;
     self->_endTime = KALTURA_UNDEF_FLOAT;
+    self->_duration = KALTURA_UNDEF_FLOAT;
     return self;
 }
 
@@ -29621,6 +29623,11 @@
     return @"KalturaKeyValue";
 }
 
+- (KalturaFieldType)getTypeOfDuration
+{
+    return KFT_Float;
+}
+
 - (void)setMediaServerIndexFromString:(NSString*)aPropVal
 {
     self.mediaServerIndex = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -29636,6 +29643,11 @@
     self.endTime = [KalturaSimpleTypeParser parseFloat:aPropVal];
 }
 
+- (void)setDurationFromString:(NSString*)aPropVal
+{
+    self.duration = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -29649,6 +29661,7 @@
     [aParams addIfDefinedKey:@"destFilePath" withString:self.destFilePath];
     [aParams addIfDefinedKey:@"endTime" withFloat:self.endTime];
     [aParams addIfDefinedKey:@"amfArray" withArray:self.amfArray];
+    [aParams addIfDefinedKey:@"duration" withFloat:self.duration];
 }
 
 - (void)dealloc
