@@ -15031,6 +15031,7 @@
 @synthesize parentId = _parentId;
 @synthesize mediaProtocols = _mediaProtocols;
 @synthesize priority = _priority;
+@synthesize extraParams = _extraParams;
 
 - (id)init
 {
@@ -15148,6 +15149,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfExtraParams
+{
+    return KFT_String;
+}
+
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -15204,6 +15210,7 @@
     [aParams addIfDefinedKey:@"tokenizer" withObject:self.tokenizer];
     [aParams addIfDefinedKey:@"mediaProtocols" withString:self.mediaProtocols];
     [aParams addIfDefinedKey:@"priority" withInt:self.priority];
+    [aParams addIfDefinedKey:@"extraParams" withString:self.extraParams];
 }
 
 - (void)dealloc
@@ -15218,6 +15225,7 @@
     [self->_recognizer release];
     [self->_tokenizer release];
     [self->_mediaProtocols release];
+    [self->_extraParams release];
     [super dealloc];
 }
 

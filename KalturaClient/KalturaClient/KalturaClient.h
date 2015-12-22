@@ -5049,6 +5049,8 @@
 @property (nonatomic,copy) NSString* mediaProtocols;
 // priority used for ordering similar delivery profiles
 @property (nonatomic,assign) int priority;
+// Extra query string parameters that should be added to the url
+@property (nonatomic,copy) NSString* extraParams;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfPartnerId;
 - (KalturaFieldType)getTypeOfName;
@@ -5069,6 +5071,7 @@
 - (KalturaFieldType)getTypeOfParentId;
 - (KalturaFieldType)getTypeOfMediaProtocols;
 - (KalturaFieldType)getTypeOfPriority;
+- (KalturaFieldType)getTypeOfExtraParams;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
