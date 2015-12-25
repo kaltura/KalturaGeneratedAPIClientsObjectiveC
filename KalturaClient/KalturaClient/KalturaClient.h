@@ -1371,6 +1371,7 @@
 + (NSString*)OR_OPERATOR;
 + (NSString*)HASH;
 + (NSString*)DELIVERY_PROFILE;
++ (NSString*)ACTIVE_EDGE_VALIDATE;
 @end
 
 // @package Kaltura
@@ -8923,10 +8924,8 @@
 @property (nonatomic,copy) NSString* destFilePath;
 // Duration of the live entry including all recorded segments including the current
 @property (nonatomic,assign) double endTime;
-@property (nonatomic,retain) NSMutableArray* amfArray;	// of KalturaKeyValue elements
-// Duration of the live segment.
-// 	 filled by the ConvertLiveSegment job
-@property (nonatomic,assign) double duration;
+// The data output file
+@property (nonatomic,copy) NSString* destDataFilePath;
 - (KalturaFieldType)getTypeOfEntryId;
 - (KalturaFieldType)getTypeOfAssetId;
 - (KalturaFieldType)getTypeOfMediaServerIndex;
@@ -8934,13 +8933,10 @@
 - (KalturaFieldType)getTypeOfSrcFilePath;
 - (KalturaFieldType)getTypeOfDestFilePath;
 - (KalturaFieldType)getTypeOfEndTime;
-- (KalturaFieldType)getTypeOfAmfArray;
-- (NSString*)getObjectTypeOfAmfArray;
-- (KalturaFieldType)getTypeOfDuration;
+- (KalturaFieldType)getTypeOfDestDataFilePath;
 - (void)setMediaServerIndexFromString:(NSString*)aPropVal;
 - (void)setFileIndexFromString:(NSString*)aPropVal;
 - (void)setEndTimeFromString:(NSString*)aPropVal;
-- (void)setDurationFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -10641,6 +10637,14 @@
 @property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaUserRole elements
 - (KalturaFieldType)getTypeOfObjects;
 - (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaValidateActiveEdgeCondition : KalturaCondition
+// Comma separated list of edge servers to validate are active
+@property (nonatomic,copy) NSString* edgeServerIds;
+- (KalturaFieldType)getTypeOfEdgeServerIds;
 @end
 
 // @package Kaltura

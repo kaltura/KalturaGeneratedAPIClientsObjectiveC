@@ -3367,6 +3367,10 @@
 {
     return @"13";
 }
++ (NSString*)ACTIVE_EDGE_VALIDATE
+{
+    return @"14";
+}
 @end
 
 @implementation KalturaContainerFormat
@@ -29571,8 +29575,7 @@
 @synthesize srcFilePath = _srcFilePath;
 @synthesize destFilePath = _destFilePath;
 @synthesize endTime = _endTime;
-@synthesize amfArray = _amfArray;
-@synthesize duration = _duration;
+@synthesize destDataFilePath = _destDataFilePath;
 
 - (id)init
 {
@@ -29582,7 +29585,6 @@
     self->_mediaServerIndex = KALTURA_UNDEF_INT;
     self->_fileIndex = KALTURA_UNDEF_INT;
     self->_endTime = KALTURA_UNDEF_FLOAT;
-    self->_duration = KALTURA_UNDEF_FLOAT;
     return self;
 }
 
@@ -29621,19 +29623,9 @@
     return KFT_Float;
 }
 
-- (KalturaFieldType)getTypeOfAmfArray
+- (KalturaFieldType)getTypeOfDestDataFilePath
 {
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfAmfArray
-{
-    return @"KalturaKeyValue";
-}
-
-- (KalturaFieldType)getTypeOfDuration
-{
-    return KFT_Float;
+    return KFT_String;
 }
 
 - (void)setMediaServerIndexFromString:(NSString*)aPropVal
@@ -29651,11 +29643,6 @@
     self.endTime = [KalturaSimpleTypeParser parseFloat:aPropVal];
 }
 
-- (void)setDurationFromString:(NSString*)aPropVal
-{
-    self.duration = [KalturaSimpleTypeParser parseFloat:aPropVal];
-}
-
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -29668,8 +29655,7 @@
     [aParams addIfDefinedKey:@"srcFilePath" withString:self.srcFilePath];
     [aParams addIfDefinedKey:@"destFilePath" withString:self.destFilePath];
     [aParams addIfDefinedKey:@"endTime" withFloat:self.endTime];
-    [aParams addIfDefinedKey:@"amfArray" withArray:self.amfArray];
-    [aParams addIfDefinedKey:@"duration" withFloat:self.duration];
+    [aParams addIfDefinedKey:@"destDataFilePath" withString:self.destDataFilePath];
 }
 
 - (void)dealloc
@@ -29678,7 +29664,7 @@
     [self->_assetId release];
     [self->_srcFilePath release];
     [self->_destFilePath release];
-    [self->_amfArray release];
+    [self->_destDataFilePath release];
     [super dealloc];
 }
 
@@ -36208,6 +36194,30 @@
 - (void)dealloc
 {
     [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaValidateActiveEdgeCondition
+@synthesize edgeServerIds = _edgeServerIds;
+
+- (KalturaFieldType)getTypeOfEdgeServerIds
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaValidateActiveEdgeCondition"];
+    [aParams addIfDefinedKey:@"edgeServerIds" withString:self.edgeServerIds];
+}
+
+- (void)dealloc
+{
+    [self->_edgeServerIds release];
     [super dealloc];
 }
 
