@@ -338,6 +338,10 @@
 @end
 
 @implementation KalturaDistributionProviderType
++ (NSString*)FACEBOOK
+{
+    return @"facebookDistribution.FACEBOOK";
+}
 + (NSString*)IDETIC
 {
     return @"ideticDistribution.IDETIC";

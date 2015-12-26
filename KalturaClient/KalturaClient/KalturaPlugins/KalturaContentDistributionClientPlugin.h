@@ -175,6 +175,7 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaDistributionProviderType : NSObject
++ (NSString*)FACEBOOK;
 + (NSString*)IDETIC;
 + (NSString*)YOUTUBE_API;
 + (NSString*)GENERIC;
