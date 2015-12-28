@@ -1067,6 +1067,13 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaBaseEntryCloneOptions : NSObject
++ (NSString*)USERS;
++ (NSString*)CATEGORIES;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaBaseEntryCompareAttribute : NSObject
 + (NSString*)ACCESS_CONTROL_ID;
 + (NSString*)CREATED_AT;
@@ -1348,6 +1355,13 @@
 + (NSString*)UPDATED_AT_ASC;
 + (NSString*)CREATED_AT_DESC;
 + (NSString*)UPDATED_AT_DESC;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaCloneComponentSelectorType : NSObject
++ (NSString*)INCLUDE_COMPONENT;
++ (NSString*)EXCLUDE_COMPONENT;
 @end
 
 // @package Kaltura
@@ -4140,6 +4154,11 @@
 - (void)setEndDateFromString:(NSString*)aPropVal;
 - (void)setPartnerSortValueFromString:(NSString*)aPropVal;
 - (void)setConversionProfileIdFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaBaseEntryCloneOptionItem : KalturaObjectBase
 @end
 
 // @package Kaltura
@@ -8206,6 +8225,16 @@
 @property (nonatomic,retain) NSMutableArray* privileges;	// of KalturaStringValue elements
 - (KalturaFieldType)getTypeOfPrivileges;
 - (NSString*)getObjectTypeOfPrivileges;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaBaseEntryCloneOptionComponent : KalturaBaseEntryCloneOptionItem
+@property (nonatomic,copy) NSString* itemType;	// enum KalturaBaseEntryCloneOptions
+// condition rule (include/exclude)
+@property (nonatomic,copy) NSString* rule;	// enum KalturaCloneComponentSelectorType
+- (KalturaFieldType)getTypeOfItemType;
+- (KalturaFieldType)getTypeOfRule;
 @end
 
 // @package Kaltura
@@ -12884,6 +12913,7 @@
 - (int)indexWithId:(NSString*)aId withShouldUpdate:(KALTURA_BOOL)aShouldUpdate;
 - (int)indexWithId:(NSString*)aId;
 // Clone an entry with optional attributes to apply to the clone
+- (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId withCloneOptions:(NSArray*)aCloneOptions;
 - (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId;
 @end
 

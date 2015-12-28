@@ -2460,6 +2460,17 @@
 }
 @end
 
+@implementation KalturaBaseEntryCloneOptions
++ (NSString*)USERS
+{
+    return @"1";
+}
++ (NSString*)CATEGORIES
+{
+    return @"2";
+}
+@end
+
 @implementation KalturaBaseEntryCompareAttribute
 + (NSString*)ACCESS_CONTROL_ID
 {
@@ -3291,6 +3302,17 @@
 + (NSString*)UPDATED_AT_DESC
 {
     return @"-updatedAt";
+}
+@end
+
+@implementation KalturaCloneComponentSelectorType
++ (NSString*)INCLUDE_COMPONENT
+{
+    return @"0";
+}
++ (NSString*)EXCLUDE_COMPONENT
+{
+    return @"1";
 }
 @end
 
@@ -11848,6 +11870,16 @@
     [self->_entitledUsersPublish release];
     [self->_capabilities release];
     [super dealloc];
+}
+
+@end
+
+@implementation KalturaBaseEntryCloneOptionItem
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaBaseEntryCloneOptionItem"];
 }
 
 @end
@@ -26871,6 +26903,38 @@
 - (void)dealloc
 {
     [self->_privileges release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaBaseEntryCloneOptionComponent
+@synthesize itemType = _itemType;
+@synthesize rule = _rule;
+
+- (KalturaFieldType)getTypeOfItemType
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfRule
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaBaseEntryCloneOptionComponent"];
+    [aParams addIfDefinedKey:@"itemType" withString:self.itemType];
+    [aParams addIfDefinedKey:@"rule" withString:self.rule];
+}
+
+- (void)dealloc
+{
+    [self->_itemType release];
+    [self->_rule release];
     [super dealloc];
 }
 
@@ -43313,10 +43377,16 @@
     return [self indexWithId:aId withShouldUpdate:KALTURA_UNDEF_BOOL];
 }
 
-- (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId
+- (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId withCloneOptions:(NSArray*)aCloneOptions
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"cloneOptions" withArray:aCloneOptions];
     return [self.client queueObjectService:@"baseentry" withAction:@"clone" withExpectedType:@"KalturaBaseEntry"];
+}
+
+- (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId
+{
+    return [self cloneWithEntryId:aEntryId withCloneOptions:nil];
 }
 
 @end
