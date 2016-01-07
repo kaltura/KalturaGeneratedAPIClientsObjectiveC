@@ -671,6 +671,21 @@
 }
 @end
 
+@implementation KalturaLiveEntryStatus
++ (int)STOPPED
+{
+    return 0;
+}
++ (int)PLAYABLE
+{
+    return 1;
+}
++ (int)BROADCASTING
+{
+    return 2;
+}
+@end
+
 @implementation KalturaLivePublishStatus
 + (int)DISABLED
 {
@@ -10458,6 +10473,8 @@
 @end
 
 @implementation KalturaRule
+@synthesize description = _description;
+@synthesize ruleData = _ruleData;
 @synthesize message = _message;
 @synthesize actions = _actions;
 @synthesize conditions = _conditions;
@@ -10471,6 +10488,16 @@
         return nil;
     self->_stopProcessing = KALTURA_UNDEF_BOOL;
     return self;
+}
+
+- (KalturaFieldType)getTypeOfDescription
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfRuleData
+{
+    return KFT_String;
 }
 
 - (KalturaFieldType)getTypeOfMessage
@@ -10523,6 +10550,8 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaRule"];
+    [aParams addIfDefinedKey:@"description" withString:self.description];
+    [aParams addIfDefinedKey:@"ruleData" withString:self.ruleData];
     [aParams addIfDefinedKey:@"message" withString:self.message];
     [aParams addIfDefinedKey:@"actions" withArray:self.actions];
     [aParams addIfDefinedKey:@"conditions" withArray:self.conditions];
@@ -10532,6 +10561,8 @@
 
 - (void)dealloc
 {
+    [self->_description release];
+    [self->_ruleData release];
     [self->_message release];
     [self->_actions release];
     [self->_conditions release];
@@ -17481,6 +17512,7 @@
 @synthesize lastBroadcast = _lastBroadcast;
 @synthesize currentBroadcastStartTime = _currentBroadcastStartTime;
 @synthesize recordingOptions = _recordingOptions;
+@synthesize liveStatus = _liveStatus;
 
 - (id)init
 {
@@ -17495,6 +17527,7 @@
     self->_firstBroadcast = KALTURA_UNDEF_INT;
     self->_lastBroadcast = KALTURA_UNDEF_INT;
     self->_currentBroadcastStartTime = KALTURA_UNDEF_FLOAT;
+    self->_liveStatus = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -17578,6 +17611,11 @@
     return @"KalturaLiveEntryRecordingOptions";
 }
 
+- (KalturaFieldType)getTypeOfLiveStatus
+{
+    return KFT_Int;
+}
+
 - (void)setRecordStatusFromString:(NSString*)aPropVal
 {
     self.recordStatus = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -17618,6 +17656,11 @@
     self.currentBroadcastStartTime = [KalturaSimpleTypeParser parseFloat:aPropVal];
 }
 
+- (void)setLiveStatusFromString:(NSString*)aPropVal
+{
+    self.liveStatus = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -17634,6 +17677,7 @@
     [aParams addIfDefinedKey:@"publishConfigurations" withArray:self.publishConfigurations];
     [aParams addIfDefinedKey:@"currentBroadcastStartTime" withFloat:self.currentBroadcastStartTime];
     [aParams addIfDefinedKey:@"recordingOptions" withObject:self.recordingOptions];
+    [aParams addIfDefinedKey:@"liveStatus" withInt:self.liveStatus];
 }
 
 - (void)dealloc
@@ -44391,13 +44435,19 @@
     return [self appendRecordingWithEntryId:aEntryId withAssetId:aAssetId withMediaServerIndex:aMediaServerIndex withResource:aResource withDuration:aDuration withIsLastChunk:KALTURA_UNDEF_BOOL];
 }
 
-- (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(int)aMediaServerIndex withApplicationName:(NSString*)aApplicationName
+- (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(int)aMediaServerIndex withApplicationName:(NSString*)aApplicationName withLiveEntryStatus:(int)aLiveEntryStatus
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
     [self.client.params addIfDefinedKey:@"hostname" withString:aHostname];
     [self.client.params addIfDefinedKey:@"mediaServerIndex" withInt:aMediaServerIndex];
     [self.client.params addIfDefinedKey:@"applicationName" withString:aApplicationName];
+    [self.client.params addIfDefinedKey:@"liveEntryStatus" withInt:aLiveEntryStatus];
     return [self.client queueObjectService:@"livechannel" withAction:@"registerMediaServer" withExpectedType:@"KalturaLiveEntry"];
+}
+
+- (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(int)aMediaServerIndex withApplicationName:(NSString*)aApplicationName
+{
+    return [self registerMediaServerWithEntryId:aEntryId withHostname:aHostname withMediaServerIndex:aMediaServerIndex withApplicationName:aApplicationName withLiveEntryStatus:KALTURA_UNDEF_INT];
 }
 
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(int)aMediaServerIndex
@@ -44607,13 +44657,19 @@
     return [self appendRecordingWithEntryId:aEntryId withAssetId:aAssetId withMediaServerIndex:aMediaServerIndex withResource:aResource withDuration:aDuration withIsLastChunk:KALTURA_UNDEF_BOOL];
 }
 
-- (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(int)aMediaServerIndex withApplicationName:(NSString*)aApplicationName
+- (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(int)aMediaServerIndex withApplicationName:(NSString*)aApplicationName withLiveEntryStatus:(int)aLiveEntryStatus
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
     [self.client.params addIfDefinedKey:@"hostname" withString:aHostname];
     [self.client.params addIfDefinedKey:@"mediaServerIndex" withInt:aMediaServerIndex];
     [self.client.params addIfDefinedKey:@"applicationName" withString:aApplicationName];
+    [self.client.params addIfDefinedKey:@"liveEntryStatus" withInt:aLiveEntryStatus];
     return [self.client queueObjectService:@"livestream" withAction:@"registerMediaServer" withExpectedType:@"KalturaLiveEntry"];
+}
+
+- (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(int)aMediaServerIndex withApplicationName:(NSString*)aApplicationName
+{
+    return [self registerMediaServerWithEntryId:aEntryId withHostname:aHostname withMediaServerIndex:aMediaServerIndex withApplicationName:aApplicationName withLiveEntryStatus:KALTURA_UNDEF_INT];
 }
 
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(int)aMediaServerIndex

@@ -335,6 +335,14 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaLiveEntryStatus : NSObject
++ (int)STOPPED;
++ (int)PLAYABLE;
++ (int)BROADCASTING;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaLivePublishStatus : NSObject
 + (int)DISABLED;
 + (int)ENABLED;
@@ -3721,6 +3729,10 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaRule : KalturaObjectBase
+// Short Rule Description
+@property (nonatomic,copy) NSString* description;
+// Rule Custom Data to allow saving rule specific information
+@property (nonatomic,copy) NSString* ruleData;
 // Message to be thrown to the player in case the rule is fulfilled
 @property (nonatomic,copy) NSString* message;
 // Actions to be performed by the player in case the rule is fulfilled
@@ -3731,6 +3743,8 @@
 @property (nonatomic,retain) NSMutableArray* contexts;	// of KalturaContextTypeHolder elements
 // Indicates that this rule is enough and no need to continue checking the rest of the rules
 @property (nonatomic,assign) KALTURA_BOOL stopProcessing;
+- (KalturaFieldType)getTypeOfDescription;
+- (KalturaFieldType)getTypeOfRuleData;
 - (KalturaFieldType)getTypeOfMessage;
 - (KalturaFieldType)getTypeOfActions;
 - (NSString*)getObjectTypeOfActions;
@@ -5725,6 +5739,8 @@
 // The time (unix timestamp in milliseconds) in which the entry broadcast started or 0 when the entry is off the air
 @property (nonatomic,assign) double currentBroadcastStartTime;
 @property (nonatomic,retain) KalturaLiveEntryRecordingOptions* recordingOptions;	// insertonly
+// the status of the entry of type LiveEntryStatus
+@property (nonatomic,assign) int liveStatus;	// enum KalturaLiveEntryStatus
 - (KalturaFieldType)getTypeOfOfflineMessage;
 - (KalturaFieldType)getTypeOfRecordStatus;
 - (KalturaFieldType)getTypeOfDvrStatus;
@@ -5741,6 +5757,7 @@
 - (KalturaFieldType)getTypeOfCurrentBroadcastStartTime;
 - (KalturaFieldType)getTypeOfRecordingOptions;
 - (NSString*)getObjectTypeOfRecordingOptions;
+- (KalturaFieldType)getTypeOfLiveStatus;
 - (void)setRecordStatusFromString:(NSString*)aPropVal;
 - (void)setDvrStatusFromString:(NSString*)aPropVal;
 - (void)setDvrWindowFromString:(NSString*)aPropVal;
@@ -5749,6 +5766,7 @@
 - (void)setFirstBroadcastFromString:(NSString*)aPropVal;
 - (void)setLastBroadcastFromString:(NSString*)aPropVal;
 - (void)setCurrentBroadcastStartTimeFromString:(NSString*)aPropVal;
+- (void)setLiveStatusFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -13274,6 +13292,7 @@
 - (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(int)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withIsLastChunk:(KALTURA_BOOL)aIsLastChunk;
 - (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(int)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration;
 // Register media server to live entry
+- (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(int)aMediaServerIndex withApplicationName:(NSString*)aApplicationName withLiveEntryStatus:(int)aLiveEntryStatus;
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(int)aMediaServerIndex withApplicationName:(NSString*)aApplicationName;
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(int)aMediaServerIndex;
 // Unregister media server from live entry
@@ -13342,6 +13361,7 @@
 - (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(int)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withIsLastChunk:(KALTURA_BOOL)aIsLastChunk;
 - (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(int)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration;
 // Register media server to live entry
+- (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(int)aMediaServerIndex withApplicationName:(NSString*)aApplicationName withLiveEntryStatus:(int)aLiveEntryStatus;
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(int)aMediaServerIndex withApplicationName:(NSString*)aApplicationName;
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(int)aMediaServerIndex;
 // Unregister media server from live entry
