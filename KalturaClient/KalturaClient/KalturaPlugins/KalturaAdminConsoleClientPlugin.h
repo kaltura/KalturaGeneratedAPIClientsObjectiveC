@@ -143,6 +143,8 @@
 - (KalturaBaseEntry*)getByFlavorIdWithFlavorId:(NSString*)aFlavorId;
 // Get base entry by ID with no filters.
 - (KalturaTrackEntryListResponse*)getTracksWithEntryId:(NSString*)aEntryId;
+// Restore deleted entry.
+- (KalturaBaseEntry*)restoreDeletedEntryWithEntryId:(NSString*)aEntryId;
 @end
 
 // @package Kaltura

@@ -408,6 +408,12 @@
     return [self.client queueObjectService:@"adminconsole_entryadmin" withAction:@"getTracks" withExpectedType:@"KalturaTrackEntryListResponse"];
 }
 
+- (KalturaBaseEntry*)restoreDeletedEntryWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    return [self.client queueObjectService:@"adminconsole_entryadmin" withAction:@"restoreDeletedEntry" withExpectedType:@"KalturaBaseEntry"];
+}
+
 @end
 
 @implementation KalturaUiConfAdminService
