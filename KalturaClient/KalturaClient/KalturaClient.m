@@ -2476,6 +2476,22 @@
 @end
 
 @implementation KalturaBaseEntryCloneOptions
++ (NSString*)AD_CUE_POINTS
+{
+    return @"adCuePoint.AD_CUE_POINTS";
+}
++ (NSString*)ANNOTATION_CUE_POINTS
+{
+    return @"annotation.ANNOTATION_CUE_POINTS";
+}
++ (NSString*)CODE_CUE_POINTS
+{
+    return @"codeCuePoint.CODE_CUE_POINTS";
+}
++ (NSString*)THUMB_CUE_POINTS
+{
+    return @"thumbCuePoint.THUMB_CUE_POINTS";
+}
 + (NSString*)USERS
 {
     return @"1";
@@ -31302,6 +31318,7 @@
 @synthesize accessControlMessages = _accessControlMessages;
 @synthesize accessControlActions = _accessControlActions;
 @synthesize flavorAssets = _flavorAssets;
+@synthesize msDuration = _msDuration;
 @synthesize pluginData = _pluginData;
 
 - (id)init
@@ -31317,6 +31334,7 @@
     self->_previewLength = KALTURA_UNDEF_INT;
     self->_isScheduledNow = KALTURA_UNDEF_BOOL;
     self->_isAdmin = KALTURA_UNDEF_BOOL;
+    self->_msDuration = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -31405,6 +31423,11 @@
     return @"KalturaFlavorAsset";
 }
 
+- (KalturaFieldType)getTypeOfMsDuration
+{
+    return KFT_Int;
+}
+
 - (KalturaFieldType)getTypeOfPluginData
 {
     return KFT_Dictionary;
@@ -31455,6 +31478,11 @@
     self.isAdmin = [KalturaSimpleTypeParser parseBool:aPropVal];
 }
 
+- (void)setMsDurationFromString:(NSString*)aPropVal
+{
+    self.msDuration = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -31474,6 +31502,7 @@
     [aParams addIfDefinedKey:@"accessControlMessages" withArray:self.accessControlMessages];
     [aParams addIfDefinedKey:@"accessControlActions" withArray:self.accessControlActions];
     [aParams addIfDefinedKey:@"flavorAssets" withArray:self.flavorAssets];
+    [aParams addIfDefinedKey:@"msDuration" withInt:self.msDuration];
     [aParams addIfDefinedKey:@"pluginData" withDictionary:self.pluginData];
 }
 
@@ -42291,11 +42320,33 @@
 @end
 
 @implementation KalturaQuizUserEntryFilter
+@synthesize isAnonymous = _isAnonymous;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_isAnonymous = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfIsAnonymous
+{
+    return KFT_Int;
+}
+
+- (void)setIsAnonymousFromString:(NSString*)aPropVal
+{
+    self.isAnonymous = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaQuizUserEntryFilter"];
+    [aParams addIfDefinedKey:@"isAnonymous" withInt:self.isAnonymous];
 }
 
 @end

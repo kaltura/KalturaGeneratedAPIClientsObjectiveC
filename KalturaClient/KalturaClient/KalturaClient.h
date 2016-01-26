@@ -1076,6 +1076,10 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaBaseEntryCloneOptions : NSObject
++ (NSString*)AD_CUE_POINTS;
++ (NSString*)ANNOTATION_CUE_POINTS;
++ (NSString*)CODE_CUE_POINTS;
++ (NSString*)THUMB_CUE_POINTS;
 + (NSString*)USERS;
 + (NSString*)CATEGORIES;
 @end
@@ -9408,6 +9412,8 @@
 @property (nonatomic,retain) NSMutableArray* accessControlActions;	// of KalturaRuleAction elements
 // Array of allowed flavor assets according to access control limitations and requested tags
 @property (nonatomic,retain) NSMutableArray* flavorAssets;	// of KalturaFlavorAsset elements
+// The duration of the entry in milliseconds
+@property (nonatomic,assign) int msDuration;
 // Array of allowed flavor assets according to access control limitations and requested tags
 @property (nonatomic,retain) NSMutableDictionary* pluginData;	// of KalturaPluginData elements
 - (KalturaFieldType)getTypeOfIsSiteRestricted;
@@ -9427,6 +9433,7 @@
 - (NSString*)getObjectTypeOfAccessControlActions;
 - (KalturaFieldType)getTypeOfFlavorAssets;
 - (NSString*)getObjectTypeOfFlavorAssets;
+- (KalturaFieldType)getTypeOfMsDuration;
 - (KalturaFieldType)getTypeOfPluginData;
 - (NSString*)getObjectTypeOfPluginData;
 - (void)setIsSiteRestrictedFromString:(NSString*)aPropVal;
@@ -9437,6 +9444,7 @@
 - (void)setPreviewLengthFromString:(NSString*)aPropVal;
 - (void)setIsScheduledNowFromString:(NSString*)aPropVal;
 - (void)setIsAdminFromString:(NSString*)aPropVal;
+- (void)setMsDurationFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -12522,6 +12530,9 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaQuizUserEntryFilter : KalturaQuizUserEntryBaseFilter
+@property (nonatomic,assign) int isAnonymous;	// enum KalturaNullableBoolean
+- (KalturaFieldType)getTypeOfIsAnonymous;
+- (void)setIsAnonymousFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
