@@ -122,6 +122,46 @@
 
 @end
 
+@implementation KalturaEntryTranscriptAssetSearchItem
+@synthesize contentLike = _contentLike;
+@synthesize contentMultiLikeOr = _contentMultiLikeOr;
+@synthesize contentMultiLikeAnd = _contentMultiLikeAnd;
+
+- (KalturaFieldType)getTypeOfContentLike
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfContentMultiLikeOr
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfContentMultiLikeAnd
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaEntryTranscriptAssetSearchItem"];
+    [aParams addIfDefinedKey:@"contentLike" withString:self.contentLike];
+    [aParams addIfDefinedKey:@"contentMultiLikeOr" withString:self.contentMultiLikeOr];
+    [aParams addIfDefinedKey:@"contentMultiLikeAnd" withString:self.contentMultiLikeAnd];
+}
+
+- (void)dealloc
+{
+    [self->_contentLike release];
+    [self->_contentMultiLikeOr release];
+    [self->_contentMultiLikeAnd release];
+    [super dealloc];
+}
+
+@end
+
 @interface KalturaTranscriptAssetListResponse()
 @property (nonatomic,retain) NSMutableArray* objects;
 @end

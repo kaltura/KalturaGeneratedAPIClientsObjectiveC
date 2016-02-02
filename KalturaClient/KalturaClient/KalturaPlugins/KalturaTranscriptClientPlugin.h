@@ -63,6 +63,17 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaEntryTranscriptAssetSearchItem : KalturaSearchItem
+@property (nonatomic,copy) NSString* contentLike;
+@property (nonatomic,copy) NSString* contentMultiLikeOr;
+@property (nonatomic,copy) NSString* contentMultiLikeAnd;
+- (KalturaFieldType)getTypeOfContentLike;
+- (KalturaFieldType)getTypeOfContentMultiLikeOr;
+- (KalturaFieldType)getTypeOfContentMultiLikeAnd;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaTranscriptAssetListResponse : KalturaListResponse
 @property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaTranscriptAsset elements
 - (KalturaFieldType)getTypeOfObjects;

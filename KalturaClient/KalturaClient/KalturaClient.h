@@ -5526,6 +5526,7 @@
 @property (nonatomic,assign) int videoConstantBitrate;
 @property (nonatomic,assign) int videoBitrateTolerance;
 @property (nonatomic,copy) NSString* watermarkData;
+@property (nonatomic,assign) int isEncrypted;
 @property (nonatomic,assign) int clipOffset;
 @property (nonatomic,assign) int clipDuration;
 - (KalturaFieldType)getTypeOfVideoCodec;
@@ -5561,6 +5562,7 @@
 - (KalturaFieldType)getTypeOfVideoConstantBitrate;
 - (KalturaFieldType)getTypeOfVideoBitrateTolerance;
 - (KalturaFieldType)getTypeOfWatermarkData;
+- (KalturaFieldType)getTypeOfIsEncrypted;
 - (KalturaFieldType)getTypeOfClipOffset;
 - (KalturaFieldType)getTypeOfClipDuration;
 - (void)setVideoBitrateFromString:(NSString*)aPropVal;
@@ -5588,6 +5590,7 @@
 - (void)setMaxFrameRateFromString:(NSString*)aPropVal;
 - (void)setVideoConstantBitrateFromString:(NSString*)aPropVal;
 - (void)setVideoBitrateToleranceFromString:(NSString*)aPropVal;
+- (void)setIsEncryptedFromString:(NSString*)aPropVal;
 - (void)setClipOffsetFromString:(NSString*)aPropVal;
 - (void)setClipDurationFromString:(NSString*)aPropVal;
 @end
@@ -10009,7 +10012,7 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaQuizUserEntry : KalturaUserEntry
-@property (nonatomic,assign,readonly) int score;
+@property (nonatomic,assign,readonly) double score;
 - (KalturaFieldType)getTypeOfScore;
 - (void)setScoreFromString:(NSString*)aPropVal;
 @end

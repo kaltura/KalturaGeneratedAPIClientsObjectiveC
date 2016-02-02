@@ -16640,6 +16640,7 @@
 @synthesize videoConstantBitrate = _videoConstantBitrate;
 @synthesize videoBitrateTolerance = _videoBitrateTolerance;
 @synthesize watermarkData = _watermarkData;
+@synthesize isEncrypted = _isEncrypted;
 @synthesize clipOffset = _clipOffset;
 @synthesize clipDuration = _clipDuration;
 
@@ -16673,6 +16674,7 @@
     self->_maxFrameRate = KALTURA_UNDEF_INT;
     self->_videoConstantBitrate = KALTURA_UNDEF_INT;
     self->_videoBitrateTolerance = KALTURA_UNDEF_INT;
+    self->_isEncrypted = KALTURA_UNDEF_INT;
     self->_clipOffset = KALTURA_UNDEF_INT;
     self->_clipDuration = KALTURA_UNDEF_INT;
     return self;
@@ -16843,6 +16845,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfIsEncrypted
+{
+    return KFT_Int;
+}
+
 - (KalturaFieldType)getTypeOfClipOffset
 {
     return KFT_Int;
@@ -16978,6 +16985,11 @@
     self.videoBitrateTolerance = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setIsEncryptedFromString:(NSString*)aPropVal
+{
+    self.isEncrypted = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)setClipOffsetFromString:(NSString*)aPropVal
 {
     self.clipOffset = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -17026,6 +17038,7 @@
     [aParams addIfDefinedKey:@"videoConstantBitrate" withInt:self.videoConstantBitrate];
     [aParams addIfDefinedKey:@"videoBitrateTolerance" withInt:self.videoBitrateTolerance];
     [aParams addIfDefinedKey:@"watermarkData" withString:self.watermarkData];
+    [aParams addIfDefinedKey:@"isEncrypted" withInt:self.isEncrypted];
     [aParams addIfDefinedKey:@"clipOffset" withInt:self.clipOffset];
     [aParams addIfDefinedKey:@"clipDuration" withInt:self.clipDuration];
 }
@@ -33664,7 +33677,7 @@
 @end
 
 @interface KalturaQuizUserEntry()
-@property (nonatomic,assign) int score;
+@property (nonatomic,assign) double score;
 @end
 
 @implementation KalturaQuizUserEntry
@@ -33675,18 +33688,18 @@
     self = [super init];
     if (self == nil)
         return nil;
-    self->_score = KALTURA_UNDEF_INT;
+    self->_score = KALTURA_UNDEF_FLOAT;
     return self;
 }
 
 - (KalturaFieldType)getTypeOfScore
 {
-    return KFT_Int;
+    return KFT_Float;
 }
 
 - (void)setScoreFromString:(NSString*)aPropVal
 {
-    self.score = [KalturaSimpleTypeParser parseInt:aPropVal];
+    self.score = [KalturaSimpleTypeParser parseFloat:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
