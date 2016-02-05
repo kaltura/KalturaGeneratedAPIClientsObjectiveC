@@ -6116,7 +6116,9 @@
 @property (nonatomic,copy) NSString* rootEntryIdIn;
 @property (nonatomic,copy) NSString* parentEntryIdEqual;
 @property (nonatomic,copy) NSString* entitledUsersEditMatchAnd;
+@property (nonatomic,copy) NSString* entitledUsersEditMatchOr;
 @property (nonatomic,copy) NSString* entitledUsersPublishMatchAnd;
+@property (nonatomic,copy) NSString* entitledUsersPublishMatchOr;
 @property (nonatomic,copy) NSString* tagsNameMultiLikeOr;
 @property (nonatomic,copy) NSString* tagsAdminTagsMultiLikeOr;
 @property (nonatomic,copy) NSString* tagsAdminTagsNameMultiLikeOr;
@@ -6191,7 +6193,9 @@
 - (KalturaFieldType)getTypeOfRootEntryIdIn;
 - (KalturaFieldType)getTypeOfParentEntryIdEqual;
 - (KalturaFieldType)getTypeOfEntitledUsersEditMatchAnd;
+- (KalturaFieldType)getTypeOfEntitledUsersEditMatchOr;
 - (KalturaFieldType)getTypeOfEntitledUsersPublishMatchAnd;
+- (KalturaFieldType)getTypeOfEntitledUsersPublishMatchOr;
 - (KalturaFieldType)getTypeOfTagsNameMultiLikeOr;
 - (KalturaFieldType)getTypeOfTagsAdminTagsMultiLikeOr;
 - (KalturaFieldType)getTypeOfTagsAdminTagsNameMultiLikeOr;
@@ -11777,8 +11781,11 @@
 // @subpackage Client
 @interface KalturaUserEntryFilter : KalturaUserEntryBaseFilter
 @property (nonatomic,assign) int userIdEqualCurrent;	// enum KalturaNullableBoolean
+@property (nonatomic,assign) int isAnonymous;	// enum KalturaNullableBoolean
 - (KalturaFieldType)getTypeOfUserIdEqualCurrent;
+- (KalturaFieldType)getTypeOfIsAnonymous;
 - (void)setUserIdEqualCurrentFromString:(NSString*)aPropVal;
+- (void)setIsAnonymousFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -12533,9 +12540,6 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaQuizUserEntryFilter : KalturaQuizUserEntryBaseFilter
-@property (nonatomic,assign) int isAnonymous;	// enum KalturaNullableBoolean
-- (KalturaFieldType)getTypeOfIsAnonymous;
-- (void)setIsAnonymousFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

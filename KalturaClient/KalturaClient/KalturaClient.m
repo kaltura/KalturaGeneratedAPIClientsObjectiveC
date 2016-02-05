@@ -18672,7 +18672,9 @@
 @synthesize rootEntryIdIn = _rootEntryIdIn;
 @synthesize parentEntryIdEqual = _parentEntryIdEqual;
 @synthesize entitledUsersEditMatchAnd = _entitledUsersEditMatchAnd;
+@synthesize entitledUsersEditMatchOr = _entitledUsersEditMatchOr;
 @synthesize entitledUsersPublishMatchAnd = _entitledUsersPublishMatchAnd;
+@synthesize entitledUsersPublishMatchOr = _entitledUsersPublishMatchOr;
 @synthesize tagsNameMultiLikeOr = _tagsNameMultiLikeOr;
 @synthesize tagsAdminTagsMultiLikeOr = _tagsAdminTagsMultiLikeOr;
 @synthesize tagsAdminTagsNameMultiLikeOr = _tagsAdminTagsNameMultiLikeOr;
@@ -19050,7 +19052,17 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfEntitledUsersEditMatchOr
+{
+    return KFT_String;
+}
+
 - (KalturaFieldType)getTypeOfEntitledUsersPublishMatchAnd
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEntitledUsersPublishMatchOr
 {
     return KFT_String;
 }
@@ -19268,7 +19280,9 @@
     [aParams addIfDefinedKey:@"rootEntryIdIn" withString:self.rootEntryIdIn];
     [aParams addIfDefinedKey:@"parentEntryIdEqual" withString:self.parentEntryIdEqual];
     [aParams addIfDefinedKey:@"entitledUsersEditMatchAnd" withString:self.entitledUsersEditMatchAnd];
+    [aParams addIfDefinedKey:@"entitledUsersEditMatchOr" withString:self.entitledUsersEditMatchOr];
     [aParams addIfDefinedKey:@"entitledUsersPublishMatchAnd" withString:self.entitledUsersPublishMatchAnd];
+    [aParams addIfDefinedKey:@"entitledUsersPublishMatchOr" withString:self.entitledUsersPublishMatchOr];
     [aParams addIfDefinedKey:@"tagsNameMultiLikeOr" withString:self.tagsNameMultiLikeOr];
     [aParams addIfDefinedKey:@"tagsAdminTagsMultiLikeOr" withString:self.tagsAdminTagsMultiLikeOr];
     [aParams addIfDefinedKey:@"tagsAdminTagsNameMultiLikeOr" withString:self.tagsAdminTagsNameMultiLikeOr];
@@ -19325,7 +19339,9 @@
     [self->_rootEntryIdIn release];
     [self->_parentEntryIdEqual release];
     [self->_entitledUsersEditMatchAnd release];
+    [self->_entitledUsersEditMatchOr release];
     [self->_entitledUsersPublishMatchAnd release];
+    [self->_entitledUsersPublishMatchOr release];
     [self->_tagsNameMultiLikeOr release];
     [self->_tagsAdminTagsMultiLikeOr release];
     [self->_tagsAdminTagsNameMultiLikeOr release];
@@ -40391,6 +40407,7 @@
 
 @implementation KalturaUserEntryFilter
 @synthesize userIdEqualCurrent = _userIdEqualCurrent;
+@synthesize isAnonymous = _isAnonymous;
 
 - (id)init
 {
@@ -40398,10 +40415,16 @@
     if (self == nil)
         return nil;
     self->_userIdEqualCurrent = KALTURA_UNDEF_INT;
+    self->_isAnonymous = KALTURA_UNDEF_INT;
     return self;
 }
 
 - (KalturaFieldType)getTypeOfUserIdEqualCurrent
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfIsAnonymous
 {
     return KFT_Int;
 }
@@ -40411,12 +40434,18 @@
     self.userIdEqualCurrent = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setIsAnonymousFromString:(NSString*)aPropVal
+{
+    self.isAnonymous = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaUserEntryFilter"];
     [aParams addIfDefinedKey:@"userIdEqualCurrent" withInt:self.userIdEqualCurrent];
+    [aParams addIfDefinedKey:@"isAnonymous" withInt:self.isAnonymous];
 }
 
 @end
@@ -42333,33 +42362,11 @@
 @end
 
 @implementation KalturaQuizUserEntryFilter
-@synthesize isAnonymous = _isAnonymous;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_isAnonymous = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfIsAnonymous
-{
-    return KFT_Int;
-}
-
-- (void)setIsAnonymousFromString:(NSString*)aPropVal
-{
-    self.isAnonymous = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaQuizUserEntryFilter"];
-    [aParams addIfDefinedKey:@"isAnonymous" withInt:self.isAnonymous];
 }
 
 @end
