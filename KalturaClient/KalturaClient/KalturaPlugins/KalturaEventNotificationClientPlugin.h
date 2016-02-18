@@ -43,6 +43,7 @@
 @interface KalturaEventNotificationEventObjectType : NSObject
 + (NSString*)AD_CUE_POINT;
 + (NSString*)ANNOTATION;
++ (NSString*)ATTACHMENT_ASSET;
 + (NSString*)CAPTION_ASSET;
 + (NSString*)CODE_CUE_POINT;
 + (NSString*)DISTRIBUTION_PROFILE;
@@ -51,6 +52,7 @@
 + (NSString*)DROP_FOLDER;
 + (NSString*)DROP_FOLDER_FILE;
 + (NSString*)METADATA;
++ (NSString*)TRANSCRIPT_ASSET;
 + (NSString*)ENTRY;
 + (NSString*)CATEGORY;
 + (NSString*)ASSET;

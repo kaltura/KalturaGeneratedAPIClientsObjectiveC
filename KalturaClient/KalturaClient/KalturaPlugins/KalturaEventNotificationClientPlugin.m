@@ -52,6 +52,10 @@
 {
     return @"annotationEventNotifications.Annotation";
 }
++ (NSString*)ATTACHMENT_ASSET
+{
+    return @"attachmentAssetEventNotifications.AttachmentAsset";
+}
 + (NSString*)CAPTION_ASSET
 {
     return @"captionAssetEventNotifications.CaptionAsset";
@@ -83,6 +87,10 @@
 + (NSString*)METADATA
 {
     return @"metadataEventNotifications.Metadata";
+}
++ (NSString*)TRANSCRIPT_ASSET
+{
+    return @"transcriptAssetEventNotifications.TranscriptAsset";
 }
 + (NSString*)ENTRY
 {
