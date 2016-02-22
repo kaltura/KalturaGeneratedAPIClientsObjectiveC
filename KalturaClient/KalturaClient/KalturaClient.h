@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2015  Kaltura Inc.
+// Copyright (C) 2006-2016  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -5726,9 +5726,9 @@
 // Recording Status Enabled/Disabled
 @property (nonatomic,assign) int recordStatus;	// enum KalturaRecordStatus, insertonly
 // DVR Status Enabled/Disabled
-@property (nonatomic,assign) int dvrStatus;	// enum KalturaDVRStatus, insertonly
+@property (nonatomic,assign) int dvrStatus;	// enum KalturaDVRStatus
 // Window of time which the DVR allows for backwards scrubbing (in minutes)
-@property (nonatomic,assign) int dvrWindow;	// insertonly
+@property (nonatomic,assign) int dvrWindow;
 // Elapsed recording time (in msec) up to the point where the live stream was last stopped (unpublished).
 @property (nonatomic,assign) int lastElapsedRecordingTime;
 // Array of key value protocol->live stream url objects
