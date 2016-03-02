@@ -26147,6 +26147,7 @@
 @synthesize enforceEntitlement = _enforceEntitlement;
 @synthesize privacyContext = _privacyContext;
 @synthesize addEmbedHtml5Support = _addEmbedHtml5Support;
+@synthesize roles = _roles;
 
 - (id)init
 {
@@ -26239,6 +26240,11 @@
     return KFT_Bool;
 }
 
+- (KalturaFieldType)getTypeOfRoles
+{
+    return KFT_String;
+}
+
 - (void)setPartnerIdFromString:(NSString*)aPropVal
 {
     self.partnerId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -26293,6 +26299,7 @@
     [aParams addIfDefinedKey:@"enforceEntitlement" withBool:self.enforceEntitlement];
     [aParams addIfDefinedKey:@"privacyContext" withString:self.privacyContext];
     [aParams addIfDefinedKey:@"addEmbedHtml5Support" withBool:self.addEmbedHtml5Support];
+    [aParams addIfDefinedKey:@"roles" withString:self.roles];
 }
 
 - (void)dealloc
@@ -26304,6 +26311,7 @@
     [self->_partnerData release];
     [self->_widgetHTML release];
     [self->_privacyContext release];
+    [self->_roles release];
     [super dealloc];
 }
 

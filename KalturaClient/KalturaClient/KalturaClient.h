@@ -8043,6 +8043,7 @@
 @property (nonatomic,copy) NSString* privacyContext;
 // Addes the HTML5 script line to the widget's embed code
 @property (nonatomic,assign) KALTURA_BOOL addEmbedHtml5Support;
+@property (nonatomic,copy) NSString* roles;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfSourceWidgetId;
 - (KalturaFieldType)getTypeOfRootWidgetId;
@@ -8058,6 +8059,7 @@
 - (KalturaFieldType)getTypeOfEnforceEntitlement;
 - (KalturaFieldType)getTypeOfPrivacyContext;
 - (KalturaFieldType)getTypeOfAddEmbedHtml5Support;
+- (KalturaFieldType)getTypeOfRoles;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setUiConfIdFromString:(NSString*)aPropVal;
 - (void)setSecurityTypeFromString:(NSString*)aPropVal;
