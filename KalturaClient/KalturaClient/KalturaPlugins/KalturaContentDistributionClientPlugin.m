@@ -3248,11 +3248,33 @@
 @end
 
 @implementation KalturaDistributionDeleteJobData
+@synthesize keepDistributionItem = _keepDistributionItem;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_keepDistributionItem = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfKeepDistributionItem
+{
+    return KFT_Bool;
+}
+
+- (void)setKeepDistributionItemFromString:(NSString*)aPropVal
+{
+    self.keepDistributionItem = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaDistributionDeleteJobData"];
+    [aParams addIfDefinedKey:@"keepDistributionItem" withBool:self.keepDistributionItem];
 }
 
 @end

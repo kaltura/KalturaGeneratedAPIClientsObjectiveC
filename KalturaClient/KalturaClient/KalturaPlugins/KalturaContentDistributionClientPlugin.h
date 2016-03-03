@@ -960,6 +960,10 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaDistributionDeleteJobData : KalturaDistributionJobData
+// Flag signifying that the associated distribution item should not be moved to 'removed' status
+@property (nonatomic,assign) KALTURA_BOOL keepDistributionItem;
+- (KalturaFieldType)getTypeOfKeepDistributionItem;
+- (void)setKeepDistributionItemFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

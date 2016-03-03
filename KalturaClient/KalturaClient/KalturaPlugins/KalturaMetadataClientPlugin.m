@@ -1162,6 +1162,7 @@
 @implementation KalturaMetadataBaseFilter
 @synthesize partnerIdEqual = _partnerIdEqual;
 @synthesize metadataProfileIdEqual = _metadataProfileIdEqual;
+@synthesize metadataProfileIdIn = _metadataProfileIdIn;
 @synthesize metadataProfileVersionEqual = _metadataProfileVersionEqual;
 @synthesize metadataProfileVersionGreaterThanOrEqual = _metadataProfileVersionGreaterThanOrEqual;
 @synthesize metadataProfileVersionLessThanOrEqual = _metadataProfileVersionLessThanOrEqual;
@@ -1207,6 +1208,11 @@
 - (KalturaFieldType)getTypeOfMetadataProfileIdEqual
 {
     return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfMetadataProfileIdIn
+{
+    return KFT_String;
 }
 
 - (KalturaFieldType)getTypeOfMetadataProfileVersionEqual
@@ -1356,6 +1362,7 @@
         [aParams putKey:@"objectType" withString:@"KalturaMetadataBaseFilter"];
     [aParams addIfDefinedKey:@"partnerIdEqual" withInt:self.partnerIdEqual];
     [aParams addIfDefinedKey:@"metadataProfileIdEqual" withInt:self.metadataProfileIdEqual];
+    [aParams addIfDefinedKey:@"metadataProfileIdIn" withString:self.metadataProfileIdIn];
     [aParams addIfDefinedKey:@"metadataProfileVersionEqual" withInt:self.metadataProfileVersionEqual];
     [aParams addIfDefinedKey:@"metadataProfileVersionGreaterThanOrEqual" withInt:self.metadataProfileVersionGreaterThanOrEqual];
     [aParams addIfDefinedKey:@"metadataProfileVersionLessThanOrEqual" withInt:self.metadataProfileVersionLessThanOrEqual];
@@ -1375,6 +1382,7 @@
 
 - (void)dealloc
 {
+    [self->_metadataProfileIdIn release];
     [self->_metadataObjectTypeEqual release];
     [self->_objectIdEqual release];
     [self->_objectIdIn release];

@@ -341,6 +341,7 @@
 @interface KalturaMetadataBaseFilter : KalturaRelatedFilter
 @property (nonatomic,assign) int partnerIdEqual;
 @property (nonatomic,assign) int metadataProfileIdEqual;
+@property (nonatomic,copy) NSString* metadataProfileIdIn;
 @property (nonatomic,assign) int metadataProfileVersionEqual;
 @property (nonatomic,assign) int metadataProfileVersionGreaterThanOrEqual;
 @property (nonatomic,assign) int metadataProfileVersionLessThanOrEqual;
@@ -359,6 +360,7 @@
 @property (nonatomic,copy) NSString* statusIn;
 - (KalturaFieldType)getTypeOfPartnerIdEqual;
 - (KalturaFieldType)getTypeOfMetadataProfileIdEqual;
+- (KalturaFieldType)getTypeOfMetadataProfileIdIn;
 - (KalturaFieldType)getTypeOfMetadataProfileVersionEqual;
 - (KalturaFieldType)getTypeOfMetadataProfileVersionGreaterThanOrEqual;
 - (KalturaFieldType)getTypeOfMetadataProfileVersionLessThanOrEqual;
