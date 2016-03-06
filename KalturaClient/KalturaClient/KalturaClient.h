@@ -7715,7 +7715,9 @@
 // @subpackage Client
 @interface KalturaThumbnailServeOptions : KalturaObjectBase
 @property (nonatomic,assign) KALTURA_BOOL download;
+@property (nonatomic,copy) NSString* referrer;
 - (KalturaFieldType)getTypeOfDownload;
+- (KalturaFieldType)getTypeOfReferrer;
 - (void)setDownloadFromString:(NSString*)aPropVal;
 @end
 

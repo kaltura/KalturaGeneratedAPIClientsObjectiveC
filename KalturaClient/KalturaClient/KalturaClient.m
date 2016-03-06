@@ -24894,6 +24894,7 @@
 
 @implementation KalturaThumbnailServeOptions
 @synthesize download = _download;
+@synthesize referrer = _referrer;
 
 - (id)init
 {
@@ -24909,6 +24910,11 @@
     return KFT_Bool;
 }
 
+- (KalturaFieldType)getTypeOfReferrer
+{
+    return KFT_String;
+}
+
 - (void)setDownloadFromString:(NSString*)aPropVal
 {
     self.download = [KalturaSimpleTypeParser parseBool:aPropVal];
@@ -24920,6 +24926,13 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaThumbnailServeOptions"];
     [aParams addIfDefinedKey:@"download" withBool:self.download];
+    [aParams addIfDefinedKey:@"referrer" withString:self.referrer];
+}
+
+- (void)dealloc
+{
+    [self->_referrer release];
+    [super dealloc];
 }
 
 @end
