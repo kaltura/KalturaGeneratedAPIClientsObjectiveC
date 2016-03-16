@@ -471,6 +471,13 @@
     [self.client queueVoidService:@"annotation_annotation" withAction:@"delete"];
 }
 
+- (void)updateStatusWithId:(NSString*)aId withStatus:(int)aStatus
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"status" withInt:aStatus];
+    [self.client queueVoidService:@"annotation_annotation" withAction:@"updateStatus"];
+}
+
 @end
 
 @implementation KalturaAnnotationClientPlugin

@@ -157,6 +157,8 @@
 - (int)count;
 // delete cue point by id, and delete all children cue points
 - (void)deleteWithId:(NSString*)aId;
+// Update cuePoint status by id
+- (void)updateStatusWithId:(NSString*)aId withStatus:(int)aStatus;
 @end
 
 @interface KalturaAnnotationClientPlugin : KalturaClientPlugin

@@ -5724,7 +5724,7 @@
 // The message to be presented when the stream is offline
 @property (nonatomic,copy) NSString* offlineMessage;
 // Recording Status Enabled/Disabled
-@property (nonatomic,assign) int recordStatus;	// enum KalturaRecordStatus, insertonly
+@property (nonatomic,assign) int recordStatus;	// enum KalturaRecordStatus
 // DVR Status Enabled/Disabled
 @property (nonatomic,assign) int dvrStatus;	// enum KalturaDVRStatus
 // Window of time which the DVR allows for backwards scrubbing (in minutes)
@@ -5745,7 +5745,7 @@
 @property (nonatomic,assign,readonly) int lastBroadcast;
 // The time (unix timestamp in milliseconds) in which the entry broadcast started or 0 when the entry is off the air
 @property (nonatomic,assign) double currentBroadcastStartTime;
-@property (nonatomic,retain) KalturaLiveEntryRecordingOptions* recordingOptions;	// insertonly
+@property (nonatomic,retain) KalturaLiveEntryRecordingOptions* recordingOptions;
 // the status of the entry of type LiveEntryStatus
 @property (nonatomic,assign) int liveStatus;	// enum KalturaLiveEntryStatus
 - (KalturaFieldType)getTypeOfOfflineMessage;

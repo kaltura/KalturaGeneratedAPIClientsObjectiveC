@@ -821,6 +821,13 @@
     [self.client queueVoidService:@"cuepoint_cuepoint" withAction:@"delete"];
 }
 
+- (void)updateStatusWithId:(NSString*)aId withStatus:(int)aStatus
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"status" withInt:aStatus];
+    [self.client queueVoidService:@"cuepoint_cuepoint" withAction:@"updateStatus"];
+}
+
 @end
 
 @implementation KalturaCuePointClientPlugin
