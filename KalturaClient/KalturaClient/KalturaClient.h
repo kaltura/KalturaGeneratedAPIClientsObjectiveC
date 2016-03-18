@@ -241,6 +241,15 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaEntryServerNodeStatus : NSObject
++ (int)STOPPED;
++ (int)PLAYABLE;
++ (int)BROADCASTING;
++ (int)AUTHENTICATED;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaFeatureStatusType : NSObject
 + (int)LOCK_CATEGORY;
 + (int)CATEGORY;
@@ -335,14 +344,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaLiveEntryStatus : NSObject
-+ (int)STOPPED;
-+ (int)PLAYABLE;
-+ (int)BROADCASTING;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaLivePublishStatus : NSObject
 + (int)DISABLED;
 + (int)ENABLED;
@@ -375,13 +376,6 @@
 + (int)SENT;
 + (int)ERROR;
 + (int)QUEUED;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaMediaServerIndex : NSObject
-+ (int)PRIMARY;
-+ (int)SECONDARY;
 @end
 
 // @package Kaltura
@@ -1782,6 +1776,22 @@
 + (NSString*)READY_BUT_NOT_APPROVED;
 + (NSString*)NOT_READY_AND_NOT_APPROVED;
 + (NSString*)FAILED;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaEntryServerNodeOrderBy : NSObject
++ (NSString*)CREATED_AT_ASC;
++ (NSString*)UPDATED_AT_ASC;
++ (NSString*)CREATED_AT_DESC;
++ (NSString*)UPDATED_AT_DESC;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaEntryServerNodeType : NSObject
++ (NSString*)LIVE_PRIMARY;
++ (NSString*)LIVE_BACKUP;
 @end
 
 // @package Kaltura
@@ -5282,6 +5292,34 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaEntryServerNode : KalturaObjectBase
+// unique auto-generated identifier
+@property (nonatomic,assign,readonly) int id;
+@property (nonatomic,copy,readonly) NSString* entryId;
+@property (nonatomic,assign,readonly) int serverNodeId;
+@property (nonatomic,assign,readonly) int partnerId;
+@property (nonatomic,assign,readonly) int createdAt;
+@property (nonatomic,assign,readonly) int updatedAt;
+@property (nonatomic,assign,readonly) int status;	// enum KalturaEntryServerNodeStatus
+@property (nonatomic,copy,readonly) NSString* serverType;	// enum KalturaEntryServerNodeType
+- (KalturaFieldType)getTypeOfId;
+- (KalturaFieldType)getTypeOfEntryId;
+- (KalturaFieldType)getTypeOfServerNodeId;
+- (KalturaFieldType)getTypeOfPartnerId;
+- (KalturaFieldType)getTypeOfCreatedAt;
+- (KalturaFieldType)getTypeOfUpdatedAt;
+- (KalturaFieldType)getTypeOfStatus;
+- (KalturaFieldType)getTypeOfServerType;
+- (void)setIdFromString:(NSString*)aPropVal;
+- (void)setServerNodeIdFromString:(NSString*)aPropVal;
+- (void)setPartnerIdFromString:(NSString*)aPropVal;
+- (void)setCreatedAtFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtFromString:(NSString*)aPropVal;
+- (void)setStatusFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 // Configuration for extended item in the Kaltura MRSS feeds
 @interface KalturaObjectIdentifier : KalturaObjectBase
 // Comma separated string of enum values denoting which features of the item need to be included in the MRSS
@@ -5746,8 +5784,8 @@
 // The time (unix timestamp in milliseconds) in which the entry broadcast started or 0 when the entry is off the air
 @property (nonatomic,assign) double currentBroadcastStartTime;
 @property (nonatomic,retain) KalturaLiveEntryRecordingOptions* recordingOptions;
-// the status of the entry of type LiveEntryStatus
-@property (nonatomic,assign) int liveStatus;	// enum KalturaLiveEntryStatus
+// the status of the entry of type EntryServerNodeStatus
+@property (nonatomic,assign,readonly) int liveStatus;	// enum KalturaEntryServerNodeStatus
 - (KalturaFieldType)getTypeOfOfflineMessage;
 - (KalturaFieldType)getTypeOfRecordStatus;
 - (KalturaFieldType)getTypeOfDvrStatus;
@@ -6016,6 +6054,29 @@
 - (KalturaFieldType)getTypeOfEncodingIP2;
 - (KalturaFieldType)getTypeOfStreamPassword;
 - (KalturaFieldType)getTypeOfStreamUsername;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaLiveStreamParams : KalturaObjectBase
+// Bit rate of the stream. (i.e. 900)
+@property (nonatomic,assign) int bitrate;
+// flavor asset id
+@property (nonatomic,copy) NSString* flavorId;
+// Stream's width
+@property (nonatomic,assign) int width;
+// Stream's height
+@property (nonatomic,assign) int height;
+// Live stream's codec
+@property (nonatomic,copy) NSString* codec;
+- (KalturaFieldType)getTypeOfBitrate;
+- (KalturaFieldType)getTypeOfFlavorId;
+- (KalturaFieldType)getTypeOfWidth;
+- (KalturaFieldType)getTypeOfHeight;
+- (KalturaFieldType)getTypeOfCodec;
+- (void)setBitrateFromString:(NSString*)aPropVal;
+- (void)setWidthFromString:(NSString*)aPropVal;
+- (void)setHeightFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -8977,7 +9038,7 @@
 @property (nonatomic,copy) NSString* entryId;
 @property (nonatomic,copy) NSString* assetId;
 // Primary or secondary media server
-@property (nonatomic,assign) int mediaServerIndex;	// enum KalturaMediaServerIndex
+@property (nonatomic,copy) NSString* mediaServerIndex;	// enum KalturaEntryServerNodeType
 // The index of the file within the entry
 @property (nonatomic,assign) int fileIndex;
 // The recorded live media
@@ -8996,7 +9057,6 @@
 - (KalturaFieldType)getTypeOfDestFilePath;
 - (KalturaFieldType)getTypeOfEndTime;
 - (KalturaFieldType)getTypeOfDestDataFilePath;
-- (void)setMediaServerIndexFromString:(NSString*)aPropVal;
 - (void)setFileIndexFromString:(NSString*)aPropVal;
 - (void)setEndTimeFromString:(NSString*)aPropVal;
 @end
@@ -9493,6 +9553,14 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaEntryServerNodeListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaEntryServerNode elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
 // A boolean representation to return evaluated dynamic value
 @interface KalturaBooleanField : KalturaBooleanValue
 @end
@@ -9689,6 +9757,15 @@
 @property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaLiveChannelSegment elements
 - (KalturaFieldType)getTypeOfObjects;
 - (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaLiveEntryServerNode : KalturaEntryServerNode
+// parameters of the stream we got
+@property (nonatomic,retain) NSMutableArray* streams;	// of KalturaLiveStreamParams elements
+- (KalturaFieldType)getTypeOfStreams;
+- (NSString*)getObjectTypeOfStreams;
 @end
 
 // @package Kaltura
@@ -11259,6 +11336,48 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaEntryServerNodeBaseFilter : KalturaRelatedFilter
+@property (nonatomic,assign) int idEqual;
+@property (nonatomic,copy) NSString* idIn;
+@property (nonatomic,copy) NSString* idNotIn;
+@property (nonatomic,copy) NSString* entryIdEqual;
+@property (nonatomic,copy) NSString* entryIdIn;
+@property (nonatomic,copy) NSString* entryIdNotIn;
+@property (nonatomic,assign) int serverNodeIdEqual;
+@property (nonatomic,copy) NSString* serverNodeIdIn;
+@property (nonatomic,copy) NSString* serverNodeIdNotIn;
+@property (nonatomic,assign) int createdAtLessThanOrEqual;
+@property (nonatomic,assign) int createdAtGreaterThanOrEqual;
+@property (nonatomic,assign) int updatedAtLessThanOrEqual;
+@property (nonatomic,assign) int updatedAtGreaterThanOrEqual;
+@property (nonatomic,assign) int statusEqual;	// enum KalturaEntryServerNodeStatus
+@property (nonatomic,copy) NSString* serverTypeEqual;	// enum KalturaEntryServerNodeType
+- (KalturaFieldType)getTypeOfIdEqual;
+- (KalturaFieldType)getTypeOfIdIn;
+- (KalturaFieldType)getTypeOfIdNotIn;
+- (KalturaFieldType)getTypeOfEntryIdEqual;
+- (KalturaFieldType)getTypeOfEntryIdIn;
+- (KalturaFieldType)getTypeOfEntryIdNotIn;
+- (KalturaFieldType)getTypeOfServerNodeIdEqual;
+- (KalturaFieldType)getTypeOfServerNodeIdIn;
+- (KalturaFieldType)getTypeOfServerNodeIdNotIn;
+- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfStatusEqual;
+- (KalturaFieldType)getTypeOfServerTypeEqual;
+- (void)setIdEqualFromString:(NSString*)aPropVal;
+- (void)setServerNodeIdEqualFromString:(NSString*)aPropVal;
+- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setStatusEqualFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaExtractMediaJobData : KalturaConvartableJobData
 @property (nonatomic,copy) NSString* flavorAssetId;
 - (KalturaFieldType)getTypeOfFlavorAssetId;
@@ -12066,6 +12185,11 @@
 @interface KalturaDocumentEntryMatchAttributeCondition : KalturaSearchMatchAttributeCondition
 @property (nonatomic,copy) NSString* attribute;	// enum KalturaDocumentEntryMatchAttribute
 - (KalturaFieldType)getTypeOfAttribute;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaEntryServerNodeFilter : KalturaEntryServerNodeBaseFilter
 @end
 
 // @package Kaltura
@@ -13162,6 +13286,15 @@
 
 // @package Kaltura
 // @subpackage Client
+// Base class for entry server node
+@interface KalturaEntryServerNodeService : KalturaServiceBase
+- (KalturaEntryServerNodeListResponse*)listWithFilter:(KalturaEntryServerNodeFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
+- (KalturaEntryServerNodeListResponse*)listWithFilter:(KalturaEntryServerNodeFilter*)aFilter;
+- (KalturaEntryServerNode*)getWithId:(NSString*)aId;
+@end
+
+// @package Kaltura
+// @subpackage Client
 // Manage file assets
 @interface KalturaFileAssetService : KalturaServiceBase
 // Add new file asset
@@ -13311,14 +13444,14 @@
 // Delivering the status of a live channel (on-air/offline)
 - (KALTURA_BOOL)isLiveWithId:(NSString*)aId;
 // Append recorded video to live entry
-- (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(int)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withIsLastChunk:(KALTURA_BOOL)aIsLastChunk;
-- (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(int)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration;
+- (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withIsLastChunk:(KALTURA_BOOL)aIsLastChunk;
+- (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration;
 // Register media server to live entry
-- (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(int)aMediaServerIndex withApplicationName:(NSString*)aApplicationName withLiveEntryStatus:(int)aLiveEntryStatus;
-- (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(int)aMediaServerIndex withApplicationName:(NSString*)aApplicationName;
-- (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(int)aMediaServerIndex;
+- (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex withApplicationName:(NSString*)aApplicationName withLiveEntryStatus:(int)aLiveEntryStatus;
+- (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex withApplicationName:(NSString*)aApplicationName;
+- (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex;
 // Unregister media server from live entry
-- (KalturaLiveEntry*)unregisterMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(int)aMediaServerIndex;
+- (KalturaLiveEntry*)unregisterMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex;
 // Validates all registered media servers
 - (void)validateRegisteredMediaServersWithEntryId:(NSString*)aEntryId;
 @end
@@ -13380,14 +13513,14 @@
 // Remove push publish configuration from entry
 - (KalturaLiveStreamEntry*)removeLiveStreamPushPublishConfigurationWithEntryId:(NSString*)aEntryId withProtocol:(NSString*)aProtocol;
 // Append recorded video to live entry
-- (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(int)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withIsLastChunk:(KALTURA_BOOL)aIsLastChunk;
-- (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(int)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration;
+- (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withIsLastChunk:(KALTURA_BOOL)aIsLastChunk;
+- (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration;
 // Register media server to live entry
-- (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(int)aMediaServerIndex withApplicationName:(NSString*)aApplicationName withLiveEntryStatus:(int)aLiveEntryStatus;
-- (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(int)aMediaServerIndex withApplicationName:(NSString*)aApplicationName;
-- (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(int)aMediaServerIndex;
+- (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex withApplicationName:(NSString*)aApplicationName withLiveEntryStatus:(int)aLiveEntryStatus;
+- (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex withApplicationName:(NSString*)aApplicationName;
+- (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex;
 // Unregister media server from live entry
-- (KalturaLiveEntry*)unregisterMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(int)aMediaServerIndex;
+- (KalturaLiveEntry*)unregisterMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex;
 // Validates all registered media servers
 - (void)validateRegisteredMediaServersWithEntryId:(NSString*)aEntryId;
 // Creates perioding metadata sync-point events on a live stream
@@ -14198,6 +14331,7 @@
 	KalturaDataService* _data;
 	KalturaDeliveryProfileService* _deliveryProfile;
 	KalturaEmailIngestionProfileService* _EmailIngestionProfile;
+	KalturaEntryServerNodeService* _entryServerNode;
 	KalturaFileAssetService* _fileAsset;
 	KalturaFlavorAssetService* _flavorAsset;
 	KalturaFlavorParamsOutputService* _flavorParamsOutput;
@@ -14253,6 +14387,7 @@
 @property (nonatomic, readonly) KalturaDataService* data;
 @property (nonatomic, readonly) KalturaDeliveryProfileService* deliveryProfile;
 @property (nonatomic, readonly) KalturaEmailIngestionProfileService* EmailIngestionProfile;
+@property (nonatomic, readonly) KalturaEntryServerNodeService* entryServerNode;
 @property (nonatomic, readonly) KalturaFileAssetService* fileAsset;
 @property (nonatomic, readonly) KalturaFlavorAssetService* flavorAsset;
 @property (nonatomic, readonly) KalturaFlavorParamsOutputService* flavorParamsOutput;
