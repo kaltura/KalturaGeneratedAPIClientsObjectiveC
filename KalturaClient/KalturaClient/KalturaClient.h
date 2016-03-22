@@ -9924,8 +9924,6 @@
 @property (nonatomic,assign) int lastMovedCategoryEntryPageIndex;
 // All entries from all child categories will be moved as well
 @property (nonatomic,assign) KALTURA_BOOL moveFromChildren;
-// Entries won't be deleted from the source entry
-@property (nonatomic,assign) KALTURA_BOOL acopyOnly;
 // Destination categories fallback ids
 @property (nonatomic,copy) NSString* destCategoryFullIds;
 - (KalturaFieldType)getTypeOfSrcCategoryId;
@@ -9934,7 +9932,6 @@
 - (KalturaFieldType)getTypeOfLastMovedCategoryPageIndex;
 - (KalturaFieldType)getTypeOfLastMovedCategoryEntryPageIndex;
 - (KalturaFieldType)getTypeOfMoveFromChildren;
-- (KalturaFieldType)getTypeOfCopyOnly;
 - (KalturaFieldType)getTypeOfDestCategoryFullIds;
 - (void)setSrcCategoryIdFromString:(NSString*)aPropVal;
 - (void)setDestCategoryIdFromString:(NSString*)aPropVal;
@@ -9942,7 +9939,6 @@
 - (void)setLastMovedCategoryPageIndexFromString:(NSString*)aPropVal;
 - (void)setLastMovedCategoryEntryPageIndexFromString:(NSString*)aPropVal;
 - (void)setMoveFromChildrenFromString:(NSString*)aPropVal;
-- (void)setCopyOnlyFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

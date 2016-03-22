@@ -58,6 +58,7 @@
 @interface KalturaCielo24JobProviderData()
 @property (nonatomic,copy) NSString* username;
 @property (nonatomic,copy) NSString* password;
+@property (nonatomic,copy) NSString* baseUrl;
 @end
 
 @implementation KalturaCielo24JobProviderData
@@ -68,6 +69,7 @@
 @synthesize fidelity = _fidelity;
 @synthesize username = _username;
 @synthesize password = _password;
+@synthesize baseUrl = _baseUrl;
 @synthesize spokenLanguage = _spokenLanguage;
 @synthesize replaceMediaContent = _replaceMediaContent;
 
@@ -115,6 +117,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfBaseUrl
+{
+    return KFT_String;
+}
+
 - (KalturaFieldType)getTypeOfSpokenLanguage
 {
     return KFT_String;
@@ -153,6 +160,7 @@
     [self->_fidelity release];
     [self->_username release];
     [self->_password release];
+    [self->_baseUrl release];
     [self->_spokenLanguage release];
     [super dealloc];
 }

@@ -33259,7 +33259,6 @@
 @synthesize lastMovedCategoryPageIndex = _lastMovedCategoryPageIndex;
 @synthesize lastMovedCategoryEntryPageIndex = _lastMovedCategoryEntryPageIndex;
 @synthesize moveFromChildren = _moveFromChildren;
-@synthesize acopyOnly = _acopyOnly;
 @synthesize destCategoryFullIds = _destCategoryFullIds;
 
 - (id)init
@@ -33273,7 +33272,6 @@
     self->_lastMovedCategoryPageIndex = KALTURA_UNDEF_INT;
     self->_lastMovedCategoryEntryPageIndex = KALTURA_UNDEF_INT;
     self->_moveFromChildren = KALTURA_UNDEF_BOOL;
-    self->_acopyOnly = KALTURA_UNDEF_BOOL;
     return self;
 }
 
@@ -33303,11 +33301,6 @@
 }
 
 - (KalturaFieldType)getTypeOfMoveFromChildren
-{
-    return KFT_Bool;
-}
-
-- (KalturaFieldType)getTypeOfCopyOnly
 {
     return KFT_Bool;
 }
@@ -33347,11 +33340,6 @@
     self.moveFromChildren = [KalturaSimpleTypeParser parseBool:aPropVal];
 }
 
-- (void)setCopyOnlyFromString:(NSString*)aPropVal
-{
-    self.acopyOnly = [KalturaSimpleTypeParser parseBool:aPropVal];
-}
-
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -33363,7 +33351,6 @@
     [aParams addIfDefinedKey:@"lastMovedCategoryPageIndex" withInt:self.lastMovedCategoryPageIndex];
     [aParams addIfDefinedKey:@"lastMovedCategoryEntryPageIndex" withInt:self.lastMovedCategoryEntryPageIndex];
     [aParams addIfDefinedKey:@"moveFromChildren" withBool:self.moveFromChildren];
-    [aParams addIfDefinedKey:@"acopyOnly" withBool:self.acopyOnly];
     [aParams addIfDefinedKey:@"destCategoryFullIds" withString:self.destCategoryFullIds];
 }
 

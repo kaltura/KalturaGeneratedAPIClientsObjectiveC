@@ -62,6 +62,8 @@
 @property (nonatomic,copy,readonly) NSString* username;
 // Api key for service provider
 @property (nonatomic,copy,readonly) NSString* password;
+// Base url for service provider
+@property (nonatomic,copy,readonly) NSString* baseUrl;
 // Transcript content language
 @property (nonatomic,copy) NSString* spokenLanguage;	// enum KalturaLanguage
 // should replace remote media content
@@ -73,6 +75,7 @@
 - (KalturaFieldType)getTypeOfFidelity;
 - (KalturaFieldType)getTypeOfUsername;
 - (KalturaFieldType)getTypeOfPassword;
+- (KalturaFieldType)getTypeOfBaseUrl;
 - (KalturaFieldType)getTypeOfSpokenLanguage;
 - (KalturaFieldType)getTypeOfReplaceMediaContent;
 - (void)setReplaceMediaContentFromString:(NSString*)aPropVal;
