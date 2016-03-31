@@ -16728,8 +16728,14 @@
 
 @implementation KalturaFlavorAssetUrlOptions
 @synthesize fileName = _fileName;
+@synthesize referrer = _referrer;
 
 - (KalturaFieldType)getTypeOfFileName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfReferrer
 {
     return KFT_String;
 }
@@ -16740,11 +16746,13 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaFlavorAssetUrlOptions"];
     [aParams addIfDefinedKey:@"fileName" withString:self.fileName];
+    [aParams addIfDefinedKey:@"referrer" withString:self.referrer];
 }
 
 - (void)dealloc
 {
     [self->_fileName release];
+    [self->_referrer release];
     [super dealloc];
 }
 

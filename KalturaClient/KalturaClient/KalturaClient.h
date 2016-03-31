@@ -5512,7 +5512,9 @@
 @interface KalturaFlavorAssetUrlOptions : KalturaObjectBase
 // The name of the downloaded file
 @property (nonatomic,copy) NSString* fileName;
+@property (nonatomic,copy) NSString* referrer;
 - (KalturaFieldType)getTypeOfFileName;
+- (KalturaFieldType)getTypeOfReferrer;
 @end
 
 // @package Kaltura
