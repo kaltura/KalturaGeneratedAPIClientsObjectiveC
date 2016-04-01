@@ -1401,9 +1401,9 @@
     return [self listWithFilter:nil];
 }
 
-- (void)updateStatusWithPartnerId:(int)aPartnerId withStatus:(int)aStatus withReason:(NSString*)aReason
+- (void)updateStatusWithId:(int)aId withStatus:(int)aStatus withReason:(NSString*)aReason
 {
-    [self.client.params addIfDefinedKey:@"partnerId" withInt:aPartnerId];
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
     [self.client.params addIfDefinedKey:@"status" withInt:aStatus];
     [self.client.params addIfDefinedKey:@"reason" withString:aReason];
     [self.client queueVoidService:@"systempartner_systempartner" withAction:@"updateStatus"];

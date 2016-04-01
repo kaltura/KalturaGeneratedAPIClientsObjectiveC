@@ -388,7 +388,7 @@
 - (KalturaPartnerListResponse*)listWithFilter:(KalturaPartnerFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaPartnerListResponse*)listWithFilter:(KalturaPartnerFilter*)aFilter;
 - (KalturaPartnerListResponse*)list;
-- (void)updateStatusWithPartnerId:(int)aPartnerId withStatus:(int)aStatus withReason:(NSString*)aReason;
+- (void)updateStatusWithId:(int)aId withStatus:(int)aStatus withReason:(NSString*)aReason;
 - (NSString*)getAdminSessionWithPartnerId:(int)aPartnerId withUserId:(NSString*)aUserId;
 - (NSString*)getAdminSessionWithPartnerId:(int)aPartnerId;
 - (void)updateConfigurationWithPartnerId:(int)aPartnerId withConfiguration:(KalturaSystemPartnerConfiguration*)aConfiguration;
