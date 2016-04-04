@@ -602,7 +602,7 @@ NSString* const KalturaClientErrorDomain = @"KalturaClientErrorDomain";
     if (self == nil)
         return nil;
 
-    self.clientTag = @"objCLib:16-04-03";
+    self.clientTag = @"objCLib:16-04-04";
     self.partnerId = -1;
     self.serviceUrl = @"http://www.kaltura.com";
     self.requestTimeout = 120;
