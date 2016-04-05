@@ -11349,6 +11349,7 @@
 @property (nonatomic,assign) int updatedAtLessThanOrEqual;
 @property (nonatomic,assign) int updatedAtGreaterThanOrEqual;
 @property (nonatomic,assign) int statusEqual;	// enum KalturaEntryServerNodeStatus
+@property (nonatomic,assign) int statusIn;	// enum KalturaEntryServerNodeStatus
 @property (nonatomic,copy) NSString* serverTypeEqual;	// enum KalturaEntryServerNodeType
 - (KalturaFieldType)getTypeOfIdEqual;
 - (KalturaFieldType)getTypeOfIdIn;
@@ -11364,6 +11365,7 @@
 - (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
 - (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual;
 - (KalturaFieldType)getTypeOfStatusEqual;
+- (KalturaFieldType)getTypeOfStatusIn;
 - (KalturaFieldType)getTypeOfServerTypeEqual;
 - (void)setIdEqualFromString:(NSString*)aPropVal;
 - (void)setServerNodeIdEqualFromString:(NSString*)aPropVal;
@@ -11372,6 +11374,7 @@
 - (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setStatusEqualFromString:(NSString*)aPropVal;
+- (void)setStatusInFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -13288,6 +13291,7 @@
 @interface KalturaEntryServerNodeService : KalturaServiceBase
 - (KalturaEntryServerNodeListResponse*)listWithFilter:(KalturaEntryServerNodeFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaEntryServerNodeListResponse*)listWithFilter:(KalturaEntryServerNodeFilter*)aFilter;
+- (KalturaEntryServerNodeListResponse*)list;
 - (KalturaEntryServerNode*)getWithId:(NSString*)aId;
 @end
 

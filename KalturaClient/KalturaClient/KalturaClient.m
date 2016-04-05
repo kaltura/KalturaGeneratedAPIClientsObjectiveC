@@ -38838,6 +38838,7 @@
 @synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
 @synthesize updatedAtGreaterThanOrEqual = _updatedAtGreaterThanOrEqual;
 @synthesize statusEqual = _statusEqual;
+@synthesize statusIn = _statusIn;
 @synthesize serverTypeEqual = _serverTypeEqual;
 
 - (id)init
@@ -38852,6 +38853,7 @@
     self->_updatedAtLessThanOrEqual = KALTURA_UNDEF_INT;
     self->_updatedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
     self->_statusEqual = KALTURA_UNDEF_INT;
+    self->_statusIn = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -38925,6 +38927,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfStatusIn
+{
+    return KFT_Int;
+}
+
 - (KalturaFieldType)getTypeOfServerTypeEqual
 {
     return KFT_String;
@@ -38965,6 +38972,11 @@
     self.statusEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setStatusInFromString:(NSString*)aPropVal
+{
+    self.statusIn = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -38984,6 +38996,7 @@
     [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
     [aParams addIfDefinedKey:@"updatedAtGreaterThanOrEqual" withInt:self.updatedAtGreaterThanOrEqual];
     [aParams addIfDefinedKey:@"statusEqual" withInt:self.statusEqual];
+    [aParams addIfDefinedKey:@"statusIn" withInt:self.statusIn];
     [aParams addIfDefinedKey:@"serverTypeEqual" withString:self.serverTypeEqual];
 }
 
@@ -44577,6 +44590,11 @@
 - (KalturaEntryServerNodeListResponse*)listWithFilter:(KalturaEntryServerNodeFilter*)aFilter
 {
     return [self listWithFilter:aFilter withPager:nil];
+}
+
+- (KalturaEntryServerNodeListResponse*)list
+{
+    return [self listWithFilter:nil];
 }
 
 - (KalturaEntryServerNode*)getWithId:(NSString*)aId
