@@ -3133,29 +3133,6 @@
 @implementation KalturaBulkUploadOrderBy
 @end
 
-@implementation KalturaBulkUploadResultObjectType
-+ (NSString*)ENTRY
-{
-    return @"1";
-}
-+ (NSString*)CATEGORY
-{
-    return @"2";
-}
-+ (NSString*)USER
-{
-    return @"3";
-}
-+ (NSString*)CATEGORY_USER
-{
-    return @"4";
-}
-+ (NSString*)CATEGORY_ENTRY
-{
-    return @"5";
-}
-@end
-
 @implementation KalturaBulkUploadResultStatus
 + (NSString*)ERROR
 {
@@ -11561,6 +11538,7 @@
 @synthesize entitledUsersEdit = _entitledUsersEdit;
 @synthesize entitledUsersPublish = _entitledUsersPublish;
 @synthesize capabilities = _capabilities;
+@synthesize templateEntryId = _templateEntryId;
 
 - (id)init
 {
@@ -11801,6 +11779,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfTemplateEntryId
+{
+    return KFT_String;
+}
+
 - (void)setPartnerIdFromString:(NSString*)aPropVal
 {
     self.partnerId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -11909,6 +11892,7 @@
     [aParams addIfDefinedKey:@"operationAttributes" withArray:self.operationAttributes];
     [aParams addIfDefinedKey:@"entitledUsersEdit" withString:self.entitledUsersEdit];
     [aParams addIfDefinedKey:@"entitledUsersPublish" withString:self.entitledUsersPublish];
+    [aParams addIfDefinedKey:@"templateEntryId" withString:self.templateEntryId];
 }
 
 - (void)dealloc
@@ -11939,6 +11923,7 @@
     [self->_entitledUsersEdit release];
     [self->_entitledUsersPublish release];
     [self->_capabilities release];
+    [self->_templateEntryId release];
     [super dealloc];
 }
 
@@ -28694,6 +28679,8 @@
 @synthesize entitledUsersEdit = _entitledUsersEdit;
 @synthesize entitledUsersPublish = _entitledUsersPublish;
 @synthesize ownerId = _ownerId;
+@synthesize referenceId = _referenceId;
+@synthesize templateEntryId = _templateEntryId;
 
 - (id)init
 {
@@ -28814,6 +28801,16 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfReferenceId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfTemplateEntryId
+{
+    return KFT_String;
+}
+
 - (void)setConversionProfileIdFromString:(NSString*)aPropVal
 {
     self.conversionProfileId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -28870,6 +28867,8 @@
     [aParams addIfDefinedKey:@"entitledUsersEdit" withString:self.entitledUsersEdit];
     [aParams addIfDefinedKey:@"entitledUsersPublish" withString:self.entitledUsersPublish];
     [aParams addIfDefinedKey:@"ownerId" withString:self.ownerId];
+    [aParams addIfDefinedKey:@"referenceId" withString:self.referenceId];
+    [aParams addIfDefinedKey:@"templateEntryId" withString:self.templateEntryId];
 }
 
 - (void)dealloc
@@ -28889,6 +28888,8 @@
     [self->_entitledUsersEdit release];
     [self->_entitledUsersPublish release];
     [self->_ownerId release];
+    [self->_referenceId release];
+    [self->_templateEntryId release];
     [super dealloc];
 }
 

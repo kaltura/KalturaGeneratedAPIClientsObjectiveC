@@ -1282,16 +1282,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaBulkUploadResultObjectType : NSObject
-+ (NSString*)ENTRY;
-+ (NSString*)CATEGORY;
-+ (NSString*)USER;
-+ (NSString*)CATEGORY_USER;
-+ (NSString*)CATEGORY_ENTRY;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaBulkUploadResultStatus : NSObject
 + (NSString*)ERROR;
 + (NSString*)OK;
@@ -4123,6 +4113,8 @@
 @property (nonatomic,copy) NSString* entitledUsersPublish;
 // Comma seperated string of the capabilities of the entry. Any capability needed can be added to this list.
 @property (nonatomic,copy,readonly) NSString* capabilities;
+// Template entry id
+@property (nonatomic,copy) NSString* templateEntryId;	// insertonly
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfName;
 - (KalturaFieldType)getTypeOfDescription;
@@ -4166,6 +4158,7 @@
 - (KalturaFieldType)getTypeOfEntitledUsersEdit;
 - (KalturaFieldType)getTypeOfEntitledUsersPublish;
 - (KalturaFieldType)getTypeOfCapabilities;
+- (KalturaFieldType)getTypeOfTemplateEntryId;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setModerationStatusFromString:(NSString*)aPropVal;
 - (void)setModerationCountFromString:(NSString*)aPropVal;
@@ -4445,7 +4438,7 @@
 @property (nonatomic,copy) NSString* action;	// enum KalturaBulkUploadAction
 @property (nonatomic,copy) NSString* objectId;
 @property (nonatomic,assign) int objectStatus;
-@property (nonatomic,copy) NSString* bulkUploadResultObjectType;	// enum KalturaBulkUploadResultObjectType
+@property (nonatomic,copy) NSString* bulkUploadResultObjectType;	// enum KalturaBulkUploadObjectType
 // The data as recieved in the csv
 @property (nonatomic,copy) NSString* rowData;
 @property (nonatomic,copy) NSString* partnerData;
@@ -8720,6 +8713,8 @@
 @property (nonatomic,copy) NSString* entitledUsersEdit;
 @property (nonatomic,copy) NSString* entitledUsersPublish;
 @property (nonatomic,copy) NSString* ownerId;
+@property (nonatomic,copy) NSString* referenceId;
+@property (nonatomic,copy) NSString* templateEntryId;
 - (KalturaFieldType)getTypeOfEntryId;
 - (KalturaFieldType)getTypeOfTitle;
 - (KalturaFieldType)getTypeOfDescription;
@@ -8741,6 +8736,8 @@
 - (KalturaFieldType)getTypeOfEntitledUsersEdit;
 - (KalturaFieldType)getTypeOfEntitledUsersPublish;
 - (KalturaFieldType)getTypeOfOwnerId;
+- (KalturaFieldType)getTypeOfReferenceId;
+- (KalturaFieldType)getTypeOfTemplateEntryId;
 - (void)setConversionProfileIdFromString:(NSString*)aPropVal;
 - (void)setAccessControlProfileIdFromString:(NSString*)aPropVal;
 - (void)setScheduleStartDateFromString:(NSString*)aPropVal;
