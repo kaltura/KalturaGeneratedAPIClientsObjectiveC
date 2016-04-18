@@ -17629,6 +17629,8 @@
 
 @implementation KalturaLiveEntryRecordingOptions
 @synthesize shouldCopyEntitlement = _shouldCopyEntitlement;
+@synthesize shouldCopyScheduling = _shouldCopyScheduling;
+@synthesize shouldCopyThumbnail = _shouldCopyThumbnail;
 
 - (id)init
 {
@@ -17636,10 +17638,22 @@
     if (self == nil)
         return nil;
     self->_shouldCopyEntitlement = KALTURA_UNDEF_INT;
+    self->_shouldCopyScheduling = KALTURA_UNDEF_INT;
+    self->_shouldCopyThumbnail = KALTURA_UNDEF_INT;
     return self;
 }
 
 - (KalturaFieldType)getTypeOfShouldCopyEntitlement
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfShouldCopyScheduling
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfShouldCopyThumbnail
 {
     return KFT_Int;
 }
@@ -17649,12 +17663,24 @@
     self.shouldCopyEntitlement = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setShouldCopySchedulingFromString:(NSString*)aPropVal
+{
+    self.shouldCopyScheduling = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setShouldCopyThumbnailFromString:(NSString*)aPropVal
+{
+    self.shouldCopyThumbnail = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaLiveEntryRecordingOptions"];
     [aParams addIfDefinedKey:@"shouldCopyEntitlement" withInt:self.shouldCopyEntitlement];
+    [aParams addIfDefinedKey:@"shouldCopyScheduling" withInt:self.shouldCopyScheduling];
+    [aParams addIfDefinedKey:@"shouldCopyThumbnail" withInt:self.shouldCopyThumbnail];
 }
 
 @end

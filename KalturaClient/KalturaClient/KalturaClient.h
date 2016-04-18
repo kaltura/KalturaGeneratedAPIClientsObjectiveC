@@ -5747,8 +5747,14 @@
 // A representation of a live stream recording entry configuration
 @interface KalturaLiveEntryRecordingOptions : KalturaObjectBase
 @property (nonatomic,assign) int shouldCopyEntitlement;	// enum KalturaNullableBoolean
+@property (nonatomic,assign) int shouldCopyScheduling;	// enum KalturaNullableBoolean
+@property (nonatomic,assign) int shouldCopyThumbnail;	// enum KalturaNullableBoolean
 - (KalturaFieldType)getTypeOfShouldCopyEntitlement;
+- (KalturaFieldType)getTypeOfShouldCopyScheduling;
+- (KalturaFieldType)getTypeOfShouldCopyThumbnail;
 - (void)setShouldCopyEntitlementFromString:(NSString*)aPropVal;
+- (void)setShouldCopySchedulingFromString:(NSString*)aPropVal;
+- (void)setShouldCopyThumbnailFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
