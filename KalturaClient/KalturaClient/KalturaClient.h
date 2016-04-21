@@ -6039,6 +6039,8 @@
 @property (nonatomic,copy) NSString* streamPassword;
 // The broadcast username
 @property (nonatomic,copy,readonly) NSString* streamUsername;
+// The Streams primary server node id
+@property (nonatomic,assign,readonly) int primaryServerNodeId;
 - (KalturaFieldType)getTypeOfStreamRemoteId;
 - (KalturaFieldType)getTypeOfStreamRemoteBackupId;
 - (KalturaFieldType)getTypeOfBitrates;
@@ -6055,6 +6057,8 @@
 - (KalturaFieldType)getTypeOfEncodingIP2;
 - (KalturaFieldType)getTypeOfStreamPassword;
 - (KalturaFieldType)getTypeOfStreamUsername;
+- (KalturaFieldType)getTypeOfPrimaryServerNodeId;
+- (void)setPrimaryServerNodeIdFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -13496,6 +13500,9 @@
 - (KalturaLiveStreamEntry*)getWithEntryId:(NSString*)aEntryId withVersion:(int)aVersion;
 - (KalturaLiveStreamEntry*)getWithEntryId:(NSString*)aEntryId;
 // Authenticate live-stream entry against stream token and partner limitations
+- (KalturaLiveStreamEntry*)authenticateWithEntryId:(NSString*)aEntryId withToken:(NSString*)aToken withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex withApplicationName:(NSString*)aApplicationName;
+- (KalturaLiveStreamEntry*)authenticateWithEntryId:(NSString*)aEntryId withToken:(NSString*)aToken withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex;
+- (KalturaLiveStreamEntry*)authenticateWithEntryId:(NSString*)aEntryId withToken:(NSString*)aToken withHostname:(NSString*)aHostname;
 - (KalturaLiveStreamEntry*)authenticateWithEntryId:(NSString*)aEntryId withToken:(NSString*)aToken;
 // Update live stream entry. Only the properties that were set will be updated.
 - (KalturaLiveStreamEntry*)updateWithEntryId:(NSString*)aEntryId withLiveStreamEntry:(KalturaLiveStreamEntry*)aLiveStreamEntry;

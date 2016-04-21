@@ -18626,6 +18626,7 @@
 @property (nonatomic,copy) NSString* streamRemoteId;
 @property (nonatomic,copy) NSString* streamRemoteBackupId;
 @property (nonatomic,copy) NSString* streamUsername;
+@property (nonatomic,assign) int primaryServerNodeId;
 @end
 
 @implementation KalturaLiveStreamEntry
@@ -18644,6 +18645,16 @@
 @synthesize encodingIP2 = _encodingIP2;
 @synthesize streamPassword = _streamPassword;
 @synthesize streamUsername = _streamUsername;
+@synthesize primaryServerNodeId = _primaryServerNodeId;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_primaryServerNodeId = KALTURA_UNDEF_INT;
+    return self;
+}
 
 - (KalturaFieldType)getTypeOfStreamRemoteId
 {
@@ -18723,6 +18734,16 @@
 - (KalturaFieldType)getTypeOfStreamUsername
 {
     return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfPrimaryServerNodeId
+{
+    return KFT_Int;
+}
+
+- (void)setPrimaryServerNodeIdFromString:(NSString*)aPropVal
+{
+    self.primaryServerNodeId = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -45178,11 +45199,29 @@
     return [self getWithEntryId:aEntryId withVersion:KALTURA_UNDEF_INT];
 }
 
-- (KalturaLiveStreamEntry*)authenticateWithEntryId:(NSString*)aEntryId withToken:(NSString*)aToken
+- (KalturaLiveStreamEntry*)authenticateWithEntryId:(NSString*)aEntryId withToken:(NSString*)aToken withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex withApplicationName:(NSString*)aApplicationName
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
     [self.client.params addIfDefinedKey:@"token" withString:aToken];
+    [self.client.params addIfDefinedKey:@"hostname" withString:aHostname];
+    [self.client.params addIfDefinedKey:@"mediaServerIndex" withString:aMediaServerIndex];
+    [self.client.params addIfDefinedKey:@"applicationName" withString:aApplicationName];
     return [self.client queueObjectService:@"livestream" withAction:@"authenticate" withExpectedType:@"KalturaLiveStreamEntry"];
+}
+
+- (KalturaLiveStreamEntry*)authenticateWithEntryId:(NSString*)aEntryId withToken:(NSString*)aToken withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex
+{
+    return [self authenticateWithEntryId:aEntryId withToken:aToken withHostname:aHostname withMediaServerIndex:aMediaServerIndex withApplicationName:nil];
+}
+
+- (KalturaLiveStreamEntry*)authenticateWithEntryId:(NSString*)aEntryId withToken:(NSString*)aToken withHostname:(NSString*)aHostname
+{
+    return [self authenticateWithEntryId:aEntryId withToken:aToken withHostname:aHostname withMediaServerIndex:nil];
+}
+
+- (KalturaLiveStreamEntry*)authenticateWithEntryId:(NSString*)aEntryId withToken:(NSString*)aToken
+{
+    return [self authenticateWithEntryId:aEntryId withToken:aToken withHostname:nil];
 }
 
 - (KalturaLiveStreamEntry*)updateWithEntryId:(NSString*)aEntryId withLiveStreamEntry:(KalturaLiveStreamEntry*)aLiveStreamEntry
