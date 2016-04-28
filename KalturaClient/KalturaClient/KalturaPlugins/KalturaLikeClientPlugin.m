@@ -119,6 +119,7 @@
 
 @implementation KalturaLikeBaseFilter
 @synthesize entryIdEqual = _entryIdEqual;
+@synthesize entryIdIn = _entryIdIn;
 @synthesize userIdEqual = _userIdEqual;
 @synthesize createdAtGreaterThanOrEqual = _createdAtGreaterThanOrEqual;
 @synthesize createdAtLessThanOrEqual = _createdAtLessThanOrEqual;
@@ -134,6 +135,11 @@
 }
 
 - (KalturaFieldType)getTypeOfEntryIdEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEntryIdIn
 {
     return KFT_String;
 }
@@ -169,6 +175,7 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaLikeBaseFilter"];
     [aParams addIfDefinedKey:@"entryIdEqual" withString:self.entryIdEqual];
+    [aParams addIfDefinedKey:@"entryIdIn" withString:self.entryIdIn];
     [aParams addIfDefinedKey:@"userIdEqual" withString:self.userIdEqual];
     [aParams addIfDefinedKey:@"createdAtGreaterThanOrEqual" withInt:self.createdAtGreaterThanOrEqual];
     [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
@@ -177,6 +184,7 @@
 - (void)dealloc
 {
     [self->_entryIdEqual release];
+    [self->_entryIdIn release];
     [self->_userIdEqual release];
     [super dealloc];
 }

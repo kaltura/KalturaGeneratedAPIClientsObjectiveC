@@ -63,10 +63,12 @@
 // @subpackage Client
 @interface KalturaLikeBaseFilter : KalturaRelatedFilter
 @property (nonatomic,copy) NSString* entryIdEqual;
+@property (nonatomic,copy) NSString* entryIdIn;
 @property (nonatomic,copy) NSString* userIdEqual;
 @property (nonatomic,assign) int createdAtGreaterThanOrEqual;
 @property (nonatomic,assign) int createdAtLessThanOrEqual;
 - (KalturaFieldType)getTypeOfEntryIdEqual;
+- (KalturaFieldType)getTypeOfEntryIdIn;
 - (KalturaFieldType)getTypeOfUserIdEqual;
 - (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
 - (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual;

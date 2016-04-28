@@ -56,6 +56,13 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaScheduleEventType : NSObject
++ (int)RECORD;
++ (int)LIVE_STREAM;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaScheduleResourceStatus : NSObject
 + (int)DISABLED;
 + (int)ACTIVE;

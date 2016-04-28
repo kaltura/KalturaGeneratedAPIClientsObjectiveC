@@ -73,6 +73,17 @@
 }
 @end
 
+@implementation KalturaScheduleEventType
++ (int)RECORD
+{
+    return 1;
+}
++ (int)LIVE_STREAM
+{
+    return 2;
+}
+@end
+
 @implementation KalturaScheduleResourceStatus
 + (int)DISABLED
 {

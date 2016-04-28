@@ -5559,6 +5559,7 @@
 @property (nonatomic,assign) int videoConstantBitrate;
 @property (nonatomic,assign) int videoBitrateTolerance;
 @property (nonatomic,copy) NSString* watermarkData;
+@property (nonatomic,copy) NSString* subtitlesData;
 @property (nonatomic,assign) int isEncrypted;
 @property (nonatomic,assign) int clipOffset;
 @property (nonatomic,assign) int clipDuration;
@@ -5595,6 +5596,7 @@
 - (KalturaFieldType)getTypeOfVideoConstantBitrate;
 - (KalturaFieldType)getTypeOfVideoBitrateTolerance;
 - (KalturaFieldType)getTypeOfWatermarkData;
+- (KalturaFieldType)getTypeOfSubtitlesData;
 - (KalturaFieldType)getTypeOfIsEncrypted;
 - (KalturaFieldType)getTypeOfClipOffset;
 - (KalturaFieldType)getTypeOfClipDuration;

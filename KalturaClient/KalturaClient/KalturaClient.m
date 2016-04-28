@@ -16777,6 +16777,7 @@
 @synthesize videoConstantBitrate = _videoConstantBitrate;
 @synthesize videoBitrateTolerance = _videoBitrateTolerance;
 @synthesize watermarkData = _watermarkData;
+@synthesize subtitlesData = _subtitlesData;
 @synthesize isEncrypted = _isEncrypted;
 @synthesize clipOffset = _clipOffset;
 @synthesize clipDuration = _clipDuration;
@@ -16982,6 +16983,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfSubtitlesData
+{
+    return KFT_String;
+}
+
 - (KalturaFieldType)getTypeOfIsEncrypted
 {
     return KFT_Int;
@@ -17175,6 +17181,7 @@
     [aParams addIfDefinedKey:@"videoConstantBitrate" withInt:self.videoConstantBitrate];
     [aParams addIfDefinedKey:@"videoBitrateTolerance" withInt:self.videoBitrateTolerance];
     [aParams addIfDefinedKey:@"watermarkData" withString:self.watermarkData];
+    [aParams addIfDefinedKey:@"subtitlesData" withString:self.subtitlesData];
     [aParams addIfDefinedKey:@"isEncrypted" withInt:self.isEncrypted];
     [aParams addIfDefinedKey:@"clipOffset" withInt:self.clipOffset];
     [aParams addIfDefinedKey:@"clipDuration" withInt:self.clipDuration];
@@ -17190,6 +17197,7 @@
     [self->_format release];
     [self->_multiStream release];
     [self->_watermarkData release];
+    [self->_subtitlesData release];
     [super dealloc];
 }
 

@@ -53,7 +53,7 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaShortLink : KalturaObjectBase
-@property (nonatomic,assign,readonly) int id;
+@property (nonatomic,copy,readonly) NSString* id;
 @property (nonatomic,assign,readonly) int createdAt;
 @property (nonatomic,assign,readonly) int updatedAt;
 @property (nonatomic,assign) int expiresAt;
@@ -73,7 +73,6 @@
 - (KalturaFieldType)getTypeOfSystemName;
 - (KalturaFieldType)getTypeOfFullUrl;
 - (KalturaFieldType)getTypeOfStatus;
-- (void)setIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
 - (void)setExpiresAtFromString:(NSString*)aPropVal;

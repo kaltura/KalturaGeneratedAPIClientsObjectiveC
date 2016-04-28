@@ -72,7 +72,7 @@
 
 ///////////////////////// classes /////////////////////////
 @interface KalturaShortLink()
-@property (nonatomic,assign) int id;
+@property (nonatomic,copy) NSString* id;
 @property (nonatomic,assign) int createdAt;
 @property (nonatomic,assign) int updatedAt;
 @property (nonatomic,assign) int partnerId;
@@ -95,7 +95,6 @@
     self = [super init];
     if (self == nil)
         return nil;
-    self->_id = KALTURA_UNDEF_INT;
     self->_createdAt = KALTURA_UNDEF_INT;
     self->_updatedAt = KALTURA_UNDEF_INT;
     self->_expiresAt = KALTURA_UNDEF_INT;
@@ -106,7 +105,7 @@
 
 - (KalturaFieldType)getTypeOfId
 {
-    return KFT_Int;
+    return KFT_String;
 }
 
 - (KalturaFieldType)getTypeOfCreatedAt
@@ -154,11 +153,6 @@
     return KFT_Int;
 }
 
-- (void)setIdFromString:(NSString*)aPropVal
-{
-    self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
 - (void)setCreatedAtFromString:(NSString*)aPropVal
 {
     self.createdAt = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -199,6 +193,7 @@
 
 - (void)dealloc
 {
+    [self->_id release];
     [self->_userId release];
     [self->_name release];
     [self->_systemName release];
