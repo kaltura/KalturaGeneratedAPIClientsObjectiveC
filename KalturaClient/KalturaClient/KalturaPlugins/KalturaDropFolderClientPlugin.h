@@ -116,6 +116,7 @@
 // @subpackage Client
 @interface KalturaDropFolderFileHandlerType : NSObject
 + (NSString*)XML;
++ (NSString*)ICAL;
 + (NSString*)CONTENT;
 @end
 

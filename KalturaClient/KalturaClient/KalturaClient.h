@@ -1257,6 +1257,7 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaBulkUploadAction : NSObject
++ (NSString*)CANCEL;
 + (NSString*)ADD;
 + (NSString*)UPDATE;
 + (NSString*)DELETE;
@@ -1268,6 +1269,8 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaBulkUploadObjectType : NSObject
++ (NSString*)SCHEDULE_EVENT;
++ (NSString*)SCHEDULE_RESOURCE;
 + (NSString*)ENTRY;
 + (NSString*)CATEGORY;
 + (NSString*)USER;
@@ -1295,6 +1298,8 @@
 + (NSString*)FILTER;
 + (NSString*)XML;
 + (NSString*)DROP_FOLDER_XML;
++ (NSString*)ICAL;
++ (NSString*)DROP_FOLDER_ICAL;
 @end
 
 // @package Kaltura

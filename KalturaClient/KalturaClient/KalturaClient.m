@@ -3081,6 +3081,10 @@
 @end
 
 @implementation KalturaBulkUploadAction
++ (NSString*)CANCEL
+{
+    return @"scheduleBulkUpload.CANCEL";
+}
 + (NSString*)ADD
 {
     return @"1";
@@ -3108,6 +3112,14 @@
 @end
 
 @implementation KalturaBulkUploadObjectType
++ (NSString*)SCHEDULE_EVENT
+{
+    return @"scheduleBulkUpload.SCHEDULE_EVENT";
+}
++ (NSString*)SCHEDULE_RESOURCE
+{
+    return @"scheduleBulkUpload.SCHEDULE_RESOURCE";
+}
 + (NSString*)ENTRY
 {
     return @"1";
@@ -3164,6 +3176,14 @@
 + (NSString*)DROP_FOLDER_XML
 {
     return @"dropFolderXmlBulkUpload.DROP_FOLDER_XML";
+}
++ (NSString*)ICAL
+{
+    return @"scheduleBulkUpload.ICAL";
+}
++ (NSString*)DROP_FOLDER_ICAL
+{
+    return @"scheduleDropFolder.DROP_FOLDER_ICAL";
 }
 @end
 

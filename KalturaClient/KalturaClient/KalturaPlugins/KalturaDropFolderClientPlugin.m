@@ -255,6 +255,10 @@
 {
     return @"dropFolderXmlBulkUpload.XML";
 }
++ (NSString*)ICAL
+{
+    return @"scheduleDropFolder.ICAL";
+}
 + (NSString*)CONTENT
 {
     return @"1";

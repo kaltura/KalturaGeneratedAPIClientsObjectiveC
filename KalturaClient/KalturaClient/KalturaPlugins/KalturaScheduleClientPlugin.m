@@ -2307,6 +2307,18 @@
     return [self listWithFilter:nil];
 }
 
+- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadICalJobData*)aBulkUploadData
+{
+    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
+    [self.client.params addIfDefinedKey:@"bulkUploadData" withObject:aBulkUploadData];
+    return [self.client queueObjectService:@"schedule_scheduleevent" withAction:@"addFromBulkUpload" withExpectedType:@"KalturaBulkUpload"];
+}
+
+- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData
+{
+    return [self addFromBulkUploadWithFileData:aFileData withBulkUploadData:nil];
+}
+
 @end
 
 @implementation KalturaScheduleResourceService
@@ -2350,6 +2362,18 @@
 - (KalturaScheduleResourceListResponse*)list
 {
     return [self listWithFilter:nil];
+}
+
+- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadCsvJobData*)aBulkUploadData
+{
+    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
+    [self.client.params addIfDefinedKey:@"bulkUploadData" withObject:aBulkUploadData];
+    return [self.client queueObjectService:@"schedule_scheduleresource" withAction:@"addFromBulkUpload" withExpectedType:@"KalturaBulkUpload"];
+}
+
+- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData
+{
+    return [self addFromBulkUploadWithFileData:aFileData withBulkUploadData:nil];
 }
 
 @end

@@ -745,6 +745,9 @@
 - (KalturaScheduleEventListResponse*)listWithFilter:(KalturaScheduleEventFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaScheduleEventListResponse*)listWithFilter:(KalturaScheduleEventFilter*)aFilter;
 - (KalturaScheduleEventListResponse*)list;
+// Add new bulk upload batch job
+- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadICalJobData*)aBulkUploadData;
+- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData;
 @end
 
 // @package Kaltura
@@ -763,6 +766,9 @@
 - (KalturaScheduleResourceListResponse*)listWithFilter:(KalturaScheduleResourceFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaScheduleResourceListResponse*)listWithFilter:(KalturaScheduleResourceFilter*)aFilter;
 - (KalturaScheduleResourceListResponse*)list;
+// Add new bulk upload batch job
+- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadCsvJobData*)aBulkUploadData;
+- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData;
 @end
 
 // @package Kaltura
