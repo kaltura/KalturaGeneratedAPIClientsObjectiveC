@@ -3752,6 +3752,8 @@
 @property (nonatomic,retain) NSMutableArray* contexts;	// of KalturaContextTypeHolder elements
 // Indicates that this rule is enough and no need to continue checking the rest of the rules
 @property (nonatomic,assign) KALTURA_BOOL stopProcessing;
+// Indicates if we should force ks validation for admin ks users as well
+@property (nonatomic,assign) int forceAdminValidation;	// enum KalturaNullableBoolean
 - (KalturaFieldType)getTypeOfDescription;
 - (KalturaFieldType)getTypeOfRuleData;
 - (KalturaFieldType)getTypeOfMessage;
@@ -3762,7 +3764,9 @@
 - (KalturaFieldType)getTypeOfContexts;
 - (NSString*)getObjectTypeOfContexts;
 - (KalturaFieldType)getTypeOfStopProcessing;
+- (KalturaFieldType)getTypeOfForceAdminValidation;
 - (void)setStopProcessingFromString:(NSString*)aPropVal;
+- (void)setForceAdminValidationFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -3839,6 +3843,42 @@
 - (KalturaFieldType)getTypeOfHashes;
 - (NSString*)getObjectTypeOfHashes;
 - (void)setTimeFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaReportFilter : KalturaObjectBase
+// The dimension whose values should be filtered
+@property (nonatomic,copy) NSString* dimension;
+// The (comma separated) values to include in the filter
+@property (nonatomic,copy) NSString* values;
+- (KalturaFieldType)getTypeOfDimension;
+- (KalturaFieldType)getTypeOfValues;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaAnalyticsFilter : KalturaObjectBase
+// Query start time (in local time)
+@property (nonatomic,copy) NSString* from_time;
+// Query end time (in local time)
+@property (nonatomic,copy) NSString* to_time;
+// Comma separated metrics list
+@property (nonatomic,copy) NSString* metrics;
+// Timezone offset from UTC (in minutes)
+@property (nonatomic,assign) double utcOffset;
+// Comma separated dimensions list
+@property (nonatomic,copy) NSString* dimensions;
+// Array of filters
+@property (nonatomic,retain) NSMutableArray* filters;	// of KalturaReportFilter elements
+- (KalturaFieldType)getTypeOfFrom_time;
+- (KalturaFieldType)getTypeOfTo_time;
+- (KalturaFieldType)getTypeOfMetrics;
+- (KalturaFieldType)getTypeOfUtcOffset;
+- (KalturaFieldType)getTypeOfDimensions;
+- (KalturaFieldType)getTypeOfFilters;
+- (NSString*)getObjectTypeOfFilters;
+- (void)setUtcOffsetFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -10704,6 +10744,14 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaUrlTokenizerVnpt : KalturaUrlTokenizer
+@property (nonatomic,assign) int tokenizationFormat;
+- (KalturaFieldType)getTypeOfTokenizationFormat;
+- (void)setTokenizationFormatFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaUserAgentRestriction : KalturaBaseRestriction
 // User agent restriction type (Allow or deny)
 @property (nonatomic,assign) int userAgentRestrictionType;	// enum KalturaUserAgentRestrictionType
@@ -11349,46 +11397,32 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaEntryServerNodeBaseFilter : KalturaRelatedFilter
-@property (nonatomic,assign) int idEqual;
-@property (nonatomic,copy) NSString* idIn;
-@property (nonatomic,copy) NSString* idNotIn;
 @property (nonatomic,copy) NSString* entryIdEqual;
 @property (nonatomic,copy) NSString* entryIdIn;
-@property (nonatomic,copy) NSString* entryIdNotIn;
 @property (nonatomic,assign) int serverNodeIdEqual;
-@property (nonatomic,copy) NSString* serverNodeIdIn;
-@property (nonatomic,copy) NSString* serverNodeIdNotIn;
-@property (nonatomic,assign) int createdAtLessThanOrEqual;
 @property (nonatomic,assign) int createdAtGreaterThanOrEqual;
-@property (nonatomic,assign) int updatedAtLessThanOrEqual;
+@property (nonatomic,assign) int createdAtLessThanOrEqual;
 @property (nonatomic,assign) int updatedAtGreaterThanOrEqual;
+@property (nonatomic,assign) int updatedAtLessThanOrEqual;
 @property (nonatomic,assign) int statusEqual;	// enum KalturaEntryServerNodeStatus
-@property (nonatomic,assign) int statusIn;	// enum KalturaEntryServerNodeStatus
+@property (nonatomic,copy) NSString* statusIn;
 @property (nonatomic,copy) NSString* serverTypeEqual;	// enum KalturaEntryServerNodeType
-- (KalturaFieldType)getTypeOfIdEqual;
-- (KalturaFieldType)getTypeOfIdIn;
-- (KalturaFieldType)getTypeOfIdNotIn;
 - (KalturaFieldType)getTypeOfEntryIdEqual;
 - (KalturaFieldType)getTypeOfEntryIdIn;
-- (KalturaFieldType)getTypeOfEntryIdNotIn;
 - (KalturaFieldType)getTypeOfServerNodeIdEqual;
-- (KalturaFieldType)getTypeOfServerNodeIdIn;
-- (KalturaFieldType)getTypeOfServerNodeIdNotIn;
-- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual;
 - (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual;
 - (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
 - (KalturaFieldType)getTypeOfStatusEqual;
 - (KalturaFieldType)getTypeOfStatusIn;
 - (KalturaFieldType)getTypeOfServerTypeEqual;
-- (void)setIdEqualFromString:(NSString*)aPropVal;
 - (void)setServerNodeIdEqualFromString:(NSString*)aPropVal;
-- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setStatusEqualFromString:(NSString*)aPropVal;
-- (void)setStatusInFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -11812,11 +11846,6 @@
 @property (nonatomic,retain) NSMutableArray* resources;	// of KalturaRemoteStorageResource elements
 - (KalturaFieldType)getTypeOfResources;
 - (NSString*)getObjectTypeOfResources;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaReportFilter : KalturaReportBaseFilter
 @end
 
 // @package Kaltura
@@ -13004,6 +13033,14 @@
 - (NSString*)loginWithEmail:(NSString*)aEmail withPassword:(NSString*)aPassword;
 // Set initial users password
 - (void)setInitialPasswordWithHashKey:(NSString*)aHashKey withNewPassword:(NSString*)aNewPassword;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// api for getting analytics data
+@interface KalturaAnalyticsService : KalturaServiceBase
+// report query action allows to get a analytics data for specific query dimensions, metrics and filters.
+- (KalturaReportResponse*)queryWithFilter:(KalturaAnalyticsFilter*)aFilter;
 @end
 
 // @package Kaltura
@@ -14339,6 +14376,7 @@
 	KalturaAccessControlProfileService* _accessControlProfile;
 	KalturaAccessControlService* _accessControl;
 	KalturaAdminUserService* _adminUser;
+	KalturaAnalyticsService* _analytics;
 	KalturaAppTokenService* _appToken;
 	KalturaBaseEntryService* _baseEntry;
 	KalturaBulkUploadService* _bulkUpload;
@@ -14395,6 +14433,7 @@
 @property (nonatomic, readonly) KalturaAccessControlProfileService* accessControlProfile;
 @property (nonatomic, readonly) KalturaAccessControlService* accessControl;
 @property (nonatomic, readonly) KalturaAdminUserService* adminUser;
+@property (nonatomic, readonly) KalturaAnalyticsService* analytics;
 @property (nonatomic, readonly) KalturaAppTokenService* appToken;
 @property (nonatomic, readonly) KalturaBaseEntryService* baseEntry;
 @property (nonatomic, readonly) KalturaBulkUploadService* bulkUpload;

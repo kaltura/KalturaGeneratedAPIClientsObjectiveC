@@ -10516,6 +10516,7 @@
 @synthesize conditions = _conditions;
 @synthesize contexts = _contexts;
 @synthesize stopProcessing = _stopProcessing;
+@synthesize forceAdminValidation = _forceAdminValidation;
 
 - (id)init
 {
@@ -10523,6 +10524,7 @@
     if (self == nil)
         return nil;
     self->_stopProcessing = KALTURA_UNDEF_BOOL;
+    self->_forceAdminValidation = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -10576,9 +10578,19 @@
     return KFT_Bool;
 }
 
+- (KalturaFieldType)getTypeOfForceAdminValidation
+{
+    return KFT_Int;
+}
+
 - (void)setStopProcessingFromString:(NSString*)aPropVal
 {
     self.stopProcessing = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)setForceAdminValidationFromString:(NSString*)aPropVal
+{
+    self.forceAdminValidation = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -10593,6 +10605,7 @@
     [aParams addIfDefinedKey:@"conditions" withArray:self.conditions];
     [aParams addIfDefinedKey:@"contexts" withArray:self.contexts];
     [aParams addIfDefinedKey:@"stopProcessing" withBool:self.stopProcessing];
+    [aParams addIfDefinedKey:@"forceAdminValidation" withInt:self.forceAdminValidation];
 }
 
 - (void)dealloc
@@ -10859,6 +10872,120 @@
     [self->_userAgent release];
     [self->_contexts release];
     [self->_hashes release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaReportFilter
+@synthesize dimension = _dimension;
+@synthesize values = _values;
+
+- (KalturaFieldType)getTypeOfDimension
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfValues
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaReportFilter"];
+    [aParams addIfDefinedKey:@"dimension" withString:self.dimension];
+    [aParams addIfDefinedKey:@"values" withString:self.values];
+}
+
+- (void)dealloc
+{
+    [self->_dimension release];
+    [self->_values release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaAnalyticsFilter
+@synthesize from_time = _from_time;
+@synthesize to_time = _to_time;
+@synthesize metrics = _metrics;
+@synthesize utcOffset = _utcOffset;
+@synthesize dimensions = _dimensions;
+@synthesize filters = _filters;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_utcOffset = KALTURA_UNDEF_FLOAT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfFrom_time
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfTo_time
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfMetrics
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfUtcOffset
+{
+    return KFT_Float;
+}
+
+- (KalturaFieldType)getTypeOfDimensions
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfFilters
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfFilters
+{
+    return @"KalturaReportFilter";
+}
+
+- (void)setUtcOffsetFromString:(NSString*)aPropVal
+{
+    self.utcOffset = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaAnalyticsFilter"];
+    [aParams addIfDefinedKey:@"from_time" withString:self.from_time];
+    [aParams addIfDefinedKey:@"to_time" withString:self.to_time];
+    [aParams addIfDefinedKey:@"metrics" withString:self.metrics];
+    [aParams addIfDefinedKey:@"utcOffset" withFloat:self.utcOffset];
+    [aParams addIfDefinedKey:@"dimensions" withString:self.dimensions];
+    [aParams addIfDefinedKey:@"filters" withArray:self.filters];
+}
+
+- (void)dealloc
+{
+    [self->_from_time release];
+    [self->_to_time release];
+    [self->_metrics release];
+    [self->_dimensions release];
+    [self->_filters release];
     [super dealloc];
 }
 
@@ -36370,6 +36497,38 @@
 
 @end
 
+@implementation KalturaUrlTokenizerVnpt
+@synthesize tokenizationFormat = _tokenizationFormat;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_tokenizationFormat = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfTokenizationFormat
+{
+    return KFT_Int;
+}
+
+- (void)setTokenizationFormatFromString:(NSString*)aPropVal
+{
+    self.tokenizationFormat = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaUrlTokenizerVnpt"];
+    [aParams addIfDefinedKey:@"tokenizationFormat" withInt:self.tokenizationFormat];
+}
+
+@end
+
 @implementation KalturaUserAgentRestriction
 @synthesize userAgentRestrictionType = _userAgentRestrictionType;
 @synthesize userAgentRegexList = _userAgentRegexList;
@@ -38900,19 +39059,13 @@
 @end
 
 @implementation KalturaEntryServerNodeBaseFilter
-@synthesize idEqual = _idEqual;
-@synthesize idIn = _idIn;
-@synthesize idNotIn = _idNotIn;
 @synthesize entryIdEqual = _entryIdEqual;
 @synthesize entryIdIn = _entryIdIn;
-@synthesize entryIdNotIn = _entryIdNotIn;
 @synthesize serverNodeIdEqual = _serverNodeIdEqual;
-@synthesize serverNodeIdIn = _serverNodeIdIn;
-@synthesize serverNodeIdNotIn = _serverNodeIdNotIn;
-@synthesize createdAtLessThanOrEqual = _createdAtLessThanOrEqual;
 @synthesize createdAtGreaterThanOrEqual = _createdAtGreaterThanOrEqual;
-@synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
+@synthesize createdAtLessThanOrEqual = _createdAtLessThanOrEqual;
 @synthesize updatedAtGreaterThanOrEqual = _updatedAtGreaterThanOrEqual;
+@synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
 @synthesize statusEqual = _statusEqual;
 @synthesize statusIn = _statusIn;
 @synthesize serverTypeEqual = _serverTypeEqual;
@@ -38922,30 +39075,13 @@
     self = [super init];
     if (self == nil)
         return nil;
-    self->_idEqual = KALTURA_UNDEF_INT;
     self->_serverNodeIdEqual = KALTURA_UNDEF_INT;
-    self->_createdAtLessThanOrEqual = KALTURA_UNDEF_INT;
     self->_createdAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_updatedAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_createdAtLessThanOrEqual = KALTURA_UNDEF_INT;
     self->_updatedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_updatedAtLessThanOrEqual = KALTURA_UNDEF_INT;
     self->_statusEqual = KALTURA_UNDEF_INT;
-    self->_statusIn = KALTURA_UNDEF_INT;
     return self;
-}
-
-- (KalturaFieldType)getTypeOfIdEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfIdIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfIdNotIn
-{
-    return KFT_String;
 }
 
 - (KalturaFieldType)getTypeOfEntryIdEqual
@@ -38958,27 +39094,7 @@
     return KFT_String;
 }
 
-- (KalturaFieldType)getTypeOfEntryIdNotIn
-{
-    return KFT_String;
-}
-
 - (KalturaFieldType)getTypeOfServerNodeIdEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfServerNodeIdIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfServerNodeIdNotIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual
 {
     return KFT_Int;
 }
@@ -38988,12 +39104,17 @@
     return KFT_Int;
 }
 
-- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual
+- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual
 {
     return KFT_Int;
 }
 
 - (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual
 {
     return KFT_Int;
 }
@@ -39005,7 +39126,7 @@
 
 - (KalturaFieldType)getTypeOfStatusIn
 {
-    return KFT_Int;
+    return KFT_String;
 }
 
 - (KalturaFieldType)getTypeOfServerTypeEqual
@@ -39013,19 +39134,9 @@
     return KFT_String;
 }
 
-- (void)setIdEqualFromString:(NSString*)aPropVal
-{
-    self.idEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
 - (void)setServerNodeIdEqualFromString:(NSString*)aPropVal
 {
     self.serverNodeIdEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.createdAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
@@ -39033,9 +39144,9 @@
     self.createdAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
-- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal
+- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal
 {
-    self.updatedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+    self.createdAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
@@ -39043,14 +39154,14 @@
     self.updatedAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.updatedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)setStatusEqualFromString:(NSString*)aPropVal
 {
     self.statusEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setStatusInFromString:(NSString*)aPropVal
-{
-    self.statusIn = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -39058,33 +39169,23 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaEntryServerNodeBaseFilter"];
-    [aParams addIfDefinedKey:@"idEqual" withInt:self.idEqual];
-    [aParams addIfDefinedKey:@"idIn" withString:self.idIn];
-    [aParams addIfDefinedKey:@"idNotIn" withString:self.idNotIn];
     [aParams addIfDefinedKey:@"entryIdEqual" withString:self.entryIdEqual];
     [aParams addIfDefinedKey:@"entryIdIn" withString:self.entryIdIn];
-    [aParams addIfDefinedKey:@"entryIdNotIn" withString:self.entryIdNotIn];
     [aParams addIfDefinedKey:@"serverNodeIdEqual" withInt:self.serverNodeIdEqual];
-    [aParams addIfDefinedKey:@"serverNodeIdIn" withString:self.serverNodeIdIn];
-    [aParams addIfDefinedKey:@"serverNodeIdNotIn" withString:self.serverNodeIdNotIn];
-    [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
     [aParams addIfDefinedKey:@"createdAtGreaterThanOrEqual" withInt:self.createdAtGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
+    [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
     [aParams addIfDefinedKey:@"updatedAtGreaterThanOrEqual" withInt:self.updatedAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
     [aParams addIfDefinedKey:@"statusEqual" withInt:self.statusEqual];
-    [aParams addIfDefinedKey:@"statusIn" withInt:self.statusIn];
+    [aParams addIfDefinedKey:@"statusIn" withString:self.statusIn];
     [aParams addIfDefinedKey:@"serverTypeEqual" withString:self.serverTypeEqual];
 }
 
 - (void)dealloc
 {
-    [self->_idIn release];
-    [self->_idNotIn release];
     [self->_entryIdEqual release];
     [self->_entryIdIn release];
-    [self->_entryIdNotIn release];
-    [self->_serverNodeIdIn release];
-    [self->_serverNodeIdNotIn release];
+    [self->_statusIn release];
     [self->_serverTypeEqual release];
     [super dealloc];
 }
@@ -40663,16 +40764,6 @@
 {
     [self->_resources release];
     [super dealloc];
-}
-
-@end
-
-@implementation KalturaReportFilter
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaReportFilter"];
 }
 
 @end
@@ -43771,6 +43862,15 @@
     [self.client.params addIfDefinedKey:@"hashKey" withString:aHashKey];
     [self.client.params addIfDefinedKey:@"newPassword" withString:aNewPassword];
     [self.client queueVoidService:@"adminuser" withAction:@"setInitialPassword"];
+}
+
+@end
+
+@implementation KalturaAnalyticsService
+- (KalturaReportResponse*)queryWithFilter:(KalturaAnalyticsFilter*)aFilter
+{
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    return [self.client queueObjectService:@"analytics" withAction:@"query" withExpectedType:@"KalturaReportResponse"];
 }
 
 @end
@@ -47632,6 +47732,13 @@
     return self->_adminUser;
 }
 
+- (KalturaAnalyticsService*)analytics
+{
+    if (self->_analytics == nil)
+    	self->_analytics = [[KalturaAnalyticsService alloc] initWithClient:self];
+    return self->_analytics;
+}
+
 - (KalturaAppTokenService*)appToken
 {
     if (self->_appToken == nil)
@@ -47994,6 +48101,7 @@
     [self->_accessControlProfile release];
     [self->_accessControl release];
     [self->_adminUser release];
+    [self->_analytics release];
     [self->_appToken release];
     [self->_baseEntry release];
     [self->_bulkUpload release];
