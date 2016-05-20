@@ -4322,6 +4322,13 @@
     return self->_genericDistributionProviderAction;
 }
 
+- (KalturaContentDistributionBatchService*)contentDistributionBatch
+{
+    if (self->_contentDistributionBatch == nil)
+    	self->_contentDistributionBatch = [[KalturaContentDistributionBatchService alloc] initWithClient:self.client];
+    return self->_contentDistributionBatch;
+}
+
 - (void)dealloc
 {
     [self->_distributionProfile release];
@@ -4329,6 +4336,7 @@
     [self->_distributionProvider release];
     [self->_genericDistributionProvider release];
     [self->_genericDistributionProviderAction release];
+    [self->_contentDistributionBatch release];
 	[super dealloc];
 }
 

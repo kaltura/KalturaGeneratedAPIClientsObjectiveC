@@ -849,9 +849,17 @@
     return self->_cuePoint;
 }
 
+- (KalturaLiveCuePointService*)liveCuePoint
+{
+    if (self->_liveCuePoint == nil)
+    	self->_liveCuePoint = [[KalturaLiveCuePointService alloc] initWithClient:self.client];
+    return self->_liveCuePoint;
+}
+
 - (void)dealloc
 {
     [self->_cuePoint release];
+    [self->_liveCuePoint release];
 	[super dealloc];
 }
 

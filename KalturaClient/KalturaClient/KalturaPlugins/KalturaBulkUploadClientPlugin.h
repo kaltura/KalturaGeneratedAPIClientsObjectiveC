@@ -31,6 +31,13 @@
 
 ///////////////////////// enums /////////////////////////
 ///////////////////////// classes /////////////////////////
+// @package Kaltura
+// @subpackage Client
+// This class represents object-specific data passed to the 
+//  bulk upload job.
+@interface KalturaBulkServiceData : KalturaObjectBase
+@end
+
 ///////////////////////// services /////////////////////////
 // @package Kaltura
 // @subpackage Client

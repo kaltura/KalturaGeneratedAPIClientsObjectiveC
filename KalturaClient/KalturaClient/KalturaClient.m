@@ -80,33 +80,6 @@
 }
 @end
 
-@implementation KalturaAssetStatus
-+ (int)ERROR
-{
-    return -1;
-}
-+ (int)QUEUED
-{
-    return 0;
-}
-+ (int)READY
-{
-    return 2;
-}
-+ (int)DELETED
-{
-    return 3;
-}
-+ (int)IMPORTING
-{
-    return 7;
-}
-+ (int)EXPORTING
-{
-    return 9;
-}
-@end
-
 @implementation KalturaBatchJobErrorTypes
 + (int)APP
 {
@@ -1777,25 +1750,6 @@
 + (int)MANUAL
 {
     return 3;
-}
-@end
-
-@implementation KalturaStorageServePriority
-+ (int)KALTURA_ONLY
-{
-    return 1;
-}
-+ (int)KALTURA_FIRST
-{
-    return 2;
-}
-+ (int)EXTERNAL_FIRST
-{
-    return 3;
-}
-+ (int)EXTERNAL_ONLY
-{
-    return 4;
 }
 @end
 
@@ -4376,9 +4330,6 @@
 {
     return @"short";
 }
-@end
-
-@implementation KalturaDynamicEnum
 @end
 
 @implementation KalturaEdgeServerNodeOrderBy
@@ -12356,6 +12307,16 @@
 
 @end
 
+@implementation KalturaJobData
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaJobData"];
+}
+
+@end
+
 @implementation KalturaBatchHistoryData
 @synthesize schedulerId = _schedulerId;
 @synthesize workerId = _workerId;
@@ -12478,16 +12439,6 @@
     [self->_hostName release];
     [self->_sessionId release];
     [super dealloc];
-}
-
-@end
-
-@implementation KalturaJobData
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaJobData"];
 }
 
 @end
@@ -12979,6 +12930,773 @@
     [self->_history release];
     [self->_jobObjectId release];
     [super dealloc];
+}
+
+@end
+
+@implementation KalturaPlayerDeliveryType
+@synthesize id = _id;
+@synthesize label = _label;
+@synthesize flashvars = _flashvars;
+@synthesize minVersion = _minVersion;
+@synthesize enabledByDefault = _enabledByDefault;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_enabledByDefault = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfLabel
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfFlashvars
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfFlashvars
+{
+    return @"KalturaKeyValue";
+}
+
+- (KalturaFieldType)getTypeOfMinVersion
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEnabledByDefault
+{
+    return KFT_Bool;
+}
+
+- (void)setEnabledByDefaultFromString:(NSString*)aPropVal
+{
+    self.enabledByDefault = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaPlayerDeliveryType"];
+    [aParams addIfDefinedKey:@"id" withString:self.id];
+    [aParams addIfDefinedKey:@"label" withString:self.label];
+    [aParams addIfDefinedKey:@"flashvars" withArray:self.flashvars];
+    [aParams addIfDefinedKey:@"minVersion" withString:self.minVersion];
+    [aParams addIfDefinedKey:@"enabledByDefault" withBool:self.enabledByDefault];
+}
+
+- (void)dealloc
+{
+    [self->_id release];
+    [self->_label release];
+    [self->_flashvars release];
+    [self->_minVersion release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaPlayerEmbedCodeType
+@synthesize id = _id;
+@synthesize label = _label;
+@synthesize entryOnly = _entryOnly;
+@synthesize minVersion = _minVersion;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_entryOnly = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfLabel
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEntryOnly
+{
+    return KFT_Bool;
+}
+
+- (KalturaFieldType)getTypeOfMinVersion
+{
+    return KFT_String;
+}
+
+- (void)setEntryOnlyFromString:(NSString*)aPropVal
+{
+    self.entryOnly = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaPlayerEmbedCodeType"];
+    [aParams addIfDefinedKey:@"id" withString:self.id];
+    [aParams addIfDefinedKey:@"label" withString:self.label];
+    [aParams addIfDefinedKey:@"entryOnly" withBool:self.entryOnly];
+    [aParams addIfDefinedKey:@"minVersion" withString:self.minVersion];
+}
+
+- (void)dealloc
+{
+    [self->_id release];
+    [self->_label release];
+    [self->_minVersion release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaPartner()
+@property (nonatomic,assign) int id;
+@property (nonatomic,assign) int createdAt;
+@property (nonatomic,assign) int status;
+@property (nonatomic,assign) int partnerPackage;
+@property (nonatomic,copy) NSString* secret;
+@property (nonatomic,copy) NSString* adminSecret;
+@property (nonatomic,copy) NSString* cmsPassword;
+@property (nonatomic,assign) int adminLoginUsersQuota;
+@property (nonatomic,assign) int publishersQuota;
+@property (nonatomic,assign) int partnerGroupType;
+@property (nonatomic,assign) KALTURA_BOOL defaultEntitlementEnforcement;
+@property (nonatomic,copy) NSString* defaultDeliveryType;
+@property (nonatomic,copy) NSString* defaultEmbedCodeType;
+@property (nonatomic,retain) NSMutableArray* deliveryTypes;
+@property (nonatomic,retain) NSMutableArray* embedCodeTypes;
+@property (nonatomic,assign) int templatePartnerId;
+@property (nonatomic,assign) KALTURA_BOOL ignoreSeoLinks;
+@property (nonatomic,copy) NSString* host;
+@property (nonatomic,copy) NSString* cdnHost;
+@property (nonatomic,assign) KALTURA_BOOL isFirstLogin;
+@property (nonatomic,copy) NSString* logoutUrl;
+@property (nonatomic,assign) int partnerParentId;
+@property (nonatomic,copy) NSString* crmId;
+@property (nonatomic,assign) KALTURA_BOOL timeAlignedRenditions;
+@end
+
+@implementation KalturaPartner
+@synthesize id = _id;
+@synthesize name = _name;
+@synthesize website = _website;
+@synthesize notificationUrl = _notificationUrl;
+@synthesize appearInSearch = _appearInSearch;
+@synthesize createdAt = _createdAt;
+@synthesize adminName = _adminName;
+@synthesize adminEmail = _adminEmail;
+@synthesize description = _description;
+@synthesize commercialUse = _commercialUse;
+@synthesize landingPage = _landingPage;
+@synthesize userLandingPage = _userLandingPage;
+@synthesize contentCategories = _contentCategories;
+@synthesize type = _type;
+@synthesize phone = _phone;
+@synthesize describeYourself = _describeYourself;
+@synthesize adultContent = _adultContent;
+@synthesize defConversionProfileType = _defConversionProfileType;
+@synthesize notify = _notify;
+@synthesize status = _status;
+@synthesize allowQuickEdit = _allowQuickEdit;
+@synthesize mergeEntryLists = _mergeEntryLists;
+@synthesize notificationsConfig = _notificationsConfig;
+@synthesize maxUploadSize = _maxUploadSize;
+@synthesize partnerPackage = _partnerPackage;
+@synthesize secret = _secret;
+@synthesize adminSecret = _adminSecret;
+@synthesize cmsPassword = _cmsPassword;
+@synthesize allowMultiNotification = _allowMultiNotification;
+@synthesize adminLoginUsersQuota = _adminLoginUsersQuota;
+@synthesize adminUserId = _adminUserId;
+@synthesize firstName = _firstName;
+@synthesize lastName = _lastName;
+@synthesize country = _country;
+@synthesize state = _state;
+@synthesize additionalParams = _additionalParams;
+@synthesize publishersQuota = _publishersQuota;
+@synthesize partnerGroupType = _partnerGroupType;
+@synthesize defaultEntitlementEnforcement = _defaultEntitlementEnforcement;
+@synthesize defaultDeliveryType = _defaultDeliveryType;
+@synthesize defaultEmbedCodeType = _defaultEmbedCodeType;
+@synthesize deliveryTypes = _deliveryTypes;
+@synthesize embedCodeTypes = _embedCodeTypes;
+@synthesize templatePartnerId = _templatePartnerId;
+@synthesize ignoreSeoLinks = _ignoreSeoLinks;
+@synthesize host = _host;
+@synthesize cdnHost = _cdnHost;
+@synthesize isFirstLogin = _isFirstLogin;
+@synthesize logoutUrl = _logoutUrl;
+@synthesize partnerParentId = _partnerParentId;
+@synthesize crmId = _crmId;
+@synthesize referenceId = _referenceId;
+@synthesize timeAlignedRenditions = _timeAlignedRenditions;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_id = KALTURA_UNDEF_INT;
+    self->_appearInSearch = KALTURA_UNDEF_INT;
+    self->_createdAt = KALTURA_UNDEF_INT;
+    self->_commercialUse = KALTURA_UNDEF_INT;
+    self->_type = KALTURA_UNDEF_INT;
+    self->_adultContent = KALTURA_UNDEF_BOOL;
+    self->_notify = KALTURA_UNDEF_INT;
+    self->_status = KALTURA_UNDEF_INT;
+    self->_allowQuickEdit = KALTURA_UNDEF_INT;
+    self->_mergeEntryLists = KALTURA_UNDEF_INT;
+    self->_maxUploadSize = KALTURA_UNDEF_INT;
+    self->_partnerPackage = KALTURA_UNDEF_INT;
+    self->_allowMultiNotification = KALTURA_UNDEF_INT;
+    self->_adminLoginUsersQuota = KALTURA_UNDEF_INT;
+    self->_publishersQuota = KALTURA_UNDEF_INT;
+    self->_partnerGroupType = KALTURA_UNDEF_INT;
+    self->_defaultEntitlementEnforcement = KALTURA_UNDEF_BOOL;
+    self->_templatePartnerId = KALTURA_UNDEF_INT;
+    self->_ignoreSeoLinks = KALTURA_UNDEF_BOOL;
+    self->_isFirstLogin = KALTURA_UNDEF_BOOL;
+    self->_partnerParentId = KALTURA_UNDEF_INT;
+    self->_timeAlignedRenditions = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfWebsite
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfNotificationUrl
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfAppearInSearch
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAt
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfAdminName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfAdminEmail
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfDescription
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCommercialUse
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfLandingPage
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfUserLandingPage
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfContentCategories
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfType
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfPhone
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfDescribeYourself
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfAdultContent
+{
+    return KFT_Bool;
+}
+
+- (KalturaFieldType)getTypeOfDefConversionProfileType
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfNotify
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfStatus
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfAllowQuickEdit
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfMergeEntryLists
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfNotificationsConfig
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfMaxUploadSize
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfPartnerPackage
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfSecret
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfAdminSecret
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCmsPassword
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfAllowMultiNotification
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfAdminLoginUsersQuota
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfAdminUserId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfFirstName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfLastName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCountry
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfState
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfAdditionalParams
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfAdditionalParams
+{
+    return @"KalturaKeyValue";
+}
+
+- (KalturaFieldType)getTypeOfPublishersQuota
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfPartnerGroupType
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfDefaultEntitlementEnforcement
+{
+    return KFT_Bool;
+}
+
+- (KalturaFieldType)getTypeOfDefaultDeliveryType
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfDefaultEmbedCodeType
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfDeliveryTypes
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfDeliveryTypes
+{
+    return @"KalturaPlayerDeliveryType";
+}
+
+- (KalturaFieldType)getTypeOfEmbedCodeTypes
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfEmbedCodeTypes
+{
+    return @"KalturaPlayerEmbedCodeType";
+}
+
+- (KalturaFieldType)getTypeOfTemplatePartnerId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfIgnoreSeoLinks
+{
+    return KFT_Bool;
+}
+
+- (KalturaFieldType)getTypeOfHost
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCdnHost
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfIsFirstLogin
+{
+    return KFT_Bool;
+}
+
+- (KalturaFieldType)getTypeOfLogoutUrl
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfPartnerParentId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCrmId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfReferenceId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfTimeAlignedRenditions
+{
+    return KFT_Bool;
+}
+
+- (void)setIdFromString:(NSString*)aPropVal
+{
+    self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAppearInSearchFromString:(NSString*)aPropVal
+{
+    self.appearInSearch = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtFromString:(NSString*)aPropVal
+{
+    self.createdAt = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCommercialUseFromString:(NSString*)aPropVal
+{
+    self.commercialUse = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setTypeFromString:(NSString*)aPropVal
+{
+    self.type = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAdultContentFromString:(NSString*)aPropVal
+{
+    self.adultContent = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)setNotifyFromString:(NSString*)aPropVal
+{
+    self.notify = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setStatusFromString:(NSString*)aPropVal
+{
+    self.status = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAllowQuickEditFromString:(NSString*)aPropVal
+{
+    self.allowQuickEdit = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setMergeEntryListsFromString:(NSString*)aPropVal
+{
+    self.mergeEntryLists = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setMaxUploadSizeFromString:(NSString*)aPropVal
+{
+    self.maxUploadSize = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setPartnerPackageFromString:(NSString*)aPropVal
+{
+    self.partnerPackage = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAllowMultiNotificationFromString:(NSString*)aPropVal
+{
+    self.allowMultiNotification = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAdminLoginUsersQuotaFromString:(NSString*)aPropVal
+{
+    self.adminLoginUsersQuota = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setPublishersQuotaFromString:(NSString*)aPropVal
+{
+    self.publishersQuota = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setPartnerGroupTypeFromString:(NSString*)aPropVal
+{
+    self.partnerGroupType = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setDefaultEntitlementEnforcementFromString:(NSString*)aPropVal
+{
+    self.defaultEntitlementEnforcement = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)setTemplatePartnerIdFromString:(NSString*)aPropVal
+{
+    self.templatePartnerId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setIgnoreSeoLinksFromString:(NSString*)aPropVal
+{
+    self.ignoreSeoLinks = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)setIsFirstLoginFromString:(NSString*)aPropVal
+{
+    self.isFirstLogin = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)setPartnerParentIdFromString:(NSString*)aPropVal
+{
+    self.partnerParentId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setTimeAlignedRenditionsFromString:(NSString*)aPropVal
+{
+    self.timeAlignedRenditions = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaPartner"];
+    [aParams addIfDefinedKey:@"name" withString:self.name];
+    [aParams addIfDefinedKey:@"website" withString:self.website];
+    [aParams addIfDefinedKey:@"notificationUrl" withString:self.notificationUrl];
+    [aParams addIfDefinedKey:@"appearInSearch" withInt:self.appearInSearch];
+    [aParams addIfDefinedKey:@"adminName" withString:self.adminName];
+    [aParams addIfDefinedKey:@"adminEmail" withString:self.adminEmail];
+    [aParams addIfDefinedKey:@"description" withString:self.description];
+    [aParams addIfDefinedKey:@"commercialUse" withInt:self.commercialUse];
+    [aParams addIfDefinedKey:@"landingPage" withString:self.landingPage];
+    [aParams addIfDefinedKey:@"userLandingPage" withString:self.userLandingPage];
+    [aParams addIfDefinedKey:@"contentCategories" withString:self.contentCategories];
+    [aParams addIfDefinedKey:@"type" withInt:self.type];
+    [aParams addIfDefinedKey:@"phone" withString:self.phone];
+    [aParams addIfDefinedKey:@"describeYourself" withString:self.describeYourself];
+    [aParams addIfDefinedKey:@"adultContent" withBool:self.adultContent];
+    [aParams addIfDefinedKey:@"defConversionProfileType" withString:self.defConversionProfileType];
+    [aParams addIfDefinedKey:@"notify" withInt:self.notify];
+    [aParams addIfDefinedKey:@"allowQuickEdit" withInt:self.allowQuickEdit];
+    [aParams addIfDefinedKey:@"mergeEntryLists" withInt:self.mergeEntryLists];
+    [aParams addIfDefinedKey:@"notificationsConfig" withString:self.notificationsConfig];
+    [aParams addIfDefinedKey:@"maxUploadSize" withInt:self.maxUploadSize];
+    [aParams addIfDefinedKey:@"allowMultiNotification" withInt:self.allowMultiNotification];
+    [aParams addIfDefinedKey:@"adminUserId" withString:self.adminUserId];
+    [aParams addIfDefinedKey:@"firstName" withString:self.firstName];
+    [aParams addIfDefinedKey:@"lastName" withString:self.lastName];
+    [aParams addIfDefinedKey:@"country" withString:self.country];
+    [aParams addIfDefinedKey:@"state" withString:self.state];
+    [aParams addIfDefinedKey:@"additionalParams" withArray:self.additionalParams];
+    [aParams addIfDefinedKey:@"referenceId" withString:self.referenceId];
+}
+
+- (void)dealloc
+{
+    [self->_name release];
+    [self->_website release];
+    [self->_notificationUrl release];
+    [self->_adminName release];
+    [self->_adminEmail release];
+    [self->_description release];
+    [self->_landingPage release];
+    [self->_userLandingPage release];
+    [self->_contentCategories release];
+    [self->_phone release];
+    [self->_describeYourself release];
+    [self->_defConversionProfileType release];
+    [self->_notificationsConfig release];
+    [self->_secret release];
+    [self->_adminSecret release];
+    [self->_cmsPassword release];
+    [self->_adminUserId release];
+    [self->_firstName release];
+    [self->_lastName release];
+    [self->_country release];
+    [self->_state release];
+    [self->_additionalParams release];
+    [self->_defaultDeliveryType release];
+    [self->_defaultEmbedCodeType release];
+    [self->_deliveryTypes release];
+    [self->_embedCodeTypes release];
+    [self->_host release];
+    [self->_cdnHost release];
+    [self->_logoutUrl release];
+    [self->_crmId release];
+    [self->_referenceId release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaValue
+@synthesize description = _description;
+
+- (KalturaFieldType)getTypeOfDescription
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaValue"];
+    [aParams addIfDefinedKey:@"description" withString:self.description];
+}
+
+- (void)dealloc
+{
+    [self->_description release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaBooleanValue
+@synthesize value = _value;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_value = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfValue
+{
+    return KFT_Bool;
+}
+
+- (void)setValueFromString:(NSString*)aPropVal
+{
+    self.value = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaBooleanValue"];
+    [aParams addIfDefinedKey:@"value" withBool:self.value];
 }
 
 @end
@@ -14155,38 +14873,6 @@
     [self->_userId release];
     [self->_categoryFullIds release];
     [self->_permissionNames release];
-    [super dealloc];
-}
-
-@end
-
-@implementation KalturaClientConfiguration
-@synthesize clientTag = _clientTag;
-@synthesize apiVersion = _apiVersion;
-
-- (KalturaFieldType)getTypeOfClientTag
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfApiVersion
-{
-    return KFT_String;
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaClientConfiguration"];
-    [aParams addIfDefinedKey:@"clientTag" withString:self.clientTag];
-    [aParams addIfDefinedKey:@"apiVersion" withString:self.apiVersion];
-}
-
-- (void)dealloc
-{
-    [self->_clientTag release];
-    [self->_apiVersion release];
     [super dealloc];
 }
 
@@ -15982,30 +16668,6 @@
 
 @end
 
-@implementation KalturaValue
-@synthesize description = _description;
-
-- (KalturaFieldType)getTypeOfDescription
-{
-    return KFT_String;
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaValue"];
-    [aParams addIfDefinedKey:@"description" withString:self.description];
-}
-
-- (void)dealloc
-{
-    [self->_description release];
-    [super dealloc];
-}
-
-@end
-
 @implementation KalturaStringValue
 @synthesize value = _value;
 
@@ -16734,6 +17396,7 @@
 @synthesize containerFormat = _containerFormat;
 @synthesize videoCodecId = _videoCodecId;
 @synthesize status = _status;
+@synthesize language = _language;
 
 - (id)init
 {
@@ -16801,6 +17464,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfLanguage
+{
+    return KFT_String;
+}
+
 - (void)setFlavorParamsIdFromString:(NSString*)aPropVal
 {
     self.flavorParamsId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -16847,12 +17515,14 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaFlavorAsset"];
     [aParams addIfDefinedKey:@"flavorParamsId" withInt:self.flavorParamsId];
+    [aParams addIfDefinedKey:@"language" withString:self.language];
 }
 
 - (void)dealloc
 {
     [self->_containerFormat release];
     [self->_videoCodecId release];
+    [self->_language release];
     [super dealloc];
 }
 
@@ -17482,6 +18152,627 @@
 
 @end
 
+@interface KalturaSchedulerStatus()
+@property (nonatomic,assign) int id;
+@property (nonatomic,assign) int schedulerId;
+@property (nonatomic,assign) int workerId;
+@end
+
+@implementation KalturaSchedulerStatus
+@synthesize id = _id;
+@synthesize schedulerConfiguredId = _schedulerConfiguredId;
+@synthesize workerConfiguredId = _workerConfiguredId;
+@synthesize workerType = _workerType;
+@synthesize type = _type;
+@synthesize value = _value;
+@synthesize schedulerId = _schedulerId;
+@synthesize workerId = _workerId;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_id = KALTURA_UNDEF_INT;
+    self->_schedulerConfiguredId = KALTURA_UNDEF_INT;
+    self->_workerConfiguredId = KALTURA_UNDEF_INT;
+    self->_type = KALTURA_UNDEF_INT;
+    self->_value = KALTURA_UNDEF_INT;
+    self->_schedulerId = KALTURA_UNDEF_INT;
+    self->_workerId = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfSchedulerConfiguredId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfWorkerConfiguredId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfWorkerType
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfType
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfValue
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfSchedulerId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfWorkerId
+{
+    return KFT_Int;
+}
+
+- (void)setIdFromString:(NSString*)aPropVal
+{
+    self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setSchedulerConfiguredIdFromString:(NSString*)aPropVal
+{
+    self.schedulerConfiguredId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setWorkerConfiguredIdFromString:(NSString*)aPropVal
+{
+    self.workerConfiguredId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setTypeFromString:(NSString*)aPropVal
+{
+    self.type = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setValueFromString:(NSString*)aPropVal
+{
+    self.value = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setSchedulerIdFromString:(NSString*)aPropVal
+{
+    self.schedulerId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setWorkerIdFromString:(NSString*)aPropVal
+{
+    self.workerId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaSchedulerStatus"];
+    [aParams addIfDefinedKey:@"schedulerConfiguredId" withInt:self.schedulerConfiguredId];
+    [aParams addIfDefinedKey:@"workerConfiguredId" withInt:self.workerConfiguredId];
+    [aParams addIfDefinedKey:@"workerType" withString:self.workerType];
+    [aParams addIfDefinedKey:@"type" withInt:self.type];
+    [aParams addIfDefinedKey:@"value" withInt:self.value];
+}
+
+- (void)dealloc
+{
+    [self->_workerType release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaSchedulerConfig()
+@property (nonatomic,assign) int id;
+@end
+
+@implementation KalturaSchedulerConfig
+@synthesize id = _id;
+@synthesize createdBy = _createdBy;
+@synthesize updatedBy = _updatedBy;
+@synthesize commandId = _commandId;
+@synthesize commandStatus = _commandStatus;
+@synthesize schedulerId = _schedulerId;
+@synthesize schedulerConfiguredId = _schedulerConfiguredId;
+@synthesize schedulerName = _schedulerName;
+@synthesize workerId = _workerId;
+@synthesize workerConfiguredId = _workerConfiguredId;
+@synthesize workerName = _workerName;
+@synthesize variable = _variable;
+@synthesize variablePart = _variablePart;
+@synthesize value = _value;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_id = KALTURA_UNDEF_INT;
+    self->_schedulerId = KALTURA_UNDEF_INT;
+    self->_schedulerConfiguredId = KALTURA_UNDEF_INT;
+    self->_workerId = KALTURA_UNDEF_INT;
+    self->_workerConfiguredId = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCreatedBy
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedBy
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCommandId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCommandStatus
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSchedulerId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfSchedulerConfiguredId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfSchedulerName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfWorkerId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfWorkerConfiguredId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfWorkerName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfVariable
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfVariablePart
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfValue
+{
+    return KFT_String;
+}
+
+- (void)setIdFromString:(NSString*)aPropVal
+{
+    self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setSchedulerIdFromString:(NSString*)aPropVal
+{
+    self.schedulerId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setSchedulerConfiguredIdFromString:(NSString*)aPropVal
+{
+    self.schedulerConfiguredId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setWorkerIdFromString:(NSString*)aPropVal
+{
+    self.workerId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setWorkerConfiguredIdFromString:(NSString*)aPropVal
+{
+    self.workerConfiguredId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaSchedulerConfig"];
+    [aParams addIfDefinedKey:@"createdBy" withString:self.createdBy];
+    [aParams addIfDefinedKey:@"updatedBy" withString:self.updatedBy];
+    [aParams addIfDefinedKey:@"commandId" withString:self.commandId];
+    [aParams addIfDefinedKey:@"commandStatus" withString:self.commandStatus];
+    [aParams addIfDefinedKey:@"schedulerId" withInt:self.schedulerId];
+    [aParams addIfDefinedKey:@"schedulerConfiguredId" withInt:self.schedulerConfiguredId];
+    [aParams addIfDefinedKey:@"schedulerName" withString:self.schedulerName];
+    [aParams addIfDefinedKey:@"workerId" withInt:self.workerId];
+    [aParams addIfDefinedKey:@"workerConfiguredId" withInt:self.workerConfiguredId];
+    [aParams addIfDefinedKey:@"workerName" withString:self.workerName];
+    [aParams addIfDefinedKey:@"variable" withString:self.variable];
+    [aParams addIfDefinedKey:@"variablePart" withString:self.variablePart];
+    [aParams addIfDefinedKey:@"value" withString:self.value];
+}
+
+- (void)dealloc
+{
+    [self->_createdBy release];
+    [self->_updatedBy release];
+    [self->_commandId release];
+    [self->_commandStatus release];
+    [self->_schedulerName release];
+    [self->_workerName release];
+    [self->_variable release];
+    [self->_variablePart release];
+    [self->_value release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaSchedulerWorker()
+@property (nonatomic,assign) int id;
+@end
+
+@implementation KalturaSchedulerWorker
+@synthesize id = _id;
+@synthesize configuredId = _configuredId;
+@synthesize schedulerId = _schedulerId;
+@synthesize schedulerConfiguredId = _schedulerConfiguredId;
+@synthesize type = _type;
+@synthesize typeName = _typeName;
+@synthesize name = _name;
+@synthesize statuses = _statuses;
+@synthesize configs = _configs;
+@synthesize lockedJobs = _lockedJobs;
+@synthesize avgWait = _avgWait;
+@synthesize avgWork = _avgWork;
+@synthesize lastStatus = _lastStatus;
+@synthesize lastStatusStr = _lastStatusStr;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_id = KALTURA_UNDEF_INT;
+    self->_configuredId = KALTURA_UNDEF_INT;
+    self->_schedulerId = KALTURA_UNDEF_INT;
+    self->_schedulerConfiguredId = KALTURA_UNDEF_INT;
+    self->_avgWait = KALTURA_UNDEF_INT;
+    self->_avgWork = KALTURA_UNDEF_INT;
+    self->_lastStatus = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfConfiguredId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfSchedulerId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfSchedulerConfiguredId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfType
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfTypeName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfStatuses
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfStatuses
+{
+    return @"KalturaSchedulerStatus";
+}
+
+- (KalturaFieldType)getTypeOfConfigs
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfConfigs
+{
+    return @"KalturaSchedulerConfig";
+}
+
+- (KalturaFieldType)getTypeOfLockedJobs
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfLockedJobs
+{
+    return @"KalturaBatchJob";
+}
+
+- (KalturaFieldType)getTypeOfAvgWait
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfAvgWork
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfLastStatus
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfLastStatusStr
+{
+    return KFT_String;
+}
+
+- (void)setIdFromString:(NSString*)aPropVal
+{
+    self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setConfiguredIdFromString:(NSString*)aPropVal
+{
+    self.configuredId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setSchedulerIdFromString:(NSString*)aPropVal
+{
+    self.schedulerId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setSchedulerConfiguredIdFromString:(NSString*)aPropVal
+{
+    self.schedulerConfiguredId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAvgWaitFromString:(NSString*)aPropVal
+{
+    self.avgWait = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAvgWorkFromString:(NSString*)aPropVal
+{
+    self.avgWork = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setLastStatusFromString:(NSString*)aPropVal
+{
+    self.lastStatus = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaSchedulerWorker"];
+    [aParams addIfDefinedKey:@"configuredId" withInt:self.configuredId];
+    [aParams addIfDefinedKey:@"schedulerId" withInt:self.schedulerId];
+    [aParams addIfDefinedKey:@"schedulerConfiguredId" withInt:self.schedulerConfiguredId];
+    [aParams addIfDefinedKey:@"type" withString:self.type];
+    [aParams addIfDefinedKey:@"typeName" withString:self.typeName];
+    [aParams addIfDefinedKey:@"name" withString:self.name];
+    [aParams addIfDefinedKey:@"statuses" withArray:self.statuses];
+    [aParams addIfDefinedKey:@"configs" withArray:self.configs];
+    [aParams addIfDefinedKey:@"lockedJobs" withArray:self.lockedJobs];
+    [aParams addIfDefinedKey:@"avgWait" withInt:self.avgWait];
+    [aParams addIfDefinedKey:@"avgWork" withInt:self.avgWork];
+    [aParams addIfDefinedKey:@"lastStatus" withInt:self.lastStatus];
+    [aParams addIfDefinedKey:@"lastStatusStr" withString:self.lastStatusStr];
+}
+
+- (void)dealloc
+{
+    [self->_type release];
+    [self->_typeName release];
+    [self->_name release];
+    [self->_statuses release];
+    [self->_configs release];
+    [self->_lockedJobs release];
+    [self->_lastStatusStr release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaScheduler()
+@property (nonatomic,assign) int id;
+@property (nonatomic,retain) NSMutableArray* statuses;
+@property (nonatomic,retain) NSMutableArray* configs;
+@property (nonatomic,retain) NSMutableArray* workers;
+@property (nonatomic,assign) int createdAt;
+@property (nonatomic,assign) int lastStatus;
+@property (nonatomic,copy) NSString* lastStatusStr;
+@end
+
+@implementation KalturaScheduler
+@synthesize id = _id;
+@synthesize configuredId = _configuredId;
+@synthesize name = _name;
+@synthesize host = _host;
+@synthesize statuses = _statuses;
+@synthesize configs = _configs;
+@synthesize workers = _workers;
+@synthesize createdAt = _createdAt;
+@synthesize lastStatus = _lastStatus;
+@synthesize lastStatusStr = _lastStatusStr;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_id = KALTURA_UNDEF_INT;
+    self->_configuredId = KALTURA_UNDEF_INT;
+    self->_createdAt = KALTURA_UNDEF_INT;
+    self->_lastStatus = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfConfiguredId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfHost
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfStatuses
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfStatuses
+{
+    return @"KalturaSchedulerStatus";
+}
+
+- (KalturaFieldType)getTypeOfConfigs
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfConfigs
+{
+    return @"KalturaSchedulerConfig";
+}
+
+- (KalturaFieldType)getTypeOfWorkers
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfWorkers
+{
+    return @"KalturaSchedulerWorker";
+}
+
+- (KalturaFieldType)getTypeOfCreatedAt
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfLastStatus
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfLastStatusStr
+{
+    return KFT_String;
+}
+
+- (void)setIdFromString:(NSString*)aPropVal
+{
+    self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setConfiguredIdFromString:(NSString*)aPropVal
+{
+    self.configuredId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtFromString:(NSString*)aPropVal
+{
+    self.createdAt = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setLastStatusFromString:(NSString*)aPropVal
+{
+    self.lastStatus = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaScheduler"];
+    [aParams addIfDefinedKey:@"configuredId" withInt:self.configuredId];
+    [aParams addIfDefinedKey:@"name" withString:self.name];
+    [aParams addIfDefinedKey:@"host" withString:self.host];
+}
+
+- (void)dealloc
+{
+    [self->_name release];
+    [self->_host release];
+    [self->_statuses release];
+    [self->_configs release];
+    [self->_workers release];
+    [self->_lastStatusStr release];
+    [super dealloc];
+}
+
+@end
+
 @interface KalturaGroupUser()
 @property (nonatomic,assign) int status;
 @property (nonatomic,assign) int partnerId;
@@ -17641,46 +18932,903 @@
 
 @end
 
-@implementation KalturaKeyBooleanValue
-@synthesize key = _key;
-@synthesize value = _value;
+@interface KalturaBatchJobListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
 
-- (id)init
+@implementation KalturaBatchJobListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
 {
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_value = KALTURA_UNDEF_BOOL;
-    return self;
+    return KFT_Array;
 }
 
-- (KalturaFieldType)getTypeOfKey
+- (NSString*)getObjectTypeOfObjects
 {
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfValue
-{
-    return KFT_Bool;
-}
-
-- (void)setValueFromString:(NSString*)aPropVal
-{
-    self.value = [KalturaSimpleTypeParser parseBool:aPropVal];
+    return @"KalturaBatchJob";
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaKeyBooleanValue"];
-    [aParams addIfDefinedKey:@"key" withString:self.key];
-    [aParams addIfDefinedKey:@"value" withBool:self.value];
+        [aParams putKey:@"objectType" withString:@"KalturaBatchJobListResponse"];
 }
 
 - (void)dealloc
 {
-    [self->_key release];
+    [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaMediaInfo()
+@property (nonatomic,assign) int id;
+@end
+
+@implementation KalturaMediaInfo
+@synthesize id = _id;
+@synthesize flavorAssetId = _flavorAssetId;
+@synthesize fileSize = _fileSize;
+@synthesize containerFormat = _containerFormat;
+@synthesize containerId = _containerId;
+@synthesize containerProfile = _containerProfile;
+@synthesize containerDuration = _containerDuration;
+@synthesize containerBitRate = _containerBitRate;
+@synthesize videoFormat = _videoFormat;
+@synthesize videoCodecId = _videoCodecId;
+@synthesize videoDuration = _videoDuration;
+@synthesize videoBitRate = _videoBitRate;
+@synthesize videoBitRateMode = _videoBitRateMode;
+@synthesize videoWidth = _videoWidth;
+@synthesize videoHeight = _videoHeight;
+@synthesize videoFrameRate = _videoFrameRate;
+@synthesize videoDar = _videoDar;
+@synthesize videoRotation = _videoRotation;
+@synthesize audioFormat = _audioFormat;
+@synthesize audioCodecId = _audioCodecId;
+@synthesize audioDuration = _audioDuration;
+@synthesize audioBitRate = _audioBitRate;
+@synthesize audioBitRateMode = _audioBitRateMode;
+@synthesize audioChannels = _audioChannels;
+@synthesize audioSamplingRate = _audioSamplingRate;
+@synthesize audioResolution = _audioResolution;
+@synthesize writingLib = _writingLib;
+@synthesize rawData = _rawData;
+@synthesize multiStreamInfo = _multiStreamInfo;
+@synthesize scanType = _scanType;
+@synthesize multiStream = _multiStream;
+@synthesize isFastStart = _isFastStart;
+@synthesize contentStreams = _contentStreams;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_id = KALTURA_UNDEF_INT;
+    self->_fileSize = KALTURA_UNDEF_INT;
+    self->_containerDuration = KALTURA_UNDEF_INT;
+    self->_containerBitRate = KALTURA_UNDEF_INT;
+    self->_videoDuration = KALTURA_UNDEF_INT;
+    self->_videoBitRate = KALTURA_UNDEF_INT;
+    self->_videoBitRateMode = KALTURA_UNDEF_INT;
+    self->_videoWidth = KALTURA_UNDEF_INT;
+    self->_videoHeight = KALTURA_UNDEF_INT;
+    self->_videoFrameRate = KALTURA_UNDEF_FLOAT;
+    self->_videoDar = KALTURA_UNDEF_FLOAT;
+    self->_videoRotation = KALTURA_UNDEF_INT;
+    self->_audioDuration = KALTURA_UNDEF_INT;
+    self->_audioBitRate = KALTURA_UNDEF_INT;
+    self->_audioBitRateMode = KALTURA_UNDEF_INT;
+    self->_audioChannels = KALTURA_UNDEF_INT;
+    self->_audioSamplingRate = KALTURA_UNDEF_INT;
+    self->_audioResolution = KALTURA_UNDEF_INT;
+    self->_scanType = KALTURA_UNDEF_INT;
+    self->_isFastStart = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfFlavorAssetId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfFileSize
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfContainerFormat
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfContainerId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfContainerProfile
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfContainerDuration
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfContainerBitRate
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfVideoFormat
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfVideoCodecId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfVideoDuration
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfVideoBitRate
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfVideoBitRateMode
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfVideoWidth
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfVideoHeight
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfVideoFrameRate
+{
+    return KFT_Float;
+}
+
+- (KalturaFieldType)getTypeOfVideoDar
+{
+    return KFT_Float;
+}
+
+- (KalturaFieldType)getTypeOfVideoRotation
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfAudioFormat
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfAudioCodecId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfAudioDuration
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfAudioBitRate
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfAudioBitRateMode
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfAudioChannels
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfAudioSamplingRate
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfAudioResolution
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfWritingLib
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfRawData
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfMultiStreamInfo
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfScanType
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfMultiStream
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfIsFastStart
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfContentStreams
+{
+    return KFT_String;
+}
+
+- (void)setIdFromString:(NSString*)aPropVal
+{
+    self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setFileSizeFromString:(NSString*)aPropVal
+{
+    self.fileSize = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setContainerDurationFromString:(NSString*)aPropVal
+{
+    self.containerDuration = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setContainerBitRateFromString:(NSString*)aPropVal
+{
+    self.containerBitRate = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setVideoDurationFromString:(NSString*)aPropVal
+{
+    self.videoDuration = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setVideoBitRateFromString:(NSString*)aPropVal
+{
+    self.videoBitRate = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setVideoBitRateModeFromString:(NSString*)aPropVal
+{
+    self.videoBitRateMode = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setVideoWidthFromString:(NSString*)aPropVal
+{
+    self.videoWidth = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setVideoHeightFromString:(NSString*)aPropVal
+{
+    self.videoHeight = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setVideoFrameRateFromString:(NSString*)aPropVal
+{
+    self.videoFrameRate = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
+- (void)setVideoDarFromString:(NSString*)aPropVal
+{
+    self.videoDar = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
+- (void)setVideoRotationFromString:(NSString*)aPropVal
+{
+    self.videoRotation = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAudioDurationFromString:(NSString*)aPropVal
+{
+    self.audioDuration = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAudioBitRateFromString:(NSString*)aPropVal
+{
+    self.audioBitRate = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAudioBitRateModeFromString:(NSString*)aPropVal
+{
+    self.audioBitRateMode = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAudioChannelsFromString:(NSString*)aPropVal
+{
+    self.audioChannels = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAudioSamplingRateFromString:(NSString*)aPropVal
+{
+    self.audioSamplingRate = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAudioResolutionFromString:(NSString*)aPropVal
+{
+    self.audioResolution = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setScanTypeFromString:(NSString*)aPropVal
+{
+    self.scanType = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setIsFastStartFromString:(NSString*)aPropVal
+{
+    self.isFastStart = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaMediaInfo"];
+    [aParams addIfDefinedKey:@"flavorAssetId" withString:self.flavorAssetId];
+    [aParams addIfDefinedKey:@"fileSize" withInt:self.fileSize];
+    [aParams addIfDefinedKey:@"containerFormat" withString:self.containerFormat];
+    [aParams addIfDefinedKey:@"containerId" withString:self.containerId];
+    [aParams addIfDefinedKey:@"containerProfile" withString:self.containerProfile];
+    [aParams addIfDefinedKey:@"containerDuration" withInt:self.containerDuration];
+    [aParams addIfDefinedKey:@"containerBitRate" withInt:self.containerBitRate];
+    [aParams addIfDefinedKey:@"videoFormat" withString:self.videoFormat];
+    [aParams addIfDefinedKey:@"videoCodecId" withString:self.videoCodecId];
+    [aParams addIfDefinedKey:@"videoDuration" withInt:self.videoDuration];
+    [aParams addIfDefinedKey:@"videoBitRate" withInt:self.videoBitRate];
+    [aParams addIfDefinedKey:@"videoBitRateMode" withInt:self.videoBitRateMode];
+    [aParams addIfDefinedKey:@"videoWidth" withInt:self.videoWidth];
+    [aParams addIfDefinedKey:@"videoHeight" withInt:self.videoHeight];
+    [aParams addIfDefinedKey:@"videoFrameRate" withFloat:self.videoFrameRate];
+    [aParams addIfDefinedKey:@"videoDar" withFloat:self.videoDar];
+    [aParams addIfDefinedKey:@"videoRotation" withInt:self.videoRotation];
+    [aParams addIfDefinedKey:@"audioFormat" withString:self.audioFormat];
+    [aParams addIfDefinedKey:@"audioCodecId" withString:self.audioCodecId];
+    [aParams addIfDefinedKey:@"audioDuration" withInt:self.audioDuration];
+    [aParams addIfDefinedKey:@"audioBitRate" withInt:self.audioBitRate];
+    [aParams addIfDefinedKey:@"audioBitRateMode" withInt:self.audioBitRateMode];
+    [aParams addIfDefinedKey:@"audioChannels" withInt:self.audioChannels];
+    [aParams addIfDefinedKey:@"audioSamplingRate" withInt:self.audioSamplingRate];
+    [aParams addIfDefinedKey:@"audioResolution" withInt:self.audioResolution];
+    [aParams addIfDefinedKey:@"writingLib" withString:self.writingLib];
+    [aParams addIfDefinedKey:@"rawData" withString:self.rawData];
+    [aParams addIfDefinedKey:@"multiStreamInfo" withString:self.multiStreamInfo];
+    [aParams addIfDefinedKey:@"scanType" withInt:self.scanType];
+    [aParams addIfDefinedKey:@"multiStream" withString:self.multiStream];
+    [aParams addIfDefinedKey:@"isFastStart" withInt:self.isFastStart];
+    [aParams addIfDefinedKey:@"contentStreams" withString:self.contentStreams];
+}
+
+- (void)dealloc
+{
+    [self->_flavorAssetId release];
+    [self->_containerFormat release];
+    [self->_containerId release];
+    [self->_containerProfile release];
+    [self->_videoFormat release];
+    [self->_videoCodecId release];
+    [self->_audioFormat release];
+    [self->_audioCodecId release];
+    [self->_writingLib release];
+    [self->_rawData release];
+    [self->_multiStreamInfo release];
+    [self->_multiStream release];
+    [self->_contentStreams release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaMediaInfoListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
+
+@implementation KalturaMediaInfoListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfObjects
+{
+    return @"KalturaMediaInfo";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaMediaInfoListResponse"];
+}
+
+- (void)dealloc
+{
+    [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaFlavorParamsOutputListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
+
+@implementation KalturaFlavorParamsOutputListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfObjects
+{
+    return @"KalturaFlavorParamsOutput";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaFlavorParamsOutputListResponse"];
+}
+
+- (void)dealloc
+{
+    [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaThumbAsset()
+@property (nonatomic,assign) int width;
+@property (nonatomic,assign) int height;
+@property (nonatomic,assign) int status;
+@end
+
+@implementation KalturaThumbAsset
+@synthesize thumbParamsId = _thumbParamsId;
+@synthesize width = _width;
+@synthesize height = _height;
+@synthesize status = _status;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_thumbParamsId = KALTURA_UNDEF_INT;
+    self->_width = KALTURA_UNDEF_INT;
+    self->_height = KALTURA_UNDEF_INT;
+    self->_status = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfThumbParamsId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfWidth
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfHeight
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfStatus
+{
+    return KFT_Int;
+}
+
+- (void)setThumbParamsIdFromString:(NSString*)aPropVal
+{
+    self.thumbParamsId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setWidthFromString:(NSString*)aPropVal
+{
+    self.width = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setHeightFromString:(NSString*)aPropVal
+{
+    self.height = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setStatusFromString:(NSString*)aPropVal
+{
+    self.status = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaThumbAsset"];
+    [aParams addIfDefinedKey:@"thumbParamsId" withInt:self.thumbParamsId];
+}
+
+@end
+
+@implementation KalturaThumbParams
+@synthesize cropType = _cropType;
+@synthesize quality = _quality;
+@synthesize cropX = _cropX;
+@synthesize cropY = _cropY;
+@synthesize cropWidth = _cropWidth;
+@synthesize cropHeight = _cropHeight;
+@synthesize videoOffset = _videoOffset;
+@synthesize width = _width;
+@synthesize height = _height;
+@synthesize scaleWidth = _scaleWidth;
+@synthesize scaleHeight = _scaleHeight;
+@synthesize backgroundColor = _backgroundColor;
+@synthesize sourceParamsId = _sourceParamsId;
+@synthesize format = _format;
+@synthesize density = _density;
+@synthesize stripProfiles = _stripProfiles;
+@synthesize videoOffsetInPercentage = _videoOffsetInPercentage;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_cropType = KALTURA_UNDEF_INT;
+    self->_quality = KALTURA_UNDEF_INT;
+    self->_cropX = KALTURA_UNDEF_INT;
+    self->_cropY = KALTURA_UNDEF_INT;
+    self->_cropWidth = KALTURA_UNDEF_INT;
+    self->_cropHeight = KALTURA_UNDEF_INT;
+    self->_videoOffset = KALTURA_UNDEF_FLOAT;
+    self->_width = KALTURA_UNDEF_INT;
+    self->_height = KALTURA_UNDEF_INT;
+    self->_scaleWidth = KALTURA_UNDEF_FLOAT;
+    self->_scaleHeight = KALTURA_UNDEF_FLOAT;
+    self->_sourceParamsId = KALTURA_UNDEF_INT;
+    self->_density = KALTURA_UNDEF_INT;
+    self->_stripProfiles = KALTURA_UNDEF_BOOL;
+    self->_videoOffsetInPercentage = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfCropType
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfQuality
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCropX
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCropY
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCropWidth
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCropHeight
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfVideoOffset
+{
+    return KFT_Float;
+}
+
+- (KalturaFieldType)getTypeOfWidth
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfHeight
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfScaleWidth
+{
+    return KFT_Float;
+}
+
+- (KalturaFieldType)getTypeOfScaleHeight
+{
+    return KFT_Float;
+}
+
+- (KalturaFieldType)getTypeOfBackgroundColor
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSourceParamsId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfFormat
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfDensity
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfStripProfiles
+{
+    return KFT_Bool;
+}
+
+- (KalturaFieldType)getTypeOfVideoOffsetInPercentage
+{
+    return KFT_Int;
+}
+
+- (void)setCropTypeFromString:(NSString*)aPropVal
+{
+    self.cropType = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setQualityFromString:(NSString*)aPropVal
+{
+    self.quality = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCropXFromString:(NSString*)aPropVal
+{
+    self.cropX = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCropYFromString:(NSString*)aPropVal
+{
+    self.cropY = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCropWidthFromString:(NSString*)aPropVal
+{
+    self.cropWidth = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCropHeightFromString:(NSString*)aPropVal
+{
+    self.cropHeight = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setVideoOffsetFromString:(NSString*)aPropVal
+{
+    self.videoOffset = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
+- (void)setWidthFromString:(NSString*)aPropVal
+{
+    self.width = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setHeightFromString:(NSString*)aPropVal
+{
+    self.height = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setScaleWidthFromString:(NSString*)aPropVal
+{
+    self.scaleWidth = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
+- (void)setScaleHeightFromString:(NSString*)aPropVal
+{
+    self.scaleHeight = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
+- (void)setSourceParamsIdFromString:(NSString*)aPropVal
+{
+    self.sourceParamsId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setDensityFromString:(NSString*)aPropVal
+{
+    self.density = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setStripProfilesFromString:(NSString*)aPropVal
+{
+    self.stripProfiles = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)setVideoOffsetInPercentageFromString:(NSString*)aPropVal
+{
+    self.videoOffsetInPercentage = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaThumbParams"];
+    [aParams addIfDefinedKey:@"cropType" withInt:self.cropType];
+    [aParams addIfDefinedKey:@"quality" withInt:self.quality];
+    [aParams addIfDefinedKey:@"cropX" withInt:self.cropX];
+    [aParams addIfDefinedKey:@"cropY" withInt:self.cropY];
+    [aParams addIfDefinedKey:@"cropWidth" withInt:self.cropWidth];
+    [aParams addIfDefinedKey:@"cropHeight" withInt:self.cropHeight];
+    [aParams addIfDefinedKey:@"videoOffset" withFloat:self.videoOffset];
+    [aParams addIfDefinedKey:@"width" withInt:self.width];
+    [aParams addIfDefinedKey:@"height" withInt:self.height];
+    [aParams addIfDefinedKey:@"scaleWidth" withFloat:self.scaleWidth];
+    [aParams addIfDefinedKey:@"scaleHeight" withFloat:self.scaleHeight];
+    [aParams addIfDefinedKey:@"backgroundColor" withString:self.backgroundColor];
+    [aParams addIfDefinedKey:@"sourceParamsId" withInt:self.sourceParamsId];
+    [aParams addIfDefinedKey:@"format" withString:self.format];
+    [aParams addIfDefinedKey:@"density" withInt:self.density];
+    [aParams addIfDefinedKey:@"stripProfiles" withBool:self.stripProfiles];
+    [aParams addIfDefinedKey:@"videoOffsetInPercentage" withInt:self.videoOffsetInPercentage];
+}
+
+- (void)dealloc
+{
+    [self->_backgroundColor release];
+    [self->_format release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaThumbParamsOutput
+@synthesize thumbParamsId = _thumbParamsId;
+@synthesize thumbParamsVersion = _thumbParamsVersion;
+@synthesize thumbAssetId = _thumbAssetId;
+@synthesize thumbAssetVersion = _thumbAssetVersion;
+@synthesize rotate = _rotate;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_thumbParamsId = KALTURA_UNDEF_INT;
+    self->_rotate = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfThumbParamsId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfThumbParamsVersion
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfThumbAssetId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfThumbAssetVersion
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfRotate
+{
+    return KFT_Int;
+}
+
+- (void)setThumbParamsIdFromString:(NSString*)aPropVal
+{
+    self.thumbParamsId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setRotateFromString:(NSString*)aPropVal
+{
+    self.rotate = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaThumbParamsOutput"];
+    [aParams addIfDefinedKey:@"thumbParamsId" withInt:self.thumbParamsId];
+    [aParams addIfDefinedKey:@"thumbParamsVersion" withString:self.thumbParamsVersion];
+    [aParams addIfDefinedKey:@"thumbAssetId" withString:self.thumbAssetId];
+    [aParams addIfDefinedKey:@"thumbAssetVersion" withString:self.thumbAssetVersion];
+    [aParams addIfDefinedKey:@"rotate" withInt:self.rotate];
+}
+
+- (void)dealloc
+{
+    [self->_thumbParamsVersion release];
+    [self->_thumbAssetId release];
+    [self->_thumbAssetVersion release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaThumbParamsOutputListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
+
+@implementation KalturaThumbParamsOutputListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfObjects
+{
+    return @"KalturaThumbParamsOutput";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaThumbParamsOutputListResponse"];
+}
+
+- (void)dealloc
+{
+    [self->_objects release];
     [super dealloc];
 }
 
@@ -20121,397 +22269,6 @@
 
 @end
 
-@interface KalturaMediaInfo()
-@property (nonatomic,assign) int id;
-@end
-
-@implementation KalturaMediaInfo
-@synthesize id = _id;
-@synthesize flavorAssetId = _flavorAssetId;
-@synthesize fileSize = _fileSize;
-@synthesize containerFormat = _containerFormat;
-@synthesize containerId = _containerId;
-@synthesize containerProfile = _containerProfile;
-@synthesize containerDuration = _containerDuration;
-@synthesize containerBitRate = _containerBitRate;
-@synthesize videoFormat = _videoFormat;
-@synthesize videoCodecId = _videoCodecId;
-@synthesize videoDuration = _videoDuration;
-@synthesize videoBitRate = _videoBitRate;
-@synthesize videoBitRateMode = _videoBitRateMode;
-@synthesize videoWidth = _videoWidth;
-@synthesize videoHeight = _videoHeight;
-@synthesize videoFrameRate = _videoFrameRate;
-@synthesize videoDar = _videoDar;
-@synthesize videoRotation = _videoRotation;
-@synthesize audioFormat = _audioFormat;
-@synthesize audioCodecId = _audioCodecId;
-@synthesize audioDuration = _audioDuration;
-@synthesize audioBitRate = _audioBitRate;
-@synthesize audioBitRateMode = _audioBitRateMode;
-@synthesize audioChannels = _audioChannels;
-@synthesize audioSamplingRate = _audioSamplingRate;
-@synthesize audioResolution = _audioResolution;
-@synthesize writingLib = _writingLib;
-@synthesize rawData = _rawData;
-@synthesize multiStreamInfo = _multiStreamInfo;
-@synthesize scanType = _scanType;
-@synthesize multiStream = _multiStream;
-@synthesize isFastStart = _isFastStart;
-@synthesize contentStreams = _contentStreams;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_id = KALTURA_UNDEF_INT;
-    self->_fileSize = KALTURA_UNDEF_INT;
-    self->_containerDuration = KALTURA_UNDEF_INT;
-    self->_containerBitRate = KALTURA_UNDEF_INT;
-    self->_videoDuration = KALTURA_UNDEF_INT;
-    self->_videoBitRate = KALTURA_UNDEF_INT;
-    self->_videoBitRateMode = KALTURA_UNDEF_INT;
-    self->_videoWidth = KALTURA_UNDEF_INT;
-    self->_videoHeight = KALTURA_UNDEF_INT;
-    self->_videoFrameRate = KALTURA_UNDEF_FLOAT;
-    self->_videoDar = KALTURA_UNDEF_FLOAT;
-    self->_videoRotation = KALTURA_UNDEF_INT;
-    self->_audioDuration = KALTURA_UNDEF_INT;
-    self->_audioBitRate = KALTURA_UNDEF_INT;
-    self->_audioBitRateMode = KALTURA_UNDEF_INT;
-    self->_audioChannels = KALTURA_UNDEF_INT;
-    self->_audioSamplingRate = KALTURA_UNDEF_INT;
-    self->_audioResolution = KALTURA_UNDEF_INT;
-    self->_scanType = KALTURA_UNDEF_INT;
-    self->_isFastStart = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfFlavorAssetId
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfFileSize
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfContainerFormat
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfContainerId
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfContainerProfile
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfContainerDuration
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfContainerBitRate
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfVideoFormat
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfVideoCodecId
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfVideoDuration
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfVideoBitRate
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfVideoBitRateMode
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfVideoWidth
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfVideoHeight
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfVideoFrameRate
-{
-    return KFT_Float;
-}
-
-- (KalturaFieldType)getTypeOfVideoDar
-{
-    return KFT_Float;
-}
-
-- (KalturaFieldType)getTypeOfVideoRotation
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfAudioFormat
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfAudioCodecId
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfAudioDuration
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfAudioBitRate
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfAudioBitRateMode
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfAudioChannels
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfAudioSamplingRate
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfAudioResolution
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfWritingLib
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfRawData
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfMultiStreamInfo
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfScanType
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfMultiStream
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfIsFastStart
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfContentStreams
-{
-    return KFT_String;
-}
-
-- (void)setIdFromString:(NSString*)aPropVal
-{
-    self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setFileSizeFromString:(NSString*)aPropVal
-{
-    self.fileSize = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setContainerDurationFromString:(NSString*)aPropVal
-{
-    self.containerDuration = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setContainerBitRateFromString:(NSString*)aPropVal
-{
-    self.containerBitRate = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setVideoDurationFromString:(NSString*)aPropVal
-{
-    self.videoDuration = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setVideoBitRateFromString:(NSString*)aPropVal
-{
-    self.videoBitRate = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setVideoBitRateModeFromString:(NSString*)aPropVal
-{
-    self.videoBitRateMode = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setVideoWidthFromString:(NSString*)aPropVal
-{
-    self.videoWidth = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setVideoHeightFromString:(NSString*)aPropVal
-{
-    self.videoHeight = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setVideoFrameRateFromString:(NSString*)aPropVal
-{
-    self.videoFrameRate = [KalturaSimpleTypeParser parseFloat:aPropVal];
-}
-
-- (void)setVideoDarFromString:(NSString*)aPropVal
-{
-    self.videoDar = [KalturaSimpleTypeParser parseFloat:aPropVal];
-}
-
-- (void)setVideoRotationFromString:(NSString*)aPropVal
-{
-    self.videoRotation = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setAudioDurationFromString:(NSString*)aPropVal
-{
-    self.audioDuration = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setAudioBitRateFromString:(NSString*)aPropVal
-{
-    self.audioBitRate = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setAudioBitRateModeFromString:(NSString*)aPropVal
-{
-    self.audioBitRateMode = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setAudioChannelsFromString:(NSString*)aPropVal
-{
-    self.audioChannels = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setAudioSamplingRateFromString:(NSString*)aPropVal
-{
-    self.audioSamplingRate = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setAudioResolutionFromString:(NSString*)aPropVal
-{
-    self.audioResolution = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setScanTypeFromString:(NSString*)aPropVal
-{
-    self.scanType = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setIsFastStartFromString:(NSString*)aPropVal
-{
-    self.isFastStart = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaMediaInfo"];
-    [aParams addIfDefinedKey:@"flavorAssetId" withString:self.flavorAssetId];
-    [aParams addIfDefinedKey:@"fileSize" withInt:self.fileSize];
-    [aParams addIfDefinedKey:@"containerFormat" withString:self.containerFormat];
-    [aParams addIfDefinedKey:@"containerId" withString:self.containerId];
-    [aParams addIfDefinedKey:@"containerProfile" withString:self.containerProfile];
-    [aParams addIfDefinedKey:@"containerDuration" withInt:self.containerDuration];
-    [aParams addIfDefinedKey:@"containerBitRate" withInt:self.containerBitRate];
-    [aParams addIfDefinedKey:@"videoFormat" withString:self.videoFormat];
-    [aParams addIfDefinedKey:@"videoCodecId" withString:self.videoCodecId];
-    [aParams addIfDefinedKey:@"videoDuration" withInt:self.videoDuration];
-    [aParams addIfDefinedKey:@"videoBitRate" withInt:self.videoBitRate];
-    [aParams addIfDefinedKey:@"videoBitRateMode" withInt:self.videoBitRateMode];
-    [aParams addIfDefinedKey:@"videoWidth" withInt:self.videoWidth];
-    [aParams addIfDefinedKey:@"videoHeight" withInt:self.videoHeight];
-    [aParams addIfDefinedKey:@"videoFrameRate" withFloat:self.videoFrameRate];
-    [aParams addIfDefinedKey:@"videoDar" withFloat:self.videoDar];
-    [aParams addIfDefinedKey:@"videoRotation" withInt:self.videoRotation];
-    [aParams addIfDefinedKey:@"audioFormat" withString:self.audioFormat];
-    [aParams addIfDefinedKey:@"audioCodecId" withString:self.audioCodecId];
-    [aParams addIfDefinedKey:@"audioDuration" withInt:self.audioDuration];
-    [aParams addIfDefinedKey:@"audioBitRate" withInt:self.audioBitRate];
-    [aParams addIfDefinedKey:@"audioBitRateMode" withInt:self.audioBitRateMode];
-    [aParams addIfDefinedKey:@"audioChannels" withInt:self.audioChannels];
-    [aParams addIfDefinedKey:@"audioSamplingRate" withInt:self.audioSamplingRate];
-    [aParams addIfDefinedKey:@"audioResolution" withInt:self.audioResolution];
-    [aParams addIfDefinedKey:@"writingLib" withString:self.writingLib];
-    [aParams addIfDefinedKey:@"rawData" withString:self.rawData];
-    [aParams addIfDefinedKey:@"multiStreamInfo" withString:self.multiStreamInfo];
-    [aParams addIfDefinedKey:@"scanType" withInt:self.scanType];
-    [aParams addIfDefinedKey:@"multiStream" withString:self.multiStream];
-    [aParams addIfDefinedKey:@"isFastStart" withInt:self.isFastStart];
-    [aParams addIfDefinedKey:@"contentStreams" withString:self.contentStreams];
-}
-
-- (void)dealloc
-{
-    [self->_flavorAssetId release];
-    [self->_containerFormat release];
-    [self->_containerId release];
-    [self->_containerProfile release];
-    [self->_videoFormat release];
-    [self->_videoCodecId release];
-    [self->_audioFormat release];
-    [self->_audioCodecId release];
-    [self->_writingLib release];
-    [self->_rawData release];
-    [self->_multiStreamInfo release];
-    [self->_multiStream release];
-    [self->_contentStreams release];
-    [super dealloc];
-}
-
-@end
-
 @interface KalturaMixEntry()
 @property (nonatomic,assign) KALTURA_BOOL hasRealThumbnail;
 @end
@@ -20708,717 +22465,6 @@
     [self->_flaggedUserId release];
     [self->_status release];
     [self->_comments release];
-    [super dealloc];
-}
-
-@end
-
-@implementation KalturaPlayerDeliveryType
-@synthesize id = _id;
-@synthesize label = _label;
-@synthesize flashvars = _flashvars;
-@synthesize minVersion = _minVersion;
-@synthesize enabledByDefault = _enabledByDefault;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_enabledByDefault = KALTURA_UNDEF_BOOL;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfId
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfLabel
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfFlashvars
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfFlashvars
-{
-    return @"KalturaKeyValue";
-}
-
-- (KalturaFieldType)getTypeOfMinVersion
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfEnabledByDefault
-{
-    return KFT_Bool;
-}
-
-- (void)setEnabledByDefaultFromString:(NSString*)aPropVal
-{
-    self.enabledByDefault = [KalturaSimpleTypeParser parseBool:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaPlayerDeliveryType"];
-    [aParams addIfDefinedKey:@"id" withString:self.id];
-    [aParams addIfDefinedKey:@"label" withString:self.label];
-    [aParams addIfDefinedKey:@"flashvars" withArray:self.flashvars];
-    [aParams addIfDefinedKey:@"minVersion" withString:self.minVersion];
-    [aParams addIfDefinedKey:@"enabledByDefault" withBool:self.enabledByDefault];
-}
-
-- (void)dealloc
-{
-    [self->_id release];
-    [self->_label release];
-    [self->_flashvars release];
-    [self->_minVersion release];
-    [super dealloc];
-}
-
-@end
-
-@implementation KalturaPlayerEmbedCodeType
-@synthesize id = _id;
-@synthesize label = _label;
-@synthesize entryOnly = _entryOnly;
-@synthesize minVersion = _minVersion;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_entryOnly = KALTURA_UNDEF_BOOL;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfId
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfLabel
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfEntryOnly
-{
-    return KFT_Bool;
-}
-
-- (KalturaFieldType)getTypeOfMinVersion
-{
-    return KFT_String;
-}
-
-- (void)setEntryOnlyFromString:(NSString*)aPropVal
-{
-    self.entryOnly = [KalturaSimpleTypeParser parseBool:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaPlayerEmbedCodeType"];
-    [aParams addIfDefinedKey:@"id" withString:self.id];
-    [aParams addIfDefinedKey:@"label" withString:self.label];
-    [aParams addIfDefinedKey:@"entryOnly" withBool:self.entryOnly];
-    [aParams addIfDefinedKey:@"minVersion" withString:self.minVersion];
-}
-
-- (void)dealloc
-{
-    [self->_id release];
-    [self->_label release];
-    [self->_minVersion release];
-    [super dealloc];
-}
-
-@end
-
-@interface KalturaPartner()
-@property (nonatomic,assign) int id;
-@property (nonatomic,assign) int createdAt;
-@property (nonatomic,assign) int status;
-@property (nonatomic,assign) int partnerPackage;
-@property (nonatomic,copy) NSString* secret;
-@property (nonatomic,copy) NSString* adminSecret;
-@property (nonatomic,copy) NSString* cmsPassword;
-@property (nonatomic,assign) int adminLoginUsersQuota;
-@property (nonatomic,assign) int publishersQuota;
-@property (nonatomic,assign) int partnerGroupType;
-@property (nonatomic,assign) KALTURA_BOOL defaultEntitlementEnforcement;
-@property (nonatomic,copy) NSString* defaultDeliveryType;
-@property (nonatomic,copy) NSString* defaultEmbedCodeType;
-@property (nonatomic,retain) NSMutableArray* deliveryTypes;
-@property (nonatomic,retain) NSMutableArray* embedCodeTypes;
-@property (nonatomic,assign) int templatePartnerId;
-@property (nonatomic,assign) KALTURA_BOOL ignoreSeoLinks;
-@property (nonatomic,copy) NSString* host;
-@property (nonatomic,copy) NSString* cdnHost;
-@property (nonatomic,assign) KALTURA_BOOL isFirstLogin;
-@property (nonatomic,copy) NSString* logoutUrl;
-@property (nonatomic,assign) int partnerParentId;
-@property (nonatomic,copy) NSString* crmId;
-@property (nonatomic,assign) KALTURA_BOOL timeAlignedRenditions;
-@end
-
-@implementation KalturaPartner
-@synthesize id = _id;
-@synthesize name = _name;
-@synthesize website = _website;
-@synthesize notificationUrl = _notificationUrl;
-@synthesize appearInSearch = _appearInSearch;
-@synthesize createdAt = _createdAt;
-@synthesize adminName = _adminName;
-@synthesize adminEmail = _adminEmail;
-@synthesize description = _description;
-@synthesize commercialUse = _commercialUse;
-@synthesize landingPage = _landingPage;
-@synthesize userLandingPage = _userLandingPage;
-@synthesize contentCategories = _contentCategories;
-@synthesize type = _type;
-@synthesize phone = _phone;
-@synthesize describeYourself = _describeYourself;
-@synthesize adultContent = _adultContent;
-@synthesize defConversionProfileType = _defConversionProfileType;
-@synthesize notify = _notify;
-@synthesize status = _status;
-@synthesize allowQuickEdit = _allowQuickEdit;
-@synthesize mergeEntryLists = _mergeEntryLists;
-@synthesize notificationsConfig = _notificationsConfig;
-@synthesize maxUploadSize = _maxUploadSize;
-@synthesize partnerPackage = _partnerPackage;
-@synthesize secret = _secret;
-@synthesize adminSecret = _adminSecret;
-@synthesize cmsPassword = _cmsPassword;
-@synthesize allowMultiNotification = _allowMultiNotification;
-@synthesize adminLoginUsersQuota = _adminLoginUsersQuota;
-@synthesize adminUserId = _adminUserId;
-@synthesize firstName = _firstName;
-@synthesize lastName = _lastName;
-@synthesize country = _country;
-@synthesize state = _state;
-@synthesize additionalParams = _additionalParams;
-@synthesize publishersQuota = _publishersQuota;
-@synthesize partnerGroupType = _partnerGroupType;
-@synthesize defaultEntitlementEnforcement = _defaultEntitlementEnforcement;
-@synthesize defaultDeliveryType = _defaultDeliveryType;
-@synthesize defaultEmbedCodeType = _defaultEmbedCodeType;
-@synthesize deliveryTypes = _deliveryTypes;
-@synthesize embedCodeTypes = _embedCodeTypes;
-@synthesize templatePartnerId = _templatePartnerId;
-@synthesize ignoreSeoLinks = _ignoreSeoLinks;
-@synthesize host = _host;
-@synthesize cdnHost = _cdnHost;
-@synthesize isFirstLogin = _isFirstLogin;
-@synthesize logoutUrl = _logoutUrl;
-@synthesize partnerParentId = _partnerParentId;
-@synthesize crmId = _crmId;
-@synthesize referenceId = _referenceId;
-@synthesize timeAlignedRenditions = _timeAlignedRenditions;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_id = KALTURA_UNDEF_INT;
-    self->_appearInSearch = KALTURA_UNDEF_INT;
-    self->_createdAt = KALTURA_UNDEF_INT;
-    self->_commercialUse = KALTURA_UNDEF_INT;
-    self->_type = KALTURA_UNDEF_INT;
-    self->_adultContent = KALTURA_UNDEF_BOOL;
-    self->_notify = KALTURA_UNDEF_INT;
-    self->_status = KALTURA_UNDEF_INT;
-    self->_allowQuickEdit = KALTURA_UNDEF_INT;
-    self->_mergeEntryLists = KALTURA_UNDEF_INT;
-    self->_maxUploadSize = KALTURA_UNDEF_INT;
-    self->_partnerPackage = KALTURA_UNDEF_INT;
-    self->_allowMultiNotification = KALTURA_UNDEF_INT;
-    self->_adminLoginUsersQuota = KALTURA_UNDEF_INT;
-    self->_publishersQuota = KALTURA_UNDEF_INT;
-    self->_partnerGroupType = KALTURA_UNDEF_INT;
-    self->_defaultEntitlementEnforcement = KALTURA_UNDEF_BOOL;
-    self->_templatePartnerId = KALTURA_UNDEF_INT;
-    self->_ignoreSeoLinks = KALTURA_UNDEF_BOOL;
-    self->_isFirstLogin = KALTURA_UNDEF_BOOL;
-    self->_partnerParentId = KALTURA_UNDEF_INT;
-    self->_timeAlignedRenditions = KALTURA_UNDEF_BOOL;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfName
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfWebsite
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfNotificationUrl
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfAppearInSearch
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCreatedAt
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfAdminName
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfAdminEmail
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfDescription
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfCommercialUse
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfLandingPage
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfUserLandingPage
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfContentCategories
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfType
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfPhone
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfDescribeYourself
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfAdultContent
-{
-    return KFT_Bool;
-}
-
-- (KalturaFieldType)getTypeOfDefConversionProfileType
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfNotify
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfStatus
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfAllowQuickEdit
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfMergeEntryLists
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfNotificationsConfig
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfMaxUploadSize
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfPartnerPackage
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfSecret
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfAdminSecret
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfCmsPassword
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfAllowMultiNotification
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfAdminLoginUsersQuota
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfAdminUserId
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfFirstName
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfLastName
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfCountry
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfState
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfAdditionalParams
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfAdditionalParams
-{
-    return @"KalturaKeyValue";
-}
-
-- (KalturaFieldType)getTypeOfPublishersQuota
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfPartnerGroupType
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfDefaultEntitlementEnforcement
-{
-    return KFT_Bool;
-}
-
-- (KalturaFieldType)getTypeOfDefaultDeliveryType
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfDefaultEmbedCodeType
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfDeliveryTypes
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfDeliveryTypes
-{
-    return @"KalturaPlayerDeliveryType";
-}
-
-- (KalturaFieldType)getTypeOfEmbedCodeTypes
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfEmbedCodeTypes
-{
-    return @"KalturaPlayerEmbedCodeType";
-}
-
-- (KalturaFieldType)getTypeOfTemplatePartnerId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfIgnoreSeoLinks
-{
-    return KFT_Bool;
-}
-
-- (KalturaFieldType)getTypeOfHost
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfCdnHost
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfIsFirstLogin
-{
-    return KFT_Bool;
-}
-
-- (KalturaFieldType)getTypeOfLogoutUrl
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfPartnerParentId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCrmId
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfReferenceId
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfTimeAlignedRenditions
-{
-    return KFT_Bool;
-}
-
-- (void)setIdFromString:(NSString*)aPropVal
-{
-    self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setAppearInSearchFromString:(NSString*)aPropVal
-{
-    self.appearInSearch = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCreatedAtFromString:(NSString*)aPropVal
-{
-    self.createdAt = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCommercialUseFromString:(NSString*)aPropVal
-{
-    self.commercialUse = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setTypeFromString:(NSString*)aPropVal
-{
-    self.type = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setAdultContentFromString:(NSString*)aPropVal
-{
-    self.adultContent = [KalturaSimpleTypeParser parseBool:aPropVal];
-}
-
-- (void)setNotifyFromString:(NSString*)aPropVal
-{
-    self.notify = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setStatusFromString:(NSString*)aPropVal
-{
-    self.status = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setAllowQuickEditFromString:(NSString*)aPropVal
-{
-    self.allowQuickEdit = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setMergeEntryListsFromString:(NSString*)aPropVal
-{
-    self.mergeEntryLists = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setMaxUploadSizeFromString:(NSString*)aPropVal
-{
-    self.maxUploadSize = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setPartnerPackageFromString:(NSString*)aPropVal
-{
-    self.partnerPackage = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setAllowMultiNotificationFromString:(NSString*)aPropVal
-{
-    self.allowMultiNotification = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setAdminLoginUsersQuotaFromString:(NSString*)aPropVal
-{
-    self.adminLoginUsersQuota = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setPublishersQuotaFromString:(NSString*)aPropVal
-{
-    self.publishersQuota = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setPartnerGroupTypeFromString:(NSString*)aPropVal
-{
-    self.partnerGroupType = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setDefaultEntitlementEnforcementFromString:(NSString*)aPropVal
-{
-    self.defaultEntitlementEnforcement = [KalturaSimpleTypeParser parseBool:aPropVal];
-}
-
-- (void)setTemplatePartnerIdFromString:(NSString*)aPropVal
-{
-    self.templatePartnerId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setIgnoreSeoLinksFromString:(NSString*)aPropVal
-{
-    self.ignoreSeoLinks = [KalturaSimpleTypeParser parseBool:aPropVal];
-}
-
-- (void)setIsFirstLoginFromString:(NSString*)aPropVal
-{
-    self.isFirstLogin = [KalturaSimpleTypeParser parseBool:aPropVal];
-}
-
-- (void)setPartnerParentIdFromString:(NSString*)aPropVal
-{
-    self.partnerParentId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setTimeAlignedRenditionsFromString:(NSString*)aPropVal
-{
-    self.timeAlignedRenditions = [KalturaSimpleTypeParser parseBool:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaPartner"];
-    [aParams addIfDefinedKey:@"name" withString:self.name];
-    [aParams addIfDefinedKey:@"website" withString:self.website];
-    [aParams addIfDefinedKey:@"notificationUrl" withString:self.notificationUrl];
-    [aParams addIfDefinedKey:@"appearInSearch" withInt:self.appearInSearch];
-    [aParams addIfDefinedKey:@"adminName" withString:self.adminName];
-    [aParams addIfDefinedKey:@"adminEmail" withString:self.adminEmail];
-    [aParams addIfDefinedKey:@"description" withString:self.description];
-    [aParams addIfDefinedKey:@"commercialUse" withInt:self.commercialUse];
-    [aParams addIfDefinedKey:@"landingPage" withString:self.landingPage];
-    [aParams addIfDefinedKey:@"userLandingPage" withString:self.userLandingPage];
-    [aParams addIfDefinedKey:@"contentCategories" withString:self.contentCategories];
-    [aParams addIfDefinedKey:@"type" withInt:self.type];
-    [aParams addIfDefinedKey:@"phone" withString:self.phone];
-    [aParams addIfDefinedKey:@"describeYourself" withString:self.describeYourself];
-    [aParams addIfDefinedKey:@"adultContent" withBool:self.adultContent];
-    [aParams addIfDefinedKey:@"defConversionProfileType" withString:self.defConversionProfileType];
-    [aParams addIfDefinedKey:@"notify" withInt:self.notify];
-    [aParams addIfDefinedKey:@"allowQuickEdit" withInt:self.allowQuickEdit];
-    [aParams addIfDefinedKey:@"mergeEntryLists" withInt:self.mergeEntryLists];
-    [aParams addIfDefinedKey:@"notificationsConfig" withString:self.notificationsConfig];
-    [aParams addIfDefinedKey:@"maxUploadSize" withInt:self.maxUploadSize];
-    [aParams addIfDefinedKey:@"allowMultiNotification" withInt:self.allowMultiNotification];
-    [aParams addIfDefinedKey:@"adminUserId" withString:self.adminUserId];
-    [aParams addIfDefinedKey:@"firstName" withString:self.firstName];
-    [aParams addIfDefinedKey:@"lastName" withString:self.lastName];
-    [aParams addIfDefinedKey:@"country" withString:self.country];
-    [aParams addIfDefinedKey:@"state" withString:self.state];
-    [aParams addIfDefinedKey:@"additionalParams" withArray:self.additionalParams];
-    [aParams addIfDefinedKey:@"referenceId" withString:self.referenceId];
-}
-
-- (void)dealloc
-{
-    [self->_name release];
-    [self->_website release];
-    [self->_notificationUrl release];
-    [self->_adminName release];
-    [self->_adminEmail release];
-    [self->_description release];
-    [self->_landingPage release];
-    [self->_userLandingPage release];
-    [self->_contentCategories release];
-    [self->_phone release];
-    [self->_describeYourself release];
-    [self->_defConversionProfileType release];
-    [self->_notificationsConfig release];
-    [self->_secret release];
-    [self->_adminSecret release];
-    [self->_cmsPassword release];
-    [self->_adminUserId release];
-    [self->_firstName release];
-    [self->_lastName release];
-    [self->_country release];
-    [self->_state release];
-    [self->_additionalParams release];
-    [self->_defaultDeliveryType release];
-    [self->_defaultEmbedCodeType release];
-    [self->_deliveryTypes release];
-    [self->_embedCodeTypes release];
-    [self->_host release];
-    [self->_cdnHost release];
-    [self->_logoutUrl release];
-    [self->_crmId release];
-    [self->_referenceId release];
     [super dealloc];
 }
 
@@ -22502,64 +23548,6 @@
 
 @end
 
-@implementation KalturaRequestConfiguration
-@synthesize partnerId = _partnerId;
-@synthesize ks = _ks;
-@synthesize responseProfile = _responseProfile;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_partnerId = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfPartnerId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfKs
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfResponseProfile
-{
-    return KFT_Object;
-}
-
-- (NSString*)getObjectTypeOfResponseProfile
-{
-    return @"KalturaBaseResponseProfile";
-}
-
-- (void)setPartnerIdFromString:(NSString*)aPropVal
-{
-    self.partnerId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaRequestConfiguration"];
-    [aParams addIfDefinedKey:@"partnerId" withInt:self.partnerId];
-    [aParams addIfDefinedKey:@"ks" withString:self.ks];
-    [aParams addIfDefinedKey:@"responseProfile" withObject:self.responseProfile];
-}
-
-- (void)dealloc
-{
-    [self->_ks release];
-    [self->_responseProfile release];
-    [super dealloc];
-}
-
-@end
-
 @interface KalturaResponseProfile()
 @property (nonatomic,assign) int id;
 @property (nonatomic,assign) int partnerId;
@@ -22808,627 +23796,6 @@
 - (void)dealloc
 {
     [self->_lastObjectKey release];
-    [super dealloc];
-}
-
-@end
-
-@interface KalturaSchedulerStatus()
-@property (nonatomic,assign) int id;
-@property (nonatomic,assign) int schedulerId;
-@property (nonatomic,assign) int workerId;
-@end
-
-@implementation KalturaSchedulerStatus
-@synthesize id = _id;
-@synthesize schedulerConfiguredId = _schedulerConfiguredId;
-@synthesize workerConfiguredId = _workerConfiguredId;
-@synthesize workerType = _workerType;
-@synthesize type = _type;
-@synthesize value = _value;
-@synthesize schedulerId = _schedulerId;
-@synthesize workerId = _workerId;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_id = KALTURA_UNDEF_INT;
-    self->_schedulerConfiguredId = KALTURA_UNDEF_INT;
-    self->_workerConfiguredId = KALTURA_UNDEF_INT;
-    self->_type = KALTURA_UNDEF_INT;
-    self->_value = KALTURA_UNDEF_INT;
-    self->_schedulerId = KALTURA_UNDEF_INT;
-    self->_workerId = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfSchedulerConfiguredId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfWorkerConfiguredId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfWorkerType
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfType
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfValue
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfSchedulerId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfWorkerId
-{
-    return KFT_Int;
-}
-
-- (void)setIdFromString:(NSString*)aPropVal
-{
-    self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setSchedulerConfiguredIdFromString:(NSString*)aPropVal
-{
-    self.schedulerConfiguredId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setWorkerConfiguredIdFromString:(NSString*)aPropVal
-{
-    self.workerConfiguredId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setTypeFromString:(NSString*)aPropVal
-{
-    self.type = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setValueFromString:(NSString*)aPropVal
-{
-    self.value = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setSchedulerIdFromString:(NSString*)aPropVal
-{
-    self.schedulerId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setWorkerIdFromString:(NSString*)aPropVal
-{
-    self.workerId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaSchedulerStatus"];
-    [aParams addIfDefinedKey:@"schedulerConfiguredId" withInt:self.schedulerConfiguredId];
-    [aParams addIfDefinedKey:@"workerConfiguredId" withInt:self.workerConfiguredId];
-    [aParams addIfDefinedKey:@"workerType" withString:self.workerType];
-    [aParams addIfDefinedKey:@"type" withInt:self.type];
-    [aParams addIfDefinedKey:@"value" withInt:self.value];
-}
-
-- (void)dealloc
-{
-    [self->_workerType release];
-    [super dealloc];
-}
-
-@end
-
-@interface KalturaSchedulerConfig()
-@property (nonatomic,assign) int id;
-@end
-
-@implementation KalturaSchedulerConfig
-@synthesize id = _id;
-@synthesize createdBy = _createdBy;
-@synthesize updatedBy = _updatedBy;
-@synthesize commandId = _commandId;
-@synthesize commandStatus = _commandStatus;
-@synthesize schedulerId = _schedulerId;
-@synthesize schedulerConfiguredId = _schedulerConfiguredId;
-@synthesize schedulerName = _schedulerName;
-@synthesize workerId = _workerId;
-@synthesize workerConfiguredId = _workerConfiguredId;
-@synthesize workerName = _workerName;
-@synthesize variable = _variable;
-@synthesize variablePart = _variablePart;
-@synthesize value = _value;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_id = KALTURA_UNDEF_INT;
-    self->_schedulerId = KALTURA_UNDEF_INT;
-    self->_schedulerConfiguredId = KALTURA_UNDEF_INT;
-    self->_workerId = KALTURA_UNDEF_INT;
-    self->_workerConfiguredId = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCreatedBy
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfUpdatedBy
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfCommandId
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfCommandStatus
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfSchedulerId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfSchedulerConfiguredId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfSchedulerName
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfWorkerId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfWorkerConfiguredId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfWorkerName
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfVariable
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfVariablePart
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfValue
-{
-    return KFT_String;
-}
-
-- (void)setIdFromString:(NSString*)aPropVal
-{
-    self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setSchedulerIdFromString:(NSString*)aPropVal
-{
-    self.schedulerId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setSchedulerConfiguredIdFromString:(NSString*)aPropVal
-{
-    self.schedulerConfiguredId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setWorkerIdFromString:(NSString*)aPropVal
-{
-    self.workerId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setWorkerConfiguredIdFromString:(NSString*)aPropVal
-{
-    self.workerConfiguredId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaSchedulerConfig"];
-    [aParams addIfDefinedKey:@"createdBy" withString:self.createdBy];
-    [aParams addIfDefinedKey:@"updatedBy" withString:self.updatedBy];
-    [aParams addIfDefinedKey:@"commandId" withString:self.commandId];
-    [aParams addIfDefinedKey:@"commandStatus" withString:self.commandStatus];
-    [aParams addIfDefinedKey:@"schedulerId" withInt:self.schedulerId];
-    [aParams addIfDefinedKey:@"schedulerConfiguredId" withInt:self.schedulerConfiguredId];
-    [aParams addIfDefinedKey:@"schedulerName" withString:self.schedulerName];
-    [aParams addIfDefinedKey:@"workerId" withInt:self.workerId];
-    [aParams addIfDefinedKey:@"workerConfiguredId" withInt:self.workerConfiguredId];
-    [aParams addIfDefinedKey:@"workerName" withString:self.workerName];
-    [aParams addIfDefinedKey:@"variable" withString:self.variable];
-    [aParams addIfDefinedKey:@"variablePart" withString:self.variablePart];
-    [aParams addIfDefinedKey:@"value" withString:self.value];
-}
-
-- (void)dealloc
-{
-    [self->_createdBy release];
-    [self->_updatedBy release];
-    [self->_commandId release];
-    [self->_commandStatus release];
-    [self->_schedulerName release];
-    [self->_workerName release];
-    [self->_variable release];
-    [self->_variablePart release];
-    [self->_value release];
-    [super dealloc];
-}
-
-@end
-
-@interface KalturaSchedulerWorker()
-@property (nonatomic,assign) int id;
-@end
-
-@implementation KalturaSchedulerWorker
-@synthesize id = _id;
-@synthesize configuredId = _configuredId;
-@synthesize schedulerId = _schedulerId;
-@synthesize schedulerConfiguredId = _schedulerConfiguredId;
-@synthesize type = _type;
-@synthesize typeName = _typeName;
-@synthesize name = _name;
-@synthesize statuses = _statuses;
-@synthesize configs = _configs;
-@synthesize lockedJobs = _lockedJobs;
-@synthesize avgWait = _avgWait;
-@synthesize avgWork = _avgWork;
-@synthesize lastStatus = _lastStatus;
-@synthesize lastStatusStr = _lastStatusStr;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_id = KALTURA_UNDEF_INT;
-    self->_configuredId = KALTURA_UNDEF_INT;
-    self->_schedulerId = KALTURA_UNDEF_INT;
-    self->_schedulerConfiguredId = KALTURA_UNDEF_INT;
-    self->_avgWait = KALTURA_UNDEF_INT;
-    self->_avgWork = KALTURA_UNDEF_INT;
-    self->_lastStatus = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfConfiguredId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfSchedulerId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfSchedulerConfiguredId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfType
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfTypeName
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfName
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfStatuses
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfStatuses
-{
-    return @"KalturaSchedulerStatus";
-}
-
-- (KalturaFieldType)getTypeOfConfigs
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfConfigs
-{
-    return @"KalturaSchedulerConfig";
-}
-
-- (KalturaFieldType)getTypeOfLockedJobs
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfLockedJobs
-{
-    return @"KalturaBatchJob";
-}
-
-- (KalturaFieldType)getTypeOfAvgWait
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfAvgWork
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfLastStatus
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfLastStatusStr
-{
-    return KFT_String;
-}
-
-- (void)setIdFromString:(NSString*)aPropVal
-{
-    self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setConfiguredIdFromString:(NSString*)aPropVal
-{
-    self.configuredId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setSchedulerIdFromString:(NSString*)aPropVal
-{
-    self.schedulerId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setSchedulerConfiguredIdFromString:(NSString*)aPropVal
-{
-    self.schedulerConfiguredId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setAvgWaitFromString:(NSString*)aPropVal
-{
-    self.avgWait = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setAvgWorkFromString:(NSString*)aPropVal
-{
-    self.avgWork = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setLastStatusFromString:(NSString*)aPropVal
-{
-    self.lastStatus = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaSchedulerWorker"];
-    [aParams addIfDefinedKey:@"configuredId" withInt:self.configuredId];
-    [aParams addIfDefinedKey:@"schedulerId" withInt:self.schedulerId];
-    [aParams addIfDefinedKey:@"schedulerConfiguredId" withInt:self.schedulerConfiguredId];
-    [aParams addIfDefinedKey:@"type" withString:self.type];
-    [aParams addIfDefinedKey:@"typeName" withString:self.typeName];
-    [aParams addIfDefinedKey:@"name" withString:self.name];
-    [aParams addIfDefinedKey:@"statuses" withArray:self.statuses];
-    [aParams addIfDefinedKey:@"configs" withArray:self.configs];
-    [aParams addIfDefinedKey:@"lockedJobs" withArray:self.lockedJobs];
-    [aParams addIfDefinedKey:@"avgWait" withInt:self.avgWait];
-    [aParams addIfDefinedKey:@"avgWork" withInt:self.avgWork];
-    [aParams addIfDefinedKey:@"lastStatus" withInt:self.lastStatus];
-    [aParams addIfDefinedKey:@"lastStatusStr" withString:self.lastStatusStr];
-}
-
-- (void)dealloc
-{
-    [self->_type release];
-    [self->_typeName release];
-    [self->_name release];
-    [self->_statuses release];
-    [self->_configs release];
-    [self->_lockedJobs release];
-    [self->_lastStatusStr release];
-    [super dealloc];
-}
-
-@end
-
-@interface KalturaScheduler()
-@property (nonatomic,assign) int id;
-@property (nonatomic,retain) NSMutableArray* statuses;
-@property (nonatomic,retain) NSMutableArray* configs;
-@property (nonatomic,retain) NSMutableArray* workers;
-@property (nonatomic,assign) int createdAt;
-@property (nonatomic,assign) int lastStatus;
-@property (nonatomic,copy) NSString* lastStatusStr;
-@end
-
-@implementation KalturaScheduler
-@synthesize id = _id;
-@synthesize configuredId = _configuredId;
-@synthesize name = _name;
-@synthesize host = _host;
-@synthesize statuses = _statuses;
-@synthesize configs = _configs;
-@synthesize workers = _workers;
-@synthesize createdAt = _createdAt;
-@synthesize lastStatus = _lastStatus;
-@synthesize lastStatusStr = _lastStatusStr;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_id = KALTURA_UNDEF_INT;
-    self->_configuredId = KALTURA_UNDEF_INT;
-    self->_createdAt = KALTURA_UNDEF_INT;
-    self->_lastStatus = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfConfiguredId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfName
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfHost
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfStatuses
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfStatuses
-{
-    return @"KalturaSchedulerStatus";
-}
-
-- (KalturaFieldType)getTypeOfConfigs
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfConfigs
-{
-    return @"KalturaSchedulerConfig";
-}
-
-- (KalturaFieldType)getTypeOfWorkers
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfWorkers
-{
-    return @"KalturaSchedulerWorker";
-}
-
-- (KalturaFieldType)getTypeOfCreatedAt
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfLastStatus
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfLastStatusStr
-{
-    return KFT_String;
-}
-
-- (void)setIdFromString:(NSString*)aPropVal
-{
-    self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setConfiguredIdFromString:(NSString*)aPropVal
-{
-    self.configuredId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCreatedAtFromString:(NSString*)aPropVal
-{
-    self.createdAt = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setLastStatusFromString:(NSString*)aPropVal
-{
-    self.lastStatus = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaScheduler"];
-    [aParams addIfDefinedKey:@"configuredId" withInt:self.configuredId];
-    [aParams addIfDefinedKey:@"name" withString:self.name];
-    [aParams addIfDefinedKey:@"host" withString:self.host];
-}
-
-- (void)dealloc
-{
-    [self->_name release];
-    [self->_host release];
-    [self->_statuses release];
-    [self->_configs release];
-    [self->_workers release];
-    [self->_lastStatusStr release];
     [super dealloc];
 }
 
@@ -24927,389 +25294,6 @@
 
 @end
 
-@interface KalturaThumbAsset()
-@property (nonatomic,assign) int width;
-@property (nonatomic,assign) int height;
-@property (nonatomic,assign) int status;
-@end
-
-@implementation KalturaThumbAsset
-@synthesize thumbParamsId = _thumbParamsId;
-@synthesize width = _width;
-@synthesize height = _height;
-@synthesize status = _status;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_thumbParamsId = KALTURA_UNDEF_INT;
-    self->_width = KALTURA_UNDEF_INT;
-    self->_height = KALTURA_UNDEF_INT;
-    self->_status = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfThumbParamsId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfWidth
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfHeight
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfStatus
-{
-    return KFT_Int;
-}
-
-- (void)setThumbParamsIdFromString:(NSString*)aPropVal
-{
-    self.thumbParamsId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setWidthFromString:(NSString*)aPropVal
-{
-    self.width = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setHeightFromString:(NSString*)aPropVal
-{
-    self.height = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setStatusFromString:(NSString*)aPropVal
-{
-    self.status = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaThumbAsset"];
-    [aParams addIfDefinedKey:@"thumbParamsId" withInt:self.thumbParamsId];
-}
-
-@end
-
-@implementation KalturaThumbParams
-@synthesize cropType = _cropType;
-@synthesize quality = _quality;
-@synthesize cropX = _cropX;
-@synthesize cropY = _cropY;
-@synthesize cropWidth = _cropWidth;
-@synthesize cropHeight = _cropHeight;
-@synthesize videoOffset = _videoOffset;
-@synthesize width = _width;
-@synthesize height = _height;
-@synthesize scaleWidth = _scaleWidth;
-@synthesize scaleHeight = _scaleHeight;
-@synthesize backgroundColor = _backgroundColor;
-@synthesize sourceParamsId = _sourceParamsId;
-@synthesize format = _format;
-@synthesize density = _density;
-@synthesize stripProfiles = _stripProfiles;
-@synthesize videoOffsetInPercentage = _videoOffsetInPercentage;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_cropType = KALTURA_UNDEF_INT;
-    self->_quality = KALTURA_UNDEF_INT;
-    self->_cropX = KALTURA_UNDEF_INT;
-    self->_cropY = KALTURA_UNDEF_INT;
-    self->_cropWidth = KALTURA_UNDEF_INT;
-    self->_cropHeight = KALTURA_UNDEF_INT;
-    self->_videoOffset = KALTURA_UNDEF_FLOAT;
-    self->_width = KALTURA_UNDEF_INT;
-    self->_height = KALTURA_UNDEF_INT;
-    self->_scaleWidth = KALTURA_UNDEF_FLOAT;
-    self->_scaleHeight = KALTURA_UNDEF_FLOAT;
-    self->_sourceParamsId = KALTURA_UNDEF_INT;
-    self->_density = KALTURA_UNDEF_INT;
-    self->_stripProfiles = KALTURA_UNDEF_BOOL;
-    self->_videoOffsetInPercentage = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfCropType
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfQuality
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCropX
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCropY
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCropWidth
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCropHeight
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfVideoOffset
-{
-    return KFT_Float;
-}
-
-- (KalturaFieldType)getTypeOfWidth
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfHeight
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfScaleWidth
-{
-    return KFT_Float;
-}
-
-- (KalturaFieldType)getTypeOfScaleHeight
-{
-    return KFT_Float;
-}
-
-- (KalturaFieldType)getTypeOfBackgroundColor
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfSourceParamsId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfFormat
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfDensity
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfStripProfiles
-{
-    return KFT_Bool;
-}
-
-- (KalturaFieldType)getTypeOfVideoOffsetInPercentage
-{
-    return KFT_Int;
-}
-
-- (void)setCropTypeFromString:(NSString*)aPropVal
-{
-    self.cropType = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setQualityFromString:(NSString*)aPropVal
-{
-    self.quality = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCropXFromString:(NSString*)aPropVal
-{
-    self.cropX = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCropYFromString:(NSString*)aPropVal
-{
-    self.cropY = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCropWidthFromString:(NSString*)aPropVal
-{
-    self.cropWidth = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCropHeightFromString:(NSString*)aPropVal
-{
-    self.cropHeight = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setVideoOffsetFromString:(NSString*)aPropVal
-{
-    self.videoOffset = [KalturaSimpleTypeParser parseFloat:aPropVal];
-}
-
-- (void)setWidthFromString:(NSString*)aPropVal
-{
-    self.width = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setHeightFromString:(NSString*)aPropVal
-{
-    self.height = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setScaleWidthFromString:(NSString*)aPropVal
-{
-    self.scaleWidth = [KalturaSimpleTypeParser parseFloat:aPropVal];
-}
-
-- (void)setScaleHeightFromString:(NSString*)aPropVal
-{
-    self.scaleHeight = [KalturaSimpleTypeParser parseFloat:aPropVal];
-}
-
-- (void)setSourceParamsIdFromString:(NSString*)aPropVal
-{
-    self.sourceParamsId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setDensityFromString:(NSString*)aPropVal
-{
-    self.density = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setStripProfilesFromString:(NSString*)aPropVal
-{
-    self.stripProfiles = [KalturaSimpleTypeParser parseBool:aPropVal];
-}
-
-- (void)setVideoOffsetInPercentageFromString:(NSString*)aPropVal
-{
-    self.videoOffsetInPercentage = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaThumbParams"];
-    [aParams addIfDefinedKey:@"cropType" withInt:self.cropType];
-    [aParams addIfDefinedKey:@"quality" withInt:self.quality];
-    [aParams addIfDefinedKey:@"cropX" withInt:self.cropX];
-    [aParams addIfDefinedKey:@"cropY" withInt:self.cropY];
-    [aParams addIfDefinedKey:@"cropWidth" withInt:self.cropWidth];
-    [aParams addIfDefinedKey:@"cropHeight" withInt:self.cropHeight];
-    [aParams addIfDefinedKey:@"videoOffset" withFloat:self.videoOffset];
-    [aParams addIfDefinedKey:@"width" withInt:self.width];
-    [aParams addIfDefinedKey:@"height" withInt:self.height];
-    [aParams addIfDefinedKey:@"scaleWidth" withFloat:self.scaleWidth];
-    [aParams addIfDefinedKey:@"scaleHeight" withFloat:self.scaleHeight];
-    [aParams addIfDefinedKey:@"backgroundColor" withString:self.backgroundColor];
-    [aParams addIfDefinedKey:@"sourceParamsId" withInt:self.sourceParamsId];
-    [aParams addIfDefinedKey:@"format" withString:self.format];
-    [aParams addIfDefinedKey:@"density" withInt:self.density];
-    [aParams addIfDefinedKey:@"stripProfiles" withBool:self.stripProfiles];
-    [aParams addIfDefinedKey:@"videoOffsetInPercentage" withInt:self.videoOffsetInPercentage];
-}
-
-- (void)dealloc
-{
-    [self->_backgroundColor release];
-    [self->_format release];
-    [super dealloc];
-}
-
-@end
-
-@implementation KalturaThumbParamsOutput
-@synthesize thumbParamsId = _thumbParamsId;
-@synthesize thumbParamsVersion = _thumbParamsVersion;
-@synthesize thumbAssetId = _thumbAssetId;
-@synthesize thumbAssetVersion = _thumbAssetVersion;
-@synthesize rotate = _rotate;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_thumbParamsId = KALTURA_UNDEF_INT;
-    self->_rotate = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfThumbParamsId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfThumbParamsVersion
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfThumbAssetId
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfThumbAssetVersion
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfRotate
-{
-    return KFT_Int;
-}
-
-- (void)setThumbParamsIdFromString:(NSString*)aPropVal
-{
-    self.thumbParamsId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setRotateFromString:(NSString*)aPropVal
-{
-    self.rotate = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaThumbParamsOutput"];
-    [aParams addIfDefinedKey:@"thumbParamsId" withInt:self.thumbParamsId];
-    [aParams addIfDefinedKey:@"thumbParamsVersion" withString:self.thumbParamsVersion];
-    [aParams addIfDefinedKey:@"thumbAssetId" withString:self.thumbAssetId];
-    [aParams addIfDefinedKey:@"thumbAssetVersion" withString:self.thumbAssetVersion];
-    [aParams addIfDefinedKey:@"rotate" withInt:self.rotate];
-}
-
-- (void)dealloc
-{
-    [self->_thumbParamsVersion release];
-    [self->_thumbAssetId release];
-    [self->_thumbAssetVersion release];
-    [super dealloc];
-}
-
-@end
-
 @implementation KalturaThumbnailServeOptions
 @synthesize download = _download;
 @synthesize referrer = _referrer;
@@ -26748,6 +26732,545 @@
 
 @end
 
+@implementation KalturaBatchJobBaseFilter
+@synthesize idEqual = _idEqual;
+@synthesize idGreaterThanOrEqual = _idGreaterThanOrEqual;
+@synthesize partnerIdEqual = _partnerIdEqual;
+@synthesize partnerIdIn = _partnerIdIn;
+@synthesize partnerIdNotIn = _partnerIdNotIn;
+@synthesize createdAtGreaterThanOrEqual = _createdAtGreaterThanOrEqual;
+@synthesize createdAtLessThanOrEqual = _createdAtLessThanOrEqual;
+@synthesize updatedAtGreaterThanOrEqual = _updatedAtGreaterThanOrEqual;
+@synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
+@synthesize executionAttemptsGreaterThanOrEqual = _executionAttemptsGreaterThanOrEqual;
+@synthesize executionAttemptsLessThanOrEqual = _executionAttemptsLessThanOrEqual;
+@synthesize lockVersionGreaterThanOrEqual = _lockVersionGreaterThanOrEqual;
+@synthesize lockVersionLessThanOrEqual = _lockVersionLessThanOrEqual;
+@synthesize entryIdEqual = _entryIdEqual;
+@synthesize jobTypeEqual = _jobTypeEqual;
+@synthesize jobTypeIn = _jobTypeIn;
+@synthesize jobTypeNotIn = _jobTypeNotIn;
+@synthesize jobSubTypeEqual = _jobSubTypeEqual;
+@synthesize jobSubTypeIn = _jobSubTypeIn;
+@synthesize jobSubTypeNotIn = _jobSubTypeNotIn;
+@synthesize statusEqual = _statusEqual;
+@synthesize statusIn = _statusIn;
+@synthesize statusNotIn = _statusNotIn;
+@synthesize priorityGreaterThanOrEqual = _priorityGreaterThanOrEqual;
+@synthesize priorityLessThanOrEqual = _priorityLessThanOrEqual;
+@synthesize priorityEqual = _priorityEqual;
+@synthesize priorityIn = _priorityIn;
+@synthesize priorityNotIn = _priorityNotIn;
+@synthesize batchVersionGreaterThanOrEqual = _batchVersionGreaterThanOrEqual;
+@synthesize batchVersionLessThanOrEqual = _batchVersionLessThanOrEqual;
+@synthesize batchVersionEqual = _batchVersionEqual;
+@synthesize queueTimeGreaterThanOrEqual = _queueTimeGreaterThanOrEqual;
+@synthesize queueTimeLessThanOrEqual = _queueTimeLessThanOrEqual;
+@synthesize finishTimeGreaterThanOrEqual = _finishTimeGreaterThanOrEqual;
+@synthesize finishTimeLessThanOrEqual = _finishTimeLessThanOrEqual;
+@synthesize errTypeEqual = _errTypeEqual;
+@synthesize errTypeIn = _errTypeIn;
+@synthesize errTypeNotIn = _errTypeNotIn;
+@synthesize errNumberEqual = _errNumberEqual;
+@synthesize errNumberIn = _errNumberIn;
+@synthesize errNumberNotIn = _errNumberNotIn;
+@synthesize estimatedEffortLessThan = _estimatedEffortLessThan;
+@synthesize estimatedEffortGreaterThan = _estimatedEffortGreaterThan;
+@synthesize urgencyLessThanOrEqual = _urgencyLessThanOrEqual;
+@synthesize urgencyGreaterThanOrEqual = _urgencyGreaterThanOrEqual;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_idEqual = KALTURA_UNDEF_INT;
+    self->_idGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_partnerIdEqual = KALTURA_UNDEF_INT;
+    self->_createdAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_createdAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_updatedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_updatedAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_executionAttemptsGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_executionAttemptsLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_lockVersionGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_lockVersionLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_jobSubTypeEqual = KALTURA_UNDEF_INT;
+    self->_statusEqual = KALTURA_UNDEF_INT;
+    self->_priorityGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_priorityLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_priorityEqual = KALTURA_UNDEF_INT;
+    self->_batchVersionGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_batchVersionLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_batchVersionEqual = KALTURA_UNDEF_INT;
+    self->_queueTimeGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_queueTimeLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_finishTimeGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_finishTimeLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_errTypeEqual = KALTURA_UNDEF_INT;
+    self->_errNumberEqual = KALTURA_UNDEF_INT;
+    self->_estimatedEffortLessThan = KALTURA_UNDEF_INT;
+    self->_estimatedEffortGreaterThan = KALTURA_UNDEF_INT;
+    self->_urgencyLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_urgencyGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfIdEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfIdGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfPartnerIdEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfPartnerIdIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfPartnerIdNotIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfExecutionAttemptsGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfExecutionAttemptsLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfLockVersionGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfLockVersionLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfEntryIdEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfJobTypeEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfJobTypeIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfJobTypeNotIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfJobSubTypeEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfJobSubTypeIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfJobSubTypeNotIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfStatusEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfStatusIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfStatusNotIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfPriorityGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfPriorityLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfPriorityEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfPriorityIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfPriorityNotIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfBatchVersionGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfBatchVersionLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfBatchVersionEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfQueueTimeGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfQueueTimeLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfFinishTimeGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfFinishTimeLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfErrTypeEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfErrTypeIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfErrTypeNotIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfErrNumberEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfErrNumberIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfErrNumberNotIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEstimatedEffortLessThan
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfEstimatedEffortGreaterThan
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUrgencyLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUrgencyGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (void)setIdEqualFromString:(NSString*)aPropVal
+{
+    self.idEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setIdGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.idGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setPartnerIdEqualFromString:(NSString*)aPropVal
+{
+    self.partnerIdEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.createdAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.createdAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.updatedAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.updatedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setExecutionAttemptsGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.executionAttemptsGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setExecutionAttemptsLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.executionAttemptsLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setLockVersionGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.lockVersionGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setLockVersionLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.lockVersionLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setJobSubTypeEqualFromString:(NSString*)aPropVal
+{
+    self.jobSubTypeEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setStatusEqualFromString:(NSString*)aPropVal
+{
+    self.statusEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setPriorityGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.priorityGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setPriorityLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.priorityLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setPriorityEqualFromString:(NSString*)aPropVal
+{
+    self.priorityEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setBatchVersionGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.batchVersionGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setBatchVersionLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.batchVersionLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setBatchVersionEqualFromString:(NSString*)aPropVal
+{
+    self.batchVersionEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setQueueTimeGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.queueTimeGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setQueueTimeLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.queueTimeLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setFinishTimeGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.finishTimeGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setFinishTimeLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.finishTimeLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setErrTypeEqualFromString:(NSString*)aPropVal
+{
+    self.errTypeEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setErrNumberEqualFromString:(NSString*)aPropVal
+{
+    self.errNumberEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setEstimatedEffortLessThanFromString:(NSString*)aPropVal
+{
+    self.estimatedEffortLessThan = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setEstimatedEffortGreaterThanFromString:(NSString*)aPropVal
+{
+    self.estimatedEffortGreaterThan = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUrgencyLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.urgencyLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUrgencyGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.urgencyGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaBatchJobBaseFilter"];
+    [aParams addIfDefinedKey:@"idEqual" withInt:self.idEqual];
+    [aParams addIfDefinedKey:@"idGreaterThanOrEqual" withInt:self.idGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"partnerIdEqual" withInt:self.partnerIdEqual];
+    [aParams addIfDefinedKey:@"partnerIdIn" withString:self.partnerIdIn];
+    [aParams addIfDefinedKey:@"partnerIdNotIn" withString:self.partnerIdNotIn];
+    [aParams addIfDefinedKey:@"createdAtGreaterThanOrEqual" withInt:self.createdAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
+    [aParams addIfDefinedKey:@"updatedAtGreaterThanOrEqual" withInt:self.updatedAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
+    [aParams addIfDefinedKey:@"executionAttemptsGreaterThanOrEqual" withInt:self.executionAttemptsGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"executionAttemptsLessThanOrEqual" withInt:self.executionAttemptsLessThanOrEqual];
+    [aParams addIfDefinedKey:@"lockVersionGreaterThanOrEqual" withInt:self.lockVersionGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"lockVersionLessThanOrEqual" withInt:self.lockVersionLessThanOrEqual];
+    [aParams addIfDefinedKey:@"entryIdEqual" withString:self.entryIdEqual];
+    [aParams addIfDefinedKey:@"jobTypeEqual" withString:self.jobTypeEqual];
+    [aParams addIfDefinedKey:@"jobTypeIn" withString:self.jobTypeIn];
+    [aParams addIfDefinedKey:@"jobTypeNotIn" withString:self.jobTypeNotIn];
+    [aParams addIfDefinedKey:@"jobSubTypeEqual" withInt:self.jobSubTypeEqual];
+    [aParams addIfDefinedKey:@"jobSubTypeIn" withString:self.jobSubTypeIn];
+    [aParams addIfDefinedKey:@"jobSubTypeNotIn" withString:self.jobSubTypeNotIn];
+    [aParams addIfDefinedKey:@"statusEqual" withInt:self.statusEqual];
+    [aParams addIfDefinedKey:@"statusIn" withString:self.statusIn];
+    [aParams addIfDefinedKey:@"statusNotIn" withString:self.statusNotIn];
+    [aParams addIfDefinedKey:@"priorityGreaterThanOrEqual" withInt:self.priorityGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"priorityLessThanOrEqual" withInt:self.priorityLessThanOrEqual];
+    [aParams addIfDefinedKey:@"priorityEqual" withInt:self.priorityEqual];
+    [aParams addIfDefinedKey:@"priorityIn" withString:self.priorityIn];
+    [aParams addIfDefinedKey:@"priorityNotIn" withString:self.priorityNotIn];
+    [aParams addIfDefinedKey:@"batchVersionGreaterThanOrEqual" withInt:self.batchVersionGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"batchVersionLessThanOrEqual" withInt:self.batchVersionLessThanOrEqual];
+    [aParams addIfDefinedKey:@"batchVersionEqual" withInt:self.batchVersionEqual];
+    [aParams addIfDefinedKey:@"queueTimeGreaterThanOrEqual" withInt:self.queueTimeGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"queueTimeLessThanOrEqual" withInt:self.queueTimeLessThanOrEqual];
+    [aParams addIfDefinedKey:@"finishTimeGreaterThanOrEqual" withInt:self.finishTimeGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"finishTimeLessThanOrEqual" withInt:self.finishTimeLessThanOrEqual];
+    [aParams addIfDefinedKey:@"errTypeEqual" withInt:self.errTypeEqual];
+    [aParams addIfDefinedKey:@"errTypeIn" withString:self.errTypeIn];
+    [aParams addIfDefinedKey:@"errTypeNotIn" withString:self.errTypeNotIn];
+    [aParams addIfDefinedKey:@"errNumberEqual" withInt:self.errNumberEqual];
+    [aParams addIfDefinedKey:@"errNumberIn" withString:self.errNumberIn];
+    [aParams addIfDefinedKey:@"errNumberNotIn" withString:self.errNumberNotIn];
+    [aParams addIfDefinedKey:@"estimatedEffortLessThan" withInt:self.estimatedEffortLessThan];
+    [aParams addIfDefinedKey:@"estimatedEffortGreaterThan" withInt:self.estimatedEffortGreaterThan];
+    [aParams addIfDefinedKey:@"urgencyLessThanOrEqual" withInt:self.urgencyLessThanOrEqual];
+    [aParams addIfDefinedKey:@"urgencyGreaterThanOrEqual" withInt:self.urgencyGreaterThanOrEqual];
+}
+
+- (void)dealloc
+{
+    [self->_partnerIdIn release];
+    [self->_partnerIdNotIn release];
+    [self->_entryIdEqual release];
+    [self->_jobTypeEqual release];
+    [self->_jobTypeIn release];
+    [self->_jobTypeNotIn release];
+    [self->_jobSubTypeIn release];
+    [self->_jobSubTypeNotIn release];
+    [self->_statusIn release];
+    [self->_statusNotIn release];
+    [self->_priorityIn release];
+    [self->_priorityNotIn release];
+    [self->_errTypeIn release];
+    [self->_errTypeNotIn release];
+    [self->_errNumberIn release];
+    [self->_errNumberNotIn release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaBatchJobFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaBatchJobFilter"];
+}
+
+@end
+
 @implementation KalturaAccessControlBlockAction
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
@@ -27538,599 +28061,6 @@
 {
     [self->_objects release];
     [super dealloc];
-}
-
-@end
-
-@implementation KalturaBatchJobBaseFilter
-@synthesize idEqual = _idEqual;
-@synthesize idGreaterThanOrEqual = _idGreaterThanOrEqual;
-@synthesize partnerIdEqual = _partnerIdEqual;
-@synthesize partnerIdIn = _partnerIdIn;
-@synthesize partnerIdNotIn = _partnerIdNotIn;
-@synthesize createdAtGreaterThanOrEqual = _createdAtGreaterThanOrEqual;
-@synthesize createdAtLessThanOrEqual = _createdAtLessThanOrEqual;
-@synthesize updatedAtGreaterThanOrEqual = _updatedAtGreaterThanOrEqual;
-@synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
-@synthesize executionAttemptsGreaterThanOrEqual = _executionAttemptsGreaterThanOrEqual;
-@synthesize executionAttemptsLessThanOrEqual = _executionAttemptsLessThanOrEqual;
-@synthesize lockVersionGreaterThanOrEqual = _lockVersionGreaterThanOrEqual;
-@synthesize lockVersionLessThanOrEqual = _lockVersionLessThanOrEqual;
-@synthesize entryIdEqual = _entryIdEqual;
-@synthesize jobTypeEqual = _jobTypeEqual;
-@synthesize jobTypeIn = _jobTypeIn;
-@synthesize jobTypeNotIn = _jobTypeNotIn;
-@synthesize jobSubTypeEqual = _jobSubTypeEqual;
-@synthesize jobSubTypeIn = _jobSubTypeIn;
-@synthesize jobSubTypeNotIn = _jobSubTypeNotIn;
-@synthesize statusEqual = _statusEqual;
-@synthesize statusIn = _statusIn;
-@synthesize statusNotIn = _statusNotIn;
-@synthesize priorityGreaterThanOrEqual = _priorityGreaterThanOrEqual;
-@synthesize priorityLessThanOrEqual = _priorityLessThanOrEqual;
-@synthesize priorityEqual = _priorityEqual;
-@synthesize priorityIn = _priorityIn;
-@synthesize priorityNotIn = _priorityNotIn;
-@synthesize batchVersionGreaterThanOrEqual = _batchVersionGreaterThanOrEqual;
-@synthesize batchVersionLessThanOrEqual = _batchVersionLessThanOrEqual;
-@synthesize batchVersionEqual = _batchVersionEqual;
-@synthesize queueTimeGreaterThanOrEqual = _queueTimeGreaterThanOrEqual;
-@synthesize queueTimeLessThanOrEqual = _queueTimeLessThanOrEqual;
-@synthesize finishTimeGreaterThanOrEqual = _finishTimeGreaterThanOrEqual;
-@synthesize finishTimeLessThanOrEqual = _finishTimeLessThanOrEqual;
-@synthesize errTypeEqual = _errTypeEqual;
-@synthesize errTypeIn = _errTypeIn;
-@synthesize errTypeNotIn = _errTypeNotIn;
-@synthesize errNumberEqual = _errNumberEqual;
-@synthesize errNumberIn = _errNumberIn;
-@synthesize errNumberNotIn = _errNumberNotIn;
-@synthesize estimatedEffortLessThan = _estimatedEffortLessThan;
-@synthesize estimatedEffortGreaterThan = _estimatedEffortGreaterThan;
-@synthesize urgencyLessThanOrEqual = _urgencyLessThanOrEqual;
-@synthesize urgencyGreaterThanOrEqual = _urgencyGreaterThanOrEqual;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_idEqual = KALTURA_UNDEF_INT;
-    self->_idGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_partnerIdEqual = KALTURA_UNDEF_INT;
-    self->_createdAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_createdAtLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_updatedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_updatedAtLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_executionAttemptsGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_executionAttemptsLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_lockVersionGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_lockVersionLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_jobSubTypeEqual = KALTURA_UNDEF_INT;
-    self->_statusEqual = KALTURA_UNDEF_INT;
-    self->_priorityGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_priorityLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_priorityEqual = KALTURA_UNDEF_INT;
-    self->_batchVersionGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_batchVersionLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_batchVersionEqual = KALTURA_UNDEF_INT;
-    self->_queueTimeGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_queueTimeLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_finishTimeGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_finishTimeLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_errTypeEqual = KALTURA_UNDEF_INT;
-    self->_errNumberEqual = KALTURA_UNDEF_INT;
-    self->_estimatedEffortLessThan = KALTURA_UNDEF_INT;
-    self->_estimatedEffortGreaterThan = KALTURA_UNDEF_INT;
-    self->_urgencyLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_urgencyGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfIdEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfIdGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfPartnerIdEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfPartnerIdIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfPartnerIdNotIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfExecutionAttemptsGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfExecutionAttemptsLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfLockVersionGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfLockVersionLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfEntryIdEqual
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfJobTypeEqual
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfJobTypeIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfJobTypeNotIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfJobSubTypeEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfJobSubTypeIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfJobSubTypeNotIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfStatusEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfStatusIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfStatusNotIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfPriorityGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfPriorityLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfPriorityEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfPriorityIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfPriorityNotIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfBatchVersionGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfBatchVersionLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfBatchVersionEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfQueueTimeGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfQueueTimeLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfFinishTimeGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfFinishTimeLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfErrTypeEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfErrTypeIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfErrTypeNotIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfErrNumberEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfErrNumberIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfErrNumberNotIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfEstimatedEffortLessThan
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfEstimatedEffortGreaterThan
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfUrgencyLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfUrgencyGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (void)setIdEqualFromString:(NSString*)aPropVal
-{
-    self.idEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setIdGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.idGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setPartnerIdEqualFromString:(NSString*)aPropVal
-{
-    self.partnerIdEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.createdAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.createdAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.updatedAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.updatedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setExecutionAttemptsGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.executionAttemptsGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setExecutionAttemptsLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.executionAttemptsLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setLockVersionGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.lockVersionGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setLockVersionLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.lockVersionLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setJobSubTypeEqualFromString:(NSString*)aPropVal
-{
-    self.jobSubTypeEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setStatusEqualFromString:(NSString*)aPropVal
-{
-    self.statusEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setPriorityGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.priorityGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setPriorityLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.priorityLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setPriorityEqualFromString:(NSString*)aPropVal
-{
-    self.priorityEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setBatchVersionGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.batchVersionGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setBatchVersionLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.batchVersionLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setBatchVersionEqualFromString:(NSString*)aPropVal
-{
-    self.batchVersionEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setQueueTimeGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.queueTimeGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setQueueTimeLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.queueTimeLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setFinishTimeGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.finishTimeGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setFinishTimeLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.finishTimeLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setErrTypeEqualFromString:(NSString*)aPropVal
-{
-    self.errTypeEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setErrNumberEqualFromString:(NSString*)aPropVal
-{
-    self.errNumberEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setEstimatedEffortLessThanFromString:(NSString*)aPropVal
-{
-    self.estimatedEffortLessThan = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setEstimatedEffortGreaterThanFromString:(NSString*)aPropVal
-{
-    self.estimatedEffortGreaterThan = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setUrgencyLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.urgencyLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setUrgencyGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.urgencyGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaBatchJobBaseFilter"];
-    [aParams addIfDefinedKey:@"idEqual" withInt:self.idEqual];
-    [aParams addIfDefinedKey:@"idGreaterThanOrEqual" withInt:self.idGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"partnerIdEqual" withInt:self.partnerIdEqual];
-    [aParams addIfDefinedKey:@"partnerIdIn" withString:self.partnerIdIn];
-    [aParams addIfDefinedKey:@"partnerIdNotIn" withString:self.partnerIdNotIn];
-    [aParams addIfDefinedKey:@"createdAtGreaterThanOrEqual" withInt:self.createdAtGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
-    [aParams addIfDefinedKey:@"updatedAtGreaterThanOrEqual" withInt:self.updatedAtGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
-    [aParams addIfDefinedKey:@"executionAttemptsGreaterThanOrEqual" withInt:self.executionAttemptsGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"executionAttemptsLessThanOrEqual" withInt:self.executionAttemptsLessThanOrEqual];
-    [aParams addIfDefinedKey:@"lockVersionGreaterThanOrEqual" withInt:self.lockVersionGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"lockVersionLessThanOrEqual" withInt:self.lockVersionLessThanOrEqual];
-    [aParams addIfDefinedKey:@"entryIdEqual" withString:self.entryIdEqual];
-    [aParams addIfDefinedKey:@"jobTypeEqual" withString:self.jobTypeEqual];
-    [aParams addIfDefinedKey:@"jobTypeIn" withString:self.jobTypeIn];
-    [aParams addIfDefinedKey:@"jobTypeNotIn" withString:self.jobTypeNotIn];
-    [aParams addIfDefinedKey:@"jobSubTypeEqual" withInt:self.jobSubTypeEqual];
-    [aParams addIfDefinedKey:@"jobSubTypeIn" withString:self.jobSubTypeIn];
-    [aParams addIfDefinedKey:@"jobSubTypeNotIn" withString:self.jobSubTypeNotIn];
-    [aParams addIfDefinedKey:@"statusEqual" withInt:self.statusEqual];
-    [aParams addIfDefinedKey:@"statusIn" withString:self.statusIn];
-    [aParams addIfDefinedKey:@"statusNotIn" withString:self.statusNotIn];
-    [aParams addIfDefinedKey:@"priorityGreaterThanOrEqual" withInt:self.priorityGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"priorityLessThanOrEqual" withInt:self.priorityLessThanOrEqual];
-    [aParams addIfDefinedKey:@"priorityEqual" withInt:self.priorityEqual];
-    [aParams addIfDefinedKey:@"priorityIn" withString:self.priorityIn];
-    [aParams addIfDefinedKey:@"priorityNotIn" withString:self.priorityNotIn];
-    [aParams addIfDefinedKey:@"batchVersionGreaterThanOrEqual" withInt:self.batchVersionGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"batchVersionLessThanOrEqual" withInt:self.batchVersionLessThanOrEqual];
-    [aParams addIfDefinedKey:@"batchVersionEqual" withInt:self.batchVersionEqual];
-    [aParams addIfDefinedKey:@"queueTimeGreaterThanOrEqual" withInt:self.queueTimeGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"queueTimeLessThanOrEqual" withInt:self.queueTimeLessThanOrEqual];
-    [aParams addIfDefinedKey:@"finishTimeGreaterThanOrEqual" withInt:self.finishTimeGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"finishTimeLessThanOrEqual" withInt:self.finishTimeLessThanOrEqual];
-    [aParams addIfDefinedKey:@"errTypeEqual" withInt:self.errTypeEqual];
-    [aParams addIfDefinedKey:@"errTypeIn" withString:self.errTypeIn];
-    [aParams addIfDefinedKey:@"errTypeNotIn" withString:self.errTypeNotIn];
-    [aParams addIfDefinedKey:@"errNumberEqual" withInt:self.errNumberEqual];
-    [aParams addIfDefinedKey:@"errNumberIn" withString:self.errNumberIn];
-    [aParams addIfDefinedKey:@"errNumberNotIn" withString:self.errNumberNotIn];
-    [aParams addIfDefinedKey:@"estimatedEffortLessThan" withInt:self.estimatedEffortLessThan];
-    [aParams addIfDefinedKey:@"estimatedEffortGreaterThan" withInt:self.estimatedEffortGreaterThan];
-    [aParams addIfDefinedKey:@"urgencyLessThanOrEqual" withInt:self.urgencyLessThanOrEqual];
-    [aParams addIfDefinedKey:@"urgencyGreaterThanOrEqual" withInt:self.urgencyGreaterThanOrEqual];
-}
-
-- (void)dealloc
-{
-    [self->_partnerIdIn release];
-    [self->_partnerIdNotIn release];
-    [self->_entryIdEqual release];
-    [self->_jobTypeEqual release];
-    [self->_jobTypeIn release];
-    [self->_jobTypeNotIn release];
-    [self->_jobSubTypeIn release];
-    [self->_jobSubTypeNotIn release];
-    [self->_statusIn release];
-    [self->_statusNotIn release];
-    [self->_priorityIn release];
-    [self->_priorityNotIn release];
-    [self->_errTypeIn release];
-    [self->_errTypeNotIn release];
-    [self->_errNumberIn release];
-    [self->_errNumberNotIn release];
-    [super dealloc];
-}
-
-@end
-
-@interface KalturaBatchJobListResponse()
-@property (nonatomic,retain) NSMutableArray* objects;
-@end
-
-@implementation KalturaBatchJobListResponse
-@synthesize objects = _objects;
-
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaBatchJob";
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaBatchJobListResponse"];
-}
-
-- (void)dealloc
-{
-    [self->_objects release];
-    [super dealloc];
-}
-
-@end
-
-@implementation KalturaBooleanValue
-@synthesize value = _value;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_value = KALTURA_UNDEF_BOOL;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfValue
-{
-    return KFT_Bool;
-}
-
-- (void)setValueFromString:(NSString*)aPropVal
-{
-    self.value = [KalturaSimpleTypeParser parseBool:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaBooleanValue"];
-    [aParams addIfDefinedKey:@"value" withBool:self.value];
 }
 
 @end
@@ -30331,6 +30261,69 @@
 
 @end
 
+@implementation KalturaCopyJobData
+@synthesize filter = _filter;
+@synthesize lastCopyId = _lastCopyId;
+@synthesize templateObject = _templateObject;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_lastCopyId = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfFilter
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfFilter
+{
+    return @"KalturaFilter";
+}
+
+- (KalturaFieldType)getTypeOfLastCopyId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfTemplateObject
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfTemplateObject
+{
+    return @"KalturaObjectBase";
+}
+
+- (void)setLastCopyIdFromString:(NSString*)aPropVal
+{
+    self.lastCopyId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaCopyJobData"];
+    [aParams addIfDefinedKey:@"filter" withObject:self.filter];
+    [aParams addIfDefinedKey:@"lastCopyId" withInt:self.lastCopyId];
+    [aParams addIfDefinedKey:@"templateObject" withObject:self.templateObject];
+}
+
+- (void)dealloc
+{
+    [self->_filter release];
+    [self->_templateObject release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaCopyPartnerJobData
 @synthesize fromPartnerId = _fromPartnerId;
 @synthesize toPartnerId = _toPartnerId;
@@ -32314,38 +32307,6 @@
 
 @end
 
-@interface KalturaFlavorParamsOutputListResponse()
-@property (nonatomic,retain) NSMutableArray* objects;
-@end
-
-@implementation KalturaFlavorParamsOutputListResponse
-@synthesize objects = _objects;
-
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaFlavorParamsOutput";
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaFlavorParamsOutputListResponse"];
-}
-
-- (void)dealloc
-{
-    [self->_objects release];
-    [super dealloc];
-}
-
-@end
-
 @implementation KalturaGenericSyndicationFeed
 @synthesize feedDescription = _feedDescription;
 @synthesize feedLandingPage = _feedLandingPage;
@@ -33330,38 +33291,6 @@
 - (void)dealloc
 {
     [self->_flavorAssetIdEqual release];
-    [super dealloc];
-}
-
-@end
-
-@interface KalturaMediaInfoListResponse()
-@property (nonatomic,retain) NSMutableArray* objects;
-@end
-
-@implementation KalturaMediaInfoListResponse
-@synthesize objects = _objects;
-
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaMediaInfo";
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaMediaInfoListResponse"];
-}
-
-- (void)dealloc
-{
-    [self->_objects release];
     [super dealloc];
 }
 
@@ -35638,38 +35567,6 @@
 
 @end
 
-@interface KalturaThumbParamsOutputListResponse()
-@property (nonatomic,retain) NSMutableArray* objects;
-@end
-
-@implementation KalturaThumbParamsOutputListResponse
-@synthesize objects = _objects;
-
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaThumbParamsOutput";
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaThumbParamsOutputListResponse"];
-}
-
-- (void)dealloc
-{
-    [self->_objects release];
-    [super dealloc];
-}
-
-@end
-
 @interface KalturaTubeMogulSyndicationFeed()
 @property (nonatomic,copy) NSString* category;
 @end
@@ -37841,16 +37738,6 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaBaseSyndicationFeedFilter"];
-}
-
-@end
-
-@implementation KalturaBatchJobFilter
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaBatchJobFilter"];
 }
 
 @end
@@ -42619,6 +42506,30 @@
 
 @end
 
+@implementation KalturaUploadedFileResource
+@synthesize fileData = _fileData;
+
+- (KalturaFieldType)getTypeOfFileData
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaUploadedFileResource"];
+    [aParams addIfDefinedKey:@"fileData" withString:self.fileData];
+}
+
+- (void)dealloc
+{
+    [self->_fileData release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaUploadedFileTokenResource
 @synthesize token = _token;
 
@@ -44307,6 +44218,18 @@
     [self.client queueVoidService:@"categoryentry" withAction:@"syncPrivacyContext"];
 }
 
+- (KalturaBulkUpload*)addFromBulkUploadWithBulkUploadData:(KalturaBulkServiceData*)aBulkUploadData withBulkUploadCategoryEntryData:(KalturaBulkUploadCategoryEntryData*)aBulkUploadCategoryEntryData
+{
+    [self.client.params addIfDefinedKey:@"bulkUploadData" withObject:aBulkUploadData];
+    [self.client.params addIfDefinedKey:@"bulkUploadCategoryEntryData" withObject:aBulkUploadCategoryEntryData];
+    return [self.client queueObjectService:@"categoryentry" withAction:@"addFromBulkUpload" withExpectedType:@"KalturaBulkUpload"];
+}
+
+- (KalturaBulkUpload*)addFromBulkUploadWithBulkUploadData:(KalturaBulkServiceData*)aBulkUploadData
+{
+    return [self addFromBulkUploadWithBulkUploadData:aBulkUploadData withBulkUploadCategoryEntryData:nil];
+}
+
 @end
 
 @implementation KalturaCategoryService
@@ -45526,6 +45449,14 @@
 - (KalturaMediaEntry*)addContentWithEntryId:(NSString*)aEntryId
 {
     return [self addContentWithEntryId:aEntryId withResource:nil];
+}
+
+- (KalturaMediaEntry*)addFromBulkWithMediaEntry:(KalturaMediaEntry*)aMediaEntry withUrl:(NSString*)aUrl withBulkUploadId:(int)aBulkUploadId
+{
+    [self.client.params addIfDefinedKey:@"mediaEntry" withObject:aMediaEntry];
+    [self.client.params addIfDefinedKey:@"url" withString:aUrl];
+    [self.client.params addIfDefinedKey:@"bulkUploadId" withInt:aBulkUploadId];
+    return [self.client queueObjectService:@"media" withAction:@"addFromBulk" withExpectedType:@"KalturaMediaEntry"];
 }
 
 - (KalturaMediaEntry*)addFromUrlWithMediaEntry:(KalturaMediaEntry*)aMediaEntry withUrl:(NSString*)aUrl
@@ -47753,6 +47684,20 @@
     return self->_baseEntry;
 }
 
+- (KalturaBatchcontrolService*)batchcontrol
+{
+    if (self->_batchcontrol == nil)
+    	self->_batchcontrol = [[KalturaBatchcontrolService alloc] initWithClient:self];
+    return self->_batchcontrol;
+}
+
+- (KalturaBatchService*)batch
+{
+    if (self->_batch == nil)
+    	self->_batch = [[KalturaBatchService alloc] initWithClient:self];
+    return self->_batch;
+}
+
 - (KalturaBulkUploadService*)bulkUpload
 {
     if (self->_bulkUpload == nil)
@@ -47809,6 +47754,13 @@
     return self->_deliveryProfile;
 }
 
+- (KalturaDocumentService*)document
+{
+    if (self->_document == nil)
+    	self->_document = [[KalturaDocumentService alloc] initWithClient:self];
+    return self->_document;
+}
+
 - (KalturaEmailIngestionProfileService*)EmailIngestionProfile
 {
     if (self->_EmailIngestionProfile == nil)
@@ -47856,6 +47808,13 @@
     if (self->_groupUser == nil)
     	self->_groupUser = [[KalturaGroupUserService alloc] initWithClient:self];
     return self->_groupUser;
+}
+
+- (KalturaJobsService*)jobs
+{
+    if (self->_jobs == nil)
+    	self->_jobs = [[KalturaJobsService alloc] initWithClient:self];
+    return self->_jobs;
 }
 
 - (KalturaLiveChannelSegmentService*)liveChannelSegment
@@ -48104,6 +48063,8 @@
     [self->_analytics release];
     [self->_appToken release];
     [self->_baseEntry release];
+    [self->_batchcontrol release];
+    [self->_batch release];
     [self->_bulkUpload release];
     [self->_categoryEntry release];
     [self->_category release];
@@ -48112,6 +48073,7 @@
     [self->_conversionProfile release];
     [self->_data release];
     [self->_deliveryProfile release];
+    [self->_document release];
     [self->_EmailIngestionProfile release];
     [self->_entryServerNode release];
     [self->_fileAsset release];
@@ -48119,6 +48081,7 @@
     [self->_flavorParamsOutput release];
     [self->_flavorParams release];
     [self->_groupUser release];
+    [self->_jobs release];
     [self->_liveChannelSegment release];
     [self->_liveChannel release];
     [self->_liveReports release];

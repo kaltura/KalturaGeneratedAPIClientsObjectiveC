@@ -516,10 +516,12 @@
 {
 	KalturaMetadataService* _metadata;
 	KalturaMetadataProfileService* _metadataProfile;
+	KalturaMetadataBatchService* _metadataBatch;
 }
 
 @property (nonatomic, assign) KalturaClientBase* client;
 @property (nonatomic, readonly) KalturaMetadataService* metadata;
 @property (nonatomic, readonly) KalturaMetadataProfileService* metadataProfile;
+@property (nonatomic, readonly) KalturaMetadataBatchService* metadataBatch;
 @end
 

@@ -28,62 +28,69 @@
 // @package Kaltura
 // @subpackage Client
 #import "../KalturaClient.h"
+#import "KalturaContentDistributionClientPlugin.h"
 
 ///////////////////////// enums /////////////////////////
 // @package Kaltura
 // @subpackage Client
-@interface KalturaWowzaMediaServerNodeOrderBy : NSObject
+@interface KalturaIdeticDistributionProfileOrderBy : NSObject
 + (NSString*)CREATED_AT_ASC;
-+ (NSString*)HEARTBEAT_TIME_ASC;
 + (NSString*)UPDATED_AT_ASC;
 + (NSString*)CREATED_AT_DESC;
-+ (NSString*)HEARTBEAT_TIME_DESC;
 + (NSString*)UPDATED_AT_DESC;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaIdeticDistributionProviderOrderBy : NSObject
 @end
 
 ///////////////////////// classes /////////////////////////
 // @package Kaltura
 // @subpackage Client
-@interface KalturaWowzaMediaServerNode : KalturaMediaServerNode
-// Wowza Media server app prefix
-@property (nonatomic,copy) NSString* appPrefix;
-// Wowza Media server transcoder configuration overide
-@property (nonatomic,copy) NSString* transcoder;
-// Wowza Media server GPU index id
-@property (nonatomic,assign) int GPUID;
-// Live service port
-@property (nonatomic,assign) int liveServicePort;
-// Live service protocol
-@property (nonatomic,copy) NSString* liveServiceProtocol;
-// Wowza media server live service internal domain
-@property (nonatomic,copy) NSString* liveServiceInternalDomain;
-- (KalturaFieldType)getTypeOfAppPrefix;
-- (KalturaFieldType)getTypeOfTranscoder;
-- (KalturaFieldType)getTypeOfGPUID;
-- (KalturaFieldType)getTypeOfLiveServicePort;
-- (KalturaFieldType)getTypeOfLiveServiceProtocol;
-- (KalturaFieldType)getTypeOfLiveServiceInternalDomain;
-- (void)setGPUIDFromString:(NSString*)aPropVal;
-- (void)setLiveServicePortFromString:(NSString*)aPropVal;
+@interface KalturaIdeticDistributionProvider : KalturaDistributionProvider
 @end
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaWowzaMediaServerNodeBaseFilter : KalturaMediaServerNodeFilter
+@interface KalturaIdeticDistributionJobProviderData : KalturaConfigurableDistributionJobProviderData
+@property (nonatomic,copy) NSString* thumbnailUrl;
+@property (nonatomic,copy) NSString* flavorAssetUrl;
+- (KalturaFieldType)getTypeOfThumbnailUrl;
+- (KalturaFieldType)getTypeOfFlavorAssetUrl;
 @end
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaWowzaMediaServerNodeFilter : KalturaWowzaMediaServerNodeBaseFilter
+@interface KalturaIdeticDistributionProfile : KalturaConfigurableDistributionProfile
+@property (nonatomic,copy) NSString* ftpPath;
+@property (nonatomic,copy) NSString* username;
+@property (nonatomic,copy) NSString* password;
+@property (nonatomic,copy) NSString* domain;
+- (KalturaFieldType)getTypeOfFtpPath;
+- (KalturaFieldType)getTypeOfUsername;
+- (KalturaFieldType)getTypeOfPassword;
+- (KalturaFieldType)getTypeOfDomain;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaIdeticDistributionProviderBaseFilter : KalturaDistributionProviderFilter
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaIdeticDistributionProviderFilter : KalturaIdeticDistributionProviderBaseFilter
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaIdeticDistributionProfileBaseFilter : KalturaConfigurableDistributionProfileFilter
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaIdeticDistributionProfileFilter : KalturaIdeticDistributionProfileBaseFilter
 @end
 
 ///////////////////////// services /////////////////////////
-@interface KalturaWowzaClientPlugin : KalturaClientPlugin
-{
-	KalturaLiveConversionProfileService* _liveConversionProfile;
-}
-
-@property (nonatomic, assign) KalturaClientBase* client;
-@property (nonatomic, readonly) KalturaLiveConversionProfileService* liveConversionProfile;
-@end
-

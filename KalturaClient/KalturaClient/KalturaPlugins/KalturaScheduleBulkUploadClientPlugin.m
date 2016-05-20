@@ -166,3 +166,30 @@
 @end
 
 ///////////////////////// services /////////////////////////
+@implementation KalturaScheduleBulkUploadClientPlugin
+@synthesize client = _client;
+
+- (id)initWithClient:(KalturaClient*)aClient
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self.client = aClient;
+    return self;
+}
+
+- (KalturaScheduleBulkService*)scheduleBulk
+{
+    if (self->_scheduleBulk == nil)
+    	self->_scheduleBulk = [[KalturaScheduleBulkService alloc] initWithClient:self.client];
+    return self->_scheduleBulk;
+}
+
+- (void)dealloc
+{
+    [self->_scheduleBulk release];
+	[super dealloc];
+}
+
+@end
+

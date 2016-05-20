@@ -131,56 +131,6 @@
 @end
 
 ///////////////////////// services /////////////////////////
-// @package Kaltura
-// @subpackage Client
-// Entry Admin service
-@interface KalturaEntryAdminService : KalturaServiceBase
-// Get base entry by ID with no filters.
-- (KalturaBaseEntry*)getWithEntryId:(NSString*)aEntryId withVersion:(int)aVersion;
-- (KalturaBaseEntry*)getWithEntryId:(NSString*)aEntryId;
-// Get base entry by flavor ID with no filters.
-- (KalturaBaseEntry*)getByFlavorIdWithFlavorId:(NSString*)aFlavorId withVersion:(int)aVersion;
-- (KalturaBaseEntry*)getByFlavorIdWithFlavorId:(NSString*)aFlavorId;
-// Get base entry by ID with no filters.
-- (KalturaTrackEntryListResponse*)getTracksWithEntryId:(NSString*)aEntryId;
-// Restore deleted entry.
-- (KalturaBaseEntry*)restoreDeletedEntryWithEntryId:(NSString*)aEntryId;
-@end
-
-// @package Kaltura
-// @subpackage Client
-// UiConf Admin service
-@interface KalturaUiConfAdminService : KalturaServiceBase
-// Adds new UIConf with no partner limitation
-- (KalturaUiConfAdmin*)addWithUiConf:(KalturaUiConfAdmin*)aUiConf;
-// Update an existing UIConf with no partner limitation
-- (KalturaUiConfAdmin*)updateWithId:(int)aId withUiConf:(KalturaUiConfAdmin*)aUiConf;
-// Retrieve a UIConf by id with no partner limitation
-- (KalturaUiConfAdmin*)getWithId:(int)aId;
-// Delete an existing UIConf with no partner limitation
-- (void)deleteWithId:(int)aId;
-// Retrieve a list of available UIConfs  with no partner limitation
-- (KalturaUiConfAdminListResponse*)listWithFilter:(KalturaUiConfFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
-- (KalturaUiConfAdminListResponse*)listWithFilter:(KalturaUiConfFilter*)aFilter;
-- (KalturaUiConfAdminListResponse*)list;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaReportAdminService : KalturaServiceBase
-- (KalturaReport*)addWithReport:(KalturaReport*)aReport;
-- (KalturaReport*)getWithId:(int)aId;
-- (KalturaReportListResponse*)listWithFilter:(KalturaReportFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
-- (KalturaReportListResponse*)listWithFilter:(KalturaReportFilter*)aFilter;
-- (KalturaReportListResponse*)list;
-- (KalturaReport*)updateWithId:(int)aId withReport:(KalturaReport*)aReport;
-- (void)deleteWithId:(int)aId;
-- (KalturaReportResponse*)executeDebugWithId:(int)aId withParams:(NSArray*)aParams;
-- (KalturaReportResponse*)executeDebugWithId:(int)aId;
-- (NSMutableArray*)getParametersWithId:(int)aId;
-- (NSString*)getCsvUrlWithId:(int)aId withReportPartnerId:(int)aReportPartnerId;
-@end
-
 @interface KalturaAdminConsoleClientPlugin : KalturaClientPlugin
 {
 	KalturaEntryAdminService* _entryAdmin;

@@ -1806,10 +1806,18 @@
     return self->_metadataProfile;
 }
 
+- (KalturaMetadataBatchService*)metadataBatch
+{
+    if (self->_metadataBatch == nil)
+    	self->_metadataBatch = [[KalturaMetadataBatchService alloc] initWithClient:self.client];
+    return self->_metadataBatch;
+}
+
 - (void)dealloc
 {
     [self->_metadata release];
     [self->_metadataProfile release];
+    [self->_metadataBatch release];
 	[super dealloc];
 }
 

@@ -140,6 +140,14 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaFileSyncListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaFileSync elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaFileSyncBaseFilter : KalturaFilter
 @property (nonatomic,assign) int partnerIdEqual;
 @property (nonatomic,copy) NSString* fileObjectTypeEqual;	// enum KalturaFileSyncObjectType
@@ -221,14 +229,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaFileSyncListResponse : KalturaListResponse
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaFileSync elements
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaFileSyncFilter : KalturaFileSyncBaseFilter
 @property (nonatomic,assign) int currentDc;	// enum KalturaNullableBoolean
 - (KalturaFieldType)getTypeOfCurrentDc;
@@ -236,3 +236,12 @@
 @end
 
 ///////////////////////// services /////////////////////////
+@interface KalturaFileSyncClientPlugin : KalturaClientPlugin
+{
+	KalturaFileSyncService* _fileSync;
+}
+
+@property (nonatomic, assign) KalturaClientBase* client;
+@property (nonatomic, readonly) KalturaFileSyncService* fileSync;
+@end
+

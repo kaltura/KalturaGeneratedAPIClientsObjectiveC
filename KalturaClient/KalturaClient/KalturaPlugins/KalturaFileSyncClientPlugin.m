@@ -430,6 +430,38 @@
 
 @end
 
+@interface KalturaFileSyncListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
+
+@implementation KalturaFileSyncListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfObjects
+{
+    return @"KalturaFileSync";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaFileSyncListResponse"];
+}
+
+- (void)dealloc
+{
+    [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaFileSyncBaseFilter
 @synthesize partnerIdEqual = _partnerIdEqual;
 @synthesize fileObjectTypeEqual = _fileObjectTypeEqual;
@@ -776,38 +808,6 @@
 
 @end
 
-@interface KalturaFileSyncListResponse()
-@property (nonatomic,retain) NSMutableArray* objects;
-@end
-
-@implementation KalturaFileSyncListResponse
-@synthesize objects = _objects;
-
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaFileSync";
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaFileSyncListResponse"];
-}
-
-- (void)dealloc
-{
-    [self->_objects release];
-    [super dealloc];
-}
-
-@end
-
 @implementation KalturaFileSyncFilter
 @synthesize currentDc = _currentDc;
 
@@ -841,3 +841,30 @@
 @end
 
 ///////////////////////// services /////////////////////////
+@implementation KalturaFileSyncClientPlugin
+@synthesize client = _client;
+
+- (id)initWithClient:(KalturaClient*)aClient
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self.client = aClient;
+    return self;
+}
+
+- (KalturaFileSyncService*)fileSync
+{
+    if (self->_fileSync == nil)
+    	self->_fileSync = [[KalturaFileSyncService alloc] initWithClient:self.client];
+    return self->_fileSync;
+}
+
+- (void)dealloc
+{
+    [self->_fileSync release];
+	[super dealloc];
+}
+
+@end
+

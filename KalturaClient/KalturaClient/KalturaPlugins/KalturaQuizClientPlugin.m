@@ -728,9 +728,17 @@
     return self->_quiz;
 }
 
+- (KalturaQuizUserEntryService*)quizUserEntry
+{
+    if (self->_quizUserEntry == nil)
+    	self->_quizUserEntry = [[KalturaQuizUserEntryService alloc] initWithClient:self.client];
+    return self->_quizUserEntry;
+}
+
 - (void)dealloc
 {
     [self->_quiz release];
+    [self->_quizUserEntry release];
 	[super dealloc];
 }
 

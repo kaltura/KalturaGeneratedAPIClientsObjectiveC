@@ -29,6 +29,48 @@
 
 ///////////////////////// enums /////////////////////////
 ///////////////////////// classes /////////////////////////
+@implementation KalturaBulkServiceFilterData
+@synthesize filter = _filter;
+@synthesize templateObject = _templateObject;
+
+- (KalturaFieldType)getTypeOfFilter
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfFilter
+{
+    return @"KalturaFilter";
+}
+
+- (KalturaFieldType)getTypeOfTemplateObject
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfTemplateObject
+{
+    return @"KalturaObjectBase";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaBulkServiceFilterData"];
+    [aParams addIfDefinedKey:@"filter" withObject:self.filter];
+    [aParams addIfDefinedKey:@"templateObject" withObject:self.templateObject];
+}
+
+- (void)dealloc
+{
+    [self->_filter release];
+    [self->_templateObject release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaBulkUploadFilterJobData
 @synthesize filter = _filter;
 @synthesize templateObject = _templateObject;

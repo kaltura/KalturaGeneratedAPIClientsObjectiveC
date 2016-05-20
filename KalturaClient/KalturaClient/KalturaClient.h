@@ -64,17 +64,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaAssetStatus : NSObject
-+ (int)ERROR;
-+ (int)QUEUED;
-+ (int)READY;
-+ (int)DELETED;
-+ (int)IMPORTING;
-+ (int)EXPORTING;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaBatchJobErrorTypes : NSObject
 + (int)APP;
 + (int)RUNTIME;
@@ -757,15 +746,6 @@
 + (int)DISABLED;
 + (int)AUTOMATIC;
 + (int)MANUAL;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaStorageServePriority : NSObject
-+ (int)KALTURA_ONLY;
-+ (int)KALTURA_FIRST;
-+ (int)EXTERNAL_FIRST;
-+ (int)EXTERNAL_ONLY;
 @end
 
 // @package Kaltura
@@ -1738,11 +1718,6 @@
 + (NSString*)MEDIUM;
 + (NSString*)NOT_AVAILABLE;
 + (NSString*)SHORT;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaDynamicEnum : NSObject
 @end
 
 // @package Kaltura
@@ -4310,6 +4285,11 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaJobData : KalturaObjectBase
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaBatchHistoryData : KalturaObjectBase
 @property (nonatomic,assign) int schedulerId;
 @property (nonatomic,assign) int workerId;
@@ -4335,11 +4315,6 @@
 - (void)setTimeStampFromString:(NSString*)aPropVal;
 - (void)setErrTypeFromString:(NSString*)aPropVal;
 - (void)setErrNumberFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaJobData : KalturaObjectBase
 @end
 
 // @package Kaltura
@@ -4458,6 +4433,195 @@
 - (void)setLastWorkerIdFromString:(NSString*)aPropVal;
 - (void)setDcFromString:(NSString*)aPropVal;
 - (void)setJobObjectTypeFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaPlayerDeliveryType : KalturaObjectBase
+@property (nonatomic,copy) NSString* id;
+@property (nonatomic,copy) NSString* label;
+@property (nonatomic,retain) NSMutableArray* flashvars;	// of KalturaKeyValue elements
+@property (nonatomic,copy) NSString* minVersion;
+@property (nonatomic,assign) KALTURA_BOOL enabledByDefault;
+- (KalturaFieldType)getTypeOfId;
+- (KalturaFieldType)getTypeOfLabel;
+- (KalturaFieldType)getTypeOfFlashvars;
+- (NSString*)getObjectTypeOfFlashvars;
+- (KalturaFieldType)getTypeOfMinVersion;
+- (KalturaFieldType)getTypeOfEnabledByDefault;
+- (void)setEnabledByDefaultFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaPlayerEmbedCodeType : KalturaObjectBase
+@property (nonatomic,copy) NSString* id;
+@property (nonatomic,copy) NSString* label;
+@property (nonatomic,assign) KALTURA_BOOL entryOnly;
+@property (nonatomic,copy) NSString* minVersion;
+- (KalturaFieldType)getTypeOfId;
+- (KalturaFieldType)getTypeOfLabel;
+- (KalturaFieldType)getTypeOfEntryOnly;
+- (KalturaFieldType)getTypeOfMinVersion;
+- (void)setEntryOnlyFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaPartner : KalturaObjectBase
+@property (nonatomic,assign,readonly) int id;
+@property (nonatomic,copy) NSString* name;
+@property (nonatomic,copy) NSString* website;
+@property (nonatomic,copy) NSString* notificationUrl;
+@property (nonatomic,assign) int appearInSearch;
+@property (nonatomic,assign,readonly) int createdAt;
+// deprecated - lastName and firstName replaces this field
+@property (nonatomic,copy) NSString* adminName;
+@property (nonatomic,copy) NSString* adminEmail;
+@property (nonatomic,copy) NSString* description;
+@property (nonatomic,assign) int commercialUse;	// enum KalturaCommercialUseType
+@property (nonatomic,copy) NSString* landingPage;
+@property (nonatomic,copy) NSString* userLandingPage;
+@property (nonatomic,copy) NSString* contentCategories;
+@property (nonatomic,assign) int type;	// enum KalturaPartnerType
+@property (nonatomic,copy) NSString* phone;
+@property (nonatomic,copy) NSString* describeYourself;
+@property (nonatomic,assign) KALTURA_BOOL adultContent;
+@property (nonatomic,copy) NSString* defConversionProfileType;
+@property (nonatomic,assign) int notify;
+@property (nonatomic,assign,readonly) int status;	// enum KalturaPartnerStatus
+@property (nonatomic,assign) int allowQuickEdit;
+@property (nonatomic,assign) int mergeEntryLists;
+@property (nonatomic,copy) NSString* notificationsConfig;
+@property (nonatomic,assign) int maxUploadSize;
+@property (nonatomic,assign,readonly) int partnerPackage;
+@property (nonatomic,copy,readonly) NSString* secret;
+@property (nonatomic,copy,readonly) NSString* adminSecret;
+@property (nonatomic,copy,readonly) NSString* cmsPassword;
+@property (nonatomic,assign) int allowMultiNotification;
+@property (nonatomic,assign,readonly) int adminLoginUsersQuota;
+@property (nonatomic,copy) NSString* adminUserId;
+// firstName and lastName replace the old (deprecated) adminName
+@property (nonatomic,copy) NSString* firstName;
+// lastName and firstName replace the old (deprecated) adminName
+@property (nonatomic,copy) NSString* lastName;
+// country code (2char) - this field is optional
+@property (nonatomic,copy) NSString* country;
+// state code (2char) - this field is optional
+@property (nonatomic,copy) NSString* state;
+@property (nonatomic,retain) NSMutableArray* additionalParams;	// of KalturaKeyValue elements, insertonly
+@property (nonatomic,assign,readonly) int publishersQuota;
+@property (nonatomic,assign,readonly) int partnerGroupType;	// enum KalturaPartnerGroupType
+@property (nonatomic,assign,readonly) KALTURA_BOOL defaultEntitlementEnforcement;
+@property (nonatomic,copy,readonly) NSString* defaultDeliveryType;
+@property (nonatomic,copy,readonly) NSString* defaultEmbedCodeType;
+@property (nonatomic,retain,readonly) NSMutableArray* deliveryTypes;	// of KalturaPlayerDeliveryType elements
+@property (nonatomic,retain,readonly) NSMutableArray* embedCodeTypes;	// of KalturaPlayerEmbedCodeType elements
+@property (nonatomic,assign,readonly) int templatePartnerId;
+@property (nonatomic,assign,readonly) KALTURA_BOOL ignoreSeoLinks;
+@property (nonatomic,copy,readonly) NSString* host;
+@property (nonatomic,copy,readonly) NSString* cdnHost;
+@property (nonatomic,assign,readonly) KALTURA_BOOL isFirstLogin;
+@property (nonatomic,copy,readonly) NSString* logoutUrl;
+@property (nonatomic,assign,readonly) int partnerParentId;
+@property (nonatomic,copy,readonly) NSString* crmId;
+@property (nonatomic,copy) NSString* referenceId;
+@property (nonatomic,assign,readonly) KALTURA_BOOL timeAlignedRenditions;
+- (KalturaFieldType)getTypeOfId;
+- (KalturaFieldType)getTypeOfName;
+- (KalturaFieldType)getTypeOfWebsite;
+- (KalturaFieldType)getTypeOfNotificationUrl;
+- (KalturaFieldType)getTypeOfAppearInSearch;
+- (KalturaFieldType)getTypeOfCreatedAt;
+- (KalturaFieldType)getTypeOfAdminName;
+- (KalturaFieldType)getTypeOfAdminEmail;
+- (KalturaFieldType)getTypeOfDescription;
+- (KalturaFieldType)getTypeOfCommercialUse;
+- (KalturaFieldType)getTypeOfLandingPage;
+- (KalturaFieldType)getTypeOfUserLandingPage;
+- (KalturaFieldType)getTypeOfContentCategories;
+- (KalturaFieldType)getTypeOfType;
+- (KalturaFieldType)getTypeOfPhone;
+- (KalturaFieldType)getTypeOfDescribeYourself;
+- (KalturaFieldType)getTypeOfAdultContent;
+- (KalturaFieldType)getTypeOfDefConversionProfileType;
+- (KalturaFieldType)getTypeOfNotify;
+- (KalturaFieldType)getTypeOfStatus;
+- (KalturaFieldType)getTypeOfAllowQuickEdit;
+- (KalturaFieldType)getTypeOfMergeEntryLists;
+- (KalturaFieldType)getTypeOfNotificationsConfig;
+- (KalturaFieldType)getTypeOfMaxUploadSize;
+- (KalturaFieldType)getTypeOfPartnerPackage;
+- (KalturaFieldType)getTypeOfSecret;
+- (KalturaFieldType)getTypeOfAdminSecret;
+- (KalturaFieldType)getTypeOfCmsPassword;
+- (KalturaFieldType)getTypeOfAllowMultiNotification;
+- (KalturaFieldType)getTypeOfAdminLoginUsersQuota;
+- (KalturaFieldType)getTypeOfAdminUserId;
+- (KalturaFieldType)getTypeOfFirstName;
+- (KalturaFieldType)getTypeOfLastName;
+- (KalturaFieldType)getTypeOfCountry;
+- (KalturaFieldType)getTypeOfState;
+- (KalturaFieldType)getTypeOfAdditionalParams;
+- (NSString*)getObjectTypeOfAdditionalParams;
+- (KalturaFieldType)getTypeOfPublishersQuota;
+- (KalturaFieldType)getTypeOfPartnerGroupType;
+- (KalturaFieldType)getTypeOfDefaultEntitlementEnforcement;
+- (KalturaFieldType)getTypeOfDefaultDeliveryType;
+- (KalturaFieldType)getTypeOfDefaultEmbedCodeType;
+- (KalturaFieldType)getTypeOfDeliveryTypes;
+- (NSString*)getObjectTypeOfDeliveryTypes;
+- (KalturaFieldType)getTypeOfEmbedCodeTypes;
+- (NSString*)getObjectTypeOfEmbedCodeTypes;
+- (KalturaFieldType)getTypeOfTemplatePartnerId;
+- (KalturaFieldType)getTypeOfIgnoreSeoLinks;
+- (KalturaFieldType)getTypeOfHost;
+- (KalturaFieldType)getTypeOfCdnHost;
+- (KalturaFieldType)getTypeOfIsFirstLogin;
+- (KalturaFieldType)getTypeOfLogoutUrl;
+- (KalturaFieldType)getTypeOfPartnerParentId;
+- (KalturaFieldType)getTypeOfCrmId;
+- (KalturaFieldType)getTypeOfReferenceId;
+- (KalturaFieldType)getTypeOfTimeAlignedRenditions;
+- (void)setIdFromString:(NSString*)aPropVal;
+- (void)setAppearInSearchFromString:(NSString*)aPropVal;
+- (void)setCreatedAtFromString:(NSString*)aPropVal;
+- (void)setCommercialUseFromString:(NSString*)aPropVal;
+- (void)setTypeFromString:(NSString*)aPropVal;
+- (void)setAdultContentFromString:(NSString*)aPropVal;
+- (void)setNotifyFromString:(NSString*)aPropVal;
+- (void)setStatusFromString:(NSString*)aPropVal;
+- (void)setAllowQuickEditFromString:(NSString*)aPropVal;
+- (void)setMergeEntryListsFromString:(NSString*)aPropVal;
+- (void)setMaxUploadSizeFromString:(NSString*)aPropVal;
+- (void)setPartnerPackageFromString:(NSString*)aPropVal;
+- (void)setAllowMultiNotificationFromString:(NSString*)aPropVal;
+- (void)setAdminLoginUsersQuotaFromString:(NSString*)aPropVal;
+- (void)setPublishersQuotaFromString:(NSString*)aPropVal;
+- (void)setPartnerGroupTypeFromString:(NSString*)aPropVal;
+- (void)setDefaultEntitlementEnforcementFromString:(NSString*)aPropVal;
+- (void)setTemplatePartnerIdFromString:(NSString*)aPropVal;
+- (void)setIgnoreSeoLinksFromString:(NSString*)aPropVal;
+- (void)setIsFirstLoginFromString:(NSString*)aPropVal;
+- (void)setPartnerParentIdFromString:(NSString*)aPropVal;
+- (void)setTimeAlignedRenditionsFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// A representation to return an array of values
+@interface KalturaValue : KalturaObjectBase
+@property (nonatomic,copy) NSString* description;
+- (KalturaFieldType)getTypeOfDescription;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// A boolean representation to return an array of booleans
+@interface KalturaBooleanValue : KalturaValue
+@property (nonatomic,assign) KALTURA_BOOL value;
+- (KalturaFieldType)getTypeOfValue;
+- (void)setValueFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -4784,17 +4948,6 @@
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
 - (void)setUpdateMethodFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-// Define client optional configurations
-//  /
-@interface KalturaClientConfiguration : KalturaObjectBase
-@property (nonatomic,copy) NSString* clientTag;
-@property (nonatomic,copy) NSString* apiVersion;
-- (KalturaFieldType)getTypeOfClientTag;
-- (KalturaFieldType)getTypeOfApiVersion;
 @end
 
 // @package Kaltura
@@ -5304,14 +5457,6 @@
 
 // @package Kaltura
 // @subpackage Client
-// A representation to return an array of values
-@interface KalturaValue : KalturaObjectBase
-@property (nonatomic,copy) NSString* description;
-- (KalturaFieldType)getTypeOfDescription;
-@end
-
-// @package Kaltura
-// @subpackage Client
 // A string representation to return an array of strings
 @interface KalturaStringValue : KalturaValue
 @property (nonatomic,copy) NSString* value;
@@ -5525,6 +5670,8 @@
 @property (nonatomic,copy,readonly) NSString* videoCodecId;
 // The status of the Flavor Asset
 @property (nonatomic,assign,readonly) int status;	// enum KalturaFlavorAssetStatus
+// The language of the flavor asset
+@property (nonatomic,copy) NSString* language;	// enum KalturaLanguage
 - (KalturaFieldType)getTypeOfFlavorParamsId;
 - (KalturaFieldType)getTypeOfWidth;
 - (KalturaFieldType)getTypeOfHeight;
@@ -5535,6 +5682,7 @@
 - (KalturaFieldType)getTypeOfContainerFormat;
 - (KalturaFieldType)getTypeOfVideoCodecId;
 - (KalturaFieldType)getTypeOfStatus;
+- (KalturaFieldType)getTypeOfLanguage;
 - (void)setFlavorParamsIdFromString:(NSString*)aPropVal;
 - (void)setWidthFromString:(NSString*)aPropVal;
 - (void)setHeightFromString:(NSString*)aPropVal;
@@ -5712,6 +5860,193 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaSchedulerStatus : KalturaObjectBase
+// The id of the Category
+@property (nonatomic,assign,readonly) int id;
+// The configured id of the scheduler
+@property (nonatomic,assign) int schedulerConfiguredId;
+// The configured id of the job worker
+@property (nonatomic,assign) int workerConfiguredId;
+// The type of the job worker.
+@property (nonatomic,copy) NSString* workerType;	// enum KalturaBatchJobType
+// The status type
+@property (nonatomic,assign) int type;	// enum KalturaSchedulerStatusType
+// The status value
+@property (nonatomic,assign) int value;
+// The id of the scheduler
+@property (nonatomic,assign,readonly) int schedulerId;
+// The id of the worker
+@property (nonatomic,assign,readonly) int workerId;
+- (KalturaFieldType)getTypeOfId;
+- (KalturaFieldType)getTypeOfSchedulerConfiguredId;
+- (KalturaFieldType)getTypeOfWorkerConfiguredId;
+- (KalturaFieldType)getTypeOfWorkerType;
+- (KalturaFieldType)getTypeOfType;
+- (KalturaFieldType)getTypeOfValue;
+- (KalturaFieldType)getTypeOfSchedulerId;
+- (KalturaFieldType)getTypeOfWorkerId;
+- (void)setIdFromString:(NSString*)aPropVal;
+- (void)setSchedulerConfiguredIdFromString:(NSString*)aPropVal;
+- (void)setWorkerConfiguredIdFromString:(NSString*)aPropVal;
+- (void)setTypeFromString:(NSString*)aPropVal;
+- (void)setValueFromString:(NSString*)aPropVal;
+- (void)setSchedulerIdFromString:(NSString*)aPropVal;
+- (void)setWorkerIdFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaSchedulerConfig : KalturaObjectBase
+// The id of the Category
+@property (nonatomic,assign,readonly) int id;
+// Creator name
+@property (nonatomic,copy) NSString* createdBy;
+// Updater name
+@property (nonatomic,copy) NSString* updatedBy;
+// Id of the control panel command that created this config item
+@property (nonatomic,copy) NSString* commandId;
+// The status of the control panel command
+@property (nonatomic,copy) NSString* commandStatus;
+// The id of the scheduler
+@property (nonatomic,assign) int schedulerId;
+// The configured id of the scheduler
+@property (nonatomic,assign) int schedulerConfiguredId;
+// The name of the scheduler
+@property (nonatomic,copy) NSString* schedulerName;
+// The id of the job worker
+@property (nonatomic,assign) int workerId;
+// The configured id of the job worker
+@property (nonatomic,assign) int workerConfiguredId;
+// The name of the job worker
+@property (nonatomic,copy) NSString* workerName;
+// The name of the variable
+@property (nonatomic,copy) NSString* variable;
+// The part of the variable
+@property (nonatomic,copy) NSString* variablePart;
+// The value of the variable
+@property (nonatomic,copy) NSString* value;
+- (KalturaFieldType)getTypeOfId;
+- (KalturaFieldType)getTypeOfCreatedBy;
+- (KalturaFieldType)getTypeOfUpdatedBy;
+- (KalturaFieldType)getTypeOfCommandId;
+- (KalturaFieldType)getTypeOfCommandStatus;
+- (KalturaFieldType)getTypeOfSchedulerId;
+- (KalturaFieldType)getTypeOfSchedulerConfiguredId;
+- (KalturaFieldType)getTypeOfSchedulerName;
+- (KalturaFieldType)getTypeOfWorkerId;
+- (KalturaFieldType)getTypeOfWorkerConfiguredId;
+- (KalturaFieldType)getTypeOfWorkerName;
+- (KalturaFieldType)getTypeOfVariable;
+- (KalturaFieldType)getTypeOfVariablePart;
+- (KalturaFieldType)getTypeOfValue;
+- (void)setIdFromString:(NSString*)aPropVal;
+- (void)setSchedulerIdFromString:(NSString*)aPropVal;
+- (void)setSchedulerConfiguredIdFromString:(NSString*)aPropVal;
+- (void)setWorkerIdFromString:(NSString*)aPropVal;
+- (void)setWorkerConfiguredIdFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaSchedulerWorker : KalturaObjectBase
+// The id of the Worker
+@property (nonatomic,assign,readonly) int id;
+// The id as configured in the batch config
+@property (nonatomic,assign) int configuredId;
+// The id of the Scheduler
+@property (nonatomic,assign) int schedulerId;
+// The id of the scheduler as configured in the batch config
+@property (nonatomic,assign) int schedulerConfiguredId;
+// The worker type
+@property (nonatomic,copy) NSString* type;	// enum KalturaBatchJobType
+// The friendly name of the type
+@property (nonatomic,copy) NSString* typeName;
+// The scheduler name
+@property (nonatomic,copy) NSString* name;
+// Array of the last statuses
+@property (nonatomic,retain) NSMutableArray* statuses;	// of KalturaSchedulerStatus elements
+// Array of the last configs
+@property (nonatomic,retain) NSMutableArray* configs;	// of KalturaSchedulerConfig elements
+// Array of jobs that locked to this worker
+@property (nonatomic,retain) NSMutableArray* lockedJobs;	// of KalturaBatchJob elements
+// Avarage time between creation and queue time
+@property (nonatomic,assign) int avgWait;
+// Avarage time between queue time end finish time
+@property (nonatomic,assign) int avgWork;
+// last status time
+@property (nonatomic,assign) int lastStatus;
+// last status formated
+@property (nonatomic,copy) NSString* lastStatusStr;
+- (KalturaFieldType)getTypeOfId;
+- (KalturaFieldType)getTypeOfConfiguredId;
+- (KalturaFieldType)getTypeOfSchedulerId;
+- (KalturaFieldType)getTypeOfSchedulerConfiguredId;
+- (KalturaFieldType)getTypeOfType;
+- (KalturaFieldType)getTypeOfTypeName;
+- (KalturaFieldType)getTypeOfName;
+- (KalturaFieldType)getTypeOfStatuses;
+- (NSString*)getObjectTypeOfStatuses;
+- (KalturaFieldType)getTypeOfConfigs;
+- (NSString*)getObjectTypeOfConfigs;
+- (KalturaFieldType)getTypeOfLockedJobs;
+- (NSString*)getObjectTypeOfLockedJobs;
+- (KalturaFieldType)getTypeOfAvgWait;
+- (KalturaFieldType)getTypeOfAvgWork;
+- (KalturaFieldType)getTypeOfLastStatus;
+- (KalturaFieldType)getTypeOfLastStatusStr;
+- (void)setIdFromString:(NSString*)aPropVal;
+- (void)setConfiguredIdFromString:(NSString*)aPropVal;
+- (void)setSchedulerIdFromString:(NSString*)aPropVal;
+- (void)setSchedulerConfiguredIdFromString:(NSString*)aPropVal;
+- (void)setAvgWaitFromString:(NSString*)aPropVal;
+- (void)setAvgWorkFromString:(NSString*)aPropVal;
+- (void)setLastStatusFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaScheduler : KalturaObjectBase
+// The id of the Scheduler
+@property (nonatomic,assign,readonly) int id;
+// The id as configured in the batch config
+@property (nonatomic,assign) int configuredId;
+// The scheduler name
+@property (nonatomic,copy) NSString* name;
+// The host name
+@property (nonatomic,copy) NSString* host;
+// Array of the last statuses
+@property (nonatomic,retain,readonly) NSMutableArray* statuses;	// of KalturaSchedulerStatus elements
+// Array of the last configs
+@property (nonatomic,retain,readonly) NSMutableArray* configs;	// of KalturaSchedulerConfig elements
+// Array of the workers
+@property (nonatomic,retain,readonly) NSMutableArray* workers;	// of KalturaSchedulerWorker elements
+// creation time
+@property (nonatomic,assign,readonly) int createdAt;
+// last status time
+@property (nonatomic,assign,readonly) int lastStatus;
+// last status formated
+@property (nonatomic,copy,readonly) NSString* lastStatusStr;
+- (KalturaFieldType)getTypeOfId;
+- (KalturaFieldType)getTypeOfConfiguredId;
+- (KalturaFieldType)getTypeOfName;
+- (KalturaFieldType)getTypeOfHost;
+- (KalturaFieldType)getTypeOfStatuses;
+- (NSString*)getObjectTypeOfStatuses;
+- (KalturaFieldType)getTypeOfConfigs;
+- (NSString*)getObjectTypeOfConfigs;
+- (KalturaFieldType)getTypeOfWorkers;
+- (NSString*)getObjectTypeOfWorkers;
+- (KalturaFieldType)getTypeOfCreatedAt;
+- (KalturaFieldType)getTypeOfLastStatus;
+- (KalturaFieldType)getTypeOfLastStatusStr;
+- (void)setIdFromString:(NSString*)aPropVal;
+- (void)setConfiguredIdFromString:(NSString*)aPropVal;
+- (void)setCreatedAtFromString:(NSString*)aPropVal;
+- (void)setLastStatusFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaGroupUser : KalturaObjectBase
 @property (nonatomic,copy) NSString* userId;	// insertonly
 @property (nonatomic,copy) NSString* groupId;	// insertonly
@@ -5752,13 +6087,250 @@
 
 // @package Kaltura
 // @subpackage Client
-// A key (boolean) value pair representation to return an array of key-(boolean)value pairs (associative array)
-@interface KalturaKeyBooleanValue : KalturaObjectBase
-@property (nonatomic,copy) NSString* key;
-@property (nonatomic,assign) KALTURA_BOOL value;
-- (KalturaFieldType)getTypeOfKey;
-- (KalturaFieldType)getTypeOfValue;
-- (void)setValueFromString:(NSString*)aPropVal;
+@interface KalturaBatchJobListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaBatchJob elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaMediaInfo : KalturaObjectBase
+// The id of the media info
+@property (nonatomic,assign,readonly) int id;
+// The id of the related flavor asset
+@property (nonatomic,copy) NSString* flavorAssetId;
+// The file size
+@property (nonatomic,assign) int fileSize;
+// The container format
+@property (nonatomic,copy) NSString* containerFormat;
+// The container id
+@property (nonatomic,copy) NSString* containerId;
+// The container profile
+@property (nonatomic,copy) NSString* containerProfile;
+// The container duration
+@property (nonatomic,assign) int containerDuration;
+// The container bit rate
+@property (nonatomic,assign) int containerBitRate;
+// The video format
+@property (nonatomic,copy) NSString* videoFormat;
+// The video codec id
+@property (nonatomic,copy) NSString* videoCodecId;
+// The video duration
+@property (nonatomic,assign) int videoDuration;
+// The video bit rate
+@property (nonatomic,assign) int videoBitRate;
+// The video bit rate mode
+@property (nonatomic,assign) int videoBitRateMode;	// enum KalturaBitRateMode
+// The video width
+@property (nonatomic,assign) int videoWidth;
+// The video height
+@property (nonatomic,assign) int videoHeight;
+// The video frame rate
+@property (nonatomic,assign) double videoFrameRate;
+// The video display aspect ratio (dar)
+@property (nonatomic,assign) double videoDar;
+@property (nonatomic,assign) int videoRotation;
+// The audio format
+@property (nonatomic,copy) NSString* audioFormat;
+// The audio codec id
+@property (nonatomic,copy) NSString* audioCodecId;
+// The audio duration
+@property (nonatomic,assign) int audioDuration;
+// The audio bit rate
+@property (nonatomic,assign) int audioBitRate;
+// The audio bit rate mode
+@property (nonatomic,assign) int audioBitRateMode;	// enum KalturaBitRateMode
+// The number of audio channels
+@property (nonatomic,assign) int audioChannels;
+// The audio sampling rate
+@property (nonatomic,assign) int audioSamplingRate;
+// The audio resolution
+@property (nonatomic,assign) int audioResolution;
+// The writing library
+@property (nonatomic,copy) NSString* writingLib;
+// The data as returned by the mediainfo command line
+@property (nonatomic,copy) NSString* rawData;
+@property (nonatomic,copy) NSString* multiStreamInfo;
+@property (nonatomic,assign) int scanType;
+@property (nonatomic,copy) NSString* multiStream;
+@property (nonatomic,assign) int isFastStart;
+@property (nonatomic,copy) NSString* contentStreams;
+- (KalturaFieldType)getTypeOfId;
+- (KalturaFieldType)getTypeOfFlavorAssetId;
+- (KalturaFieldType)getTypeOfFileSize;
+- (KalturaFieldType)getTypeOfContainerFormat;
+- (KalturaFieldType)getTypeOfContainerId;
+- (KalturaFieldType)getTypeOfContainerProfile;
+- (KalturaFieldType)getTypeOfContainerDuration;
+- (KalturaFieldType)getTypeOfContainerBitRate;
+- (KalturaFieldType)getTypeOfVideoFormat;
+- (KalturaFieldType)getTypeOfVideoCodecId;
+- (KalturaFieldType)getTypeOfVideoDuration;
+- (KalturaFieldType)getTypeOfVideoBitRate;
+- (KalturaFieldType)getTypeOfVideoBitRateMode;
+- (KalturaFieldType)getTypeOfVideoWidth;
+- (KalturaFieldType)getTypeOfVideoHeight;
+- (KalturaFieldType)getTypeOfVideoFrameRate;
+- (KalturaFieldType)getTypeOfVideoDar;
+- (KalturaFieldType)getTypeOfVideoRotation;
+- (KalturaFieldType)getTypeOfAudioFormat;
+- (KalturaFieldType)getTypeOfAudioCodecId;
+- (KalturaFieldType)getTypeOfAudioDuration;
+- (KalturaFieldType)getTypeOfAudioBitRate;
+- (KalturaFieldType)getTypeOfAudioBitRateMode;
+- (KalturaFieldType)getTypeOfAudioChannels;
+- (KalturaFieldType)getTypeOfAudioSamplingRate;
+- (KalturaFieldType)getTypeOfAudioResolution;
+- (KalturaFieldType)getTypeOfWritingLib;
+- (KalturaFieldType)getTypeOfRawData;
+- (KalturaFieldType)getTypeOfMultiStreamInfo;
+- (KalturaFieldType)getTypeOfScanType;
+- (KalturaFieldType)getTypeOfMultiStream;
+- (KalturaFieldType)getTypeOfIsFastStart;
+- (KalturaFieldType)getTypeOfContentStreams;
+- (void)setIdFromString:(NSString*)aPropVal;
+- (void)setFileSizeFromString:(NSString*)aPropVal;
+- (void)setContainerDurationFromString:(NSString*)aPropVal;
+- (void)setContainerBitRateFromString:(NSString*)aPropVal;
+- (void)setVideoDurationFromString:(NSString*)aPropVal;
+- (void)setVideoBitRateFromString:(NSString*)aPropVal;
+- (void)setVideoBitRateModeFromString:(NSString*)aPropVal;
+- (void)setVideoWidthFromString:(NSString*)aPropVal;
+- (void)setVideoHeightFromString:(NSString*)aPropVal;
+- (void)setVideoFrameRateFromString:(NSString*)aPropVal;
+- (void)setVideoDarFromString:(NSString*)aPropVal;
+- (void)setVideoRotationFromString:(NSString*)aPropVal;
+- (void)setAudioDurationFromString:(NSString*)aPropVal;
+- (void)setAudioBitRateFromString:(NSString*)aPropVal;
+- (void)setAudioBitRateModeFromString:(NSString*)aPropVal;
+- (void)setAudioChannelsFromString:(NSString*)aPropVal;
+- (void)setAudioSamplingRateFromString:(NSString*)aPropVal;
+- (void)setAudioResolutionFromString:(NSString*)aPropVal;
+- (void)setScanTypeFromString:(NSString*)aPropVal;
+- (void)setIsFastStartFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaMediaInfoListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaMediaInfo elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaFlavorParamsOutputListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaFlavorParamsOutput elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaThumbAsset : KalturaAsset
+// The Flavor Params used to create this Flavor Asset
+@property (nonatomic,assign) int thumbParamsId;	// insertonly
+// The width of the Flavor Asset
+@property (nonatomic,assign,readonly) int width;
+// The height of the Flavor Asset
+@property (nonatomic,assign,readonly) int height;
+// The status of the asset
+@property (nonatomic,assign,readonly) int status;	// enum KalturaThumbAssetStatus
+- (KalturaFieldType)getTypeOfThumbParamsId;
+- (KalturaFieldType)getTypeOfWidth;
+- (KalturaFieldType)getTypeOfHeight;
+- (KalturaFieldType)getTypeOfStatus;
+- (void)setThumbParamsIdFromString:(NSString*)aPropVal;
+- (void)setWidthFromString:(NSString*)aPropVal;
+- (void)setHeightFromString:(NSString*)aPropVal;
+- (void)setStatusFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaThumbParams : KalturaAssetParams
+@property (nonatomic,assign) int cropType;	// enum KalturaThumbCropType
+@property (nonatomic,assign) int quality;
+@property (nonatomic,assign) int cropX;
+@property (nonatomic,assign) int cropY;
+@property (nonatomic,assign) int cropWidth;
+@property (nonatomic,assign) int cropHeight;
+@property (nonatomic,assign) double videoOffset;
+@property (nonatomic,assign) int width;
+@property (nonatomic,assign) int height;
+@property (nonatomic,assign) double scaleWidth;
+@property (nonatomic,assign) double scaleHeight;
+// Hexadecimal value
+@property (nonatomic,copy) NSString* backgroundColor;
+// Id of the flavor params or the thumbnail params to be used as source for the thumbnail creation
+@property (nonatomic,assign) int sourceParamsId;
+// The container format of the Flavor Params
+@property (nonatomic,copy) NSString* format;	// enum KalturaContainerFormat
+// The image density (dpi) for example: 72 or 96
+@property (nonatomic,assign) int density;
+// Strip profiles and comments
+@property (nonatomic,assign) KALTURA_BOOL stripProfiles;
+// Create thumbnail from the videoLengthpercentage second
+@property (nonatomic,assign) int videoOffsetInPercentage;
+- (KalturaFieldType)getTypeOfCropType;
+- (KalturaFieldType)getTypeOfQuality;
+- (KalturaFieldType)getTypeOfCropX;
+- (KalturaFieldType)getTypeOfCropY;
+- (KalturaFieldType)getTypeOfCropWidth;
+- (KalturaFieldType)getTypeOfCropHeight;
+- (KalturaFieldType)getTypeOfVideoOffset;
+- (KalturaFieldType)getTypeOfWidth;
+- (KalturaFieldType)getTypeOfHeight;
+- (KalturaFieldType)getTypeOfScaleWidth;
+- (KalturaFieldType)getTypeOfScaleHeight;
+- (KalturaFieldType)getTypeOfBackgroundColor;
+- (KalturaFieldType)getTypeOfSourceParamsId;
+- (KalturaFieldType)getTypeOfFormat;
+- (KalturaFieldType)getTypeOfDensity;
+- (KalturaFieldType)getTypeOfStripProfiles;
+- (KalturaFieldType)getTypeOfVideoOffsetInPercentage;
+- (void)setCropTypeFromString:(NSString*)aPropVal;
+- (void)setQualityFromString:(NSString*)aPropVal;
+- (void)setCropXFromString:(NSString*)aPropVal;
+- (void)setCropYFromString:(NSString*)aPropVal;
+- (void)setCropWidthFromString:(NSString*)aPropVal;
+- (void)setCropHeightFromString:(NSString*)aPropVal;
+- (void)setVideoOffsetFromString:(NSString*)aPropVal;
+- (void)setWidthFromString:(NSString*)aPropVal;
+- (void)setHeightFromString:(NSString*)aPropVal;
+- (void)setScaleWidthFromString:(NSString*)aPropVal;
+- (void)setScaleHeightFromString:(NSString*)aPropVal;
+- (void)setSourceParamsIdFromString:(NSString*)aPropVal;
+- (void)setDensityFromString:(NSString*)aPropVal;
+- (void)setStripProfilesFromString:(NSString*)aPropVal;
+- (void)setVideoOffsetInPercentageFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaThumbParamsOutput : KalturaThumbParams
+@property (nonatomic,assign) int thumbParamsId;
+@property (nonatomic,copy) NSString* thumbParamsVersion;
+@property (nonatomic,copy) NSString* thumbAssetId;
+@property (nonatomic,copy) NSString* thumbAssetVersion;
+@property (nonatomic,assign) int rotate;
+- (KalturaFieldType)getTypeOfThumbParamsId;
+- (KalturaFieldType)getTypeOfThumbParamsVersion;
+- (KalturaFieldType)getTypeOfThumbAssetId;
+- (KalturaFieldType)getTypeOfThumbAssetVersion;
+- (KalturaFieldType)getTypeOfRotate;
+- (void)setThumbParamsIdFromString:(NSString*)aPropVal;
+- (void)setRotateFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaThumbParamsOutputListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaThumbParamsOutput elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
 @end
 
 // @package Kaltura
@@ -6430,124 +7002,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaMediaInfo : KalturaObjectBase
-// The id of the media info
-@property (nonatomic,assign,readonly) int id;
-// The id of the related flavor asset
-@property (nonatomic,copy) NSString* flavorAssetId;
-// The file size
-@property (nonatomic,assign) int fileSize;
-// The container format
-@property (nonatomic,copy) NSString* containerFormat;
-// The container id
-@property (nonatomic,copy) NSString* containerId;
-// The container profile
-@property (nonatomic,copy) NSString* containerProfile;
-// The container duration
-@property (nonatomic,assign) int containerDuration;
-// The container bit rate
-@property (nonatomic,assign) int containerBitRate;
-// The video format
-@property (nonatomic,copy) NSString* videoFormat;
-// The video codec id
-@property (nonatomic,copy) NSString* videoCodecId;
-// The video duration
-@property (nonatomic,assign) int videoDuration;
-// The video bit rate
-@property (nonatomic,assign) int videoBitRate;
-// The video bit rate mode
-@property (nonatomic,assign) int videoBitRateMode;	// enum KalturaBitRateMode
-// The video width
-@property (nonatomic,assign) int videoWidth;
-// The video height
-@property (nonatomic,assign) int videoHeight;
-// The video frame rate
-@property (nonatomic,assign) double videoFrameRate;
-// The video display aspect ratio (dar)
-@property (nonatomic,assign) double videoDar;
-@property (nonatomic,assign) int videoRotation;
-// The audio format
-@property (nonatomic,copy) NSString* audioFormat;
-// The audio codec id
-@property (nonatomic,copy) NSString* audioCodecId;
-// The audio duration
-@property (nonatomic,assign) int audioDuration;
-// The audio bit rate
-@property (nonatomic,assign) int audioBitRate;
-// The audio bit rate mode
-@property (nonatomic,assign) int audioBitRateMode;	// enum KalturaBitRateMode
-// The number of audio channels
-@property (nonatomic,assign) int audioChannels;
-// The audio sampling rate
-@property (nonatomic,assign) int audioSamplingRate;
-// The audio resolution
-@property (nonatomic,assign) int audioResolution;
-// The writing library
-@property (nonatomic,copy) NSString* writingLib;
-// The data as returned by the mediainfo command line
-@property (nonatomic,copy) NSString* rawData;
-@property (nonatomic,copy) NSString* multiStreamInfo;
-@property (nonatomic,assign) int scanType;
-@property (nonatomic,copy) NSString* multiStream;
-@property (nonatomic,assign) int isFastStart;
-@property (nonatomic,copy) NSString* contentStreams;
-- (KalturaFieldType)getTypeOfId;
-- (KalturaFieldType)getTypeOfFlavorAssetId;
-- (KalturaFieldType)getTypeOfFileSize;
-- (KalturaFieldType)getTypeOfContainerFormat;
-- (KalturaFieldType)getTypeOfContainerId;
-- (KalturaFieldType)getTypeOfContainerProfile;
-- (KalturaFieldType)getTypeOfContainerDuration;
-- (KalturaFieldType)getTypeOfContainerBitRate;
-- (KalturaFieldType)getTypeOfVideoFormat;
-- (KalturaFieldType)getTypeOfVideoCodecId;
-- (KalturaFieldType)getTypeOfVideoDuration;
-- (KalturaFieldType)getTypeOfVideoBitRate;
-- (KalturaFieldType)getTypeOfVideoBitRateMode;
-- (KalturaFieldType)getTypeOfVideoWidth;
-- (KalturaFieldType)getTypeOfVideoHeight;
-- (KalturaFieldType)getTypeOfVideoFrameRate;
-- (KalturaFieldType)getTypeOfVideoDar;
-- (KalturaFieldType)getTypeOfVideoRotation;
-- (KalturaFieldType)getTypeOfAudioFormat;
-- (KalturaFieldType)getTypeOfAudioCodecId;
-- (KalturaFieldType)getTypeOfAudioDuration;
-- (KalturaFieldType)getTypeOfAudioBitRate;
-- (KalturaFieldType)getTypeOfAudioBitRateMode;
-- (KalturaFieldType)getTypeOfAudioChannels;
-- (KalturaFieldType)getTypeOfAudioSamplingRate;
-- (KalturaFieldType)getTypeOfAudioResolution;
-- (KalturaFieldType)getTypeOfWritingLib;
-- (KalturaFieldType)getTypeOfRawData;
-- (KalturaFieldType)getTypeOfMultiStreamInfo;
-- (KalturaFieldType)getTypeOfScanType;
-- (KalturaFieldType)getTypeOfMultiStream;
-- (KalturaFieldType)getTypeOfIsFastStart;
-- (KalturaFieldType)getTypeOfContentStreams;
-- (void)setIdFromString:(NSString*)aPropVal;
-- (void)setFileSizeFromString:(NSString*)aPropVal;
-- (void)setContainerDurationFromString:(NSString*)aPropVal;
-- (void)setContainerBitRateFromString:(NSString*)aPropVal;
-- (void)setVideoDurationFromString:(NSString*)aPropVal;
-- (void)setVideoBitRateFromString:(NSString*)aPropVal;
-- (void)setVideoBitRateModeFromString:(NSString*)aPropVal;
-- (void)setVideoWidthFromString:(NSString*)aPropVal;
-- (void)setVideoHeightFromString:(NSString*)aPropVal;
-- (void)setVideoFrameRateFromString:(NSString*)aPropVal;
-- (void)setVideoDarFromString:(NSString*)aPropVal;
-- (void)setVideoRotationFromString:(NSString*)aPropVal;
-- (void)setAudioDurationFromString:(NSString*)aPropVal;
-- (void)setAudioBitRateFromString:(NSString*)aPropVal;
-- (void)setAudioBitRateModeFromString:(NSString*)aPropVal;
-- (void)setAudioChannelsFromString:(NSString*)aPropVal;
-- (void)setAudioSamplingRateFromString:(NSString*)aPropVal;
-- (void)setAudioResolutionFromString:(NSString*)aPropVal;
-- (void)setScanTypeFromString:(NSString*)aPropVal;
-- (void)setIsFastStartFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaMixEntry : KalturaPlayableEntry
 // Indicates whether the user has submited a real thumbnail to the mix (Not the one that was generated automaticaly)
 @property (nonatomic,assign,readonly) KALTURA_BOOL hasRealThumbnail;
@@ -6599,178 +7053,6 @@
 - (void)setFlagTypeFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaPlayerDeliveryType : KalturaObjectBase
-@property (nonatomic,copy) NSString* id;
-@property (nonatomic,copy) NSString* label;
-@property (nonatomic,retain) NSMutableArray* flashvars;	// of KalturaKeyValue elements
-@property (nonatomic,copy) NSString* minVersion;
-@property (nonatomic,assign) KALTURA_BOOL enabledByDefault;
-- (KalturaFieldType)getTypeOfId;
-- (KalturaFieldType)getTypeOfLabel;
-- (KalturaFieldType)getTypeOfFlashvars;
-- (NSString*)getObjectTypeOfFlashvars;
-- (KalturaFieldType)getTypeOfMinVersion;
-- (KalturaFieldType)getTypeOfEnabledByDefault;
-- (void)setEnabledByDefaultFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaPlayerEmbedCodeType : KalturaObjectBase
-@property (nonatomic,copy) NSString* id;
-@property (nonatomic,copy) NSString* label;
-@property (nonatomic,assign) KALTURA_BOOL entryOnly;
-@property (nonatomic,copy) NSString* minVersion;
-- (KalturaFieldType)getTypeOfId;
-- (KalturaFieldType)getTypeOfLabel;
-- (KalturaFieldType)getTypeOfEntryOnly;
-- (KalturaFieldType)getTypeOfMinVersion;
-- (void)setEntryOnlyFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaPartner : KalturaObjectBase
-@property (nonatomic,assign,readonly) int id;
-@property (nonatomic,copy) NSString* name;
-@property (nonatomic,copy) NSString* website;
-@property (nonatomic,copy) NSString* notificationUrl;
-@property (nonatomic,assign) int appearInSearch;
-@property (nonatomic,assign,readonly) int createdAt;
-// deprecated - lastName and firstName replaces this field
-@property (nonatomic,copy) NSString* adminName;
-@property (nonatomic,copy) NSString* adminEmail;
-@property (nonatomic,copy) NSString* description;
-@property (nonatomic,assign) int commercialUse;	// enum KalturaCommercialUseType
-@property (nonatomic,copy) NSString* landingPage;
-@property (nonatomic,copy) NSString* userLandingPage;
-@property (nonatomic,copy) NSString* contentCategories;
-@property (nonatomic,assign) int type;	// enum KalturaPartnerType
-@property (nonatomic,copy) NSString* phone;
-@property (nonatomic,copy) NSString* describeYourself;
-@property (nonatomic,assign) KALTURA_BOOL adultContent;
-@property (nonatomic,copy) NSString* defConversionProfileType;
-@property (nonatomic,assign) int notify;
-@property (nonatomic,assign,readonly) int status;	// enum KalturaPartnerStatus
-@property (nonatomic,assign) int allowQuickEdit;
-@property (nonatomic,assign) int mergeEntryLists;
-@property (nonatomic,copy) NSString* notificationsConfig;
-@property (nonatomic,assign) int maxUploadSize;
-@property (nonatomic,assign,readonly) int partnerPackage;
-@property (nonatomic,copy,readonly) NSString* secret;
-@property (nonatomic,copy,readonly) NSString* adminSecret;
-@property (nonatomic,copy,readonly) NSString* cmsPassword;
-@property (nonatomic,assign) int allowMultiNotification;
-@property (nonatomic,assign,readonly) int adminLoginUsersQuota;
-@property (nonatomic,copy) NSString* adminUserId;
-// firstName and lastName replace the old (deprecated) adminName
-@property (nonatomic,copy) NSString* firstName;
-// lastName and firstName replace the old (deprecated) adminName
-@property (nonatomic,copy) NSString* lastName;
-// country code (2char) - this field is optional
-@property (nonatomic,copy) NSString* country;
-// state code (2char) - this field is optional
-@property (nonatomic,copy) NSString* state;
-@property (nonatomic,retain) NSMutableArray* additionalParams;	// of KalturaKeyValue elements, insertonly
-@property (nonatomic,assign,readonly) int publishersQuota;
-@property (nonatomic,assign,readonly) int partnerGroupType;	// enum KalturaPartnerGroupType
-@property (nonatomic,assign,readonly) KALTURA_BOOL defaultEntitlementEnforcement;
-@property (nonatomic,copy,readonly) NSString* defaultDeliveryType;
-@property (nonatomic,copy,readonly) NSString* defaultEmbedCodeType;
-@property (nonatomic,retain,readonly) NSMutableArray* deliveryTypes;	// of KalturaPlayerDeliveryType elements
-@property (nonatomic,retain,readonly) NSMutableArray* embedCodeTypes;	// of KalturaPlayerEmbedCodeType elements
-@property (nonatomic,assign,readonly) int templatePartnerId;
-@property (nonatomic,assign,readonly) KALTURA_BOOL ignoreSeoLinks;
-@property (nonatomic,copy,readonly) NSString* host;
-@property (nonatomic,copy,readonly) NSString* cdnHost;
-@property (nonatomic,assign,readonly) KALTURA_BOOL isFirstLogin;
-@property (nonatomic,copy,readonly) NSString* logoutUrl;
-@property (nonatomic,assign,readonly) int partnerParentId;
-@property (nonatomic,copy,readonly) NSString* crmId;
-@property (nonatomic,copy) NSString* referenceId;
-@property (nonatomic,assign,readonly) KALTURA_BOOL timeAlignedRenditions;
-- (KalturaFieldType)getTypeOfId;
-- (KalturaFieldType)getTypeOfName;
-- (KalturaFieldType)getTypeOfWebsite;
-- (KalturaFieldType)getTypeOfNotificationUrl;
-- (KalturaFieldType)getTypeOfAppearInSearch;
-- (KalturaFieldType)getTypeOfCreatedAt;
-- (KalturaFieldType)getTypeOfAdminName;
-- (KalturaFieldType)getTypeOfAdminEmail;
-- (KalturaFieldType)getTypeOfDescription;
-- (KalturaFieldType)getTypeOfCommercialUse;
-- (KalturaFieldType)getTypeOfLandingPage;
-- (KalturaFieldType)getTypeOfUserLandingPage;
-- (KalturaFieldType)getTypeOfContentCategories;
-- (KalturaFieldType)getTypeOfType;
-- (KalturaFieldType)getTypeOfPhone;
-- (KalturaFieldType)getTypeOfDescribeYourself;
-- (KalturaFieldType)getTypeOfAdultContent;
-- (KalturaFieldType)getTypeOfDefConversionProfileType;
-- (KalturaFieldType)getTypeOfNotify;
-- (KalturaFieldType)getTypeOfStatus;
-- (KalturaFieldType)getTypeOfAllowQuickEdit;
-- (KalturaFieldType)getTypeOfMergeEntryLists;
-- (KalturaFieldType)getTypeOfNotificationsConfig;
-- (KalturaFieldType)getTypeOfMaxUploadSize;
-- (KalturaFieldType)getTypeOfPartnerPackage;
-- (KalturaFieldType)getTypeOfSecret;
-- (KalturaFieldType)getTypeOfAdminSecret;
-- (KalturaFieldType)getTypeOfCmsPassword;
-- (KalturaFieldType)getTypeOfAllowMultiNotification;
-- (KalturaFieldType)getTypeOfAdminLoginUsersQuota;
-- (KalturaFieldType)getTypeOfAdminUserId;
-- (KalturaFieldType)getTypeOfFirstName;
-- (KalturaFieldType)getTypeOfLastName;
-- (KalturaFieldType)getTypeOfCountry;
-- (KalturaFieldType)getTypeOfState;
-- (KalturaFieldType)getTypeOfAdditionalParams;
-- (NSString*)getObjectTypeOfAdditionalParams;
-- (KalturaFieldType)getTypeOfPublishersQuota;
-- (KalturaFieldType)getTypeOfPartnerGroupType;
-- (KalturaFieldType)getTypeOfDefaultEntitlementEnforcement;
-- (KalturaFieldType)getTypeOfDefaultDeliveryType;
-- (KalturaFieldType)getTypeOfDefaultEmbedCodeType;
-- (KalturaFieldType)getTypeOfDeliveryTypes;
-- (NSString*)getObjectTypeOfDeliveryTypes;
-- (KalturaFieldType)getTypeOfEmbedCodeTypes;
-- (NSString*)getObjectTypeOfEmbedCodeTypes;
-- (KalturaFieldType)getTypeOfTemplatePartnerId;
-- (KalturaFieldType)getTypeOfIgnoreSeoLinks;
-- (KalturaFieldType)getTypeOfHost;
-- (KalturaFieldType)getTypeOfCdnHost;
-- (KalturaFieldType)getTypeOfIsFirstLogin;
-- (KalturaFieldType)getTypeOfLogoutUrl;
-- (KalturaFieldType)getTypeOfPartnerParentId;
-- (KalturaFieldType)getTypeOfCrmId;
-- (KalturaFieldType)getTypeOfReferenceId;
-- (KalturaFieldType)getTypeOfTimeAlignedRenditions;
-- (void)setIdFromString:(NSString*)aPropVal;
-- (void)setAppearInSearchFromString:(NSString*)aPropVal;
-- (void)setCreatedAtFromString:(NSString*)aPropVal;
-- (void)setCommercialUseFromString:(NSString*)aPropVal;
-- (void)setTypeFromString:(NSString*)aPropVal;
-- (void)setAdultContentFromString:(NSString*)aPropVal;
-- (void)setNotifyFromString:(NSString*)aPropVal;
-- (void)setStatusFromString:(NSString*)aPropVal;
-- (void)setAllowQuickEditFromString:(NSString*)aPropVal;
-- (void)setMergeEntryListsFromString:(NSString*)aPropVal;
-- (void)setMaxUploadSizeFromString:(NSString*)aPropVal;
-- (void)setPartnerPackageFromString:(NSString*)aPropVal;
-- (void)setAllowMultiNotificationFromString:(NSString*)aPropVal;
-- (void)setAdminLoginUsersQuotaFromString:(NSString*)aPropVal;
-- (void)setPublishersQuotaFromString:(NSString*)aPropVal;
-- (void)setPartnerGroupTypeFromString:(NSString*)aPropVal;
-- (void)setDefaultEntitlementEnforcementFromString:(NSString*)aPropVal;
-- (void)setTemplatePartnerIdFromString:(NSString*)aPropVal;
-- (void)setIgnoreSeoLinksFromString:(NSString*)aPropVal;
-- (void)setIsFirstLoginFromString:(NSString*)aPropVal;
-- (void)setPartnerParentIdFromString:(NSString*)aPropVal;
-- (void)setTimeAlignedRenditionsFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -7068,24 +7350,6 @@
 
 // @package Kaltura
 // @subpackage Client
-// Define client request optional configurations
-//  /
-@interface KalturaRequestConfiguration : KalturaObjectBase
-// Impersonated partner id
-@property (nonatomic,assign) int partnerId;
-// Kaltura API session
-@property (nonatomic,copy) NSString* ks;
-// Response profile - this attribute will be automatically unset after every API call.
-@property (nonatomic,retain) KalturaBaseResponseProfile* responseProfile;
-- (KalturaFieldType)getTypeOfPartnerId;
-- (KalturaFieldType)getTypeOfKs;
-- (KalturaFieldType)getTypeOfResponseProfile;
-- (NSString*)getObjectTypeOfResponseProfile;
-- (void)setPartnerIdFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaResponseProfile : KalturaDetachedResponseProfile
 // Auto generated numeric identifier
 @property (nonatomic,assign,readonly) int id;
@@ -7147,193 +7411,6 @@
 - (KalturaFieldType)getTypeOfLastObjectKey;
 - (KalturaFieldType)getTypeOfRecalculated;
 - (void)setRecalculatedFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaSchedulerStatus : KalturaObjectBase
-// The id of the Category
-@property (nonatomic,assign,readonly) int id;
-// The configured id of the scheduler
-@property (nonatomic,assign) int schedulerConfiguredId;
-// The configured id of the job worker
-@property (nonatomic,assign) int workerConfiguredId;
-// The type of the job worker.
-@property (nonatomic,copy) NSString* workerType;	// enum KalturaBatchJobType
-// The status type
-@property (nonatomic,assign) int type;	// enum KalturaSchedulerStatusType
-// The status value
-@property (nonatomic,assign) int value;
-// The id of the scheduler
-@property (nonatomic,assign,readonly) int schedulerId;
-// The id of the worker
-@property (nonatomic,assign,readonly) int workerId;
-- (KalturaFieldType)getTypeOfId;
-- (KalturaFieldType)getTypeOfSchedulerConfiguredId;
-- (KalturaFieldType)getTypeOfWorkerConfiguredId;
-- (KalturaFieldType)getTypeOfWorkerType;
-- (KalturaFieldType)getTypeOfType;
-- (KalturaFieldType)getTypeOfValue;
-- (KalturaFieldType)getTypeOfSchedulerId;
-- (KalturaFieldType)getTypeOfWorkerId;
-- (void)setIdFromString:(NSString*)aPropVal;
-- (void)setSchedulerConfiguredIdFromString:(NSString*)aPropVal;
-- (void)setWorkerConfiguredIdFromString:(NSString*)aPropVal;
-- (void)setTypeFromString:(NSString*)aPropVal;
-- (void)setValueFromString:(NSString*)aPropVal;
-- (void)setSchedulerIdFromString:(NSString*)aPropVal;
-- (void)setWorkerIdFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaSchedulerConfig : KalturaObjectBase
-// The id of the Category
-@property (nonatomic,assign,readonly) int id;
-// Creator name
-@property (nonatomic,copy) NSString* createdBy;
-// Updater name
-@property (nonatomic,copy) NSString* updatedBy;
-// Id of the control panel command that created this config item
-@property (nonatomic,copy) NSString* commandId;
-// The status of the control panel command
-@property (nonatomic,copy) NSString* commandStatus;
-// The id of the scheduler
-@property (nonatomic,assign) int schedulerId;
-// The configured id of the scheduler
-@property (nonatomic,assign) int schedulerConfiguredId;
-// The name of the scheduler
-@property (nonatomic,copy) NSString* schedulerName;
-// The id of the job worker
-@property (nonatomic,assign) int workerId;
-// The configured id of the job worker
-@property (nonatomic,assign) int workerConfiguredId;
-// The name of the job worker
-@property (nonatomic,copy) NSString* workerName;
-// The name of the variable
-@property (nonatomic,copy) NSString* variable;
-// The part of the variable
-@property (nonatomic,copy) NSString* variablePart;
-// The value of the variable
-@property (nonatomic,copy) NSString* value;
-- (KalturaFieldType)getTypeOfId;
-- (KalturaFieldType)getTypeOfCreatedBy;
-- (KalturaFieldType)getTypeOfUpdatedBy;
-- (KalturaFieldType)getTypeOfCommandId;
-- (KalturaFieldType)getTypeOfCommandStatus;
-- (KalturaFieldType)getTypeOfSchedulerId;
-- (KalturaFieldType)getTypeOfSchedulerConfiguredId;
-- (KalturaFieldType)getTypeOfSchedulerName;
-- (KalturaFieldType)getTypeOfWorkerId;
-- (KalturaFieldType)getTypeOfWorkerConfiguredId;
-- (KalturaFieldType)getTypeOfWorkerName;
-- (KalturaFieldType)getTypeOfVariable;
-- (KalturaFieldType)getTypeOfVariablePart;
-- (KalturaFieldType)getTypeOfValue;
-- (void)setIdFromString:(NSString*)aPropVal;
-- (void)setSchedulerIdFromString:(NSString*)aPropVal;
-- (void)setSchedulerConfiguredIdFromString:(NSString*)aPropVal;
-- (void)setWorkerIdFromString:(NSString*)aPropVal;
-- (void)setWorkerConfiguredIdFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaSchedulerWorker : KalturaObjectBase
-// The id of the Worker
-@property (nonatomic,assign,readonly) int id;
-// The id as configured in the batch config
-@property (nonatomic,assign) int configuredId;
-// The id of the Scheduler
-@property (nonatomic,assign) int schedulerId;
-// The id of the scheduler as configured in the batch config
-@property (nonatomic,assign) int schedulerConfiguredId;
-// The worker type
-@property (nonatomic,copy) NSString* type;	// enum KalturaBatchJobType
-// The friendly name of the type
-@property (nonatomic,copy) NSString* typeName;
-// The scheduler name
-@property (nonatomic,copy) NSString* name;
-// Array of the last statuses
-@property (nonatomic,retain) NSMutableArray* statuses;	// of KalturaSchedulerStatus elements
-// Array of the last configs
-@property (nonatomic,retain) NSMutableArray* configs;	// of KalturaSchedulerConfig elements
-// Array of jobs that locked to this worker
-@property (nonatomic,retain) NSMutableArray* lockedJobs;	// of KalturaBatchJob elements
-// Avarage time between creation and queue time
-@property (nonatomic,assign) int avgWait;
-// Avarage time between queue time end finish time
-@property (nonatomic,assign) int avgWork;
-// last status time
-@property (nonatomic,assign) int lastStatus;
-// last status formated
-@property (nonatomic,copy) NSString* lastStatusStr;
-- (KalturaFieldType)getTypeOfId;
-- (KalturaFieldType)getTypeOfConfiguredId;
-- (KalturaFieldType)getTypeOfSchedulerId;
-- (KalturaFieldType)getTypeOfSchedulerConfiguredId;
-- (KalturaFieldType)getTypeOfType;
-- (KalturaFieldType)getTypeOfTypeName;
-- (KalturaFieldType)getTypeOfName;
-- (KalturaFieldType)getTypeOfStatuses;
-- (NSString*)getObjectTypeOfStatuses;
-- (KalturaFieldType)getTypeOfConfigs;
-- (NSString*)getObjectTypeOfConfigs;
-- (KalturaFieldType)getTypeOfLockedJobs;
-- (NSString*)getObjectTypeOfLockedJobs;
-- (KalturaFieldType)getTypeOfAvgWait;
-- (KalturaFieldType)getTypeOfAvgWork;
-- (KalturaFieldType)getTypeOfLastStatus;
-- (KalturaFieldType)getTypeOfLastStatusStr;
-- (void)setIdFromString:(NSString*)aPropVal;
-- (void)setConfiguredIdFromString:(NSString*)aPropVal;
-- (void)setSchedulerIdFromString:(NSString*)aPropVal;
-- (void)setSchedulerConfiguredIdFromString:(NSString*)aPropVal;
-- (void)setAvgWaitFromString:(NSString*)aPropVal;
-- (void)setAvgWorkFromString:(NSString*)aPropVal;
-- (void)setLastStatusFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaScheduler : KalturaObjectBase
-// The id of the Scheduler
-@property (nonatomic,assign,readonly) int id;
-// The id as configured in the batch config
-@property (nonatomic,assign) int configuredId;
-// The scheduler name
-@property (nonatomic,copy) NSString* name;
-// The host name
-@property (nonatomic,copy) NSString* host;
-// Array of the last statuses
-@property (nonatomic,retain,readonly) NSMutableArray* statuses;	// of KalturaSchedulerStatus elements
-// Array of the last configs
-@property (nonatomic,retain,readonly) NSMutableArray* configs;	// of KalturaSchedulerConfig elements
-// Array of the workers
-@property (nonatomic,retain,readonly) NSMutableArray* workers;	// of KalturaSchedulerWorker elements
-// creation time
-@property (nonatomic,assign,readonly) int createdAt;
-// last status time
-@property (nonatomic,assign,readonly) int lastStatus;
-// last status formated
-@property (nonatomic,copy,readonly) NSString* lastStatusStr;
-- (KalturaFieldType)getTypeOfId;
-- (KalturaFieldType)getTypeOfConfiguredId;
-- (KalturaFieldType)getTypeOfName;
-- (KalturaFieldType)getTypeOfHost;
-- (KalturaFieldType)getTypeOfStatuses;
-- (NSString*)getObjectTypeOfStatuses;
-- (KalturaFieldType)getTypeOfConfigs;
-- (NSString*)getObjectTypeOfConfigs;
-- (KalturaFieldType)getTypeOfWorkers;
-- (NSString*)getObjectTypeOfWorkers;
-- (KalturaFieldType)getTypeOfCreatedAt;
-- (KalturaFieldType)getTypeOfLastStatus;
-- (KalturaFieldType)getTypeOfLastStatusStr;
-- (void)setIdFromString:(NSString*)aPropVal;
-- (void)setConfiguredIdFromString:(NSString*)aPropVal;
-- (void)setCreatedAtFromString:(NSString*)aPropVal;
-- (void)setLastStatusFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -7728,104 +7805,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaThumbAsset : KalturaAsset
-// The Flavor Params used to create this Flavor Asset
-@property (nonatomic,assign) int thumbParamsId;	// insertonly
-// The width of the Flavor Asset
-@property (nonatomic,assign,readonly) int width;
-// The height of the Flavor Asset
-@property (nonatomic,assign,readonly) int height;
-// The status of the asset
-@property (nonatomic,assign,readonly) int status;	// enum KalturaThumbAssetStatus
-- (KalturaFieldType)getTypeOfThumbParamsId;
-- (KalturaFieldType)getTypeOfWidth;
-- (KalturaFieldType)getTypeOfHeight;
-- (KalturaFieldType)getTypeOfStatus;
-- (void)setThumbParamsIdFromString:(NSString*)aPropVal;
-- (void)setWidthFromString:(NSString*)aPropVal;
-- (void)setHeightFromString:(NSString*)aPropVal;
-- (void)setStatusFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaThumbParams : KalturaAssetParams
-@property (nonatomic,assign) int cropType;	// enum KalturaThumbCropType
-@property (nonatomic,assign) int quality;
-@property (nonatomic,assign) int cropX;
-@property (nonatomic,assign) int cropY;
-@property (nonatomic,assign) int cropWidth;
-@property (nonatomic,assign) int cropHeight;
-@property (nonatomic,assign) double videoOffset;
-@property (nonatomic,assign) int width;
-@property (nonatomic,assign) int height;
-@property (nonatomic,assign) double scaleWidth;
-@property (nonatomic,assign) double scaleHeight;
-// Hexadecimal value
-@property (nonatomic,copy) NSString* backgroundColor;
-// Id of the flavor params or the thumbnail params to be used as source for the thumbnail creation
-@property (nonatomic,assign) int sourceParamsId;
-// The container format of the Flavor Params
-@property (nonatomic,copy) NSString* format;	// enum KalturaContainerFormat
-// The image density (dpi) for example: 72 or 96
-@property (nonatomic,assign) int density;
-// Strip profiles and comments
-@property (nonatomic,assign) KALTURA_BOOL stripProfiles;
-// Create thumbnail from the videoLengthpercentage second
-@property (nonatomic,assign) int videoOffsetInPercentage;
-- (KalturaFieldType)getTypeOfCropType;
-- (KalturaFieldType)getTypeOfQuality;
-- (KalturaFieldType)getTypeOfCropX;
-- (KalturaFieldType)getTypeOfCropY;
-- (KalturaFieldType)getTypeOfCropWidth;
-- (KalturaFieldType)getTypeOfCropHeight;
-- (KalturaFieldType)getTypeOfVideoOffset;
-- (KalturaFieldType)getTypeOfWidth;
-- (KalturaFieldType)getTypeOfHeight;
-- (KalturaFieldType)getTypeOfScaleWidth;
-- (KalturaFieldType)getTypeOfScaleHeight;
-- (KalturaFieldType)getTypeOfBackgroundColor;
-- (KalturaFieldType)getTypeOfSourceParamsId;
-- (KalturaFieldType)getTypeOfFormat;
-- (KalturaFieldType)getTypeOfDensity;
-- (KalturaFieldType)getTypeOfStripProfiles;
-- (KalturaFieldType)getTypeOfVideoOffsetInPercentage;
-- (void)setCropTypeFromString:(NSString*)aPropVal;
-- (void)setQualityFromString:(NSString*)aPropVal;
-- (void)setCropXFromString:(NSString*)aPropVal;
-- (void)setCropYFromString:(NSString*)aPropVal;
-- (void)setCropWidthFromString:(NSString*)aPropVal;
-- (void)setCropHeightFromString:(NSString*)aPropVal;
-- (void)setVideoOffsetFromString:(NSString*)aPropVal;
-- (void)setWidthFromString:(NSString*)aPropVal;
-- (void)setHeightFromString:(NSString*)aPropVal;
-- (void)setScaleWidthFromString:(NSString*)aPropVal;
-- (void)setScaleHeightFromString:(NSString*)aPropVal;
-- (void)setSourceParamsIdFromString:(NSString*)aPropVal;
-- (void)setDensityFromString:(NSString*)aPropVal;
-- (void)setStripProfilesFromString:(NSString*)aPropVal;
-- (void)setVideoOffsetInPercentageFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaThumbParamsOutput : KalturaThumbParams
-@property (nonatomic,assign) int thumbParamsId;
-@property (nonatomic,copy) NSString* thumbParamsVersion;
-@property (nonatomic,copy) NSString* thumbAssetId;
-@property (nonatomic,copy) NSString* thumbAssetVersion;
-@property (nonatomic,assign) int rotate;
-- (KalturaFieldType)getTypeOfThumbParamsId;
-- (KalturaFieldType)getTypeOfThumbParamsVersion;
-- (KalturaFieldType)getTypeOfThumbAssetId;
-- (KalturaFieldType)getTypeOfThumbAssetVersion;
-- (KalturaFieldType)getTypeOfRotate;
-- (void)setThumbParamsIdFromString:(NSString*)aPropVal;
-- (void)setRotateFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaThumbnailServeOptions : KalturaObjectBase
 @property (nonatomic,assign) KALTURA_BOOL download;
 @property (nonatomic,copy) NSString* referrer;
@@ -8187,6 +8166,135 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaBatchJobBaseFilter : KalturaFilter
+@property (nonatomic,assign) int idEqual;
+@property (nonatomic,assign) int idGreaterThanOrEqual;
+@property (nonatomic,assign) int partnerIdEqual;
+@property (nonatomic,copy) NSString* partnerIdIn;
+@property (nonatomic,copy) NSString* partnerIdNotIn;
+@property (nonatomic,assign) int createdAtGreaterThanOrEqual;
+@property (nonatomic,assign) int createdAtLessThanOrEqual;
+@property (nonatomic,assign) int updatedAtGreaterThanOrEqual;
+@property (nonatomic,assign) int updatedAtLessThanOrEqual;
+@property (nonatomic,assign) int executionAttemptsGreaterThanOrEqual;
+@property (nonatomic,assign) int executionAttemptsLessThanOrEqual;
+@property (nonatomic,assign) int lockVersionGreaterThanOrEqual;
+@property (nonatomic,assign) int lockVersionLessThanOrEqual;
+@property (nonatomic,copy) NSString* entryIdEqual;
+@property (nonatomic,copy) NSString* jobTypeEqual;	// enum KalturaBatchJobType
+@property (nonatomic,copy) NSString* jobTypeIn;
+@property (nonatomic,copy) NSString* jobTypeNotIn;
+@property (nonatomic,assign) int jobSubTypeEqual;
+@property (nonatomic,copy) NSString* jobSubTypeIn;
+@property (nonatomic,copy) NSString* jobSubTypeNotIn;
+@property (nonatomic,assign) int statusEqual;	// enum KalturaBatchJobStatus
+@property (nonatomic,copy) NSString* statusIn;
+@property (nonatomic,copy) NSString* statusNotIn;
+@property (nonatomic,assign) int priorityGreaterThanOrEqual;
+@property (nonatomic,assign) int priorityLessThanOrEqual;
+@property (nonatomic,assign) int priorityEqual;
+@property (nonatomic,copy) NSString* priorityIn;
+@property (nonatomic,copy) NSString* priorityNotIn;
+@property (nonatomic,assign) int batchVersionGreaterThanOrEqual;
+@property (nonatomic,assign) int batchVersionLessThanOrEqual;
+@property (nonatomic,assign) int batchVersionEqual;
+@property (nonatomic,assign) int queueTimeGreaterThanOrEqual;
+@property (nonatomic,assign) int queueTimeLessThanOrEqual;
+@property (nonatomic,assign) int finishTimeGreaterThanOrEqual;
+@property (nonatomic,assign) int finishTimeLessThanOrEqual;
+@property (nonatomic,assign) int errTypeEqual;	// enum KalturaBatchJobErrorTypes
+@property (nonatomic,copy) NSString* errTypeIn;
+@property (nonatomic,copy) NSString* errTypeNotIn;
+@property (nonatomic,assign) int errNumberEqual;
+@property (nonatomic,copy) NSString* errNumberIn;
+@property (nonatomic,copy) NSString* errNumberNotIn;
+@property (nonatomic,assign) int estimatedEffortLessThan;
+@property (nonatomic,assign) int estimatedEffortGreaterThan;
+@property (nonatomic,assign) int urgencyLessThanOrEqual;
+@property (nonatomic,assign) int urgencyGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfIdEqual;
+- (KalturaFieldType)getTypeOfIdGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfPartnerIdEqual;
+- (KalturaFieldType)getTypeOfPartnerIdIn;
+- (KalturaFieldType)getTypeOfPartnerIdNotIn;
+- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfExecutionAttemptsGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfExecutionAttemptsLessThanOrEqual;
+- (KalturaFieldType)getTypeOfLockVersionGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfLockVersionLessThanOrEqual;
+- (KalturaFieldType)getTypeOfEntryIdEqual;
+- (KalturaFieldType)getTypeOfJobTypeEqual;
+- (KalturaFieldType)getTypeOfJobTypeIn;
+- (KalturaFieldType)getTypeOfJobTypeNotIn;
+- (KalturaFieldType)getTypeOfJobSubTypeEqual;
+- (KalturaFieldType)getTypeOfJobSubTypeIn;
+- (KalturaFieldType)getTypeOfJobSubTypeNotIn;
+- (KalturaFieldType)getTypeOfStatusEqual;
+- (KalturaFieldType)getTypeOfStatusIn;
+- (KalturaFieldType)getTypeOfStatusNotIn;
+- (KalturaFieldType)getTypeOfPriorityGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfPriorityLessThanOrEqual;
+- (KalturaFieldType)getTypeOfPriorityEqual;
+- (KalturaFieldType)getTypeOfPriorityIn;
+- (KalturaFieldType)getTypeOfPriorityNotIn;
+- (KalturaFieldType)getTypeOfBatchVersionGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfBatchVersionLessThanOrEqual;
+- (KalturaFieldType)getTypeOfBatchVersionEqual;
+- (KalturaFieldType)getTypeOfQueueTimeGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfQueueTimeLessThanOrEqual;
+- (KalturaFieldType)getTypeOfFinishTimeGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfFinishTimeLessThanOrEqual;
+- (KalturaFieldType)getTypeOfErrTypeEqual;
+- (KalturaFieldType)getTypeOfErrTypeIn;
+- (KalturaFieldType)getTypeOfErrTypeNotIn;
+- (KalturaFieldType)getTypeOfErrNumberEqual;
+- (KalturaFieldType)getTypeOfErrNumberIn;
+- (KalturaFieldType)getTypeOfErrNumberNotIn;
+- (KalturaFieldType)getTypeOfEstimatedEffortLessThan;
+- (KalturaFieldType)getTypeOfEstimatedEffortGreaterThan;
+- (KalturaFieldType)getTypeOfUrgencyLessThanOrEqual;
+- (KalturaFieldType)getTypeOfUrgencyGreaterThanOrEqual;
+- (void)setIdEqualFromString:(NSString*)aPropVal;
+- (void)setIdGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setPartnerIdEqualFromString:(NSString*)aPropVal;
+- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setExecutionAttemptsGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setExecutionAttemptsLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setLockVersionGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setLockVersionLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setJobSubTypeEqualFromString:(NSString*)aPropVal;
+- (void)setStatusEqualFromString:(NSString*)aPropVal;
+- (void)setPriorityGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setPriorityLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setPriorityEqualFromString:(NSString*)aPropVal;
+- (void)setBatchVersionGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setBatchVersionLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setBatchVersionEqualFromString:(NSString*)aPropVal;
+- (void)setQueueTimeGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setQueueTimeLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setFinishTimeGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setFinishTimeLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setErrTypeEqualFromString:(NSString*)aPropVal;
+- (void)setErrNumberEqualFromString:(NSString*)aPropVal;
+- (void)setEstimatedEffortLessThanFromString:(NSString*)aPropVal;
+- (void)setEstimatedEffortGreaterThanFromString:(NSString*)aPropVal;
+- (void)setUrgencyLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setUrgencyGreaterThanOrEqualFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaBatchJobFilter : KalturaBatchJobBaseFilter
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaAccessControlBlockAction : KalturaRuleAction
 @end
 
@@ -8402,147 +8510,6 @@
 @property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaBaseSyndicationFeed elements
 - (KalturaFieldType)getTypeOfObjects;
 - (NSString*)getObjectTypeOfObjects;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaBatchJobBaseFilter : KalturaFilter
-@property (nonatomic,assign) int idEqual;
-@property (nonatomic,assign) int idGreaterThanOrEqual;
-@property (nonatomic,assign) int partnerIdEqual;
-@property (nonatomic,copy) NSString* partnerIdIn;
-@property (nonatomic,copy) NSString* partnerIdNotIn;
-@property (nonatomic,assign) int createdAtGreaterThanOrEqual;
-@property (nonatomic,assign) int createdAtLessThanOrEqual;
-@property (nonatomic,assign) int updatedAtGreaterThanOrEqual;
-@property (nonatomic,assign) int updatedAtLessThanOrEqual;
-@property (nonatomic,assign) int executionAttemptsGreaterThanOrEqual;
-@property (nonatomic,assign) int executionAttemptsLessThanOrEqual;
-@property (nonatomic,assign) int lockVersionGreaterThanOrEqual;
-@property (nonatomic,assign) int lockVersionLessThanOrEqual;
-@property (nonatomic,copy) NSString* entryIdEqual;
-@property (nonatomic,copy) NSString* jobTypeEqual;	// enum KalturaBatchJobType
-@property (nonatomic,copy) NSString* jobTypeIn;
-@property (nonatomic,copy) NSString* jobTypeNotIn;
-@property (nonatomic,assign) int jobSubTypeEqual;
-@property (nonatomic,copy) NSString* jobSubTypeIn;
-@property (nonatomic,copy) NSString* jobSubTypeNotIn;
-@property (nonatomic,assign) int statusEqual;	// enum KalturaBatchJobStatus
-@property (nonatomic,copy) NSString* statusIn;
-@property (nonatomic,copy) NSString* statusNotIn;
-@property (nonatomic,assign) int priorityGreaterThanOrEqual;
-@property (nonatomic,assign) int priorityLessThanOrEqual;
-@property (nonatomic,assign) int priorityEqual;
-@property (nonatomic,copy) NSString* priorityIn;
-@property (nonatomic,copy) NSString* priorityNotIn;
-@property (nonatomic,assign) int batchVersionGreaterThanOrEqual;
-@property (nonatomic,assign) int batchVersionLessThanOrEqual;
-@property (nonatomic,assign) int batchVersionEqual;
-@property (nonatomic,assign) int queueTimeGreaterThanOrEqual;
-@property (nonatomic,assign) int queueTimeLessThanOrEqual;
-@property (nonatomic,assign) int finishTimeGreaterThanOrEqual;
-@property (nonatomic,assign) int finishTimeLessThanOrEqual;
-@property (nonatomic,assign) int errTypeEqual;	// enum KalturaBatchJobErrorTypes
-@property (nonatomic,copy) NSString* errTypeIn;
-@property (nonatomic,copy) NSString* errTypeNotIn;
-@property (nonatomic,assign) int errNumberEqual;
-@property (nonatomic,copy) NSString* errNumberIn;
-@property (nonatomic,copy) NSString* errNumberNotIn;
-@property (nonatomic,assign) int estimatedEffortLessThan;
-@property (nonatomic,assign) int estimatedEffortGreaterThan;
-@property (nonatomic,assign) int urgencyLessThanOrEqual;
-@property (nonatomic,assign) int urgencyGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfIdEqual;
-- (KalturaFieldType)getTypeOfIdGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfPartnerIdEqual;
-- (KalturaFieldType)getTypeOfPartnerIdIn;
-- (KalturaFieldType)getTypeOfPartnerIdNotIn;
-- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual;
-- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
-- (KalturaFieldType)getTypeOfExecutionAttemptsGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfExecutionAttemptsLessThanOrEqual;
-- (KalturaFieldType)getTypeOfLockVersionGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfLockVersionLessThanOrEqual;
-- (KalturaFieldType)getTypeOfEntryIdEqual;
-- (KalturaFieldType)getTypeOfJobTypeEqual;
-- (KalturaFieldType)getTypeOfJobTypeIn;
-- (KalturaFieldType)getTypeOfJobTypeNotIn;
-- (KalturaFieldType)getTypeOfJobSubTypeEqual;
-- (KalturaFieldType)getTypeOfJobSubTypeIn;
-- (KalturaFieldType)getTypeOfJobSubTypeNotIn;
-- (KalturaFieldType)getTypeOfStatusEqual;
-- (KalturaFieldType)getTypeOfStatusIn;
-- (KalturaFieldType)getTypeOfStatusNotIn;
-- (KalturaFieldType)getTypeOfPriorityGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfPriorityLessThanOrEqual;
-- (KalturaFieldType)getTypeOfPriorityEqual;
-- (KalturaFieldType)getTypeOfPriorityIn;
-- (KalturaFieldType)getTypeOfPriorityNotIn;
-- (KalturaFieldType)getTypeOfBatchVersionGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfBatchVersionLessThanOrEqual;
-- (KalturaFieldType)getTypeOfBatchVersionEqual;
-- (KalturaFieldType)getTypeOfQueueTimeGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfQueueTimeLessThanOrEqual;
-- (KalturaFieldType)getTypeOfFinishTimeGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfFinishTimeLessThanOrEqual;
-- (KalturaFieldType)getTypeOfErrTypeEqual;
-- (KalturaFieldType)getTypeOfErrTypeIn;
-- (KalturaFieldType)getTypeOfErrTypeNotIn;
-- (KalturaFieldType)getTypeOfErrNumberEqual;
-- (KalturaFieldType)getTypeOfErrNumberIn;
-- (KalturaFieldType)getTypeOfErrNumberNotIn;
-- (KalturaFieldType)getTypeOfEstimatedEffortLessThan;
-- (KalturaFieldType)getTypeOfEstimatedEffortGreaterThan;
-- (KalturaFieldType)getTypeOfUrgencyLessThanOrEqual;
-- (KalturaFieldType)getTypeOfUrgencyGreaterThanOrEqual;
-- (void)setIdEqualFromString:(NSString*)aPropVal;
-- (void)setIdGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setPartnerIdEqualFromString:(NSString*)aPropVal;
-- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setExecutionAttemptsGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setExecutionAttemptsLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setLockVersionGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setLockVersionLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setJobSubTypeEqualFromString:(NSString*)aPropVal;
-- (void)setStatusEqualFromString:(NSString*)aPropVal;
-- (void)setPriorityGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setPriorityLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setPriorityEqualFromString:(NSString*)aPropVal;
-- (void)setBatchVersionGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setBatchVersionLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setBatchVersionEqualFromString:(NSString*)aPropVal;
-- (void)setQueueTimeGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setQueueTimeLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setFinishTimeGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setFinishTimeLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setErrTypeEqualFromString:(NSString*)aPropVal;
-- (void)setErrNumberEqualFromString:(NSString*)aPropVal;
-- (void)setEstimatedEffortLessThanFromString:(NSString*)aPropVal;
-- (void)setEstimatedEffortGreaterThanFromString:(NSString*)aPropVal;
-- (void)setUrgencyLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setUrgencyGreaterThanOrEqualFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaBatchJobListResponse : KalturaListResponse
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaBatchJob elements
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-@end
-
-// @package Kaltura
-// @subpackage Client
-// A boolean representation to return an array of booleans
-@interface KalturaBooleanValue : KalturaValue
-@property (nonatomic,assign) KALTURA_BOOL value;
-- (KalturaFieldType)getTypeOfValue;
-- (void)setValueFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -9134,6 +9101,23 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaCopyJobData : KalturaJobData
+// The filter should return the list of objects that need to be copied.
+@property (nonatomic,retain) KalturaFilter* filter;
+// Indicates the last id that copied, used when the batch crached, to re-run from the last crash point.
+@property (nonatomic,assign) int lastCopyId;
+// Template object to overwrite attributes on the copied object
+@property (nonatomic,retain) KalturaObjectBase* templateObject;
+- (KalturaFieldType)getTypeOfFilter;
+- (NSString*)getObjectTypeOfFilter;
+- (KalturaFieldType)getTypeOfLastCopyId;
+- (KalturaFieldType)getTypeOfTemplateObject;
+- (NSString*)getObjectTypeOfTemplateObject;
+- (void)setLastCopyIdFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaCopyPartnerJobData : KalturaJobData
 // Id of the partner to copy from
 @property (nonatomic,assign) int fromPartnerId;
@@ -9660,14 +9644,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaFlavorParamsOutputListResponse : KalturaListResponse
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaFlavorParamsOutput elements
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaGenericSyndicationFeed : KalturaBaseSyndicationFeed
 // feed description
 @property (nonatomic,copy) NSString* feedDescription;
@@ -9928,14 +9904,6 @@
 @interface KalturaMediaInfoBaseFilter : KalturaFilter
 @property (nonatomic,copy) NSString* flavorAssetIdEqual;
 - (KalturaFieldType)getTypeOfFlavorAssetIdEqual;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaMediaInfoListResponse : KalturaListResponse
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaMediaInfo elements
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
 @end
 
 // @package Kaltura
@@ -10515,14 +10483,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaThumbParamsOutputListResponse : KalturaListResponse
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaThumbParamsOutput elements
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaTubeMogulSyndicationFeed : KalturaBaseSyndicationFeed
 @property (nonatomic,copy,readonly) NSString* category;	// enum KalturaTubeMogulSyndicationFeedCategories
 - (KalturaFieldType)getTypeOfCategory;
@@ -11078,11 +11038,6 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaBaseSyndicationFeedFilter : KalturaBaseSyndicationFeedBaseFilter
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaBatchJobFilter : KalturaBatchJobBaseFilter
 @end
 
 // @package Kaltura
@@ -12537,6 +12492,15 @@
 
 // @package Kaltura
 // @subpackage Client
+// sed to ingest media that uploaded as posted file in this http request, the file data represents the $_FILE
+@interface KalturaUploadedFileResource : KalturaDataCenterContentResource
+// Represents the $_FILE
+@property (nonatomic,copy) NSString* fileData;
+- (KalturaFieldType)getTypeOfFileData;
+@end
+
+// @package Kaltura
+// @subpackage Client
 // Used to ingest media that uploaded to the system and represented by token that returned from upload.upload action or uploadToken.add action.
 @interface KalturaUploadedFileTokenResource : KalturaDataCenterContentResource
 // Token that returned from upload.upload action or uploadToken.add action.
@@ -13179,6 +13143,8 @@
 - (void)rejectWithEntryId:(NSString*)aEntryId withCategoryId:(int)aCategoryId;
 // update privacy context from the category
 - (void)syncPrivacyContextWithEntryId:(NSString*)aEntryId withCategoryId:(int)aCategoryId;
+- (KalturaBulkUpload*)addFromBulkUploadWithBulkUploadData:(KalturaBulkServiceData*)aBulkUploadData withBulkUploadCategoryEntryData:(KalturaBulkUploadCategoryEntryData*)aBulkUploadCategoryEntryData;
+- (KalturaBulkUpload*)addFromBulkUploadWithBulkUploadData:(KalturaBulkServiceData*)aBulkUploadData;
 @end
 
 // @package Kaltura
@@ -13603,6 +13569,10 @@
 //      If the requirement is to replace the entry's associated content, use action updateContent.
 - (KalturaMediaEntry*)addContentWithEntryId:(NSString*)aEntryId withResource:(KalturaResource*)aResource;
 - (KalturaMediaEntry*)addContentWithEntryId:(NSString*)aEntryId;
+// Adds new media entry by importing an HTTP or FTP URL.
+// 	 The entry will be queued for import and then for conversion.
+// 	 This action should be exposed only to the batches
+- (KalturaMediaEntry*)addFromBulkWithMediaEntry:(KalturaMediaEntry*)aMediaEntry withUrl:(NSString*)aUrl withBulkUploadId:(int)aBulkUploadId;
 // Adds new media entry by importing an HTTP or FTP URL.
 // 	 The entry will be queued for import and then for conversion.
 - (KalturaMediaEntry*)addFromUrlWithMediaEntry:(KalturaMediaEntry*)aMediaEntry withUrl:(NSString*)aUrl;
@@ -14379,6 +14349,8 @@
 	KalturaAnalyticsService* _analytics;
 	KalturaAppTokenService* _appToken;
 	KalturaBaseEntryService* _baseEntry;
+	KalturaBatchcontrolService* _batchcontrol;
+	KalturaBatchService* _batch;
 	KalturaBulkUploadService* _bulkUpload;
 	KalturaCategoryEntryService* _categoryEntry;
 	KalturaCategoryService* _category;
@@ -14387,6 +14359,7 @@
 	KalturaConversionProfileService* _conversionProfile;
 	KalturaDataService* _data;
 	KalturaDeliveryProfileService* _deliveryProfile;
+	KalturaDocumentService* _document;
 	KalturaEmailIngestionProfileService* _EmailIngestionProfile;
 	KalturaEntryServerNodeService* _entryServerNode;
 	KalturaFileAssetService* _fileAsset;
@@ -14394,6 +14367,7 @@
 	KalturaFlavorParamsOutputService* _flavorParamsOutput;
 	KalturaFlavorParamsService* _flavorParams;
 	KalturaGroupUserService* _groupUser;
+	KalturaJobsService* _jobs;
 	KalturaLiveChannelSegmentService* _liveChannelSegment;
 	KalturaLiveChannelService* _liveChannel;
 	KalturaLiveReportsService* _liveReports;
@@ -14436,6 +14410,8 @@
 @property (nonatomic, readonly) KalturaAnalyticsService* analytics;
 @property (nonatomic, readonly) KalturaAppTokenService* appToken;
 @property (nonatomic, readonly) KalturaBaseEntryService* baseEntry;
+@property (nonatomic, readonly) KalturaBatchcontrolService* batchcontrol;
+@property (nonatomic, readonly) KalturaBatchService* batch;
 @property (nonatomic, readonly) KalturaBulkUploadService* bulkUpload;
 @property (nonatomic, readonly) KalturaCategoryEntryService* categoryEntry;
 @property (nonatomic, readonly) KalturaCategoryService* category;
@@ -14444,6 +14420,7 @@
 @property (nonatomic, readonly) KalturaConversionProfileService* conversionProfile;
 @property (nonatomic, readonly) KalturaDataService* data;
 @property (nonatomic, readonly) KalturaDeliveryProfileService* deliveryProfile;
+@property (nonatomic, readonly) KalturaDocumentService* document;
 @property (nonatomic, readonly) KalturaEmailIngestionProfileService* EmailIngestionProfile;
 @property (nonatomic, readonly) KalturaEntryServerNodeService* entryServerNode;
 @property (nonatomic, readonly) KalturaFileAssetService* fileAsset;
@@ -14451,6 +14428,7 @@
 @property (nonatomic, readonly) KalturaFlavorParamsOutputService* flavorParamsOutput;
 @property (nonatomic, readonly) KalturaFlavorParamsService* flavorParams;
 @property (nonatomic, readonly) KalturaGroupUserService* groupUser;
+@property (nonatomic, readonly) KalturaJobsService* jobs;
 @property (nonatomic, readonly) KalturaLiveChannelSegmentService* liveChannelSegment;
 @property (nonatomic, readonly) KalturaLiveChannelService* liveChannel;
 @property (nonatomic, readonly) KalturaLiveReportsService* liveReports;

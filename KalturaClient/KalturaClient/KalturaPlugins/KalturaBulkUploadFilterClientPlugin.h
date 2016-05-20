@@ -34,6 +34,20 @@
 ///////////////////////// classes /////////////////////////
 // @package Kaltura
 // @subpackage Client
+// Represents the Bulk service input for filter bulk upload
+@interface KalturaBulkServiceFilterData : KalturaBulkServiceData
+// Filter for extracting the objects list to upload
+@property (nonatomic,retain) KalturaFilter* filter;
+// Template object for new object creation
+@property (nonatomic,retain) KalturaObjectBase* templateObject;
+- (KalturaFieldType)getTypeOfFilter;
+- (NSString*)getObjectTypeOfFilter;
+- (KalturaFieldType)getTypeOfTemplateObject;
+- (NSString*)getObjectTypeOfTemplateObject;
+@end
+
+// @package Kaltura
+// @subpackage Client
 // Represents the Bulk upload job data for filter bulk upload
 @interface KalturaBulkUploadFilterJobData : KalturaBulkUploadJobData
 // Filter for extracting the objects list to upload

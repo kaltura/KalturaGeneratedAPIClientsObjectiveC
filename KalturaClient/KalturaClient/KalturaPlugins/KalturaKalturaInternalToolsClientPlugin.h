@@ -31,49 +31,15 @@
 
 ///////////////////////// enums /////////////////////////
 ///////////////////////// classes /////////////////////////
-// @package Kaltura
-// @subpackage Client
-@interface KalturaInternalToolsSession : KalturaObjectBase
-@property (nonatomic,assign) int partner_id;
-@property (nonatomic,assign) int valid_until;
-@property (nonatomic,copy) NSString* partner_pattern;
-@property (nonatomic,assign) int type;	// enum KalturaSessionType
-@property (nonatomic,copy) NSString* error;
-@property (nonatomic,assign) int rand;
-@property (nonatomic,copy) NSString* user;
-@property (nonatomic,copy) NSString* privileges;
-- (KalturaFieldType)getTypeOfPartner_id;
-- (KalturaFieldType)getTypeOfValid_until;
-- (KalturaFieldType)getTypeOfPartner_pattern;
-- (KalturaFieldType)getTypeOfType;
-- (KalturaFieldType)getTypeOfError;
-- (KalturaFieldType)getTypeOfRand;
-- (KalturaFieldType)getTypeOfUser;
-- (KalturaFieldType)getTypeOfPrivileges;
-- (void)setPartner_idFromString:(NSString*)aPropVal;
-- (void)setValid_untilFromString:(NSString*)aPropVal;
-- (void)setTypeFromString:(NSString*)aPropVal;
-- (void)setRandFromString:(NSString*)aPropVal;
-@end
-
 ///////////////////////// services /////////////////////////
-// @package Kaltura
-// @subpackage Client
-// Internal Tools Service
-@interface KalturaKalturaInternalToolsSystemHelperService : KalturaServiceBase
-// KS from Secure String
-- (KalturaInternalToolsSession*)fromSecureStringWithStr:(NSString*)aStr;
-// from ip to country
-- (NSString*)iptocountryWithRemote_addr:(NSString*)aRemote_addr;
-- (NSString*)getRemoteAddress;
-@end
-
 @interface KalturaKalturaInternalToolsClientPlugin : KalturaClientPlugin
 {
+	KalturaKalturaInternalToolsService* _KalturaInternalTools;
 	KalturaKalturaInternalToolsSystemHelperService* _KalturaInternalToolsSystemHelper;
 }
 
 @property (nonatomic, assign) KalturaClientBase* client;
+@property (nonatomic, readonly) KalturaKalturaInternalToolsService* KalturaInternalTools;
 @property (nonatomic, readonly) KalturaKalturaInternalToolsSystemHelperService* KalturaInternalToolsSystemHelper;
 @end
 

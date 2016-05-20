@@ -72,3 +72,12 @@
 @end
 
 ///////////////////////// services /////////////////////////
+@interface KalturaScheduleBulkUploadClientPlugin : KalturaClientPlugin
+{
+	KalturaScheduleBulkService* _scheduleBulk;
+}
+
+@property (nonatomic, assign) KalturaClientBase* client;
+@property (nonatomic, readonly) KalturaScheduleBulkService* scheduleBulk;
+@end
+

@@ -342,55 +342,6 @@
 @end
 
 ///////////////////////// services /////////////////////////
-@implementation KalturaCaptionAssetItemService
-- (KalturaCaptionAssetItemListResponse*)searchWithEntryFilter:(KalturaBaseEntryFilter*)aEntryFilter withCaptionAssetItemFilter:(KalturaCaptionAssetItemFilter*)aCaptionAssetItemFilter withCaptionAssetItemPager:(KalturaFilterPager*)aCaptionAssetItemPager
-{
-    [self.client.params addIfDefinedKey:@"entryFilter" withObject:aEntryFilter];
-    [self.client.params addIfDefinedKey:@"captionAssetItemFilter" withObject:aCaptionAssetItemFilter];
-    [self.client.params addIfDefinedKey:@"captionAssetItemPager" withObject:aCaptionAssetItemPager];
-    return [self.client queueObjectService:@"captionsearch_captionassetitem" withAction:@"search" withExpectedType:@"KalturaCaptionAssetItemListResponse"];
-}
-
-- (KalturaCaptionAssetItemListResponse*)searchWithEntryFilter:(KalturaBaseEntryFilter*)aEntryFilter withCaptionAssetItemFilter:(KalturaCaptionAssetItemFilter*)aCaptionAssetItemFilter
-{
-    return [self searchWithEntryFilter:aEntryFilter withCaptionAssetItemFilter:aCaptionAssetItemFilter withCaptionAssetItemPager:nil];
-}
-
-- (KalturaCaptionAssetItemListResponse*)searchWithEntryFilter:(KalturaBaseEntryFilter*)aEntryFilter
-{
-    return [self searchWithEntryFilter:aEntryFilter withCaptionAssetItemFilter:nil];
-}
-
-- (KalturaCaptionAssetItemListResponse*)search
-{
-    return [self searchWithEntryFilter:nil];
-}
-
-- (KalturaBaseEntryListResponse*)searchEntriesWithEntryFilter:(KalturaBaseEntryFilter*)aEntryFilter withCaptionAssetItemFilter:(KalturaCaptionAssetItemFilter*)aCaptionAssetItemFilter withCaptionAssetItemPager:(KalturaFilterPager*)aCaptionAssetItemPager
-{
-    [self.client.params addIfDefinedKey:@"entryFilter" withObject:aEntryFilter];
-    [self.client.params addIfDefinedKey:@"captionAssetItemFilter" withObject:aCaptionAssetItemFilter];
-    [self.client.params addIfDefinedKey:@"captionAssetItemPager" withObject:aCaptionAssetItemPager];
-    return [self.client queueObjectService:@"captionsearch_captionassetitem" withAction:@"searchEntries" withExpectedType:@"KalturaBaseEntryListResponse"];
-}
-
-- (KalturaBaseEntryListResponse*)searchEntriesWithEntryFilter:(KalturaBaseEntryFilter*)aEntryFilter withCaptionAssetItemFilter:(KalturaCaptionAssetItemFilter*)aCaptionAssetItemFilter
-{
-    return [self searchEntriesWithEntryFilter:aEntryFilter withCaptionAssetItemFilter:aCaptionAssetItemFilter withCaptionAssetItemPager:nil];
-}
-
-- (KalturaBaseEntryListResponse*)searchEntriesWithEntryFilter:(KalturaBaseEntryFilter*)aEntryFilter
-{
-    return [self searchEntriesWithEntryFilter:aEntryFilter withCaptionAssetItemFilter:nil];
-}
-
-- (KalturaBaseEntryListResponse*)searchEntries
-{
-    return [self searchEntriesWithEntryFilter:nil];
-}
-
-@end
-
 @implementation KalturaCaptionSearchClientPlugin
 @synthesize client = _client;
 

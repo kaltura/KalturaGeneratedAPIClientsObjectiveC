@@ -159,3 +159,30 @@
 @end
 
 ///////////////////////// services /////////////////////////
+@implementation KalturaWowzaClientPlugin
+@synthesize client = _client;
+
+- (id)initWithClient:(KalturaClient*)aClient
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self.client = aClient;
+    return self;
+}
+
+- (KalturaLiveConversionProfileService*)liveConversionProfile
+{
+    if (self->_liveConversionProfile == nil)
+    	self->_liveConversionProfile = [[KalturaLiveConversionProfileService alloc] initWithClient:self.client];
+    return self->_liveConversionProfile;
+}
+
+- (void)dealloc
+{
+    [self->_liveConversionProfile release];
+	[super dealloc];
+}
+
+@end
+

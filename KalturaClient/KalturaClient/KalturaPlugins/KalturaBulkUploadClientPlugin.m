@@ -29,6 +29,16 @@
 
 ///////////////////////// enums /////////////////////////
 ///////////////////////// classes /////////////////////////
+@implementation KalturaBulkServiceData
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaBulkServiceData"];
+}
+
+@end
+
 ///////////////////////// services /////////////////////////
 @implementation KalturaBulkService
 - (KalturaBulkUpload*)getWithId:(int)aId
