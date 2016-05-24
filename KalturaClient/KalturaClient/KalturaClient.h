@@ -4830,6 +4830,10 @@
 @property (nonatomic,assign) int moderation;	// enum KalturaNullableBoolean
 // Nunber of pending moderation entries
 @property (nonatomic,assign,readonly) int pendingEntriesCount;
+// Flag indicating that the category is an aggregation category
+@property (nonatomic,assign) int isAggregationCategory;	// enum KalturaNullableBoolean
+// List of aggregation channels the category belongs to
+@property (nonatomic,copy) NSString* aggregationCategories;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfParentId;
 - (KalturaFieldType)getTypeOfDepth;
@@ -4863,6 +4867,8 @@
 - (KalturaFieldType)getTypeOfDirectSubCategoriesCount;
 - (KalturaFieldType)getTypeOfModeration;
 - (KalturaFieldType)getTypeOfPendingEntriesCount;
+- (KalturaFieldType)getTypeOfIsAggregationCategory;
+- (KalturaFieldType)getTypeOfAggregationCategories;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setParentIdFromString:(NSString*)aPropVal;
 - (void)setDepthFromString:(NSString*)aPropVal;
@@ -4885,6 +4891,7 @@
 - (void)setDirectSubCategoriesCountFromString:(NSString*)aPropVal;
 - (void)setModerationFromString:(NSString*)aPropVal;
 - (void)setPendingEntriesCountFromString:(NSString*)aPropVal;
+- (void)setIsAggregationCategoryFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -9101,23 +9108,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaCopyJobData : KalturaJobData
-// The filter should return the list of objects that need to be copied.
-@property (nonatomic,retain) KalturaFilter* filter;
-// Indicates the last id that copied, used when the batch crached, to re-run from the last crash point.
-@property (nonatomic,assign) int lastCopyId;
-// Template object to overwrite attributes on the copied object
-@property (nonatomic,retain) KalturaObjectBase* templateObject;
-- (KalturaFieldType)getTypeOfFilter;
-- (NSString*)getObjectTypeOfFilter;
-- (KalturaFieldType)getTypeOfLastCopyId;
-- (KalturaFieldType)getTypeOfTemplateObject;
-- (NSString*)getObjectTypeOfTemplateObject;
-- (void)setLastCopyIdFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaCopyPartnerJobData : KalturaJobData
 // Id of the partner to copy from
 @property (nonatomic,assign) int fromPartnerId;
@@ -11085,6 +11075,8 @@
 @property (nonatomic,copy) NSString* inheritedParentIdIn;
 @property (nonatomic,assign) int partnerSortValueGreaterThanOrEqual;
 @property (nonatomic,assign) int partnerSortValueLessThanOrEqual;
+@property (nonatomic,copy) NSString* aggregationCategoriesMultiLikeOr;
+@property (nonatomic,copy) NSString* aggregationCategoriesMultiLikeAnd;
 - (KalturaFieldType)getTypeOfIdEqual;
 - (KalturaFieldType)getTypeOfIdIn;
 - (KalturaFieldType)getTypeOfParentIdEqual;
@@ -11122,6 +11114,8 @@
 - (KalturaFieldType)getTypeOfInheritedParentIdIn;
 - (KalturaFieldType)getTypeOfPartnerSortValueGreaterThanOrEqual;
 - (KalturaFieldType)getTypeOfPartnerSortValueLessThanOrEqual;
+- (KalturaFieldType)getTypeOfAggregationCategoriesMultiLikeOr;
+- (KalturaFieldType)getTypeOfAggregationCategoriesMultiLikeAnd;
 - (void)setIdEqualFromString:(NSString*)aPropVal;
 - (void)setParentIdEqualFromString:(NSString*)aPropVal;
 - (void)setDepthEqualFromString:(NSString*)aPropVal;
@@ -12488,15 +12482,6 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaTubeMogulSyndicationFeedBaseFilter : KalturaBaseSyndicationFeedFilter
-@end
-
-// @package Kaltura
-// @subpackage Client
-// sed to ingest media that uploaded as posted file in this http request, the file data represents the $_FILE
-@interface KalturaUploadedFileResource : KalturaDataCenterContentResource
-// Represents the $_FILE
-@property (nonatomic,copy) NSString* fileData;
-- (KalturaFieldType)getTypeOfFileData;
 @end
 
 // @package Kaltura

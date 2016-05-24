@@ -14307,6 +14307,8 @@
 @synthesize directSubCategoriesCount = _directSubCategoriesCount;
 @synthesize moderation = _moderation;
 @synthesize pendingEntriesCount = _pendingEntriesCount;
+@synthesize isAggregationCategory = _isAggregationCategory;
+@synthesize aggregationCategories = _aggregationCategories;
 
 - (id)init
 {
@@ -14335,6 +14337,7 @@
     self->_directSubCategoriesCount = KALTURA_UNDEF_INT;
     self->_moderation = KALTURA_UNDEF_INT;
     self->_pendingEntriesCount = KALTURA_UNDEF_INT;
+    self->_isAggregationCategory = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -14503,6 +14506,16 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfIsAggregationCategory
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfAggregationCategories
+{
+    return KFT_String;
+}
+
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -14613,6 +14626,11 @@
     self.pendingEntriesCount = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setIsAggregationCategoryFromString:(NSString*)aPropVal
+{
+    self.isAggregationCategory = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -14634,6 +14652,8 @@
     [aParams addIfDefinedKey:@"partnerData" withString:self.partnerData];
     [aParams addIfDefinedKey:@"defaultOrderBy" withString:self.defaultOrderBy];
     [aParams addIfDefinedKey:@"moderation" withInt:self.moderation];
+    [aParams addIfDefinedKey:@"isAggregationCategory" withInt:self.isAggregationCategory];
+    [aParams addIfDefinedKey:@"aggregationCategories" withString:self.aggregationCategories];
 }
 
 - (void)dealloc
@@ -14649,6 +14669,7 @@
     [self->_privacyContexts release];
     [self->_partnerData release];
     [self->_defaultOrderBy release];
+    [self->_aggregationCategories release];
     [super dealloc];
 }
 
@@ -30261,69 +30282,6 @@
 
 @end
 
-@implementation KalturaCopyJobData
-@synthesize filter = _filter;
-@synthesize lastCopyId = _lastCopyId;
-@synthesize templateObject = _templateObject;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_lastCopyId = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfFilter
-{
-    return KFT_Object;
-}
-
-- (NSString*)getObjectTypeOfFilter
-{
-    return @"KalturaFilter";
-}
-
-- (KalturaFieldType)getTypeOfLastCopyId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfTemplateObject
-{
-    return KFT_Object;
-}
-
-- (NSString*)getObjectTypeOfTemplateObject
-{
-    return @"KalturaObjectBase";
-}
-
-- (void)setLastCopyIdFromString:(NSString*)aPropVal
-{
-    self.lastCopyId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaCopyJobData"];
-    [aParams addIfDefinedKey:@"filter" withObject:self.filter];
-    [aParams addIfDefinedKey:@"lastCopyId" withInt:self.lastCopyId];
-    [aParams addIfDefinedKey:@"templateObject" withObject:self.templateObject];
-}
-
-- (void)dealloc
-{
-    [self->_filter release];
-    [self->_templateObject release];
-    [super dealloc];
-}
-
-@end
-
 @implementation KalturaCopyPartnerJobData
 @synthesize fromPartnerId = _fromPartnerId;
 @synthesize toPartnerId = _toPartnerId;
@@ -37790,6 +37748,8 @@
 @synthesize inheritedParentIdIn = _inheritedParentIdIn;
 @synthesize partnerSortValueGreaterThanOrEqual = _partnerSortValueGreaterThanOrEqual;
 @synthesize partnerSortValueLessThanOrEqual = _partnerSortValueLessThanOrEqual;
+@synthesize aggregationCategoriesMultiLikeOr = _aggregationCategoriesMultiLikeOr;
+@synthesize aggregationCategoriesMultiLikeAnd = _aggregationCategoriesMultiLikeAnd;
 
 - (id)init
 {
@@ -38004,6 +37964,16 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfAggregationCategoriesMultiLikeOr
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfAggregationCategoriesMultiLikeAnd
+{
+    return KFT_String;
+}
+
 - (void)setIdEqualFromString:(NSString*)aPropVal
 {
     self.idEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -38146,6 +38116,8 @@
     [aParams addIfDefinedKey:@"inheritedParentIdIn" withString:self.inheritedParentIdIn];
     [aParams addIfDefinedKey:@"partnerSortValueGreaterThanOrEqual" withInt:self.partnerSortValueGreaterThanOrEqual];
     [aParams addIfDefinedKey:@"partnerSortValueLessThanOrEqual" withInt:self.partnerSortValueLessThanOrEqual];
+    [aParams addIfDefinedKey:@"aggregationCategoriesMultiLikeOr" withString:self.aggregationCategoriesMultiLikeOr];
+    [aParams addIfDefinedKey:@"aggregationCategoriesMultiLikeAnd" withString:self.aggregationCategoriesMultiLikeAnd];
 }
 
 - (void)dealloc
@@ -38167,6 +38139,8 @@
     [self->_privacyContextEqual release];
     [self->_statusIn release];
     [self->_inheritedParentIdIn release];
+    [self->_aggregationCategoriesMultiLikeOr release];
+    [self->_aggregationCategoriesMultiLikeAnd release];
     [super dealloc];
 }
 
@@ -42502,30 +42476,6 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaTubeMogulSyndicationFeedBaseFilter"];
-}
-
-@end
-
-@implementation KalturaUploadedFileResource
-@synthesize fileData = _fileData;
-
-- (KalturaFieldType)getTypeOfFileData
-{
-    return KFT_String;
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaUploadedFileResource"];
-    [aParams addIfDefinedKey:@"fileData" withString:self.fileData];
-}
-
-- (void)dealloc
-{
-    [self->_fileData release];
-    [super dealloc];
 }
 
 @end
