@@ -32,14 +32,3 @@
 ///////////////////////// enums /////////////////////////
 ///////////////////////// classes /////////////////////////
 ///////////////////////// services /////////////////////////
-@interface KalturaKalturaInternalToolsClientPlugin : KalturaClientPlugin
-{
-	KalturaKalturaInternalToolsService* _KalturaInternalTools;
-	KalturaKalturaInternalToolsSystemHelperService* _KalturaInternalToolsSystemHelper;
-}
-
-@property (nonatomic, assign) KalturaClientBase* client;
-@property (nonatomic, readonly) KalturaKalturaInternalToolsService* KalturaInternalTools;
-@property (nonatomic, readonly) KalturaKalturaInternalToolsSystemHelperService* KalturaInternalToolsSystemHelper;
-@end
-

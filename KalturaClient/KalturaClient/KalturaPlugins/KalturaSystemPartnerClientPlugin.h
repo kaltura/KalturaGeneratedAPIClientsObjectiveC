@@ -155,12 +155,3 @@
 @end
 
 ///////////////////////// services /////////////////////////
-@interface KalturaSystemPartnerClientPlugin : KalturaClientPlugin
-{
-	KalturaSystemPartnerService* _systemPartner;
-}
-
-@property (nonatomic, assign) KalturaClientBase* client;
-@property (nonatomic, readonly) KalturaSystemPartnerService* systemPartner;
-@end
-

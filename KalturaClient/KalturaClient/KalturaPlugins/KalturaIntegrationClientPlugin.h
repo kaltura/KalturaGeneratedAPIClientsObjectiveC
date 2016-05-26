@@ -84,12 +84,3 @@
 - (void)notifyWithId:(int)aId;
 @end
 
-@interface KalturaIntegrationClientPlugin : KalturaClientPlugin
-{
-	KalturaIntegrationService* _integration;
-}
-
-@property (nonatomic, assign) KalturaClientBase* client;
-@property (nonatomic, readonly) KalturaIntegrationService* integration;
-@end
-

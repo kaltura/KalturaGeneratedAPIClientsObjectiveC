@@ -30,38 +30,3 @@
 ///////////////////////// enums /////////////////////////
 ///////////////////////// classes /////////////////////////
 ///////////////////////// services /////////////////////////
-@implementation KalturaKalturaInternalToolsClientPlugin
-@synthesize client = _client;
-
-- (id)initWithClient:(KalturaClient*)aClient
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self.client = aClient;
-    return self;
-}
-
-- (KalturaKalturaInternalToolsService*)KalturaInternalTools
-{
-    if (self->_KalturaInternalTools == nil)
-    	self->_KalturaInternalTools = [[KalturaKalturaInternalToolsService alloc] initWithClient:self.client];
-    return self->_KalturaInternalTools;
-}
-
-- (KalturaKalturaInternalToolsSystemHelperService*)KalturaInternalToolsSystemHelper
-{
-    if (self->_KalturaInternalToolsSystemHelper == nil)
-    	self->_KalturaInternalToolsSystemHelper = [[KalturaKalturaInternalToolsSystemHelperService alloc] initWithClient:self.client];
-    return self->_KalturaInternalToolsSystemHelper;
-}
-
-- (void)dealloc
-{
-    [self->_KalturaInternalTools release];
-    [self->_KalturaInternalToolsSystemHelper release];
-	[super dealloc];
-}
-
-@end
-

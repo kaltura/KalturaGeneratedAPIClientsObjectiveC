@@ -236,12 +236,3 @@
 @end
 
 ///////////////////////// services /////////////////////////
-@interface KalturaFileSyncClientPlugin : KalturaClientPlugin
-{
-	KalturaFileSyncService* _fileSync;
-}
-
-@property (nonatomic, assign) KalturaClientBase* client;
-@property (nonatomic, readonly) KalturaFileSyncService* fileSync;
-@end
-

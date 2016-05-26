@@ -136,12 +136,3 @@
 - (void)deleteWithAttachmentAssetId:(NSString*)aAttachmentAssetId;
 @end
 
-@interface KalturaAttachmentClientPlugin : KalturaClientPlugin
-{
-	KalturaAttachmentAssetService* _attachmentAsset;
-}
-
-@property (nonatomic, assign) KalturaClientBase* client;
-@property (nonatomic, readonly) KalturaAttachmentAssetService* attachmentAsset;
-@end
-

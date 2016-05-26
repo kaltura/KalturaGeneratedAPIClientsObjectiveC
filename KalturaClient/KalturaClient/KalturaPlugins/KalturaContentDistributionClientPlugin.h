@@ -1284,22 +1284,3 @@
 - (KalturaGenericDistributionProviderActionListResponse*)list;
 @end
 
-@interface KalturaContentDistributionClientPlugin : KalturaClientPlugin
-{
-	KalturaDistributionProfileService* _distributionProfile;
-	KalturaEntryDistributionService* _entryDistribution;
-	KalturaDistributionProviderService* _distributionProvider;
-	KalturaGenericDistributionProviderService* _genericDistributionProvider;
-	KalturaGenericDistributionProviderActionService* _genericDistributionProviderAction;
-	KalturaContentDistributionBatchService* _contentDistributionBatch;
-}
-
-@property (nonatomic, assign) KalturaClientBase* client;
-@property (nonatomic, readonly) KalturaDistributionProfileService* distributionProfile;
-@property (nonatomic, readonly) KalturaEntryDistributionService* entryDistribution;
-@property (nonatomic, readonly) KalturaDistributionProviderService* distributionProvider;
-@property (nonatomic, readonly) KalturaGenericDistributionProviderService* genericDistributionProvider;
-@property (nonatomic, readonly) KalturaGenericDistributionProviderActionService* genericDistributionProviderAction;
-@property (nonatomic, readonly) KalturaContentDistributionBatchService* contentDistributionBatch;
-@end
-

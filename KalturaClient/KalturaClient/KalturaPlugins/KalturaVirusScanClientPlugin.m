@@ -603,30 +603,3 @@
 
 @end
 
-@implementation KalturaVirusScanClientPlugin
-@synthesize client = _client;
-
-- (id)initWithClient:(KalturaClient*)aClient
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self.client = aClient;
-    return self;
-}
-
-- (KalturaVirusScanProfileService*)virusScanProfile
-{
-    if (self->_virusScanProfile == nil)
-    	self->_virusScanProfile = [[KalturaVirusScanProfileService alloc] initWithClient:self.client];
-    return self->_virusScanProfile;
-}
-
-- (void)dealloc
-{
-    [self->_virusScanProfile release];
-	[super dealloc];
-}
-
-@end
-

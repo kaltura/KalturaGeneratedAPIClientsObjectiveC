@@ -57,12 +57,3 @@
 - (KalturaBulkUpload*)abortWithId:(int)aId;
 @end
 
-@interface KalturaBulkUploadClientPlugin : KalturaClientPlugin
-{
-	KalturaBulkService* _bulk;
-}
-
-@property (nonatomic, assign) KalturaClientBase* client;
-@property (nonatomic, readonly) KalturaBulkService* bulk;
-@end
-

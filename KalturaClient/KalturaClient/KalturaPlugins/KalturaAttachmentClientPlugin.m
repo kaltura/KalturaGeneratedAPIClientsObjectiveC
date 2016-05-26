@@ -359,30 +359,3 @@
 
 @end
 
-@implementation KalturaAttachmentClientPlugin
-@synthesize client = _client;
-
-- (id)initWithClient:(KalturaClient*)aClient
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self.client = aClient;
-    return self;
-}
-
-- (KalturaAttachmentAssetService*)attachmentAsset
-{
-    if (self->_attachmentAsset == nil)
-    	self->_attachmentAsset = [[KalturaAttachmentAssetService alloc] initWithClient:self.client];
-    return self->_attachmentAsset;
-}
-
-- (void)dealloc
-{
-    [self->_attachmentAsset release];
-	[super dealloc];
-}
-
-@end
-

@@ -199,12 +199,3 @@
 - (int)scanWithFlavorAssetId:(NSString*)aFlavorAssetId;
 @end
 
-@interface KalturaVirusScanClientPlugin : KalturaClientPlugin
-{
-	KalturaVirusScanProfileService* _virusScanProfile;
-}
-
-@property (nonatomic, assign) KalturaClientBase* client;
-@property (nonatomic, readonly) KalturaVirusScanProfileService* virusScanProfile;
-@end
-

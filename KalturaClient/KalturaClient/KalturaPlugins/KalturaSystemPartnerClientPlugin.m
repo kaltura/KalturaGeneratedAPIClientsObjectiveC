@@ -454,30 +454,3 @@
 @end
 
 ///////////////////////// services /////////////////////////
-@implementation KalturaSystemPartnerClientPlugin
-@synthesize client = _client;
-
-- (id)initWithClient:(KalturaClient*)aClient
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self.client = aClient;
-    return self;
-}
-
-- (KalturaSystemPartnerService*)systemPartner
-{
-    if (self->_systemPartner == nil)
-    	self->_systemPartner = [[KalturaSystemPartnerService alloc] initWithClient:self.client];
-    return self->_systemPartner;
-}
-
-- (void)dealloc
-{
-    [self->_systemPartner release];
-	[super dealloc];
-}
-
-@end
-

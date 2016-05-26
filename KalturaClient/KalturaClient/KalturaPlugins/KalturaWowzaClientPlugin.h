@@ -78,12 +78,3 @@
 @end
 
 ///////////////////////// services /////////////////////////
-@interface KalturaWowzaClientPlugin : KalturaClientPlugin
-{
-	KalturaLiveConversionProfileService* _liveConversionProfile;
-}
-
-@property (nonatomic, assign) KalturaClientBase* client;
-@property (nonatomic, readonly) KalturaLiveConversionProfileService* liveConversionProfile;
-@end
-

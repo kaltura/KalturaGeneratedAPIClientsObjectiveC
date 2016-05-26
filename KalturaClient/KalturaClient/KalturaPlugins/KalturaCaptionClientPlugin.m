@@ -713,38 +713,3 @@
 
 @end
 
-@implementation KalturaCaptionClientPlugin
-@synthesize client = _client;
-
-- (id)initWithClient:(KalturaClient*)aClient
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self.client = aClient;
-    return self;
-}
-
-- (KalturaCaptionAssetService*)captionAsset
-{
-    if (self->_captionAsset == nil)
-    	self->_captionAsset = [[KalturaCaptionAssetService alloc] initWithClient:self.client];
-    return self->_captionAsset;
-}
-
-- (KalturaCaptionParamsService*)captionParams
-{
-    if (self->_captionParams == nil)
-    	self->_captionParams = [[KalturaCaptionParamsService alloc] initWithClient:self.client];
-    return self->_captionParams;
-}
-
-- (void)dealloc
-{
-    [self->_captionAsset release];
-    [self->_captionParams release];
-	[super dealloc];
-}
-
-@end
-

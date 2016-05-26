@@ -110,12 +110,19 @@
 @end
 
 ///////////////////////// services /////////////////////////
-@interface KalturaCaptionSearchClientPlugin : KalturaClientPlugin
-{
-	KalturaCaptionAssetItemService* _captionAssetItem;
-}
-
-@property (nonatomic, assign) KalturaClientBase* client;
-@property (nonatomic, readonly) KalturaCaptionAssetItemService* captionAssetItem;
+// @package Kaltura
+// @subpackage Client
+// Search caption asset items
+@interface KalturaCaptionAssetItemService : KalturaServiceBase
+// Search caption asset items by filter, pager and free text
+- (KalturaCaptionAssetItemListResponse*)searchWithEntryFilter:(KalturaBaseEntryFilter*)aEntryFilter withCaptionAssetItemFilter:(KalturaCaptionAssetItemFilter*)aCaptionAssetItemFilter withCaptionAssetItemPager:(KalturaFilterPager*)aCaptionAssetItemPager;
+- (KalturaCaptionAssetItemListResponse*)searchWithEntryFilter:(KalturaBaseEntryFilter*)aEntryFilter withCaptionAssetItemFilter:(KalturaCaptionAssetItemFilter*)aCaptionAssetItemFilter;
+- (KalturaCaptionAssetItemListResponse*)searchWithEntryFilter:(KalturaBaseEntryFilter*)aEntryFilter;
+- (KalturaCaptionAssetItemListResponse*)search;
+// Search caption asset items by filter, pager and free text
+- (KalturaBaseEntryListResponse*)searchEntriesWithEntryFilter:(KalturaBaseEntryFilter*)aEntryFilter withCaptionAssetItemFilter:(KalturaCaptionAssetItemFilter*)aCaptionAssetItemFilter withCaptionAssetItemPager:(KalturaFilterPager*)aCaptionAssetItemPager;
+- (KalturaBaseEntryListResponse*)searchEntriesWithEntryFilter:(KalturaBaseEntryFilter*)aEntryFilter withCaptionAssetItemFilter:(KalturaCaptionAssetItemFilter*)aCaptionAssetItemFilter;
+- (KalturaBaseEntryListResponse*)searchEntriesWithEntryFilter:(KalturaBaseEntryFilter*)aEntryFilter;
+- (KalturaBaseEntryListResponse*)searchEntries;
 @end
 

@@ -912,30 +912,3 @@
 
 @end
 
-@implementation KalturaScheduledTaskClientPlugin
-@synthesize client = _client;
-
-- (id)initWithClient:(KalturaClient*)aClient
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self.client = aClient;
-    return self;
-}
-
-- (KalturaScheduledTaskProfileService*)scheduledTaskProfile
-{
-    if (self->_scheduledTaskProfile == nil)
-    	self->_scheduledTaskProfile = [[KalturaScheduledTaskProfileService alloc] initWithClient:self.client];
-    return self->_scheduledTaskProfile;
-}
-
-- (void)dealloc
-{
-    [self->_scheduledTaskProfile release];
-	[super dealloc];
-}
-
-@end
-

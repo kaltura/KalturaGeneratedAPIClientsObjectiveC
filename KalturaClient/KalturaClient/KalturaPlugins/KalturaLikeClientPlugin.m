@@ -246,30 +246,3 @@
 
 @end
 
-@implementation KalturaLikeClientPlugin
-@synthesize client = _client;
-
-- (id)initWithClient:(KalturaClient*)aClient
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self.client = aClient;
-    return self;
-}
-
-- (KalturaLikeService*)like
-{
-    if (self->_like == nil)
-    	self->_like = [[KalturaLikeService alloc] initWithClient:self.client];
-    return self->_like;
-}
-
-- (void)dealloc
-{
-    [self->_like release];
-	[super dealloc];
-}
-
-@end
-

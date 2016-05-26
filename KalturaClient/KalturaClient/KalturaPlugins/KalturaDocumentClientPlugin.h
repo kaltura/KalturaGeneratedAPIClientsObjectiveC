@@ -364,12 +364,3 @@
 - (KalturaDocumentEntry*)cancelReplaceWithEntryId:(NSString*)aEntryId;
 @end
 
-@interface KalturaDocumentClientPlugin : KalturaClientPlugin
-{
-	KalturaDocumentsService* _documents;
-}
-
-@property (nonatomic, assign) KalturaClientBase* client;
-@property (nonatomic, readonly) KalturaDocumentsService* documents;
-@end
-

@@ -730,6 +730,8 @@
 // @package Kaltura
 // @subpackage Client
 // ScheduleEvent service lets you create and manage schedule events
+@class KalturaBulkUpload;
+@class KalturaBulkUploadICalJobData;
 @interface KalturaScheduleEventService : KalturaServiceBase
 // Allows you to add a new KalturaScheduleEvent object
 - (KalturaScheduleEvent*)addWithScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent;
@@ -753,6 +755,8 @@
 // @package Kaltura
 // @subpackage Client
 // ScheduleResource service lets you create and manage schedule events
+@class KalturaBulkUpload;
+@class KalturaBulkUploadCsvJobData;
 @interface KalturaScheduleResourceService : KalturaServiceBase
 // Allows you to add a new KalturaScheduleResource object
 - (KalturaScheduleResource*)addWithScheduleResource:(KalturaScheduleResource*)aScheduleResource;
@@ -787,18 +791,5 @@
 - (KalturaScheduleEventResourceListResponse*)listWithFilter:(KalturaScheduleEventResourceFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaScheduleEventResourceListResponse*)listWithFilter:(KalturaScheduleEventResourceFilter*)aFilter;
 - (KalturaScheduleEventResourceListResponse*)list;
-@end
-
-@interface KalturaScheduleClientPlugin : KalturaClientPlugin
-{
-	KalturaScheduleEventService* _scheduleEvent;
-	KalturaScheduleResourceService* _scheduleResource;
-	KalturaScheduleEventResourceService* _scheduleEventResource;
-}
-
-@property (nonatomic, assign) KalturaClientBase* client;
-@property (nonatomic, readonly) KalturaScheduleEventService* scheduleEvent;
-@property (nonatomic, readonly) KalturaScheduleResourceService* scheduleResource;
-@property (nonatomic, readonly) KalturaScheduleEventResourceService* scheduleEventResource;
 @end
 

@@ -14307,8 +14307,6 @@
 @synthesize directSubCategoriesCount = _directSubCategoriesCount;
 @synthesize moderation = _moderation;
 @synthesize pendingEntriesCount = _pendingEntriesCount;
-@synthesize isAggregationCategory = _isAggregationCategory;
-@synthesize aggregationCategories = _aggregationCategories;
 
 - (id)init
 {
@@ -14337,7 +14335,6 @@
     self->_directSubCategoriesCount = KALTURA_UNDEF_INT;
     self->_moderation = KALTURA_UNDEF_INT;
     self->_pendingEntriesCount = KALTURA_UNDEF_INT;
-    self->_isAggregationCategory = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -14506,16 +14503,6 @@
     return KFT_Int;
 }
 
-- (KalturaFieldType)getTypeOfIsAggregationCategory
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfAggregationCategories
-{
-    return KFT_String;
-}
-
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -14626,11 +14613,6 @@
     self.pendingEntriesCount = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
-- (void)setIsAggregationCategoryFromString:(NSString*)aPropVal
-{
-    self.isAggregationCategory = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -14652,8 +14634,6 @@
     [aParams addIfDefinedKey:@"partnerData" withString:self.partnerData];
     [aParams addIfDefinedKey:@"defaultOrderBy" withString:self.defaultOrderBy];
     [aParams addIfDefinedKey:@"moderation" withInt:self.moderation];
-    [aParams addIfDefinedKey:@"isAggregationCategory" withInt:self.isAggregationCategory];
-    [aParams addIfDefinedKey:@"aggregationCategories" withString:self.aggregationCategories];
 }
 
 - (void)dealloc
@@ -14669,7 +14649,6 @@
     [self->_privacyContexts release];
     [self->_partnerData release];
     [self->_defaultOrderBy release];
-    [self->_aggregationCategories release];
     [super dealloc];
 }
 
@@ -14894,6 +14873,38 @@
     [self->_userId release];
     [self->_categoryFullIds release];
     [self->_permissionNames release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaClientConfiguration
+@synthesize clientTag = _clientTag;
+@synthesize apiVersion = _apiVersion;
+
+- (KalturaFieldType)getTypeOfClientTag
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfApiVersion
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaClientConfiguration"];
+    [aParams addIfDefinedKey:@"clientTag" withString:self.clientTag];
+    [aParams addIfDefinedKey:@"apiVersion" withString:self.apiVersion];
+}
+
+- (void)dealloc
+{
+    [self->_clientTag release];
+    [self->_apiVersion release];
     [super dealloc];
 }
 
@@ -15567,6 +15578,7 @@
 @synthesize systemName = _systemName;
 @synthesize forceNoneComplied = _forceNoneComplied;
 @synthesize deletePolicy = _deletePolicy;
+@synthesize isEncrypted = _isEncrypted;
 
 - (id)init
 {
@@ -15579,6 +15591,7 @@
     self->_origin = KALTURA_UNDEF_INT;
     self->_forceNoneComplied = KALTURA_UNDEF_INT;
     self->_deletePolicy = KALTURA_UNDEF_INT;
+    self->_isEncrypted = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -15617,6 +15630,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfIsEncrypted
+{
+    return KFT_Int;
+}
+
 - (void)setConversionProfileIdFromString:(NSString*)aPropVal
 {
     self.conversionProfileId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -15647,6 +15665,11 @@
     self.deletePolicy = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setIsEncryptedFromString:(NSString*)aPropVal
+{
+    self.isEncrypted = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -15657,6 +15680,7 @@
     [aParams addIfDefinedKey:@"systemName" withString:self.systemName];
     [aParams addIfDefinedKey:@"forceNoneComplied" withInt:self.forceNoneComplied];
     [aParams addIfDefinedKey:@"deletePolicy" withInt:self.deletePolicy];
+    [aParams addIfDefinedKey:@"isEncrypted" withInt:self.isEncrypted];
 }
 
 - (void)dealloc
@@ -23564,6 +23588,64 @@
 {
     [self->_header release];
     [self->_data release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaRequestConfiguration
+@synthesize partnerId = _partnerId;
+@synthesize ks = _ks;
+@synthesize responseProfile = _responseProfile;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_partnerId = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfPartnerId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfKs
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfResponseProfile
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfResponseProfile
+{
+    return @"KalturaBaseResponseProfile";
+}
+
+- (void)setPartnerIdFromString:(NSString*)aPropVal
+{
+    self.partnerId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaRequestConfiguration"];
+    [aParams addIfDefinedKey:@"partnerId" withInt:self.partnerId];
+    [aParams addIfDefinedKey:@"ks" withString:self.ks];
+    [aParams addIfDefinedKey:@"responseProfile" withObject:self.responseProfile];
+}
+
+- (void)dealloc
+{
+    [self->_ks release];
+    [self->_responseProfile release];
     [super dealloc];
 }
 
@@ -37748,8 +37830,6 @@
 @synthesize inheritedParentIdIn = _inheritedParentIdIn;
 @synthesize partnerSortValueGreaterThanOrEqual = _partnerSortValueGreaterThanOrEqual;
 @synthesize partnerSortValueLessThanOrEqual = _partnerSortValueLessThanOrEqual;
-@synthesize aggregationCategoriesMultiLikeOr = _aggregationCategoriesMultiLikeOr;
-@synthesize aggregationCategoriesMultiLikeAnd = _aggregationCategoriesMultiLikeAnd;
 
 - (id)init
 {
@@ -37964,16 +38044,6 @@
     return KFT_Int;
 }
 
-- (KalturaFieldType)getTypeOfAggregationCategoriesMultiLikeOr
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfAggregationCategoriesMultiLikeAnd
-{
-    return KFT_String;
-}
-
 - (void)setIdEqualFromString:(NSString*)aPropVal
 {
     self.idEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -38116,8 +38186,6 @@
     [aParams addIfDefinedKey:@"inheritedParentIdIn" withString:self.inheritedParentIdIn];
     [aParams addIfDefinedKey:@"partnerSortValueGreaterThanOrEqual" withInt:self.partnerSortValueGreaterThanOrEqual];
     [aParams addIfDefinedKey:@"partnerSortValueLessThanOrEqual" withInt:self.partnerSortValueLessThanOrEqual];
-    [aParams addIfDefinedKey:@"aggregationCategoriesMultiLikeOr" withString:self.aggregationCategoriesMultiLikeOr];
-    [aParams addIfDefinedKey:@"aggregationCategoriesMultiLikeAnd" withString:self.aggregationCategoriesMultiLikeAnd];
 }
 
 - (void)dealloc
@@ -38139,8 +38207,6 @@
     [self->_privacyContextEqual release];
     [self->_statusIn release];
     [self->_inheritedParentIdIn release];
-    [self->_aggregationCategoriesMultiLikeOr release];
-    [self->_aggregationCategoriesMultiLikeAnd release];
     [super dealloc];
 }
 
@@ -44629,6 +44695,13 @@
 @end
 
 @implementation KalturaEntryServerNodeService
+- (KalturaEntryServerNode*)updateWithId:(int)aId withEntryServerNode:(KalturaEntryServerNode*)aEntryServerNode
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"entryServerNode" withObject:aEntryServerNode];
+    return [self.client queueObjectService:@"entryservernode" withAction:@"update" withExpectedType:@"KalturaEntryServerNode"];
+}
+
 - (KalturaEntryServerNodeListResponse*)listWithFilter:(KalturaEntryServerNodeFilter*)aFilter withPager:(KalturaFilterPager*)aPager
 {
     [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
@@ -47634,20 +47707,6 @@
     return self->_baseEntry;
 }
 
-- (KalturaBatchcontrolService*)batchcontrol
-{
-    if (self->_batchcontrol == nil)
-    	self->_batchcontrol = [[KalturaBatchcontrolService alloc] initWithClient:self];
-    return self->_batchcontrol;
-}
-
-- (KalturaBatchService*)batch
-{
-    if (self->_batch == nil)
-    	self->_batch = [[KalturaBatchService alloc] initWithClient:self];
-    return self->_batch;
-}
-
 - (KalturaBulkUploadService*)bulkUpload
 {
     if (self->_bulkUpload == nil)
@@ -47704,13 +47763,6 @@
     return self->_deliveryProfile;
 }
 
-- (KalturaDocumentService*)document
-{
-    if (self->_document == nil)
-    	self->_document = [[KalturaDocumentService alloc] initWithClient:self];
-    return self->_document;
-}
-
 - (KalturaEmailIngestionProfileService*)EmailIngestionProfile
 {
     if (self->_EmailIngestionProfile == nil)
@@ -47758,13 +47810,6 @@
     if (self->_groupUser == nil)
     	self->_groupUser = [[KalturaGroupUserService alloc] initWithClient:self];
     return self->_groupUser;
-}
-
-- (KalturaJobsService*)jobs
-{
-    if (self->_jobs == nil)
-    	self->_jobs = [[KalturaJobsService alloc] initWithClient:self];
-    return self->_jobs;
 }
 
 - (KalturaLiveChannelSegmentService*)liveChannelSegment
@@ -48013,8 +48058,6 @@
     [self->_analytics release];
     [self->_appToken release];
     [self->_baseEntry release];
-    [self->_batchcontrol release];
-    [self->_batch release];
     [self->_bulkUpload release];
     [self->_categoryEntry release];
     [self->_category release];
@@ -48023,7 +48066,6 @@
     [self->_conversionProfile release];
     [self->_data release];
     [self->_deliveryProfile release];
-    [self->_document release];
     [self->_EmailIngestionProfile release];
     [self->_entryServerNode release];
     [self->_fileAsset release];
@@ -48031,7 +48073,6 @@
     [self->_flavorParamsOutput release];
     [self->_flavorParams release];
     [self->_groupUser release];
-    [self->_jobs release];
     [self->_liveChannelSegment release];
     [self->_liveChannel release];
     [self->_liveReports release];

@@ -227,14 +227,3 @@
 - (NSString*)getUrlWithEntryId:(NSString*)aEntryId withQuizOutputType:(int)aQuizOutputType;
 @end
 
-@interface KalturaQuizClientPlugin : KalturaClientPlugin
-{
-	KalturaQuizService* _quiz;
-	KalturaQuizUserEntryService* _quizUserEntry;
-}
-
-@property (nonatomic, assign) KalturaClientBase* client;
-@property (nonatomic, readonly) KalturaQuizService* quiz;
-@property (nonatomic, readonly) KalturaQuizUserEntryService* quizUserEntry;
-@end
-

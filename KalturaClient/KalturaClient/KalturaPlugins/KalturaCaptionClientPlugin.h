@@ -247,14 +247,3 @@
 - (KalturaCaptionParamsListResponse*)list;
 @end
 
-@interface KalturaCaptionClientPlugin : KalturaClientPlugin
-{
-	KalturaCaptionAssetService* _captionAsset;
-	KalturaCaptionParamsService* _captionParams;
-}
-
-@property (nonatomic, assign) KalturaClientBase* client;
-@property (nonatomic, readonly) KalturaCaptionAssetService* captionAsset;
-@property (nonatomic, readonly) KalturaCaptionParamsService* captionParams;
-@end
-

@@ -4830,10 +4830,6 @@
 @property (nonatomic,assign) int moderation;	// enum KalturaNullableBoolean
 // Nunber of pending moderation entries
 @property (nonatomic,assign,readonly) int pendingEntriesCount;
-// Flag indicating that the category is an aggregation category
-@property (nonatomic,assign) int isAggregationCategory;	// enum KalturaNullableBoolean
-// List of aggregation channels the category belongs to
-@property (nonatomic,copy) NSString* aggregationCategories;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfParentId;
 - (KalturaFieldType)getTypeOfDepth;
@@ -4867,8 +4863,6 @@
 - (KalturaFieldType)getTypeOfDirectSubCategoriesCount;
 - (KalturaFieldType)getTypeOfModeration;
 - (KalturaFieldType)getTypeOfPendingEntriesCount;
-- (KalturaFieldType)getTypeOfIsAggregationCategory;
-- (KalturaFieldType)getTypeOfAggregationCategories;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setParentIdFromString:(NSString*)aPropVal;
 - (void)setDepthFromString:(NSString*)aPropVal;
@@ -4891,7 +4885,6 @@
 - (void)setDirectSubCategoriesCountFromString:(NSString*)aPropVal;
 - (void)setModerationFromString:(NSString*)aPropVal;
 - (void)setPendingEntriesCountFromString:(NSString*)aPropVal;
-- (void)setIsAggregationCategoryFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -4955,6 +4948,17 @@
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
 - (void)setUpdateMethodFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Define client optional configurations
+//  /
+@interface KalturaClientConfiguration : KalturaObjectBase
+@property (nonatomic,copy) NSString* clientTag;
+@property (nonatomic,copy) NSString* apiVersion;
+- (KalturaFieldType)getTypeOfClientTag;
+- (KalturaFieldType)getTypeOfApiVersion;
 @end
 
 // @package Kaltura
@@ -5176,6 +5180,7 @@
 @property (nonatomic,assign) int forceNoneComplied;	// enum KalturaNullableBoolean
 // Specifies how to treat the flavor after conversion is finished
 @property (nonatomic,assign) int deletePolicy;	// enum KalturaAssetParamsDeletePolicy
+@property (nonatomic,assign) int isEncrypted;	// enum KalturaNullableBoolean
 - (KalturaFieldType)getTypeOfConversionProfileId;
 - (KalturaFieldType)getTypeOfAssetParamsId;
 - (KalturaFieldType)getTypeOfReadyBehavior;
@@ -5183,12 +5188,14 @@
 - (KalturaFieldType)getTypeOfSystemName;
 - (KalturaFieldType)getTypeOfForceNoneComplied;
 - (KalturaFieldType)getTypeOfDeletePolicy;
+- (KalturaFieldType)getTypeOfIsEncrypted;
 - (void)setConversionProfileIdFromString:(NSString*)aPropVal;
 - (void)setAssetParamsIdFromString:(NSString*)aPropVal;
 - (void)setReadyBehaviorFromString:(NSString*)aPropVal;
 - (void)setOriginFromString:(NSString*)aPropVal;
 - (void)setForceNoneCompliedFromString:(NSString*)aPropVal;
 - (void)setDeletePolicyFromString:(NSString*)aPropVal;
+- (void)setIsEncryptedFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -7353,6 +7360,24 @@
 @property (nonatomic,copy) NSString* data;
 - (KalturaFieldType)getTypeOfHeader;
 - (KalturaFieldType)getTypeOfData;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Define client request optional configurations
+//  /
+@interface KalturaRequestConfiguration : KalturaObjectBase
+// Impersonated partner id
+@property (nonatomic,assign) int partnerId;
+// Kaltura API session
+@property (nonatomic,copy) NSString* ks;
+// Response profile - this attribute will be automatically unset after every API call.
+@property (nonatomic,retain) KalturaBaseResponseProfile* responseProfile;
+- (KalturaFieldType)getTypeOfPartnerId;
+- (KalturaFieldType)getTypeOfKs;
+- (KalturaFieldType)getTypeOfResponseProfile;
+- (NSString*)getObjectTypeOfResponseProfile;
+- (void)setPartnerIdFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -11075,8 +11100,6 @@
 @property (nonatomic,copy) NSString* inheritedParentIdIn;
 @property (nonatomic,assign) int partnerSortValueGreaterThanOrEqual;
 @property (nonatomic,assign) int partnerSortValueLessThanOrEqual;
-@property (nonatomic,copy) NSString* aggregationCategoriesMultiLikeOr;
-@property (nonatomic,copy) NSString* aggregationCategoriesMultiLikeAnd;
 - (KalturaFieldType)getTypeOfIdEqual;
 - (KalturaFieldType)getTypeOfIdIn;
 - (KalturaFieldType)getTypeOfParentIdEqual;
@@ -11114,8 +11137,6 @@
 - (KalturaFieldType)getTypeOfInheritedParentIdIn;
 - (KalturaFieldType)getTypeOfPartnerSortValueGreaterThanOrEqual;
 - (KalturaFieldType)getTypeOfPartnerSortValueLessThanOrEqual;
-- (KalturaFieldType)getTypeOfAggregationCategoriesMultiLikeOr;
-- (KalturaFieldType)getTypeOfAggregationCategoriesMultiLikeAnd;
 - (void)setIdEqualFromString:(NSString*)aPropVal;
 - (void)setParentIdEqualFromString:(NSString*)aPropVal;
 - (void)setDepthEqualFromString:(NSString*)aPropVal;
@@ -13110,6 +13131,9 @@
 // @package Kaltura
 // @subpackage Client
 // Add & Manage CategoryEntry - assign entry to category
+@class KalturaBulkUpload;
+@class KalturaBulkServiceData;
+@class KalturaBulkUploadCategoryEntryData;
 @interface KalturaCategoryEntryService : KalturaServiceBase
 // Add new CategoryEntry
 - (KalturaCategoryEntry*)addWithCategoryEntry:(KalturaCategoryEntry*)aCategoryEntry;
@@ -13135,6 +13159,9 @@
 // @package Kaltura
 // @subpackage Client
 // Add & Manage Categories
+@class KalturaBulkUpload;
+@class KalturaBulkUploadJobData;
+@class KalturaBulkUploadCategoryData;
 @interface KalturaCategoryService : KalturaServiceBase
 // Add new Category
 - (KalturaCategory*)addWithCategory:(KalturaCategory*)aCategory;
@@ -13164,6 +13191,9 @@
 // @package Kaltura
 // @subpackage Client
 // Add & Manage CategoryUser - membership of a user in a category
+@class KalturaBulkUpload;
+@class KalturaBulkUploadJobData;
+@class KalturaBulkUploadCategoryUserData;
 @interface KalturaCategoryUserService : KalturaServiceBase
 // Add new CategoryUser
 - (KalturaCategoryUser*)addWithCategoryUser:(KalturaCategoryUser*)aCategoryUser;
@@ -13291,6 +13321,7 @@
 // @subpackage Client
 // Base class for entry server node
 @interface KalturaEntryServerNodeService : KalturaServiceBase
+- (KalturaEntryServerNode*)updateWithId:(int)aId withEntryServerNode:(KalturaEntryServerNode*)aEntryServerNode;
 - (KalturaEntryServerNodeListResponse*)listWithFilter:(KalturaEntryServerNodeFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaEntryServerNodeListResponse*)listWithFilter:(KalturaEntryServerNodeFilter*)aFilter;
 - (KalturaEntryServerNodeListResponse*)list;
@@ -13547,6 +13578,9 @@
 // @package Kaltura
 // @subpackage Client
 // Media service lets you upload and manage media files (images / videos & audio)
+@class KalturaBulkUpload;
+@class KalturaBulkUploadJobData;
+@class KalturaBulkUploadEntryData;
 @interface KalturaMediaService : KalturaServiceBase
 // Add entry
 - (KalturaMediaEntry*)addWithEntry:(KalturaMediaEntry*)aEntry;
@@ -14191,6 +14225,7 @@
 
 // @package Kaltura
 // @subpackage Client
+@class KalturaQuizUserEntry;
 @interface KalturaUserEntryService : KalturaServiceBase
 // Adds a user_entry to the Kaltura DB.
 - (KalturaUserEntry*)addWithUserEntry:(KalturaUserEntry*)aUserEntry;
@@ -14229,6 +14264,10 @@
 // @subpackage Client
 // Manage partner users on Kaltura's side
 //  The userId in kaltura is the unique Id in the partner's system, and the [partnerId,Id] couple are unique key in kaltura's DB
+@class KalturaBulkUpload;
+@class KalturaBulkUploadJobData;
+@class KalturaBulkUploadUserData;
+@class KalturaUserLoginDataFilter;
 @interface KalturaUserService : KalturaServiceBase
 // Adds a new user to an existing account in the Kaltura database.
 // 	 Input param $id is the unique identifier in the partner's system.
@@ -14334,8 +14373,6 @@
 	KalturaAnalyticsService* _analytics;
 	KalturaAppTokenService* _appToken;
 	KalturaBaseEntryService* _baseEntry;
-	KalturaBatchcontrolService* _batchcontrol;
-	KalturaBatchService* _batch;
 	KalturaBulkUploadService* _bulkUpload;
 	KalturaCategoryEntryService* _categoryEntry;
 	KalturaCategoryService* _category;
@@ -14344,7 +14381,6 @@
 	KalturaConversionProfileService* _conversionProfile;
 	KalturaDataService* _data;
 	KalturaDeliveryProfileService* _deliveryProfile;
-	KalturaDocumentService* _document;
 	KalturaEmailIngestionProfileService* _EmailIngestionProfile;
 	KalturaEntryServerNodeService* _entryServerNode;
 	KalturaFileAssetService* _fileAsset;
@@ -14352,7 +14388,6 @@
 	KalturaFlavorParamsOutputService* _flavorParamsOutput;
 	KalturaFlavorParamsService* _flavorParams;
 	KalturaGroupUserService* _groupUser;
-	KalturaJobsService* _jobs;
 	KalturaLiveChannelSegmentService* _liveChannelSegment;
 	KalturaLiveChannelService* _liveChannel;
 	KalturaLiveReportsService* _liveReports;
@@ -14395,8 +14430,6 @@
 @property (nonatomic, readonly) KalturaAnalyticsService* analytics;
 @property (nonatomic, readonly) KalturaAppTokenService* appToken;
 @property (nonatomic, readonly) KalturaBaseEntryService* baseEntry;
-@property (nonatomic, readonly) KalturaBatchcontrolService* batchcontrol;
-@property (nonatomic, readonly) KalturaBatchService* batch;
 @property (nonatomic, readonly) KalturaBulkUploadService* bulkUpload;
 @property (nonatomic, readonly) KalturaCategoryEntryService* categoryEntry;
 @property (nonatomic, readonly) KalturaCategoryService* category;
@@ -14405,7 +14438,6 @@
 @property (nonatomic, readonly) KalturaConversionProfileService* conversionProfile;
 @property (nonatomic, readonly) KalturaDataService* data;
 @property (nonatomic, readonly) KalturaDeliveryProfileService* deliveryProfile;
-@property (nonatomic, readonly) KalturaDocumentService* document;
 @property (nonatomic, readonly) KalturaEmailIngestionProfileService* EmailIngestionProfile;
 @property (nonatomic, readonly) KalturaEntryServerNodeService* entryServerNode;
 @property (nonatomic, readonly) KalturaFileAssetService* fileAsset;
@@ -14413,7 +14445,6 @@
 @property (nonatomic, readonly) KalturaFlavorParamsOutputService* flavorParamsOutput;
 @property (nonatomic, readonly) KalturaFlavorParamsService* flavorParams;
 @property (nonatomic, readonly) KalturaGroupUserService* groupUser;
-@property (nonatomic, readonly) KalturaJobsService* jobs;
 @property (nonatomic, readonly) KalturaLiveChannelSegmentService* liveChannelSegment;
 @property (nonatomic, readonly) KalturaLiveChannelService* liveChannel;
 @property (nonatomic, readonly) KalturaLiveReportsService* liveReports;

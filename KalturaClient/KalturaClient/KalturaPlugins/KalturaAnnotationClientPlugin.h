@@ -161,12 +161,3 @@
 - (void)updateStatusWithId:(NSString*)aId withStatus:(int)aStatus;
 @end
 
-@interface KalturaAnnotationClientPlugin : KalturaClientPlugin
-{
-	KalturaAnnotationService* _annotation;
-}
-
-@property (nonatomic, assign) KalturaClientBase* client;
-@property (nonatomic, readonly) KalturaAnnotationService* annotation;
-@end
-

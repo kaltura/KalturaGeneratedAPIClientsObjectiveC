@@ -252,14 +252,3 @@
 - (void)updateStatusWithId:(NSString*)aId withStatus:(int)aStatus;
 @end
 
-@interface KalturaCuePointClientPlugin : KalturaClientPlugin
-{
-	KalturaCuePointService* _cuePoint;
-	KalturaLiveCuePointService* _liveCuePoint;
-}
-
-@property (nonatomic, assign) KalturaClientBase* client;
-@property (nonatomic, readonly) KalturaCuePointService* cuePoint;
-@property (nonatomic, readonly) KalturaLiveCuePointService* liveCuePoint;
-@end
-

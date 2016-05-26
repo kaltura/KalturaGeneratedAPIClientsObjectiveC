@@ -131,16 +131,3 @@
 @end
 
 ///////////////////////// services /////////////////////////
-@interface KalturaAdminConsoleClientPlugin : KalturaClientPlugin
-{
-	KalturaEntryAdminService* _entryAdmin;
-	KalturaUiConfAdminService* _uiConfAdmin;
-	KalturaReportAdminService* _reportAdmin;
-}
-
-@property (nonatomic, assign) KalturaClientBase* client;
-@property (nonatomic, readonly) KalturaEntryAdminService* entryAdmin;
-@property (nonatomic, readonly) KalturaUiConfAdminService* uiConfAdmin;
-@property (nonatomic, readonly) KalturaReportAdminService* reportAdmin;
-@end
-

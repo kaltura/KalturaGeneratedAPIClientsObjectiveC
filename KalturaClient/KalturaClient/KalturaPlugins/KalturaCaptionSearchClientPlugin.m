@@ -342,29 +342,51 @@
 @end
 
 ///////////////////////// services /////////////////////////
-@implementation KalturaCaptionSearchClientPlugin
-@synthesize client = _client;
-
-- (id)initWithClient:(KalturaClient*)aClient
+@implementation KalturaCaptionAssetItemService
+- (KalturaCaptionAssetItemListResponse*)searchWithEntryFilter:(KalturaBaseEntryFilter*)aEntryFilter withCaptionAssetItemFilter:(KalturaCaptionAssetItemFilter*)aCaptionAssetItemFilter withCaptionAssetItemPager:(KalturaFilterPager*)aCaptionAssetItemPager
 {
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self.client = aClient;
-    return self;
+    [self.client.params addIfDefinedKey:@"entryFilter" withObject:aEntryFilter];
+    [self.client.params addIfDefinedKey:@"captionAssetItemFilter" withObject:aCaptionAssetItemFilter];
+    [self.client.params addIfDefinedKey:@"captionAssetItemPager" withObject:aCaptionAssetItemPager];
+    return [self.client queueObjectService:@"captionsearch_captionassetitem" withAction:@"search" withExpectedType:@"KalturaCaptionAssetItemListResponse"];
 }
 
-- (KalturaCaptionAssetItemService*)captionAssetItem
+- (KalturaCaptionAssetItemListResponse*)searchWithEntryFilter:(KalturaBaseEntryFilter*)aEntryFilter withCaptionAssetItemFilter:(KalturaCaptionAssetItemFilter*)aCaptionAssetItemFilter
 {
-    if (self->_captionAssetItem == nil)
-    	self->_captionAssetItem = [[KalturaCaptionAssetItemService alloc] initWithClient:self.client];
-    return self->_captionAssetItem;
+    return [self searchWithEntryFilter:aEntryFilter withCaptionAssetItemFilter:aCaptionAssetItemFilter withCaptionAssetItemPager:nil];
 }
 
-- (void)dealloc
+- (KalturaCaptionAssetItemListResponse*)searchWithEntryFilter:(KalturaBaseEntryFilter*)aEntryFilter
 {
-    [self->_captionAssetItem release];
-	[super dealloc];
+    return [self searchWithEntryFilter:aEntryFilter withCaptionAssetItemFilter:nil];
+}
+
+- (KalturaCaptionAssetItemListResponse*)search
+{
+    return [self searchWithEntryFilter:nil];
+}
+
+- (KalturaBaseEntryListResponse*)searchEntriesWithEntryFilter:(KalturaBaseEntryFilter*)aEntryFilter withCaptionAssetItemFilter:(KalturaCaptionAssetItemFilter*)aCaptionAssetItemFilter withCaptionAssetItemPager:(KalturaFilterPager*)aCaptionAssetItemPager
+{
+    [self.client.params addIfDefinedKey:@"entryFilter" withObject:aEntryFilter];
+    [self.client.params addIfDefinedKey:@"captionAssetItemFilter" withObject:aCaptionAssetItemFilter];
+    [self.client.params addIfDefinedKey:@"captionAssetItemPager" withObject:aCaptionAssetItemPager];
+    return [self.client queueObjectService:@"captionsearch_captionassetitem" withAction:@"searchEntries" withExpectedType:@"KalturaBaseEntryListResponse"];
+}
+
+- (KalturaBaseEntryListResponse*)searchEntriesWithEntryFilter:(KalturaBaseEntryFilter*)aEntryFilter withCaptionAssetItemFilter:(KalturaCaptionAssetItemFilter*)aCaptionAssetItemFilter
+{
+    return [self searchEntriesWithEntryFilter:aEntryFilter withCaptionAssetItemFilter:aCaptionAssetItemFilter withCaptionAssetItemPager:nil];
+}
+
+- (KalturaBaseEntryListResponse*)searchEntriesWithEntryFilter:(KalturaBaseEntryFilter*)aEntryFilter
+{
+    return [self searchEntriesWithEntryFilter:aEntryFilter withCaptionAssetItemFilter:nil];
+}
+
+- (KalturaBaseEntryListResponse*)searchEntries
+{
+    return [self searchEntriesWithEntryFilter:nil];
 }
 
 @end

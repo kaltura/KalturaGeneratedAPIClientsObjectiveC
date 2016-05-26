@@ -134,12 +134,3 @@
 - (int)count;
 @end
 
-@interface KalturaExternalMediaClientPlugin : KalturaClientPlugin
-{
-	KalturaExternalMediaService* _externalMedia;
-}
-
-@property (nonatomic, assign) KalturaClientBase* client;
-@property (nonatomic, readonly) KalturaExternalMediaService* externalMedia;
-@end
-

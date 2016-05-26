@@ -841,30 +841,3 @@
 @end
 
 ///////////////////////// services /////////////////////////
-@implementation KalturaFileSyncClientPlugin
-@synthesize client = _client;
-
-- (id)initWithClient:(KalturaClient*)aClient
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self.client = aClient;
-    return self;
-}
-
-- (KalturaFileSyncService*)fileSync
-{
-    if (self->_fileSync == nil)
-    	self->_fileSync = [[KalturaFileSyncService alloc] initWithClient:self.client];
-    return self->_fileSync;
-}
-
-- (void)dealloc
-{
-    [self->_fileSync release];
-	[super dealloc];
-}
-
-@end
-
