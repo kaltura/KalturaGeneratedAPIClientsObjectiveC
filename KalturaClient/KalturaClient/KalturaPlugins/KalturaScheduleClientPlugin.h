@@ -440,7 +440,41 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaScheduleEventBaseFilter : KalturaFilter
+@interface KalturaScheduleEventListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaScheduleEvent elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaScheduleEventResourceListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaScheduleEventResource elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaScheduleResourceListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaScheduleResource elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaLiveStreamScheduleEvent : KalturaEntryScheduleEvent
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaRecordScheduleEvent : KalturaEntryScheduleEvent
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaScheduleEventBaseFilter : KalturaRelatedFilter
 @property (nonatomic,assign) int idEqual;
 @property (nonatomic,copy) NSString* idIn;
 @property (nonatomic,copy) NSString* idNotIn;
@@ -518,15 +552,7 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaScheduleEventListResponse : KalturaListResponse
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaScheduleEvent elements
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaScheduleEventResourceBaseFilter : KalturaFilter
+@interface KalturaScheduleEventResourceBaseFilter : KalturaRelatedFilter
 @property (nonatomic,assign) int eventIdEqual;
 @property (nonatomic,copy) NSString* eventIdIn;
 @property (nonatomic,assign) int resourceIdEqual;
@@ -553,15 +579,7 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaScheduleEventResourceListResponse : KalturaListResponse
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaScheduleEventResource elements
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaScheduleResourceBaseFilter : KalturaFilter
+@interface KalturaScheduleResourceBaseFilter : KalturaRelatedFilter
 @property (nonatomic,assign) int idEqual;
 @property (nonatomic,copy) NSString* idIn;
 @property (nonatomic,copy) NSString* idNotIn;
@@ -601,24 +619,6 @@
 - (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaScheduleResourceListResponse : KalturaListResponse
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaScheduleResource elements
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaLiveStreamScheduleEvent : KalturaEntryScheduleEvent
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaRecordScheduleEvent : KalturaEntryScheduleEvent
 @end
 
 // @package Kaltura

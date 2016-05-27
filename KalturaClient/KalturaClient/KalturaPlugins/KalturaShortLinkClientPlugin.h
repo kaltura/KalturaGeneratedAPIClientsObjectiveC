@@ -83,7 +83,7 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaShortLinkBaseFilter : KalturaFilter
-@property (nonatomic,assign) int idEqual;
+@property (nonatomic,copy) NSString* idEqual;
 @property (nonatomic,copy) NSString* idIn;
 @property (nonatomic,assign) int createdAtGreaterThanOrEqual;
 @property (nonatomic,assign) int createdAtLessThanOrEqual;
@@ -115,7 +115,6 @@
 - (KalturaFieldType)getTypeOfSystemNameIn;
 - (KalturaFieldType)getTypeOfStatusEqual;
 - (KalturaFieldType)getTypeOfStatusIn;
-- (void)setIdEqualFromString:(NSString*)aPropVal;
 - (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;

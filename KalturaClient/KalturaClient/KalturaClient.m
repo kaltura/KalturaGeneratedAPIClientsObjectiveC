@@ -14307,6 +14307,8 @@
 @synthesize directSubCategoriesCount = _directSubCategoriesCount;
 @synthesize moderation = _moderation;
 @synthesize pendingEntriesCount = _pendingEntriesCount;
+@synthesize isAggregationCategory = _isAggregationCategory;
+@synthesize aggregationCategories = _aggregationCategories;
 
 - (id)init
 {
@@ -14335,6 +14337,7 @@
     self->_directSubCategoriesCount = KALTURA_UNDEF_INT;
     self->_moderation = KALTURA_UNDEF_INT;
     self->_pendingEntriesCount = KALTURA_UNDEF_INT;
+    self->_isAggregationCategory = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -14503,6 +14506,16 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfIsAggregationCategory
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfAggregationCategories
+{
+    return KFT_String;
+}
+
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -14613,6 +14626,11 @@
     self.pendingEntriesCount = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setIsAggregationCategoryFromString:(NSString*)aPropVal
+{
+    self.isAggregationCategory = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -14634,6 +14652,8 @@
     [aParams addIfDefinedKey:@"partnerData" withString:self.partnerData];
     [aParams addIfDefinedKey:@"defaultOrderBy" withString:self.defaultOrderBy];
     [aParams addIfDefinedKey:@"moderation" withInt:self.moderation];
+    [aParams addIfDefinedKey:@"isAggregationCategory" withInt:self.isAggregationCategory];
+    [aParams addIfDefinedKey:@"aggregationCategories" withString:self.aggregationCategories];
 }
 
 - (void)dealloc
@@ -14649,6 +14669,7 @@
     [self->_privacyContexts release];
     [self->_partnerData release];
     [self->_defaultOrderBy release];
+    [self->_aggregationCategories release];
     [super dealloc];
 }
 
@@ -27747,23 +27768,25 @@
 @synthesize createdAtLessThanOrEqual = _createdAtLessThanOrEqual;
 @synthesize updatedAtGreaterThanOrEqual = _updatedAtGreaterThanOrEqual;
 @synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
+@synthesize statusEqual = _statusEqual;
+@synthesize statusIn = _statusIn;
 
 - (id)init
 {
     self = [super init];
     if (self == nil)
         return nil;
-    self->_idEqual = KALTURA_UNDEF_INT;
     self->_createdAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
     self->_createdAtLessThanOrEqual = KALTURA_UNDEF_INT;
     self->_updatedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
     self->_updatedAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_statusEqual = KALTURA_UNDEF_INT;
     return self;
 }
 
 - (KalturaFieldType)getTypeOfIdEqual
 {
-    return KFT_Int;
+    return KFT_String;
 }
 
 - (KalturaFieldType)getTypeOfIdIn
@@ -27791,9 +27814,14 @@
     return KFT_Int;
 }
 
-- (void)setIdEqualFromString:(NSString*)aPropVal
+- (KalturaFieldType)getTypeOfStatusEqual
 {
-    self.idEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfStatusIn
+{
+    return KFT_String;
 }
 
 - (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
@@ -27816,22 +27844,31 @@
     self.updatedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setStatusEqualFromString:(NSString*)aPropVal
+{
+    self.statusEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaAppTokenBaseFilter"];
-    [aParams addIfDefinedKey:@"idEqual" withInt:self.idEqual];
+    [aParams addIfDefinedKey:@"idEqual" withString:self.idEqual];
     [aParams addIfDefinedKey:@"idIn" withString:self.idIn];
     [aParams addIfDefinedKey:@"createdAtGreaterThanOrEqual" withInt:self.createdAtGreaterThanOrEqual];
     [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
     [aParams addIfDefinedKey:@"updatedAtGreaterThanOrEqual" withInt:self.updatedAtGreaterThanOrEqual];
     [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
+    [aParams addIfDefinedKey:@"statusEqual" withInt:self.statusEqual];
+    [aParams addIfDefinedKey:@"statusIn" withString:self.statusIn];
 }
 
 - (void)dealloc
 {
+    [self->_idEqual release];
     [self->_idIn release];
+    [self->_statusIn release];
     [super dealloc];
 }
 
@@ -36511,175 +36548,6 @@
 
 @end
 
-@implementation KalturaUserEntryBaseFilter
-@synthesize idEqual = _idEqual;
-@synthesize idIn = _idIn;
-@synthesize idNotIn = _idNotIn;
-@synthesize entryIdEqual = _entryIdEqual;
-@synthesize entryIdIn = _entryIdIn;
-@synthesize entryIdNotIn = _entryIdNotIn;
-@synthesize userIdEqual = _userIdEqual;
-@synthesize userIdIn = _userIdIn;
-@synthesize userIdNotIn = _userIdNotIn;
-@synthesize statusEqual = _statusEqual;
-@synthesize createdAtLessThanOrEqual = _createdAtLessThanOrEqual;
-@synthesize createdAtGreaterThanOrEqual = _createdAtGreaterThanOrEqual;
-@synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
-@synthesize updatedAtGreaterThanOrEqual = _updatedAtGreaterThanOrEqual;
-@synthesize typeEqual = _typeEqual;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_idEqual = KALTURA_UNDEF_INT;
-    self->_createdAtLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_createdAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_updatedAtLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_updatedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfIdEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfIdIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfIdNotIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfEntryIdEqual
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfEntryIdIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfEntryIdNotIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfUserIdEqual
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfUserIdIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfUserIdNotIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfStatusEqual
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfTypeEqual
-{
-    return KFT_String;
-}
-
-- (void)setIdEqualFromString:(NSString*)aPropVal
-{
-    self.idEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.createdAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.createdAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.updatedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.updatedAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaUserEntryBaseFilter"];
-    [aParams addIfDefinedKey:@"idEqual" withInt:self.idEqual];
-    [aParams addIfDefinedKey:@"idIn" withString:self.idIn];
-    [aParams addIfDefinedKey:@"idNotIn" withString:self.idNotIn];
-    [aParams addIfDefinedKey:@"entryIdEqual" withString:self.entryIdEqual];
-    [aParams addIfDefinedKey:@"entryIdIn" withString:self.entryIdIn];
-    [aParams addIfDefinedKey:@"entryIdNotIn" withString:self.entryIdNotIn];
-    [aParams addIfDefinedKey:@"userIdEqual" withString:self.userIdEqual];
-    [aParams addIfDefinedKey:@"userIdIn" withString:self.userIdIn];
-    [aParams addIfDefinedKey:@"userIdNotIn" withString:self.userIdNotIn];
-    [aParams addIfDefinedKey:@"statusEqual" withString:self.statusEqual];
-    [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
-    [aParams addIfDefinedKey:@"createdAtGreaterThanOrEqual" withInt:self.createdAtGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
-    [aParams addIfDefinedKey:@"updatedAtGreaterThanOrEqual" withInt:self.updatedAtGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"typeEqual" withString:self.typeEqual];
-}
-
-- (void)dealloc
-{
-    [self->_idIn release];
-    [self->_idNotIn release];
-    [self->_entryIdEqual release];
-    [self->_entryIdIn release];
-    [self->_entryIdNotIn release];
-    [self->_userIdEqual release];
-    [self->_userIdIn release];
-    [self->_userIdNotIn release];
-    [self->_statusEqual release];
-    [self->_typeEqual release];
-    [super dealloc];
-}
-
-@end
-
 @interface KalturaUserEntryListResponse()
 @property (nonatomic,retain) NSMutableArray* objects;
 @end
@@ -37795,6 +37663,7 @@
 @implementation KalturaCategoryBaseFilter
 @synthesize idEqual = _idEqual;
 @synthesize idIn = _idIn;
+@synthesize idNotIn = _idNotIn;
 @synthesize parentIdEqual = _parentIdEqual;
 @synthesize parentIdIn = _parentIdIn;
 @synthesize depthEqual = _depthEqual;
@@ -37830,6 +37699,8 @@
 @synthesize inheritedParentIdIn = _inheritedParentIdIn;
 @synthesize partnerSortValueGreaterThanOrEqual = _partnerSortValueGreaterThanOrEqual;
 @synthesize partnerSortValueLessThanOrEqual = _partnerSortValueLessThanOrEqual;
+@synthesize aggregationCategoriesMultiLikeOr = _aggregationCategoriesMultiLikeOr;
+@synthesize aggregationCategoriesMultiLikeAnd = _aggregationCategoriesMultiLikeAnd;
 
 - (id)init
 {
@@ -37865,6 +37736,11 @@
 }
 
 - (KalturaFieldType)getTypeOfIdIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfIdNotIn
 {
     return KFT_String;
 }
@@ -38044,6 +37920,16 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfAggregationCategoriesMultiLikeOr
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfAggregationCategoriesMultiLikeAnd
+{
+    return KFT_String;
+}
+
 - (void)setIdEqualFromString:(NSString*)aPropVal
 {
     self.idEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -38151,6 +38037,7 @@
         [aParams putKey:@"objectType" withString:@"KalturaCategoryBaseFilter"];
     [aParams addIfDefinedKey:@"idEqual" withInt:self.idEqual];
     [aParams addIfDefinedKey:@"idIn" withString:self.idIn];
+    [aParams addIfDefinedKey:@"idNotIn" withString:self.idNotIn];
     [aParams addIfDefinedKey:@"parentIdEqual" withInt:self.parentIdEqual];
     [aParams addIfDefinedKey:@"parentIdIn" withString:self.parentIdIn];
     [aParams addIfDefinedKey:@"depthEqual" withInt:self.depthEqual];
@@ -38186,11 +38073,14 @@
     [aParams addIfDefinedKey:@"inheritedParentIdIn" withString:self.inheritedParentIdIn];
     [aParams addIfDefinedKey:@"partnerSortValueGreaterThanOrEqual" withInt:self.partnerSortValueGreaterThanOrEqual];
     [aParams addIfDefinedKey:@"partnerSortValueLessThanOrEqual" withInt:self.partnerSortValueLessThanOrEqual];
+    [aParams addIfDefinedKey:@"aggregationCategoriesMultiLikeOr" withString:self.aggregationCategoriesMultiLikeOr];
+    [aParams addIfDefinedKey:@"aggregationCategoriesMultiLikeAnd" withString:self.aggregationCategoriesMultiLikeAnd];
 }
 
 - (void)dealloc
 {
     [self->_idIn release];
+    [self->_idNotIn release];
     [self->_parentIdIn release];
     [self->_fullNameEqual release];
     [self->_fullNameStartsWith release];
@@ -38207,6 +38097,8 @@
     [self->_privacyContextEqual release];
     [self->_statusIn release];
     [self->_inheritedParentIdIn release];
+    [self->_aggregationCategoriesMultiLikeOr release];
+    [self->_aggregationCategoriesMultiLikeAnd release];
     [super dealloc];
 }
 
@@ -40986,47 +40878,171 @@
 
 @end
 
-@implementation KalturaUserEntryFilter
-@synthesize userIdEqualCurrent = _userIdEqualCurrent;
-@synthesize isAnonymous = _isAnonymous;
+@implementation KalturaUserEntryBaseFilter
+@synthesize idEqual = _idEqual;
+@synthesize idIn = _idIn;
+@synthesize idNotIn = _idNotIn;
+@synthesize entryIdEqual = _entryIdEqual;
+@synthesize entryIdIn = _entryIdIn;
+@synthesize entryIdNotIn = _entryIdNotIn;
+@synthesize userIdEqual = _userIdEqual;
+@synthesize userIdIn = _userIdIn;
+@synthesize userIdNotIn = _userIdNotIn;
+@synthesize statusEqual = _statusEqual;
+@synthesize createdAtLessThanOrEqual = _createdAtLessThanOrEqual;
+@synthesize createdAtGreaterThanOrEqual = _createdAtGreaterThanOrEqual;
+@synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
+@synthesize updatedAtGreaterThanOrEqual = _updatedAtGreaterThanOrEqual;
+@synthesize typeEqual = _typeEqual;
 
 - (id)init
 {
     self = [super init];
     if (self == nil)
         return nil;
-    self->_userIdEqualCurrent = KALTURA_UNDEF_INT;
-    self->_isAnonymous = KALTURA_UNDEF_INT;
+    self->_idEqual = KALTURA_UNDEF_INT;
+    self->_createdAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_createdAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_updatedAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_updatedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
     return self;
 }
 
-- (KalturaFieldType)getTypeOfUserIdEqualCurrent
+- (KalturaFieldType)getTypeOfIdEqual
 {
     return KFT_Int;
 }
 
-- (KalturaFieldType)getTypeOfIsAnonymous
+- (KalturaFieldType)getTypeOfIdIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfIdNotIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEntryIdEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEntryIdIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEntryIdNotIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfUserIdEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfUserIdIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfUserIdNotIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfStatusEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual
 {
     return KFT_Int;
 }
 
-- (void)setUserIdEqualCurrentFromString:(NSString*)aPropVal
+- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual
 {
-    self.userIdEqualCurrent = [KalturaSimpleTypeParser parseInt:aPropVal];
+    return KFT_Int;
 }
 
-- (void)setIsAnonymousFromString:(NSString*)aPropVal
+- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual
 {
-    self.isAnonymous = [KalturaSimpleTypeParser parseInt:aPropVal];
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfTypeEqual
+{
+    return KFT_String;
+}
+
+- (void)setIdEqualFromString:(NSString*)aPropVal
+{
+    self.idEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.createdAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.createdAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.updatedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.updatedAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaUserEntryFilter"];
-    [aParams addIfDefinedKey:@"userIdEqualCurrent" withInt:self.userIdEqualCurrent];
-    [aParams addIfDefinedKey:@"isAnonymous" withInt:self.isAnonymous];
+        [aParams putKey:@"objectType" withString:@"KalturaUserEntryBaseFilter"];
+    [aParams addIfDefinedKey:@"idEqual" withInt:self.idEqual];
+    [aParams addIfDefinedKey:@"idIn" withString:self.idIn];
+    [aParams addIfDefinedKey:@"idNotIn" withString:self.idNotIn];
+    [aParams addIfDefinedKey:@"entryIdEqual" withString:self.entryIdEqual];
+    [aParams addIfDefinedKey:@"entryIdIn" withString:self.entryIdIn];
+    [aParams addIfDefinedKey:@"entryIdNotIn" withString:self.entryIdNotIn];
+    [aParams addIfDefinedKey:@"userIdEqual" withString:self.userIdEqual];
+    [aParams addIfDefinedKey:@"userIdIn" withString:self.userIdIn];
+    [aParams addIfDefinedKey:@"userIdNotIn" withString:self.userIdNotIn];
+    [aParams addIfDefinedKey:@"statusEqual" withString:self.statusEqual];
+    [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
+    [aParams addIfDefinedKey:@"createdAtGreaterThanOrEqual" withInt:self.createdAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
+    [aParams addIfDefinedKey:@"updatedAtGreaterThanOrEqual" withInt:self.updatedAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"typeEqual" withString:self.typeEqual];
+}
+
+- (void)dealloc
+{
+    [self->_idIn release];
+    [self->_idNotIn release];
+    [self->_entryIdEqual release];
+    [self->_entryIdIn release];
+    [self->_entryIdNotIn release];
+    [self->_userIdEqual release];
+    [self->_userIdIn release];
+    [self->_userIdNotIn release];
+    [self->_statusEqual release];
+    [self->_typeEqual release];
+    [super dealloc];
 }
 
 @end
@@ -42430,16 +42446,6 @@
 
 @end
 
-@implementation KalturaQuizUserEntryBaseFilter
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaQuizUserEntryBaseFilter"];
-}
-
-@end
-
 @implementation KalturaServerFileResource
 @synthesize localFilePath = _localFilePath;
 
@@ -42596,6 +42602,51 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaUserEmailContextField"];
+}
+
+@end
+
+@implementation KalturaUserEntryFilter
+@synthesize userIdEqualCurrent = _userIdEqualCurrent;
+@synthesize isAnonymous = _isAnonymous;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_userIdEqualCurrent = KALTURA_UNDEF_INT;
+    self->_isAnonymous = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfUserIdEqualCurrent
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfIsAnonymous
+{
+    return KFT_Int;
+}
+
+- (void)setUserIdEqualCurrentFromString:(NSString*)aPropVal
+{
+    self.userIdEqualCurrent = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setIsAnonymousFromString:(NSString*)aPropVal
+{
+    self.isAnonymous = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaUserEntryFilter"];
+    [aParams addIfDefinedKey:@"userIdEqualCurrent" withInt:self.userIdEqualCurrent];
+    [aParams addIfDefinedKey:@"isAnonymous" withInt:self.isAnonymous];
 }
 
 @end
@@ -42952,12 +43003,12 @@
 
 @end
 
-@implementation KalturaQuizUserEntryFilter
+@implementation KalturaQuizUserEntryBaseFilter
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaQuizUserEntryFilter"];
+        [aParams putKey:@"objectType" withString:@"KalturaQuizUserEntryBaseFilter"];
 }
 
 @end
@@ -43206,6 +43257,16 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaPlaylistFilter"];
+}
+
+@end
+
+@implementation KalturaQuizUserEntryFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaQuizUserEntryFilter"];
 }
 
 @end

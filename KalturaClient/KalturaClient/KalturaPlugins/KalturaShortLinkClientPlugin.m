@@ -226,7 +226,6 @@
     self = [super init];
     if (self == nil)
         return nil;
-    self->_idEqual = KALTURA_UNDEF_INT;
     self->_createdAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
     self->_createdAtLessThanOrEqual = KALTURA_UNDEF_INT;
     self->_updatedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
@@ -240,7 +239,7 @@
 
 - (KalturaFieldType)getTypeOfIdEqual
 {
-    return KFT_Int;
+    return KFT_String;
 }
 
 - (KalturaFieldType)getTypeOfIdIn
@@ -318,11 +317,6 @@
     return KFT_String;
 }
 
-- (void)setIdEqualFromString:(NSString*)aPropVal
-{
-    self.idEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
 - (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
 {
     self.createdAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -368,7 +362,7 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaShortLinkBaseFilter"];
-    [aParams addIfDefinedKey:@"idEqual" withInt:self.idEqual];
+    [aParams addIfDefinedKey:@"idEqual" withString:self.idEqual];
     [aParams addIfDefinedKey:@"idIn" withString:self.idIn];
     [aParams addIfDefinedKey:@"createdAtGreaterThanOrEqual" withInt:self.createdAtGreaterThanOrEqual];
     [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
@@ -388,6 +382,7 @@
 
 - (void)dealloc
 {
+    [self->_idEqual release];
     [self->_idIn release];
     [self->_partnerIdIn release];
     [self->_userIdEqual release];

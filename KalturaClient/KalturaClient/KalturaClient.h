@@ -4830,6 +4830,10 @@
 @property (nonatomic,assign) int moderation;	// enum KalturaNullableBoolean
 // Nunber of pending moderation entries
 @property (nonatomic,assign,readonly) int pendingEntriesCount;
+// Flag indicating that the category is an aggregation category
+@property (nonatomic,assign) int isAggregationCategory;	// enum KalturaNullableBoolean
+// List of aggregation channels the category belongs to
+@property (nonatomic,copy) NSString* aggregationCategories;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfParentId;
 - (KalturaFieldType)getTypeOfDepth;
@@ -4863,6 +4867,8 @@
 - (KalturaFieldType)getTypeOfDirectSubCategoriesCount;
 - (KalturaFieldType)getTypeOfModeration;
 - (KalturaFieldType)getTypeOfPendingEntriesCount;
+- (KalturaFieldType)getTypeOfIsAggregationCategory;
+- (KalturaFieldType)getTypeOfAggregationCategories;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setParentIdFromString:(NSString*)aPropVal;
 - (void)setDepthFromString:(NSString*)aPropVal;
@@ -4885,6 +4891,7 @@
 - (void)setDirectSubCategoriesCountFromString:(NSString*)aPropVal;
 - (void)setModerationFromString:(NSString*)aPropVal;
 - (void)setPendingEntriesCountFromString:(NSString*)aPropVal;
+- (void)setIsAggregationCategoryFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -8432,23 +8439,27 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaAppTokenBaseFilter : KalturaFilter
-@property (nonatomic,assign) int idEqual;
+@property (nonatomic,copy) NSString* idEqual;
 @property (nonatomic,copy) NSString* idIn;
 @property (nonatomic,assign) int createdAtGreaterThanOrEqual;
 @property (nonatomic,assign) int createdAtLessThanOrEqual;
 @property (nonatomic,assign) int updatedAtGreaterThanOrEqual;
 @property (nonatomic,assign) int updatedAtLessThanOrEqual;
+@property (nonatomic,assign) int statusEqual;	// enum KalturaAppTokenStatus
+@property (nonatomic,copy) NSString* statusIn;
 - (KalturaFieldType)getTypeOfIdEqual;
 - (KalturaFieldType)getTypeOfIdIn;
 - (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
 - (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual;
 - (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual;
 - (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
-- (void)setIdEqualFromString:(NSString*)aPropVal;
+- (KalturaFieldType)getTypeOfStatusEqual;
+- (KalturaFieldType)getTypeOfStatusIn;
 - (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setStatusEqualFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -10739,46 +10750,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaUserEntryBaseFilter : KalturaFilter
-@property (nonatomic,assign) int idEqual;
-@property (nonatomic,copy) NSString* idIn;
-@property (nonatomic,copy) NSString* idNotIn;
-@property (nonatomic,copy) NSString* entryIdEqual;
-@property (nonatomic,copy) NSString* entryIdIn;
-@property (nonatomic,copy) NSString* entryIdNotIn;
-@property (nonatomic,copy) NSString* userIdEqual;
-@property (nonatomic,copy) NSString* userIdIn;
-@property (nonatomic,copy) NSString* userIdNotIn;
-@property (nonatomic,copy) NSString* statusEqual;	// enum KalturaUserEntryStatus
-@property (nonatomic,assign) int createdAtLessThanOrEqual;
-@property (nonatomic,assign) int createdAtGreaterThanOrEqual;
-@property (nonatomic,assign) int updatedAtLessThanOrEqual;
-@property (nonatomic,assign) int updatedAtGreaterThanOrEqual;
-@property (nonatomic,copy) NSString* typeEqual;	// enum KalturaUserEntryType
-- (KalturaFieldType)getTypeOfIdEqual;
-- (KalturaFieldType)getTypeOfIdIn;
-- (KalturaFieldType)getTypeOfIdNotIn;
-- (KalturaFieldType)getTypeOfEntryIdEqual;
-- (KalturaFieldType)getTypeOfEntryIdIn;
-- (KalturaFieldType)getTypeOfEntryIdNotIn;
-- (KalturaFieldType)getTypeOfUserIdEqual;
-- (KalturaFieldType)getTypeOfUserIdIn;
-- (KalturaFieldType)getTypeOfUserIdNotIn;
-- (KalturaFieldType)getTypeOfStatusEqual;
-- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual;
-- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
-- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfTypeEqual;
-- (void)setIdEqualFromString:(NSString*)aPropVal;
-- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaUserEntryListResponse : KalturaListResponse
 @property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaUserEntry elements
 - (KalturaFieldType)getTypeOfObjects;
@@ -11065,6 +11036,7 @@
 @interface KalturaCategoryBaseFilter : KalturaRelatedFilter
 @property (nonatomic,assign) int idEqual;
 @property (nonatomic,copy) NSString* idIn;
+@property (nonatomic,copy) NSString* idNotIn;
 @property (nonatomic,assign) int parentIdEqual;
 @property (nonatomic,copy) NSString* parentIdIn;
 @property (nonatomic,assign) int depthEqual;
@@ -11100,8 +11072,11 @@
 @property (nonatomic,copy) NSString* inheritedParentIdIn;
 @property (nonatomic,assign) int partnerSortValueGreaterThanOrEqual;
 @property (nonatomic,assign) int partnerSortValueLessThanOrEqual;
+@property (nonatomic,copy) NSString* aggregationCategoriesMultiLikeOr;
+@property (nonatomic,copy) NSString* aggregationCategoriesMultiLikeAnd;
 - (KalturaFieldType)getTypeOfIdEqual;
 - (KalturaFieldType)getTypeOfIdIn;
+- (KalturaFieldType)getTypeOfIdNotIn;
 - (KalturaFieldType)getTypeOfParentIdEqual;
 - (KalturaFieldType)getTypeOfParentIdIn;
 - (KalturaFieldType)getTypeOfDepthEqual;
@@ -11137,6 +11112,8 @@
 - (KalturaFieldType)getTypeOfInheritedParentIdIn;
 - (KalturaFieldType)getTypeOfPartnerSortValueGreaterThanOrEqual;
 - (KalturaFieldType)getTypeOfPartnerSortValueLessThanOrEqual;
+- (KalturaFieldType)getTypeOfAggregationCategoriesMultiLikeOr;
+- (KalturaFieldType)getTypeOfAggregationCategoriesMultiLikeAnd;
 - (void)setIdEqualFromString:(NSString*)aPropVal;
 - (void)setParentIdEqualFromString:(NSString*)aPropVal;
 - (void)setDepthEqualFromString:(NSString*)aPropVal;
@@ -11916,13 +11893,42 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaUserEntryFilter : KalturaUserEntryBaseFilter
-@property (nonatomic,assign) int userIdEqualCurrent;	// enum KalturaNullableBoolean
-@property (nonatomic,assign) int isAnonymous;	// enum KalturaNullableBoolean
-- (KalturaFieldType)getTypeOfUserIdEqualCurrent;
-- (KalturaFieldType)getTypeOfIsAnonymous;
-- (void)setUserIdEqualCurrentFromString:(NSString*)aPropVal;
-- (void)setIsAnonymousFromString:(NSString*)aPropVal;
+@interface KalturaUserEntryBaseFilter : KalturaRelatedFilter
+@property (nonatomic,assign) int idEqual;
+@property (nonatomic,copy) NSString* idIn;
+@property (nonatomic,copy) NSString* idNotIn;
+@property (nonatomic,copy) NSString* entryIdEqual;
+@property (nonatomic,copy) NSString* entryIdIn;
+@property (nonatomic,copy) NSString* entryIdNotIn;
+@property (nonatomic,copy) NSString* userIdEqual;
+@property (nonatomic,copy) NSString* userIdIn;
+@property (nonatomic,copy) NSString* userIdNotIn;
+@property (nonatomic,copy) NSString* statusEqual;	// enum KalturaUserEntryStatus
+@property (nonatomic,assign) int createdAtLessThanOrEqual;
+@property (nonatomic,assign) int createdAtGreaterThanOrEqual;
+@property (nonatomic,assign) int updatedAtLessThanOrEqual;
+@property (nonatomic,assign) int updatedAtGreaterThanOrEqual;
+@property (nonatomic,copy) NSString* typeEqual;	// enum KalturaUserEntryType
+- (KalturaFieldType)getTypeOfIdEqual;
+- (KalturaFieldType)getTypeOfIdIn;
+- (KalturaFieldType)getTypeOfIdNotIn;
+- (KalturaFieldType)getTypeOfEntryIdEqual;
+- (KalturaFieldType)getTypeOfEntryIdIn;
+- (KalturaFieldType)getTypeOfEntryIdNotIn;
+- (KalturaFieldType)getTypeOfUserIdEqual;
+- (KalturaFieldType)getTypeOfUserIdIn;
+- (KalturaFieldType)getTypeOfUserIdNotIn;
+- (KalturaFieldType)getTypeOfStatusEqual;
+- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfTypeEqual;
+- (void)setIdEqualFromString:(NSString*)aPropVal;
+- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -12463,11 +12469,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaQuizUserEntryBaseFilter : KalturaUserEntryFilter
-@end
-
-// @package Kaltura
-// @subpackage Client
 // Used to ingest media file that is already accessible on the shared disc.
 @interface KalturaServerFileResource : KalturaDataCenterContentResource
 // Full path to the local file
@@ -12529,6 +12530,17 @@
 // @subpackage Client
 // Represents the current session user e-mail address context
 @interface KalturaUserEmailContextField : KalturaStringField
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaUserEntryFilter : KalturaUserEntryBaseFilter
+@property (nonatomic,assign) int userIdEqualCurrent;	// enum KalturaNullableBoolean
+@property (nonatomic,assign) int isAnonymous;	// enum KalturaNullableBoolean
+- (KalturaFieldType)getTypeOfUserIdEqualCurrent;
+- (KalturaFieldType)getTypeOfIsAnonymous;
+- (void)setUserIdEqualCurrentFromString:(NSString*)aPropVal;
+- (void)setIsAnonymousFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -12681,7 +12693,7 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaQuizUserEntryFilter : KalturaQuizUserEntryBaseFilter
+@interface KalturaQuizUserEntryBaseFilter : KalturaUserEntryFilter
 @end
 
 // @package Kaltura
@@ -12781,6 +12793,11 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaPlaylistFilter : KalturaPlaylistBaseFilter
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaQuizUserEntryFilter : KalturaQuizUserEntryBaseFilter
 @end
 
 // @package Kaltura

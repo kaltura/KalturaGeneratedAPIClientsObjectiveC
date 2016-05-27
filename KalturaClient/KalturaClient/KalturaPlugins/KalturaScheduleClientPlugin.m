@@ -1217,6 +1217,122 @@
 
 @end
 
+@interface KalturaScheduleEventListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
+
+@implementation KalturaScheduleEventListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfObjects
+{
+    return @"KalturaScheduleEvent";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaScheduleEventListResponse"];
+}
+
+- (void)dealloc
+{
+    [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaScheduleEventResourceListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
+
+@implementation KalturaScheduleEventResourceListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfObjects
+{
+    return @"KalturaScheduleEventResource";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaScheduleEventResourceListResponse"];
+}
+
+- (void)dealloc
+{
+    [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaScheduleResourceListResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
+
+@implementation KalturaScheduleResourceListResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfObjects
+{
+    return @"KalturaScheduleResource";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaScheduleResourceListResponse"];
+}
+
+- (void)dealloc
+{
+    [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaLiveStreamScheduleEvent
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaLiveStreamScheduleEvent"];
+}
+
+@end
+
+@implementation KalturaRecordScheduleEvent
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaRecordScheduleEvent"];
+}
+
+@end
+
 @implementation KalturaScheduleEventBaseFilter
 @synthesize idEqual = _idEqual;
 @synthesize idIn = _idIn;
@@ -1548,38 +1664,6 @@
 
 @end
 
-@interface KalturaScheduleEventListResponse()
-@property (nonatomic,retain) NSMutableArray* objects;
-@end
-
-@implementation KalturaScheduleEventListResponse
-@synthesize objects = _objects;
-
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaScheduleEvent";
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaScheduleEventListResponse"];
-}
-
-- (void)dealloc
-{
-    [self->_objects release];
-    [super dealloc];
-}
-
-@end
-
 @implementation KalturaScheduleEventResourceBaseFilter
 @synthesize eventIdEqual = _eventIdEqual;
 @synthesize eventIdIn = _eventIdIn;
@@ -1693,38 +1777,6 @@
 {
     [self->_eventIdIn release];
     [self->_resourceIdIn release];
-    [super dealloc];
-}
-
-@end
-
-@interface KalturaScheduleEventResourceListResponse()
-@property (nonatomic,retain) NSMutableArray* objects;
-@end
-
-@implementation KalturaScheduleEventResourceListResponse
-@synthesize objects = _objects;
-
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaScheduleEventResource";
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaScheduleEventResourceListResponse"];
-}
-
-- (void)dealloc
-{
-    [self->_objects release];
     [super dealloc];
 }
 
@@ -1913,58 +1965,6 @@
     [self->_tagsMultiLikeOr release];
     [self->_tagsMultiLikeAnd release];
     [super dealloc];
-}
-
-@end
-
-@interface KalturaScheduleResourceListResponse()
-@property (nonatomic,retain) NSMutableArray* objects;
-@end
-
-@implementation KalturaScheduleResourceListResponse
-@synthesize objects = _objects;
-
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaScheduleResource";
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaScheduleResourceListResponse"];
-}
-
-- (void)dealloc
-{
-    [self->_objects release];
-    [super dealloc];
-}
-
-@end
-
-@implementation KalturaLiveStreamScheduleEvent
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaLiveStreamScheduleEvent"];
-}
-
-@end
-
-@implementation KalturaRecordScheduleEvent
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaRecordScheduleEvent"];
 }
 
 @end
