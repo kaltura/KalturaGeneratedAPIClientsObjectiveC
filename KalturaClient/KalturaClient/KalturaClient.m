@@ -36473,6 +36473,7 @@
 
 @implementation KalturaUrlTokenizerVnpt
 @synthesize tokenizationFormat = _tokenizationFormat;
+@synthesize shouldIncludeClientIp = _shouldIncludeClientIp;
 
 - (id)init
 {
@@ -36480,6 +36481,7 @@
     if (self == nil)
         return nil;
     self->_tokenizationFormat = KALTURA_UNDEF_INT;
+    self->_shouldIncludeClientIp = KALTURA_UNDEF_BOOL;
     return self;
 }
 
@@ -36488,9 +36490,19 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfShouldIncludeClientIp
+{
+    return KFT_Bool;
+}
+
 - (void)setTokenizationFormatFromString:(NSString*)aPropVal
 {
     self.tokenizationFormat = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setShouldIncludeClientIpFromString:(NSString*)aPropVal
+{
+    self.shouldIncludeClientIp = [KalturaSimpleTypeParser parseBool:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -36499,6 +36511,7 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaUrlTokenizerVnpt"];
     [aParams addIfDefinedKey:@"tokenizationFormat" withInt:self.tokenizationFormat];
+    [aParams addIfDefinedKey:@"shouldIncludeClientIp" withBool:self.shouldIncludeClientIp];
 }
 
 @end

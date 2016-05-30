@@ -10732,8 +10732,11 @@
 // @subpackage Client
 @interface KalturaUrlTokenizerVnpt : KalturaUrlTokenizer
 @property (nonatomic,assign) int tokenizationFormat;
+@property (nonatomic,assign) KALTURA_BOOL shouldIncludeClientIp;
 - (KalturaFieldType)getTypeOfTokenizationFormat;
+- (KalturaFieldType)getTypeOfShouldIncludeClientIp;
 - (void)setTokenizationFormatFromString:(NSString*)aPropVal;
+- (void)setShouldIncludeClientIpFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
