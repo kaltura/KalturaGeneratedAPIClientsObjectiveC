@@ -14368,23 +14368,6 @@
 - (KalturaWidgetListResponse*)list;
 @end
 
-// @package Kaltura
-// @subpackage Client
-// Internal Service is used for actions that are used internally in Kaltura applications and might be changed in the future without any notice.
-@interface KalturaXInternalService : KalturaServiceBase
-// Creates new download job for multiple entry ids (comma separated), an email will be sent when the job is done
-// 	 This sevice support the following entries: 
-// 	 - MediaEntry
-// 	 - Video will be converted using the flavor params id
-// 	 - Audio will be downloaded as MP3
-// 	 - Image will be downloaded as Jpeg
-// 	 - MixEntry will be flattened using the flavor params id
-// 	 - Other entry types are not supported
-// 	 Returns the admin email that the email message will be sent to
-- (NSString*)xAddBulkDownloadWithEntryIds:(NSString*)aEntryIds withFlavorParamsId:(NSString*)aFlavorParamsId;
-- (NSString*)xAddBulkDownloadWithEntryIds:(NSString*)aEntryIds;
-@end
-
 @interface KalturaClient : KalturaClientBase
 {
 	KalturaAccessControlProfileService* _accessControlProfile;
@@ -14441,7 +14424,6 @@
 	KalturaUserRoleService* _userRole;
 	KalturaUserService* _user;
 	KalturaWidgetService* _widget;
-	KalturaXInternalService* _xInternal;
 }
 
 @property (nonatomic, readonly) KalturaAccessControlProfileService* accessControlProfile;
@@ -14498,6 +14480,5 @@
 @property (nonatomic, readonly) KalturaUserRoleService* userRole;
 @property (nonatomic, readonly) KalturaUserService* user;
 @property (nonatomic, readonly) KalturaWidgetService* widget;
-@property (nonatomic, readonly) KalturaXInternalService* xInternal;
 @end
 

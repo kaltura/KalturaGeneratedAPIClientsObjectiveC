@@ -1976,6 +1976,12 @@
 @synthesize parentResourceIdsLike = _parentResourceIdsLike;
 @synthesize parentResourceIdsMultiLikeOr = _parentResourceIdsMultiLikeOr;
 @synthesize parentResourceIdsMultiLikeAnd = _parentResourceIdsMultiLikeAnd;
+@synthesize templateEntryCategoriesIdsMultiLikeAnd = _templateEntryCategoriesIdsMultiLikeAnd;
+@synthesize templateEntryCategoriesIdsMultiLikeOr = _templateEntryCategoriesIdsMultiLikeOr;
+@synthesize templateEntryCategoriesIdsLike = _templateEntryCategoriesIdsLike;
+@synthesize systemNamesMultiLikeOr = _systemNamesMultiLikeOr;
+@synthesize systemNamesMultiLikeAnd = _systemNamesMultiLikeAnd;
+@synthesize systemNamesLike = _systemNamesLike;
 
 - (KalturaFieldType)getTypeOfResourceIdsLike
 {
@@ -2007,6 +2013,36 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfTemplateEntryCategoriesIdsMultiLikeAnd
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfTemplateEntryCategoriesIdsMultiLikeOr
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfTemplateEntryCategoriesIdsLike
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSystemNamesMultiLikeOr
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSystemNamesMultiLikeAnd
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSystemNamesLike
+{
+    return KFT_String;
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -2018,6 +2054,12 @@
     [aParams addIfDefinedKey:@"parentResourceIdsLike" withString:self.parentResourceIdsLike];
     [aParams addIfDefinedKey:@"parentResourceIdsMultiLikeOr" withString:self.parentResourceIdsMultiLikeOr];
     [aParams addIfDefinedKey:@"parentResourceIdsMultiLikeAnd" withString:self.parentResourceIdsMultiLikeAnd];
+    [aParams addIfDefinedKey:@"templateEntryCategoriesIdsMultiLikeAnd" withString:self.templateEntryCategoriesIdsMultiLikeAnd];
+    [aParams addIfDefinedKey:@"templateEntryCategoriesIdsMultiLikeOr" withString:self.templateEntryCategoriesIdsMultiLikeOr];
+    [aParams addIfDefinedKey:@"templateEntryCategoriesIdsLike" withString:self.templateEntryCategoriesIdsLike];
+    [aParams addIfDefinedKey:@"systemNamesMultiLikeOr" withString:self.systemNamesMultiLikeOr];
+    [aParams addIfDefinedKey:@"systemNamesMultiLikeAnd" withString:self.systemNamesMultiLikeAnd];
+    [aParams addIfDefinedKey:@"systemNamesLike" withString:self.systemNamesLike];
 }
 
 - (void)dealloc
@@ -2028,6 +2070,12 @@
     [self->_parentResourceIdsLike release];
     [self->_parentResourceIdsMultiLikeOr release];
     [self->_parentResourceIdsMultiLikeAnd release];
+    [self->_templateEntryCategoriesIdsMultiLikeAnd release];
+    [self->_templateEntryCategoriesIdsMultiLikeOr release];
+    [self->_templateEntryCategoriesIdsLike release];
+    [self->_systemNamesMultiLikeOr release];
+    [self->_systemNamesMultiLikeAnd release];
+    [self->_systemNamesLike release];
     [super dealloc];
 }
 

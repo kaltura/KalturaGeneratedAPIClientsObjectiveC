@@ -47713,21 +47713,6 @@
 
 @end
 
-@implementation KalturaXInternalService
-- (NSString*)xAddBulkDownloadWithEntryIds:(NSString*)aEntryIds withFlavorParamsId:(NSString*)aFlavorParamsId
-{
-    [self.client.params addIfDefinedKey:@"entryIds" withString:aEntryIds];
-    [self.client.params addIfDefinedKey:@"flavorParamsId" withString:aFlavorParamsId];
-    return [self.client queueStringService:@"xinternal" withAction:@"xAddBulkDownload"];
-}
-
-- (NSString*)xAddBulkDownloadWithEntryIds:(NSString*)aEntryIds
-{
-    return [self xAddBulkDownloadWithEntryIds:aEntryIds withFlavorParamsId:nil];
-}
-
-@end
-
 @implementation KalturaClient
 
 - (id)initWithConfig:(KalturaConfiguration*)aConfig
@@ -48117,13 +48102,6 @@
     return self->_widget;
 }
 
-- (KalturaXInternalService*)xInternal
-{
-    if (self->_xInternal == nil)
-    	self->_xInternal = [[KalturaXInternalService alloc] initWithClient:self];
-    return self->_xInternal;
-}
-
 - (void)dealloc
 {
     [self->_accessControlProfile release];
@@ -48180,7 +48158,6 @@
     [self->_userRole release];
     [self->_user release];
     [self->_widget release];
-    [self->_xInternal release];
 	[super dealloc];
 }
 

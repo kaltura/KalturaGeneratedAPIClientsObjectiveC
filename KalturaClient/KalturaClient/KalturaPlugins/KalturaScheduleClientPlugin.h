@@ -630,12 +630,24 @@
 @property (nonatomic,copy) NSString* parentResourceIdsLike;
 @property (nonatomic,copy) NSString* parentResourceIdsMultiLikeOr;
 @property (nonatomic,copy) NSString* parentResourceIdsMultiLikeAnd;
+@property (nonatomic,copy) NSString* templateEntryCategoriesIdsMultiLikeAnd;
+@property (nonatomic,copy) NSString* templateEntryCategoriesIdsMultiLikeOr;
+@property (nonatomic,copy) NSString* templateEntryCategoriesIdsLike;
+@property (nonatomic,copy) NSString* systemNamesMultiLikeOr;
+@property (nonatomic,copy) NSString* systemNamesMultiLikeAnd;
+@property (nonatomic,copy) NSString* systemNamesLike;
 - (KalturaFieldType)getTypeOfResourceIdsLike;
 - (KalturaFieldType)getTypeOfResourceIdsMultiLikeOr;
 - (KalturaFieldType)getTypeOfResourceIdsMultiLikeAnd;
 - (KalturaFieldType)getTypeOfParentResourceIdsLike;
 - (KalturaFieldType)getTypeOfParentResourceIdsMultiLikeOr;
 - (KalturaFieldType)getTypeOfParentResourceIdsMultiLikeAnd;
+- (KalturaFieldType)getTypeOfTemplateEntryCategoriesIdsMultiLikeAnd;
+- (KalturaFieldType)getTypeOfTemplateEntryCategoriesIdsMultiLikeOr;
+- (KalturaFieldType)getTypeOfTemplateEntryCategoriesIdsLike;
+- (KalturaFieldType)getTypeOfSystemNamesMultiLikeOr;
+- (KalturaFieldType)getTypeOfSystemNamesMultiLikeAnd;
+- (KalturaFieldType)getTypeOfSystemNamesLike;
 @end
 
 // @package Kaltura
