@@ -13346,6 +13346,8 @@
 - (KalturaEntryServerNodeListResponse*)listWithFilter:(KalturaEntryServerNodeFilter*)aFilter;
 - (KalturaEntryServerNodeListResponse*)list;
 - (KalturaEntryServerNode*)getWithId:(NSString*)aId;
+// Validates server node still registered on entry
+- (void)validateRegisteredEntryServerNodeWithId:(int)aId;
 @end
 
 // @package Kaltura

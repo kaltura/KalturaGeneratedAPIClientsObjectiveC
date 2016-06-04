@@ -44799,6 +44799,12 @@
     return [self.client queueObjectService:@"entryservernode" withAction:@"get" withExpectedType:@"KalturaEntryServerNode"];
 }
 
+- (void)validateRegisteredEntryServerNodeWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client queueVoidService:@"entryservernode" withAction:@"validateRegisteredEntryServerNode"];
+}
+
 @end
 
 @implementation KalturaFileAssetService
