@@ -1978,10 +1978,11 @@
 @synthesize parentResourceIdsMultiLikeAnd = _parentResourceIdsMultiLikeAnd;
 @synthesize templateEntryCategoriesIdsMultiLikeAnd = _templateEntryCategoriesIdsMultiLikeAnd;
 @synthesize templateEntryCategoriesIdsMultiLikeOr = _templateEntryCategoriesIdsMultiLikeOr;
+@synthesize resourceSystemNamesMultiLikeOr = _resourceSystemNamesMultiLikeOr;
 @synthesize templateEntryCategoriesIdsLike = _templateEntryCategoriesIdsLike;
-@synthesize systemNamesMultiLikeOr = _systemNamesMultiLikeOr;
-@synthesize systemNamesMultiLikeAnd = _systemNamesMultiLikeAnd;
-@synthesize systemNamesLike = _systemNamesLike;
+@synthesize resourceSystemNamesMultiLikeAnd = _resourceSystemNamesMultiLikeAnd;
+@synthesize resourceSystemNamesLike = _resourceSystemNamesLike;
+@synthesize templateEntryIdEqual = _templateEntryIdEqual;
 
 - (KalturaFieldType)getTypeOfResourceIdsLike
 {
@@ -2023,22 +2024,27 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfResourceSystemNamesMultiLikeOr
+{
+    return KFT_String;
+}
+
 - (KalturaFieldType)getTypeOfTemplateEntryCategoriesIdsLike
 {
     return KFT_String;
 }
 
-- (KalturaFieldType)getTypeOfSystemNamesMultiLikeOr
+- (KalturaFieldType)getTypeOfResourceSystemNamesMultiLikeAnd
 {
     return KFT_String;
 }
 
-- (KalturaFieldType)getTypeOfSystemNamesMultiLikeAnd
+- (KalturaFieldType)getTypeOfResourceSystemNamesLike
 {
     return KFT_String;
 }
 
-- (KalturaFieldType)getTypeOfSystemNamesLike
+- (KalturaFieldType)getTypeOfTemplateEntryIdEqual
 {
     return KFT_String;
 }
@@ -2056,10 +2062,11 @@
     [aParams addIfDefinedKey:@"parentResourceIdsMultiLikeAnd" withString:self.parentResourceIdsMultiLikeAnd];
     [aParams addIfDefinedKey:@"templateEntryCategoriesIdsMultiLikeAnd" withString:self.templateEntryCategoriesIdsMultiLikeAnd];
     [aParams addIfDefinedKey:@"templateEntryCategoriesIdsMultiLikeOr" withString:self.templateEntryCategoriesIdsMultiLikeOr];
+    [aParams addIfDefinedKey:@"resourceSystemNamesMultiLikeOr" withString:self.resourceSystemNamesMultiLikeOr];
     [aParams addIfDefinedKey:@"templateEntryCategoriesIdsLike" withString:self.templateEntryCategoriesIdsLike];
-    [aParams addIfDefinedKey:@"systemNamesMultiLikeOr" withString:self.systemNamesMultiLikeOr];
-    [aParams addIfDefinedKey:@"systemNamesMultiLikeAnd" withString:self.systemNamesMultiLikeAnd];
-    [aParams addIfDefinedKey:@"systemNamesLike" withString:self.systemNamesLike];
+    [aParams addIfDefinedKey:@"resourceSystemNamesMultiLikeAnd" withString:self.resourceSystemNamesMultiLikeAnd];
+    [aParams addIfDefinedKey:@"resourceSystemNamesLike" withString:self.resourceSystemNamesLike];
+    [aParams addIfDefinedKey:@"templateEntryIdEqual" withString:self.templateEntryIdEqual];
 }
 
 - (void)dealloc
@@ -2072,10 +2079,11 @@
     [self->_parentResourceIdsMultiLikeAnd release];
     [self->_templateEntryCategoriesIdsMultiLikeAnd release];
     [self->_templateEntryCategoriesIdsMultiLikeOr release];
+    [self->_resourceSystemNamesMultiLikeOr release];
     [self->_templateEntryCategoriesIdsLike release];
-    [self->_systemNamesMultiLikeOr release];
-    [self->_systemNamesMultiLikeAnd release];
-    [self->_systemNamesLike release];
+    [self->_resourceSystemNamesMultiLikeAnd release];
+    [self->_resourceSystemNamesLike release];
+    [self->_templateEntryIdEqual release];
     [super dealloc];
 }
 
@@ -2112,12 +2120,18 @@
 @end
 
 @implementation KalturaEntryScheduleEventBaseFilter
+@synthesize templateEntryIdEqual = _templateEntryIdEqual;
 @synthesize entryIdsLike = _entryIdsLike;
 @synthesize entryIdsMultiLikeOr = _entryIdsMultiLikeOr;
 @synthesize entryIdsMultiLikeAnd = _entryIdsMultiLikeAnd;
 @synthesize categoryIdsLike = _categoryIdsLike;
 @synthesize categoryIdsMultiLikeOr = _categoryIdsMultiLikeOr;
 @synthesize categoryIdsMultiLikeAnd = _categoryIdsMultiLikeAnd;
+
+- (KalturaFieldType)getTypeOfTemplateEntryIdEqual
+{
+    return KFT_String;
+}
 
 - (KalturaFieldType)getTypeOfEntryIdsLike
 {
@@ -2154,6 +2168,7 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaEntryScheduleEventBaseFilter"];
+    [aParams addIfDefinedKey:@"templateEntryIdEqual" withString:self.templateEntryIdEqual];
     [aParams addIfDefinedKey:@"entryIdsLike" withString:self.entryIdsLike];
     [aParams addIfDefinedKey:@"entryIdsMultiLikeOr" withString:self.entryIdsMultiLikeOr];
     [aParams addIfDefinedKey:@"entryIdsMultiLikeAnd" withString:self.entryIdsMultiLikeAnd];
@@ -2164,6 +2179,7 @@
 
 - (void)dealloc
 {
+    [self->_templateEntryIdEqual release];
     [self->_entryIdsLike release];
     [self->_entryIdsMultiLikeOr release];
     [self->_entryIdsMultiLikeAnd release];

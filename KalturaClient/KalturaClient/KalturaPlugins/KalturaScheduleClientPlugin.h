@@ -632,10 +632,11 @@
 @property (nonatomic,copy) NSString* parentResourceIdsMultiLikeAnd;
 @property (nonatomic,copy) NSString* templateEntryCategoriesIdsMultiLikeAnd;
 @property (nonatomic,copy) NSString* templateEntryCategoriesIdsMultiLikeOr;
+@property (nonatomic,copy) NSString* resourceSystemNamesMultiLikeOr;
 @property (nonatomic,copy) NSString* templateEntryCategoriesIdsLike;
-@property (nonatomic,copy) NSString* systemNamesMultiLikeOr;
-@property (nonatomic,copy) NSString* systemNamesMultiLikeAnd;
-@property (nonatomic,copy) NSString* systemNamesLike;
+@property (nonatomic,copy) NSString* resourceSystemNamesMultiLikeAnd;
+@property (nonatomic,copy) NSString* resourceSystemNamesLike;
+@property (nonatomic,copy) NSString* templateEntryIdEqual;
 - (KalturaFieldType)getTypeOfResourceIdsLike;
 - (KalturaFieldType)getTypeOfResourceIdsMultiLikeOr;
 - (KalturaFieldType)getTypeOfResourceIdsMultiLikeAnd;
@@ -644,10 +645,11 @@
 - (KalturaFieldType)getTypeOfParentResourceIdsMultiLikeAnd;
 - (KalturaFieldType)getTypeOfTemplateEntryCategoriesIdsMultiLikeAnd;
 - (KalturaFieldType)getTypeOfTemplateEntryCategoriesIdsMultiLikeOr;
+- (KalturaFieldType)getTypeOfResourceSystemNamesMultiLikeOr;
 - (KalturaFieldType)getTypeOfTemplateEntryCategoriesIdsLike;
-- (KalturaFieldType)getTypeOfSystemNamesMultiLikeOr;
-- (KalturaFieldType)getTypeOfSystemNamesMultiLikeAnd;
-- (KalturaFieldType)getTypeOfSystemNamesLike;
+- (KalturaFieldType)getTypeOfResourceSystemNamesMultiLikeAnd;
+- (KalturaFieldType)getTypeOfResourceSystemNamesLike;
+- (KalturaFieldType)getTypeOfTemplateEntryIdEqual;
 @end
 
 // @package Kaltura
@@ -668,12 +670,14 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaEntryScheduleEventBaseFilter : KalturaScheduleEventFilter
+@property (nonatomic,copy) NSString* templateEntryIdEqual;
 @property (nonatomic,copy) NSString* entryIdsLike;
 @property (nonatomic,copy) NSString* entryIdsMultiLikeOr;
 @property (nonatomic,copy) NSString* entryIdsMultiLikeAnd;
 @property (nonatomic,copy) NSString* categoryIdsLike;
 @property (nonatomic,copy) NSString* categoryIdsMultiLikeOr;
 @property (nonatomic,copy) NSString* categoryIdsMultiLikeAnd;
+- (KalturaFieldType)getTypeOfTemplateEntryIdEqual;
 - (KalturaFieldType)getTypeOfEntryIdsLike;
 - (KalturaFieldType)getTypeOfEntryIdsMultiLikeOr;
 - (KalturaFieldType)getTypeOfEntryIdsMultiLikeAnd;
