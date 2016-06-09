@@ -27660,6 +27660,8 @@
 @implementation KalturaAmazonS3StorageProfile
 @synthesize filesPermissionInS3 = _filesPermissionInS3;
 @synthesize s3Region = _s3Region;
+@synthesize sseType = _sseType;
+@synthesize sseKmsKeyId = _sseKmsKeyId;
 
 - (KalturaFieldType)getTypeOfFilesPermissionInS3
 {
@@ -27671,6 +27673,16 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfSseType
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSseKmsKeyId
+{
+    return KFT_String;
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -27678,12 +27690,16 @@
         [aParams putKey:@"objectType" withString:@"KalturaAmazonS3StorageProfile"];
     [aParams addIfDefinedKey:@"filesPermissionInS3" withString:self.filesPermissionInS3];
     [aParams addIfDefinedKey:@"s3Region" withString:self.s3Region];
+    [aParams addIfDefinedKey:@"sseType" withString:self.sseType];
+    [aParams addIfDefinedKey:@"sseKmsKeyId" withString:self.sseKmsKeyId];
 }
 
 - (void)dealloc
 {
     [self->_filesPermissionInS3 release];
     [self->_s3Region release];
+    [self->_sseType release];
+    [self->_sseKmsKeyId release];
     [super dealloc];
 }
 
@@ -41312,6 +41328,8 @@
 @implementation KalturaAmazonS3StorageExportJobData
 @synthesize filesPermissionInS3 = _filesPermissionInS3;
 @synthesize s3Region = _s3Region;
+@synthesize sseType = _sseType;
+@synthesize sseKmsKeyId = _sseKmsKeyId;
 
 - (KalturaFieldType)getTypeOfFilesPermissionInS3
 {
@@ -41323,6 +41341,16 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfSseType
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSseKmsKeyId
+{
+    return KFT_String;
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -41330,12 +41358,16 @@
         [aParams putKey:@"objectType" withString:@"KalturaAmazonS3StorageExportJobData"];
     [aParams addIfDefinedKey:@"filesPermissionInS3" withString:self.filesPermissionInS3];
     [aParams addIfDefinedKey:@"s3Region" withString:self.s3Region];
+    [aParams addIfDefinedKey:@"sseType" withString:self.sseType];
+    [aParams addIfDefinedKey:@"sseKmsKeyId" withString:self.sseKmsKeyId];
 }
 
 - (void)dealloc
 {
     [self->_filesPermissionInS3 release];
     [self->_s3Region release];
+    [self->_sseType release];
+    [self->_sseKmsKeyId release];
     [super dealloc];
 }
 
@@ -47123,6 +47155,13 @@
 {
     [self.client.params addIfDefinedKey:@"id" withString:aId];
     return [self.client queueObjectService:@"thumbasset" withAction:@"getRemotePaths" withExpectedType:@"KalturaRemotePathListResponse"];
+}
+
+- (KalturaFlavorAsset*)exportWithAssetId:(NSString*)aAssetId withStorageProfileId:(int)aStorageProfileId
+{
+    [self.client.params addIfDefinedKey:@"assetId" withString:aAssetId];
+    [self.client.params addIfDefinedKey:@"storageProfileId" withInt:aStorageProfileId];
+    return [self.client queueObjectService:@"thumbasset" withAction:@"export" withExpectedType:@"KalturaFlavorAsset"];
 }
 
 @end

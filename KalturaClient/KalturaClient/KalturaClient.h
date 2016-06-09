@@ -8412,8 +8412,12 @@
 @interface KalturaAmazonS3StorageProfile : KalturaStorageProfile
 @property (nonatomic,copy) NSString* filesPermissionInS3;	// enum KalturaAmazonS3StorageProfileFilesPermissionLevel
 @property (nonatomic,copy) NSString* s3Region;
+@property (nonatomic,copy) NSString* sseType;
+@property (nonatomic,copy) NSString* sseKmsKeyId;
 - (KalturaFieldType)getTypeOfFilesPermissionInS3;
 - (KalturaFieldType)getTypeOfS3Region;
+- (KalturaFieldType)getTypeOfSseType;
+- (KalturaFieldType)getTypeOfSseKmsKeyId;
 @end
 
 // @package Kaltura
@@ -12007,8 +12011,12 @@
 @interface KalturaAmazonS3StorageExportJobData : KalturaStorageExportJobData
 @property (nonatomic,copy) NSString* filesPermissionInS3;	// enum KalturaAmazonS3StorageProfileFilesPermissionLevel
 @property (nonatomic,copy) NSString* s3Region;
+@property (nonatomic,copy) NSString* sseType;
+@property (nonatomic,copy) NSString* sseKmsKeyId;
 - (KalturaFieldType)getTypeOfFilesPermissionInS3;
 - (KalturaFieldType)getTypeOfS3Region;
+- (KalturaFieldType)getTypeOfSseType;
+- (KalturaFieldType)getTypeOfSseKmsKeyId;
 @end
 
 // @package Kaltura
@@ -14147,6 +14155,8 @@
 - (NSString*)getUrlWithId:(NSString*)aId;
 // Get remote storage existing paths for the asset
 - (KalturaRemotePathListResponse*)getRemotePathsWithId:(NSString*)aId;
+// manually export an asset
+- (KalturaFlavorAsset*)exportWithAssetId:(NSString*)aAssetId withStorageProfileId:(int)aStorageProfileId;
 @end
 
 // @package Kaltura
