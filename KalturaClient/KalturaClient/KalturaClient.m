@@ -15600,6 +15600,8 @@
 @synthesize forceNoneComplied = _forceNoneComplied;
 @synthesize deletePolicy = _deletePolicy;
 @synthesize isEncrypted = _isEncrypted;
+@synthesize contentAwareness = _contentAwareness;
+@synthesize twoPass = _twoPass;
 
 - (id)init
 {
@@ -15613,6 +15615,8 @@
     self->_forceNoneComplied = KALTURA_UNDEF_INT;
     self->_deletePolicy = KALTURA_UNDEF_INT;
     self->_isEncrypted = KALTURA_UNDEF_INT;
+    self->_contentAwareness = KALTURA_UNDEF_FLOAT;
+    self->_twoPass = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -15656,6 +15660,16 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfContentAwareness
+{
+    return KFT_Float;
+}
+
+- (KalturaFieldType)getTypeOfTwoPass
+{
+    return KFT_Int;
+}
+
 - (void)setConversionProfileIdFromString:(NSString*)aPropVal
 {
     self.conversionProfileId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -15691,6 +15705,16 @@
     self.isEncrypted = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setContentAwarenessFromString:(NSString*)aPropVal
+{
+    self.contentAwareness = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
+- (void)setTwoPassFromString:(NSString*)aPropVal
+{
+    self.twoPass = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -15702,6 +15726,8 @@
     [aParams addIfDefinedKey:@"forceNoneComplied" withInt:self.forceNoneComplied];
     [aParams addIfDefinedKey:@"deletePolicy" withInt:self.deletePolicy];
     [aParams addIfDefinedKey:@"isEncrypted" withInt:self.isEncrypted];
+    [aParams addIfDefinedKey:@"contentAwareness" withFloat:self.contentAwareness];
+    [aParams addIfDefinedKey:@"twoPass" withInt:self.twoPass];
 }
 
 - (void)dealloc
@@ -17662,6 +17688,7 @@
 @synthesize watermarkData = _watermarkData;
 @synthesize subtitlesData = _subtitlesData;
 @synthesize isEncrypted = _isEncrypted;
+@synthesize contentAwareness = _contentAwareness;
 @synthesize clipOffset = _clipOffset;
 @synthesize clipDuration = _clipDuration;
 
@@ -17696,6 +17723,7 @@
     self->_videoConstantBitrate = KALTURA_UNDEF_INT;
     self->_videoBitrateTolerance = KALTURA_UNDEF_INT;
     self->_isEncrypted = KALTURA_UNDEF_INT;
+    self->_contentAwareness = KALTURA_UNDEF_FLOAT;
     self->_clipOffset = KALTURA_UNDEF_INT;
     self->_clipDuration = KALTURA_UNDEF_INT;
     return self;
@@ -17876,6 +17904,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfContentAwareness
+{
+    return KFT_Float;
+}
+
 - (KalturaFieldType)getTypeOfClipOffset
 {
     return KFT_Int;
@@ -18016,6 +18049,11 @@
     self.isEncrypted = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setContentAwarenessFromString:(NSString*)aPropVal
+{
+    self.contentAwareness = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
 - (void)setClipOffsetFromString:(NSString*)aPropVal
 {
     self.clipOffset = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -18066,6 +18104,7 @@
     [aParams addIfDefinedKey:@"watermarkData" withString:self.watermarkData];
     [aParams addIfDefinedKey:@"subtitlesData" withString:self.subtitlesData];
     [aParams addIfDefinedKey:@"isEncrypted" withInt:self.isEncrypted];
+    [aParams addIfDefinedKey:@"contentAwareness" withFloat:self.contentAwareness];
     [aParams addIfDefinedKey:@"clipOffset" withInt:self.clipOffset];
     [aParams addIfDefinedKey:@"clipDuration" withInt:self.clipDuration];
 }
@@ -19068,6 +19107,7 @@
 @synthesize multiStream = _multiStream;
 @synthesize isFastStart = _isFastStart;
 @synthesize contentStreams = _contentStreams;
+@synthesize complexityValue = _complexityValue;
 
 - (id)init
 {
@@ -19094,6 +19134,7 @@
     self->_audioResolution = KALTURA_UNDEF_INT;
     self->_scanType = KALTURA_UNDEF_INT;
     self->_isFastStart = KALTURA_UNDEF_INT;
+    self->_complexityValue = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -19262,6 +19303,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfComplexityValue
+{
+    return KFT_Int;
+}
+
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -19362,6 +19408,11 @@
     self.isFastStart = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setComplexityValueFromString:(NSString*)aPropVal
+{
+    self.complexityValue = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -19399,6 +19450,7 @@
     [aParams addIfDefinedKey:@"multiStream" withString:self.multiStream];
     [aParams addIfDefinedKey:@"isFastStart" withInt:self.isFastStart];
     [aParams addIfDefinedKey:@"contentStreams" withString:self.contentStreams];
+    [aParams addIfDefinedKey:@"complexityValue" withInt:self.complexityValue];
 }
 
 - (void)dealloc

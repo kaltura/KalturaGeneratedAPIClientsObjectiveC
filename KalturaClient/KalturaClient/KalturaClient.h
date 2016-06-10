@@ -5188,6 +5188,8 @@
 // Specifies how to treat the flavor after conversion is finished
 @property (nonatomic,assign) int deletePolicy;	// enum KalturaAssetParamsDeletePolicy
 @property (nonatomic,assign) int isEncrypted;	// enum KalturaNullableBoolean
+@property (nonatomic,assign) double contentAwareness;
+@property (nonatomic,assign) int twoPass;	// enum KalturaNullableBoolean
 - (KalturaFieldType)getTypeOfConversionProfileId;
 - (KalturaFieldType)getTypeOfAssetParamsId;
 - (KalturaFieldType)getTypeOfReadyBehavior;
@@ -5196,6 +5198,8 @@
 - (KalturaFieldType)getTypeOfForceNoneComplied;
 - (KalturaFieldType)getTypeOfDeletePolicy;
 - (KalturaFieldType)getTypeOfIsEncrypted;
+- (KalturaFieldType)getTypeOfContentAwareness;
+- (KalturaFieldType)getTypeOfTwoPass;
 - (void)setConversionProfileIdFromString:(NSString*)aPropVal;
 - (void)setAssetParamsIdFromString:(NSString*)aPropVal;
 - (void)setReadyBehaviorFromString:(NSString*)aPropVal;
@@ -5203,6 +5207,8 @@
 - (void)setForceNoneCompliedFromString:(NSString*)aPropVal;
 - (void)setDeletePolicyFromString:(NSString*)aPropVal;
 - (void)setIsEncryptedFromString:(NSString*)aPropVal;
+- (void)setContentAwarenessFromString:(NSString*)aPropVal;
+- (void)setTwoPassFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -5775,6 +5781,7 @@
 @property (nonatomic,copy) NSString* watermarkData;
 @property (nonatomic,copy) NSString* subtitlesData;
 @property (nonatomic,assign) int isEncrypted;
+@property (nonatomic,assign) double contentAwareness;
 @property (nonatomic,assign) int clipOffset;
 @property (nonatomic,assign) int clipDuration;
 - (KalturaFieldType)getTypeOfVideoCodec;
@@ -5812,6 +5819,7 @@
 - (KalturaFieldType)getTypeOfWatermarkData;
 - (KalturaFieldType)getTypeOfSubtitlesData;
 - (KalturaFieldType)getTypeOfIsEncrypted;
+- (KalturaFieldType)getTypeOfContentAwareness;
 - (KalturaFieldType)getTypeOfClipOffset;
 - (KalturaFieldType)getTypeOfClipDuration;
 - (void)setVideoBitrateFromString:(NSString*)aPropVal;
@@ -5840,6 +5848,7 @@
 - (void)setVideoConstantBitrateFromString:(NSString*)aPropVal;
 - (void)setVideoBitrateToleranceFromString:(NSString*)aPropVal;
 - (void)setIsEncryptedFromString:(NSString*)aPropVal;
+- (void)setContentAwarenessFromString:(NSString*)aPropVal;
 - (void)setClipOffsetFromString:(NSString*)aPropVal;
 - (void)setClipDurationFromString:(NSString*)aPropVal;
 @end
@@ -6177,6 +6186,7 @@
 @property (nonatomic,copy) NSString* multiStream;
 @property (nonatomic,assign) int isFastStart;
 @property (nonatomic,copy) NSString* contentStreams;
+@property (nonatomic,assign) int complexityValue;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfFlavorAssetId;
 - (KalturaFieldType)getTypeOfFileSize;
@@ -6210,6 +6220,7 @@
 - (KalturaFieldType)getTypeOfMultiStream;
 - (KalturaFieldType)getTypeOfIsFastStart;
 - (KalturaFieldType)getTypeOfContentStreams;
+- (KalturaFieldType)getTypeOfComplexityValue;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setFileSizeFromString:(NSString*)aPropVal;
 - (void)setContainerDurationFromString:(NSString*)aPropVal;
@@ -6230,6 +6241,7 @@
 - (void)setAudioResolutionFromString:(NSString*)aPropVal;
 - (void)setScanTypeFromString:(NSString*)aPropVal;
 - (void)setIsFastStartFromString:(NSString*)aPropVal;
+- (void)setComplexityValueFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
