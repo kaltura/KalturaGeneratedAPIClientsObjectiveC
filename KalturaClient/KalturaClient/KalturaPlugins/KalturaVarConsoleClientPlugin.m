@@ -381,6 +381,59 @@
 
 @end
 
+@implementation KalturaVarConsolePartnerFilter
+@synthesize groupTypeEq = _groupTypeEq;
+@synthesize groupTypeIn = _groupTypeIn;
+@synthesize partnerPermissionsExist = _partnerPermissionsExist;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_groupTypeEq = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfGroupTypeEq
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfGroupTypeIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfPartnerPermissionsExist
+{
+    return KFT_String;
+}
+
+- (void)setGroupTypeEqFromString:(NSString*)aPropVal
+{
+    self.groupTypeEq = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaVarConsolePartnerFilter"];
+    [aParams addIfDefinedKey:@"groupTypeEq" withInt:self.groupTypeEq];
+    [aParams addIfDefinedKey:@"groupTypeIn" withString:self.groupTypeIn];
+    [aParams addIfDefinedKey:@"partnerPermissionsExist" withString:self.partnerPermissionsExist];
+}
+
+- (void)dealloc
+{
+    [self->_groupTypeIn release];
+    [self->_partnerPermissionsExist release];
+    [super dealloc];
+}
+
+@end
+
 ///////////////////////// services /////////////////////////
 @implementation KalturaVarConsoleService
 - (KalturaPartnerUsageListResponse*)getPartnerUsageWithPartnerFilter:(KalturaPartnerFilter*)aPartnerFilter withUsageFilter:(KalturaReportInputFilter*)aUsageFilter withPager:(KalturaFilterPager*)aPager

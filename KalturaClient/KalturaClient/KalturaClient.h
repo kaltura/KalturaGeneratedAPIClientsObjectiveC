@@ -9160,6 +9160,23 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaCopyJobData : KalturaJobData
+// The filter should return the list of objects that need to be copied.
+@property (nonatomic,retain) KalturaFilter* filter;
+// Indicates the last id that copied, used when the batch crached, to re-run from the last crash point.
+@property (nonatomic,assign) int lastCopyId;
+// Template object to overwrite attributes on the copied object
+@property (nonatomic,retain) KalturaObjectBase* templateObject;
+- (KalturaFieldType)getTypeOfFilter;
+- (NSString*)getObjectTypeOfFilter;
+- (KalturaFieldType)getTypeOfLastCopyId;
+- (KalturaFieldType)getTypeOfTemplateObject;
+- (NSString*)getObjectTypeOfTemplateObject;
+- (void)setLastCopyIdFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaCopyPartnerJobData : KalturaJobData
 // Id of the partner to copy from
 @property (nonatomic,assign) int fromPartnerId;
@@ -9772,8 +9789,11 @@
 // @subpackage Client
 @interface KalturaIndexAdvancedFilter : KalturaSearchItem
 @property (nonatomic,assign) int indexIdGreaterThan;
+@property (nonatomic,assign) int depthGreaterThanEqual;
 - (KalturaFieldType)getTypeOfIndexIdGreaterThan;
+- (KalturaFieldType)getTypeOfDepthGreaterThanEqual;
 - (void)setIndexIdGreaterThanFromString:(NSString*)aPropVal;
+- (void)setDepthGreaterThanEqualFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -9783,13 +9803,17 @@
 @property (nonatomic,retain) KalturaFilter* filter;
 // Indicates the last id that reindexed, used when the batch crached, to re-run from the last crash point.
 @property (nonatomic,assign) int lastIndexId;
+// Indicates the last depth that reindexed, used when the batch crached, to re-run from the last crash point.
+@property (nonatomic,assign) int lastIndexDepth;
 // Indicates that the object columns and attributes values should be recalculated before reindexed.
 @property (nonatomic,assign) KALTURA_BOOL shouldUpdate;
 - (KalturaFieldType)getTypeOfFilter;
 - (NSString*)getObjectTypeOfFilter;
 - (KalturaFieldType)getTypeOfLastIndexId;
+- (KalturaFieldType)getTypeOfLastIndexDepth;
 - (KalturaFieldType)getTypeOfShouldUpdate;
 - (void)setLastIndexIdFromString:(NSString*)aPropVal;
+- (void)setLastIndexDepthFromString:(NSString*)aPropVal;
 - (void)setShouldUpdateFromString:(NSString*)aPropVal;
 @end
 
@@ -12527,6 +12551,15 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaTubeMogulSyndicationFeedBaseFilter : KalturaBaseSyndicationFeedFilter
+@end
+
+// @package Kaltura
+// @subpackage Client
+// sed to ingest media that uploaded as posted file in this http request, the file data represents the $_FILE
+@interface KalturaUploadedFileResource : KalturaDataCenterContentResource
+// Represents the $_FILE
+@property (nonatomic,copy) NSString* fileData;
+- (KalturaFieldType)getTypeOfFileData;
 @end
 
 // @package Kaltura

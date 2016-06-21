@@ -30469,6 +30469,69 @@
 
 @end
 
+@implementation KalturaCopyJobData
+@synthesize filter = _filter;
+@synthesize lastCopyId = _lastCopyId;
+@synthesize templateObject = _templateObject;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_lastCopyId = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfFilter
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfFilter
+{
+    return @"KalturaFilter";
+}
+
+- (KalturaFieldType)getTypeOfLastCopyId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfTemplateObject
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfTemplateObject
+{
+    return @"KalturaObjectBase";
+}
+
+- (void)setLastCopyIdFromString:(NSString*)aPropVal
+{
+    self.lastCopyId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaCopyJobData"];
+    [aParams addIfDefinedKey:@"filter" withObject:self.filter];
+    [aParams addIfDefinedKey:@"lastCopyId" withInt:self.lastCopyId];
+    [aParams addIfDefinedKey:@"templateObject" withObject:self.templateObject];
+}
+
+- (void)dealloc
+{
+    [self->_filter release];
+    [self->_templateObject release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaCopyPartnerJobData
 @synthesize fromPartnerId = _fromPartnerId;
 @synthesize toPartnerId = _toPartnerId;
@@ -32747,6 +32810,7 @@
 
 @implementation KalturaIndexAdvancedFilter
 @synthesize indexIdGreaterThan = _indexIdGreaterThan;
+@synthesize depthGreaterThanEqual = _depthGreaterThanEqual;
 
 - (id)init
 {
@@ -32754,10 +32818,16 @@
     if (self == nil)
         return nil;
     self->_indexIdGreaterThan = KALTURA_UNDEF_INT;
+    self->_depthGreaterThanEqual = KALTURA_UNDEF_INT;
     return self;
 }
 
 - (KalturaFieldType)getTypeOfIndexIdGreaterThan
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfDepthGreaterThanEqual
 {
     return KFT_Int;
 }
@@ -32767,12 +32837,18 @@
     self.indexIdGreaterThan = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setDepthGreaterThanEqualFromString:(NSString*)aPropVal
+{
+    self.depthGreaterThanEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaIndexAdvancedFilter"];
     [aParams addIfDefinedKey:@"indexIdGreaterThan" withInt:self.indexIdGreaterThan];
+    [aParams addIfDefinedKey:@"depthGreaterThanEqual" withInt:self.depthGreaterThanEqual];
 }
 
 @end
@@ -32780,6 +32856,7 @@
 @implementation KalturaIndexJobData
 @synthesize filter = _filter;
 @synthesize lastIndexId = _lastIndexId;
+@synthesize lastIndexDepth = _lastIndexDepth;
 @synthesize shouldUpdate = _shouldUpdate;
 
 - (id)init
@@ -32788,6 +32865,7 @@
     if (self == nil)
         return nil;
     self->_lastIndexId = KALTURA_UNDEF_INT;
+    self->_lastIndexDepth = KALTURA_UNDEF_INT;
     self->_shouldUpdate = KALTURA_UNDEF_BOOL;
     return self;
 }
@@ -32807,6 +32885,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfLastIndexDepth
+{
+    return KFT_Int;
+}
+
 - (KalturaFieldType)getTypeOfShouldUpdate
 {
     return KFT_Bool;
@@ -32815,6 +32898,11 @@
 - (void)setLastIndexIdFromString:(NSString*)aPropVal
 {
     self.lastIndexId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setLastIndexDepthFromString:(NSString*)aPropVal
+{
+    self.lastIndexDepth = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)setShouldUpdateFromString:(NSString*)aPropVal
@@ -32829,6 +32917,7 @@
         [aParams putKey:@"objectType" withString:@"KalturaIndexJobData"];
     [aParams addIfDefinedKey:@"filter" withObject:self.filter];
     [aParams addIfDefinedKey:@"lastIndexId" withInt:self.lastIndexId];
+    [aParams addIfDefinedKey:@"lastIndexDepth" withInt:self.lastIndexDepth];
     [aParams addIfDefinedKey:@"shouldUpdate" withBool:self.shouldUpdate];
 }
 
@@ -42645,6 +42734,30 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaTubeMogulSyndicationFeedBaseFilter"];
+}
+
+@end
+
+@implementation KalturaUploadedFileResource
+@synthesize fileData = _fileData;
+
+- (KalturaFieldType)getTypeOfFileData
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaUploadedFileResource"];
+    [aParams addIfDefinedKey:@"fileData" withString:self.fileData];
+}
+
+- (void)dealloc
+{
+    [self->_fileData release];
+    [super dealloc];
 }
 
 @end

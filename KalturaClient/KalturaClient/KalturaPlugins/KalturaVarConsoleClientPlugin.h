@@ -138,6 +138,21 @@
 @interface KalturaVarPartnerUsageTotalItem : KalturaVarPartnerUsageItem
 @end
 
+// @package Kaltura
+// @subpackage Client
+@interface KalturaVarConsolePartnerFilter : KalturaPartnerFilter
+// Eq filter for the partner's group type
+@property (nonatomic,assign) int groupTypeEq;	// enum KalturaPartnerGroupType
+// In filter for the partner's group type
+@property (nonatomic,copy) NSString* groupTypeIn;
+// Filter for partner permissions- filter contains comma-separated string of permission names which the returned partners should have.
+@property (nonatomic,copy) NSString* partnerPermissionsExist;
+- (KalturaFieldType)getTypeOfGroupTypeEq;
+- (KalturaFieldType)getTypeOfGroupTypeIn;
+- (KalturaFieldType)getTypeOfPartnerPermissionsExist;
+- (void)setGroupTypeEqFromString:(NSString*)aPropVal;
+@end
+
 ///////////////////////// services /////////////////////////
 // @package Kaltura
 // @subpackage Client

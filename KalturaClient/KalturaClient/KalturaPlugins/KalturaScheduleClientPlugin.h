@@ -80,21 +80,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaEntryScheduleEventOrderBy : NSObject
-+ (NSString*)CREATED_AT_ASC;
-+ (NSString*)END_DATE_ASC;
-+ (NSString*)PRIORITY_ASC;
-+ (NSString*)START_DATE_ASC;
-+ (NSString*)UPDATED_AT_ASC;
-+ (NSString*)CREATED_AT_DESC;
-+ (NSString*)END_DATE_DESC;
-+ (NSString*)PRIORITY_DESC;
-+ (NSString*)START_DATE_DESC;
-+ (NSString*)UPDATED_AT_DESC;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaLiveEntryScheduleResourceOrderBy : NSObject
 + (NSString*)CREATED_AT_ASC;
 + (NSString*)UPDATED_AT_ASC;
@@ -104,55 +89,10 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaLiveStreamScheduleEventOrderBy : NSObject
-+ (NSString*)CREATED_AT_ASC;
-+ (NSString*)END_DATE_ASC;
-+ (NSString*)PRIORITY_ASC;
-+ (NSString*)START_DATE_ASC;
-+ (NSString*)UPDATED_AT_ASC;
-+ (NSString*)CREATED_AT_DESC;
-+ (NSString*)END_DATE_DESC;
-+ (NSString*)PRIORITY_DESC;
-+ (NSString*)START_DATE_DESC;
-+ (NSString*)UPDATED_AT_DESC;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaLocationScheduleResourceOrderBy : NSObject
 + (NSString*)CREATED_AT_ASC;
 + (NSString*)UPDATED_AT_ASC;
 + (NSString*)CREATED_AT_DESC;
-+ (NSString*)UPDATED_AT_DESC;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaRecordScheduleEventOrderBy : NSObject
-+ (NSString*)CREATED_AT_ASC;
-+ (NSString*)END_DATE_ASC;
-+ (NSString*)PRIORITY_ASC;
-+ (NSString*)START_DATE_ASC;
-+ (NSString*)UPDATED_AT_ASC;
-+ (NSString*)CREATED_AT_DESC;
-+ (NSString*)END_DATE_DESC;
-+ (NSString*)PRIORITY_DESC;
-+ (NSString*)START_DATE_DESC;
-+ (NSString*)UPDATED_AT_DESC;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaScheduleEventOrderBy : NSObject
-+ (NSString*)CREATED_AT_ASC;
-+ (NSString*)END_DATE_ASC;
-+ (NSString*)PRIORITY_ASC;
-+ (NSString*)START_DATE_ASC;
-+ (NSString*)UPDATED_AT_ASC;
-+ (NSString*)CREATED_AT_DESC;
-+ (NSString*)END_DATE_DESC;
-+ (NSString*)PRIORITY_DESC;
-+ (NSString*)START_DATE_DESC;
 + (NSString*)UPDATED_AT_DESC;
 @end
 
@@ -623,37 +563,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaScheduleEventFilter : KalturaScheduleEventBaseFilter
-@property (nonatomic,copy) NSString* resourceIdsLike;
-@property (nonatomic,copy) NSString* resourceIdsMultiLikeOr;
-@property (nonatomic,copy) NSString* resourceIdsMultiLikeAnd;
-@property (nonatomic,copy) NSString* parentResourceIdsLike;
-@property (nonatomic,copy) NSString* parentResourceIdsMultiLikeOr;
-@property (nonatomic,copy) NSString* parentResourceIdsMultiLikeAnd;
-@property (nonatomic,copy) NSString* templateEntryCategoriesIdsMultiLikeAnd;
-@property (nonatomic,copy) NSString* templateEntryCategoriesIdsMultiLikeOr;
-@property (nonatomic,copy) NSString* resourceSystemNamesMultiLikeOr;
-@property (nonatomic,copy) NSString* templateEntryCategoriesIdsLike;
-@property (nonatomic,copy) NSString* resourceSystemNamesMultiLikeAnd;
-@property (nonatomic,copy) NSString* resourceSystemNamesLike;
-@property (nonatomic,copy) NSString* templateEntryIdEqual;
-- (KalturaFieldType)getTypeOfResourceIdsLike;
-- (KalturaFieldType)getTypeOfResourceIdsMultiLikeOr;
-- (KalturaFieldType)getTypeOfResourceIdsMultiLikeAnd;
-- (KalturaFieldType)getTypeOfParentResourceIdsLike;
-- (KalturaFieldType)getTypeOfParentResourceIdsMultiLikeOr;
-- (KalturaFieldType)getTypeOfParentResourceIdsMultiLikeAnd;
-- (KalturaFieldType)getTypeOfTemplateEntryCategoriesIdsMultiLikeAnd;
-- (KalturaFieldType)getTypeOfTemplateEntryCategoriesIdsMultiLikeOr;
-- (KalturaFieldType)getTypeOfResourceSystemNamesMultiLikeOr;
-- (KalturaFieldType)getTypeOfTemplateEntryCategoriesIdsLike;
-- (KalturaFieldType)getTypeOfResourceSystemNamesMultiLikeAnd;
-- (KalturaFieldType)getTypeOfResourceSystemNamesLike;
-- (KalturaFieldType)getTypeOfTemplateEntryIdEqual;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaScheduleEventResourceFilter : KalturaScheduleEventResourceBaseFilter
 @end
 
@@ -665,25 +574,6 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaCameraScheduleResourceBaseFilter : KalturaScheduleResourceFilter
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaEntryScheduleEventBaseFilter : KalturaScheduleEventFilter
-@property (nonatomic,copy) NSString* templateEntryIdEqual;
-@property (nonatomic,copy) NSString* entryIdsLike;
-@property (nonatomic,copy) NSString* entryIdsMultiLikeOr;
-@property (nonatomic,copy) NSString* entryIdsMultiLikeAnd;
-@property (nonatomic,copy) NSString* categoryIdsLike;
-@property (nonatomic,copy) NSString* categoryIdsMultiLikeOr;
-@property (nonatomic,copy) NSString* categoryIdsMultiLikeAnd;
-- (KalturaFieldType)getTypeOfTemplateEntryIdEqual;
-- (KalturaFieldType)getTypeOfEntryIdsLike;
-- (KalturaFieldType)getTypeOfEntryIdsMultiLikeOr;
-- (KalturaFieldType)getTypeOfEntryIdsMultiLikeAnd;
-- (KalturaFieldType)getTypeOfCategoryIdsLike;
-- (KalturaFieldType)getTypeOfCategoryIdsMultiLikeOr;
-- (KalturaFieldType)getTypeOfCategoryIdsMultiLikeAnd;
 @end
 
 // @package Kaltura
@@ -703,43 +593,12 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaEntryScheduleEventFilter : KalturaEntryScheduleEventBaseFilter
-@property (nonatomic,copy) NSString* parentCategoryIdsLike;
-@property (nonatomic,copy) NSString* parentCategoryIdsMultiLikeOr;
-@property (nonatomic,copy) NSString* parentCategoryIdsMultiLikeAnd;
-- (KalturaFieldType)getTypeOfParentCategoryIdsLike;
-- (KalturaFieldType)getTypeOfParentCategoryIdsMultiLikeOr;
-- (KalturaFieldType)getTypeOfParentCategoryIdsMultiLikeAnd;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaLiveEntryScheduleResourceFilter : KalturaLiveEntryScheduleResourceBaseFilter
 @end
 
 // @package Kaltura
 // @subpackage Client
 @interface KalturaLocationScheduleResourceFilter : KalturaLocationScheduleResourceBaseFilter
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaLiveStreamScheduleEventBaseFilter : KalturaEntryScheduleEventFilter
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaRecordScheduleEventBaseFilter : KalturaEntryScheduleEventFilter
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaLiveStreamScheduleEventFilter : KalturaLiveStreamScheduleEventBaseFilter
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaRecordScheduleEventFilter : KalturaRecordScheduleEventBaseFilter
 @end
 
 ///////////////////////// services /////////////////////////
