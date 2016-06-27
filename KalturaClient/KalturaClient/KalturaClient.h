@@ -3323,6 +3323,7 @@
 + (NSString*)LIMIT_DELIVERY_PROFILES;
 + (NSString*)SERVE_FROM_REMOTE_SERVER;
 + (NSString*)REQUEST_HOST_REGEX;
++ (NSString*)LIMIT_THUMBNAIL_CAPTURE;
 @end
 
 // @package Kaltura
@@ -8369,6 +8370,11 @@
 - (KalturaFieldType)getTypeOfFlavorParamsIds;
 - (KalturaFieldType)getTypeOfIsBlockedList;
 - (void)setIsBlockedListFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaAccessControlLimitThumbnailCaptureAction : KalturaRuleAction
 @end
 
 // @package Kaltura

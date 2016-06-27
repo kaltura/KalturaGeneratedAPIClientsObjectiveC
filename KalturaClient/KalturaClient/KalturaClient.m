@@ -9424,6 +9424,10 @@
 {
     return @"7";
 }
++ (NSString*)LIMIT_THUMBNAIL_CAPTURE
+{
+    return @"8";
+}
 @end
 
 @implementation KalturaSchemaType
@@ -27543,6 +27547,16 @@
 {
     [self->_flavorParamsIds release];
     [super dealloc];
+}
+
+@end
+
+@implementation KalturaAccessControlLimitThumbnailCaptureAction
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaAccessControlLimitThumbnailCaptureAction"];
 }
 
 @end
