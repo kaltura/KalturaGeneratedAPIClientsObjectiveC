@@ -27596,6 +27596,16 @@
 @implementation KalturaAccessControlModifyRequestHostRegexAction
 @synthesize pattern = _pattern;
 @synthesize replacement = _replacement;
+@synthesize replacmenServerNodeId = _replacmenServerNodeId;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_replacmenServerNodeId = KALTURA_UNDEF_INT;
+    return self;
+}
 
 - (KalturaFieldType)getTypeOfPattern
 {
@@ -27607,6 +27617,16 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfReplacmenServerNodeId
+{
+    return KFT_Int;
+}
+
+- (void)setReplacmenServerNodeIdFromString:(NSString*)aPropVal
+{
+    self.replacmenServerNodeId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -27614,6 +27634,7 @@
         [aParams putKey:@"objectType" withString:@"KalturaAccessControlModifyRequestHostRegexAction"];
     [aParams addIfDefinedKey:@"pattern" withString:self.pattern];
     [aParams addIfDefinedKey:@"replacement" withString:self.replacement];
+    [aParams addIfDefinedKey:@"replacmenServerNodeId" withInt:self.replacmenServerNodeId];
 }
 
 - (void)dealloc

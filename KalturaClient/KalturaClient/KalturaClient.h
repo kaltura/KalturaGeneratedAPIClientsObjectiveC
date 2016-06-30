@@ -8392,8 +8392,12 @@
 @property (nonatomic,copy) NSString* pattern;
 // Request host regex replacment
 @property (nonatomic,copy) NSString* replacement;
+// serverNodeId to generate replacment host from
+@property (nonatomic,assign) int replacmenServerNodeId;
 - (KalturaFieldType)getTypeOfPattern;
 - (KalturaFieldType)getTypeOfReplacement;
+- (KalturaFieldType)getTypeOfReplacmenServerNodeId;
+- (void)setReplacmenServerNodeIdFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
