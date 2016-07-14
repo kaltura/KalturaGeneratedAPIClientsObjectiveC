@@ -233,11 +233,6 @@
 + (NSString*)UPDATED_AT_DESC;
 @end
 
-// @package Kaltura
-// @subpackage Client
-@interface KalturaSyndicationDistributionProviderOrderBy : NSObject
-@end
-
 ///////////////////////// classes /////////////////////////
 // @package Kaltura
 // @subpackage Client
@@ -1164,11 +1159,6 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaSyndicationDistributionProfileFilter : KalturaSyndicationDistributionProfileBaseFilter
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaSyndicationDistributionProviderFilter : KalturaSyndicationDistributionProviderBaseFilter
 @end
 
 ///////////////////////// services /////////////////////////

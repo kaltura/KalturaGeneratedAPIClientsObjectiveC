@@ -8436,10 +8436,14 @@
 @property (nonatomic,copy) NSString* s3Region;
 @property (nonatomic,copy) NSString* sseType;
 @property (nonatomic,copy) NSString* sseKmsKeyId;
+@property (nonatomic,copy) NSString* signatureType;
+@property (nonatomic,copy) NSString* endPoint;
 - (KalturaFieldType)getTypeOfFilesPermissionInS3;
 - (KalturaFieldType)getTypeOfS3Region;
 - (KalturaFieldType)getTypeOfSseType;
 - (KalturaFieldType)getTypeOfSseKmsKeyId;
+- (KalturaFieldType)getTypeOfSignatureType;
+- (KalturaFieldType)getTypeOfEndPoint;
 @end
 
 // @package Kaltura
@@ -12059,10 +12063,14 @@
 @property (nonatomic,copy) NSString* s3Region;
 @property (nonatomic,copy) NSString* sseType;
 @property (nonatomic,copy) NSString* sseKmsKeyId;
+@property (nonatomic,copy) NSString* signatureType;
+@property (nonatomic,copy) NSString* endPoint;
 - (KalturaFieldType)getTypeOfFilesPermissionInS3;
 - (KalturaFieldType)getTypeOfS3Region;
 - (KalturaFieldType)getTypeOfSseType;
 - (KalturaFieldType)getTypeOfSseKmsKeyId;
+- (KalturaFieldType)getTypeOfSignatureType;
+- (KalturaFieldType)getTypeOfEndPoint;
 @end
 
 // @package Kaltura

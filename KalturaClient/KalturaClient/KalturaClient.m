@@ -27749,6 +27749,8 @@
 @synthesize s3Region = _s3Region;
 @synthesize sseType = _sseType;
 @synthesize sseKmsKeyId = _sseKmsKeyId;
+@synthesize signatureType = _signatureType;
+@synthesize endPoint = _endPoint;
 
 - (KalturaFieldType)getTypeOfFilesPermissionInS3
 {
@@ -27770,6 +27772,16 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfSignatureType
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEndPoint
+{
+    return KFT_String;
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -27779,6 +27791,8 @@
     [aParams addIfDefinedKey:@"s3Region" withString:self.s3Region];
     [aParams addIfDefinedKey:@"sseType" withString:self.sseType];
     [aParams addIfDefinedKey:@"sseKmsKeyId" withString:self.sseKmsKeyId];
+    [aParams addIfDefinedKey:@"signatureType" withString:self.signatureType];
+    [aParams addIfDefinedKey:@"endPoint" withString:self.endPoint];
 }
 
 - (void)dealloc
@@ -27787,6 +27801,8 @@
     [self->_s3Region release];
     [self->_sseType release];
     [self->_sseKmsKeyId release];
+    [self->_signatureType release];
+    [self->_endPoint release];
     [super dealloc];
 }
 
@@ -41506,6 +41522,8 @@
 @synthesize s3Region = _s3Region;
 @synthesize sseType = _sseType;
 @synthesize sseKmsKeyId = _sseKmsKeyId;
+@synthesize signatureType = _signatureType;
+@synthesize endPoint = _endPoint;
 
 - (KalturaFieldType)getTypeOfFilesPermissionInS3
 {
@@ -41527,6 +41545,16 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfSignatureType
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEndPoint
+{
+    return KFT_String;
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -41536,6 +41564,8 @@
     [aParams addIfDefinedKey:@"s3Region" withString:self.s3Region];
     [aParams addIfDefinedKey:@"sseType" withString:self.sseType];
     [aParams addIfDefinedKey:@"sseKmsKeyId" withString:self.sseKmsKeyId];
+    [aParams addIfDefinedKey:@"signatureType" withString:self.signatureType];
+    [aParams addIfDefinedKey:@"endPoint" withString:self.endPoint];
 }
 
 - (void)dealloc
@@ -41544,6 +41574,8 @@
     [self->_s3Region release];
     [self->_sseType release];
     [self->_sseKmsKeyId release];
+    [self->_signatureType release];
+    [self->_endPoint release];
     [super dealloc];
 }
 
