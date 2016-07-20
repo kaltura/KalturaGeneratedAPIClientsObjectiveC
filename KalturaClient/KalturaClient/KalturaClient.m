@@ -25090,6 +25090,7 @@
 @synthesize privateKey = _privateKey;
 @synthesize publicKey = _publicKey;
 @synthesize passPhrase = _passPhrase;
+@synthesize shouldExportThumbs = _shouldExportThumbs;
 
 - (id)init
 {
@@ -25111,6 +25112,7 @@
     self->_readyBehavior = KALTURA_UNDEF_INT;
     self->_allowAutoDelete = KALTURA_UNDEF_INT;
     self->_createFileLink = KALTURA_UNDEF_BOOL;
+    self->_shouldExportThumbs = KALTURA_UNDEF_BOOL;
     return self;
 }
 
@@ -25284,6 +25286,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfShouldExportThumbs
+{
+    return KFT_Bool;
+}
+
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -25359,6 +25366,11 @@
     self.createFileLink = [KalturaSimpleTypeParser parseBool:aPropVal];
 }
 
+- (void)setShouldExportThumbsFromString:(NSString*)aPropVal
+{
+    self.shouldExportThumbs = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -25391,6 +25403,7 @@
     [aParams addIfDefinedKey:@"privateKey" withString:self.privateKey];
     [aParams addIfDefinedKey:@"publicKey" withString:self.publicKey];
     [aParams addIfDefinedKey:@"passPhrase" withString:self.passPhrase];
+    [aParams addIfDefinedKey:@"shouldExportThumbs" withBool:self.shouldExportThumbs];
 }
 
 - (void)dealloc

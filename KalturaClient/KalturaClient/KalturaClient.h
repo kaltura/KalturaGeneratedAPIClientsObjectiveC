@@ -7787,6 +7787,7 @@
 @property (nonatomic,copy) NSString* privateKey;
 @property (nonatomic,copy) NSString* publicKey;
 @property (nonatomic,copy) NSString* passPhrase;
+@property (nonatomic,assign) KALTURA_BOOL shouldExportThumbs;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfCreatedAt;
 - (KalturaFieldType)getTypeOfUpdatedAt;
@@ -7821,6 +7822,7 @@
 - (KalturaFieldType)getTypeOfPrivateKey;
 - (KalturaFieldType)getTypeOfPublicKey;
 - (KalturaFieldType)getTypeOfPassPhrase;
+- (KalturaFieldType)getTypeOfShouldExportThumbs;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
@@ -7836,6 +7838,7 @@
 - (void)setReadyBehaviorFromString:(NSString*)aPropVal;
 - (void)setAllowAutoDeleteFromString:(NSString*)aPropVal;
 - (void)setCreateFileLinkFromString:(NSString*)aPropVal;
+- (void)setShouldExportThumbsFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
