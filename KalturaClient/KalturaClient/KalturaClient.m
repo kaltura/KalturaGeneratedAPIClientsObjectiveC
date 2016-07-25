@@ -16022,6 +16022,278 @@
 
 @end
 
+@implementation KalturaSearchItem
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaSearchItem"];
+}
+
+@end
+
+@implementation KalturaFilter
+@synthesize orderBy = _orderBy;
+@synthesize advancedSearch = _advancedSearch;
+
+- (KalturaFieldType)getTypeOfOrderBy
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfAdvancedSearch
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfAdvancedSearch
+{
+    return @"KalturaSearchItem";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaFilter"];
+    [aParams addIfDefinedKey:@"orderBy" withString:self.orderBy];
+    [aParams addIfDefinedKey:@"advancedSearch" withObject:self.advancedSearch];
+}
+
+- (void)dealloc
+{
+    [self->_orderBy release];
+    [self->_advancedSearch release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaRelatedFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaRelatedFilter"];
+}
+
+@end
+
+@implementation KalturaAssetBaseFilter
+@synthesize idEqual = _idEqual;
+@synthesize idIn = _idIn;
+@synthesize entryIdEqual = _entryIdEqual;
+@synthesize entryIdIn = _entryIdIn;
+@synthesize partnerIdEqual = _partnerIdEqual;
+@synthesize partnerIdIn = _partnerIdIn;
+@synthesize sizeGreaterThanOrEqual = _sizeGreaterThanOrEqual;
+@synthesize sizeLessThanOrEqual = _sizeLessThanOrEqual;
+@synthesize tagsLike = _tagsLike;
+@synthesize tagsMultiLikeOr = _tagsMultiLikeOr;
+@synthesize tagsMultiLikeAnd = _tagsMultiLikeAnd;
+@synthesize createdAtGreaterThanOrEqual = _createdAtGreaterThanOrEqual;
+@synthesize createdAtLessThanOrEqual = _createdAtLessThanOrEqual;
+@synthesize updatedAtGreaterThanOrEqual = _updatedAtGreaterThanOrEqual;
+@synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
+@synthesize deletedAtGreaterThanOrEqual = _deletedAtGreaterThanOrEqual;
+@synthesize deletedAtLessThanOrEqual = _deletedAtLessThanOrEqual;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_partnerIdEqual = KALTURA_UNDEF_INT;
+    self->_sizeGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_sizeLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_createdAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_createdAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_updatedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_updatedAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_deletedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_deletedAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfIdEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfIdIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEntryIdEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEntryIdIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfPartnerIdEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfPartnerIdIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSizeGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfSizeLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfTagsLike
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfTagsMultiLikeOr
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfTagsMultiLikeAnd
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfDeletedAtGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfDeletedAtLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (void)setPartnerIdEqualFromString:(NSString*)aPropVal
+{
+    self.partnerIdEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setSizeGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.sizeGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setSizeLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.sizeLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.createdAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.createdAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.updatedAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.updatedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setDeletedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.deletedAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setDeletedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.deletedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaAssetBaseFilter"];
+    [aParams addIfDefinedKey:@"idEqual" withString:self.idEqual];
+    [aParams addIfDefinedKey:@"idIn" withString:self.idIn];
+    [aParams addIfDefinedKey:@"entryIdEqual" withString:self.entryIdEqual];
+    [aParams addIfDefinedKey:@"entryIdIn" withString:self.entryIdIn];
+    [aParams addIfDefinedKey:@"partnerIdEqual" withInt:self.partnerIdEqual];
+    [aParams addIfDefinedKey:@"partnerIdIn" withString:self.partnerIdIn];
+    [aParams addIfDefinedKey:@"sizeGreaterThanOrEqual" withInt:self.sizeGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"sizeLessThanOrEqual" withInt:self.sizeLessThanOrEqual];
+    [aParams addIfDefinedKey:@"tagsLike" withString:self.tagsLike];
+    [aParams addIfDefinedKey:@"tagsMultiLikeOr" withString:self.tagsMultiLikeOr];
+    [aParams addIfDefinedKey:@"tagsMultiLikeAnd" withString:self.tagsMultiLikeAnd];
+    [aParams addIfDefinedKey:@"createdAtGreaterThanOrEqual" withInt:self.createdAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
+    [aParams addIfDefinedKey:@"updatedAtGreaterThanOrEqual" withInt:self.updatedAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
+    [aParams addIfDefinedKey:@"deletedAtGreaterThanOrEqual" withInt:self.deletedAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"deletedAtLessThanOrEqual" withInt:self.deletedAtLessThanOrEqual];
+}
+
+- (void)dealloc
+{
+    [self->_idEqual release];
+    [self->_idIn release];
+    [self->_entryIdEqual release];
+    [self->_entryIdIn release];
+    [self->_partnerIdIn release];
+    [self->_tagsLike release];
+    [self->_tagsMultiLikeOr release];
+    [self->_tagsMultiLikeAnd release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaAssetFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaAssetFilter"];
+}
+
+@end
+
 @interface KalturaDeliveryProfile()
 @property (nonatomic,assign) int id;
 @property (nonatomic,assign) int partnerId;
@@ -16052,6 +16324,7 @@
 @synthesize mediaProtocols = _mediaProtocols;
 @synthesize priority = _priority;
 @synthesize extraParams = _extraParams;
+@synthesize supplementaryAssetsFilter = _supplementaryAssetsFilter;
 
 - (id)init
 {
@@ -16174,6 +16447,16 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfSupplementaryAssetsFilter
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfSupplementaryAssetsFilter
+{
+    return @"KalturaAssetFilter";
+}
+
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -16231,6 +16514,7 @@
     [aParams addIfDefinedKey:@"mediaProtocols" withString:self.mediaProtocols];
     [aParams addIfDefinedKey:@"priority" withInt:self.priority];
     [aParams addIfDefinedKey:@"extraParams" withString:self.extraParams];
+    [aParams addIfDefinedKey:@"supplementaryAssetsFilter" withObject:self.supplementaryAssetsFilter];
 }
 
 - (void)dealloc
@@ -16246,6 +16530,7 @@
     [self->_tokenizer release];
     [self->_mediaProtocols release];
     [self->_extraParams release];
+    [self->_supplementaryAssetsFilter release];
     [super dealloc];
 }
 
@@ -16310,63 +16595,6 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaDestFileSyncDescriptor"];
-}
-
-@end
-
-@implementation KalturaSearchItem
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaSearchItem"];
-}
-
-@end
-
-@implementation KalturaFilter
-@synthesize orderBy = _orderBy;
-@synthesize advancedSearch = _advancedSearch;
-
-- (KalturaFieldType)getTypeOfOrderBy
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfAdvancedSearch
-{
-    return KFT_Object;
-}
-
-- (NSString*)getObjectTypeOfAdvancedSearch
-{
-    return @"KalturaSearchItem";
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaFilter"];
-    [aParams addIfDefinedKey:@"orderBy" withString:self.orderBy];
-    [aParams addIfDefinedKey:@"advancedSearch" withObject:self.advancedSearch];
-}
-
-- (void)dealloc
-{
-    [self->_orderBy release];
-    [self->_advancedSearch release];
-    [super dealloc];
-}
-
-@end
-
-@implementation KalturaRelatedFilter
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaRelatedFilter"];
 }
 
 @end
@@ -37584,211 +37812,6 @@
 
 @end
 
-@implementation KalturaAssetBaseFilter
-@synthesize idEqual = _idEqual;
-@synthesize idIn = _idIn;
-@synthesize entryIdEqual = _entryIdEqual;
-@synthesize entryIdIn = _entryIdIn;
-@synthesize partnerIdEqual = _partnerIdEqual;
-@synthesize partnerIdIn = _partnerIdIn;
-@synthesize sizeGreaterThanOrEqual = _sizeGreaterThanOrEqual;
-@synthesize sizeLessThanOrEqual = _sizeLessThanOrEqual;
-@synthesize tagsLike = _tagsLike;
-@synthesize tagsMultiLikeOr = _tagsMultiLikeOr;
-@synthesize tagsMultiLikeAnd = _tagsMultiLikeAnd;
-@synthesize createdAtGreaterThanOrEqual = _createdAtGreaterThanOrEqual;
-@synthesize createdAtLessThanOrEqual = _createdAtLessThanOrEqual;
-@synthesize updatedAtGreaterThanOrEqual = _updatedAtGreaterThanOrEqual;
-@synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
-@synthesize deletedAtGreaterThanOrEqual = _deletedAtGreaterThanOrEqual;
-@synthesize deletedAtLessThanOrEqual = _deletedAtLessThanOrEqual;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_partnerIdEqual = KALTURA_UNDEF_INT;
-    self->_sizeGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_sizeLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_createdAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_createdAtLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_updatedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_updatedAtLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_deletedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_deletedAtLessThanOrEqual = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfIdEqual
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfIdIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfEntryIdEqual
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfEntryIdIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfPartnerIdEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfPartnerIdIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfSizeGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfSizeLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfTagsLike
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfTagsMultiLikeOr
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfTagsMultiLikeAnd
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfDeletedAtGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfDeletedAtLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (void)setPartnerIdEqualFromString:(NSString*)aPropVal
-{
-    self.partnerIdEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setSizeGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.sizeGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setSizeLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.sizeLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.createdAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.createdAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.updatedAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.updatedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setDeletedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.deletedAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setDeletedAtLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.deletedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaAssetBaseFilter"];
-    [aParams addIfDefinedKey:@"idEqual" withString:self.idEqual];
-    [aParams addIfDefinedKey:@"idIn" withString:self.idIn];
-    [aParams addIfDefinedKey:@"entryIdEqual" withString:self.entryIdEqual];
-    [aParams addIfDefinedKey:@"entryIdIn" withString:self.entryIdIn];
-    [aParams addIfDefinedKey:@"partnerIdEqual" withInt:self.partnerIdEqual];
-    [aParams addIfDefinedKey:@"partnerIdIn" withString:self.partnerIdIn];
-    [aParams addIfDefinedKey:@"sizeGreaterThanOrEqual" withInt:self.sizeGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"sizeLessThanOrEqual" withInt:self.sizeLessThanOrEqual];
-    [aParams addIfDefinedKey:@"tagsLike" withString:self.tagsLike];
-    [aParams addIfDefinedKey:@"tagsMultiLikeOr" withString:self.tagsMultiLikeOr];
-    [aParams addIfDefinedKey:@"tagsMultiLikeAnd" withString:self.tagsMultiLikeAnd];
-    [aParams addIfDefinedKey:@"createdAtGreaterThanOrEqual" withInt:self.createdAtGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
-    [aParams addIfDefinedKey:@"updatedAtGreaterThanOrEqual" withInt:self.updatedAtGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
-    [aParams addIfDefinedKey:@"deletedAtGreaterThanOrEqual" withInt:self.deletedAtGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"deletedAtLessThanOrEqual" withInt:self.deletedAtLessThanOrEqual];
-}
-
-- (void)dealloc
-{
-    [self->_idEqual release];
-    [self->_idIn release];
-    [self->_entryIdEqual release];
-    [self->_entryIdIn release];
-    [self->_partnerIdIn release];
-    [self->_tagsLike release];
-    [self->_tagsMultiLikeOr release];
-    [self->_tagsMultiLikeAnd release];
-    [super dealloc];
-}
-
-@end
-
 @implementation KalturaAssetParamsBaseFilter
 @synthesize systemNameEqual = _systemNameEqual;
 @synthesize systemNameIn = _systemNameIn;
@@ -41600,16 +41623,6 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaAmazonS3StorageProfileBaseFilter"];
-}
-
-@end
-
-@implementation KalturaAssetFilter
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaAssetFilter"];
 }
 
 @end

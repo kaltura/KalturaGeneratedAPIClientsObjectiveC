@@ -5285,6 +5285,79 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaSearchItem : KalturaObjectBase
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaFilter : KalturaObjectBase
+@property (nonatomic,copy) NSString* orderBy;
+@property (nonatomic,retain) KalturaSearchItem* advancedSearch;
+- (KalturaFieldType)getTypeOfOrderBy;
+- (KalturaFieldType)getTypeOfAdvancedSearch;
+- (NSString*)getObjectTypeOfAdvancedSearch;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaRelatedFilter : KalturaFilter
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaAssetBaseFilter : KalturaRelatedFilter
+@property (nonatomic,copy) NSString* idEqual;
+@property (nonatomic,copy) NSString* idIn;
+@property (nonatomic,copy) NSString* entryIdEqual;
+@property (nonatomic,copy) NSString* entryIdIn;
+@property (nonatomic,assign) int partnerIdEqual;
+@property (nonatomic,copy) NSString* partnerIdIn;
+@property (nonatomic,assign) int sizeGreaterThanOrEqual;
+@property (nonatomic,assign) int sizeLessThanOrEqual;
+@property (nonatomic,copy) NSString* tagsLike;
+@property (nonatomic,copy) NSString* tagsMultiLikeOr;
+@property (nonatomic,copy) NSString* tagsMultiLikeAnd;
+@property (nonatomic,assign) int createdAtGreaterThanOrEqual;
+@property (nonatomic,assign) int createdAtLessThanOrEqual;
+@property (nonatomic,assign) int updatedAtGreaterThanOrEqual;
+@property (nonatomic,assign) int updatedAtLessThanOrEqual;
+@property (nonatomic,assign) int deletedAtGreaterThanOrEqual;
+@property (nonatomic,assign) int deletedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfIdEqual;
+- (KalturaFieldType)getTypeOfIdIn;
+- (KalturaFieldType)getTypeOfEntryIdEqual;
+- (KalturaFieldType)getTypeOfEntryIdIn;
+- (KalturaFieldType)getTypeOfPartnerIdEqual;
+- (KalturaFieldType)getTypeOfPartnerIdIn;
+- (KalturaFieldType)getTypeOfSizeGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfSizeLessThanOrEqual;
+- (KalturaFieldType)getTypeOfTagsLike;
+- (KalturaFieldType)getTypeOfTagsMultiLikeOr;
+- (KalturaFieldType)getTypeOfTagsMultiLikeAnd;
+- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfDeletedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfDeletedAtLessThanOrEqual;
+- (void)setPartnerIdEqualFromString:(NSString*)aPropVal;
+- (void)setSizeGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setSizeLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setDeletedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setDeletedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaAssetFilter : KalturaAssetBaseFilter
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaDeliveryProfile : KalturaObjectBase
 // The id of the Delivery
 @property (nonatomic,assign,readonly) int id;
@@ -5318,6 +5391,8 @@
 @property (nonatomic,assign) int priority;
 // Extra query string parameters that should be added to the url
 @property (nonatomic,copy) NSString* extraParams;
+// A filter that can be used to include additional assets in the URL (e.g. captions)
+@property (nonatomic,retain) KalturaAssetFilter* supplementaryAssetsFilter;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfPartnerId;
 - (KalturaFieldType)getTypeOfName;
@@ -5339,6 +5414,8 @@
 - (KalturaFieldType)getTypeOfMediaProtocols;
 - (KalturaFieldType)getTypeOfPriority;
 - (KalturaFieldType)getTypeOfExtraParams;
+- (KalturaFieldType)getTypeOfSupplementaryAssetsFilter;
+- (NSString*)getObjectTypeOfSupplementaryAssetsFilter;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
@@ -5365,26 +5442,6 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaDestFileSyncDescriptor : KalturaFileSyncDescriptor
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaSearchItem : KalturaObjectBase
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaFilter : KalturaObjectBase
-@property (nonatomic,copy) NSString* orderBy;
-@property (nonatomic,retain) KalturaSearchItem* advancedSearch;
-- (KalturaFieldType)getTypeOfOrderBy;
-- (KalturaFieldType)getTypeOfAdvancedSearch;
-- (NSString*)getObjectTypeOfAdvancedSearch;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaRelatedFilter : KalturaFilter
 @end
 
 // @package Kaltura
@@ -11012,54 +11069,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaAssetBaseFilter : KalturaRelatedFilter
-@property (nonatomic,copy) NSString* idEqual;
-@property (nonatomic,copy) NSString* idIn;
-@property (nonatomic,copy) NSString* entryIdEqual;
-@property (nonatomic,copy) NSString* entryIdIn;
-@property (nonatomic,assign) int partnerIdEqual;
-@property (nonatomic,copy) NSString* partnerIdIn;
-@property (nonatomic,assign) int sizeGreaterThanOrEqual;
-@property (nonatomic,assign) int sizeLessThanOrEqual;
-@property (nonatomic,copy) NSString* tagsLike;
-@property (nonatomic,copy) NSString* tagsMultiLikeOr;
-@property (nonatomic,copy) NSString* tagsMultiLikeAnd;
-@property (nonatomic,assign) int createdAtGreaterThanOrEqual;
-@property (nonatomic,assign) int createdAtLessThanOrEqual;
-@property (nonatomic,assign) int updatedAtGreaterThanOrEqual;
-@property (nonatomic,assign) int updatedAtLessThanOrEqual;
-@property (nonatomic,assign) int deletedAtGreaterThanOrEqual;
-@property (nonatomic,assign) int deletedAtLessThanOrEqual;
-- (KalturaFieldType)getTypeOfIdEqual;
-- (KalturaFieldType)getTypeOfIdIn;
-- (KalturaFieldType)getTypeOfEntryIdEqual;
-- (KalturaFieldType)getTypeOfEntryIdIn;
-- (KalturaFieldType)getTypeOfPartnerIdEqual;
-- (KalturaFieldType)getTypeOfPartnerIdIn;
-- (KalturaFieldType)getTypeOfSizeGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfSizeLessThanOrEqual;
-- (KalturaFieldType)getTypeOfTagsLike;
-- (KalturaFieldType)getTypeOfTagsMultiLikeOr;
-- (KalturaFieldType)getTypeOfTagsMultiLikeAnd;
-- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual;
-- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
-- (KalturaFieldType)getTypeOfDeletedAtGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfDeletedAtLessThanOrEqual;
-- (void)setPartnerIdEqualFromString:(NSString*)aPropVal;
-- (void)setSizeGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setSizeLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setDeletedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setDeletedAtLessThanOrEqualFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaAssetParamsBaseFilter : KalturaRelatedFilter
 @property (nonatomic,copy) NSString* systemNameEqual;
 @property (nonatomic,copy) NSString* systemNameIn;
@@ -12079,11 +12088,6 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaAmazonS3StorageProfileBaseFilter : KalturaStorageProfileFilter
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaAssetFilter : KalturaAssetBaseFilter
 @end
 
 // @package Kaltura
