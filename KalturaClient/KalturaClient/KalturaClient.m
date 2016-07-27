@@ -5504,11 +5504,11 @@
 {
     return @"Hausa";
 }
-+ (NSString*)HE
++ (NSString*)IW
 {
     return @"Hebrew";
 }
-+ (NSString*)IW
++ (NSString*)HE
 {
     return @"Hebrew";
 }
@@ -5524,11 +5524,11 @@
 {
     return @"Icelandic";
 }
-+ (NSString*)ID
++ (NSString*)IN
 {
     return @"Indonesian";
 }
-+ (NSString*)IN
++ (NSString*)ID
 {
     return @"Indonesian";
 }
@@ -5847,6 +5847,10 @@
 + (NSString*)UK
 {
     return @"Ukrainian";
+}
++ (NSString*)UN
+{
+    return @"Undefined";
 }
 + (NSString*)UR
 {

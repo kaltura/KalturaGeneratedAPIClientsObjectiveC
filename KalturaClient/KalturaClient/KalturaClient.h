@@ -2122,13 +2122,13 @@
 + (NSString*)GN;
 + (NSString*)GU;
 + (NSString*)HA;
-+ (NSString*)HE;
 + (NSString*)IW;
++ (NSString*)HE;
 + (NSString*)HI;
 + (NSString*)HU;
 + (NSString*)IS;
-+ (NSString*)ID;
 + (NSString*)IN;
++ (NSString*)ID;
 + (NSString*)IA;
 + (NSString*)IE;
 + (NSString*)IU;
@@ -2208,6 +2208,7 @@
 + (NSString*)TW;
 + (NSString*)UG;
 + (NSString*)UK;
++ (NSString*)UN;
 + (NSString*)UR;
 + (NSString*)UZ;
 + (NSString*)VI;
