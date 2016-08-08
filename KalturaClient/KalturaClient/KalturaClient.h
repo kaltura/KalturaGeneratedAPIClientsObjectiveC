@@ -1232,6 +1232,7 @@
 + (NSString*)SYNC_CATEGORY_PRIVACY_CONTEXT;
 + (NSString*)LIVE_REPORT_EXPORT;
 + (NSString*)RECALCULATE_CACHE;
++ (NSString*)LIVE_TO_VOD;
 @end
 
 // @package Kaltura
@@ -5355,6 +5356,8 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaAssetFilter : KalturaAssetBaseFilter
+@property (nonatomic,copy) NSString* typeIn;
+- (KalturaFieldType)getTypeOfTypeIn;
 @end
 
 // @package Kaltura
@@ -5551,11 +5554,20 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaPluginReplacementOptionsItem : KalturaObjectBase
+@end
+
+// @package Kaltura
+// @subpackage Client
 // Advanced configuration for entry replacement process
 @interface KalturaEntryReplacementOptions : KalturaObjectBase
 // If true manually created thumbnails will not be deleted on entry replacement
 @property (nonatomic,assign) int keepManualThumbnails;
+// Array of plugin replacement options
+@property (nonatomic,retain) NSMutableArray* pluginOptionItems;	// of KalturaPluginReplacementOptionsItem elements
 - (KalturaFieldType)getTypeOfKeepManualThumbnails;
+- (KalturaFieldType)getTypeOfPluginOptionItems;
+- (NSString*)getObjectTypeOfPluginOptionItems;
 - (void)setKeepManualThumbnailsFromString:(NSString*)aPropVal;
 @end
 
@@ -9990,6 +10002,28 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaLiveToVodJobData : KalturaJobData
+// $vod Entry Id
+@property (nonatomic,copy) NSString* vodEntryId;
+// live Entry Id
+@property (nonatomic,copy) NSString* liveEntryId;
+// total VOD Duration
+@property (nonatomic,assign) double totalVodDuration;
+// last Segment Duration
+@property (nonatomic,assign) double lastSegmentDuration;
+// amf Array File Path
+@property (nonatomic,copy) NSString* amfArray;
+- (KalturaFieldType)getTypeOfVodEntryId;
+- (KalturaFieldType)getTypeOfLiveEntryId;
+- (KalturaFieldType)getTypeOfTotalVodDuration;
+- (KalturaFieldType)getTypeOfLastSegmentDuration;
+- (KalturaFieldType)getTypeOfAmfArray;
+- (void)setTotalVodDurationFromString:(NSString*)aPropVal;
+- (void)setLastSegmentDurationFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaMailJobData : KalturaJobData
 @property (nonatomic,copy) NSString* mailType;	// enum KalturaMailType
 @property (nonatomic,assign) int mailPriority;
@@ -12885,8 +12919,6 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaThumbAssetFilter : KalturaThumbAssetBaseFilter
-@property (nonatomic,copy) NSString* typeIn;
-- (KalturaFieldType)getTypeOfTypeIn;
 @end
 
 // @package Kaltura
@@ -13495,6 +13527,8 @@
 - (void)setAsSourceWithAssetId:(NSString*)aAssetId;
 // delete all local file syncs for this asset
 - (void)deleteLocalContentWithAssetId:(NSString*)aAssetId;
+// serve cmd line to transcode the ad
+- (void)serveAdStitchCmdWithAssetId:(NSString*)aAssetId withMediaInfoJson:(NSString*)aMediaInfoJson;
 @end
 
 // @package Kaltura

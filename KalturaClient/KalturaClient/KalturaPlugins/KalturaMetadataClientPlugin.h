@@ -272,6 +272,16 @@
 
 // @package Kaltura
 // @subpackage Client
+// Advanced metadata configuration for entry replacement process
+@interface KalturaMetadataReplacementOptionsItem : KalturaPluginReplacementOptionsItem
+// If true custom-metadata transferred to temp entry on entry replacement
+@property (nonatomic,assign) KALTURA_BOOL shouldCopyMetadata;
+- (KalturaFieldType)getTypeOfShouldCopyMetadata;
+- (void)setShouldCopyMetadataFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaMetadataResponseProfileMapping : KalturaResponseProfileMapping
 @end
 

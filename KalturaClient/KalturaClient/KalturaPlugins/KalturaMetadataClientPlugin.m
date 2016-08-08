@@ -940,6 +940,38 @@
 
 @end
 
+@implementation KalturaMetadataReplacementOptionsItem
+@synthesize shouldCopyMetadata = _shouldCopyMetadata;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_shouldCopyMetadata = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfShouldCopyMetadata
+{
+    return KFT_Bool;
+}
+
+- (void)setShouldCopyMetadataFromString:(NSString*)aPropVal
+{
+    self.shouldCopyMetadata = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaMetadataReplacementOptionsItem"];
+    [aParams addIfDefinedKey:@"shouldCopyMetadata" withBool:self.shouldCopyMetadata];
+}
+
+@end
+
 @implementation KalturaMetadataResponseProfileMapping
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {

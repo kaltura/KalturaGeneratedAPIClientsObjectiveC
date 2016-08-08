@@ -3032,6 +3032,10 @@
 {
     return @"41";
 }
++ (NSString*)LIVE_TO_VOD
+{
+    return @"42";
+}
 @end
 
 @implementation KalturaBulkUploadAction
@@ -16289,11 +16293,25 @@
 @end
 
 @implementation KalturaAssetFilter
+@synthesize typeIn = _typeIn;
+
+- (KalturaFieldType)getTypeOfTypeIn
+{
+    return KFT_String;
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaAssetFilter"];
+    [aParams addIfDefinedKey:@"typeIn" withString:self.typeIn];
+}
+
+- (void)dealloc
+{
+    [self->_typeIn release];
+    [super dealloc];
 }
 
 @end
@@ -17020,8 +17038,19 @@
 
 @end
 
+@implementation KalturaPluginReplacementOptionsItem
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaPluginReplacementOptionsItem"];
+}
+
+@end
+
 @implementation KalturaEntryReplacementOptions
 @synthesize keepManualThumbnails = _keepManualThumbnails;
+@synthesize pluginOptionItems = _pluginOptionItems;
 
 - (id)init
 {
@@ -17037,6 +17066,16 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfPluginOptionItems
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfPluginOptionItems
+{
+    return @"KalturaPluginReplacementOptionsItem";
+}
+
 - (void)setKeepManualThumbnailsFromString:(NSString*)aPropVal
 {
     self.keepManualThumbnails = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -17048,6 +17087,13 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaEntryReplacementOptions"];
     [aParams addIfDefinedKey:@"keepManualThumbnails" withInt:self.keepManualThumbnails];
+    [aParams addIfDefinedKey:@"pluginOptionItems" withArray:self.pluginOptionItems];
+}
+
+- (void)dealloc
+{
+    [self->_pluginOptionItems release];
+    [super dealloc];
 }
 
 @end
@@ -33591,6 +33637,80 @@
 
 @end
 
+@implementation KalturaLiveToVodJobData
+@synthesize vodEntryId = _vodEntryId;
+@synthesize liveEntryId = _liveEntryId;
+@synthesize totalVodDuration = _totalVodDuration;
+@synthesize lastSegmentDuration = _lastSegmentDuration;
+@synthesize amfArray = _amfArray;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_totalVodDuration = KALTURA_UNDEF_FLOAT;
+    self->_lastSegmentDuration = KALTURA_UNDEF_FLOAT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfVodEntryId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfLiveEntryId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfTotalVodDuration
+{
+    return KFT_Float;
+}
+
+- (KalturaFieldType)getTypeOfLastSegmentDuration
+{
+    return KFT_Float;
+}
+
+- (KalturaFieldType)getTypeOfAmfArray
+{
+    return KFT_String;
+}
+
+- (void)setTotalVodDurationFromString:(NSString*)aPropVal
+{
+    self.totalVodDuration = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
+- (void)setLastSegmentDurationFromString:(NSString*)aPropVal
+{
+    self.lastSegmentDuration = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaLiveToVodJobData"];
+    [aParams addIfDefinedKey:@"vodEntryId" withString:self.vodEntryId];
+    [aParams addIfDefinedKey:@"liveEntryId" withString:self.liveEntryId];
+    [aParams addIfDefinedKey:@"totalVodDuration" withFloat:self.totalVodDuration];
+    [aParams addIfDefinedKey:@"lastSegmentDuration" withFloat:self.lastSegmentDuration];
+    [aParams addIfDefinedKey:@"amfArray" withString:self.amfArray];
+}
+
+- (void)dealloc
+{
+    [self->_vodEntryId release];
+    [self->_liveEntryId release];
+    [self->_amfArray release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaMailJobData
 @synthesize mailType = _mailType;
 @synthesize mailPriority = _mailPriority;
@@ -43579,25 +43699,11 @@
 @end
 
 @implementation KalturaThumbAssetFilter
-@synthesize typeIn = _typeIn;
-
-- (KalturaFieldType)getTypeOfTypeIn
-{
-    return KFT_String;
-}
-
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaThumbAssetFilter"];
-    [aParams addIfDefinedKey:@"typeIn" withString:self.typeIn];
-}
-
-- (void)dealloc
-{
-    [self->_typeIn release];
-    [super dealloc];
 }
 
 @end
@@ -45301,6 +45407,13 @@
 {
     [self.client.params addIfDefinedKey:@"assetId" withString:aAssetId];
     [self.client queueVoidService:@"flavorasset" withAction:@"deleteLocalContent"];
+}
+
+- (void)serveAdStitchCmdWithAssetId:(NSString*)aAssetId withMediaInfoJson:(NSString*)aMediaInfoJson
+{
+    [self.client.params addIfDefinedKey:@"assetId" withString:aAssetId];
+    [self.client.params addIfDefinedKey:@"mediaInfoJson" withString:aMediaInfoJson];
+    [self.client queueVoidService:@"flavorasset" withAction:@"serveAdStitchCmd"];
 }
 
 @end
