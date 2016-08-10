@@ -3032,10 +3032,6 @@
 {
     return @"41";
 }
-+ (NSString*)LIVE_TO_VOD
-{
-    return @"42";
-}
 @end
 
 @implementation KalturaBulkUploadAction
@@ -30811,69 +30807,6 @@
 
 @end
 
-@implementation KalturaCopyJobData
-@synthesize filter = _filter;
-@synthesize lastCopyId = _lastCopyId;
-@synthesize templateObject = _templateObject;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_lastCopyId = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfFilter
-{
-    return KFT_Object;
-}
-
-- (NSString*)getObjectTypeOfFilter
-{
-    return @"KalturaFilter";
-}
-
-- (KalturaFieldType)getTypeOfLastCopyId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfTemplateObject
-{
-    return KFT_Object;
-}
-
-- (NSString*)getObjectTypeOfTemplateObject
-{
-    return @"KalturaObjectBase";
-}
-
-- (void)setLastCopyIdFromString:(NSString*)aPropVal
-{
-    self.lastCopyId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaCopyJobData"];
-    [aParams addIfDefinedKey:@"filter" withObject:self.filter];
-    [aParams addIfDefinedKey:@"lastCopyId" withInt:self.lastCopyId];
-    [aParams addIfDefinedKey:@"templateObject" withObject:self.templateObject];
-}
-
-- (void)dealloc
-{
-    [self->_filter release];
-    [self->_templateObject release];
-    [super dealloc];
-}
-
-@end
-
 @implementation KalturaCopyPartnerJobData
 @synthesize fromPartnerId = _fromPartnerId;
 @synthesize toPartnerId = _toPartnerId;
@@ -33632,80 +33565,6 @@
     [self->_password release];
     [self->_streamName release];
     [self->_applicationName release];
-    [super dealloc];
-}
-
-@end
-
-@implementation KalturaLiveToVodJobData
-@synthesize vodEntryId = _vodEntryId;
-@synthesize liveEntryId = _liveEntryId;
-@synthesize totalVodDuration = _totalVodDuration;
-@synthesize lastSegmentDuration = _lastSegmentDuration;
-@synthesize amfArray = _amfArray;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_totalVodDuration = KALTURA_UNDEF_FLOAT;
-    self->_lastSegmentDuration = KALTURA_UNDEF_FLOAT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfVodEntryId
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfLiveEntryId
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfTotalVodDuration
-{
-    return KFT_Float;
-}
-
-- (KalturaFieldType)getTypeOfLastSegmentDuration
-{
-    return KFT_Float;
-}
-
-- (KalturaFieldType)getTypeOfAmfArray
-{
-    return KFT_String;
-}
-
-- (void)setTotalVodDurationFromString:(NSString*)aPropVal
-{
-    self.totalVodDuration = [KalturaSimpleTypeParser parseFloat:aPropVal];
-}
-
-- (void)setLastSegmentDurationFromString:(NSString*)aPropVal
-{
-    self.lastSegmentDuration = [KalturaSimpleTypeParser parseFloat:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaLiveToVodJobData"];
-    [aParams addIfDefinedKey:@"vodEntryId" withString:self.vodEntryId];
-    [aParams addIfDefinedKey:@"liveEntryId" withString:self.liveEntryId];
-    [aParams addIfDefinedKey:@"totalVodDuration" withFloat:self.totalVodDuration];
-    [aParams addIfDefinedKey:@"lastSegmentDuration" withFloat:self.lastSegmentDuration];
-    [aParams addIfDefinedKey:@"amfArray" withString:self.amfArray];
-}
-
-- (void)dealloc
-{
-    [self->_vodEntryId release];
-    [self->_liveEntryId release];
-    [self->_amfArray release];
     [super dealloc];
 }
 
@@ -42955,30 +42814,6 @@
 
 @end
 
-@implementation KalturaUploadedFileResource
-@synthesize fileData = _fileData;
-
-- (KalturaFieldType)getTypeOfFileData
-{
-    return KFT_String;
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaUploadedFileResource"];
-    [aParams addIfDefinedKey:@"fileData" withString:self.fileData];
-}
-
-- (void)dealloc
-{
-    [self->_fileData release];
-    [super dealloc];
-}
-
-@end
-
 @implementation KalturaUploadedFileTokenResource
 @synthesize token = _token;
 
@@ -45409,11 +45244,22 @@
     [self.client queueVoidService:@"flavorasset" withAction:@"deleteLocalContent"];
 }
 
-- (void)serveAdStitchCmdWithAssetId:(NSString*)aAssetId withMediaInfoJson:(NSString*)aMediaInfoJson
+- (void)serveAdStitchCmdWithAssetId:(NSString*)aAssetId withFfprobeJson:(NSString*)aFfprobeJson withDuration:(NSString*)aDuration
 {
     [self.client.params addIfDefinedKey:@"assetId" withString:aAssetId];
-    [self.client.params addIfDefinedKey:@"mediaInfoJson" withString:aMediaInfoJson];
+    [self.client.params addIfDefinedKey:@"ffprobeJson" withString:aFfprobeJson];
+    [self.client.params addIfDefinedKey:@"duration" withString:aDuration];
     [self.client queueVoidService:@"flavorasset" withAction:@"serveAdStitchCmd"];
+}
+
+- (void)serveAdStitchCmdWithAssetId:(NSString*)aAssetId withFfprobeJson:(NSString*)aFfprobeJson
+{
+    [self serveAdStitchCmdWithAssetId:aAssetId withFfprobeJson:aFfprobeJson withDuration:nil];
+}
+
+- (void)serveAdStitchCmdWithAssetId:(NSString*)aAssetId
+{
+    [self serveAdStitchCmdWithAssetId:aAssetId withFfprobeJson:nil];
 }
 
 @end

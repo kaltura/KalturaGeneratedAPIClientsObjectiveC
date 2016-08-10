@@ -118,6 +118,49 @@
 }
 @end
 
+@implementation KalturaEntryScheduleEventOrderBy
++ (NSString*)CREATED_AT_ASC
+{
+    return @"+createdAt";
+}
++ (NSString*)END_DATE_ASC
+{
+    return @"+endDate";
+}
++ (NSString*)PRIORITY_ASC
+{
+    return @"+priority";
+}
++ (NSString*)START_DATE_ASC
+{
+    return @"+startDate";
+}
++ (NSString*)UPDATED_AT_ASC
+{
+    return @"+updatedAt";
+}
++ (NSString*)CREATED_AT_DESC
+{
+    return @"-createdAt";
+}
++ (NSString*)END_DATE_DESC
+{
+    return @"-endDate";
+}
++ (NSString*)PRIORITY_DESC
+{
+    return @"-priority";
+}
++ (NSString*)START_DATE_DESC
+{
+    return @"-startDate";
+}
++ (NSString*)UPDATED_AT_DESC
+{
+    return @"-updatedAt";
+}
+@end
+
 @implementation KalturaLiveEntryScheduleResourceOrderBy
 + (NSString*)CREATED_AT_ASC
 {
@@ -137,6 +180,49 @@
 }
 @end
 
+@implementation KalturaLiveStreamScheduleEventOrderBy
++ (NSString*)CREATED_AT_ASC
+{
+    return @"+createdAt";
+}
++ (NSString*)END_DATE_ASC
+{
+    return @"+endDate";
+}
++ (NSString*)PRIORITY_ASC
+{
+    return @"+priority";
+}
++ (NSString*)START_DATE_ASC
+{
+    return @"+startDate";
+}
++ (NSString*)UPDATED_AT_ASC
+{
+    return @"+updatedAt";
+}
++ (NSString*)CREATED_AT_DESC
+{
+    return @"-createdAt";
+}
++ (NSString*)END_DATE_DESC
+{
+    return @"-endDate";
+}
++ (NSString*)PRIORITY_DESC
+{
+    return @"-priority";
+}
++ (NSString*)START_DATE_DESC
+{
+    return @"-startDate";
+}
++ (NSString*)UPDATED_AT_DESC
+{
+    return @"-updatedAt";
+}
+@end
+
 @implementation KalturaLocationScheduleResourceOrderBy
 + (NSString*)CREATED_AT_ASC
 {
@@ -149,6 +235,92 @@
 + (NSString*)CREATED_AT_DESC
 {
     return @"-createdAt";
+}
++ (NSString*)UPDATED_AT_DESC
+{
+    return @"-updatedAt";
+}
+@end
+
+@implementation KalturaRecordScheduleEventOrderBy
++ (NSString*)CREATED_AT_ASC
+{
+    return @"+createdAt";
+}
++ (NSString*)END_DATE_ASC
+{
+    return @"+endDate";
+}
++ (NSString*)PRIORITY_ASC
+{
+    return @"+priority";
+}
++ (NSString*)START_DATE_ASC
+{
+    return @"+startDate";
+}
++ (NSString*)UPDATED_AT_ASC
+{
+    return @"+updatedAt";
+}
++ (NSString*)CREATED_AT_DESC
+{
+    return @"-createdAt";
+}
++ (NSString*)END_DATE_DESC
+{
+    return @"-endDate";
+}
++ (NSString*)PRIORITY_DESC
+{
+    return @"-priority";
+}
++ (NSString*)START_DATE_DESC
+{
+    return @"-startDate";
+}
++ (NSString*)UPDATED_AT_DESC
+{
+    return @"-updatedAt";
+}
+@end
+
+@implementation KalturaScheduleEventOrderBy
++ (NSString*)CREATED_AT_ASC
+{
+    return @"+createdAt";
+}
++ (NSString*)END_DATE_ASC
+{
+    return @"+endDate";
+}
++ (NSString*)PRIORITY_ASC
+{
+    return @"+priority";
+}
++ (NSString*)START_DATE_ASC
+{
+    return @"+startDate";
+}
++ (NSString*)UPDATED_AT_ASC
+{
+    return @"+updatedAt";
+}
++ (NSString*)CREATED_AT_DESC
+{
+    return @"-createdAt";
+}
++ (NSString*)END_DATE_DESC
+{
+    return @"-endDate";
+}
++ (NSString*)PRIORITY_DESC
+{
+    return @"-priority";
+}
++ (NSString*)START_DATE_DESC
+{
+    return @"-startDate";
 }
 + (NSString*)UPDATED_AT_DESC
 {
@@ -1797,6 +1969,118 @@
 
 @end
 
+@implementation KalturaScheduleEventFilter
+@synthesize resourceIdsLike = _resourceIdsLike;
+@synthesize resourceIdsMultiLikeOr = _resourceIdsMultiLikeOr;
+@synthesize resourceIdsMultiLikeAnd = _resourceIdsMultiLikeAnd;
+@synthesize parentResourceIdsLike = _parentResourceIdsLike;
+@synthesize parentResourceIdsMultiLikeOr = _parentResourceIdsMultiLikeOr;
+@synthesize parentResourceIdsMultiLikeAnd = _parentResourceIdsMultiLikeAnd;
+@synthesize templateEntryCategoriesIdsMultiLikeAnd = _templateEntryCategoriesIdsMultiLikeAnd;
+@synthesize templateEntryCategoriesIdsMultiLikeOr = _templateEntryCategoriesIdsMultiLikeOr;
+@synthesize resourceSystemNamesMultiLikeOr = _resourceSystemNamesMultiLikeOr;
+@synthesize templateEntryCategoriesIdsLike = _templateEntryCategoriesIdsLike;
+@synthesize resourceSystemNamesMultiLikeAnd = _resourceSystemNamesMultiLikeAnd;
+@synthesize resourceSystemNamesLike = _resourceSystemNamesLike;
+
+- (KalturaFieldType)getTypeOfResourceIdsLike
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfResourceIdsMultiLikeOr
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfResourceIdsMultiLikeAnd
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfParentResourceIdsLike
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfParentResourceIdsMultiLikeOr
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfParentResourceIdsMultiLikeAnd
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfTemplateEntryCategoriesIdsMultiLikeAnd
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfTemplateEntryCategoriesIdsMultiLikeOr
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfResourceSystemNamesMultiLikeOr
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfTemplateEntryCategoriesIdsLike
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfResourceSystemNamesMultiLikeAnd
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfResourceSystemNamesLike
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaScheduleEventFilter"];
+    [aParams addIfDefinedKey:@"resourceIdsLike" withString:self.resourceIdsLike];
+    [aParams addIfDefinedKey:@"resourceIdsMultiLikeOr" withString:self.resourceIdsMultiLikeOr];
+    [aParams addIfDefinedKey:@"resourceIdsMultiLikeAnd" withString:self.resourceIdsMultiLikeAnd];
+    [aParams addIfDefinedKey:@"parentResourceIdsLike" withString:self.parentResourceIdsLike];
+    [aParams addIfDefinedKey:@"parentResourceIdsMultiLikeOr" withString:self.parentResourceIdsMultiLikeOr];
+    [aParams addIfDefinedKey:@"parentResourceIdsMultiLikeAnd" withString:self.parentResourceIdsMultiLikeAnd];
+    [aParams addIfDefinedKey:@"templateEntryCategoriesIdsMultiLikeAnd" withString:self.templateEntryCategoriesIdsMultiLikeAnd];
+    [aParams addIfDefinedKey:@"templateEntryCategoriesIdsMultiLikeOr" withString:self.templateEntryCategoriesIdsMultiLikeOr];
+    [aParams addIfDefinedKey:@"resourceSystemNamesMultiLikeOr" withString:self.resourceSystemNamesMultiLikeOr];
+    [aParams addIfDefinedKey:@"templateEntryCategoriesIdsLike" withString:self.templateEntryCategoriesIdsLike];
+    [aParams addIfDefinedKey:@"resourceSystemNamesMultiLikeAnd" withString:self.resourceSystemNamesMultiLikeAnd];
+    [aParams addIfDefinedKey:@"resourceSystemNamesLike" withString:self.resourceSystemNamesLike];
+}
+
+- (void)dealloc
+{
+    [self->_resourceIdsLike release];
+    [self->_resourceIdsMultiLikeOr release];
+    [self->_resourceIdsMultiLikeAnd release];
+    [self->_parentResourceIdsLike release];
+    [self->_parentResourceIdsMultiLikeOr release];
+    [self->_parentResourceIdsMultiLikeAnd release];
+    [self->_templateEntryCategoriesIdsMultiLikeAnd release];
+    [self->_templateEntryCategoriesIdsMultiLikeOr release];
+    [self->_resourceSystemNamesMultiLikeOr release];
+    [self->_templateEntryCategoriesIdsLike release];
+    [self->_resourceSystemNamesMultiLikeAnd release];
+    [self->_resourceSystemNamesLike release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaScheduleEventResourceFilter
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
@@ -1823,6 +2107,78 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaCameraScheduleResourceBaseFilter"];
+}
+
+@end
+
+@implementation KalturaEntryScheduleEventBaseFilter
+@synthesize templateEntryIdEqual = _templateEntryIdEqual;
+@synthesize entryIdsLike = _entryIdsLike;
+@synthesize entryIdsMultiLikeOr = _entryIdsMultiLikeOr;
+@synthesize entryIdsMultiLikeAnd = _entryIdsMultiLikeAnd;
+@synthesize categoryIdsLike = _categoryIdsLike;
+@synthesize categoryIdsMultiLikeOr = _categoryIdsMultiLikeOr;
+@synthesize categoryIdsMultiLikeAnd = _categoryIdsMultiLikeAnd;
+
+- (KalturaFieldType)getTypeOfTemplateEntryIdEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEntryIdsLike
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEntryIdsMultiLikeOr
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEntryIdsMultiLikeAnd
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCategoryIdsLike
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCategoryIdsMultiLikeOr
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCategoryIdsMultiLikeAnd
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaEntryScheduleEventBaseFilter"];
+    [aParams addIfDefinedKey:@"templateEntryIdEqual" withString:self.templateEntryIdEqual];
+    [aParams addIfDefinedKey:@"entryIdsLike" withString:self.entryIdsLike];
+    [aParams addIfDefinedKey:@"entryIdsMultiLikeOr" withString:self.entryIdsMultiLikeOr];
+    [aParams addIfDefinedKey:@"entryIdsMultiLikeAnd" withString:self.entryIdsMultiLikeAnd];
+    [aParams addIfDefinedKey:@"categoryIdsLike" withString:self.categoryIdsLike];
+    [aParams addIfDefinedKey:@"categoryIdsMultiLikeOr" withString:self.categoryIdsMultiLikeOr];
+    [aParams addIfDefinedKey:@"categoryIdsMultiLikeAnd" withString:self.categoryIdsMultiLikeAnd];
+}
+
+- (void)dealloc
+{
+    [self->_templateEntryIdEqual release];
+    [self->_entryIdsLike release];
+    [self->_entryIdsMultiLikeOr release];
+    [self->_entryIdsMultiLikeAnd release];
+    [self->_categoryIdsLike release];
+    [self->_categoryIdsMultiLikeOr release];
+    [self->_categoryIdsMultiLikeAnd release];
+    [super dealloc];
 }
 
 @end
@@ -1857,6 +2213,46 @@
 
 @end
 
+@implementation KalturaEntryScheduleEventFilter
+@synthesize parentCategoryIdsLike = _parentCategoryIdsLike;
+@synthesize parentCategoryIdsMultiLikeOr = _parentCategoryIdsMultiLikeOr;
+@synthesize parentCategoryIdsMultiLikeAnd = _parentCategoryIdsMultiLikeAnd;
+
+- (KalturaFieldType)getTypeOfParentCategoryIdsLike
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfParentCategoryIdsMultiLikeOr
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfParentCategoryIdsMultiLikeAnd
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaEntryScheduleEventFilter"];
+    [aParams addIfDefinedKey:@"parentCategoryIdsLike" withString:self.parentCategoryIdsLike];
+    [aParams addIfDefinedKey:@"parentCategoryIdsMultiLikeOr" withString:self.parentCategoryIdsMultiLikeOr];
+    [aParams addIfDefinedKey:@"parentCategoryIdsMultiLikeAnd" withString:self.parentCategoryIdsMultiLikeAnd];
+}
+
+- (void)dealloc
+{
+    [self->_parentCategoryIdsLike release];
+    [self->_parentCategoryIdsMultiLikeOr release];
+    [self->_parentCategoryIdsMultiLikeAnd release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaLiveEntryScheduleResourceFilter
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
@@ -1873,6 +2269,46 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaLocationScheduleResourceFilter"];
+}
+
+@end
+
+@implementation KalturaLiveStreamScheduleEventBaseFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaLiveStreamScheduleEventBaseFilter"];
+}
+
+@end
+
+@implementation KalturaRecordScheduleEventBaseFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaRecordScheduleEventBaseFilter"];
+}
+
+@end
+
+@implementation KalturaLiveStreamScheduleEventFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaLiveStreamScheduleEventFilter"];
+}
+
+@end
+
+@implementation KalturaRecordScheduleEventFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaRecordScheduleEventFilter"];
 }
 
 @end

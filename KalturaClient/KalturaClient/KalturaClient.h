@@ -1232,7 +1232,6 @@
 + (NSString*)SYNC_CATEGORY_PRIVACY_CONTEXT;
 + (NSString*)LIVE_REPORT_EXPORT;
 + (NSString*)RECALCULATE_CACHE;
-+ (NSString*)LIVE_TO_VOD;
 @end
 
 // @package Kaltura
@@ -9247,23 +9246,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaCopyJobData : KalturaJobData
-// The filter should return the list of objects that need to be copied.
-@property (nonatomic,retain) KalturaFilter* filter;
-// Indicates the last id that copied, used when the batch crached, to re-run from the last crash point.
-@property (nonatomic,assign) int lastCopyId;
-// Template object to overwrite attributes on the copied object
-@property (nonatomic,retain) KalturaObjectBase* templateObject;
-- (KalturaFieldType)getTypeOfFilter;
-- (NSString*)getObjectTypeOfFilter;
-- (KalturaFieldType)getTypeOfLastCopyId;
-- (KalturaFieldType)getTypeOfTemplateObject;
-- (NSString*)getObjectTypeOfTemplateObject;
-- (void)setLastCopyIdFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaCopyPartnerJobData : KalturaJobData
 // Id of the partner to copy from
 @property (nonatomic,assign) int fromPartnerId;
@@ -9998,28 +9980,6 @@
 - (KalturaFieldType)getTypeOfPassword;
 - (KalturaFieldType)getTypeOfStreamName;
 - (KalturaFieldType)getTypeOfApplicationName;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaLiveToVodJobData : KalturaJobData
-// $vod Entry Id
-@property (nonatomic,copy) NSString* vodEntryId;
-// live Entry Id
-@property (nonatomic,copy) NSString* liveEntryId;
-// total VOD Duration
-@property (nonatomic,assign) double totalVodDuration;
-// last Segment Duration
-@property (nonatomic,assign) double lastSegmentDuration;
-// amf Array File Path
-@property (nonatomic,copy) NSString* amfArray;
-- (KalturaFieldType)getTypeOfVodEntryId;
-- (KalturaFieldType)getTypeOfLiveEntryId;
-- (KalturaFieldType)getTypeOfTotalVodDuration;
-- (KalturaFieldType)getTypeOfLastSegmentDuration;
-- (KalturaFieldType)getTypeOfAmfArray;
-- (void)setTotalVodDurationFromString:(NSString*)aPropVal;
-- (void)setLastSegmentDurationFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -12615,15 +12575,6 @@
 
 // @package Kaltura
 // @subpackage Client
-// sed to ingest media that uploaded as posted file in this http request, the file data represents the $_FILE
-@interface KalturaUploadedFileResource : KalturaDataCenterContentResource
-// Represents the $_FILE
-@property (nonatomic,copy) NSString* fileData;
-- (KalturaFieldType)getTypeOfFileData;
-@end
-
-// @package Kaltura
-// @subpackage Client
 // Used to ingest media that uploaded to the system and represented by token that returned from upload.upload action or uploadToken.add action.
 @interface KalturaUploadedFileTokenResource : KalturaDataCenterContentResource
 // Token that returned from upload.upload action or uploadToken.add action.
@@ -13528,7 +13479,9 @@
 // delete all local file syncs for this asset
 - (void)deleteLocalContentWithAssetId:(NSString*)aAssetId;
 // serve cmd line to transcode the ad
-- (void)serveAdStitchCmdWithAssetId:(NSString*)aAssetId withMediaInfoJson:(NSString*)aMediaInfoJson;
+- (void)serveAdStitchCmdWithAssetId:(NSString*)aAssetId withFfprobeJson:(NSString*)aFfprobeJson withDuration:(NSString*)aDuration;
+- (void)serveAdStitchCmdWithAssetId:(NSString*)aAssetId withFfprobeJson:(NSString*)aFfprobeJson;
+- (void)serveAdStitchCmdWithAssetId:(NSString*)aAssetId;
 @end
 
 // @package Kaltura
