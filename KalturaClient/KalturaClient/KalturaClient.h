@@ -5279,9 +5279,12 @@
 @property (nonatomic,assign) int window;
 // key
 @property (nonatomic,copy) NSString* key;
+@property (nonatomic,assign) KALTURA_BOOL limitIpAddress;
 - (KalturaFieldType)getTypeOfWindow;
 - (KalturaFieldType)getTypeOfKey;
+- (KalturaFieldType)getTypeOfLimitIpAddress;
 - (void)setWindowFromString:(NSString*)aPropVal;
+- (void)setLimitIpAddressFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -10797,11 +10800,8 @@
 @interface KalturaUrlTokenizerCloudFront : KalturaUrlTokenizer
 @property (nonatomic,copy) NSString* keyPairId;
 @property (nonatomic,copy) NSString* rootDir;
-@property (nonatomic,assign) KALTURA_BOOL limitIpAddress;
 - (KalturaFieldType)getTypeOfKeyPairId;
 - (KalturaFieldType)getTypeOfRootDir;
-- (KalturaFieldType)getTypeOfLimitIpAddress;
-- (void)setLimitIpAddressFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

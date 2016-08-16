@@ -15984,6 +15984,7 @@
 @implementation KalturaUrlTokenizer
 @synthesize window = _window;
 @synthesize key = _key;
+@synthesize limitIpAddress = _limitIpAddress;
 
 - (id)init
 {
@@ -15991,6 +15992,7 @@
     if (self == nil)
         return nil;
     self->_window = KALTURA_UNDEF_INT;
+    self->_limitIpAddress = KALTURA_UNDEF_BOOL;
     return self;
 }
 
@@ -16004,9 +16006,19 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfLimitIpAddress
+{
+    return KFT_Bool;
+}
+
 - (void)setWindowFromString:(NSString*)aPropVal
 {
     self.window = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setLimitIpAddressFromString:(NSString*)aPropVal
+{
+    self.limitIpAddress = [KalturaSimpleTypeParser parseBool:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -16016,6 +16028,7 @@
         [aParams putKey:@"objectType" withString:@"KalturaUrlTokenizer"];
     [aParams addIfDefinedKey:@"window" withInt:self.window];
     [aParams addIfDefinedKey:@"key" withString:self.key];
+    [aParams addIfDefinedKey:@"limitIpAddress" withBool:self.limitIpAddress];
 }
 
 - (void)dealloc
@@ -36763,16 +36776,6 @@
 @implementation KalturaUrlTokenizerCloudFront
 @synthesize keyPairId = _keyPairId;
 @synthesize rootDir = _rootDir;
-@synthesize limitIpAddress = _limitIpAddress;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_limitIpAddress = KALTURA_UNDEF_BOOL;
-    return self;
-}
 
 - (KalturaFieldType)getTypeOfKeyPairId
 {
@@ -36784,16 +36787,6 @@
     return KFT_String;
 }
 
-- (KalturaFieldType)getTypeOfLimitIpAddress
-{
-    return KFT_Bool;
-}
-
-- (void)setLimitIpAddressFromString:(NSString*)aPropVal
-{
-    self.limitIpAddress = [KalturaSimpleTypeParser parseBool:aPropVal];
-}
-
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -36801,7 +36794,6 @@
         [aParams putKey:@"objectType" withString:@"KalturaUrlTokenizerCloudFront"];
     [aParams addIfDefinedKey:@"keyPairId" withString:self.keyPairId];
     [aParams addIfDefinedKey:@"rootDir" withString:self.rootDir];
-    [aParams addIfDefinedKey:@"limitIpAddress" withBool:self.limitIpAddress];
 }
 
 - (void)dealloc
