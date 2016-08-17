@@ -12086,6 +12086,7 @@
 @synthesize privacyContext = _privacyContext;
 @synthesize updatedAt = _updatedAt;
 @synthesize useCategoryEntries = _useCategoryEntries;
+@synthesize feedContentTypeHeader = _feedContentTypeHeader;
 
 - (id)init
 {
@@ -12213,6 +12214,11 @@
     return KFT_Bool;
 }
 
+- (KalturaFieldType)getTypeOfFeedContentTypeHeader
+{
+    return KFT_String;
+}
+
 - (void)setPartnerIdFromString:(NSString*)aPropVal
 {
     self.partnerId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -12298,6 +12304,7 @@
     [aParams addIfDefinedKey:@"enforceEntitlement" withBool:self.enforceEntitlement];
     [aParams addIfDefinedKey:@"privacyContext" withString:self.privacyContext];
     [aParams addIfDefinedKey:@"useCategoryEntries" withBool:self.useCategoryEntries];
+    [aParams addIfDefinedKey:@"feedContentTypeHeader" withString:self.feedContentTypeHeader];
 }
 
 - (void)dealloc
@@ -12310,6 +12317,7 @@
     [self->_categories release];
     [self->_entriesOrderBy release];
     [self->_privacyContext release];
+    [self->_feedContentTypeHeader release];
     [super dealloc];
 }
 

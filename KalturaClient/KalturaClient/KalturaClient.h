@@ -4249,6 +4249,8 @@
 // Update date as Unix timestamp (In seconds)
 @property (nonatomic,assign,readonly) int updatedAt;
 @property (nonatomic,assign) KALTURA_BOOL useCategoryEntries;
+// Feed content-type header value
+@property (nonatomic,copy) NSString* feedContentTypeHeader;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfFeedUrl;
 - (KalturaFieldType)getTypeOfPartnerId;
@@ -4270,6 +4272,7 @@
 - (KalturaFieldType)getTypeOfPrivacyContext;
 - (KalturaFieldType)getTypeOfUpdatedAt;
 - (KalturaFieldType)getTypeOfUseCategoryEntries;
+- (KalturaFieldType)getTypeOfFeedContentTypeHeader;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setStatusFromString:(NSString*)aPropVal;
 - (void)setTypeFromString:(NSString*)aPropVal;

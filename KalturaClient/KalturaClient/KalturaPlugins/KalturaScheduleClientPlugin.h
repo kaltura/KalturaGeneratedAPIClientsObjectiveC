@@ -290,7 +290,7 @@
 @property (nonatomic,assign) int priority;
 // Defines the revision sequence number.
 @property (nonatomic,assign) int sequence;
-@property (nonatomic,assign) int recurrenceType;	// enum KalturaScheduleEventRecurrenceType, insertonly
+@property (nonatomic,assign) int recurrenceType;	// enum KalturaScheduleEventRecurrenceType
 // Duration in seconds
 @property (nonatomic,assign) int duration;
 // Used to represent contact information or alternately a reference to contact information.
