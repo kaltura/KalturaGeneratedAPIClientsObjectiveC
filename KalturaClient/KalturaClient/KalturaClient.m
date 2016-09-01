@@ -31547,11 +31547,16 @@
 @end
 
 @implementation KalturaDeliveryServerNode
-@synthesize playbackDomain = _playbackDomain;
+@synthesize deliveryProfileIds = _deliveryProfileIds;
 
-- (KalturaFieldType)getTypeOfPlaybackDomain
+- (KalturaFieldType)getTypeOfDeliveryProfileIds
 {
-    return KFT_String;
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfDeliveryProfileIds
+{
+    return @"KalturaKeyValue";
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -31559,12 +31564,12 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaDeliveryServerNode"];
-    [aParams addIfDefinedKey:@"playbackDomain" withString:self.playbackDomain];
+    [aParams addIfDefinedKey:@"deliveryProfileIds" withArray:self.deliveryProfileIds];
 }
 
 - (void)dealloc
 {
-    [self->_playbackDomain release];
+    [self->_deliveryProfileIds release];
     [super dealloc];
 }
 
@@ -38922,11 +38927,33 @@
 @end
 
 @implementation KalturaDeliveryProfileFilter
+@synthesize isLive = _isLive;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_isLive = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfIsLive
+{
+    return KFT_Int;
+}
+
+- (void)setIsLiveFromString:(NSString*)aPropVal
+{
+    self.isLive = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaDeliveryProfileFilter"];
+    [aParams addIfDefinedKey:@"isLive" withInt:self.isLive];
 }
 
 @end
@@ -38964,17 +38991,12 @@
 @end
 
 @implementation KalturaEdgeServerNode
-@synthesize deliveryProfileIds = _deliveryProfileIds;
+@synthesize playbackDomain = _playbackDomain;
 @synthesize config = _config;
 
-- (KalturaFieldType)getTypeOfDeliveryProfileIds
+- (KalturaFieldType)getTypeOfPlaybackDomain
 {
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfDeliveryProfileIds
-{
-    return @"KalturaKeyValue";
+    return KFT_String;
 }
 
 - (KalturaFieldType)getTypeOfConfig
@@ -38987,13 +39009,13 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaEdgeServerNode"];
-    [aParams addIfDefinedKey:@"deliveryProfileIds" withArray:self.deliveryProfileIds];
+    [aParams addIfDefinedKey:@"playbackDomain" withString:self.playbackDomain];
     [aParams addIfDefinedKey:@"config" withString:self.config];
 }
 
 - (void)dealloc
 {
-    [self->_deliveryProfileIds release];
+    [self->_playbackDomain release];
     [self->_config release];
     [super dealloc];
 }

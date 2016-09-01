@@ -9445,9 +9445,10 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaDeliveryServerNode : KalturaServerNode
-// Delivery server playback Domain
-@property (nonatomic,copy) NSString* playbackDomain;
-- (KalturaFieldType)getTypeOfPlaybackDomain;
+// Delivery profile ids
+@property (nonatomic,retain) NSMutableArray* deliveryProfileIds;	// of KalturaKeyValue elements
+- (KalturaFieldType)getTypeOfDeliveryProfileIds;
+- (NSString*)getObjectTypeOfDeliveryProfileIds;
 @end
 
 // @package Kaltura
@@ -11351,6 +11352,9 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaDeliveryProfileFilter : KalturaDeliveryProfileBaseFilter
+@property (nonatomic,assign) int isLive;	// enum KalturaNullableBoolean
+- (KalturaFieldType)getTypeOfIsLive;
+- (void)setIsLiveFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -11366,12 +11370,11 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaEdgeServerNode : KalturaDeliveryServerNode
-// Delivery profile ids
-@property (nonatomic,retain) NSMutableArray* deliveryProfileIds;	// of KalturaKeyValue elements
+// Delivery server playback Domain
+@property (nonatomic,copy) NSString* playbackDomain;
 // Overdie edge server default configuration - json format
 @property (nonatomic,copy) NSString* config;
-- (KalturaFieldType)getTypeOfDeliveryProfileIds;
-- (NSString*)getObjectTypeOfDeliveryProfileIds;
+- (KalturaFieldType)getTypeOfPlaybackDomain;
 - (KalturaFieldType)getTypeOfConfig;
 @end
 
