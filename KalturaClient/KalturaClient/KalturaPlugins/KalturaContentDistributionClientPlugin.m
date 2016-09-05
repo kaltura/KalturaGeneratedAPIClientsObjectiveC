@@ -479,9 +479,6 @@
 }
 @end
 
-@implementation KalturaSyndicationDistributionProviderOrderBy
-@end
-
 ///////////////////////// classes /////////////////////////
 @implementation KalturaAssetDistributionCondition
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -3929,16 +3926,6 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaSyndicationDistributionProfileFilter"];
-}
-
-@end
-
-@implementation KalturaSyndicationDistributionProviderFilter
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaSyndicationDistributionProviderFilter"];
 }
 
 @end
