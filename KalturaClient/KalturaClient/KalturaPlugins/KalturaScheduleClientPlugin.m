@@ -2082,11 +2082,33 @@
 @end
 
 @implementation KalturaScheduleEventResourceFilter
+@synthesize eventIdOrItsParentIdEqual = _eventIdOrItsParentIdEqual;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_eventIdOrItsParentIdEqual = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfEventIdOrItsParentIdEqual
+{
+    return KFT_Int;
+}
+
+- (void)setEventIdOrItsParentIdEqualFromString:(NSString*)aPropVal
+{
+    self.eventIdOrItsParentIdEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaScheduleEventResourceFilter"];
+    [aParams addIfDefinedKey:@"eventIdOrItsParentIdEqual" withInt:self.eventIdOrItsParentIdEqual];
 }
 
 @end

@@ -653,6 +653,10 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaScheduleEventResourceFilter : KalturaScheduleEventResourceBaseFilter
+// Find event-resource objects that associated with the event, if none found, find by its parent event
+@property (nonatomic,assign) int eventIdOrItsParentIdEqual;
+- (KalturaFieldType)getTypeOfEventIdOrItsParentIdEqual;
+- (void)setEventIdOrItsParentIdEqualFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

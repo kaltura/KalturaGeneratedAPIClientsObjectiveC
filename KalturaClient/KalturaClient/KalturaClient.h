@@ -220,6 +220,15 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaEntryDisplayInSearchType : NSObject
++ (int)SYSTEM;
++ (int)NONE;
++ (int)PARTNER_ONLY;
++ (int)KALTURA_NETWORK;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaEntryModerationStatus : NSObject
 + (int)PENDING_MODERATION;
 + (int)APPROVED;
@@ -1232,6 +1241,7 @@
 + (NSString*)SYNC_CATEGORY_PRIVACY_CONTEXT;
 + (NSString*)LIVE_REPORT_EXPORT;
 + (NSString*)RECALCULATE_CACHE;
++ (NSString*)LIVE_TO_VOD;
 @end
 
 // @package Kaltura
@@ -4137,6 +4147,8 @@
 @property (nonatomic,copy,readonly) NSString* capabilities;
 // Template entry id
 @property (nonatomic,copy) NSString* templateEntryId;	// insertonly
+// should we display this entry in search
+@property (nonatomic,assign) int displayInSearch;	// enum KalturaEntryDisplayInSearchType
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfName;
 - (KalturaFieldType)getTypeOfDescription;
@@ -4181,6 +4193,7 @@
 - (KalturaFieldType)getTypeOfEntitledUsersPublish;
 - (KalturaFieldType)getTypeOfCapabilities;
 - (KalturaFieldType)getTypeOfTemplateEntryId;
+- (KalturaFieldType)getTypeOfDisplayInSearch;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setModerationStatusFromString:(NSString*)aPropVal;
 - (void)setModerationCountFromString:(NSString*)aPropVal;
@@ -4197,6 +4210,7 @@
 - (void)setEndDateFromString:(NSString*)aPropVal;
 - (void)setPartnerSortValueFromString:(NSString*)aPropVal;
 - (void)setConversionProfileIdFromString:(NSString*)aPropVal;
+- (void)setDisplayInSearchFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -6477,12 +6491,15 @@
 @property (nonatomic,assign) int shouldCopyEntitlement;	// enum KalturaNullableBoolean
 @property (nonatomic,assign) int shouldCopyScheduling;	// enum KalturaNullableBoolean
 @property (nonatomic,assign) int shouldCopyThumbnail;	// enum KalturaNullableBoolean
+@property (nonatomic,assign) int shouldMakeHidden;	// enum KalturaNullableBoolean
 - (KalturaFieldType)getTypeOfShouldCopyEntitlement;
 - (KalturaFieldType)getTypeOfShouldCopyScheduling;
 - (KalturaFieldType)getTypeOfShouldCopyThumbnail;
+- (KalturaFieldType)getTypeOfShouldMakeHidden;
 - (void)setShouldCopyEntitlementFromString:(NSString*)aPropVal;
 - (void)setShouldCopySchedulingFromString:(NSString*)aPropVal;
 - (void)setShouldCopyThumbnailFromString:(NSString*)aPropVal;
+- (void)setShouldMakeHiddenFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -9987,6 +10004,28 @@
 - (KalturaFieldType)getTypeOfPassword;
 - (KalturaFieldType)getTypeOfStreamName;
 - (KalturaFieldType)getTypeOfApplicationName;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaLiveToVodJobData : KalturaJobData
+// $vod Entry Id
+@property (nonatomic,copy) NSString* vodEntryId;
+// live Entry Id
+@property (nonatomic,copy) NSString* liveEntryId;
+// total VOD Duration
+@property (nonatomic,assign) double totalVodDuration;
+// last Segment Duration
+@property (nonatomic,assign) double lastSegmentDuration;
+// amf Array File Path
+@property (nonatomic,copy) NSString* amfArray;
+- (KalturaFieldType)getTypeOfVodEntryId;
+- (KalturaFieldType)getTypeOfLiveEntryId;
+- (KalturaFieldType)getTypeOfTotalVodDuration;
+- (KalturaFieldType)getTypeOfLastSegmentDuration;
+- (KalturaFieldType)getTypeOfAmfArray;
+- (void)setTotalVodDurationFromString:(NSString*)aPropVal;
+- (void)setLastSegmentDurationFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

@@ -398,6 +398,25 @@
 }
 @end
 
+@implementation KalturaEntryDisplayInSearchType
++ (int)SYSTEM
+{
+    return -1;
+}
++ (int)NONE
+{
+    return 0;
+}
++ (int)PARTNER_ONLY
+{
+    return 1;
+}
++ (int)KALTURA_NETWORK
+{
+    return 2;
+}
+@end
+
 @implementation KalturaEntryModerationStatus
 + (int)PENDING_MODERATION
 {
@@ -3031,6 +3050,10 @@
 + (NSString*)RECALCULATE_CACHE
 {
     return @"41";
+}
++ (NSString*)LIVE_TO_VOD
+{
+    return @"42";
 }
 @end
 
@@ -11645,6 +11668,7 @@
 @synthesize entitledUsersPublish = _entitledUsersPublish;
 @synthesize capabilities = _capabilities;
 @synthesize templateEntryId = _templateEntryId;
+@synthesize displayInSearch = _displayInSearch;
 
 - (id)init
 {
@@ -11667,6 +11691,7 @@
     self->_endDate = KALTURA_UNDEF_INT;
     self->_partnerSortValue = KALTURA_UNDEF_INT;
     self->_conversionProfileId = KALTURA_UNDEF_INT;
+    self->_displayInSearch = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -11890,6 +11915,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfDisplayInSearch
+{
+    return KFT_Int;
+}
+
 - (void)setPartnerIdFromString:(NSString*)aPropVal
 {
     self.partnerId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -11970,6 +12000,11 @@
     self.conversionProfileId = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setDisplayInSearchFromString:(NSString*)aPropVal
+{
+    self.displayInSearch = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -11999,6 +12034,7 @@
     [aParams addIfDefinedKey:@"entitledUsersEdit" withString:self.entitledUsersEdit];
     [aParams addIfDefinedKey:@"entitledUsersPublish" withString:self.entitledUsersPublish];
     [aParams addIfDefinedKey:@"templateEntryId" withString:self.templateEntryId];
+    [aParams addIfDefinedKey:@"displayInSearch" withInt:self.displayInSearch];
 }
 
 - (void)dealloc
@@ -20351,6 +20387,7 @@
 @synthesize shouldCopyEntitlement = _shouldCopyEntitlement;
 @synthesize shouldCopyScheduling = _shouldCopyScheduling;
 @synthesize shouldCopyThumbnail = _shouldCopyThumbnail;
+@synthesize shouldMakeHidden = _shouldMakeHidden;
 
 - (id)init
 {
@@ -20360,6 +20397,7 @@
     self->_shouldCopyEntitlement = KALTURA_UNDEF_INT;
     self->_shouldCopyScheduling = KALTURA_UNDEF_INT;
     self->_shouldCopyThumbnail = KALTURA_UNDEF_INT;
+    self->_shouldMakeHidden = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -20374,6 +20412,11 @@
 }
 
 - (KalturaFieldType)getTypeOfShouldCopyThumbnail
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfShouldMakeHidden
 {
     return KFT_Int;
 }
@@ -20393,6 +20436,11 @@
     self.shouldCopyThumbnail = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setShouldMakeHiddenFromString:(NSString*)aPropVal
+{
+    self.shouldMakeHidden = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -20401,6 +20449,7 @@
     [aParams addIfDefinedKey:@"shouldCopyEntitlement" withInt:self.shouldCopyEntitlement];
     [aParams addIfDefinedKey:@"shouldCopyScheduling" withInt:self.shouldCopyScheduling];
     [aParams addIfDefinedKey:@"shouldCopyThumbnail" withInt:self.shouldCopyThumbnail];
+    [aParams addIfDefinedKey:@"shouldMakeHidden" withInt:self.shouldMakeHidden];
 }
 
 @end
@@ -33591,6 +33640,80 @@
     [self->_password release];
     [self->_streamName release];
     [self->_applicationName release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaLiveToVodJobData
+@synthesize vodEntryId = _vodEntryId;
+@synthesize liveEntryId = _liveEntryId;
+@synthesize totalVodDuration = _totalVodDuration;
+@synthesize lastSegmentDuration = _lastSegmentDuration;
+@synthesize amfArray = _amfArray;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_totalVodDuration = KALTURA_UNDEF_FLOAT;
+    self->_lastSegmentDuration = KALTURA_UNDEF_FLOAT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfVodEntryId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfLiveEntryId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfTotalVodDuration
+{
+    return KFT_Float;
+}
+
+- (KalturaFieldType)getTypeOfLastSegmentDuration
+{
+    return KFT_Float;
+}
+
+- (KalturaFieldType)getTypeOfAmfArray
+{
+    return KFT_String;
+}
+
+- (void)setTotalVodDurationFromString:(NSString*)aPropVal
+{
+    self.totalVodDuration = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
+- (void)setLastSegmentDurationFromString:(NSString*)aPropVal
+{
+    self.lastSegmentDuration = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaLiveToVodJobData"];
+    [aParams addIfDefinedKey:@"vodEntryId" withString:self.vodEntryId];
+    [aParams addIfDefinedKey:@"liveEntryId" withString:self.liveEntryId];
+    [aParams addIfDefinedKey:@"totalVodDuration" withFloat:self.totalVodDuration];
+    [aParams addIfDefinedKey:@"lastSegmentDuration" withFloat:self.lastSegmentDuration];
+    [aParams addIfDefinedKey:@"amfArray" withString:self.amfArray];
+}
+
+- (void)dealloc
+{
+    [self->_vodEntryId release];
+    [self->_liveEntryId release];
+    [self->_amfArray release];
     [super dealloc];
 }
 

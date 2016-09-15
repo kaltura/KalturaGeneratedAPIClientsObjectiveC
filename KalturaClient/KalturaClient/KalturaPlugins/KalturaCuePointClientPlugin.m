@@ -828,5 +828,12 @@
     [self.client queueVoidService:@"cuepoint_cuepoint" withAction:@"updateStatus"];
 }
 
+- (KalturaCuePoint*)cloneWithId:(NSString*)aId withEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    return [self.client queueObjectService:@"cuepoint_cuepoint" withAction:@"clone" withExpectedType:@"KalturaCuePoint"];
+}
+
 @end
 

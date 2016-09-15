@@ -250,5 +250,7 @@
 - (void)deleteWithId:(NSString*)aId;
 // Update cuePoint status by id
 - (void)updateStatusWithId:(NSString*)aId withStatus:(int)aStatus;
+// Clone cuePoint with id to given entry
+- (KalturaCuePoint*)cloneWithId:(NSString*)aId withEntryId:(NSString*)aEntryId;
 @end
 
