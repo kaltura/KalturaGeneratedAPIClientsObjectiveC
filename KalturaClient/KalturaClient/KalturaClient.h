@@ -1670,6 +1670,10 @@
 + (NSString*)LIVE_DASH;
 + (NSString*)LIVE_RTMP;
 + (NSString*)LIVE_HLS_TO_MULTICAST;
++ (NSString*)LIVE_PACKAGER_HLS;
++ (NSString*)LIVE_PACKAGER_HDS;
++ (NSString*)LIVE_PACKAGER_DASH;
++ (NSString*)LIVE_PACKAGER_MSS;
 + (NSString*)LIVE_AKAMAI_HDS;
 @end
 
@@ -8954,6 +8958,7 @@
 @property (nonatomic,assign) int gender;
 @property (nonatomic,copy) NSString* firstName;
 @property (nonatomic,copy) NSString* lastName;
+@property (nonatomic,copy) NSString* group;
 - (KalturaFieldType)getTypeOfUserId;
 - (KalturaFieldType)getTypeOfScreenName;
 - (KalturaFieldType)getTypeOfEmail;
@@ -8967,6 +8972,7 @@
 - (KalturaFieldType)getTypeOfGender;
 - (KalturaFieldType)getTypeOfFirstName;
 - (KalturaFieldType)getTypeOfLastName;
+- (KalturaFieldType)getTypeOfGroup;
 - (void)setDateOfBirthFromString:(NSString*)aPropVal;
 - (void)setGenderFromString:(NSString*)aPropVal;
 @end

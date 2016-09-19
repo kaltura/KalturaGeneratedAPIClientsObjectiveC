@@ -4189,6 +4189,22 @@
 {
     return @"1006";
 }
++ (NSString*)LIVE_PACKAGER_HLS
+{
+    return @"1007";
+}
++ (NSString*)LIVE_PACKAGER_HDS
+{
+    return @"1008";
+}
++ (NSString*)LIVE_PACKAGER_DASH
+{
+    return @"1009";
+}
++ (NSString*)LIVE_PACKAGER_MSS
+{
+    return @"1010";
+}
 + (NSString*)LIVE_AKAMAI_HDS
 {
     return @"1013";
@@ -29657,6 +29673,7 @@
 @synthesize gender = _gender;
 @synthesize firstName = _firstName;
 @synthesize lastName = _lastName;
+@synthesize group = _group;
 
 - (id)init
 {
@@ -29733,6 +29750,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfGroup
+{
+    return KFT_String;
+}
+
 - (void)setDateOfBirthFromString:(NSString*)aPropVal
 {
     self.dateOfBirth = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -29761,6 +29783,7 @@
     [aParams addIfDefinedKey:@"gender" withInt:self.gender];
     [aParams addIfDefinedKey:@"firstName" withString:self.firstName];
     [aParams addIfDefinedKey:@"lastName" withString:self.lastName];
+    [aParams addIfDefinedKey:@"group" withString:self.group];
 }
 
 - (void)dealloc
@@ -29776,6 +29799,7 @@
     [self->_zip release];
     [self->_firstName release];
     [self->_lastName release];
+    [self->_group release];
     [super dealloc];
 }
 
