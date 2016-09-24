@@ -28,6 +28,108 @@
 #import "KalturaFeedDropFolderClientPlugin.h"
 
 ///////////////////////// enums /////////////////////////
+@implementation KalturaFeedDropFolderFileOrderBy
++ (NSString*)CREATED_AT_ASC
+{
+    return @"+createdAt";
+}
++ (NSString*)FILE_NAME_ASC
+{
+    return @"+fileName";
+}
++ (NSString*)FILE_SIZE_ASC
+{
+    return @"+fileSize";
+}
++ (NSString*)FILE_SIZE_LAST_SET_AT_ASC
+{
+    return @"+fileSizeLastSetAt";
+}
++ (NSString*)ID_ASC
+{
+    return @"+id";
+}
++ (NSString*)PARSED_FLAVOR_ASC
+{
+    return @"+parsedFlavor";
+}
++ (NSString*)PARSED_SLUG_ASC
+{
+    return @"+parsedSlug";
+}
++ (NSString*)UPDATED_AT_ASC
+{
+    return @"+updatedAt";
+}
++ (NSString*)CREATED_AT_DESC
+{
+    return @"-createdAt";
+}
++ (NSString*)FILE_NAME_DESC
+{
+    return @"-fileName";
+}
++ (NSString*)FILE_SIZE_DESC
+{
+    return @"-fileSize";
+}
++ (NSString*)FILE_SIZE_LAST_SET_AT_DESC
+{
+    return @"-fileSizeLastSetAt";
+}
++ (NSString*)ID_DESC
+{
+    return @"-id";
+}
++ (NSString*)PARSED_FLAVOR_DESC
+{
+    return @"-parsedFlavor";
+}
++ (NSString*)PARSED_SLUG_DESC
+{
+    return @"-parsedSlug";
+}
++ (NSString*)UPDATED_AT_DESC
+{
+    return @"-updatedAt";
+}
+@end
+
+@implementation KalturaFeedDropFolderOrderBy
++ (NSString*)CREATED_AT_ASC
+{
+    return @"+createdAt";
+}
++ (NSString*)ID_ASC
+{
+    return @"+id";
+}
++ (NSString*)NAME_ASC
+{
+    return @"+name";
+}
++ (NSString*)UPDATED_AT_ASC
+{
+    return @"+updatedAt";
+}
++ (NSString*)CREATED_AT_DESC
+{
+    return @"-createdAt";
+}
++ (NSString*)ID_DESC
+{
+    return @"-id";
+}
++ (NSString*)NAME_DESC
+{
+    return @"-name";
+}
++ (NSString*)UPDATED_AT_DESC
+{
+    return @"-updatedAt";
+}
+@end
+
 ///////////////////////// classes /////////////////////////
 @implementation KalturaFeedItemInfo
 @synthesize itemXPath = _itemXPath;
@@ -195,6 +297,46 @@
     [self->_hash release];
     [self->_feedXmlPath release];
     [super dealloc];
+}
+
+@end
+
+@implementation KalturaFeedDropFolderBaseFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaFeedDropFolderBaseFilter"];
+}
+
+@end
+
+@implementation KalturaFeedDropFolderFileBaseFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaFeedDropFolderFileBaseFilter"];
+}
+
+@end
+
+@implementation KalturaFeedDropFolderFileFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaFeedDropFolderFileFilter"];
+}
+
+@end
+
+@implementation KalturaFeedDropFolderFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaFeedDropFolderFilter"];
 }
 
 @end
