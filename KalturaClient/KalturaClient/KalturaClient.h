@@ -9467,6 +9467,14 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaDeliveryProfileVodPackagerHls : KalturaDeliveryProfile
+@property (nonatomic,assign) KALTURA_BOOL allowFairplayOffline;
+- (KalturaFieldType)getTypeOfAllowFairplayOffline;
+- (void)setAllowFairplayOfflineFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaDeliveryServerNode : KalturaServerNode
 // Delivery profile ids
 @property (nonatomic,retain) NSMutableArray* deliveryProfileIds;	// of KalturaKeyValue elements

@@ -31619,6 +31619,38 @@
 
 @end
 
+@implementation KalturaDeliveryProfileVodPackagerHls
+@synthesize allowFairplayOffline = _allowFairplayOffline;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_allowFairplayOffline = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfAllowFairplayOffline
+{
+    return KFT_Bool;
+}
+
+- (void)setAllowFairplayOfflineFromString:(NSString*)aPropVal
+{
+    self.allowFairplayOffline = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaDeliveryProfileVodPackagerHls"];
+    [aParams addIfDefinedKey:@"allowFairplayOffline" withBool:self.allowFairplayOffline];
+}
+
+@end
+
 @implementation KalturaDeliveryServerNode
 @synthesize deliveryProfileIds = _deliveryProfileIds;
 
