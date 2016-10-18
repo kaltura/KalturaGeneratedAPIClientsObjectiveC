@@ -48004,14 +48004,20 @@
     return [self loginWithPartnerId:aPartnerId withUserId:aUserId withPassword:aPassword withExpiry:KALTURA_UNDEF_INT];
 }
 
-- (NSString*)loginByLoginIdWithLoginId:(NSString*)aLoginId withPassword:(NSString*)aPassword withPartnerId:(int)aPartnerId withExpiry:(int)aExpiry withPrivileges:(NSString*)aPrivileges
+- (NSString*)loginByLoginIdWithLoginId:(NSString*)aLoginId withPassword:(NSString*)aPassword withPartnerId:(int)aPartnerId withExpiry:(int)aExpiry withPrivileges:(NSString*)aPrivileges withOtp:(NSString*)aOtp
 {
     [self.client.params addIfDefinedKey:@"loginId" withString:aLoginId];
     [self.client.params addIfDefinedKey:@"password" withString:aPassword];
     [self.client.params addIfDefinedKey:@"partnerId" withInt:aPartnerId];
     [self.client.params addIfDefinedKey:@"expiry" withInt:aExpiry];
     [self.client.params addIfDefinedKey:@"privileges" withString:aPrivileges];
+    [self.client.params addIfDefinedKey:@"otp" withString:aOtp];
     return [self.client queueStringService:@"user" withAction:@"loginByLoginId"];
+}
+
+- (NSString*)loginByLoginIdWithLoginId:(NSString*)aLoginId withPassword:(NSString*)aPassword withPartnerId:(int)aPartnerId withExpiry:(int)aExpiry withPrivileges:(NSString*)aPrivileges
+{
+    return [self loginByLoginIdWithLoginId:aLoginId withPassword:aPassword withPartnerId:aPartnerId withExpiry:aExpiry withPrivileges:aPrivileges withOtp:nil];
 }
 
 - (NSString*)loginByLoginIdWithLoginId:(NSString*)aLoginId withPassword:(NSString*)aPassword withPartnerId:(int)aPartnerId withExpiry:(int)aExpiry
