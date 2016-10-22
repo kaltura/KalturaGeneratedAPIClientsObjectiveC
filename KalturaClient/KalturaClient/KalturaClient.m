@@ -45909,10 +45909,10 @@
     return [self.client queueObjectService:@"livestream" withAction:@"removeLiveStreamPushPublishConfiguration" withExpectedType:@"KalturaLiveStreamEntry"];
 }
 
-- (void)regenrateSecureTokenWithEntryId:(NSString*)aEntryId
+- (void)regenerateStreamTokenWithEntryId:(NSString*)aEntryId
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client queueVoidService:@"livestream" withAction:@"regenrateSecureToken"];
+    [self.client queueVoidService:@"livestream" withAction:@"regenerateStreamToken"];
 }
 
 - (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withIsLastChunk:(KALTURA_BOOL)aIsLastChunk
