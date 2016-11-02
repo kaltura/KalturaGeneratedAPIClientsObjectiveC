@@ -135,6 +135,10 @@
 {
     return @"+startDate";
 }
++ (NSString*)SUMMARY_ASC
+{
+    return @"+summary";
+}
 + (NSString*)UPDATED_AT_ASC
 {
     return @"+updatedAt";
@@ -154,6 +158,10 @@
 + (NSString*)START_DATE_DESC
 {
     return @"-startDate";
+}
++ (NSString*)SUMMARY_DESC
+{
+    return @"-summary";
 }
 + (NSString*)UPDATED_AT_DESC
 {
@@ -197,6 +205,10 @@
 {
     return @"+startDate";
 }
++ (NSString*)SUMMARY_ASC
+{
+    return @"+summary";
+}
 + (NSString*)UPDATED_AT_ASC
 {
     return @"+updatedAt";
@@ -216,6 +228,10 @@
 + (NSString*)START_DATE_DESC
 {
     return @"-startDate";
+}
++ (NSString*)SUMMARY_DESC
+{
+    return @"-summary";
 }
 + (NSString*)UPDATED_AT_DESC
 {
@@ -259,6 +275,10 @@
 {
     return @"+startDate";
 }
++ (NSString*)SUMMARY_ASC
+{
+    return @"+summary";
+}
 + (NSString*)UPDATED_AT_ASC
 {
     return @"+updatedAt";
@@ -278,6 +298,10 @@
 + (NSString*)START_DATE_DESC
 {
     return @"-startDate";
+}
++ (NSString*)SUMMARY_DESC
+{
+    return @"-summary";
 }
 + (NSString*)UPDATED_AT_DESC
 {
@@ -302,6 +326,10 @@
 {
     return @"+startDate";
 }
++ (NSString*)SUMMARY_ASC
+{
+    return @"+summary";
+}
 + (NSString*)UPDATED_AT_ASC
 {
     return @"+updatedAt";
@@ -321,6 +349,10 @@
 + (NSString*)START_DATE_DESC
 {
     return @"-startDate";
+}
++ (NSString*)SUMMARY_DESC
+{
+    return @"-summary";
 }
 + (NSString*)UPDATED_AT_DESC
 {

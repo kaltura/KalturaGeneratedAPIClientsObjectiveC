@@ -85,11 +85,13 @@
 + (NSString*)END_DATE_ASC;
 + (NSString*)PRIORITY_ASC;
 + (NSString*)START_DATE_ASC;
++ (NSString*)SUMMARY_ASC;
 + (NSString*)UPDATED_AT_ASC;
 + (NSString*)CREATED_AT_DESC;
 + (NSString*)END_DATE_DESC;
 + (NSString*)PRIORITY_DESC;
 + (NSString*)START_DATE_DESC;
++ (NSString*)SUMMARY_DESC;
 + (NSString*)UPDATED_AT_DESC;
 @end
 
@@ -109,11 +111,13 @@
 + (NSString*)END_DATE_ASC;
 + (NSString*)PRIORITY_ASC;
 + (NSString*)START_DATE_ASC;
++ (NSString*)SUMMARY_ASC;
 + (NSString*)UPDATED_AT_ASC;
 + (NSString*)CREATED_AT_DESC;
 + (NSString*)END_DATE_DESC;
 + (NSString*)PRIORITY_DESC;
 + (NSString*)START_DATE_DESC;
++ (NSString*)SUMMARY_DESC;
 + (NSString*)UPDATED_AT_DESC;
 @end
 
@@ -133,11 +137,13 @@
 + (NSString*)END_DATE_ASC;
 + (NSString*)PRIORITY_ASC;
 + (NSString*)START_DATE_ASC;
++ (NSString*)SUMMARY_ASC;
 + (NSString*)UPDATED_AT_ASC;
 + (NSString*)CREATED_AT_DESC;
 + (NSString*)END_DATE_DESC;
 + (NSString*)PRIORITY_DESC;
 + (NSString*)START_DATE_DESC;
++ (NSString*)SUMMARY_DESC;
 + (NSString*)UPDATED_AT_DESC;
 @end
 
@@ -148,11 +154,13 @@
 + (NSString*)END_DATE_ASC;
 + (NSString*)PRIORITY_ASC;
 + (NSString*)START_DATE_ASC;
++ (NSString*)SUMMARY_ASC;
 + (NSString*)UPDATED_AT_ASC;
 + (NSString*)CREATED_AT_DESC;
 + (NSString*)END_DATE_DESC;
 + (NSString*)PRIORITY_DESC;
 + (NSString*)START_DATE_DESC;
++ (NSString*)SUMMARY_DESC;
 + (NSString*)UPDATED_AT_DESC;
 @end
 
@@ -747,7 +755,7 @@
 ///////////////////////// services /////////////////////////
 // @package Kaltura
 // @subpackage Client
-// ScheduleEvent service lets you create and manage schedule events
+// The ScheduleEvent service enables you to create and manage (update, delete, retrieve, etc.) scheduled recording events.
 @class KalturaBulkUpload;
 @class KalturaBulkUploadICalJobData;
 @interface KalturaScheduleEventService : KalturaServiceBase
@@ -772,7 +780,7 @@
 
 // @package Kaltura
 // @subpackage Client
-// ScheduleResource service lets you create and manage schedule events
+// The ScheduleResource service enables you to create and manage (update, delete, retrieve, etc.) the resources required for scheduled events (cameras, capture devices, etc.).
 @class KalturaBulkUpload;
 @class KalturaBulkUploadCsvJobData;
 @interface KalturaScheduleResourceService : KalturaServiceBase
@@ -795,7 +803,7 @@
 
 // @package Kaltura
 // @subpackage Client
-// ScheduleEventResource service lets you create and manage connections between events and resources
+// The ScheduleEventResource service enables you create and manage (update, delete, retrieve, etc.) the connections between recording events and the resources required for these events (cameras, capture devices, etc.).
 @interface KalturaScheduleEventResourceService : KalturaServiceBase
 // Allows you to add a new KalturaScheduleEventResource object
 - (KalturaScheduleEventResource*)addWithScheduleEventResource:(KalturaScheduleEventResource*)aScheduleEventResource;

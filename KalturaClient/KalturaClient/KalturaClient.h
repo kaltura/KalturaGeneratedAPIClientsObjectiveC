@@ -244,6 +244,7 @@
 + (int)PLAYABLE;
 + (int)BROADCASTING;
 + (int)AUTHENTICATED;
++ (int)MARKED_FOR_DELETION;
 @end
 
 // @package Kaltura
@@ -3396,6 +3397,7 @@
 + (NSString*)LIVE_CHANNEL;
 + (NSString*)RECORDED_LIVE;
 + (NSString*)CLIP;
++ (NSString*)KALTURA_RECORDED_LIVE;
 + (NSString*)LIVE_STREAM_ONTEXTDATA_CAPTIONS;
 @end
 
@@ -13538,9 +13540,9 @@
 // delete all local file syncs for this asset
 - (void)deleteLocalContentWithAssetId:(NSString*)aAssetId;
 // serve cmd line to transcode the ad
-- (void)serveAdStitchCmdWithAssetId:(NSString*)aAssetId withFfprobeJson:(NSString*)aFfprobeJson withDuration:(NSString*)aDuration;
-- (void)serveAdStitchCmdWithAssetId:(NSString*)aAssetId withFfprobeJson:(NSString*)aFfprobeJson;
-- (void)serveAdStitchCmdWithAssetId:(NSString*)aAssetId;
+- (NSString*)serveAdStitchCmdWithAssetId:(NSString*)aAssetId withFfprobeJson:(NSString*)aFfprobeJson withDuration:(NSString*)aDuration;
+- (NSString*)serveAdStitchCmdWithAssetId:(NSString*)aAssetId withFfprobeJson:(NSString*)aFfprobeJson;
+- (NSString*)serveAdStitchCmdWithAssetId:(NSString*)aAssetId;
 @end
 
 // @package Kaltura
@@ -13636,6 +13638,8 @@
 - (KalturaLiveEntry*)unregisterMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex;
 // Validates all registered media servers
 - (void)validateRegisteredMediaServersWithEntryId:(NSString*)aEntryId;
+// Sey recorded video to live entry
+- (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration;
 @end
 
 // @package Kaltura
@@ -13710,6 +13714,8 @@
 - (KalturaLiveEntry*)unregisterMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex;
 // Validates all registered media servers
 - (void)validateRegisteredMediaServersWithEntryId:(NSString*)aEntryId;
+// Sey recorded video to live entry
+- (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration;
 // Creates perioding metadata sync-point events on a live stream
 - (void)createPeriodicSyncPointsWithEntryId:(NSString*)aEntryId withInterval:(int)aInterval withDuration:(int)aDuration;
 @end

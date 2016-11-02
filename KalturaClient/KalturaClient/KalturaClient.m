@@ -457,6 +457,10 @@
 {
     return 3;
 }
++ (int)MARKED_FOR_DELETION
+{
+    return 4;
+}
 @end
 
 @implementation KalturaFeatureStatusType
@@ -9613,6 +9617,10 @@
 + (NSString*)CLIP
 {
     return @"35";
+}
++ (NSString*)KALTURA_RECORDED_LIVE
+{
+    return @"36";
 }
 + (NSString*)LIVE_STREAM_ONTEXTDATA_CAPTIONS
 {
@@ -45445,22 +45453,22 @@
     [self.client queueVoidService:@"flavorasset" withAction:@"deleteLocalContent"];
 }
 
-- (void)serveAdStitchCmdWithAssetId:(NSString*)aAssetId withFfprobeJson:(NSString*)aFfprobeJson withDuration:(NSString*)aDuration
+- (NSString*)serveAdStitchCmdWithAssetId:(NSString*)aAssetId withFfprobeJson:(NSString*)aFfprobeJson withDuration:(NSString*)aDuration
 {
     [self.client.params addIfDefinedKey:@"assetId" withString:aAssetId];
     [self.client.params addIfDefinedKey:@"ffprobeJson" withString:aFfprobeJson];
     [self.client.params addIfDefinedKey:@"duration" withString:aDuration];
-    [self.client queueVoidService:@"flavorasset" withAction:@"serveAdStitchCmd"];
+    return [self.client queueStringService:@"flavorasset" withAction:@"serveAdStitchCmd"];
 }
 
-- (void)serveAdStitchCmdWithAssetId:(NSString*)aAssetId withFfprobeJson:(NSString*)aFfprobeJson
+- (NSString*)serveAdStitchCmdWithAssetId:(NSString*)aAssetId withFfprobeJson:(NSString*)aFfprobeJson
 {
-    [self serveAdStitchCmdWithAssetId:aAssetId withFfprobeJson:aFfprobeJson withDuration:nil];
+    return [self serveAdStitchCmdWithAssetId:aAssetId withFfprobeJson:aFfprobeJson withDuration:nil];
 }
 
-- (void)serveAdStitchCmdWithAssetId:(NSString*)aAssetId
+- (NSString*)serveAdStitchCmdWithAssetId:(NSString*)aAssetId
 {
-    [self serveAdStitchCmdWithAssetId:aAssetId withFfprobeJson:nil];
+    return [self serveAdStitchCmdWithAssetId:aAssetId withFfprobeJson:nil];
 }
 
 @end
@@ -45719,6 +45727,15 @@
     [self.client queueVoidService:@"livechannel" withAction:@"validateRegisteredMediaServers"];
 }
 
+- (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"mediaServerIndex" withString:aMediaServerIndex];
+    [self.client.params addIfDefinedKey:@"resource" withObject:aResource];
+    [self.client.params addIfDefinedKey:@"duration" withFloat:aDuration];
+    return [self.client queueObjectService:@"livechannel" withAction:@"setRecordedContent" withExpectedType:@"KalturaLiveEntry"];
+}
+
 @end
 
 @implementation KalturaLiveReportsService
@@ -45963,6 +45980,15 @@
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
     [self.client queueVoidService:@"livestream" withAction:@"validateRegisteredMediaServers"];
+}
+
+- (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"mediaServerIndex" withString:aMediaServerIndex];
+    [self.client.params addIfDefinedKey:@"resource" withObject:aResource];
+    [self.client.params addIfDefinedKey:@"duration" withFloat:aDuration];
+    return [self.client queueObjectService:@"livestream" withAction:@"setRecordedContent" withExpectedType:@"KalturaLiveEntry"];
 }
 
 - (void)createPeriodicSyncPointsWithEntryId:(NSString*)aEntryId withInterval:(int)aInterval withDuration:(int)aDuration
