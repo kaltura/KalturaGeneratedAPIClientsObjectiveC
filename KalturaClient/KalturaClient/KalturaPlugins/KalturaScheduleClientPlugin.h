@@ -213,6 +213,8 @@
 @property (nonatomic,copy) NSString* name;
 @property (nonatomic,copy) NSString* frequency;	// enum KalturaScheduleEventRecurrenceFrequency
 @property (nonatomic,assign) int until;
+// TimeZone String
+@property (nonatomic,copy) NSString* timeZone;
 @property (nonatomic,assign) int count;
 @property (nonatomic,assign) int interval;
 // Comma separated numbers between 0 to 59
@@ -254,6 +256,7 @@
 - (KalturaFieldType)getTypeOfName;
 - (KalturaFieldType)getTypeOfFrequency;
 - (KalturaFieldType)getTypeOfUntil;
+- (KalturaFieldType)getTypeOfTimeZone;
 - (KalturaFieldType)getTypeOfCount;
 - (KalturaFieldType)getTypeOfInterval;
 - (KalturaFieldType)getTypeOfBySecond;

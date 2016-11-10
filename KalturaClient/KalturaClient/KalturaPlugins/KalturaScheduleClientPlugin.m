@@ -465,6 +465,7 @@
 @synthesize name = _name;
 @synthesize frequency = _frequency;
 @synthesize until = _until;
+@synthesize timeZone = _timeZone;
 @synthesize count = _count;
 @synthesize interval = _interval;
 @synthesize bySecond = _bySecond;
@@ -502,6 +503,11 @@
 - (KalturaFieldType)getTypeOfUntil
 {
     return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfTimeZone
+{
+    return KFT_String;
 }
 
 - (KalturaFieldType)getTypeOfCount
@@ -587,6 +593,7 @@
     [aParams addIfDefinedKey:@"name" withString:self.name];
     [aParams addIfDefinedKey:@"frequency" withString:self.frequency];
     [aParams addIfDefinedKey:@"until" withInt:self.until];
+    [aParams addIfDefinedKey:@"timeZone" withString:self.timeZone];
     [aParams addIfDefinedKey:@"count" withInt:self.count];
     [aParams addIfDefinedKey:@"interval" withInt:self.interval];
     [aParams addIfDefinedKey:@"bySecond" withString:self.bySecond];
@@ -605,6 +612,7 @@
 {
     [self->_name release];
     [self->_frequency release];
+    [self->_timeZone release];
     [self->_bySecond release];
     [self->_byMinute release];
     [self->_byHour release];

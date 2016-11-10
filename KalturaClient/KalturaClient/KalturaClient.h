@@ -5687,6 +5687,25 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaStreamContainer : KalturaObjectBase
+@property (nonatomic,copy) NSString* type;
+@property (nonatomic,assign) int trackIndex;
+@property (nonatomic,copy) NSString* language;
+@property (nonatomic,assign) int channelIndex;
+@property (nonatomic,copy) NSString* label;
+@property (nonatomic,copy) NSString* channelLayout;
+- (KalturaFieldType)getTypeOfType;
+- (KalturaFieldType)getTypeOfTrackIndex;
+- (KalturaFieldType)getTypeOfLanguage;
+- (KalturaFieldType)getTypeOfChannelIndex;
+- (KalturaFieldType)getTypeOfLabel;
+- (KalturaFieldType)getTypeOfChannelLayout;
+- (void)setTrackIndexFromString:(NSString*)aPropVal;
+- (void)setChannelIndexFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaMediaEntry : KalturaPlayableEntry
 // The media type of the entry
 @property (nonatomic,assign) int mediaType;	// enum KalturaMediaType, insertonly
@@ -5710,6 +5729,8 @@
 @property (nonatomic,copy,readonly) NSString* flavorParamsIds;
 // True if trim action is disabled for this entry
 @property (nonatomic,assign,readonly) int isTrimDisabled;	// enum KalturaNullableBoolean
+// Array of streams that exists on the entry
+@property (nonatomic,retain) NSMutableArray* streams;	// of KalturaStreamContainer elements
 - (KalturaFieldType)getTypeOfMediaType;
 - (KalturaFieldType)getTypeOfConversionQuality;
 - (KalturaFieldType)getTypeOfSourceType;
@@ -5721,6 +5742,8 @@
 - (KalturaFieldType)getTypeOfDataUrl;
 - (KalturaFieldType)getTypeOfFlavorParamsIds;
 - (KalturaFieldType)getTypeOfIsTrimDisabled;
+- (KalturaFieldType)getTypeOfStreams;
+- (NSString*)getObjectTypeOfStreams;
 - (void)setMediaTypeFromString:(NSString*)aPropVal;
 - (void)setSearchProviderTypeFromString:(NSString*)aPropVal;
 - (void)setMediaDateFromString:(NSString*)aPropVal;
@@ -5795,6 +5818,8 @@
 @property (nonatomic,assign,readonly) int status;	// enum KalturaFlavorAssetStatus
 // The language of the flavor asset
 @property (nonatomic,copy) NSString* language;	// enum KalturaLanguage
+// The label of the flavor asset
+@property (nonatomic,copy,readonly) NSString* label;
 - (KalturaFieldType)getTypeOfFlavorParamsId;
 - (KalturaFieldType)getTypeOfWidth;
 - (KalturaFieldType)getTypeOfHeight;
@@ -5806,6 +5831,7 @@
 - (KalturaFieldType)getTypeOfVideoCodecId;
 - (KalturaFieldType)getTypeOfStatus;
 - (KalturaFieldType)getTypeOfLanguage;
+- (KalturaFieldType)getTypeOfLabel;
 - (void)setFlavorParamsIdFromString:(NSString*)aPropVal;
 - (void)setWidthFromString:(NSString*)aPropVal;
 - (void)setHeightFromString:(NSString*)aPropVal;
@@ -9469,10 +9495,10 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaDeliveryProfileVodPackagerHls : KalturaDeliveryProfile
-@property (nonatomic,assign) KALTURA_BOOL allowFairplayOffline;
-- (KalturaFieldType)getTypeOfAllowFairplayOffline;
-- (void)setAllowFairplayOfflineFromString:(NSString*)aPropVal;
+@interface KalturaDeliveryProfileVodPackagerPlayServer : KalturaDeliveryProfile
+@property (nonatomic,assign) KALTURA_BOOL adStitchingEnabled;
+- (KalturaFieldType)getTypeOfAdStitchingEnabled;
+- (void)setAdStitchingEnabledFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -11420,6 +11446,14 @@
 @property (nonatomic,copy) NSString* rendererClass;
 - (KalturaFieldType)getTypeOfPattern;
 - (KalturaFieldType)getTypeOfRendererClass;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaDeliveryProfileVodPackagerHls : KalturaDeliveryProfileVodPackagerPlayServer
+@property (nonatomic,assign) KALTURA_BOOL allowFairplayOffline;
+- (KalturaFieldType)getTypeOfAllowFairplayOffline;
+- (void)setAllowFairplayOfflineFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

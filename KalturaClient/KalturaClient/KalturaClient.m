@@ -17504,6 +17504,88 @@
 
 @end
 
+@implementation KalturaStreamContainer
+@synthesize type = _type;
+@synthesize trackIndex = _trackIndex;
+@synthesize language = _language;
+@synthesize channelIndex = _channelIndex;
+@synthesize label = _label;
+@synthesize channelLayout = _channelLayout;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_trackIndex = KALTURA_UNDEF_INT;
+    self->_channelIndex = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfType
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfTrackIndex
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfLanguage
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfChannelIndex
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfLabel
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfChannelLayout
+{
+    return KFT_String;
+}
+
+- (void)setTrackIndexFromString:(NSString*)aPropVal
+{
+    self.trackIndex = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setChannelIndexFromString:(NSString*)aPropVal
+{
+    self.channelIndex = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaStreamContainer"];
+    [aParams addIfDefinedKey:@"type" withString:self.type];
+    [aParams addIfDefinedKey:@"trackIndex" withInt:self.trackIndex];
+    [aParams addIfDefinedKey:@"language" withString:self.language];
+    [aParams addIfDefinedKey:@"channelIndex" withInt:self.channelIndex];
+    [aParams addIfDefinedKey:@"label" withString:self.label];
+    [aParams addIfDefinedKey:@"channelLayout" withString:self.channelLayout];
+}
+
+- (void)dealloc
+{
+    [self->_type release];
+    [self->_language release];
+    [self->_label release];
+    [self->_channelLayout release];
+    [super dealloc];
+}
+
+@end
+
 @interface KalturaMediaEntry()
 @property (nonatomic,assign) int mediaDate;
 @property (nonatomic,copy) NSString* dataUrl;
@@ -17523,6 +17605,7 @@
 @synthesize dataUrl = _dataUrl;
 @synthesize flavorParamsIds = _flavorParamsIds;
 @synthesize isTrimDisabled = _isTrimDisabled;
+@synthesize streams = _streams;
 
 - (id)init
 {
@@ -17591,6 +17674,16 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfStreams
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfStreams
+{
+    return @"KalturaStreamContainer";
+}
+
 - (void)setMediaTypeFromString:(NSString*)aPropVal
 {
     self.mediaType = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -17623,6 +17716,7 @@
     [aParams addIfDefinedKey:@"searchProviderId" withString:self.searchProviderId];
     [aParams addIfDefinedKey:@"creditUserName" withString:self.creditUserName];
     [aParams addIfDefinedKey:@"creditUrl" withString:self.creditUrl];
+    [aParams addIfDefinedKey:@"streams" withArray:self.streams];
 }
 
 - (void)dealloc
@@ -17634,6 +17728,7 @@
     [self->_creditUrl release];
     [self->_dataUrl release];
     [self->_flavorParamsIds release];
+    [self->_streams release];
     [super dealloc];
 }
 
@@ -17834,6 +17929,7 @@
 @property (nonatomic,copy) NSString* containerFormat;
 @property (nonatomic,copy) NSString* videoCodecId;
 @property (nonatomic,assign) int status;
+@property (nonatomic,copy) NSString* label;
 @end
 
 @implementation KalturaFlavorAsset
@@ -17848,6 +17944,7 @@
 @synthesize videoCodecId = _videoCodecId;
 @synthesize status = _status;
 @synthesize language = _language;
+@synthesize label = _label;
 
 - (id)init
 {
@@ -17920,6 +18017,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfLabel
+{
+    return KFT_String;
+}
+
 - (void)setFlavorParamsIdFromString:(NSString*)aPropVal
 {
     self.flavorParamsId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -17974,6 +18076,7 @@
     [self->_containerFormat release];
     [self->_videoCodecId release];
     [self->_language release];
+    [self->_label release];
     [super dealloc];
 }
 
@@ -31627,34 +31730,34 @@
 
 @end
 
-@implementation KalturaDeliveryProfileVodPackagerHls
-@synthesize allowFairplayOffline = _allowFairplayOffline;
+@implementation KalturaDeliveryProfileVodPackagerPlayServer
+@synthesize adStitchingEnabled = _adStitchingEnabled;
 
 - (id)init
 {
     self = [super init];
     if (self == nil)
         return nil;
-    self->_allowFairplayOffline = KALTURA_UNDEF_BOOL;
+    self->_adStitchingEnabled = KALTURA_UNDEF_BOOL;
     return self;
 }
 
-- (KalturaFieldType)getTypeOfAllowFairplayOffline
+- (KalturaFieldType)getTypeOfAdStitchingEnabled
 {
     return KFT_Bool;
 }
 
-- (void)setAllowFairplayOfflineFromString:(NSString*)aPropVal
+- (void)setAdStitchingEnabledFromString:(NSString*)aPropVal
 {
-    self.allowFairplayOffline = [KalturaSimpleTypeParser parseBool:aPropVal];
+    self.adStitchingEnabled = [KalturaSimpleTypeParser parseBool:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaDeliveryProfileVodPackagerHls"];
-    [aParams addIfDefinedKey:@"allowFairplayOffline" withBool:self.allowFairplayOffline];
+        [aParams putKey:@"objectType" withString:@"KalturaDeliveryProfileVodPackagerPlayServer"];
+    [aParams addIfDefinedKey:@"adStitchingEnabled" withBool:self.adStitchingEnabled];
 }
 
 @end
@@ -39173,6 +39276,38 @@
     [self->_pattern release];
     [self->_rendererClass release];
     [super dealloc];
+}
+
+@end
+
+@implementation KalturaDeliveryProfileVodPackagerHls
+@synthesize allowFairplayOffline = _allowFairplayOffline;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_allowFairplayOffline = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfAllowFairplayOffline
+{
+    return KFT_Bool;
+}
+
+- (void)setAllowFairplayOfflineFromString:(NSString*)aPropVal
+{
+    self.allowFairplayOffline = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaDeliveryProfileVodPackagerHls"];
+    [aParams addIfDefinedKey:@"allowFairplayOffline" withBool:self.allowFairplayOffline];
 }
 
 @end
