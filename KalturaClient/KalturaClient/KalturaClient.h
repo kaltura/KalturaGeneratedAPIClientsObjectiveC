@@ -6884,6 +6884,7 @@
 // This filter parameter should be in use for retrieving only entries, uploaded by/assigned to a specific user (identified by user Id).
 @property (nonatomic,copy) NSString* userIdEqual;
 @property (nonatomic,copy) NSString* userIdIn;
+@property (nonatomic,copy) NSString* userIdNotIn;
 @property (nonatomic,copy) NSString* creatorIdEqual;
 // This filter should be in use for retrieving specific entries. It should include only one string to search for in entry tags (no wildcards, spaces are treated as part of the string).
 @property (nonatomic,copy) NSString* tagsLike;
@@ -6979,6 +6980,7 @@
 - (KalturaFieldType)getTypeOfPartnerIdIn;
 - (KalturaFieldType)getTypeOfUserIdEqual;
 - (KalturaFieldType)getTypeOfUserIdIn;
+- (KalturaFieldType)getTypeOfUserIdNotIn;
 - (KalturaFieldType)getTypeOfCreatorIdEqual;
 - (KalturaFieldType)getTypeOfTagsLike;
 - (KalturaFieldType)getTypeOfTagsMultiLikeOr;

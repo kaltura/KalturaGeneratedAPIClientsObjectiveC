@@ -21774,6 +21774,7 @@
 @synthesize partnerIdIn = _partnerIdIn;
 @synthesize userIdEqual = _userIdEqual;
 @synthesize userIdIn = _userIdIn;
+@synthesize userIdNotIn = _userIdNotIn;
 @synthesize creatorIdEqual = _creatorIdEqual;
 @synthesize tagsLike = _tagsLike;
 @synthesize tagsMultiLikeOr = _tagsMultiLikeOr;
@@ -21922,6 +21923,11 @@
 }
 
 - (KalturaFieldType)getTypeOfUserIdIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfUserIdNotIn
 {
     return KFT_String;
 }
@@ -22382,6 +22388,7 @@
     [aParams addIfDefinedKey:@"partnerIdIn" withString:self.partnerIdIn];
     [aParams addIfDefinedKey:@"userIdEqual" withString:self.userIdEqual];
     [aParams addIfDefinedKey:@"userIdIn" withString:self.userIdIn];
+    [aParams addIfDefinedKey:@"userIdNotIn" withString:self.userIdNotIn];
     [aParams addIfDefinedKey:@"creatorIdEqual" withString:self.creatorIdEqual];
     [aParams addIfDefinedKey:@"tagsLike" withString:self.tagsLike];
     [aParams addIfDefinedKey:@"tagsMultiLikeOr" withString:self.tagsMultiLikeOr];
@@ -22462,6 +22469,7 @@
     [self->_partnerIdIn release];
     [self->_userIdEqual release];
     [self->_userIdIn release];
+    [self->_userIdNotIn release];
     [self->_creatorIdEqual release];
     [self->_tagsLike release];
     [self->_tagsMultiLikeOr release];
