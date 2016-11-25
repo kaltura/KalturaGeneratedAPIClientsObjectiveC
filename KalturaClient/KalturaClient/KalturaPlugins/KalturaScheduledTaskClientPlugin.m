@@ -121,6 +121,10 @@
 {
     return @"6";
 }
++ (NSString*)MODIFY_ENTRY
+{
+    return @"7";
+}
 @end
 
 @implementation KalturaScheduledTaskProfileOrderBy
@@ -538,6 +542,106 @@
 - (void)dealloc
 {
     [self->_categoryIds release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaModifyEntryObjectTask
+@synthesize inputMetadataProfileId = _inputMetadataProfileId;
+@synthesize inputMetadata = _inputMetadata;
+@synthesize outputMetadataProfileId = _outputMetadataProfileId;
+@synthesize outputMetadata = _outputMetadata;
+@synthesize inputUserId = _inputUserId;
+@synthesize inputEntitledUsersEdit = _inputEntitledUsersEdit;
+@synthesize inputEntitledUsersPublish = _inputEntitledUsersPublish;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_inputMetadataProfileId = KALTURA_UNDEF_INT;
+    self->_outputMetadataProfileId = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfInputMetadataProfileId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfInputMetadata
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfInputMetadata
+{
+    return @"KalturaKeyValue";
+}
+
+- (KalturaFieldType)getTypeOfOutputMetadataProfileId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfOutputMetadata
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfOutputMetadata
+{
+    return @"KalturaKeyValue";
+}
+
+- (KalturaFieldType)getTypeOfInputUserId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfInputEntitledUsersEdit
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfInputEntitledUsersPublish
+{
+    return KFT_String;
+}
+
+- (void)setInputMetadataProfileIdFromString:(NSString*)aPropVal
+{
+    self.inputMetadataProfileId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setOutputMetadataProfileIdFromString:(NSString*)aPropVal
+{
+    self.outputMetadataProfileId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaModifyEntryObjectTask"];
+    [aParams addIfDefinedKey:@"inputMetadataProfileId" withInt:self.inputMetadataProfileId];
+    [aParams addIfDefinedKey:@"inputMetadata" withArray:self.inputMetadata];
+    [aParams addIfDefinedKey:@"outputMetadataProfileId" withInt:self.outputMetadataProfileId];
+    [aParams addIfDefinedKey:@"outputMetadata" withArray:self.outputMetadata];
+    [aParams addIfDefinedKey:@"inputUserId" withString:self.inputUserId];
+    [aParams addIfDefinedKey:@"inputEntitledUsersEdit" withString:self.inputEntitledUsersEdit];
+    [aParams addIfDefinedKey:@"inputEntitledUsersPublish" withString:self.inputEntitledUsersPublish];
+}
+
+- (void)dealloc
+{
+    [self->_inputMetadata release];
+    [self->_outputMetadata release];
+    [self->_inputUserId release];
+    [self->_inputEntitledUsersEdit release];
+    [self->_inputEntitledUsersPublish release];
     [super dealloc];
 }
 

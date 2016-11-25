@@ -14755,6 +14755,7 @@
 @property (nonatomic,assign) int createdAt;
 @property (nonatomic,copy) NSString* categoryFullIds;
 @property (nonatomic,assign) int status;
+@property (nonatomic,copy) NSString* creatorUserId;
 @end
 
 @implementation KalturaCategoryEntry
@@ -14763,6 +14764,7 @@
 @synthesize createdAt = _createdAt;
 @synthesize categoryFullIds = _categoryFullIds;
 @synthesize status = _status;
+@synthesize creatorUserId = _creatorUserId;
 
 - (id)init
 {
@@ -14800,6 +14802,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfCreatorUserId
+{
+    return KFT_String;
+}
+
 - (void)setCategoryIdFromString:(NSString*)aPropVal
 {
     self.categoryId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -14828,6 +14835,7 @@
 {
     [self->_entryId release];
     [self->_categoryFullIds release];
+    [self->_creatorUserId release];
     [super dealloc];
 }
 
@@ -21689,6 +21697,8 @@
 @synthesize width = _width;
 @synthesize height = _height;
 @synthesize codec = _codec;
+@synthesize frameRate = _frameRate;
+@synthesize keyFrameInterval = _keyFrameInterval;
 
 - (id)init
 {
@@ -21698,6 +21708,8 @@
     self->_bitrate = KALTURA_UNDEF_INT;
     self->_width = KALTURA_UNDEF_INT;
     self->_height = KALTURA_UNDEF_INT;
+    self->_frameRate = KALTURA_UNDEF_INT;
+    self->_keyFrameInterval = KALTURA_UNDEF_FLOAT;
     return self;
 }
 
@@ -21726,6 +21738,16 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfFrameRate
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfKeyFrameInterval
+{
+    return KFT_Float;
+}
+
 - (void)setBitrateFromString:(NSString*)aPropVal
 {
     self.bitrate = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -21741,6 +21763,16 @@
     self.height = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setFrameRateFromString:(NSString*)aPropVal
+{
+    self.frameRate = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setKeyFrameIntervalFromString:(NSString*)aPropVal
+{
+    self.keyFrameInterval = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -21751,6 +21783,8 @@
     [aParams addIfDefinedKey:@"width" withInt:self.width];
     [aParams addIfDefinedKey:@"height" withInt:self.height];
     [aParams addIfDefinedKey:@"codec" withString:self.codec];
+    [aParams addIfDefinedKey:@"frameRate" withInt:self.frameRate];
+    [aParams addIfDefinedKey:@"keyFrameInterval" withFloat:self.keyFrameInterval];
 }
 
 - (void)dealloc
@@ -38657,6 +38691,8 @@
 @synthesize categoryFullIdsStartsWith = _categoryFullIdsStartsWith;
 @synthesize statusEqual = _statusEqual;
 @synthesize statusIn = _statusIn;
+@synthesize creatorUserIdEqual = _creatorUserIdEqual;
+@synthesize creatorUserIdIn = _creatorUserIdIn;
 
 - (id)init
 {
@@ -38715,6 +38751,16 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfCreatorUserIdEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCreatorUserIdIn
+{
+    return KFT_String;
+}
+
 - (void)setCategoryIdEqualFromString:(NSString*)aPropVal
 {
     self.categoryIdEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -38749,6 +38795,8 @@
     [aParams addIfDefinedKey:@"categoryFullIdsStartsWith" withString:self.categoryFullIdsStartsWith];
     [aParams addIfDefinedKey:@"statusEqual" withInt:self.statusEqual];
     [aParams addIfDefinedKey:@"statusIn" withString:self.statusIn];
+    [aParams addIfDefinedKey:@"creatorUserIdEqual" withString:self.creatorUserIdEqual];
+    [aParams addIfDefinedKey:@"creatorUserIdIn" withString:self.creatorUserIdIn];
 }
 
 - (void)dealloc
@@ -38758,6 +38806,8 @@
     [self->_entryIdIn release];
     [self->_categoryFullIdsStartsWith release];
     [self->_statusIn release];
+    [self->_creatorUserIdEqual release];
+    [self->_creatorUserIdIn release];
     [super dealloc];
 }
 

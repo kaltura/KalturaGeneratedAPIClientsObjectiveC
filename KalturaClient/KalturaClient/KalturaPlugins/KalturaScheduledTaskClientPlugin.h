@@ -73,6 +73,7 @@
 + (NSString*)CONVERT_ENTRY_FLAVORS;
 + (NSString*)DELETE_LOCAL_CONTENT;
 + (NSString*)STORAGE_EXPORT;
++ (NSString*)MODIFY_ENTRY;
 @end
 
 // @package Kaltura
@@ -188,6 +189,36 @@
 - (KalturaFieldType)getTypeOfCategoryIds;
 - (NSString*)getObjectTypeOfCategoryIds;
 - (void)setAddRemoveTypeFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaModifyEntryObjectTask : KalturaObjectTask
+// The input metadata profile id
+@property (nonatomic,assign) int inputMetadataProfileId;
+// array of {input metadata xpath location,entry field} objects
+@property (nonatomic,retain) NSMutableArray* inputMetadata;	// of KalturaKeyValue elements
+// The output metadata profile id
+@property (nonatomic,assign) int outputMetadataProfileId;
+// array of {output metadata xpath location,entry field} objects
+@property (nonatomic,retain) NSMutableArray* outputMetadata;	// of KalturaKeyValue elements
+// The input user id to set on the entry
+@property (nonatomic,copy) NSString* inputUserId;
+// The input entitled users edit to set on the entry
+@property (nonatomic,copy) NSString* inputEntitledUsersEdit;
+// The input entitled users publish to set on the entry
+@property (nonatomic,copy) NSString* inputEntitledUsersPublish;
+- (KalturaFieldType)getTypeOfInputMetadataProfileId;
+- (KalturaFieldType)getTypeOfInputMetadata;
+- (NSString*)getObjectTypeOfInputMetadata;
+- (KalturaFieldType)getTypeOfOutputMetadataProfileId;
+- (KalturaFieldType)getTypeOfOutputMetadata;
+- (NSString*)getObjectTypeOfOutputMetadata;
+- (KalturaFieldType)getTypeOfInputUserId;
+- (KalturaFieldType)getTypeOfInputEntitledUsersEdit;
+- (KalturaFieldType)getTypeOfInputEntitledUsersPublish;
+- (void)setInputMetadataProfileIdFromString:(NSString*)aPropVal;
+- (void)setOutputMetadataProfileIdFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

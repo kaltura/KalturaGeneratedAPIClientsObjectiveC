@@ -4931,11 +4931,14 @@
 @property (nonatomic,copy,readonly) NSString* categoryFullIds;
 // CategroyEntry status
 @property (nonatomic,assign,readonly) int status;	// enum KalturaCategoryEntryStatus
+// CategroyEntry creator puser ID
+@property (nonatomic,copy,readonly) NSString* creatorUserId;
 - (KalturaFieldType)getTypeOfCategoryId;
 - (KalturaFieldType)getTypeOfEntryId;
 - (KalturaFieldType)getTypeOfCreatedAt;
 - (KalturaFieldType)getTypeOfCategoryFullIds;
 - (KalturaFieldType)getTypeOfStatus;
+- (KalturaFieldType)getTypeOfCreatorUserId;
 - (void)setCategoryIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
 - (void)setStatusFromString:(NSString*)aPropVal;
@@ -6851,14 +6854,22 @@
 @property (nonatomic,assign) int height;
 // Live stream's codec
 @property (nonatomic,copy) NSString* codec;
+// Live stream's farme rate
+@property (nonatomic,assign) int frameRate;
+// Live stream's key frame interval
+@property (nonatomic,assign) double keyFrameInterval;
 - (KalturaFieldType)getTypeOfBitrate;
 - (KalturaFieldType)getTypeOfFlavorId;
 - (KalturaFieldType)getTypeOfWidth;
 - (KalturaFieldType)getTypeOfHeight;
 - (KalturaFieldType)getTypeOfCodec;
+- (KalturaFieldType)getTypeOfFrameRate;
+- (KalturaFieldType)getTypeOfKeyFrameInterval;
 - (void)setBitrateFromString:(NSString*)aPropVal;
 - (void)setWidthFromString:(NSString*)aPropVal;
 - (void)setHeightFromString:(NSString*)aPropVal;
+- (void)setFrameRateFromString:(NSString*)aPropVal;
+- (void)setKeyFrameIntervalFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -11299,6 +11310,8 @@
 @property (nonatomic,copy) NSString* categoryFullIdsStartsWith;
 @property (nonatomic,assign) int statusEqual;	// enum KalturaCategoryEntryStatus
 @property (nonatomic,copy) NSString* statusIn;
+@property (nonatomic,copy) NSString* creatorUserIdEqual;
+@property (nonatomic,copy) NSString* creatorUserIdIn;
 - (KalturaFieldType)getTypeOfCategoryIdEqual;
 - (KalturaFieldType)getTypeOfCategoryIdIn;
 - (KalturaFieldType)getTypeOfEntryIdEqual;
@@ -11308,6 +11321,8 @@
 - (KalturaFieldType)getTypeOfCategoryFullIdsStartsWith;
 - (KalturaFieldType)getTypeOfStatusEqual;
 - (KalturaFieldType)getTypeOfStatusIn;
+- (KalturaFieldType)getTypeOfCreatorUserIdEqual;
+- (KalturaFieldType)getTypeOfCreatorUserIdIn;
 - (void)setCategoryIdEqualFromString:(NSString*)aPropVal;
 - (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
