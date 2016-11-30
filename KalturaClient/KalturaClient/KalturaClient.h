@@ -3852,9 +3852,9 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaAnalyticsFilter : KalturaObjectBase
-// Query start time (in local time)
+// Query start time (in local time) MM/dd/yyyy HH:mi
 @property (nonatomic,copy) NSString* from_time;
-// Query end time (in local time)
+// Query end time (in local time) MM/dd/yyyy HH:mi
 @property (nonatomic,copy) NSString* to_time;
 // Comma separated metrics list
 @property (nonatomic,copy) NSString* metrics;
@@ -3864,6 +3864,8 @@
 @property (nonatomic,copy) NSString* dimensions;
 // Array of filters
 @property (nonatomic,retain) NSMutableArray* filters;	// of KalturaReportFilter elements
+// Query order by metric/dimension
+@property (nonatomic,copy) NSString* orderBy;
 - (KalturaFieldType)getTypeOfFrom_time;
 - (KalturaFieldType)getTypeOfTo_time;
 - (KalturaFieldType)getTypeOfMetrics;
@@ -3871,6 +3873,7 @@
 - (KalturaFieldType)getTypeOfDimensions;
 - (KalturaFieldType)getTypeOfFilters;
 - (NSString*)getObjectTypeOfFilters;
+- (KalturaFieldType)getTypeOfOrderBy;
 - (void)setUtcOffsetFromString:(NSString*)aPropVal;
 @end
 
@@ -5168,6 +5171,8 @@
 @property (nonatomic,assign) int storageProfileId;
 // Media parser type to be used for extract media
 @property (nonatomic,copy) NSString* mediaParserType;	// enum KalturaMediaParserType
+// Should calculate file conversion complexity
+@property (nonatomic,assign) int calculateComplexity;	// enum KalturaNullableBoolean
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfPartnerId;
 - (KalturaFieldType)getTypeOfStatus;
@@ -5188,6 +5193,7 @@
 - (KalturaFieldType)getTypeOfXslTransformation;
 - (KalturaFieldType)getTypeOfStorageProfileId;
 - (KalturaFieldType)getTypeOfMediaParserType;
+- (KalturaFieldType)getTypeOfCalculateComplexity;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
@@ -5196,6 +5202,7 @@
 - (void)setClipStartFromString:(NSString*)aPropVal;
 - (void)setClipDurationFromString:(NSString*)aPropVal;
 - (void)setStorageProfileIdFromString:(NSString*)aPropVal;
+- (void)setCalculateComplexityFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -10074,13 +10081,21 @@
 @property (nonatomic,assign) double lastSegmentDuration;
 // amf Array File Path
 @property (nonatomic,copy) NSString* amfArray;
+// last live to vod sync time
+@property (nonatomic,assign) int lastCuePointSyncTime;
+// last segment drift
+@property (nonatomic,assign) int lastSegmentDrift;
 - (KalturaFieldType)getTypeOfVodEntryId;
 - (KalturaFieldType)getTypeOfLiveEntryId;
 - (KalturaFieldType)getTypeOfTotalVodDuration;
 - (KalturaFieldType)getTypeOfLastSegmentDuration;
 - (KalturaFieldType)getTypeOfAmfArray;
+- (KalturaFieldType)getTypeOfLastCuePointSyncTime;
+- (KalturaFieldType)getTypeOfLastSegmentDrift;
 - (void)setTotalVodDurationFromString:(NSString*)aPropVal;
 - (void)setLastSegmentDurationFromString:(NSString*)aPropVal;
+- (void)setLastCuePointSyncTimeFromString:(NSString*)aPropVal;
+- (void)setLastSegmentDriftFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -11552,7 +11567,16 @@
 // @subpackage Client
 @interface KalturaExtractMediaJobData : KalturaConvartableJobData
 @property (nonatomic,copy) NSString* flavorAssetId;
+@property (nonatomic,assign) KALTURA_BOOL calculateComplexity;
+@property (nonatomic,assign) KALTURA_BOOL extractId3Tags;
+// The data output file
+@property (nonatomic,copy) NSString* destDataFilePath;
 - (KalturaFieldType)getTypeOfFlavorAssetId;
+- (KalturaFieldType)getTypeOfCalculateComplexity;
+- (KalturaFieldType)getTypeOfExtractId3Tags;
+- (KalturaFieldType)getTypeOfDestDataFilePath;
+- (void)setCalculateComplexityFromString:(NSString*)aPropVal;
+- (void)setExtractId3TagsFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -13204,6 +13228,7 @@
 // api for getting analytics data
 @interface KalturaAnalyticsService : KalturaServiceBase
 // report query action allows to get a analytics data for specific query dimensions, metrics and filters.
+- (KalturaReportResponse*)queryWithFilter:(KalturaAnalyticsFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaReportResponse*)queryWithFilter:(KalturaAnalyticsFilter*)aFilter;
 @end
 

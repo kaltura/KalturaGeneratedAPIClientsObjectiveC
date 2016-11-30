@@ -10922,6 +10922,7 @@
 @synthesize utcOffset = _utcOffset;
 @synthesize dimensions = _dimensions;
 @synthesize filters = _filters;
+@synthesize orderBy = _orderBy;
 
 - (id)init
 {
@@ -10967,6 +10968,11 @@
     return @"KalturaReportFilter";
 }
 
+- (KalturaFieldType)getTypeOfOrderBy
+{
+    return KFT_String;
+}
+
 - (void)setUtcOffsetFromString:(NSString*)aPropVal
 {
     self.utcOffset = [KalturaSimpleTypeParser parseFloat:aPropVal];
@@ -10983,6 +10989,7 @@
     [aParams addIfDefinedKey:@"utcOffset" withFloat:self.utcOffset];
     [aParams addIfDefinedKey:@"dimensions" withString:self.dimensions];
     [aParams addIfDefinedKey:@"filters" withArray:self.filters];
+    [aParams addIfDefinedKey:@"orderBy" withString:self.orderBy];
 }
 
 - (void)dealloc
@@ -10992,6 +10999,7 @@
     [self->_metrics release];
     [self->_dimensions release];
     [self->_filters release];
+    [self->_orderBy release];
     [super dealloc];
 }
 
@@ -15473,6 +15481,7 @@
 @synthesize xslTransformation = _xslTransformation;
 @synthesize storageProfileId = _storageProfileId;
 @synthesize mediaParserType = _mediaParserType;
+@synthesize calculateComplexity = _calculateComplexity;
 
 - (id)init
 {
@@ -15487,6 +15496,7 @@
     self->_clipStart = KALTURA_UNDEF_INT;
     self->_clipDuration = KALTURA_UNDEF_INT;
     self->_storageProfileId = KALTURA_UNDEF_INT;
+    self->_calculateComplexity = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -15590,6 +15600,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfCalculateComplexity
+{
+    return KFT_Int;
+}
+
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -15630,6 +15645,11 @@
     self.storageProfileId = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setCalculateComplexityFromString:(NSString*)aPropVal
+{
+    self.calculateComplexity = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -15650,6 +15670,7 @@
     [aParams addIfDefinedKey:@"xslTransformation" withString:self.xslTransformation];
     [aParams addIfDefinedKey:@"storageProfileId" withInt:self.storageProfileId];
     [aParams addIfDefinedKey:@"mediaParserType" withString:self.mediaParserType];
+    [aParams addIfDefinedKey:@"calculateComplexity" withInt:self.calculateComplexity];
 }
 
 - (void)dealloc
@@ -33860,6 +33881,8 @@
 @synthesize totalVodDuration = _totalVodDuration;
 @synthesize lastSegmentDuration = _lastSegmentDuration;
 @synthesize amfArray = _amfArray;
+@synthesize lastCuePointSyncTime = _lastCuePointSyncTime;
+@synthesize lastSegmentDrift = _lastSegmentDrift;
 
 - (id)init
 {
@@ -33868,6 +33891,8 @@
         return nil;
     self->_totalVodDuration = KALTURA_UNDEF_FLOAT;
     self->_lastSegmentDuration = KALTURA_UNDEF_FLOAT;
+    self->_lastCuePointSyncTime = KALTURA_UNDEF_INT;
+    self->_lastSegmentDrift = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -33896,6 +33921,16 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfLastCuePointSyncTime
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfLastSegmentDrift
+{
+    return KFT_Int;
+}
+
 - (void)setTotalVodDurationFromString:(NSString*)aPropVal
 {
     self.totalVodDuration = [KalturaSimpleTypeParser parseFloat:aPropVal];
@@ -33904,6 +33939,16 @@
 - (void)setLastSegmentDurationFromString:(NSString*)aPropVal
 {
     self.lastSegmentDuration = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
+- (void)setLastCuePointSyncTimeFromString:(NSString*)aPropVal
+{
+    self.lastCuePointSyncTime = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setLastSegmentDriftFromString:(NSString*)aPropVal
+{
+    self.lastSegmentDrift = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -33916,6 +33961,8 @@
     [aParams addIfDefinedKey:@"totalVodDuration" withFloat:self.totalVodDuration];
     [aParams addIfDefinedKey:@"lastSegmentDuration" withFloat:self.lastSegmentDuration];
     [aParams addIfDefinedKey:@"amfArray" withString:self.amfArray];
+    [aParams addIfDefinedKey:@"lastCuePointSyncTime" withInt:self.lastCuePointSyncTime];
+    [aParams addIfDefinedKey:@"lastSegmentDrift" withInt:self.lastSegmentDrift];
 }
 
 - (void)dealloc
@@ -39655,10 +39702,48 @@
 
 @implementation KalturaExtractMediaJobData
 @synthesize flavorAssetId = _flavorAssetId;
+@synthesize calculateComplexity = _calculateComplexity;
+@synthesize extractId3Tags = _extractId3Tags;
+@synthesize destDataFilePath = _destDataFilePath;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_calculateComplexity = KALTURA_UNDEF_BOOL;
+    self->_extractId3Tags = KALTURA_UNDEF_BOOL;
+    return self;
+}
 
 - (KalturaFieldType)getTypeOfFlavorAssetId
 {
     return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCalculateComplexity
+{
+    return KFT_Bool;
+}
+
+- (KalturaFieldType)getTypeOfExtractId3Tags
+{
+    return KFT_Bool;
+}
+
+- (KalturaFieldType)getTypeOfDestDataFilePath
+{
+    return KFT_String;
+}
+
+- (void)setCalculateComplexityFromString:(NSString*)aPropVal
+{
+    self.calculateComplexity = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)setExtractId3TagsFromString:(NSString*)aPropVal
+{
+    self.extractId3Tags = [KalturaSimpleTypeParser parseBool:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -39667,11 +39752,15 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaExtractMediaJobData"];
     [aParams addIfDefinedKey:@"flavorAssetId" withString:self.flavorAssetId];
+    [aParams addIfDefinedKey:@"calculateComplexity" withBool:self.calculateComplexity];
+    [aParams addIfDefinedKey:@"extractId3Tags" withBool:self.extractId3Tags];
+    [aParams addIfDefinedKey:@"destDataFilePath" withString:self.destDataFilePath];
 }
 
 - (void)dealloc
 {
     [self->_flavorAssetId release];
+    [self->_destDataFilePath release];
     [super dealloc];
 }
 
@@ -44505,10 +44594,16 @@
 @end
 
 @implementation KalturaAnalyticsService
-- (KalturaReportResponse*)queryWithFilter:(KalturaAnalyticsFilter*)aFilter
+- (KalturaReportResponse*)queryWithFilter:(KalturaAnalyticsFilter*)aFilter withPager:(KalturaFilterPager*)aPager
 {
     [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
     return [self.client queueObjectService:@"analytics" withAction:@"query" withExpectedType:@"KalturaReportResponse"];
+}
+
+- (KalturaReportResponse*)queryWithFilter:(KalturaAnalyticsFilter*)aFilter
+{
+    return [self queryWithFilter:aFilter withPager:nil];
 }
 
 @end
