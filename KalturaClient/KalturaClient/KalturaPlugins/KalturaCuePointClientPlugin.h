@@ -254,3 +254,12 @@
 - (KalturaCuePoint*)cloneWithId:(NSString*)aId withEntryId:(NSString*)aEntryId;
 @end
 
+@interface KalturaCuePointClientPlugin : KalturaClientPlugin
+{
+	KalturaCuePointService* _cuePoint;
+}
+
+@property (nonatomic, assign) KalturaClientBase* client;
+@property (nonatomic, readonly) KalturaCuePointService* cuePoint;
+@end
+

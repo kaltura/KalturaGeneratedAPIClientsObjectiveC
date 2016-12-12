@@ -3737,6 +3737,8 @@
 @property (nonatomic,copy) NSString* ruleData;
 // Message to be thrown to the player in case the rule is fulfilled
 @property (nonatomic,copy) NSString* message;
+// Code to be thrown to the player in case the rule is fulfilled
+@property (nonatomic,copy) NSString* code;
 // Actions to be performed by the player in case the rule is fulfilled
 @property (nonatomic,retain) NSMutableArray* actions;	// of KalturaRuleAction elements
 // Conditions to validate the rule
@@ -3750,6 +3752,7 @@
 - (KalturaFieldType)getTypeOfDescription;
 - (KalturaFieldType)getTypeOfRuleData;
 - (KalturaFieldType)getTypeOfMessage;
+- (KalturaFieldType)getTypeOfCode;
 - (KalturaFieldType)getTypeOfActions;
 - (NSString*)getObjectTypeOfActions;
 - (KalturaFieldType)getTypeOfConditions;
@@ -7352,6 +7355,74 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaPluginData : KalturaObjectBase
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaDrmEntryPlayingPluginData : KalturaPluginData
+@property (nonatomic,copy) NSString* scheme;
+@property (nonatomic,copy) NSString* licenseURL;
+- (KalturaFieldType)getTypeOfScheme;
+- (KalturaFieldType)getTypeOfLicenseURL;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaPlaybackSource : KalturaObjectBase
+@property (nonatomic,copy) NSString* deliveryProfileId;
+@property (nonatomic,copy) NSString* format;
+@property (nonatomic,copy) NSString* priority;
+@property (nonatomic,retain) NSMutableArray* protocols;	// of KalturaString elements
+@property (nonatomic,retain) NSMutableArray* flavors;	// of KalturaString elements
+@property (nonatomic,copy) NSString* url;
+@property (nonatomic,retain) NSMutableArray* drm;	// of KalturaDrmEntryPlayingPluginData elements
+- (KalturaFieldType)getTypeOfDeliveryProfileId;
+- (KalturaFieldType)getTypeOfFormat;
+- (KalturaFieldType)getTypeOfPriority;
+- (KalturaFieldType)getTypeOfProtocols;
+- (NSString*)getObjectTypeOfProtocols;
+- (KalturaFieldType)getTypeOfFlavors;
+- (NSString*)getObjectTypeOfFlavors;
+- (KalturaFieldType)getTypeOfUrl;
+- (KalturaFieldType)getTypeOfDrm;
+- (NSString*)getObjectTypeOfDrm;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaPlaybackRestriction : KalturaObjectBase
+@property (nonatomic,copy) NSString* message;
+@property (nonatomic,copy) NSString* code;
+- (KalturaFieldType)getTypeOfMessage;
+- (KalturaFieldType)getTypeOfCode;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaPlaybackContextResult : KalturaObjectBase
+@property (nonatomic,retain) NSMutableArray* sources;	// of KalturaPlaybackSource elements
+@property (nonatomic,retain) NSMutableArray* flavorAssets;	// of KalturaFlavorAsset elements
+// Array of messages as received from the rules that invalidated
+@property (nonatomic,retain) NSMutableArray* messages;	// of KalturaString elements
+// Array of actions as received from the rules that invalidated
+@property (nonatomic,retain) NSMutableArray* actions;	// of KalturaRuleAction elements
+// Array of actions as received from the rules that invalidated
+@property (nonatomic,retain) NSMutableArray* restrictions;	// of KalturaPlaybackRestriction elements
+- (KalturaFieldType)getTypeOfSources;
+- (NSString*)getObjectTypeOfSources;
+- (KalturaFieldType)getTypeOfFlavorAssets;
+- (NSString*)getObjectTypeOfFlavorAssets;
+- (KalturaFieldType)getTypeOfMessages;
+- (NSString*)getObjectTypeOfMessages;
+- (KalturaFieldType)getTypeOfActions;
+- (NSString*)getObjectTypeOfActions;
+- (KalturaFieldType)getTypeOfRestrictions;
+- (NSString*)getObjectTypeOfRestrictions;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaPlaylist : KalturaBaseEntry
 // Content of the playlist - 
 // 	 XML if the playlistType is dynamic 
@@ -7385,11 +7456,6 @@
 - (void)setPlaysFromString:(NSString*)aPropVal;
 - (void)setViewsFromString:(NSString*)aPropVal;
 - (void)setDurationFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaPluginData : KalturaObjectBase
 @end
 
 // @package Kaltura
@@ -10910,6 +10976,11 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaUrlTokenizerCht : KalturaUrlTokenizer
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaUrlTokenizerCloudFront : KalturaUrlTokenizer
 @property (nonatomic,copy) NSString* keyPairId;
 @property (nonatomic,copy) NSString* rootDir;
@@ -11577,6 +11648,13 @@
 - (KalturaFieldType)getTypeOfDestDataFilePath;
 - (void)setCalculateComplexityFromString:(NSString*)aPropVal;
 - (void)setExtractId3TagsFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaFairPlayEntryPlayingPluginData : KalturaDrmEntryPlayingPluginData
+@property (nonatomic,copy) NSString* certificate;
+- (KalturaFieldType)getTypeOfCertificate;
 @end
 
 // @package Kaltura
@@ -13320,6 +13398,8 @@
 // Clone an entry with optional attributes to apply to the clone
 - (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId withCloneOptions:(NSArray*)aCloneOptions;
 - (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId;
+// This action delivers all data relevant for player
+- (KalturaPlaybackContextResult*)getPlaybackContextWithEntryId:(NSString*)aEntryId withContextDataParams:(KalturaEntryContextDataParams*)aContextDataParams;
 @end
 
 // @package Kaltura
@@ -13715,6 +13795,7 @@
 // Validates all registered media servers
 - (void)validateRegisteredMediaServersWithEntryId:(NSString*)aEntryId;
 // Sey recorded video to live entry
+- (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withRecordedEntryId:(NSString*)aRecordedEntryId;
 - (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration;
 @end
 
@@ -13791,6 +13872,7 @@
 // Validates all registered media servers
 - (void)validateRegisteredMediaServersWithEntryId:(NSString*)aEntryId;
 // Sey recorded video to live entry
+- (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withRecordedEntryId:(NSString*)aRecordedEntryId;
 - (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration;
 // Creates perioding metadata sync-point events on a live stream
 - (void)createPeriodicSyncPointsWithEntryId:(NSString*)aEntryId withInterval:(int)aInterval withDuration:(int)aDuration;

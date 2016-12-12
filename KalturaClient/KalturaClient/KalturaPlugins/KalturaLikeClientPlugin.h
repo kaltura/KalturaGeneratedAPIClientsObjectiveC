@@ -95,3 +95,12 @@
 - (KalturaLikeListResponse*)list;
 @end
 
+@interface KalturaLikeClientPlugin : KalturaClientPlugin
+{
+	KalturaLikeService* _like;
+}
+
+@property (nonatomic, assign) KalturaClientBase* client;
+@property (nonatomic, readonly) KalturaLikeService* like;
+@end
+

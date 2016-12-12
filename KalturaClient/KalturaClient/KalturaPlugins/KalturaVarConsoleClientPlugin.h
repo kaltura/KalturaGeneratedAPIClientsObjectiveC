@@ -152,3 +152,12 @@
 - (void)updateStatusWithId:(int)aId withStatus:(int)aStatus;
 @end
 
+@interface KalturaVarConsoleClientPlugin : KalturaClientPlugin
+{
+	KalturaVarConsoleService* _varConsole;
+}
+
+@property (nonatomic, assign) KalturaClientBase* client;
+@property (nonatomic, readonly) KalturaVarConsoleService* varConsole;
+@end
+

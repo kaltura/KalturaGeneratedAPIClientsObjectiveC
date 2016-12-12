@@ -353,3 +353,30 @@
 
 @end
 
+@implementation KalturaExternalMediaClientPlugin
+@synthesize client = _client;
+
+- (id)initWithClient:(KalturaClient*)aClient
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self.client = aClient;
+    return self;
+}
+
+- (KalturaExternalMediaService*)externalMedia
+{
+    if (self->_externalMedia == nil)
+    	self->_externalMedia = [[KalturaExternalMediaService alloc] initWithClient:self.client];
+    return self->_externalMedia;
+}
+
+- (void)dealloc
+{
+    [self->_externalMedia release];
+	[super dealloc];
+}
+
+@end
+

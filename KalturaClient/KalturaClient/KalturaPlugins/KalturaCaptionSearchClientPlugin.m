@@ -391,3 +391,30 @@
 
 @end
 
+@implementation KalturaCaptionSearchClientPlugin
+@synthesize client = _client;
+
+- (id)initWithClient:(KalturaClient*)aClient
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self.client = aClient;
+    return self;
+}
+
+- (KalturaCaptionAssetItemService*)captionAssetItem
+{
+    if (self->_captionAssetItem == nil)
+    	self->_captionAssetItem = [[KalturaCaptionAssetItemService alloc] initWithClient:self.client];
+    return self->_captionAssetItem;
+}
+
+- (void)dealloc
+{
+    [self->_captionAssetItem release];
+	[super dealloc];
+}
+
+@end
+

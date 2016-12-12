@@ -154,3 +154,30 @@
 
 @end
 
+@implementation KalturaIntegrationClientPlugin
+@synthesize client = _client;
+
+- (id)initWithClient:(KalturaClient*)aClient
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self.client = aClient;
+    return self;
+}
+
+- (KalturaIntegrationService*)integration
+{
+    if (self->_integration == nil)
+    	self->_integration = [[KalturaIntegrationService alloc] initWithClient:self.client];
+    return self->_integration;
+}
+
+- (void)dealloc
+{
+    [self->_integration release];
+	[super dealloc];
+}
+
+@end
+

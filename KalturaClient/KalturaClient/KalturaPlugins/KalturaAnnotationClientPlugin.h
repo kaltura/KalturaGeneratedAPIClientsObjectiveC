@@ -163,3 +163,12 @@
 - (KalturaCuePoint*)cloneWithId:(NSString*)aId withEntryId:(NSString*)aEntryId;
 @end
 
+@interface KalturaAnnotationClientPlugin : KalturaClientPlugin
+{
+	KalturaAnnotationService* _annotation;
+}
+
+@property (nonatomic, assign) KalturaClientBase* client;
+@property (nonatomic, readonly) KalturaAnnotationService* annotation;
+@end
+

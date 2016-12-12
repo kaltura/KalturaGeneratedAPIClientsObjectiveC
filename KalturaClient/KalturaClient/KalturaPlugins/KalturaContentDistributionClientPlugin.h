@@ -233,11 +233,6 @@
 + (NSString*)UPDATED_AT_DESC;
 @end
 
-// @package Kaltura
-// @subpackage Client
-@interface KalturaSyndicationDistributionProviderOrderBy : NSObject
-@end
-
 ///////////////////////// classes /////////////////////////
 // @package Kaltura
 // @subpackage Client
@@ -1166,11 +1161,6 @@
 @interface KalturaSyndicationDistributionProfileFilter : KalturaSyndicationDistributionProfileBaseFilter
 @end
 
-// @package Kaltura
-// @subpackage Client
-@interface KalturaSyndicationDistributionProviderFilter : KalturaSyndicationDistributionProviderBaseFilter
-@end
-
 ///////////////////////// services /////////////////////////
 // @package Kaltura
 // @subpackage Client
@@ -1292,5 +1282,22 @@
 - (KalturaGenericDistributionProviderActionListResponse*)listWithFilter:(KalturaGenericDistributionProviderActionFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaGenericDistributionProviderActionListResponse*)listWithFilter:(KalturaGenericDistributionProviderActionFilter*)aFilter;
 - (KalturaGenericDistributionProviderActionListResponse*)list;
+@end
+
+@interface KalturaContentDistributionClientPlugin : KalturaClientPlugin
+{
+	KalturaDistributionProfileService* _distributionProfile;
+	KalturaEntryDistributionService* _entryDistribution;
+	KalturaDistributionProviderService* _distributionProvider;
+	KalturaGenericDistributionProviderService* _genericDistributionProvider;
+	KalturaGenericDistributionProviderActionService* _genericDistributionProviderAction;
+}
+
+@property (nonatomic, assign) KalturaClientBase* client;
+@property (nonatomic, readonly) KalturaDistributionProfileService* distributionProfile;
+@property (nonatomic, readonly) KalturaEntryDistributionService* entryDistribution;
+@property (nonatomic, readonly) KalturaDistributionProviderService* distributionProvider;
+@property (nonatomic, readonly) KalturaGenericDistributionProviderService* genericDistributionProvider;
+@property (nonatomic, readonly) KalturaGenericDistributionProviderActionService* genericDistributionProviderAction;
 @end
 

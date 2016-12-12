@@ -837,3 +837,30 @@
 
 @end
 
+@implementation KalturaCuePointClientPlugin
+@synthesize client = _client;
+
+- (id)initWithClient:(KalturaClient*)aClient
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self.client = aClient;
+    return self;
+}
+
+- (KalturaCuePointService*)cuePoint
+{
+    if (self->_cuePoint == nil)
+    	self->_cuePoint = [[KalturaCuePointService alloc] initWithClient:self.client];
+    return self->_cuePoint;
+}
+
+- (void)dealloc
+{
+    [self->_cuePoint release];
+	[super dealloc];
+}
+
+@end
+

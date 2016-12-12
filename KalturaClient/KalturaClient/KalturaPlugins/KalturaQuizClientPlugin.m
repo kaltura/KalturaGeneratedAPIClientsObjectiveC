@@ -709,3 +709,30 @@
 
 @end
 
+@implementation KalturaQuizClientPlugin
+@synthesize client = _client;
+
+- (id)initWithClient:(KalturaClient*)aClient
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self.client = aClient;
+    return self;
+}
+
+- (KalturaQuizService*)quiz
+{
+    if (self->_quiz == nil)
+    	self->_quiz = [[KalturaQuizService alloc] initWithClient:self.client];
+    return self->_quiz;
+}
+
+- (void)dealloc
+{
+    [self->_quiz release];
+	[super dealloc];
+}
+
+@end
+

@@ -84,3 +84,30 @@
 
 @end
 
+@implementation KalturaBulkUploadClientPlugin
+@synthesize client = _client;
+
+- (id)initWithClient:(KalturaClient*)aClient
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self.client = aClient;
+    return self;
+}
+
+- (KalturaBulkService*)bulk
+{
+    if (self->_bulk == nil)
+    	self->_bulk = [[KalturaBulkService alloc] initWithClient:self.client];
+    return self->_bulk;
+}
+
+- (void)dealloc
+{
+    [self->_bulk release];
+	[super dealloc];
+}
+
+@end
+

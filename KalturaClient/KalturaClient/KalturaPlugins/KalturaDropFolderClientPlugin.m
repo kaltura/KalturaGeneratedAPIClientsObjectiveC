@@ -2500,3 +2500,38 @@
 
 @end
 
+@implementation KalturaDropFolderClientPlugin
+@synthesize client = _client;
+
+- (id)initWithClient:(KalturaClient*)aClient
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self.client = aClient;
+    return self;
+}
+
+- (KalturaDropFolderService*)dropFolder
+{
+    if (self->_dropFolder == nil)
+    	self->_dropFolder = [[KalturaDropFolderService alloc] initWithClient:self.client];
+    return self->_dropFolder;
+}
+
+- (KalturaDropFolderFileService*)dropFolderFile
+{
+    if (self->_dropFolderFile == nil)
+    	self->_dropFolderFile = [[KalturaDropFolderFileService alloc] initWithClient:self.client];
+    return self->_dropFolderFile;
+}
+
+- (void)dealloc
+{
+    [self->_dropFolder release];
+    [self->_dropFolderFile release];
+	[super dealloc];
+}
+
+@end
+

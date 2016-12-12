@@ -325,3 +325,30 @@
 
 @end
 
+@implementation KalturaTagSearchClientPlugin
+@synthesize client = _client;
+
+- (id)initWithClient:(KalturaClient*)aClient
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self.client = aClient;
+    return self;
+}
+
+- (KalturaTagService*)tag
+{
+    if (self->_tag == nil)
+    	self->_tag = [[KalturaTagService alloc] initWithClient:self.client];
+    return self->_tag;
+}
+
+- (void)dealloc
+{
+    [self->_tag release];
+	[super dealloc];
+}
+
+@end
+

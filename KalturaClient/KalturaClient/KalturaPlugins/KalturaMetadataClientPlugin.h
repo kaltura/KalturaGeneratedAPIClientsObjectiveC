@@ -522,3 +522,14 @@
 - (NSString*)serveViewWithId:(int)aId;
 @end
 
+@interface KalturaMetadataClientPlugin : KalturaClientPlugin
+{
+	KalturaMetadataService* _metadata;
+	KalturaMetadataProfileService* _metadataProfile;
+}
+
+@property (nonatomic, assign) KalturaClientBase* client;
+@property (nonatomic, readonly) KalturaMetadataService* metadata;
+@property (nonatomic, readonly) KalturaMetadataProfileService* metadataProfile;
+@end
+

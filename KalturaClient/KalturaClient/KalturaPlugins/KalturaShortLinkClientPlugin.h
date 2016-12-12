@@ -160,3 +160,12 @@
 - (NSString*)gotoWithId:(NSString*)aId;
 @end
 
+@interface KalturaShortLinkClientPlugin : KalturaClientPlugin
+{
+	KalturaShortLinkService* _shortLink;
+}
+
+@property (nonatomic, assign) KalturaClientBase* client;
+@property (nonatomic, readonly) KalturaShortLinkService* shortLink;
+@end
+

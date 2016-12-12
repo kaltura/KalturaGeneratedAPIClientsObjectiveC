@@ -747,3 +747,14 @@
 - (KalturaDropFolderFile*)ignoreWithDropFolderFileId:(int)aDropFolderFileId;
 @end
 
+@interface KalturaDropFolderClientPlugin : KalturaClientPlugin
+{
+	KalturaDropFolderService* _dropFolder;
+	KalturaDropFolderFileService* _dropFolderFile;
+}
+
+@property (nonatomic, assign) KalturaClientBase* client;
+@property (nonatomic, readonly) KalturaDropFolderService* dropFolder;
+@property (nonatomic, readonly) KalturaDropFolderFileService* dropFolderFile;
+@end
+

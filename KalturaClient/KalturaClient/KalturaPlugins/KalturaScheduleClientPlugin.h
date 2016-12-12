@@ -822,3 +822,16 @@
 - (KalturaScheduleEventResourceListResponse*)list;
 @end
 
+@interface KalturaScheduleClientPlugin : KalturaClientPlugin
+{
+	KalturaScheduleEventService* _scheduleEvent;
+	KalturaScheduleResourceService* _scheduleResource;
+	KalturaScheduleEventResourceService* _scheduleEventResource;
+}
+
+@property (nonatomic, assign) KalturaClientBase* client;
+@property (nonatomic, readonly) KalturaScheduleEventService* scheduleEvent;
+@property (nonatomic, readonly) KalturaScheduleResourceService* scheduleResource;
+@property (nonatomic, readonly) KalturaScheduleEventResourceService* scheduleEventResource;
+@end
+

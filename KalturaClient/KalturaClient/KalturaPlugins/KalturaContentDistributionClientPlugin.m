@@ -479,9 +479,6 @@
 }
 @end
 
-@implementation KalturaSyndicationDistributionProviderOrderBy
-@end
-
 ///////////////////////// classes /////////////////////////
 @implementation KalturaAssetDistributionCondition
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -3933,16 +3930,6 @@
 
 @end
 
-@implementation KalturaSyndicationDistributionProviderFilter
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaSyndicationDistributionProviderFilter"];
-}
-
-@end
-
 ///////////////////////// services /////////////////////////
 @implementation KalturaDistributionProfileService
 - (KalturaDistributionProfile*)addWithDistributionProfile:(KalturaDistributionProfile*)aDistributionProfile
@@ -4284,6 +4271,65 @@
 - (KalturaGenericDistributionProviderActionListResponse*)list
 {
     return [self listWithFilter:nil];
+}
+
+@end
+
+@implementation KalturaContentDistributionClientPlugin
+@synthesize client = _client;
+
+- (id)initWithClient:(KalturaClient*)aClient
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self.client = aClient;
+    return self;
+}
+
+- (KalturaDistributionProfileService*)distributionProfile
+{
+    if (self->_distributionProfile == nil)
+    	self->_distributionProfile = [[KalturaDistributionProfileService alloc] initWithClient:self.client];
+    return self->_distributionProfile;
+}
+
+- (KalturaEntryDistributionService*)entryDistribution
+{
+    if (self->_entryDistribution == nil)
+    	self->_entryDistribution = [[KalturaEntryDistributionService alloc] initWithClient:self.client];
+    return self->_entryDistribution;
+}
+
+- (KalturaDistributionProviderService*)distributionProvider
+{
+    if (self->_distributionProvider == nil)
+    	self->_distributionProvider = [[KalturaDistributionProviderService alloc] initWithClient:self.client];
+    return self->_distributionProvider;
+}
+
+- (KalturaGenericDistributionProviderService*)genericDistributionProvider
+{
+    if (self->_genericDistributionProvider == nil)
+    	self->_genericDistributionProvider = [[KalturaGenericDistributionProviderService alloc] initWithClient:self.client];
+    return self->_genericDistributionProvider;
+}
+
+- (KalturaGenericDistributionProviderActionService*)genericDistributionProviderAction
+{
+    if (self->_genericDistributionProviderAction == nil)
+    	self->_genericDistributionProviderAction = [[KalturaGenericDistributionProviderActionService alloc] initWithClient:self.client];
+    return self->_genericDistributionProviderAction;
+}
+
+- (void)dealloc
+{
+    [self->_distributionProfile release];
+    [self->_entryDistribution release];
+    [self->_distributionProvider release];
+    [self->_genericDistributionProvider release];
+    [self->_genericDistributionProviderAction release];
+	[super dealloc];
 }
 
 @end

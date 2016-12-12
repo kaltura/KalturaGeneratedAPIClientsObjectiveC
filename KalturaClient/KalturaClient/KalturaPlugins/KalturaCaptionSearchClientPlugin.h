@@ -126,3 +126,12 @@
 - (KalturaBaseEntryListResponse*)searchEntries;
 @end
 
+@interface KalturaCaptionSearchClientPlugin : KalturaClientPlugin
+{
+	KalturaCaptionAssetItemService* _captionAssetItem;
+}
+
+@property (nonatomic, assign) KalturaClientBase* client;
+@property (nonatomic, readonly) KalturaCaptionAssetItemService* captionAssetItem;
+@end
+

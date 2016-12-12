@@ -1066,3 +1066,30 @@
 
 @end
 
+@implementation KalturaEventNotificationClientPlugin
+@synthesize client = _client;
+
+- (id)initWithClient:(KalturaClient*)aClient
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self.client = aClient;
+    return self;
+}
+
+- (KalturaEventNotificationTemplateService*)eventNotificationTemplate
+{
+    if (self->_eventNotificationTemplate == nil)
+    	self->_eventNotificationTemplate = [[KalturaEventNotificationTemplateService alloc] initWithClient:self.client];
+    return self->_eventNotificationTemplate;
+}
+
+- (void)dealloc
+{
+    [self->_eventNotificationTemplate release];
+	[super dealloc];
+}
+
+@end
+

@@ -415,3 +415,30 @@
 
 @end
 
+@implementation KalturaVarConsoleClientPlugin
+@synthesize client = _client;
+
+- (id)initWithClient:(KalturaClient*)aClient
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self.client = aClient;
+    return self;
+}
+
+- (KalturaVarConsoleService*)varConsole
+{
+    if (self->_varConsole == nil)
+    	self->_varConsole = [[KalturaVarConsoleService alloc] initWithClient:self.client];
+    return self->_varConsole;
+}
+
+- (void)dealloc
+{
+    [self->_varConsole release];
+	[super dealloc];
+}
+
+@end
+

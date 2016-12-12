@@ -986,3 +986,30 @@
 
 @end
 
+@implementation KalturaDocumentClientPlugin
+@synthesize client = _client;
+
+- (id)initWithClient:(KalturaClient*)aClient
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self.client = aClient;
+    return self;
+}
+
+- (KalturaDocumentsService*)documents
+{
+    if (self->_documents == nil)
+    	self->_documents = [[KalturaDocumentsService alloc] initWithClient:self.client];
+    return self->_documents;
+}
+
+- (void)dealloc
+{
+    [self->_documents release];
+	[super dealloc];
+}
+
+@end
+

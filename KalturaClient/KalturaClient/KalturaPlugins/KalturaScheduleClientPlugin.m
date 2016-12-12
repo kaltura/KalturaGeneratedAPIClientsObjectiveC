@@ -2544,3 +2544,46 @@
 
 @end
 
+@implementation KalturaScheduleClientPlugin
+@synthesize client = _client;
+
+- (id)initWithClient:(KalturaClient*)aClient
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self.client = aClient;
+    return self;
+}
+
+- (KalturaScheduleEventService*)scheduleEvent
+{
+    if (self->_scheduleEvent == nil)
+    	self->_scheduleEvent = [[KalturaScheduleEventService alloc] initWithClient:self.client];
+    return self->_scheduleEvent;
+}
+
+- (KalturaScheduleResourceService*)scheduleResource
+{
+    if (self->_scheduleResource == nil)
+    	self->_scheduleResource = [[KalturaScheduleResourceService alloc] initWithClient:self.client];
+    return self->_scheduleResource;
+}
+
+- (KalturaScheduleEventResourceService*)scheduleEventResource
+{
+    if (self->_scheduleEventResource == nil)
+    	self->_scheduleEventResource = [[KalturaScheduleEventResourceService alloc] initWithClient:self.client];
+    return self->_scheduleEventResource;
+}
+
+- (void)dealloc
+{
+    [self->_scheduleEvent release];
+    [self->_scheduleResource release];
+    [self->_scheduleEventResource release];
+	[super dealloc];
+}
+
+@end
+

@@ -104,3 +104,12 @@
 - (void)indexCategoryEntryTagsWithCategoryId:(int)aCategoryId withPcToDecrement:(NSString*)aPcToDecrement withPcToIncrement:(NSString*)aPcToIncrement;
 @end
 
+@interface KalturaTagSearchClientPlugin : KalturaClientPlugin
+{
+	KalturaTagService* _tag;
+}
+
+@property (nonatomic, assign) KalturaClientBase* client;
+@property (nonatomic, readonly) KalturaTagService* tag;
+@end
+

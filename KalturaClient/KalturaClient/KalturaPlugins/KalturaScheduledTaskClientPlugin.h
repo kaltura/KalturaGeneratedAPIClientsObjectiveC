@@ -319,3 +319,12 @@
 - (KalturaObjectListResponse*)getDryRunResultsWithRequestId:(int)aRequestId;
 @end
 
+@interface KalturaScheduledTaskClientPlugin : KalturaClientPlugin
+{
+	KalturaScheduledTaskProfileService* _scheduledTaskProfile;
+}
+
+@property (nonatomic, assign) KalturaClientBase* client;
+@property (nonatomic, readonly) KalturaScheduledTaskProfileService* scheduledTaskProfile;
+@end
+

@@ -329,3 +329,12 @@
 - (KalturaEventNotificationTemplateListResponse*)listTemplates;
 @end
 
+@interface KalturaEventNotificationClientPlugin : KalturaClientPlugin
+{
+	KalturaEventNotificationTemplateService* _eventNotificationTemplate;
+}
+
+@property (nonatomic, assign) KalturaClientBase* client;
+@property (nonatomic, readonly) KalturaEventNotificationTemplateService* eventNotificationTemplate;
+@end
+

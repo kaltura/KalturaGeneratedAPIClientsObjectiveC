@@ -487,3 +487,30 @@
 
 @end
 
+@implementation KalturaAnnotationClientPlugin
+@synthesize client = _client;
+
+- (id)initWithClient:(KalturaClient*)aClient
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self.client = aClient;
+    return self;
+}
+
+- (KalturaAnnotationService*)annotation
+{
+    if (self->_annotation == nil)
+    	self->_annotation = [[KalturaAnnotationService alloc] initWithClient:self.client];
+    return self->_annotation;
+}
+
+- (void)dealloc
+{
+    [self->_annotation release];
+	[super dealloc];
+}
+
+@end
+

@@ -495,3 +495,30 @@
 
 @end
 
+@implementation KalturaShortLinkClientPlugin
+@synthesize client = _client;
+
+- (id)initWithClient:(KalturaClient*)aClient
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self.client = aClient;
+    return self;
+}
+
+- (KalturaShortLinkService*)shortLink
+{
+    if (self->_shortLink == nil)
+    	self->_shortLink = [[KalturaShortLinkService alloc] initWithClient:self.client];
+    return self->_shortLink;
+}
+
+- (void)dealloc
+{
+    [self->_shortLink release];
+	[super dealloc];
+}
+
+@end
+

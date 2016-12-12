@@ -1812,3 +1812,38 @@
 
 @end
 
+@implementation KalturaMetadataClientPlugin
+@synthesize client = _client;
+
+- (id)initWithClient:(KalturaClient*)aClient
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self.client = aClient;
+    return self;
+}
+
+- (KalturaMetadataService*)metadata
+{
+    if (self->_metadata == nil)
+    	self->_metadata = [[KalturaMetadataService alloc] initWithClient:self.client];
+    return self->_metadata;
+}
+
+- (KalturaMetadataProfileService*)metadataProfile
+{
+    if (self->_metadataProfile == nil)
+    	self->_metadataProfile = [[KalturaMetadataProfileService alloc] initWithClient:self.client];
+    return self->_metadataProfile;
+}
+
+- (void)dealloc
+{
+    [self->_metadata release];
+    [self->_metadataProfile release];
+	[super dealloc];
+}
+
+@end
+
