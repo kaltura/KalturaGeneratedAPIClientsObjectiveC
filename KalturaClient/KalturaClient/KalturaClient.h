@@ -3198,6 +3198,7 @@
 + (NSString*)RTMP;
 + (NSString*)RTSP;
 + (NSString*)SILVER_LIGHT;
++ (NSString*)URL;
 @end
 
 // @package Kaltura
@@ -7360,65 +7361,11 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaDrmEntryPlayingPluginData : KalturaPluginData
+@interface KalturaDrmPlaybackPluginData : KalturaPluginData
 @property (nonatomic,copy) NSString* scheme;
 @property (nonatomic,copy) NSString* licenseURL;
 - (KalturaFieldType)getTypeOfScheme;
 - (KalturaFieldType)getTypeOfLicenseURL;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaPlaybackSource : KalturaObjectBase
-@property (nonatomic,copy) NSString* deliveryProfileId;
-@property (nonatomic,copy) NSString* format;
-@property (nonatomic,copy) NSString* priority;
-@property (nonatomic,retain) NSMutableArray* protocols;	// of KalturaString elements
-@property (nonatomic,retain) NSMutableArray* flavors;	// of KalturaString elements
-@property (nonatomic,copy) NSString* url;
-@property (nonatomic,retain) NSMutableArray* drm;	// of KalturaDrmEntryPlayingPluginData elements
-- (KalturaFieldType)getTypeOfDeliveryProfileId;
-- (KalturaFieldType)getTypeOfFormat;
-- (KalturaFieldType)getTypeOfPriority;
-- (KalturaFieldType)getTypeOfProtocols;
-- (NSString*)getObjectTypeOfProtocols;
-- (KalturaFieldType)getTypeOfFlavors;
-- (NSString*)getObjectTypeOfFlavors;
-- (KalturaFieldType)getTypeOfUrl;
-- (KalturaFieldType)getTypeOfDrm;
-- (NSString*)getObjectTypeOfDrm;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaPlaybackRestriction : KalturaObjectBase
-@property (nonatomic,copy) NSString* message;
-@property (nonatomic,copy) NSString* code;
-- (KalturaFieldType)getTypeOfMessage;
-- (KalturaFieldType)getTypeOfCode;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaPlaybackContextResult : KalturaObjectBase
-@property (nonatomic,retain) NSMutableArray* sources;	// of KalturaPlaybackSource elements
-@property (nonatomic,retain) NSMutableArray* flavorAssets;	// of KalturaFlavorAsset elements
-// Array of messages as received from the rules that invalidated
-@property (nonatomic,retain) NSMutableArray* messages;	// of KalturaString elements
-// Array of actions as received from the rules that invalidated
-@property (nonatomic,retain) NSMutableArray* actions;	// of KalturaRuleAction elements
-// Array of actions as received from the rules that invalidated
-@property (nonatomic,retain) NSMutableArray* restrictions;	// of KalturaPlaybackRestriction elements
-- (KalturaFieldType)getTypeOfSources;
-- (NSString*)getObjectTypeOfSources;
-- (KalturaFieldType)getTypeOfFlavorAssets;
-- (NSString*)getObjectTypeOfFlavorAssets;
-- (KalturaFieldType)getTypeOfMessages;
-- (NSString*)getObjectTypeOfMessages;
-- (KalturaFieldType)getTypeOfActions;
-- (NSString*)getObjectTypeOfActions;
-- (KalturaFieldType)getTypeOfRestrictions;
-- (NSString*)getObjectTypeOfRestrictions;
 @end
 
 // @package Kaltura
@@ -11652,7 +11599,7 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaFairPlayEntryPlayingPluginData : KalturaDrmEntryPlayingPluginData
+@interface KalturaFairPlayPlaybackPluginData : KalturaDrmPlaybackPluginData
 @property (nonatomic,copy) NSString* certificate;
 - (KalturaFieldType)getTypeOfCertificate;
 @end
@@ -11996,6 +11943,12 @@
 - (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Object which contains contextual entry-related data.
+@interface KalturaPlaybackContextOptions : KalturaEntryContextDataParams
 @end
 
 // @package Kaltura
@@ -13399,7 +13352,7 @@
 - (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId withCloneOptions:(NSArray*)aCloneOptions;
 - (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId;
 // This action delivers all data relevant for player
-- (KalturaPlaybackContextResult*)getPlaybackContextWithEntryId:(NSString*)aEntryId withContextDataParams:(KalturaEntryContextDataParams*)aContextDataParams;
+- (KalturaPlaybackContextOptions*)getPlaybackContextWithEntryId:(NSString*)aEntryId withContextDataParams:(KalturaPlaybackContextOptions*)aContextDataParams;
 @end
 
 // @package Kaltura
