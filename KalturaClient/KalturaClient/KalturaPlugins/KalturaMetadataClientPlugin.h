@@ -440,6 +440,24 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaMetadataField : KalturaStringField
+// May contain the full xpath to the field in three formats
+// 	 1. Slashed xPath, e.g. /metadata/myElementName
+// 	 2. Using local-name function, e.g. /[local-name()='metadata']/[local-name()='myElementName']
+// 	 3. Using only the field name, e.g. myElementName, it will be searched as //myElementName
+@property (nonatomic,copy) NSString* xPath;
+// Metadata profile id
+@property (nonatomic,assign) int profileId;
+// Metadata profile system name
+@property (nonatomic,copy) NSString* profileSystemName;
+- (KalturaFieldType)getTypeOfXPath;
+- (KalturaFieldType)getTypeOfProfileId;
+- (KalturaFieldType)getTypeOfProfileSystemName;
+- (void)setProfileIdFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaMetadataFilter : KalturaMetadataBaseFilter
 @end
 

@@ -10937,6 +10937,14 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaUrlTokenizerKs : KalturaUrlTokenizer
+@property (nonatomic,assign) KALTURA_BOOL usePath;
+- (KalturaFieldType)getTypeOfUsePath;
+- (void)setUsePathFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaUrlTokenizerLevel3 : KalturaUrlTokenizer
 // paramName
 @property (nonatomic,copy) NSString* paramName;

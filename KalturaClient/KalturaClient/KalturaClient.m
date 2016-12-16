@@ -37251,6 +37251,38 @@
 
 @end
 
+@implementation KalturaUrlTokenizerKs
+@synthesize usePath = _usePath;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_usePath = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfUsePath
+{
+    return KFT_Bool;
+}
+
+- (void)setUsePathFromString:(NSString*)aPropVal
+{
+    self.usePath = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaUrlTokenizerKs"];
+    [aParams addIfDefinedKey:@"usePath" withBool:self.usePath];
+}
+
+@end
+
 @implementation KalturaUrlTokenizerLevel3
 @synthesize paramName = _paramName;
 @synthesize expiryName = _expiryName;

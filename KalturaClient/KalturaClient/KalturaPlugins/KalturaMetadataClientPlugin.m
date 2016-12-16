@@ -1548,6 +1548,59 @@
 
 @end
 
+@implementation KalturaMetadataField
+@synthesize xPath = _xPath;
+@synthesize profileId = _profileId;
+@synthesize profileSystemName = _profileSystemName;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_profileId = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfXPath
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfProfileId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfProfileSystemName
+{
+    return KFT_String;
+}
+
+- (void)setProfileIdFromString:(NSString*)aPropVal
+{
+    self.profileId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaMetadataField"];
+    [aParams addIfDefinedKey:@"xPath" withString:self.xPath];
+    [aParams addIfDefinedKey:@"profileId" withInt:self.profileId];
+    [aParams addIfDefinedKey:@"profileSystemName" withString:self.profileSystemName];
+}
+
+- (void)dealloc
+{
+    [self->_xPath release];
+    [self->_profileSystemName release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaMetadataFilter
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
