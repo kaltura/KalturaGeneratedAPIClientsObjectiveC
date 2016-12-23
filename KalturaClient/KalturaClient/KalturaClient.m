@@ -10435,6 +10435,38 @@
 
 @end
 
+@implementation KalturaAccessControlMessage
+@synthesize message = _message;
+@synthesize code = _code;
+
+- (KalturaFieldType)getTypeOfMessage
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCode
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaAccessControlMessage"];
+    [aParams addIfDefinedKey:@"message" withString:self.message];
+    [aParams addIfDefinedKey:@"code" withString:self.code];
+}
+
+- (void)dealloc
+{
+    [self->_message release];
+    [self->_code release];
+    [super dealloc];
+}
+
+@end
+
 @interface KalturaRuleAction()
 @property (nonatomic,copy) NSString* type;
 @end
@@ -15494,6 +15526,7 @@
 @synthesize storageProfileId = _storageProfileId;
 @synthesize mediaParserType = _mediaParserType;
 @synthesize calculateComplexity = _calculateComplexity;
+@synthesize collectionTags = _collectionTags;
 
 - (id)init
 {
@@ -15617,6 +15650,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfCollectionTags
+{
+    return KFT_String;
+}
+
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -15683,6 +15721,7 @@
     [aParams addIfDefinedKey:@"storageProfileId" withInt:self.storageProfileId];
     [aParams addIfDefinedKey:@"mediaParserType" withString:self.mediaParserType];
     [aParams addIfDefinedKey:@"calculateComplexity" withInt:self.calculateComplexity];
+    [aParams addIfDefinedKey:@"collectionTags" withString:self.collectionTags];
 }
 
 - (void)dealloc
@@ -15698,6 +15737,7 @@
     [self->_cropDimensions release];
     [self->_xslTransformation release];
     [self->_mediaParserType release];
+    [self->_collectionTags release];
     [super dealloc];
 }
 
@@ -15719,6 +15759,7 @@
 @synthesize isEncrypted = _isEncrypted;
 @synthesize contentAwareness = _contentAwareness;
 @synthesize twoPass = _twoPass;
+@synthesize tags = _tags;
 
 - (id)init
 {
@@ -15787,6 +15828,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfTags
+{
+    return KFT_String;
+}
+
 - (void)setConversionProfileIdFromString:(NSString*)aPropVal
 {
     self.conversionProfileId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -15845,11 +15891,13 @@
     [aParams addIfDefinedKey:@"isEncrypted" withInt:self.isEncrypted];
     [aParams addIfDefinedKey:@"contentAwareness" withFloat:self.contentAwareness];
     [aParams addIfDefinedKey:@"twoPass" withInt:self.twoPass];
+    [aParams addIfDefinedKey:@"tags" withString:self.tags];
 }
 
 - (void)dealloc
 {
     [self->_systemName release];
+    [self->_tags release];
     [super dealloc];
 }
 
@@ -23631,6 +23679,143 @@
 {
     [self->_scheme release];
     [self->_licenseURL release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaPlaybackSource
+@synthesize deliveryProfileId = _deliveryProfileId;
+@synthesize format = _format;
+@synthesize protocols = _protocols;
+@synthesize flavorIds = _flavorIds;
+@synthesize url = _url;
+@synthesize drm = _drm;
+
+- (KalturaFieldType)getTypeOfDeliveryProfileId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfFormat
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfProtocols
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfFlavorIds
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfUrl
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfDrm
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfDrm
+{
+    return @"KalturaDrmPlaybackPluginData";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaPlaybackSource"];
+    [aParams addIfDefinedKey:@"deliveryProfileId" withString:self.deliveryProfileId];
+    [aParams addIfDefinedKey:@"format" withString:self.format];
+    [aParams addIfDefinedKey:@"protocols" withString:self.protocols];
+    [aParams addIfDefinedKey:@"flavorIds" withString:self.flavorIds];
+    [aParams addIfDefinedKey:@"url" withString:self.url];
+    [aParams addIfDefinedKey:@"drm" withArray:self.drm];
+}
+
+- (void)dealloc
+{
+    [self->_deliveryProfileId release];
+    [self->_format release];
+    [self->_protocols release];
+    [self->_flavorIds release];
+    [self->_url release];
+    [self->_drm release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaPlaybackContext
+@synthesize sources = _sources;
+@synthesize flavorAssets = _flavorAssets;
+@synthesize actions = _actions;
+@synthesize messages = _messages;
+
+- (KalturaFieldType)getTypeOfSources
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfSources
+{
+    return @"KalturaPlaybackSource";
+}
+
+- (KalturaFieldType)getTypeOfFlavorAssets
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfFlavorAssets
+{
+    return @"KalturaFlavorAsset";
+}
+
+- (KalturaFieldType)getTypeOfActions
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfActions
+{
+    return @"KalturaRuleAction";
+}
+
+- (KalturaFieldType)getTypeOfMessages
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfMessages
+{
+    return @"KalturaAccessControlMessage";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaPlaybackContext"];
+    [aParams addIfDefinedKey:@"sources" withArray:self.sources];
+    [aParams addIfDefinedKey:@"flavorAssets" withArray:self.flavorAssets];
+    [aParams addIfDefinedKey:@"actions" withArray:self.actions];
+    [aParams addIfDefinedKey:@"messages" withArray:self.messages];
+}
+
+- (void)dealloc
+{
+    [self->_sources release];
+    [self->_flavorAssets release];
+    [self->_actions release];
+    [self->_messages release];
     [super dealloc];
 }
 
@@ -45030,11 +45215,11 @@
     return [self cloneWithEntryId:aEntryId withCloneOptions:nil];
 }
 
-- (KalturaPlaybackContextOptions*)getPlaybackContextWithEntryId:(NSString*)aEntryId withContextDataParams:(KalturaPlaybackContextOptions*)aContextDataParams
+- (KalturaPlaybackContext*)getPlaybackContextWithEntryId:(NSString*)aEntryId withContextDataParams:(KalturaPlaybackContextOptions*)aContextDataParams
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
     [self.client.params addIfDefinedKey:@"contextDataParams" withObject:aContextDataParams];
-    return [self.client queueObjectService:@"baseentry" withAction:@"getPlaybackContext" withExpectedType:@"KalturaPlaybackContextOptions"];
+    return [self.client queueObjectService:@"baseentry" withAction:@"getPlaybackContext" withExpectedType:@"KalturaPlaybackContext"];
 }
 
 @end

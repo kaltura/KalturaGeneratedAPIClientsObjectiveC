@@ -3710,6 +3710,15 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaAccessControlMessage : KalturaObjectBase
+@property (nonatomic,copy) NSString* message;
+@property (nonatomic,copy) NSString* code;
+- (KalturaFieldType)getTypeOfMessage;
+- (KalturaFieldType)getTypeOfCode;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaRuleAction : KalturaObjectBase
 // The type of the action
 @property (nonatomic,copy,readonly) NSString* type;	// enum KalturaRuleActionType
@@ -5177,6 +5186,9 @@
 @property (nonatomic,copy) NSString* mediaParserType;	// enum KalturaMediaParserType
 // Should calculate file conversion complexity
 @property (nonatomic,assign) int calculateComplexity;	// enum KalturaNullableBoolean
+// Defines the tags that should be used to define 'collective'/group/multi-flavor processing,
+// 	 like 'mbr' or 'ism'
+@property (nonatomic,copy) NSString* collectionTags;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfPartnerId;
 - (KalturaFieldType)getTypeOfStatus;
@@ -5198,6 +5210,7 @@
 - (KalturaFieldType)getTypeOfStorageProfileId;
 - (KalturaFieldType)getTypeOfMediaParserType;
 - (KalturaFieldType)getTypeOfCalculateComplexity;
+- (KalturaFieldType)getTypeOfCollectionTags;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
@@ -5229,6 +5242,7 @@
 @property (nonatomic,assign) int isEncrypted;	// enum KalturaNullableBoolean
 @property (nonatomic,assign) double contentAwareness;
 @property (nonatomic,assign) int twoPass;	// enum KalturaNullableBoolean
+@property (nonatomic,copy) NSString* tags;
 - (KalturaFieldType)getTypeOfConversionProfileId;
 - (KalturaFieldType)getTypeOfAssetParamsId;
 - (KalturaFieldType)getTypeOfReadyBehavior;
@@ -5239,6 +5253,7 @@
 - (KalturaFieldType)getTypeOfIsEncrypted;
 - (KalturaFieldType)getTypeOfContentAwareness;
 - (KalturaFieldType)getTypeOfTwoPass;
+- (KalturaFieldType)getTypeOfTags;
 - (void)setConversionProfileIdFromString:(NSString*)aPropVal;
 - (void)setAssetParamsIdFromString:(NSString*)aPropVal;
 - (void)setReadyBehaviorFromString:(NSString*)aPropVal;
@@ -7362,10 +7377,51 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaDrmPlaybackPluginData : KalturaPluginData
-@property (nonatomic,copy) NSString* scheme;
+@property (nonatomic,copy) NSString* scheme;	// enum KalturaDrmSchemeName
 @property (nonatomic,copy) NSString* licenseURL;
 - (KalturaFieldType)getTypeOfScheme;
 - (KalturaFieldType)getTypeOfLicenseURL;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaPlaybackSource : KalturaObjectBase
+@property (nonatomic,copy) NSString* deliveryProfileId;
+// source format according to delivery profile streamer type (applehttp, mpegdash etc.)
+@property (nonatomic,copy) NSString* format;
+// comma separated string according to deliveryProfile media protocols ('http,https' etc.)
+@property (nonatomic,copy) NSString* protocols;
+// comma separated string of flavor ids
+@property (nonatomic,copy) NSString* flavorIds;
+@property (nonatomic,copy) NSString* url;
+// drm data object containing relevant license url ,scheme name and certificate
+@property (nonatomic,retain) NSMutableArray* drm;	// of KalturaDrmPlaybackPluginData elements
+- (KalturaFieldType)getTypeOfDeliveryProfileId;
+- (KalturaFieldType)getTypeOfFormat;
+- (KalturaFieldType)getTypeOfProtocols;
+- (KalturaFieldType)getTypeOfFlavorIds;
+- (KalturaFieldType)getTypeOfUrl;
+- (KalturaFieldType)getTypeOfDrm;
+- (NSString*)getObjectTypeOfDrm;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaPlaybackContext : KalturaObjectBase
+@property (nonatomic,retain) NSMutableArray* sources;	// of KalturaPlaybackSource elements
+@property (nonatomic,retain) NSMutableArray* flavorAssets;	// of KalturaFlavorAsset elements
+// Array of actions as received from the rules that invalidated
+@property (nonatomic,retain) NSMutableArray* actions;	// of KalturaRuleAction elements
+// Array of actions as received from the rules that invalidated
+@property (nonatomic,retain) NSMutableArray* messages;	// of KalturaAccessControlMessage elements
+- (KalturaFieldType)getTypeOfSources;
+- (NSString*)getObjectTypeOfSources;
+- (KalturaFieldType)getTypeOfFlavorAssets;
+- (NSString*)getObjectTypeOfFlavorAssets;
+- (KalturaFieldType)getTypeOfActions;
+- (NSString*)getObjectTypeOfActions;
+- (KalturaFieldType)getTypeOfMessages;
+- (NSString*)getObjectTypeOfMessages;
 @end
 
 // @package Kaltura
@@ -13360,7 +13416,7 @@
 - (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId withCloneOptions:(NSArray*)aCloneOptions;
 - (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId;
 // This action delivers all data relevant for player
-- (KalturaPlaybackContextOptions*)getPlaybackContextWithEntryId:(NSString*)aEntryId withContextDataParams:(KalturaPlaybackContextOptions*)aContextDataParams;
+- (KalturaPlaybackContext*)getPlaybackContextWithEntryId:(NSString*)aEntryId withContextDataParams:(KalturaPlaybackContextOptions*)aContextDataParams;
 @end
 
 // @package Kaltura

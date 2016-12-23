@@ -776,6 +776,8 @@
 - (KalturaScheduleEventListResponse*)listWithFilter:(KalturaScheduleEventFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaScheduleEventListResponse*)listWithFilter:(KalturaScheduleEventFilter*)aFilter;
 - (KalturaScheduleEventListResponse*)list;
+// List conflicting events for resourcesIds by event's dates
+- (NSMutableArray*)getConflictsWithResourceIds:(NSString*)aResourceIds withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent;
 // Add new bulk upload batch job
 - (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadICalJobData*)aBulkUploadData;
 - (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData;

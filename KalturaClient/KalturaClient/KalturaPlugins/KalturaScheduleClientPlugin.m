@@ -2425,6 +2425,13 @@
     return [self listWithFilter:nil];
 }
 
+- (NSMutableArray*)getConflictsWithResourceIds:(NSString*)aResourceIds withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent
+{
+    [self.client.params addIfDefinedKey:@"resourceIds" withString:aResourceIds];
+    [self.client.params addIfDefinedKey:@"scheduleEvent" withObject:aScheduleEvent];
+    return [self.client queueArrayService:@"schedule_scheduleevent" withAction:@"getConflicts" withExpectedType:@"KalturaScheduleEvent"];
+}
+
 - (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadICalJobData*)aBulkUploadData
 {
     [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
