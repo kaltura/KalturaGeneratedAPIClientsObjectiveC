@@ -1,5 +1,5 @@
 language: objective-c
-script: xcodebuild -project KalturaClient/KalturaClient.xcodeproj  && touch ~/codesign && chmod +x ~/codesign && export PATH=~/:$PATH &&  xcodebuild -project KalturaClientTester/KalturaClientTester.xcodeproj
+script: xcodebuild -project KalturaClient/KalturaClient.xcodeproj && export PATH=~/:$PATH &&  xcodebuild -project KalturaClientTester/KalturaClientTester.xcodeproj
 #xcode_project: KalturaClient/KalturaClient.xcodeproj
 #xcode_scheme: KalturaClient
 notifications:
