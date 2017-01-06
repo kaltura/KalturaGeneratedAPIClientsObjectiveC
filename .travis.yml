@@ -1,7 +1,7 @@
 language: objective-c
 #before_script:
 #- ./add-key.sh
-script: xcodebuild -project KalturaClient/KalturaClient.xcodeproj CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" && export PATH=~/:$PATH &&  xcodebuild CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" -project KalturaClientTester/KalturaClientTester.xcodeproj
+script: xcodebuild -project KalturaClient/KalturaClient.xcodeproj -sdk iphonesimulator CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" && export PATH=~/:$PATH &&  xcodebuild CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" -project KalturaClientTester/KalturaClientTester.xcodeproj -sdk iphonesimulator
 #xcode_project: KalturaClient/KalturaClient.xcodeproj
 #xcode_scheme: KalturaClient
 notifications:
