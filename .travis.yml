@@ -1,5 +1,7 @@
 language: objective-c
-script: xcodebuild -project KalturaClient/KalturaClient.xcodeproj && export PATH=~/:$PATH &&  xcodebuild -project KalturaClientTester/KalturaClientTester.xcodeproj
+#before_script:
+#- ./add-key.sh
+script: xcodebuild -project KalturaClient/KalturaClient.xcodeproj -sdk iphonesimulator VALID_ARCHS="arm64 armv7 i386 x86_64" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" && export PATH=~/:$PATH &&  xcodebuild CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" VALID_ARCHS="arm64 armv7 i386 x86_64" -project KalturaClientTester/KalturaClientTester.xcodeproj -sdk iphonesimulator
 #xcode_project: KalturaClient/KalturaClient.xcodeproj
 #xcode_scheme: KalturaClient
 notifications:
