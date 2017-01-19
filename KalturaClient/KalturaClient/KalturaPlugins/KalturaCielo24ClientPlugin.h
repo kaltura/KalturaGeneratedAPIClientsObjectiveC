@@ -29,6 +29,7 @@
 // @subpackage Client
 #import "../KalturaClient.h"
 #import "KalturaIntegrationClientPlugin.h"
+#import "KalturaTranscriptClientPlugin.h"
 
 ///////////////////////// enums /////////////////////////
 // @package Kaltura

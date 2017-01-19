@@ -60,6 +60,7 @@
 + (NSString*)TEXT;
 + (NSString*)MEDIA;
 + (NSString*)DOCUMENT;
++ (NSString*)JSON;
 @end
 
 ///////////////////////// classes /////////////////////////

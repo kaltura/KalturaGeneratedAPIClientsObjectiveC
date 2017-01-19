@@ -63,11 +63,23 @@
 }
 @end
 
+@implementation KalturaTranscriptProviderType
++ (NSString*)CIELO24
+{
+    return @"cielo24.Cielo24";
+}
++ (NSString*)VOICEBASE
+{
+    return @"voicebase.Voicebase";
+}
+@end
+
 ///////////////////////// classes /////////////////////////
 @implementation KalturaTranscriptAsset
 @synthesize accuracy = _accuracy;
 @synthesize humanVerified = _humanVerified;
 @synthesize language = _language;
+@synthesize providerType = _providerType;
 
 - (id)init
 {
@@ -94,6 +106,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfProviderType
+{
+    return KFT_String;
+}
+
 - (void)setAccuracyFromString:(NSString*)aPropVal
 {
     self.accuracy = [KalturaSimpleTypeParser parseFloat:aPropVal];
@@ -112,11 +129,13 @@
     [aParams addIfDefinedKey:@"accuracy" withFloat:self.accuracy];
     [aParams addIfDefinedKey:@"humanVerified" withInt:self.humanVerified];
     [aParams addIfDefinedKey:@"language" withString:self.language];
+    [aParams addIfDefinedKey:@"providerType" withString:self.providerType];
 }
 
 - (void)dealloc
 {
     [self->_language release];
+    [self->_providerType release];
     [super dealloc];
 }
 

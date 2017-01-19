@@ -44,6 +44,13 @@
 + (NSString*)UPDATED_AT_DESC;
 @end
 
+// @package Kaltura
+// @subpackage Client
+@interface KalturaTranscriptProviderType : NSObject
++ (NSString*)CIELO24;
++ (NSString*)VOICEBASE;
+@end
+
 ///////////////////////// classes /////////////////////////
 // @package Kaltura
 // @subpackage Client
@@ -54,9 +61,12 @@
 @property (nonatomic,assign) int humanVerified;	// enum KalturaNullableBoolean
 // The language of the transcript
 @property (nonatomic,copy) NSString* language;	// enum KalturaLanguage
+// The provider of the transcript
+@property (nonatomic,copy) NSString* providerType;	// enum KalturaTranscriptProviderType
 - (KalturaFieldType)getTypeOfAccuracy;
 - (KalturaFieldType)getTypeOfHumanVerified;
 - (KalturaFieldType)getTypeOfLanguage;
+- (KalturaFieldType)getTypeOfProviderType;
 - (void)setAccuracyFromString:(NSString*)aPropVal;
 - (void)setHumanVerifiedFromString:(NSString*)aPropVal;
 @end
