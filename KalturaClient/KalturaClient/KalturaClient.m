@@ -2470,6 +2470,10 @@
 {
     return @"2";
 }
++ (NSString*)CHILD_ENTRIES
+{
+    return @"3";
+}
 @end
 
 @implementation KalturaBaseEntryCompareAttribute

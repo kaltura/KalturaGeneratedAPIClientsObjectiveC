@@ -1066,6 +1066,7 @@
 + (NSString*)THUMB_CUE_POINTS;
 + (NSString*)USERS;
 + (NSString*)CATEGORIES;
++ (NSString*)CHILD_ENTRIES;
 @end
 
 // @package Kaltura
