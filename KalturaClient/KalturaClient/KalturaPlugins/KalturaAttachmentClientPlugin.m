@@ -206,6 +206,16 @@
 
 @end
 
+@implementation KalturaAttachmentServeOptions
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaAttachmentServeOptions"];
+}
+
+@end
+
 @implementation KalturaAttachmentAssetBaseFilter
 @synthesize formatEqual = _formatEqual;
 @synthesize formatIn = _formatIn;
@@ -326,10 +336,16 @@
     return [self.client queueObjectService:@"attachment_attachmentasset" withAction:@"getRemotePaths" withExpectedType:@"KalturaRemotePathListResponse"];
 }
 
-- (NSString*)serveWithAttachmentAssetId:(NSString*)aAttachmentAssetId
+- (NSString*)serveWithAttachmentAssetId:(NSString*)aAttachmentAssetId withServeOptions:(KalturaAttachmentServeOptions*)aServeOptions
 {
     [self.client.params addIfDefinedKey:@"attachmentAssetId" withString:aAttachmentAssetId];
+    [self.client.params addIfDefinedKey:@"serveOptions" withObject:aServeOptions];
     return [self.client queueServeService:@"attachment_attachmentasset" withAction:@"serve"];
+}
+
+- (NSString*)serveWithAttachmentAssetId:(NSString*)aAttachmentAssetId
+{
+    return [self serveWithAttachmentAssetId:aAttachmentAssetId withServeOptions:nil];
 }
 
 - (KalturaAttachmentAsset*)getWithAttachmentAssetId:(NSString*)aAttachmentAssetId

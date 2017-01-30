@@ -4080,6 +4080,16 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaAssetServeOptions : KalturaObjectBase
+@property (nonatomic,assign) KALTURA_BOOL download;
+@property (nonatomic,copy) NSString* referrer;
+- (KalturaFieldType)getTypeOfDownload;
+- (KalturaFieldType)getTypeOfReferrer;
+- (void)setDownloadFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 // Base class to all operation attributes types
 @interface KalturaOperationAttributes : KalturaObjectBase
 @end
@@ -8074,16 +8084,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaThumbnailServeOptions : KalturaObjectBase
-@property (nonatomic,assign) KALTURA_BOOL download;
-@property (nonatomic,copy) NSString* referrer;
-- (KalturaFieldType)getTypeOfDownload;
-- (KalturaFieldType)getTypeOfReferrer;
-- (void)setDownloadFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaUiConf : KalturaObjectBase
 @property (nonatomic,assign,readonly) int id;
 // Name of the uiConf, this is not a primary key
@@ -10800,6 +10800,11 @@
 @property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaThumbParams elements
 - (KalturaFieldType)getTypeOfObjects;
 - (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaThumbnailServeOptions : KalturaAssetServeOptions
 @end
 
 // @package Kaltura

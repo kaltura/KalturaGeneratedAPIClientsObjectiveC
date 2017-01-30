@@ -11672,6 +11672,51 @@
 
 @end
 
+@implementation KalturaAssetServeOptions
+@synthesize download = _download;
+@synthesize referrer = _referrer;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_download = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfDownload
+{
+    return KFT_Bool;
+}
+
+- (KalturaFieldType)getTypeOfReferrer
+{
+    return KFT_String;
+}
+
+- (void)setDownloadFromString:(NSString*)aPropVal
+{
+    self.download = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaAssetServeOptions"];
+    [aParams addIfDefinedKey:@"download" withBool:self.download];
+    [aParams addIfDefinedKey:@"referrer" withString:self.referrer];
+}
+
+- (void)dealloc
+{
+    [self->_referrer release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaOperationAttributes
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
@@ -26254,51 +26299,6 @@
 
 @end
 
-@implementation KalturaThumbnailServeOptions
-@synthesize download = _download;
-@synthesize referrer = _referrer;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_download = KALTURA_UNDEF_BOOL;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfDownload
-{
-    return KFT_Bool;
-}
-
-- (KalturaFieldType)getTypeOfReferrer
-{
-    return KFT_String;
-}
-
-- (void)setDownloadFromString:(NSString*)aPropVal
-{
-    self.download = [KalturaSimpleTypeParser parseBool:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaThumbnailServeOptions"];
-    [aParams addIfDefinedKey:@"download" withBool:self.download];
-    [aParams addIfDefinedKey:@"referrer" withString:self.referrer];
-}
-
-- (void)dealloc
-{
-    [self->_referrer release];
-    [super dealloc];
-}
-
-@end
-
 @interface KalturaUiConf()
 @property (nonatomic,assign) int id;
 @property (nonatomic,assign) int partnerId;
@@ -36710,6 +36710,16 @@
 {
     [self->_objects release];
     [super dealloc];
+}
+
+@end
+
+@implementation KalturaThumbnailServeOptions
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaThumbnailServeOptions"];
 }
 
 @end

@@ -92,6 +92,11 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaAttachmentServeOptions : KalturaAssetServeOptions
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaAttachmentAssetBaseFilter : KalturaAssetFilter
 @property (nonatomic,copy) NSString* formatEqual;	// enum KalturaAttachmentType
 @property (nonatomic,copy) NSString* formatIn;
@@ -128,6 +133,7 @@
 // Get remote storage existing paths for the asset
 - (KalturaRemotePathListResponse*)getRemotePathsWithId:(NSString*)aId;
 // Serves attachment by its id
+- (NSString*)serveWithAttachmentAssetId:(NSString*)aAttachmentAssetId withServeOptions:(KalturaAttachmentServeOptions*)aServeOptions;
 - (NSString*)serveWithAttachmentAssetId:(NSString*)aAttachmentAssetId;
 - (KalturaAttachmentAsset*)getWithAttachmentAssetId:(NSString*)aAttachmentAssetId;
 // List attachment Assets by filter and pager
