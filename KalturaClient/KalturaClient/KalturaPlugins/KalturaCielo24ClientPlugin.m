@@ -72,6 +72,7 @@
 @synthesize baseUrl = _baseUrl;
 @synthesize spokenLanguage = _spokenLanguage;
 @synthesize replaceMediaContent = _replaceMediaContent;
+@synthesize additionalParameters = _additionalParameters;
 
 - (id)init
 {
@@ -132,6 +133,11 @@
     return KFT_Bool;
 }
 
+- (KalturaFieldType)getTypeOfAdditionalParameters
+{
+    return KFT_String;
+}
+
 - (void)setReplaceMediaContentFromString:(NSString*)aPropVal
 {
     self.replaceMediaContent = [KalturaSimpleTypeParser parseBool:aPropVal];
@@ -149,6 +155,7 @@
     [aParams addIfDefinedKey:@"fidelity" withString:self.fidelity];
     [aParams addIfDefinedKey:@"spokenLanguage" withString:self.spokenLanguage];
     [aParams addIfDefinedKey:@"replaceMediaContent" withBool:self.replaceMediaContent];
+    [aParams addIfDefinedKey:@"additionalParameters" withString:self.additionalParameters];
 }
 
 - (void)dealloc
@@ -162,6 +169,7 @@
     [self->_password release];
     [self->_baseUrl release];
     [self->_spokenLanguage release];
+    [self->_additionalParameters release];
     [super dealloc];
 }
 

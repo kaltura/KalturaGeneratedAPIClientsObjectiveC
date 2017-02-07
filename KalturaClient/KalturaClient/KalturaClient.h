@@ -6604,6 +6604,8 @@
 @property (nonatomic,retain) KalturaLiveEntryRecordingOptions* recordingOptions;
 // the status of the entry of type EntryServerNodeStatus
 @property (nonatomic,assign,readonly) int liveStatus;	// enum KalturaEntryServerNodeStatus
+// The chunk duration value in milliseconds
+@property (nonatomic,assign) int segmentDuration;
 - (KalturaFieldType)getTypeOfOfflineMessage;
 - (KalturaFieldType)getTypeOfRecordStatus;
 - (KalturaFieldType)getTypeOfDvrStatus;
@@ -6621,6 +6623,7 @@
 - (KalturaFieldType)getTypeOfRecordingOptions;
 - (NSString*)getObjectTypeOfRecordingOptions;
 - (KalturaFieldType)getTypeOfLiveStatus;
+- (KalturaFieldType)getTypeOfSegmentDuration;
 - (void)setRecordStatusFromString:(NSString*)aPropVal;
 - (void)setDvrStatusFromString:(NSString*)aPropVal;
 - (void)setDvrWindowFromString:(NSString*)aPropVal;
@@ -6630,6 +6633,7 @@
 - (void)setLastBroadcastFromString:(NSString*)aPropVal;
 - (void)setCurrentBroadcastStartTimeFromString:(NSString*)aPropVal;
 - (void)setLiveStatusFromString:(NSString*)aPropVal;
+- (void)setSegmentDurationFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

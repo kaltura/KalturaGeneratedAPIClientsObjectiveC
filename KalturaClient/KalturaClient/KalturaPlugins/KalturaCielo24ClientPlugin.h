@@ -69,6 +69,8 @@
 @property (nonatomic,copy) NSString* spokenLanguage;	// enum KalturaLanguage
 // should replace remote media content
 @property (nonatomic,assign) KALTURA_BOOL replaceMediaContent;
+// additional parameters to send to Cielo24
+@property (nonatomic,copy) NSString* additionalParameters;
 - (KalturaFieldType)getTypeOfEntryId;
 - (KalturaFieldType)getTypeOfFlavorAssetId;
 - (KalturaFieldType)getTypeOfCaptionAssetFormats;
@@ -79,6 +81,7 @@
 - (KalturaFieldType)getTypeOfBaseUrl;
 - (KalturaFieldType)getTypeOfSpokenLanguage;
 - (KalturaFieldType)getTypeOfReplaceMediaContent;
+- (KalturaFieldType)getTypeOfAdditionalParameters;
 - (void)setReplaceMediaContentFromString:(NSString*)aPropVal;
 @end
 

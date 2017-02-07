@@ -20740,6 +20740,7 @@
 @synthesize currentBroadcastStartTime = _currentBroadcastStartTime;
 @synthesize recordingOptions = _recordingOptions;
 @synthesize liveStatus = _liveStatus;
+@synthesize segmentDuration = _segmentDuration;
 
 - (id)init
 {
@@ -20755,6 +20756,7 @@
     self->_lastBroadcast = KALTURA_UNDEF_INT;
     self->_currentBroadcastStartTime = KALTURA_UNDEF_FLOAT;
     self->_liveStatus = KALTURA_UNDEF_INT;
+    self->_segmentDuration = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -20843,6 +20845,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfSegmentDuration
+{
+    return KFT_Int;
+}
+
 - (void)setRecordStatusFromString:(NSString*)aPropVal
 {
     self.recordStatus = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -20888,6 +20895,11 @@
     self.liveStatus = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setSegmentDurationFromString:(NSString*)aPropVal
+{
+    self.segmentDuration = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -20904,6 +20916,7 @@
     [aParams addIfDefinedKey:@"publishConfigurations" withArray:self.publishConfigurations];
     [aParams addIfDefinedKey:@"currentBroadcastStartTime" withFloat:self.currentBroadcastStartTime];
     [aParams addIfDefinedKey:@"recordingOptions" withObject:self.recordingOptions];
+    [aParams addIfDefinedKey:@"segmentDuration" withInt:self.segmentDuration];
 }
 
 - (void)dealloc
