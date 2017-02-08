@@ -1067,6 +1067,7 @@
 + (NSString*)USERS;
 + (NSString*)CATEGORIES;
 + (NSString*)CHILD_ENTRIES;
++ (NSString*)ACCESS_CONTROL;
 @end
 
 // @package Kaltura

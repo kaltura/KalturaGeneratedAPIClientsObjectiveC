@@ -2474,6 +2474,10 @@
 {
     return @"3";
 }
++ (NSString*)ACCESS_CONTROL
+{
+    return @"4";
+}
 @end
 
 @implementation KalturaBaseEntryCompareAttribute
