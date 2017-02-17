@@ -304,23 +304,27 @@
     return [self.client queueObjectService:@"externalmedia_externalmedia" withAction:@"add" withExpectedType:@"KalturaExternalMediaEntry"];
 }
 
-- (KalturaExternalMediaEntry*)getWithId:(NSString*)aId
+- (int)countWithFilter:(KalturaExternalMediaEntryFilter*)aFilter
 {
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    return [self.client queueObjectService:@"externalmedia_externalmedia" withAction:@"get" withExpectedType:@"KalturaExternalMediaEntry"];
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    return [self.client queueIntService:@"externalmedia_externalmedia" withAction:@"count"];
 }
 
-- (KalturaExternalMediaEntry*)updateWithId:(NSString*)aId withEntry:(KalturaExternalMediaEntry*)aEntry
+- (int)count
 {
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"entry" withObject:aEntry];
-    return [self.client queueObjectService:@"externalmedia_externalmedia" withAction:@"update" withExpectedType:@"KalturaExternalMediaEntry"];
+    return [self countWithFilter:nil];
 }
 
 - (void)deleteWithId:(NSString*)aId
 {
     [self.client.params addIfDefinedKey:@"id" withString:aId];
     [self.client queueVoidService:@"externalmedia_externalmedia" withAction:@"delete"];
+}
+
+- (KalturaExternalMediaEntry*)getWithId:(NSString*)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    return [self.client queueObjectService:@"externalmedia_externalmedia" withAction:@"get" withExpectedType:@"KalturaExternalMediaEntry"];
 }
 
 - (KalturaExternalMediaEntryListResponse*)listWithFilter:(KalturaExternalMediaEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -340,15 +344,11 @@
     return [self listWithFilter:nil];
 }
 
-- (int)countWithFilter:(KalturaExternalMediaEntryFilter*)aFilter
+- (KalturaExternalMediaEntry*)updateWithId:(NSString*)aId withEntry:(KalturaExternalMediaEntry*)aEntry
 {
-    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
-    return [self.client queueIntService:@"externalmedia_externalmedia" withAction:@"count"];
-}
-
-- (int)count
-{
-    return [self countWithFilter:nil];
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"entry" withObject:aEntry];
+    return [self.client queueObjectService:@"externalmedia_externalmedia" withAction:@"update" withExpectedType:@"KalturaExternalMediaEntry"];
 }
 
 @end

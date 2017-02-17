@@ -306,14 +306,12 @@
 // This action allows registering to various backend event. Use this action to create notifications that will react to events such as new video was uploaded or metadata field was updated. To see the list of available event types, call the listTemplates action.
 - (KalturaEventNotificationTemplate*)cloneWithId:(int)aId withEventNotificationTemplate:(KalturaEventNotificationTemplate*)aEventNotificationTemplate;
 - (KalturaEventNotificationTemplate*)cloneWithId:(int)aId;
-// Retrieve an event notification template object by id
-- (KalturaEventNotificationTemplate*)getWithId:(int)aId;
-// Update an existing event notification template object
-- (KalturaEventNotificationTemplate*)updateWithId:(int)aId withEventNotificationTemplate:(KalturaEventNotificationTemplate*)aEventNotificationTemplate;
-// Update event notification template status by id
-- (KalturaEventNotificationTemplate*)updateStatusWithId:(int)aId withStatus:(int)aStatus;
 // Delete an event notification template object
 - (void)deleteWithId:(int)aId;
+// Dispatch event notification object by id
+- (int)dispatchWithId:(int)aId withScope:(KalturaEventNotificationScope*)aScope;
+// Retrieve an event notification template object by id
+- (KalturaEventNotificationTemplate*)getWithId:(int)aId;
 // list event notification template objects
 - (KalturaEventNotificationTemplateListResponse*)listWithFilter:(KalturaEventNotificationTemplateFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaEventNotificationTemplateListResponse*)listWithFilter:(KalturaEventNotificationTemplateFilter*)aFilter;
@@ -321,12 +319,14 @@
 - (KalturaEventNotificationTemplateListResponse*)listByPartnerWithFilter:(KalturaPartnerFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaEventNotificationTemplateListResponse*)listByPartnerWithFilter:(KalturaPartnerFilter*)aFilter;
 - (KalturaEventNotificationTemplateListResponse*)listByPartner;
-// Dispatch event notification object by id
-- (int)dispatchWithId:(int)aId withScope:(KalturaEventNotificationScope*)aScope;
 // Action lists the template partner event notification templates.
 - (KalturaEventNotificationTemplateListResponse*)listTemplatesWithFilter:(KalturaEventNotificationTemplateFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaEventNotificationTemplateListResponse*)listTemplatesWithFilter:(KalturaEventNotificationTemplateFilter*)aFilter;
 - (KalturaEventNotificationTemplateListResponse*)listTemplates;
+// Update an existing event notification template object
+- (KalturaEventNotificationTemplate*)updateWithId:(int)aId withEventNotificationTemplate:(KalturaEventNotificationTemplate*)aEventNotificationTemplate;
+// Update event notification template status by id
+- (KalturaEventNotificationTemplate*)updateStatusWithId:(int)aId withStatus:(int)aStatus;
 @end
 
 @interface KalturaEventNotificationClientPlugin : KalturaClientPlugin

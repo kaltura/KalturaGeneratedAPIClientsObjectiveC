@@ -138,29 +138,29 @@
 @interface KalturaAnnotationService : KalturaServiceBase
 // Allows you to add an annotation object associated with an entry
 - (KalturaAnnotation*)addWithAnnotation:(KalturaCuePoint*)aAnnotation;
-// Update annotation by id
-- (KalturaAnnotation*)updateWithId:(NSString*)aId withAnnotation:(KalturaCuePoint*)aAnnotation;
-// List annotation objects by filter and pager
-- (KalturaAnnotationListResponse*)listWithFilter:(KalturaCuePointFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
-- (KalturaAnnotationListResponse*)listWithFilter:(KalturaCuePointFilter*)aFilter;
-- (KalturaAnnotationListResponse*)list;
 // Allows you to add multiple cue points objects by uploading XML that contains multiple cue point definitions
 - (KalturaCuePointListResponse*)addFromBulkWithFileData:(NSString*)aFileData;
-// Download multiple cue points objects as XML definitions
-- (NSString*)serveBulkWithFilter:(KalturaCuePointFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
-- (NSString*)serveBulkWithFilter:(KalturaCuePointFilter*)aFilter;
-- (NSString*)serveBulk;
-// Retrieve an CuePoint object by id
-- (KalturaCuePoint*)getWithId:(NSString*)aId;
+// Clone cuePoint with id to given entry
+- (KalturaCuePoint*)cloneWithId:(NSString*)aId withEntryId:(NSString*)aEntryId;
 // count cue point objects by filter
 - (int)countWithFilter:(KalturaCuePointFilter*)aFilter;
 - (int)count;
 // delete cue point by id, and delete all children cue points
 - (void)deleteWithId:(NSString*)aId;
+// Retrieve an CuePoint object by id
+- (KalturaCuePoint*)getWithId:(NSString*)aId;
+// List annotation objects by filter and pager
+- (KalturaAnnotationListResponse*)listWithFilter:(KalturaCuePointFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
+- (KalturaAnnotationListResponse*)listWithFilter:(KalturaCuePointFilter*)aFilter;
+- (KalturaAnnotationListResponse*)list;
+// Download multiple cue points objects as XML definitions
+- (NSString*)serveBulkWithFilter:(KalturaCuePointFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
+- (NSString*)serveBulkWithFilter:(KalturaCuePointFilter*)aFilter;
+- (NSString*)serveBulk;
+// Update annotation by id
+- (KalturaAnnotation*)updateWithId:(NSString*)aId withAnnotation:(KalturaCuePoint*)aAnnotation;
 // Update cuePoint status by id
 - (void)updateStatusWithId:(NSString*)aId withStatus:(int)aStatus;
-// Clone cuePoint with id to given entry
-- (KalturaCuePoint*)cloneWithId:(NSString*)aId withEntryId:(NSString*)aEntryId;
 @end
 
 @interface KalturaAnnotationClientPlugin : KalturaClientPlugin

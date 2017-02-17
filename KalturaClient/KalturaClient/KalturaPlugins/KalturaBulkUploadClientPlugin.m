@@ -41,6 +41,12 @@
 
 ///////////////////////// services /////////////////////////
 @implementation KalturaBulkService
+- (KalturaBulkUpload*)abortWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    return [self.client queueObjectService:@"bulkupload_bulk" withAction:@"abort" withExpectedType:@"KalturaBulkUpload"];
+}
+
 - (KalturaBulkUpload*)getWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
@@ -74,12 +80,6 @@
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     return [self.client queueServeService:@"bulkupload_bulk" withAction:@"serveLog"];
-}
-
-- (KalturaBulkUpload*)abortWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"bulkupload_bulk" withAction:@"abort" withExpectedType:@"KalturaBulkUpload"];
 }
 
 @end

@@ -401,57 +401,17 @@
     return [self.client queueObjectService:@"annotation_annotation" withAction:@"add" withExpectedType:@"KalturaAnnotation"];
 }
 
-- (KalturaAnnotation*)updateWithId:(NSString*)aId withAnnotation:(KalturaCuePoint*)aAnnotation
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"annotation" withObject:aAnnotation];
-    return [self.client queueObjectService:@"annotation_annotation" withAction:@"update" withExpectedType:@"KalturaAnnotation"];
-}
-
-- (KalturaAnnotationListResponse*)listWithFilter:(KalturaCuePointFilter*)aFilter withPager:(KalturaFilterPager*)aPager
-{
-    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
-    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
-    return [self.client queueObjectService:@"annotation_annotation" withAction:@"list" withExpectedType:@"KalturaAnnotationListResponse"];
-}
-
-- (KalturaAnnotationListResponse*)listWithFilter:(KalturaCuePointFilter*)aFilter
-{
-    return [self listWithFilter:aFilter withPager:nil];
-}
-
-- (KalturaAnnotationListResponse*)list
-{
-    return [self listWithFilter:nil];
-}
-
 - (KalturaCuePointListResponse*)addFromBulkWithFileData:(NSString*)aFileData
 {
     [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
     return [self.client queueObjectService:@"annotation_annotation" withAction:@"addFromBulk" withExpectedType:@"KalturaCuePointListResponse"];
 }
 
-- (NSString*)serveBulkWithFilter:(KalturaCuePointFilter*)aFilter withPager:(KalturaFilterPager*)aPager
-{
-    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
-    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
-    return [self.client queueServeService:@"annotation_annotation" withAction:@"serveBulk"];
-}
-
-- (NSString*)serveBulkWithFilter:(KalturaCuePointFilter*)aFilter
-{
-    return [self serveBulkWithFilter:aFilter withPager:nil];
-}
-
-- (NSString*)serveBulk
-{
-    return [self serveBulkWithFilter:nil];
-}
-
-- (KalturaCuePoint*)getWithId:(NSString*)aId
+- (KalturaCuePoint*)cloneWithId:(NSString*)aId withEntryId:(NSString*)aEntryId
 {
     [self.client.params addIfDefinedKey:@"id" withString:aId];
-    return [self.client queueObjectService:@"annotation_annotation" withAction:@"get" withExpectedType:@"KalturaCuePoint"];
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    return [self.client queueObjectService:@"annotation_annotation" withAction:@"clone" withExpectedType:@"KalturaCuePoint"];
 }
 
 - (int)countWithFilter:(KalturaCuePointFilter*)aFilter
@@ -471,18 +431,58 @@
     [self.client queueVoidService:@"annotation_annotation" withAction:@"delete"];
 }
 
+- (KalturaCuePoint*)getWithId:(NSString*)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    return [self.client queueObjectService:@"annotation_annotation" withAction:@"get" withExpectedType:@"KalturaCuePoint"];
+}
+
+- (KalturaAnnotationListResponse*)listWithFilter:(KalturaCuePointFilter*)aFilter withPager:(KalturaFilterPager*)aPager
+{
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    return [self.client queueObjectService:@"annotation_annotation" withAction:@"list" withExpectedType:@"KalturaAnnotationListResponse"];
+}
+
+- (KalturaAnnotationListResponse*)listWithFilter:(KalturaCuePointFilter*)aFilter
+{
+    return [self listWithFilter:aFilter withPager:nil];
+}
+
+- (KalturaAnnotationListResponse*)list
+{
+    return [self listWithFilter:nil];
+}
+
+- (NSString*)serveBulkWithFilter:(KalturaCuePointFilter*)aFilter withPager:(KalturaFilterPager*)aPager
+{
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    return [self.client queueServeService:@"annotation_annotation" withAction:@"serveBulk"];
+}
+
+- (NSString*)serveBulkWithFilter:(KalturaCuePointFilter*)aFilter
+{
+    return [self serveBulkWithFilter:aFilter withPager:nil];
+}
+
+- (NSString*)serveBulk
+{
+    return [self serveBulkWithFilter:nil];
+}
+
+- (KalturaAnnotation*)updateWithId:(NSString*)aId withAnnotation:(KalturaCuePoint*)aAnnotation
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"annotation" withObject:aAnnotation];
+    return [self.client queueObjectService:@"annotation_annotation" withAction:@"update" withExpectedType:@"KalturaAnnotation"];
+}
+
 - (void)updateStatusWithId:(NSString*)aId withStatus:(int)aStatus
 {
     [self.client.params addIfDefinedKey:@"id" withString:aId];
     [self.client.params addIfDefinedKey:@"status" withInt:aStatus];
     [self.client queueVoidService:@"annotation_annotation" withAction:@"updateStatus"];
-}
-
-- (KalturaCuePoint*)cloneWithId:(NSString*)aId withEntryId:(NSString*)aEntryId
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    return [self.client queueObjectService:@"annotation_annotation" withAction:@"clone" withExpectedType:@"KalturaCuePoint"];
 }
 
 @end

@@ -663,17 +663,17 @@
     return [self.client queueObjectService:@"quiz_quiz" withAction:@"add" withExpectedType:@"KalturaQuiz"];
 }
 
-- (KalturaQuiz*)updateWithEntryId:(NSString*)aEntryId withQuiz:(KalturaQuiz*)aQuiz
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"quiz" withObject:aQuiz];
-    return [self.client queueObjectService:@"quiz_quiz" withAction:@"update" withExpectedType:@"KalturaQuiz"];
-}
-
 - (KalturaQuiz*)getWithEntryId:(NSString*)aEntryId
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
     return [self.client queueObjectService:@"quiz_quiz" withAction:@"get" withExpectedType:@"KalturaQuiz"];
+}
+
+- (NSString*)getUrlWithEntryId:(NSString*)aEntryId withQuizOutputType:(int)aQuizOutputType
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"quizOutputType" withInt:aQuizOutputType];
+    return [self.client queueStringService:@"quiz_quiz" withAction:@"getUrl"];
 }
 
 - (KalturaQuizListResponse*)listWithFilter:(KalturaQuizFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -700,11 +700,11 @@
     return [self.client queueServeService:@"quiz_quiz" withAction:@"serve"];
 }
 
-- (NSString*)getUrlWithEntryId:(NSString*)aEntryId withQuizOutputType:(int)aQuizOutputType
+- (KalturaQuiz*)updateWithEntryId:(NSString*)aEntryId withQuiz:(KalturaQuiz*)aQuiz
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"quizOutputType" withInt:aQuizOutputType];
-    return [self.client queueStringService:@"quiz_quiz" withAction:@"getUrl"];
+    [self.client.params addIfDefinedKey:@"quiz" withObject:aQuiz];
+    return [self.client queueObjectService:@"quiz_quiz" withAction:@"update" withExpectedType:@"KalturaQuiz"];
 }
 
 @end

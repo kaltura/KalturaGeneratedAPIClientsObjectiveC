@@ -298,18 +298,6 @@
 
 ///////////////////////// services /////////////////////////
 @implementation KalturaTagService
-- (KalturaTagListResponse*)searchWithTagFilter:(KalturaTagFilter*)aTagFilter withPager:(KalturaFilterPager*)aPager
-{
-    [self.client.params addIfDefinedKey:@"tagFilter" withObject:aTagFilter];
-    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
-    return [self.client queueObjectService:@"tagsearch_tag" withAction:@"search" withExpectedType:@"KalturaTagListResponse"];
-}
-
-- (KalturaTagListResponse*)searchWithTagFilter:(KalturaTagFilter*)aTagFilter
-{
-    return [self searchWithTagFilter:aTagFilter withPager:nil];
-}
-
 - (int)deletePending
 {
     return [self.client queueIntService:@"tagsearch_tag" withAction:@"deletePending"];
@@ -321,6 +309,18 @@
     [self.client.params addIfDefinedKey:@"pcToDecrement" withString:aPcToDecrement];
     [self.client.params addIfDefinedKey:@"pcToIncrement" withString:aPcToIncrement];
     [self.client queueVoidService:@"tagsearch_tag" withAction:@"indexCategoryEntryTags"];
+}
+
+- (KalturaTagListResponse*)searchWithTagFilter:(KalturaTagFilter*)aTagFilter withPager:(KalturaFilterPager*)aPager
+{
+    [self.client.params addIfDefinedKey:@"tagFilter" withObject:aTagFilter];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    return [self.client queueObjectService:@"tagsearch_tag" withAction:@"search" withExpectedType:@"KalturaTagListResponse"];
+}
+
+- (KalturaTagListResponse*)searchWithTagFilter:(KalturaTagFilter*)aTagFilter
+{
+    return [self searchWithTagFilter:aTagFilter withPager:nil];
 }
 
 @end

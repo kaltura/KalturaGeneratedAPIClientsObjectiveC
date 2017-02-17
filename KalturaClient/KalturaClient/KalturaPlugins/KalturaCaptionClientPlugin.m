@@ -557,30 +557,22 @@
     return [self.client queueObjectService:@"caption_captionasset" withAction:@"add" withExpectedType:@"KalturaCaptionAsset"];
 }
 
-- (KalturaCaptionAsset*)setContentWithId:(NSString*)aId withContentResource:(KalturaContentResource*)aContentResource
+- (void)deleteWithCaptionAssetId:(NSString*)aCaptionAssetId
+{
+    [self.client.params addIfDefinedKey:@"captionAssetId" withString:aCaptionAssetId];
+    [self.client queueVoidService:@"caption_captionasset" withAction:@"delete"];
+}
+
+- (KalturaCaptionAsset*)getWithCaptionAssetId:(NSString*)aCaptionAssetId
+{
+    [self.client.params addIfDefinedKey:@"captionAssetId" withString:aCaptionAssetId];
+    return [self.client queueObjectService:@"caption_captionasset" withAction:@"get" withExpectedType:@"KalturaCaptionAsset"];
+}
+
+- (KalturaRemotePathListResponse*)getRemotePathsWithId:(NSString*)aId
 {
     [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"contentResource" withObject:aContentResource];
-    return [self.client queueObjectService:@"caption_captionasset" withAction:@"setContent" withExpectedType:@"KalturaCaptionAsset"];
-}
-
-- (KalturaCaptionAsset*)updateWithId:(NSString*)aId withCaptionAsset:(KalturaCaptionAsset*)aCaptionAsset
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"captionAsset" withObject:aCaptionAsset];
-    return [self.client queueObjectService:@"caption_captionasset" withAction:@"update" withExpectedType:@"KalturaCaptionAsset"];
-}
-
-- (NSString*)serveByEntryIdWithEntryId:(NSString*)aEntryId withCaptionParamId:(int)aCaptionParamId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"captionParamId" withInt:aCaptionParamId];
-    return [self.client queueServeService:@"caption_captionasset" withAction:@"serveByEntryId"];
-}
-
-- (NSString*)serveByEntryIdWithEntryId:(NSString*)aEntryId
-{
-    return [self serveByEntryIdWithEntryId:aEntryId withCaptionParamId:KALTURA_UNDEF_INT];
+    return [self.client queueObjectService:@"caption_captionasset" withAction:@"getRemotePaths" withExpectedType:@"KalturaRemotePathListResponse"];
 }
 
 - (NSString*)getUrlWithId:(NSString*)aId withStorageId:(int)aStorageId
@@ -595,16 +587,39 @@
     return [self getUrlWithId:aId withStorageId:KALTURA_UNDEF_INT];
 }
 
-- (KalturaRemotePathListResponse*)getRemotePathsWithId:(NSString*)aId
+- (KalturaCaptionAssetListResponse*)listWithFilter:(KalturaAssetFilter*)aFilter withPager:(KalturaFilterPager*)aPager
 {
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    return [self.client queueObjectService:@"caption_captionasset" withAction:@"getRemotePaths" withExpectedType:@"KalturaRemotePathListResponse"];
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    return [self.client queueObjectService:@"caption_captionasset" withAction:@"list" withExpectedType:@"KalturaCaptionAssetListResponse"];
+}
+
+- (KalturaCaptionAssetListResponse*)listWithFilter:(KalturaAssetFilter*)aFilter
+{
+    return [self listWithFilter:aFilter withPager:nil];
+}
+
+- (KalturaCaptionAssetListResponse*)list
+{
+    return [self listWithFilter:nil];
 }
 
 - (NSString*)serveWithCaptionAssetId:(NSString*)aCaptionAssetId
 {
     [self.client.params addIfDefinedKey:@"captionAssetId" withString:aCaptionAssetId];
     return [self.client queueServeService:@"caption_captionasset" withAction:@"serve"];
+}
+
+- (NSString*)serveByEntryIdWithEntryId:(NSString*)aEntryId withCaptionParamId:(int)aCaptionParamId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"captionParamId" withInt:aCaptionParamId];
+    return [self.client queueServeService:@"caption_captionasset" withAction:@"serveByEntryId"];
+}
+
+- (NSString*)serveByEntryIdWithEntryId:(NSString*)aEntryId
+{
+    return [self serveByEntryIdWithEntryId:aEntryId withCaptionParamId:KALTURA_UNDEF_INT];
 }
 
 - (NSString*)serveWebVTTWithCaptionAssetId:(NSString*)aCaptionAssetId withSegmentDuration:(int)aSegmentDuration withSegmentIndex:(int)aSegmentIndex withLocalTimestamp:(int)aLocalTimestamp
@@ -637,33 +652,18 @@
     [self.client queueVoidService:@"caption_captionasset" withAction:@"setAsDefault"];
 }
 
-- (KalturaCaptionAsset*)getWithCaptionAssetId:(NSString*)aCaptionAssetId
+- (KalturaCaptionAsset*)setContentWithId:(NSString*)aId withContentResource:(KalturaContentResource*)aContentResource
 {
-    [self.client.params addIfDefinedKey:@"captionAssetId" withString:aCaptionAssetId];
-    return [self.client queueObjectService:@"caption_captionasset" withAction:@"get" withExpectedType:@"KalturaCaptionAsset"];
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"contentResource" withObject:aContentResource];
+    return [self.client queueObjectService:@"caption_captionasset" withAction:@"setContent" withExpectedType:@"KalturaCaptionAsset"];
 }
 
-- (KalturaCaptionAssetListResponse*)listWithFilter:(KalturaAssetFilter*)aFilter withPager:(KalturaFilterPager*)aPager
+- (KalturaCaptionAsset*)updateWithId:(NSString*)aId withCaptionAsset:(KalturaCaptionAsset*)aCaptionAsset
 {
-    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
-    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
-    return [self.client queueObjectService:@"caption_captionasset" withAction:@"list" withExpectedType:@"KalturaCaptionAssetListResponse"];
-}
-
-- (KalturaCaptionAssetListResponse*)listWithFilter:(KalturaAssetFilter*)aFilter
-{
-    return [self listWithFilter:aFilter withPager:nil];
-}
-
-- (KalturaCaptionAssetListResponse*)list
-{
-    return [self listWithFilter:nil];
-}
-
-- (void)deleteWithCaptionAssetId:(NSString*)aCaptionAssetId
-{
-    [self.client.params addIfDefinedKey:@"captionAssetId" withString:aCaptionAssetId];
-    [self.client queueVoidService:@"caption_captionasset" withAction:@"delete"];
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"captionAsset" withObject:aCaptionAsset];
+    return [self.client queueObjectService:@"caption_captionasset" withAction:@"update" withExpectedType:@"KalturaCaptionAsset"];
 }
 
 @end
@@ -675,23 +675,16 @@
     return [self.client queueObjectService:@"caption_captionparams" withAction:@"add" withExpectedType:@"KalturaCaptionParams"];
 }
 
-- (KalturaCaptionParams*)getWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"caption_captionparams" withAction:@"get" withExpectedType:@"KalturaCaptionParams"];
-}
-
-- (KalturaCaptionParams*)updateWithId:(int)aId withCaptionParams:(KalturaCaptionParams*)aCaptionParams
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"captionParams" withObject:aCaptionParams];
-    return [self.client queueObjectService:@"caption_captionparams" withAction:@"update" withExpectedType:@"KalturaCaptionParams"];
-}
-
 - (void)deleteWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     [self.client queueVoidService:@"caption_captionparams" withAction:@"delete"];
+}
+
+- (KalturaCaptionParams*)getWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    return [self.client queueObjectService:@"caption_captionparams" withAction:@"get" withExpectedType:@"KalturaCaptionParams"];
 }
 
 - (KalturaCaptionParamsListResponse*)listWithFilter:(KalturaCaptionParamsFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -709,6 +702,13 @@
 - (KalturaCaptionParamsListResponse*)list
 {
     return [self listWithFilter:nil];
+}
+
+- (KalturaCaptionParams*)updateWithId:(int)aId withCaptionParams:(KalturaCaptionParams*)aCaptionParams
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"captionParams" withObject:aCaptionParams];
+    return [self.client queueObjectService:@"caption_captionparams" withAction:@"update" withExpectedType:@"KalturaCaptionParams"];
 }
 
 @end

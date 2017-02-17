@@ -182,21 +182,21 @@
 // @subpackage Client
 // Virus scan profile service
 @interface KalturaVirusScanProfileService : KalturaServiceBase
+// Allows you to add an virus scan profile object and virus scan profile content associated with Kaltura object
+- (KalturaVirusScanProfile*)addWithVirusScanProfile:(KalturaVirusScanProfile*)aVirusScanProfile;
+// Mark the virus scan profile as deleted
+- (KalturaVirusScanProfile*)deleteWithVirusScanProfileId:(int)aVirusScanProfileId;
+// Retrieve an virus scan profile object by id
+- (KalturaVirusScanProfile*)getWithVirusScanProfileId:(int)aVirusScanProfileId;
 // List virus scan profile objects by filter and pager
 - (KalturaVirusScanProfileListResponse*)listWithFilter:(KalturaVirusScanProfileFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaVirusScanProfileListResponse*)listWithFilter:(KalturaVirusScanProfileFilter*)aFilter;
 - (KalturaVirusScanProfileListResponse*)list;
-// Allows you to add an virus scan profile object and virus scan profile content associated with Kaltura object
-- (KalturaVirusScanProfile*)addWithVirusScanProfile:(KalturaVirusScanProfile*)aVirusScanProfile;
-// Retrieve an virus scan profile object by id
-- (KalturaVirusScanProfile*)getWithVirusScanProfileId:(int)aVirusScanProfileId;
-// Update exisitng virus scan profile, it is possible to update the virus scan profile id too
-- (KalturaVirusScanProfile*)updateWithVirusScanProfileId:(int)aVirusScanProfileId withVirusScanProfile:(KalturaVirusScanProfile*)aVirusScanProfile;
-// Mark the virus scan profile as deleted
-- (KalturaVirusScanProfile*)deleteWithVirusScanProfileId:(int)aVirusScanProfileId;
 // Scan flavor asset according to virus scan profile
 - (int)scanWithFlavorAssetId:(NSString*)aFlavorAssetId withVirusScanProfileId:(int)aVirusScanProfileId;
 - (int)scanWithFlavorAssetId:(NSString*)aFlavorAssetId;
+// Update exisitng virus scan profile, it is possible to update the virus scan profile id too
+- (KalturaVirusScanProfile*)updateWithVirusScanProfileId:(int)aVirusScanProfileId withVirusScanProfile:(KalturaVirusScanProfile*)aVirusScanProfile;
 @end
 
 @interface KalturaVirusScanClientPlugin : KalturaClientPlugin

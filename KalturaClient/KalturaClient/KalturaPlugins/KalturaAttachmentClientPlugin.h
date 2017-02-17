@@ -123,24 +123,24 @@
 @interface KalturaAttachmentAssetService : KalturaServiceBase
 // Add attachment asset
 - (KalturaAttachmentAsset*)addWithEntryId:(NSString*)aEntryId withAttachmentAsset:(KalturaAttachmentAsset*)aAttachmentAsset;
-// Update content of attachment asset
-- (KalturaAttachmentAsset*)setContentWithId:(NSString*)aId withContentResource:(KalturaContentResource*)aContentResource;
-// Update attachment asset
-- (KalturaAttachmentAsset*)updateWithId:(NSString*)aId withAttachmentAsset:(KalturaAttachmentAsset*)aAttachmentAsset;
+- (void)deleteWithAttachmentAssetId:(NSString*)aAttachmentAssetId;
+- (KalturaAttachmentAsset*)getWithAttachmentAssetId:(NSString*)aAttachmentAssetId;
+// Get remote storage existing paths for the asset
+- (KalturaRemotePathListResponse*)getRemotePathsWithId:(NSString*)aId;
 // Get download URL for the asset
 - (NSString*)getUrlWithId:(NSString*)aId withStorageId:(int)aStorageId;
 - (NSString*)getUrlWithId:(NSString*)aId;
-// Get remote storage existing paths for the asset
-- (KalturaRemotePathListResponse*)getRemotePathsWithId:(NSString*)aId;
-// Serves attachment by its id
-- (NSString*)serveWithAttachmentAssetId:(NSString*)aAttachmentAssetId withServeOptions:(KalturaAttachmentServeOptions*)aServeOptions;
-- (NSString*)serveWithAttachmentAssetId:(NSString*)aAttachmentAssetId;
-- (KalturaAttachmentAsset*)getWithAttachmentAssetId:(NSString*)aAttachmentAssetId;
 // List attachment Assets by filter and pager
 - (KalturaAttachmentAssetListResponse*)listWithFilter:(KalturaAssetFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaAttachmentAssetListResponse*)listWithFilter:(KalturaAssetFilter*)aFilter;
 - (KalturaAttachmentAssetListResponse*)list;
-- (void)deleteWithAttachmentAssetId:(NSString*)aAttachmentAssetId;
+// Serves attachment by its id
+- (NSString*)serveWithAttachmentAssetId:(NSString*)aAttachmentAssetId withServeOptions:(KalturaAttachmentServeOptions*)aServeOptions;
+- (NSString*)serveWithAttachmentAssetId:(NSString*)aAttachmentAssetId;
+// Update content of attachment asset
+- (KalturaAttachmentAsset*)setContentWithId:(NSString*)aId withContentResource:(KalturaContentResource*)aContentResource;
+// Update attachment asset
+- (KalturaAttachmentAsset*)updateWithId:(NSString*)aId withAttachmentAsset:(KalturaAttachmentAsset*)aAttachmentAsset;
 @end
 
 @interface KalturaAttachmentClientPlugin : KalturaClientPlugin

@@ -200,20 +200,22 @@
 @interface KalturaCaptionAssetService : KalturaServiceBase
 // Add caption asset
 - (KalturaCaptionAsset*)addWithEntryId:(NSString*)aEntryId withCaptionAsset:(KalturaCaptionAsset*)aCaptionAsset;
-// Update content of caption asset
-- (KalturaCaptionAsset*)setContentWithId:(NSString*)aId withContentResource:(KalturaContentResource*)aContentResource;
-// Update caption asset
-- (KalturaCaptionAsset*)updateWithId:(NSString*)aId withCaptionAsset:(KalturaCaptionAsset*)aCaptionAsset;
-// Serves caption by entry id and thumnail params id
-- (NSString*)serveByEntryIdWithEntryId:(NSString*)aEntryId withCaptionParamId:(int)aCaptionParamId;
-- (NSString*)serveByEntryIdWithEntryId:(NSString*)aEntryId;
+- (void)deleteWithCaptionAssetId:(NSString*)aCaptionAssetId;
+- (KalturaCaptionAsset*)getWithCaptionAssetId:(NSString*)aCaptionAssetId;
+// Get remote storage existing paths for the asset
+- (KalturaRemotePathListResponse*)getRemotePathsWithId:(NSString*)aId;
 // Get download URL for the asset
 - (NSString*)getUrlWithId:(NSString*)aId withStorageId:(int)aStorageId;
 - (NSString*)getUrlWithId:(NSString*)aId;
-// Get remote storage existing paths for the asset
-- (KalturaRemotePathListResponse*)getRemotePathsWithId:(NSString*)aId;
+// List caption Assets by filter and pager
+- (KalturaCaptionAssetListResponse*)listWithFilter:(KalturaAssetFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
+- (KalturaCaptionAssetListResponse*)listWithFilter:(KalturaAssetFilter*)aFilter;
+- (KalturaCaptionAssetListResponse*)list;
 // Serves caption by its id
 - (NSString*)serveWithCaptionAssetId:(NSString*)aCaptionAssetId;
+// Serves caption by entry id and thumnail params id
+- (NSString*)serveByEntryIdWithEntryId:(NSString*)aEntryId withCaptionParamId:(int)aCaptionParamId;
+- (NSString*)serveByEntryIdWithEntryId:(NSString*)aEntryId;
 // Serves caption by its id converting it to segmented WebVTT
 - (NSString*)serveWebVTTWithCaptionAssetId:(NSString*)aCaptionAssetId withSegmentDuration:(int)aSegmentDuration withSegmentIndex:(int)aSegmentIndex withLocalTimestamp:(int)aLocalTimestamp;
 - (NSString*)serveWebVTTWithCaptionAssetId:(NSString*)aCaptionAssetId withSegmentDuration:(int)aSegmentDuration withSegmentIndex:(int)aSegmentIndex;
@@ -221,12 +223,10 @@
 - (NSString*)serveWebVTTWithCaptionAssetId:(NSString*)aCaptionAssetId;
 // Markss the caption as default and removes that mark from all other caption assets of the entry.
 - (void)setAsDefaultWithCaptionAssetId:(NSString*)aCaptionAssetId;
-- (KalturaCaptionAsset*)getWithCaptionAssetId:(NSString*)aCaptionAssetId;
-// List caption Assets by filter and pager
-- (KalturaCaptionAssetListResponse*)listWithFilter:(KalturaAssetFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
-- (KalturaCaptionAssetListResponse*)listWithFilter:(KalturaAssetFilter*)aFilter;
-- (KalturaCaptionAssetListResponse*)list;
-- (void)deleteWithCaptionAssetId:(NSString*)aCaptionAssetId;
+// Update content of caption asset
+- (KalturaCaptionAsset*)setContentWithId:(NSString*)aId withContentResource:(KalturaContentResource*)aContentResource;
+// Update caption asset
+- (KalturaCaptionAsset*)updateWithId:(NSString*)aId withCaptionAsset:(KalturaCaptionAsset*)aCaptionAsset;
 @end
 
 // @package Kaltura
@@ -235,16 +235,16 @@
 @interface KalturaCaptionParamsService : KalturaServiceBase
 // Add new Caption Params
 - (KalturaCaptionParams*)addWithCaptionParams:(KalturaCaptionParams*)aCaptionParams;
-// Get Caption Params by ID
-- (KalturaCaptionParams*)getWithId:(int)aId;
-// Update Caption Params by ID
-- (KalturaCaptionParams*)updateWithId:(int)aId withCaptionParams:(KalturaCaptionParams*)aCaptionParams;
 // Delete Caption Params by ID
 - (void)deleteWithId:(int)aId;
+// Get Caption Params by ID
+- (KalturaCaptionParams*)getWithId:(int)aId;
 // List Caption Params by filter with paging support (By default - all system default params will be listed too)
 - (KalturaCaptionParamsListResponse*)listWithFilter:(KalturaCaptionParamsFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaCaptionParamsListResponse*)listWithFilter:(KalturaCaptionParamsFilter*)aFilter;
 - (KalturaCaptionParamsListResponse*)list;
+// Update Caption Params by ID
+- (KalturaCaptionParams*)updateWithId:(int)aId withCaptionParams:(KalturaCaptionParams*)aCaptionParams;
 @end
 
 @interface KalturaCaptionClientPlugin : KalturaClientPlugin

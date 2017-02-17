@@ -203,18 +203,6 @@
 
 ///////////////////////// services /////////////////////////
 @implementation KalturaLikeService
-- (KALTURA_BOOL)likeWithEntryId:(NSString*)aEntryId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    return [self.client queueBoolService:@"like_like" withAction:@"like"];
-}
-
-- (KALTURA_BOOL)unlikeWithEntryId:(NSString*)aEntryId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    return [self.client queueBoolService:@"like_like" withAction:@"unlike"];
-}
-
 - (KALTURA_BOOL)checkLikeExistsWithEntryId:(NSString*)aEntryId withUserId:(NSString*)aUserId
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
@@ -225,6 +213,12 @@
 - (KALTURA_BOOL)checkLikeExistsWithEntryId:(NSString*)aEntryId
 {
     return [self checkLikeExistsWithEntryId:aEntryId withUserId:nil];
+}
+
+- (KALTURA_BOOL)likeWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    return [self.client queueBoolService:@"like_like" withAction:@"like"];
 }
 
 - (KalturaLikeListResponse*)listWithFilter:(KalturaLikeFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -242,6 +236,12 @@
 - (KalturaLikeListResponse*)list
 {
     return [self listWithFilter:nil];
+}
+
+- (KALTURA_BOOL)unlikeWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    return [self.client queueBoolService:@"like_like" withAction:@"unlike"];
 }
 
 @end

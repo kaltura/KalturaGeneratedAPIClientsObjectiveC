@@ -814,13 +814,6 @@
 
 ///////////////////////// services /////////////////////////
 @implementation KalturaDocumentsService
-- (KalturaDocumentEntry*)addFromUploadedFileWithDocumentEntry:(KalturaDocumentEntry*)aDocumentEntry withUploadTokenId:(NSString*)aUploadTokenId
-{
-    [self.client.params addIfDefinedKey:@"documentEntry" withObject:aDocumentEntry];
-    [self.client.params addIfDefinedKey:@"uploadTokenId" withString:aUploadTokenId];
-    return [self.client queueObjectService:@"document_documents" withAction:@"addFromUploadedFile" withExpectedType:@"KalturaDocumentEntry"];
-}
-
 - (KalturaDocumentEntry*)addFromEntryWithSourceEntryId:(NSString*)aSourceEntryId withDocumentEntry:(KalturaDocumentEntry*)aDocumentEntry withSourceFlavorParamsId:(int)aSourceFlavorParamsId
 {
     [self.client.params addIfDefinedKey:@"sourceEntryId" withString:aSourceEntryId];
@@ -851,6 +844,25 @@
     return [self addFromFlavorAssetWithSourceFlavorAssetId:aSourceFlavorAssetId withDocumentEntry:nil];
 }
 
+- (KalturaDocumentEntry*)addFromUploadedFileWithDocumentEntry:(KalturaDocumentEntry*)aDocumentEntry withUploadTokenId:(NSString*)aUploadTokenId
+{
+    [self.client.params addIfDefinedKey:@"documentEntry" withObject:aDocumentEntry];
+    [self.client.params addIfDefinedKey:@"uploadTokenId" withString:aUploadTokenId];
+    return [self.client queueObjectService:@"document_documents" withAction:@"addFromUploadedFile" withExpectedType:@"KalturaDocumentEntry"];
+}
+
+- (KalturaDocumentEntry*)approveReplaceWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    return [self.client queueObjectService:@"document_documents" withAction:@"approveReplace" withExpectedType:@"KalturaDocumentEntry"];
+}
+
+- (KalturaDocumentEntry*)cancelReplaceWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    return [self.client queueObjectService:@"document_documents" withAction:@"cancelReplace" withExpectedType:@"KalturaDocumentEntry"];
+}
+
 - (int)convertWithEntryId:(NSString*)aEntryId withConversionProfileId:(int)aConversionProfileId withDynamicConversionAttributes:(NSArray*)aDynamicConversionAttributes
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
@@ -869,6 +881,18 @@
     return [self convertWithEntryId:aEntryId withConversionProfileId:KALTURA_UNDEF_INT];
 }
 
+- (NSString*)convertPptToSwfWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    return [self.client queueStringService:@"document_documents" withAction:@"convertPptToSwf"];
+}
+
+- (void)deleteWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client queueVoidService:@"document_documents" withAction:@"delete"];
+}
+
 - (KalturaDocumentEntry*)getWithEntryId:(NSString*)aEntryId withVersion:(int)aVersion
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
@@ -879,19 +903,6 @@
 - (KalturaDocumentEntry*)getWithEntryId:(NSString*)aEntryId
 {
     return [self getWithEntryId:aEntryId withVersion:KALTURA_UNDEF_INT];
-}
-
-- (KalturaDocumentEntry*)updateWithEntryId:(NSString*)aEntryId withDocumentEntry:(KalturaDocumentEntry*)aDocumentEntry
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"documentEntry" withObject:aDocumentEntry];
-    return [self.client queueObjectService:@"document_documents" withAction:@"update" withExpectedType:@"KalturaDocumentEntry"];
-}
-
-- (void)deleteWithEntryId:(NSString*)aEntryId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client queueVoidService:@"document_documents" withAction:@"delete"];
 }
 
 - (KalturaDocumentListResponse*)listWithFilter:(KalturaDocumentEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -909,18 +920,6 @@
 - (KalturaDocumentListResponse*)list
 {
     return [self listWithFilter:nil];
-}
-
-- (NSString*)uploadWithFileData:(NSString*)aFileData
-{
-    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
-    return [self.client queueStringService:@"document_documents" withAction:@"upload"];
-}
-
-- (NSString*)convertPptToSwfWithEntryId:(NSString*)aEntryId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    return [self.client queueStringService:@"document_documents" withAction:@"convertPptToSwf"];
 }
 
 - (NSString*)serveWithEntryId:(NSString*)aEntryId withFlavorAssetId:(NSString*)aFlavorAssetId withForceProxy:(KALTURA_BOOL)aForceProxy
@@ -959,6 +958,13 @@
     return [self serveByFlavorParamsIdWithEntryId:aEntryId withFlavorParamsId:nil];
 }
 
+- (KalturaDocumentEntry*)updateWithEntryId:(NSString*)aEntryId withDocumentEntry:(KalturaDocumentEntry*)aDocumentEntry
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"documentEntry" withObject:aDocumentEntry];
+    return [self.client queueObjectService:@"document_documents" withAction:@"update" withExpectedType:@"KalturaDocumentEntry"];
+}
+
 - (KalturaDocumentEntry*)updateContentWithEntryId:(NSString*)aEntryId withResource:(KalturaResource*)aResource withConversionProfileId:(int)aConversionProfileId
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
@@ -972,16 +978,10 @@
     return [self updateContentWithEntryId:aEntryId withResource:aResource withConversionProfileId:KALTURA_UNDEF_INT];
 }
 
-- (KalturaDocumentEntry*)approveReplaceWithEntryId:(NSString*)aEntryId
+- (NSString*)uploadWithFileData:(NSString*)aFileData
 {
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    return [self.client queueObjectService:@"document_documents" withAction:@"approveReplace" withExpectedType:@"KalturaDocumentEntry"];
-}
-
-- (KalturaDocumentEntry*)cancelReplaceWithEntryId:(NSString*)aEntryId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    return [self.client queueObjectService:@"document_documents" withAction:@"cancelReplace" withExpectedType:@"KalturaDocumentEntry"];
+    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
+    return [self.client queueStringService:@"document_documents" withAction:@"upload"];
 }
 
 @end

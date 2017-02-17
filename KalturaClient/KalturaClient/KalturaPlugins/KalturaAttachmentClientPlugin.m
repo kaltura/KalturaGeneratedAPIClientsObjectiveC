@@ -304,18 +304,22 @@
     return [self.client queueObjectService:@"attachment_attachmentasset" withAction:@"add" withExpectedType:@"KalturaAttachmentAsset"];
 }
 
-- (KalturaAttachmentAsset*)setContentWithId:(NSString*)aId withContentResource:(KalturaContentResource*)aContentResource
+- (void)deleteWithAttachmentAssetId:(NSString*)aAttachmentAssetId
 {
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"contentResource" withObject:aContentResource];
-    return [self.client queueObjectService:@"attachment_attachmentasset" withAction:@"setContent" withExpectedType:@"KalturaAttachmentAsset"];
+    [self.client.params addIfDefinedKey:@"attachmentAssetId" withString:aAttachmentAssetId];
+    [self.client queueVoidService:@"attachment_attachmentasset" withAction:@"delete"];
 }
 
-- (KalturaAttachmentAsset*)updateWithId:(NSString*)aId withAttachmentAsset:(KalturaAttachmentAsset*)aAttachmentAsset
+- (KalturaAttachmentAsset*)getWithAttachmentAssetId:(NSString*)aAttachmentAssetId
+{
+    [self.client.params addIfDefinedKey:@"attachmentAssetId" withString:aAttachmentAssetId];
+    return [self.client queueObjectService:@"attachment_attachmentasset" withAction:@"get" withExpectedType:@"KalturaAttachmentAsset"];
+}
+
+- (KalturaRemotePathListResponse*)getRemotePathsWithId:(NSString*)aId
 {
     [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"attachmentAsset" withObject:aAttachmentAsset];
-    return [self.client queueObjectService:@"attachment_attachmentasset" withAction:@"update" withExpectedType:@"KalturaAttachmentAsset"];
+    return [self.client queueObjectService:@"attachment_attachmentasset" withAction:@"getRemotePaths" withExpectedType:@"KalturaRemotePathListResponse"];
 }
 
 - (NSString*)getUrlWithId:(NSString*)aId withStorageId:(int)aStorageId
@@ -328,30 +332,6 @@
 - (NSString*)getUrlWithId:(NSString*)aId
 {
     return [self getUrlWithId:aId withStorageId:KALTURA_UNDEF_INT];
-}
-
-- (KalturaRemotePathListResponse*)getRemotePathsWithId:(NSString*)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    return [self.client queueObjectService:@"attachment_attachmentasset" withAction:@"getRemotePaths" withExpectedType:@"KalturaRemotePathListResponse"];
-}
-
-- (NSString*)serveWithAttachmentAssetId:(NSString*)aAttachmentAssetId withServeOptions:(KalturaAttachmentServeOptions*)aServeOptions
-{
-    [self.client.params addIfDefinedKey:@"attachmentAssetId" withString:aAttachmentAssetId];
-    [self.client.params addIfDefinedKey:@"serveOptions" withObject:aServeOptions];
-    return [self.client queueServeService:@"attachment_attachmentasset" withAction:@"serve"];
-}
-
-- (NSString*)serveWithAttachmentAssetId:(NSString*)aAttachmentAssetId
-{
-    return [self serveWithAttachmentAssetId:aAttachmentAssetId withServeOptions:nil];
-}
-
-- (KalturaAttachmentAsset*)getWithAttachmentAssetId:(NSString*)aAttachmentAssetId
-{
-    [self.client.params addIfDefinedKey:@"attachmentAssetId" withString:aAttachmentAssetId];
-    return [self.client queueObjectService:@"attachment_attachmentasset" withAction:@"get" withExpectedType:@"KalturaAttachmentAsset"];
 }
 
 - (KalturaAttachmentAssetListResponse*)listWithFilter:(KalturaAssetFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -371,10 +351,30 @@
     return [self listWithFilter:nil];
 }
 
-- (void)deleteWithAttachmentAssetId:(NSString*)aAttachmentAssetId
+- (NSString*)serveWithAttachmentAssetId:(NSString*)aAttachmentAssetId withServeOptions:(KalturaAttachmentServeOptions*)aServeOptions
 {
     [self.client.params addIfDefinedKey:@"attachmentAssetId" withString:aAttachmentAssetId];
-    [self.client queueVoidService:@"attachment_attachmentasset" withAction:@"delete"];
+    [self.client.params addIfDefinedKey:@"serveOptions" withObject:aServeOptions];
+    return [self.client queueServeService:@"attachment_attachmentasset" withAction:@"serve"];
+}
+
+- (NSString*)serveWithAttachmentAssetId:(NSString*)aAttachmentAssetId
+{
+    return [self serveWithAttachmentAssetId:aAttachmentAssetId withServeOptions:nil];
+}
+
+- (KalturaAttachmentAsset*)setContentWithId:(NSString*)aId withContentResource:(KalturaContentResource*)aContentResource
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"contentResource" withObject:aContentResource];
+    return [self.client queueObjectService:@"attachment_attachmentasset" withAction:@"setContent" withExpectedType:@"KalturaAttachmentAsset"];
+}
+
+- (KalturaAttachmentAsset*)updateWithId:(NSString*)aId withAttachmentAsset:(KalturaAttachmentAsset*)aAttachmentAsset
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"attachmentAsset" withObject:aAttachmentAsset];
+    return [self.client queueObjectService:@"attachment_attachmentasset" withAction:@"update" withExpectedType:@"KalturaAttachmentAsset"];
 }
 
 @end

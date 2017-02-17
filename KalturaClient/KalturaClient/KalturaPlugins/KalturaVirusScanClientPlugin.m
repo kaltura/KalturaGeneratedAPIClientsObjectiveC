@@ -547,6 +547,24 @@
 
 ///////////////////////// services /////////////////////////
 @implementation KalturaVirusScanProfileService
+- (KalturaVirusScanProfile*)addWithVirusScanProfile:(KalturaVirusScanProfile*)aVirusScanProfile
+{
+    [self.client.params addIfDefinedKey:@"virusScanProfile" withObject:aVirusScanProfile];
+    return [self.client queueObjectService:@"virusscan_virusscanprofile" withAction:@"add" withExpectedType:@"KalturaVirusScanProfile"];
+}
+
+- (KalturaVirusScanProfile*)deleteWithVirusScanProfileId:(int)aVirusScanProfileId
+{
+    [self.client.params addIfDefinedKey:@"virusScanProfileId" withInt:aVirusScanProfileId];
+    return [self.client queueObjectService:@"virusscan_virusscanprofile" withAction:@"delete" withExpectedType:@"KalturaVirusScanProfile"];
+}
+
+- (KalturaVirusScanProfile*)getWithVirusScanProfileId:(int)aVirusScanProfileId
+{
+    [self.client.params addIfDefinedKey:@"virusScanProfileId" withInt:aVirusScanProfileId];
+    return [self.client queueObjectService:@"virusscan_virusscanprofile" withAction:@"get" withExpectedType:@"KalturaVirusScanProfile"];
+}
+
 - (KalturaVirusScanProfileListResponse*)listWithFilter:(KalturaVirusScanProfileFilter*)aFilter withPager:(KalturaFilterPager*)aPager
 {
     [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
@@ -564,31 +582,6 @@
     return [self listWithFilter:nil];
 }
 
-- (KalturaVirusScanProfile*)addWithVirusScanProfile:(KalturaVirusScanProfile*)aVirusScanProfile
-{
-    [self.client.params addIfDefinedKey:@"virusScanProfile" withObject:aVirusScanProfile];
-    return [self.client queueObjectService:@"virusscan_virusscanprofile" withAction:@"add" withExpectedType:@"KalturaVirusScanProfile"];
-}
-
-- (KalturaVirusScanProfile*)getWithVirusScanProfileId:(int)aVirusScanProfileId
-{
-    [self.client.params addIfDefinedKey:@"virusScanProfileId" withInt:aVirusScanProfileId];
-    return [self.client queueObjectService:@"virusscan_virusscanprofile" withAction:@"get" withExpectedType:@"KalturaVirusScanProfile"];
-}
-
-- (KalturaVirusScanProfile*)updateWithVirusScanProfileId:(int)aVirusScanProfileId withVirusScanProfile:(KalturaVirusScanProfile*)aVirusScanProfile
-{
-    [self.client.params addIfDefinedKey:@"virusScanProfileId" withInt:aVirusScanProfileId];
-    [self.client.params addIfDefinedKey:@"virusScanProfile" withObject:aVirusScanProfile];
-    return [self.client queueObjectService:@"virusscan_virusscanprofile" withAction:@"update" withExpectedType:@"KalturaVirusScanProfile"];
-}
-
-- (KalturaVirusScanProfile*)deleteWithVirusScanProfileId:(int)aVirusScanProfileId
-{
-    [self.client.params addIfDefinedKey:@"virusScanProfileId" withInt:aVirusScanProfileId];
-    return [self.client queueObjectService:@"virusscan_virusscanprofile" withAction:@"delete" withExpectedType:@"KalturaVirusScanProfile"];
-}
-
 - (int)scanWithFlavorAssetId:(NSString*)aFlavorAssetId withVirusScanProfileId:(int)aVirusScanProfileId
 {
     [self.client.params addIfDefinedKey:@"flavorAssetId" withString:aFlavorAssetId];
@@ -599,6 +592,13 @@
 - (int)scanWithFlavorAssetId:(NSString*)aFlavorAssetId
 {
     return [self scanWithFlavorAssetId:aFlavorAssetId withVirusScanProfileId:KALTURA_UNDEF_INT];
+}
+
+- (KalturaVirusScanProfile*)updateWithVirusScanProfileId:(int)aVirusScanProfileId withVirusScanProfile:(KalturaVirusScanProfile*)aVirusScanProfile
+{
+    [self.client.params addIfDefinedKey:@"virusScanProfileId" withInt:aVirusScanProfileId];
+    [self.client.params addIfDefinedKey:@"virusScanProfile" withObject:aVirusScanProfile];
+    return [self.client queueObjectService:@"virusscan_virusscanprofile" withAction:@"update" withExpectedType:@"KalturaVirusScanProfile"];
 }
 
 @end

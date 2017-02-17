@@ -119,19 +119,19 @@
 @interface KalturaExternalMediaService : KalturaServiceBase
 // Add external media entry
 - (KalturaExternalMediaEntry*)addWithEntry:(KalturaExternalMediaEntry*)aEntry;
-// Get external media entry by ID.
-- (KalturaExternalMediaEntry*)getWithId:(NSString*)aId;
-// Update external media entry. Only the properties that were set will be updated.
-- (KalturaExternalMediaEntry*)updateWithId:(NSString*)aId withEntry:(KalturaExternalMediaEntry*)aEntry;
+// Count media entries by filter.
+- (int)countWithFilter:(KalturaExternalMediaEntryFilter*)aFilter;
+- (int)count;
 // Delete a external media entry.
 - (void)deleteWithId:(NSString*)aId;
+// Get external media entry by ID.
+- (KalturaExternalMediaEntry*)getWithId:(NSString*)aId;
 // List media entries by filter with paging support.
 - (KalturaExternalMediaEntryListResponse*)listWithFilter:(KalturaExternalMediaEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaExternalMediaEntryListResponse*)listWithFilter:(KalturaExternalMediaEntryFilter*)aFilter;
 - (KalturaExternalMediaEntryListResponse*)list;
-// Count media entries by filter.
-- (int)countWithFilter:(KalturaExternalMediaEntryFilter*)aFilter;
-- (int)count;
+// Update external media entry. Only the properties that were set will be updated.
+- (KalturaExternalMediaEntry*)updateWithId:(NSString*)aId withEntry:(KalturaExternalMediaEntry*)aEntry;
 @end
 
 @interface KalturaExternalMediaClientPlugin : KalturaClientPlugin

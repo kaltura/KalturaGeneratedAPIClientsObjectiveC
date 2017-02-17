@@ -318,8 +318,6 @@
 // @subpackage Client
 // Document service lets you upload and manage document files
 @interface KalturaDocumentsService : KalturaServiceBase
-// Add new document entry after the specific document file was uploaded and the upload token id exists
-- (KalturaDocumentEntry*)addFromUploadedFileWithDocumentEntry:(KalturaDocumentEntry*)aDocumentEntry withUploadTokenId:(NSString*)aUploadTokenId;
 // Copy entry into new entry
 - (KalturaDocumentEntry*)addFromEntryWithSourceEntryId:(NSString*)aSourceEntryId withDocumentEntry:(KalturaDocumentEntry*)aDocumentEntry withSourceFlavorParamsId:(int)aSourceFlavorParamsId;
 - (KalturaDocumentEntry*)addFromEntryWithSourceEntryId:(NSString*)aSourceEntryId withDocumentEntry:(KalturaDocumentEntry*)aDocumentEntry;
@@ -327,26 +325,28 @@
 // Copy flavor asset into new entry
 - (KalturaDocumentEntry*)addFromFlavorAssetWithSourceFlavorAssetId:(NSString*)aSourceFlavorAssetId withDocumentEntry:(KalturaDocumentEntry*)aDocumentEntry;
 - (KalturaDocumentEntry*)addFromFlavorAssetWithSourceFlavorAssetId:(NSString*)aSourceFlavorAssetId;
+// Add new document entry after the specific document file was uploaded and the upload token id exists
+- (KalturaDocumentEntry*)addFromUploadedFileWithDocumentEntry:(KalturaDocumentEntry*)aDocumentEntry withUploadTokenId:(NSString*)aUploadTokenId;
+// Approves document replacement
+- (KalturaDocumentEntry*)approveReplaceWithEntryId:(NSString*)aEntryId;
+// Cancels document replacement
+- (KalturaDocumentEntry*)cancelReplaceWithEntryId:(NSString*)aEntryId;
 // Convert entry
 - (int)convertWithEntryId:(NSString*)aEntryId withConversionProfileId:(int)aConversionProfileId withDynamicConversionAttributes:(NSArray*)aDynamicConversionAttributes;
 - (int)convertWithEntryId:(NSString*)aEntryId withConversionProfileId:(int)aConversionProfileId;
 - (int)convertWithEntryId:(NSString*)aEntryId;
+// This will queue a batch job for converting the document file to swf
+// 	 Returns the URL where the new swf will be available
+- (NSString*)convertPptToSwfWithEntryId:(NSString*)aEntryId;
+// Delete a document entry.
+- (void)deleteWithEntryId:(NSString*)aEntryId;
 // Get document entry by ID.
 - (KalturaDocumentEntry*)getWithEntryId:(NSString*)aEntryId withVersion:(int)aVersion;
 - (KalturaDocumentEntry*)getWithEntryId:(NSString*)aEntryId;
-// Update document entry. Only the properties that were set will be updated.
-- (KalturaDocumentEntry*)updateWithEntryId:(NSString*)aEntryId withDocumentEntry:(KalturaDocumentEntry*)aDocumentEntry;
-// Delete a document entry.
-- (void)deleteWithEntryId:(NSString*)aEntryId;
 // List document entries by filter with paging support.
 - (KalturaDocumentListResponse*)listWithFilter:(KalturaDocumentEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaDocumentListResponse*)listWithFilter:(KalturaDocumentEntryFilter*)aFilter;
 - (KalturaDocumentListResponse*)list;
-// Upload a document file to Kaltura, then the file can be used to create a document entry.
-- (NSString*)uploadWithFileData:(NSString*)aFileData;
-// This will queue a batch job for converting the document file to swf
-// 	 Returns the URL where the new swf will be available
-- (NSString*)convertPptToSwfWithEntryId:(NSString*)aEntryId;
 // Serves the file content
 - (NSString*)serveWithEntryId:(NSString*)aEntryId withFlavorAssetId:(NSString*)aFlavorAssetId withForceProxy:(KALTURA_BOOL)aForceProxy;
 - (NSString*)serveWithEntryId:(NSString*)aEntryId withFlavorAssetId:(NSString*)aFlavorAssetId;
@@ -355,13 +355,13 @@
 - (NSString*)serveByFlavorParamsIdWithEntryId:(NSString*)aEntryId withFlavorParamsId:(NSString*)aFlavorParamsId withForceProxy:(KALTURA_BOOL)aForceProxy;
 - (NSString*)serveByFlavorParamsIdWithEntryId:(NSString*)aEntryId withFlavorParamsId:(NSString*)aFlavorParamsId;
 - (NSString*)serveByFlavorParamsIdWithEntryId:(NSString*)aEntryId;
+// Update document entry. Only the properties that were set will be updated.
+- (KalturaDocumentEntry*)updateWithEntryId:(NSString*)aEntryId withDocumentEntry:(KalturaDocumentEntry*)aDocumentEntry;
 // Replace content associated with the given document entry.
 - (KalturaDocumentEntry*)updateContentWithEntryId:(NSString*)aEntryId withResource:(KalturaResource*)aResource withConversionProfileId:(int)aConversionProfileId;
 - (KalturaDocumentEntry*)updateContentWithEntryId:(NSString*)aEntryId withResource:(KalturaResource*)aResource;
-// Approves document replacement
-- (KalturaDocumentEntry*)approveReplaceWithEntryId:(NSString*)aEntryId;
-// Cancels document replacement
-- (KalturaDocumentEntry*)cancelReplaceWithEntryId:(NSString*)aEntryId;
+// Upload a document file to Kaltura, then the file can be used to create a document entry.
+- (NSString*)uploadWithFileData:(NSString*)aFileData;
 @end
 
 @interface KalturaDocumentClientPlugin : KalturaClientPlugin

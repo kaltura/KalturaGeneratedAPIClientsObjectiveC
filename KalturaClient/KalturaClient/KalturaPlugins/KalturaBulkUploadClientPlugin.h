@@ -43,6 +43,8 @@
 // @subpackage Client
 // Bulk upload service is used to upload & manage bulk uploads
 @interface KalturaBulkService : KalturaServiceBase
+// Aborts the bulk upload and all its child jobs
+- (KalturaBulkUpload*)abortWithId:(int)aId;
 // Get bulk upload batch job by id
 - (KalturaBulkUpload*)getWithId:(int)aId;
 // List bulk upload batch jobs
@@ -53,8 +55,6 @@
 - (NSString*)serveWithId:(int)aId;
 // serveLog action returns the log file for the bulk-upload job.
 - (NSString*)serveLogWithId:(int)aId;
-// Aborts the bulk upload and all its child jobs
-- (KalturaBulkUpload*)abortWithId:(int)aId;
 @end
 
 @interface KalturaBulkUploadClientPlugin : KalturaClientPlugin

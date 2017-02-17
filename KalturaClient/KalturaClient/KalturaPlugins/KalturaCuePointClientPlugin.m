@@ -757,21 +757,28 @@
     return [self.client queueObjectService:@"cuepoint_cuepoint" withAction:@"addFromBulk" withExpectedType:@"KalturaCuePointListResponse"];
 }
 
-- (NSString*)serveBulkWithFilter:(KalturaCuePointFilter*)aFilter withPager:(KalturaFilterPager*)aPager
+- (KalturaCuePoint*)cloneWithId:(NSString*)aId withEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    return [self.client queueObjectService:@"cuepoint_cuepoint" withAction:@"clone" withExpectedType:@"KalturaCuePoint"];
+}
+
+- (int)countWithFilter:(KalturaCuePointFilter*)aFilter
 {
     [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
-    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
-    return [self.client queueServeService:@"cuepoint_cuepoint" withAction:@"serveBulk"];
+    return [self.client queueIntService:@"cuepoint_cuepoint" withAction:@"count"];
 }
 
-- (NSString*)serveBulkWithFilter:(KalturaCuePointFilter*)aFilter
+- (int)count
 {
-    return [self serveBulkWithFilter:aFilter withPager:nil];
+    return [self countWithFilter:nil];
 }
 
-- (NSString*)serveBulk
+- (void)deleteWithId:(NSString*)aId
 {
-    return [self serveBulkWithFilter:nil];
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client queueVoidService:@"cuepoint_cuepoint" withAction:@"delete"];
 }
 
 - (KalturaCuePoint*)getWithId:(NSString*)aId
@@ -797,15 +804,21 @@
     return [self listWithFilter:nil];
 }
 
-- (int)countWithFilter:(KalturaCuePointFilter*)aFilter
+- (NSString*)serveBulkWithFilter:(KalturaCuePointFilter*)aFilter withPager:(KalturaFilterPager*)aPager
 {
     [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
-    return [self.client queueIntService:@"cuepoint_cuepoint" withAction:@"count"];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    return [self.client queueServeService:@"cuepoint_cuepoint" withAction:@"serveBulk"];
 }
 
-- (int)count
+- (NSString*)serveBulkWithFilter:(KalturaCuePointFilter*)aFilter
 {
-    return [self countWithFilter:nil];
+    return [self serveBulkWithFilter:aFilter withPager:nil];
+}
+
+- (NSString*)serveBulk
+{
+    return [self serveBulkWithFilter:nil];
 }
 
 - (KalturaCuePoint*)updateWithId:(NSString*)aId withCuePoint:(KalturaCuePoint*)aCuePoint
@@ -815,24 +828,11 @@
     return [self.client queueObjectService:@"cuepoint_cuepoint" withAction:@"update" withExpectedType:@"KalturaCuePoint"];
 }
 
-- (void)deleteWithId:(NSString*)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client queueVoidService:@"cuepoint_cuepoint" withAction:@"delete"];
-}
-
 - (void)updateStatusWithId:(NSString*)aId withStatus:(int)aStatus
 {
     [self.client.params addIfDefinedKey:@"id" withString:aId];
     [self.client.params addIfDefinedKey:@"status" withInt:aStatus];
     [self.client queueVoidService:@"cuepoint_cuepoint" withAction:@"updateStatus"];
-}
-
-- (KalturaCuePoint*)cloneWithId:(NSString*)aId withEntryId:(NSString*)aEntryId
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    return [self.client queueObjectService:@"cuepoint_cuepoint" withAction:@"clone" withExpectedType:@"KalturaCuePoint"];
 }
 
 @end

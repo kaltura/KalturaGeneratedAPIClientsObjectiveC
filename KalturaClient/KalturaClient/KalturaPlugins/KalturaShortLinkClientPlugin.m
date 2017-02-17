@@ -439,6 +439,36 @@
 
 ///////////////////////// services /////////////////////////
 @implementation KalturaShortLinkService
+- (KalturaShortLink*)addWithShortLink:(KalturaShortLink*)aShortLink
+{
+    [self.client.params addIfDefinedKey:@"shortLink" withObject:aShortLink];
+    return [self.client queueObjectService:@"shortlink_shortlink" withAction:@"add" withExpectedType:@"KalturaShortLink"];
+}
+
+- (KalturaShortLink*)deleteWithId:(NSString*)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    return [self.client queueObjectService:@"shortlink_shortlink" withAction:@"delete" withExpectedType:@"KalturaShortLink"];
+}
+
+- (KalturaShortLink*)getWithId:(NSString*)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    return [self.client queueObjectService:@"shortlink_shortlink" withAction:@"get" withExpectedType:@"KalturaShortLink"];
+}
+
+- (NSString*)gotoWithId:(NSString*)aId withProxy:(KALTURA_BOOL)aProxy
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"proxy" withBool:aProxy];
+    return [self.client queueServeService:@"shortlink_shortlink" withAction:@"goto"];
+}
+
+- (NSString*)gotoWithId:(NSString*)aId
+{
+    return [self gotoWithId:aId withProxy:KALTURA_UNDEF_BOOL];
+}
+
 - (KalturaShortLinkListResponse*)listWithFilter:(KalturaShortLinkFilter*)aFilter withPager:(KalturaFilterPager*)aPager
 {
     [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
@@ -456,41 +486,11 @@
     return [self listWithFilter:nil];
 }
 
-- (KalturaShortLink*)addWithShortLink:(KalturaShortLink*)aShortLink
-{
-    [self.client.params addIfDefinedKey:@"shortLink" withObject:aShortLink];
-    return [self.client queueObjectService:@"shortlink_shortlink" withAction:@"add" withExpectedType:@"KalturaShortLink"];
-}
-
-- (KalturaShortLink*)getWithId:(NSString*)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    return [self.client queueObjectService:@"shortlink_shortlink" withAction:@"get" withExpectedType:@"KalturaShortLink"];
-}
-
 - (KalturaShortLink*)updateWithId:(NSString*)aId withShortLink:(KalturaShortLink*)aShortLink
 {
     [self.client.params addIfDefinedKey:@"id" withString:aId];
     [self.client.params addIfDefinedKey:@"shortLink" withObject:aShortLink];
     return [self.client queueObjectService:@"shortlink_shortlink" withAction:@"update" withExpectedType:@"KalturaShortLink"];
-}
-
-- (KalturaShortLink*)deleteWithId:(NSString*)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    return [self.client queueObjectService:@"shortlink_shortlink" withAction:@"delete" withExpectedType:@"KalturaShortLink"];
-}
-
-- (NSString*)gotoWithId:(NSString*)aId withProxy:(KALTURA_BOOL)aProxy
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"proxy" withBool:aProxy];
-    return [self.client queueServeService:@"shortlink_shortlink" withAction:@"goto"];
-}
-
-- (NSString*)gotoWithId:(NSString*)aId
-{
-    return [self gotoWithId:aId withProxy:KALTURA_UNDEF_BOOL];
 }
 
 @end

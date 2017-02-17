@@ -211,10 +211,10 @@
 @interface KalturaQuizService : KalturaServiceBase
 // Allows to add a quiz to an entry
 - (KalturaQuiz*)addWithEntryId:(NSString*)aEntryId withQuiz:(KalturaQuiz*)aQuiz;
-// Allows to update a quiz
-- (KalturaQuiz*)updateWithEntryId:(NSString*)aEntryId withQuiz:(KalturaQuiz*)aQuiz;
 // Allows to get a quiz
 - (KalturaQuiz*)getWithEntryId:(NSString*)aEntryId;
+// sends a with an api request for pdf from quiz object
+- (NSString*)getUrlWithEntryId:(NSString*)aEntryId withQuizOutputType:(int)aQuizOutputType;
 // List quiz objects by filter and pager
 - (KalturaQuizListResponse*)listWithFilter:(KalturaQuizFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaQuizListResponse*)listWithFilter:(KalturaQuizFilter*)aFilter;
@@ -223,8 +223,8 @@
 // 	 The Output type defines the file format in which the quiz will be generated
 // 	 Currently only PDF files are supported
 - (NSString*)serveWithEntryId:(NSString*)aEntryId withQuizOutputType:(int)aQuizOutputType;
-// sends a with an api request for pdf from quiz object
-- (NSString*)getUrlWithEntryId:(NSString*)aEntryId withQuizOutputType:(int)aQuizOutputType;
+// Allows to update a quiz
+- (KalturaQuiz*)updateWithEntryId:(NSString*)aEntryId withQuiz:(KalturaQuiz*)aQuiz;
 @end
 
 @interface KalturaQuizClientPlugin : KalturaClientPlugin

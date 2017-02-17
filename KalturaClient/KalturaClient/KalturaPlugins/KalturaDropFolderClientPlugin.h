@@ -713,16 +713,16 @@
 @interface KalturaDropFolderService : KalturaServiceBase
 // Allows you to add a new KalturaDropFolder object
 - (KalturaDropFolder*)addWithDropFolder:(KalturaDropFolder*)aDropFolder;
-// Retrieve a KalturaDropFolder object by ID
-- (KalturaDropFolder*)getWithDropFolderId:(int)aDropFolderId;
-// Update an existing KalturaDropFolder object
-- (KalturaDropFolder*)updateWithDropFolderId:(int)aDropFolderId withDropFolder:(KalturaDropFolder*)aDropFolder;
 // Mark the KalturaDropFolder object as deleted
 - (KalturaDropFolder*)deleteWithDropFolderId:(int)aDropFolderId;
+// Retrieve a KalturaDropFolder object by ID
+- (KalturaDropFolder*)getWithDropFolderId:(int)aDropFolderId;
 // List KalturaDropFolder objects
 - (KalturaDropFolderListResponse*)listWithFilter:(KalturaDropFolderFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaDropFolderListResponse*)listWithFilter:(KalturaDropFolderFilter*)aFilter;
 - (KalturaDropFolderListResponse*)list;
+// Update an existing KalturaDropFolder object
+- (KalturaDropFolder*)updateWithDropFolderId:(int)aDropFolderId withDropFolder:(KalturaDropFolder*)aDropFolder;
 @end
 
 // @package Kaltura
@@ -731,20 +731,20 @@
 @interface KalturaDropFolderFileService : KalturaServiceBase
 // Allows you to add a new KalturaDropFolderFile object
 - (KalturaDropFolderFile*)addWithDropFolderFile:(KalturaDropFolderFile*)aDropFolderFile;
-// Retrieve a KalturaDropFolderFile object by ID
-- (KalturaDropFolderFile*)getWithDropFolderFileId:(int)aDropFolderFileId;
-// Update an existing KalturaDropFolderFile object
-- (KalturaDropFolderFile*)updateWithDropFolderFileId:(int)aDropFolderFileId withDropFolderFile:(KalturaDropFolderFile*)aDropFolderFile;
-// Update status of KalturaDropFolderFile
-- (KalturaDropFolderFile*)updateStatusWithDropFolderFileId:(int)aDropFolderFileId withStatus:(int)aStatus;
 // Mark the KalturaDropFolderFile object as deleted
 - (KalturaDropFolderFile*)deleteWithDropFolderFileId:(int)aDropFolderFileId;
+// Retrieve a KalturaDropFolderFile object by ID
+- (KalturaDropFolderFile*)getWithDropFolderFileId:(int)aDropFolderFileId;
+// Set the KalturaDropFolderFile status to ignore (KalturaDropFolderFileStatus::IGNORE)
+- (KalturaDropFolderFile*)ignoreWithDropFolderFileId:(int)aDropFolderFileId;
 // List KalturaDropFolderFile objects
 - (KalturaDropFolderFileListResponse*)listWithFilter:(KalturaDropFolderFileFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaDropFolderFileListResponse*)listWithFilter:(KalturaDropFolderFileFilter*)aFilter;
 - (KalturaDropFolderFileListResponse*)list;
-// Set the KalturaDropFolderFile status to ignore (KalturaDropFolderFileStatus::IGNORE)
-- (KalturaDropFolderFile*)ignoreWithDropFolderFileId:(int)aDropFolderFileId;
+// Update an existing KalturaDropFolderFile object
+- (KalturaDropFolderFile*)updateWithDropFolderFileId:(int)aDropFolderFileId withDropFolderFile:(KalturaDropFolderFile*)aDropFolderFile;
+// Update status of KalturaDropFolderFile
+- (KalturaDropFolderFile*)updateStatusWithDropFolderFileId:(int)aDropFolderFileId withStatus:(int)aStatus;
 @end
 
 @interface KalturaDropFolderClientPlugin : KalturaClientPlugin

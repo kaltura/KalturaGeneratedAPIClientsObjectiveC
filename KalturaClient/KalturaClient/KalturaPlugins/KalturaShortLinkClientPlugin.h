@@ -143,21 +143,21 @@
 // @subpackage Client
 // Short link service
 @interface KalturaShortLinkService : KalturaServiceBase
+// Allows you to add a short link object
+- (KalturaShortLink*)addWithShortLink:(KalturaShortLink*)aShortLink;
+// Mark the short link as deleted
+- (KalturaShortLink*)deleteWithId:(NSString*)aId;
+// Retrieve an short link object by id
+- (KalturaShortLink*)getWithId:(NSString*)aId;
+// Serves short link
+- (NSString*)gotoWithId:(NSString*)aId withProxy:(KALTURA_BOOL)aProxy;
+- (NSString*)gotoWithId:(NSString*)aId;
 // List short link objects by filter and pager
 - (KalturaShortLinkListResponse*)listWithFilter:(KalturaShortLinkFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaShortLinkListResponse*)listWithFilter:(KalturaShortLinkFilter*)aFilter;
 - (KalturaShortLinkListResponse*)list;
-// Allows you to add a short link object
-- (KalturaShortLink*)addWithShortLink:(KalturaShortLink*)aShortLink;
-// Retrieve an short link object by id
-- (KalturaShortLink*)getWithId:(NSString*)aId;
 // Update exisitng short link
 - (KalturaShortLink*)updateWithId:(NSString*)aId withShortLink:(KalturaShortLink*)aShortLink;
-// Mark the short link as deleted
-- (KalturaShortLink*)deleteWithId:(NSString*)aId;
-// Serves short link
-- (NSString*)gotoWithId:(NSString*)aId withProxy:(KALTURA_BOOL)aProxy;
-- (NSString*)gotoWithId:(NSString*)aId;
 @end
 
 @interface KalturaShortLinkClientPlugin : KalturaClientPlugin

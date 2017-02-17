@@ -1168,14 +1168,10 @@
 @interface KalturaDistributionProfileService : KalturaServiceBase
 // Add new Distribution Profile
 - (KalturaDistributionProfile*)addWithDistributionProfile:(KalturaDistributionProfile*)aDistributionProfile;
-// Get Distribution Profile by id
-- (KalturaDistributionProfile*)getWithId:(int)aId;
-// Update Distribution Profile by id
-- (KalturaDistributionProfile*)updateWithId:(int)aId withDistributionProfile:(KalturaDistributionProfile*)aDistributionProfile;
-// Update Distribution Profile status by id
-- (KalturaDistributionProfile*)updateStatusWithId:(int)aId withStatus:(int)aStatus;
 // Delete Distribution Profile by id
 - (void)deleteWithId:(int)aId;
+// Get Distribution Profile by id
+- (KalturaDistributionProfile*)getWithId:(int)aId;
 // List all distribution providers
 - (KalturaDistributionProfileListResponse*)listWithFilter:(KalturaDistributionProfileFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaDistributionProfileListResponse*)listWithFilter:(KalturaDistributionProfileFilter*)aFilter;
@@ -1183,6 +1179,10 @@
 - (KalturaDistributionProfileListResponse*)listByPartnerWithFilter:(KalturaPartnerFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaDistributionProfileListResponse*)listByPartnerWithFilter:(KalturaPartnerFilter*)aFilter;
 - (KalturaDistributionProfileListResponse*)listByPartner;
+// Update Distribution Profile by id
+- (KalturaDistributionProfile*)updateWithId:(int)aId withDistributionProfile:(KalturaDistributionProfile*)aDistributionProfile;
+// Update Distribution Profile status by id
+- (KalturaDistributionProfile*)updateStatusWithId:(int)aId withStatus:(int)aStatus;
 @end
 
 // @package Kaltura
@@ -1191,33 +1191,33 @@
 @interface KalturaEntryDistributionService : KalturaServiceBase
 // Add new Entry Distribution
 - (KalturaEntryDistribution*)addWithEntryDistribution:(KalturaEntryDistribution*)aEntryDistribution;
-// Get Entry Distribution by id
-- (KalturaEntryDistribution*)getWithId:(int)aId;
-// Validates Entry Distribution by id for submission
-- (KalturaEntryDistribution*)validateWithId:(int)aId;
-// Update Entry Distribution by id
-- (KalturaEntryDistribution*)updateWithId:(int)aId withEntryDistribution:(KalturaEntryDistribution*)aEntryDistribution;
 // Delete Entry Distribution by id
 - (void)deleteWithId:(int)aId;
+// Get Entry Distribution by id
+- (KalturaEntryDistribution*)getWithId:(int)aId;
 // List all distribution providers
 - (KalturaEntryDistributionListResponse*)listWithFilter:(KalturaEntryDistributionFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaEntryDistributionListResponse*)listWithFilter:(KalturaEntryDistributionFilter*)aFilter;
 - (KalturaEntryDistributionListResponse*)list;
+// Retries last submit action
+- (KalturaEntryDistribution*)retrySubmitWithId:(int)aId;
+// Serves entry distribution returned data
+- (NSString*)serveReturnedDataWithId:(int)aId withActionType:(int)aActionType;
+// Serves entry distribution sent data
+- (NSString*)serveSentDataWithId:(int)aId withActionType:(int)aActionType;
 // Submits Entry Distribution to the remote destination
 - (KalturaEntryDistribution*)submitAddWithId:(int)aId withSubmitWhenReady:(KALTURA_BOOL)aSubmitWhenReady;
 - (KalturaEntryDistribution*)submitAddWithId:(int)aId;
-// Submits Entry Distribution changes to the remote destination
-- (KalturaEntryDistribution*)submitUpdateWithId:(int)aId;
-// Submits Entry Distribution report request
-- (KalturaEntryDistribution*)submitFetchReportWithId:(int)aId;
 // Deletes Entry Distribution from the remote destination
 - (KalturaEntryDistribution*)submitDeleteWithId:(int)aId;
-// Retries last submit action
-- (KalturaEntryDistribution*)retrySubmitWithId:(int)aId;
-// Serves entry distribution sent data
-- (NSString*)serveSentDataWithId:(int)aId withActionType:(int)aActionType;
-// Serves entry distribution returned data
-- (NSString*)serveReturnedDataWithId:(int)aId withActionType:(int)aActionType;
+// Submits Entry Distribution report request
+- (KalturaEntryDistribution*)submitFetchReportWithId:(int)aId;
+// Submits Entry Distribution changes to the remote destination
+- (KalturaEntryDistribution*)submitUpdateWithId:(int)aId;
+// Update Entry Distribution by id
+- (KalturaEntryDistribution*)updateWithId:(int)aId withEntryDistribution:(KalturaEntryDistribution*)aEntryDistribution;
+// Validates Entry Distribution by id for submission
+- (KalturaEntryDistribution*)validateWithId:(int)aId;
 @end
 
 // @package Kaltura
@@ -1236,16 +1236,16 @@
 @interface KalturaGenericDistributionProviderService : KalturaServiceBase
 // Add new Generic Distribution Provider
 - (KalturaGenericDistributionProvider*)addWithGenericDistributionProvider:(KalturaGenericDistributionProvider*)aGenericDistributionProvider;
-// Get Generic Distribution Provider by id
-- (KalturaGenericDistributionProvider*)getWithId:(int)aId;
-// Update Generic Distribution Provider by id
-- (KalturaGenericDistributionProvider*)updateWithId:(int)aId withGenericDistributionProvider:(KalturaGenericDistributionProvider*)aGenericDistributionProvider;
 // Delete Generic Distribution Provider by id
 - (void)deleteWithId:(int)aId;
+// Get Generic Distribution Provider by id
+- (KalturaGenericDistributionProvider*)getWithId:(int)aId;
 // List all distribution providers
 - (KalturaGenericDistributionProviderListResponse*)listWithFilter:(KalturaGenericDistributionProviderFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaGenericDistributionProviderListResponse*)listWithFilter:(KalturaGenericDistributionProviderFilter*)aFilter;
 - (KalturaGenericDistributionProviderListResponse*)list;
+// Update Generic Distribution Provider by id
+- (KalturaGenericDistributionProvider*)updateWithId:(int)aId withGenericDistributionProvider:(KalturaGenericDistributionProvider*)aGenericDistributionProvider;
 @end
 
 // @package Kaltura
@@ -1266,22 +1266,22 @@
 - (KalturaGenericDistributionProviderAction*)addResultsTransformWithId:(int)aId withTransformData:(NSString*)aTransformData;
 // Add MRSS transform file to generic distribution provider action
 - (KalturaGenericDistributionProviderAction*)addResultsTransformFromFileWithId:(int)aId withTransformFile:(NSString*)aTransformFile;
-// Get Generic Distribution Provider Action by id
-- (KalturaGenericDistributionProviderAction*)getWithId:(int)aId;
-// Get Generic Distribution Provider Action by provider id
-- (KalturaGenericDistributionProviderAction*)getByProviderIdWithGenericDistributionProviderId:(int)aGenericDistributionProviderId withActionType:(int)aActionType;
-// Update Generic Distribution Provider Action by provider id
-- (KalturaGenericDistributionProviderAction*)updateByProviderIdWithGenericDistributionProviderId:(int)aGenericDistributionProviderId withActionType:(int)aActionType withGenericDistributionProviderAction:(KalturaGenericDistributionProviderAction*)aGenericDistributionProviderAction;
-// Update Generic Distribution Provider Action by id
-- (KalturaGenericDistributionProviderAction*)updateWithId:(int)aId withGenericDistributionProviderAction:(KalturaGenericDistributionProviderAction*)aGenericDistributionProviderAction;
 // Delete Generic Distribution Provider Action by id
 - (void)deleteWithId:(int)aId;
 // Delete Generic Distribution Provider Action by provider id
 - (void)deleteByProviderIdWithGenericDistributionProviderId:(int)aGenericDistributionProviderId withActionType:(int)aActionType;
+// Get Generic Distribution Provider Action by id
+- (KalturaGenericDistributionProviderAction*)getWithId:(int)aId;
+// Get Generic Distribution Provider Action by provider id
+- (KalturaGenericDistributionProviderAction*)getByProviderIdWithGenericDistributionProviderId:(int)aGenericDistributionProviderId withActionType:(int)aActionType;
 // List all distribution providers
 - (KalturaGenericDistributionProviderActionListResponse*)listWithFilter:(KalturaGenericDistributionProviderActionFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaGenericDistributionProviderActionListResponse*)listWithFilter:(KalturaGenericDistributionProviderActionFilter*)aFilter;
 - (KalturaGenericDistributionProviderActionListResponse*)list;
+// Update Generic Distribution Provider Action by id
+- (KalturaGenericDistributionProviderAction*)updateWithId:(int)aId withGenericDistributionProviderAction:(KalturaGenericDistributionProviderAction*)aGenericDistributionProviderAction;
+// Update Generic Distribution Provider Action by provider id
+- (KalturaGenericDistributionProviderAction*)updateByProviderIdWithGenericDistributionProviderId:(int)aGenericDistributionProviderId withActionType:(int)aActionType withGenericDistributionProviderAction:(KalturaGenericDistributionProviderAction*)aGenericDistributionProviderAction;
 @end
 
 @interface KalturaContentDistributionClientPlugin : KalturaClientPlugin

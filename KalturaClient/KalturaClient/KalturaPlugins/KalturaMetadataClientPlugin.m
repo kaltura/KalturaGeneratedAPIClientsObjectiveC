@@ -1622,6 +1622,15 @@
     return [self.client queueObjectService:@"metadata_metadata" withAction:@"add" withExpectedType:@"KalturaMetadata"];
 }
 
+- (KalturaMetadata*)addFromBulkWithMetadataProfileId:(int)aMetadataProfileId withObjectType:(NSString*)aObjectType withObjectId:(NSString*)aObjectId withUrl:(NSString*)aUrl
+{
+    [self.client.params addIfDefinedKey:@"metadataProfileId" withInt:aMetadataProfileId];
+    [self.client.params addIfDefinedKey:@"objectType" withString:aObjectType];
+    [self.client.params addIfDefinedKey:@"objectId" withString:aObjectId];
+    [self.client.params addIfDefinedKey:@"url" withString:aUrl];
+    return [self.client queueObjectService:@"metadata_metadata" withAction:@"addFromBulk" withExpectedType:@"KalturaMetadata"];
+}
+
 - (KalturaMetadata*)addFromFileWithMetadataProfileId:(int)aMetadataProfileId withObjectType:(NSString*)aObjectType withObjectId:(NSString*)aObjectId withXmlFile:(NSString*)aXmlFile
 {
     [self.client.params addIfDefinedKey:@"metadataProfileId" withInt:aMetadataProfileId];
@@ -1640,19 +1649,58 @@
     return [self.client queueObjectService:@"metadata_metadata" withAction:@"addFromUrl" withExpectedType:@"KalturaMetadata"];
 }
 
-- (KalturaMetadata*)addFromBulkWithMetadataProfileId:(int)aMetadataProfileId withObjectType:(NSString*)aObjectType withObjectId:(NSString*)aObjectId withUrl:(NSString*)aUrl
+- (void)deleteWithId:(int)aId
 {
-    [self.client.params addIfDefinedKey:@"metadataProfileId" withInt:aMetadataProfileId];
-    [self.client.params addIfDefinedKey:@"objectType" withString:aObjectType];
-    [self.client.params addIfDefinedKey:@"objectId" withString:aObjectId];
-    [self.client.params addIfDefinedKey:@"url" withString:aUrl];
-    return [self.client queueObjectService:@"metadata_metadata" withAction:@"addFromBulk" withExpectedType:@"KalturaMetadata"];
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client queueVoidService:@"metadata_metadata" withAction:@"delete"];
 }
 
 - (KalturaMetadata*)getWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     return [self.client queueObjectService:@"metadata_metadata" withAction:@"get" withExpectedType:@"KalturaMetadata"];
+}
+
+- (int)indexWithId:(NSString*)aId withShouldUpdate:(KALTURA_BOOL)aShouldUpdate
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"shouldUpdate" withBool:aShouldUpdate];
+    return [self.client queueIntService:@"metadata_metadata" withAction:@"index"];
+}
+
+- (void)invalidateWithId:(int)aId withVersion:(int)aVersion
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"version" withInt:aVersion];
+    [self.client queueVoidService:@"metadata_metadata" withAction:@"invalidate"];
+}
+
+- (void)invalidateWithId:(int)aId
+{
+    [self invalidateWithId:aId withVersion:KALTURA_UNDEF_INT];
+}
+
+- (KalturaMetadataListResponse*)listWithFilter:(KalturaMetadataFilter*)aFilter withPager:(KalturaFilterPager*)aPager
+{
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    return [self.client queueObjectService:@"metadata_metadata" withAction:@"list" withExpectedType:@"KalturaMetadataListResponse"];
+}
+
+- (KalturaMetadataListResponse*)listWithFilter:(KalturaMetadataFilter*)aFilter
+{
+    return [self listWithFilter:aFilter withPager:nil];
+}
+
+- (KalturaMetadataListResponse*)list
+{
+    return [self listWithFilter:nil];
+}
+
+- (NSString*)serveWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    return [self.client queueServeService:@"metadata_metadata" withAction:@"serve"];
 }
 
 - (KalturaMetadata*)updateWithId:(int)aId withXmlData:(NSString*)aXmlData withVersion:(int)aVersion
@@ -1683,54 +1731,6 @@
 - (KalturaMetadata*)updateFromFileWithId:(int)aId
 {
     return [self updateFromFileWithId:aId withXmlFile:nil];
-}
-
-- (KalturaMetadataListResponse*)listWithFilter:(KalturaMetadataFilter*)aFilter withPager:(KalturaFilterPager*)aPager
-{
-    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
-    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
-    return [self.client queueObjectService:@"metadata_metadata" withAction:@"list" withExpectedType:@"KalturaMetadataListResponse"];
-}
-
-- (KalturaMetadataListResponse*)listWithFilter:(KalturaMetadataFilter*)aFilter
-{
-    return [self listWithFilter:aFilter withPager:nil];
-}
-
-- (KalturaMetadataListResponse*)list
-{
-    return [self listWithFilter:nil];
-}
-
-- (void)deleteWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client queueVoidService:@"metadata_metadata" withAction:@"delete"];
-}
-
-- (void)invalidateWithId:(int)aId withVersion:(int)aVersion
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"version" withInt:aVersion];
-    [self.client queueVoidService:@"metadata_metadata" withAction:@"invalidate"];
-}
-
-- (void)invalidateWithId:(int)aId
-{
-    [self invalidateWithId:aId withVersion:KALTURA_UNDEF_INT];
-}
-
-- (int)indexWithId:(NSString*)aId withShouldUpdate:(KALTURA_BOOL)aShouldUpdate
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"shouldUpdate" withBool:aShouldUpdate];
-    return [self.client queueIntService:@"metadata_metadata" withAction:@"index"];
-}
-
-- (NSString*)serveWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueServeService:@"metadata_metadata" withAction:@"serve"];
 }
 
 - (KalturaMetadata*)updateFromXSLWithId:(int)aId withXslFile:(NSString*)aXslFile
@@ -1769,29 +1769,16 @@
     return [self addFromFileWithMetadataProfile:aMetadataProfile withXsdFile:aXsdFile withViewsFile:nil];
 }
 
+- (void)deleteWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client queueVoidService:@"metadata_metadataprofile" withAction:@"delete"];
+}
+
 - (KalturaMetadataProfile*)getWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     return [self.client queueObjectService:@"metadata_metadataprofile" withAction:@"get" withExpectedType:@"KalturaMetadataProfile"];
-}
-
-- (KalturaMetadataProfile*)updateWithId:(int)aId withMetadataProfile:(KalturaMetadataProfile*)aMetadataProfile withXsdData:(NSString*)aXsdData withViewsData:(NSString*)aViewsData
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"metadataProfile" withObject:aMetadataProfile];
-    [self.client.params addIfDefinedKey:@"xsdData" withString:aXsdData];
-    [self.client.params addIfDefinedKey:@"viewsData" withString:aViewsData];
-    return [self.client queueObjectService:@"metadata_metadataprofile" withAction:@"update" withExpectedType:@"KalturaMetadataProfile"];
-}
-
-- (KalturaMetadataProfile*)updateWithId:(int)aId withMetadataProfile:(KalturaMetadataProfile*)aMetadataProfile withXsdData:(NSString*)aXsdData
-{
-    return [self updateWithId:aId withMetadataProfile:aMetadataProfile withXsdData:aXsdData withViewsData:nil];
-}
-
-- (KalturaMetadataProfile*)updateWithId:(int)aId withMetadataProfile:(KalturaMetadataProfile*)aMetadataProfile
-{
-    return [self updateWithId:aId withMetadataProfile:aMetadataProfile withXsdData:nil];
 }
 
 - (KalturaMetadataProfileListResponse*)listWithFilter:(KalturaMetadataProfileFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -1817,38 +1804,11 @@
     return [self.client queueObjectService:@"metadata_metadataprofile" withAction:@"listFields" withExpectedType:@"KalturaMetadataProfileFieldListResponse"];
 }
 
-- (void)deleteWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client queueVoidService:@"metadata_metadataprofile" withAction:@"delete"];
-}
-
 - (KalturaMetadataProfile*)revertWithId:(int)aId withToVersion:(int)aToVersion
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     [self.client.params addIfDefinedKey:@"toVersion" withInt:aToVersion];
     return [self.client queueObjectService:@"metadata_metadataprofile" withAction:@"revert" withExpectedType:@"KalturaMetadataProfile"];
-}
-
-- (KalturaMetadataProfile*)updateDefinitionFromFileWithId:(int)aId withXsdFile:(NSString*)aXsdFile
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"xsdFile" withFileName:aXsdFile];
-    return [self.client queueObjectService:@"metadata_metadataprofile" withAction:@"updateDefinitionFromFile" withExpectedType:@"KalturaMetadataProfile"];
-}
-
-- (KalturaMetadataProfile*)updateViewsFromFileWithId:(int)aId withViewsFile:(NSString*)aViewsFile
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"viewsFile" withFileName:aViewsFile];
-    return [self.client queueObjectService:@"metadata_metadataprofile" withAction:@"updateViewsFromFile" withExpectedType:@"KalturaMetadataProfile"];
-}
-
-- (KalturaMetadataProfile*)updateTransformationFromFileWithId:(int)aId withXsltFile:(NSString*)aXsltFile
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"xsltFile" withFileName:aXsltFile];
-    return [self.client queueObjectService:@"metadata_metadataprofile" withAction:@"updateTransformationFromFile" withExpectedType:@"KalturaMetadataProfile"];
 }
 
 - (NSString*)serveWithId:(int)aId
@@ -1861,6 +1821,46 @@
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     return [self.client queueServeService:@"metadata_metadataprofile" withAction:@"serveView"];
+}
+
+- (KalturaMetadataProfile*)updateWithId:(int)aId withMetadataProfile:(KalturaMetadataProfile*)aMetadataProfile withXsdData:(NSString*)aXsdData withViewsData:(NSString*)aViewsData
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"metadataProfile" withObject:aMetadataProfile];
+    [self.client.params addIfDefinedKey:@"xsdData" withString:aXsdData];
+    [self.client.params addIfDefinedKey:@"viewsData" withString:aViewsData];
+    return [self.client queueObjectService:@"metadata_metadataprofile" withAction:@"update" withExpectedType:@"KalturaMetadataProfile"];
+}
+
+- (KalturaMetadataProfile*)updateWithId:(int)aId withMetadataProfile:(KalturaMetadataProfile*)aMetadataProfile withXsdData:(NSString*)aXsdData
+{
+    return [self updateWithId:aId withMetadataProfile:aMetadataProfile withXsdData:aXsdData withViewsData:nil];
+}
+
+- (KalturaMetadataProfile*)updateWithId:(int)aId withMetadataProfile:(KalturaMetadataProfile*)aMetadataProfile
+{
+    return [self updateWithId:aId withMetadataProfile:aMetadataProfile withXsdData:nil];
+}
+
+- (KalturaMetadataProfile*)updateDefinitionFromFileWithId:(int)aId withXsdFile:(NSString*)aXsdFile
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"xsdFile" withFileName:aXsdFile];
+    return [self.client queueObjectService:@"metadata_metadataprofile" withAction:@"updateDefinitionFromFile" withExpectedType:@"KalturaMetadataProfile"];
+}
+
+- (KalturaMetadataProfile*)updateTransformationFromFileWithId:(int)aId withXsltFile:(NSString*)aXsltFile
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"xsltFile" withFileName:aXsltFile];
+    return [self.client queueObjectService:@"metadata_metadataprofile" withAction:@"updateTransformationFromFile" withExpectedType:@"KalturaMetadataProfile"];
+}
+
+- (KalturaMetadataProfile*)updateViewsFromFileWithId:(int)aId withViewsFile:(NSString*)aViewsFile
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"viewsFile" withFileName:aViewsFile];
+    return [self.client queueObjectService:@"metadata_metadataprofile" withAction:@"updateViewsFromFile" withExpectedType:@"KalturaMetadataProfile"];
 }
 
 @end

@@ -86,13 +86,13 @@
 // @subpackage Client
 // Allows user to 'like' or 'unlike' and entry
 @interface KalturaLikeService : KalturaServiceBase
-- (KALTURA_BOOL)likeWithEntryId:(NSString*)aEntryId;
-- (KALTURA_BOOL)unlikeWithEntryId:(NSString*)aEntryId;
 - (KALTURA_BOOL)checkLikeExistsWithEntryId:(NSString*)aEntryId withUserId:(NSString*)aUserId;
 - (KALTURA_BOOL)checkLikeExistsWithEntryId:(NSString*)aEntryId;
+- (KALTURA_BOOL)likeWithEntryId:(NSString*)aEntryId;
 - (KalturaLikeListResponse*)listWithFilter:(KalturaLikeFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaLikeListResponse*)listWithFilter:(KalturaLikeFilter*)aFilter;
 - (KalturaLikeListResponse*)list;
+- (KALTURA_BOOL)unlikeWithEntryId:(NSString*)aEntryId;
 @end
 
 @interface KalturaLikeClientPlugin : KalturaClientPlugin

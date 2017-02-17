@@ -2383,17 +2383,22 @@
     return [self.client queueObjectService:@"schedule_scheduleevent" withAction:@"add" withExpectedType:@"KalturaScheduleEvent"];
 }
 
-- (KalturaScheduleEvent*)getWithScheduleEventId:(int)aScheduleEventId
+- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadICalJobData*)aBulkUploadData
 {
-    [self.client.params addIfDefinedKey:@"scheduleEventId" withInt:aScheduleEventId];
-    return [self.client queueObjectService:@"schedule_scheduleevent" withAction:@"get" withExpectedType:@"KalturaScheduleEvent"];
+    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
+    [self.client.params addIfDefinedKey:@"bulkUploadData" withObject:aBulkUploadData];
+    return [self.client queueObjectService:@"schedule_scheduleevent" withAction:@"addFromBulkUpload" withExpectedType:@"KalturaBulkUpload"];
 }
 
-- (KalturaScheduleEvent*)updateWithScheduleEventId:(int)aScheduleEventId withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent
+- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData
+{
+    return [self addFromBulkUploadWithFileData:aFileData withBulkUploadData:nil];
+}
+
+- (KalturaScheduleEvent*)cancelWithScheduleEventId:(int)aScheduleEventId
 {
     [self.client.params addIfDefinedKey:@"scheduleEventId" withInt:aScheduleEventId];
-    [self.client.params addIfDefinedKey:@"scheduleEvent" withObject:aScheduleEvent];
-    return [self.client queueObjectService:@"schedule_scheduleevent" withAction:@"update" withExpectedType:@"KalturaScheduleEvent"];
+    return [self.client queueObjectService:@"schedule_scheduleevent" withAction:@"cancel" withExpectedType:@"KalturaScheduleEvent"];
 }
 
 - (KalturaScheduleEvent*)deleteWithScheduleEventId:(int)aScheduleEventId
@@ -2402,10 +2407,17 @@
     return [self.client queueObjectService:@"schedule_scheduleevent" withAction:@"delete" withExpectedType:@"KalturaScheduleEvent"];
 }
 
-- (KalturaScheduleEvent*)cancelWithScheduleEventId:(int)aScheduleEventId
+- (KalturaScheduleEvent*)getWithScheduleEventId:(int)aScheduleEventId
 {
     [self.client.params addIfDefinedKey:@"scheduleEventId" withInt:aScheduleEventId];
-    return [self.client queueObjectService:@"schedule_scheduleevent" withAction:@"cancel" withExpectedType:@"KalturaScheduleEvent"];
+    return [self.client queueObjectService:@"schedule_scheduleevent" withAction:@"get" withExpectedType:@"KalturaScheduleEvent"];
+}
+
+- (NSMutableArray*)getConflictsWithResourceIds:(NSString*)aResourceIds withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent
+{
+    [self.client.params addIfDefinedKey:@"resourceIds" withString:aResourceIds];
+    [self.client.params addIfDefinedKey:@"scheduleEvent" withObject:aScheduleEvent];
+    return [self.client queueArrayService:@"schedule_scheduleevent" withAction:@"getConflicts" withExpectedType:@"KalturaScheduleEvent"];
 }
 
 - (KalturaScheduleEventListResponse*)listWithFilter:(KalturaScheduleEventFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -2425,23 +2437,11 @@
     return [self listWithFilter:nil];
 }
 
-- (NSMutableArray*)getConflictsWithResourceIds:(NSString*)aResourceIds withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent
+- (KalturaScheduleEvent*)updateWithScheduleEventId:(int)aScheduleEventId withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent
 {
-    [self.client.params addIfDefinedKey:@"resourceIds" withString:aResourceIds];
+    [self.client.params addIfDefinedKey:@"scheduleEventId" withInt:aScheduleEventId];
     [self.client.params addIfDefinedKey:@"scheduleEvent" withObject:aScheduleEvent];
-    return [self.client queueArrayService:@"schedule_scheduleevent" withAction:@"getConflicts" withExpectedType:@"KalturaScheduleEvent"];
-}
-
-- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadICalJobData*)aBulkUploadData
-{
-    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
-    [self.client.params addIfDefinedKey:@"bulkUploadData" withObject:aBulkUploadData];
-    return [self.client queueObjectService:@"schedule_scheduleevent" withAction:@"addFromBulkUpload" withExpectedType:@"KalturaBulkUpload"];
-}
-
-- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData
-{
-    return [self addFromBulkUploadWithFileData:aFileData withBulkUploadData:nil];
+    return [self.client queueObjectService:@"schedule_scheduleevent" withAction:@"update" withExpectedType:@"KalturaScheduleEvent"];
 }
 
 @end
@@ -2453,23 +2453,28 @@
     return [self.client queueObjectService:@"schedule_scheduleresource" withAction:@"add" withExpectedType:@"KalturaScheduleResource"];
 }
 
-- (KalturaScheduleResource*)getWithScheduleResourceId:(int)aScheduleResourceId
+- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadCsvJobData*)aBulkUploadData
 {
-    [self.client.params addIfDefinedKey:@"scheduleResourceId" withInt:aScheduleResourceId];
-    return [self.client queueObjectService:@"schedule_scheduleresource" withAction:@"get" withExpectedType:@"KalturaScheduleResource"];
+    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
+    [self.client.params addIfDefinedKey:@"bulkUploadData" withObject:aBulkUploadData];
+    return [self.client queueObjectService:@"schedule_scheduleresource" withAction:@"addFromBulkUpload" withExpectedType:@"KalturaBulkUpload"];
 }
 
-- (KalturaScheduleResource*)updateWithScheduleResourceId:(int)aScheduleResourceId withScheduleResource:(KalturaScheduleResource*)aScheduleResource
+- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData
 {
-    [self.client.params addIfDefinedKey:@"scheduleResourceId" withInt:aScheduleResourceId];
-    [self.client.params addIfDefinedKey:@"scheduleResource" withObject:aScheduleResource];
-    return [self.client queueObjectService:@"schedule_scheduleresource" withAction:@"update" withExpectedType:@"KalturaScheduleResource"];
+    return [self addFromBulkUploadWithFileData:aFileData withBulkUploadData:nil];
 }
 
 - (KalturaScheduleResource*)deleteWithScheduleResourceId:(int)aScheduleResourceId
 {
     [self.client.params addIfDefinedKey:@"scheduleResourceId" withInt:aScheduleResourceId];
     return [self.client queueObjectService:@"schedule_scheduleresource" withAction:@"delete" withExpectedType:@"KalturaScheduleResource"];
+}
+
+- (KalturaScheduleResource*)getWithScheduleResourceId:(int)aScheduleResourceId
+{
+    [self.client.params addIfDefinedKey:@"scheduleResourceId" withInt:aScheduleResourceId];
+    return [self.client queueObjectService:@"schedule_scheduleresource" withAction:@"get" withExpectedType:@"KalturaScheduleResource"];
 }
 
 - (KalturaScheduleResourceListResponse*)listWithFilter:(KalturaScheduleResourceFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -2489,16 +2494,11 @@
     return [self listWithFilter:nil];
 }
 
-- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadCsvJobData*)aBulkUploadData
+- (KalturaScheduleResource*)updateWithScheduleResourceId:(int)aScheduleResourceId withScheduleResource:(KalturaScheduleResource*)aScheduleResource
 {
-    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
-    [self.client.params addIfDefinedKey:@"bulkUploadData" withObject:aBulkUploadData];
-    return [self.client queueObjectService:@"schedule_scheduleresource" withAction:@"addFromBulkUpload" withExpectedType:@"KalturaBulkUpload"];
-}
-
-- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData
-{
-    return [self addFromBulkUploadWithFileData:aFileData withBulkUploadData:nil];
+    [self.client.params addIfDefinedKey:@"scheduleResourceId" withInt:aScheduleResourceId];
+    [self.client.params addIfDefinedKey:@"scheduleResource" withObject:aScheduleResource];
+    return [self.client queueObjectService:@"schedule_scheduleresource" withAction:@"update" withExpectedType:@"KalturaScheduleResource"];
 }
 
 @end
@@ -2510,26 +2510,18 @@
     return [self.client queueObjectService:@"schedule_scheduleeventresource" withAction:@"add" withExpectedType:@"KalturaScheduleEventResource"];
 }
 
-- (KalturaScheduleEventResource*)getWithScheduleEventId:(int)aScheduleEventId withScheduleResourceId:(int)aScheduleResourceId
-{
-    [self.client.params addIfDefinedKey:@"scheduleEventId" withInt:aScheduleEventId];
-    [self.client.params addIfDefinedKey:@"scheduleResourceId" withInt:aScheduleResourceId];
-    return [self.client queueObjectService:@"schedule_scheduleeventresource" withAction:@"get" withExpectedType:@"KalturaScheduleEventResource"];
-}
-
-- (KalturaScheduleEventResource*)updateWithScheduleEventId:(int)aScheduleEventId withScheduleResourceId:(int)aScheduleResourceId withScheduleEventResource:(KalturaScheduleEventResource*)aScheduleEventResource
-{
-    [self.client.params addIfDefinedKey:@"scheduleEventId" withInt:aScheduleEventId];
-    [self.client.params addIfDefinedKey:@"scheduleResourceId" withInt:aScheduleResourceId];
-    [self.client.params addIfDefinedKey:@"scheduleEventResource" withObject:aScheduleEventResource];
-    return [self.client queueObjectService:@"schedule_scheduleeventresource" withAction:@"update" withExpectedType:@"KalturaScheduleEventResource"];
-}
-
 - (void)deleteWithScheduleEventId:(int)aScheduleEventId withScheduleResourceId:(int)aScheduleResourceId
 {
     [self.client.params addIfDefinedKey:@"scheduleEventId" withInt:aScheduleEventId];
     [self.client.params addIfDefinedKey:@"scheduleResourceId" withInt:aScheduleResourceId];
     [self.client queueVoidService:@"schedule_scheduleeventresource" withAction:@"delete"];
+}
+
+- (KalturaScheduleEventResource*)getWithScheduleEventId:(int)aScheduleEventId withScheduleResourceId:(int)aScheduleResourceId
+{
+    [self.client.params addIfDefinedKey:@"scheduleEventId" withInt:aScheduleEventId];
+    [self.client.params addIfDefinedKey:@"scheduleResourceId" withInt:aScheduleResourceId];
+    return [self.client queueObjectService:@"schedule_scheduleeventresource" withAction:@"get" withExpectedType:@"KalturaScheduleEventResource"];
 }
 
 - (KalturaScheduleEventResourceListResponse*)listWithFilter:(KalturaScheduleEventResourceFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -2547,6 +2539,14 @@
 - (KalturaScheduleEventResourceListResponse*)list
 {
     return [self listWithFilter:nil];
+}
+
+- (KalturaScheduleEventResource*)updateWithScheduleEventId:(int)aScheduleEventId withScheduleResourceId:(int)aScheduleResourceId withScheduleEventResource:(KalturaScheduleEventResource*)aScheduleEventResource
+{
+    [self.client.params addIfDefinedKey:@"scheduleEventId" withInt:aScheduleEventId];
+    [self.client.params addIfDefinedKey:@"scheduleResourceId" withInt:aScheduleResourceId];
+    [self.client.params addIfDefinedKey:@"scheduleEventResource" withObject:aScheduleEventResource];
+    return [self.client queueObjectService:@"schedule_scheduleeventresource" withAction:@"update" withExpectedType:@"KalturaScheduleEventResource"];
 }
 
 @end

@@ -231,27 +231,27 @@
 - (KalturaCuePoint*)addWithCuePoint:(KalturaCuePoint*)aCuePoint;
 // Allows you to add multiple cue points objects by uploading XML that contains multiple cue point definitions
 - (KalturaCuePointListResponse*)addFromBulkWithFileData:(NSString*)aFileData;
-// Download multiple cue points objects as XML definitions
-- (NSString*)serveBulkWithFilter:(KalturaCuePointFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
-- (NSString*)serveBulkWithFilter:(KalturaCuePointFilter*)aFilter;
-- (NSString*)serveBulk;
+// Clone cuePoint with id to given entry
+- (KalturaCuePoint*)cloneWithId:(NSString*)aId withEntryId:(NSString*)aEntryId;
+// count cue point objects by filter
+- (int)countWithFilter:(KalturaCuePointFilter*)aFilter;
+- (int)count;
+// delete cue point by id, and delete all children cue points
+- (void)deleteWithId:(NSString*)aId;
 // Retrieve an CuePoint object by id
 - (KalturaCuePoint*)getWithId:(NSString*)aId;
 // List cue point objects by filter and pager
 - (KalturaCuePointListResponse*)listWithFilter:(KalturaCuePointFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaCuePointListResponse*)listWithFilter:(KalturaCuePointFilter*)aFilter;
 - (KalturaCuePointListResponse*)list;
-// count cue point objects by filter
-- (int)countWithFilter:(KalturaCuePointFilter*)aFilter;
-- (int)count;
+// Download multiple cue points objects as XML definitions
+- (NSString*)serveBulkWithFilter:(KalturaCuePointFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
+- (NSString*)serveBulkWithFilter:(KalturaCuePointFilter*)aFilter;
+- (NSString*)serveBulk;
 // Update cue point by id
 - (KalturaCuePoint*)updateWithId:(NSString*)aId withCuePoint:(KalturaCuePoint*)aCuePoint;
-// delete cue point by id, and delete all children cue points
-- (void)deleteWithId:(NSString*)aId;
 // Update cuePoint status by id
 - (void)updateStatusWithId:(NSString*)aId withStatus:(int)aStatus;
-// Clone cuePoint with id to given entry
-- (KalturaCuePoint*)cloneWithId:(NSString*)aId withEntryId:(NSString*)aEntryId;
 @end
 
 @interface KalturaCuePointClientPlugin : KalturaClientPlugin

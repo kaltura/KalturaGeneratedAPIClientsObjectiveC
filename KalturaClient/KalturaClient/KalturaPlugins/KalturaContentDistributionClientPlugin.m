@@ -3938,30 +3938,16 @@
     return [self.client queueObjectService:@"contentdistribution_distributionprofile" withAction:@"add" withExpectedType:@"KalturaDistributionProfile"];
 }
 
-- (KalturaDistributionProfile*)getWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"contentdistribution_distributionprofile" withAction:@"get" withExpectedType:@"KalturaDistributionProfile"];
-}
-
-- (KalturaDistributionProfile*)updateWithId:(int)aId withDistributionProfile:(KalturaDistributionProfile*)aDistributionProfile
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"distributionProfile" withObject:aDistributionProfile];
-    return [self.client queueObjectService:@"contentdistribution_distributionprofile" withAction:@"update" withExpectedType:@"KalturaDistributionProfile"];
-}
-
-- (KalturaDistributionProfile*)updateStatusWithId:(int)aId withStatus:(int)aStatus
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"status" withInt:aStatus];
-    return [self.client queueObjectService:@"contentdistribution_distributionprofile" withAction:@"updateStatus" withExpectedType:@"KalturaDistributionProfile"];
-}
-
 - (void)deleteWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     [self.client queueVoidService:@"contentdistribution_distributionprofile" withAction:@"delete"];
+}
+
+- (KalturaDistributionProfile*)getWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    return [self.client queueObjectService:@"contentdistribution_distributionprofile" withAction:@"get" withExpectedType:@"KalturaDistributionProfile"];
 }
 
 - (KalturaDistributionProfileListResponse*)listWithFilter:(KalturaDistributionProfileFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -3998,6 +3984,20 @@
     return [self listByPartnerWithFilter:nil];
 }
 
+- (KalturaDistributionProfile*)updateWithId:(int)aId withDistributionProfile:(KalturaDistributionProfile*)aDistributionProfile
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"distributionProfile" withObject:aDistributionProfile];
+    return [self.client queueObjectService:@"contentdistribution_distributionprofile" withAction:@"update" withExpectedType:@"KalturaDistributionProfile"];
+}
+
+- (KalturaDistributionProfile*)updateStatusWithId:(int)aId withStatus:(int)aStatus
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"status" withInt:aStatus];
+    return [self.client queueObjectService:@"contentdistribution_distributionprofile" withAction:@"updateStatus" withExpectedType:@"KalturaDistributionProfile"];
+}
+
 @end
 
 @implementation KalturaEntryDistributionService
@@ -4007,29 +4007,16 @@
     return [self.client queueObjectService:@"contentdistribution_entrydistribution" withAction:@"add" withExpectedType:@"KalturaEntryDistribution"];
 }
 
-- (KalturaEntryDistribution*)getWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"contentdistribution_entrydistribution" withAction:@"get" withExpectedType:@"KalturaEntryDistribution"];
-}
-
-- (KalturaEntryDistribution*)validateWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"contentdistribution_entrydistribution" withAction:@"validate" withExpectedType:@"KalturaEntryDistribution"];
-}
-
-- (KalturaEntryDistribution*)updateWithId:(int)aId withEntryDistribution:(KalturaEntryDistribution*)aEntryDistribution
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"entryDistribution" withObject:aEntryDistribution];
-    return [self.client queueObjectService:@"contentdistribution_entrydistribution" withAction:@"update" withExpectedType:@"KalturaEntryDistribution"];
-}
-
 - (void)deleteWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     [self.client queueVoidService:@"contentdistribution_entrydistribution" withAction:@"delete"];
+}
+
+- (KalturaEntryDistribution*)getWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    return [self.client queueObjectService:@"contentdistribution_entrydistribution" withAction:@"get" withExpectedType:@"KalturaEntryDistribution"];
 }
 
 - (KalturaEntryDistributionListResponse*)listWithFilter:(KalturaEntryDistributionFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -4049,6 +4036,26 @@
     return [self listWithFilter:nil];
 }
 
+- (KalturaEntryDistribution*)retrySubmitWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    return [self.client queueObjectService:@"contentdistribution_entrydistribution" withAction:@"retrySubmit" withExpectedType:@"KalturaEntryDistribution"];
+}
+
+- (NSString*)serveReturnedDataWithId:(int)aId withActionType:(int)aActionType
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"actionType" withInt:aActionType];
+    return [self.client queueServeService:@"contentdistribution_entrydistribution" withAction:@"serveReturnedData"];
+}
+
+- (NSString*)serveSentDataWithId:(int)aId withActionType:(int)aActionType
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"actionType" withInt:aActionType];
+    return [self.client queueServeService:@"contentdistribution_entrydistribution" withAction:@"serveSentData"];
+}
+
 - (KalturaEntryDistribution*)submitAddWithId:(int)aId withSubmitWhenReady:(KALTURA_BOOL)aSubmitWhenReady
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
@@ -4061,10 +4068,10 @@
     return [self submitAddWithId:aId withSubmitWhenReady:KALTURA_UNDEF_BOOL];
 }
 
-- (KalturaEntryDistribution*)submitUpdateWithId:(int)aId
+- (KalturaEntryDistribution*)submitDeleteWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"contentdistribution_entrydistribution" withAction:@"submitUpdate" withExpectedType:@"KalturaEntryDistribution"];
+    return [self.client queueObjectService:@"contentdistribution_entrydistribution" withAction:@"submitDelete" withExpectedType:@"KalturaEntryDistribution"];
 }
 
 - (KalturaEntryDistribution*)submitFetchReportWithId:(int)aId
@@ -4073,30 +4080,23 @@
     return [self.client queueObjectService:@"contentdistribution_entrydistribution" withAction:@"submitFetchReport" withExpectedType:@"KalturaEntryDistribution"];
 }
 
-- (KalturaEntryDistribution*)submitDeleteWithId:(int)aId
+- (KalturaEntryDistribution*)submitUpdateWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"contentdistribution_entrydistribution" withAction:@"submitDelete" withExpectedType:@"KalturaEntryDistribution"];
+    return [self.client queueObjectService:@"contentdistribution_entrydistribution" withAction:@"submitUpdate" withExpectedType:@"KalturaEntryDistribution"];
 }
 
-- (KalturaEntryDistribution*)retrySubmitWithId:(int)aId
+- (KalturaEntryDistribution*)updateWithId:(int)aId withEntryDistribution:(KalturaEntryDistribution*)aEntryDistribution
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"contentdistribution_entrydistribution" withAction:@"retrySubmit" withExpectedType:@"KalturaEntryDistribution"];
+    [self.client.params addIfDefinedKey:@"entryDistribution" withObject:aEntryDistribution];
+    return [self.client queueObjectService:@"contentdistribution_entrydistribution" withAction:@"update" withExpectedType:@"KalturaEntryDistribution"];
 }
 
-- (NSString*)serveSentDataWithId:(int)aId withActionType:(int)aActionType
+- (KalturaEntryDistribution*)validateWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"actionType" withInt:aActionType];
-    return [self.client queueServeService:@"contentdistribution_entrydistribution" withAction:@"serveSentData"];
-}
-
-- (NSString*)serveReturnedDataWithId:(int)aId withActionType:(int)aActionType
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"actionType" withInt:aActionType];
-    return [self.client queueServeService:@"contentdistribution_entrydistribution" withAction:@"serveReturnedData"];
+    return [self.client queueObjectService:@"contentdistribution_entrydistribution" withAction:@"validate" withExpectedType:@"KalturaEntryDistribution"];
 }
 
 @end
@@ -4128,23 +4128,16 @@
     return [self.client queueObjectService:@"contentdistribution_genericdistributionprovider" withAction:@"add" withExpectedType:@"KalturaGenericDistributionProvider"];
 }
 
-- (KalturaGenericDistributionProvider*)getWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"contentdistribution_genericdistributionprovider" withAction:@"get" withExpectedType:@"KalturaGenericDistributionProvider"];
-}
-
-- (KalturaGenericDistributionProvider*)updateWithId:(int)aId withGenericDistributionProvider:(KalturaGenericDistributionProvider*)aGenericDistributionProvider
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"genericDistributionProvider" withObject:aGenericDistributionProvider];
-    return [self.client queueObjectService:@"contentdistribution_genericdistributionprovider" withAction:@"update" withExpectedType:@"KalturaGenericDistributionProvider"];
-}
-
 - (void)deleteWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     [self.client queueVoidService:@"contentdistribution_genericdistributionprovider" withAction:@"delete"];
+}
+
+- (KalturaGenericDistributionProvider*)getWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    return [self.client queueObjectService:@"contentdistribution_genericdistributionprovider" withAction:@"get" withExpectedType:@"KalturaGenericDistributionProvider"];
 }
 
 - (KalturaGenericDistributionProviderListResponse*)listWithFilter:(KalturaGenericDistributionProviderFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -4162,6 +4155,13 @@
 - (KalturaGenericDistributionProviderListResponse*)list
 {
     return [self listWithFilter:nil];
+}
+
+- (KalturaGenericDistributionProvider*)updateWithId:(int)aId withGenericDistributionProvider:(KalturaGenericDistributionProvider*)aGenericDistributionProvider
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"genericDistributionProvider" withObject:aGenericDistributionProvider];
+    return [self.client queueObjectService:@"contentdistribution_genericdistributionprovider" withAction:@"update" withExpectedType:@"KalturaGenericDistributionProvider"];
 }
 
 @end
@@ -4215,34 +4215,6 @@
     return [self.client queueObjectService:@"contentdistribution_genericdistributionprovideraction" withAction:@"addResultsTransformFromFile" withExpectedType:@"KalturaGenericDistributionProviderAction"];
 }
 
-- (KalturaGenericDistributionProviderAction*)getWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"contentdistribution_genericdistributionprovideraction" withAction:@"get" withExpectedType:@"KalturaGenericDistributionProviderAction"];
-}
-
-- (KalturaGenericDistributionProviderAction*)getByProviderIdWithGenericDistributionProviderId:(int)aGenericDistributionProviderId withActionType:(int)aActionType
-{
-    [self.client.params addIfDefinedKey:@"genericDistributionProviderId" withInt:aGenericDistributionProviderId];
-    [self.client.params addIfDefinedKey:@"actionType" withInt:aActionType];
-    return [self.client queueObjectService:@"contentdistribution_genericdistributionprovideraction" withAction:@"getByProviderId" withExpectedType:@"KalturaGenericDistributionProviderAction"];
-}
-
-- (KalturaGenericDistributionProviderAction*)updateByProviderIdWithGenericDistributionProviderId:(int)aGenericDistributionProviderId withActionType:(int)aActionType withGenericDistributionProviderAction:(KalturaGenericDistributionProviderAction*)aGenericDistributionProviderAction
-{
-    [self.client.params addIfDefinedKey:@"genericDistributionProviderId" withInt:aGenericDistributionProviderId];
-    [self.client.params addIfDefinedKey:@"actionType" withInt:aActionType];
-    [self.client.params addIfDefinedKey:@"genericDistributionProviderAction" withObject:aGenericDistributionProviderAction];
-    return [self.client queueObjectService:@"contentdistribution_genericdistributionprovideraction" withAction:@"updateByProviderId" withExpectedType:@"KalturaGenericDistributionProviderAction"];
-}
-
-- (KalturaGenericDistributionProviderAction*)updateWithId:(int)aId withGenericDistributionProviderAction:(KalturaGenericDistributionProviderAction*)aGenericDistributionProviderAction
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"genericDistributionProviderAction" withObject:aGenericDistributionProviderAction];
-    return [self.client queueObjectService:@"contentdistribution_genericdistributionprovideraction" withAction:@"update" withExpectedType:@"KalturaGenericDistributionProviderAction"];
-}
-
 - (void)deleteWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
@@ -4254,6 +4226,19 @@
     [self.client.params addIfDefinedKey:@"genericDistributionProviderId" withInt:aGenericDistributionProviderId];
     [self.client.params addIfDefinedKey:@"actionType" withInt:aActionType];
     [self.client queueVoidService:@"contentdistribution_genericdistributionprovideraction" withAction:@"deleteByProviderId"];
+}
+
+- (KalturaGenericDistributionProviderAction*)getWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    return [self.client queueObjectService:@"contentdistribution_genericdistributionprovideraction" withAction:@"get" withExpectedType:@"KalturaGenericDistributionProviderAction"];
+}
+
+- (KalturaGenericDistributionProviderAction*)getByProviderIdWithGenericDistributionProviderId:(int)aGenericDistributionProviderId withActionType:(int)aActionType
+{
+    [self.client.params addIfDefinedKey:@"genericDistributionProviderId" withInt:aGenericDistributionProviderId];
+    [self.client.params addIfDefinedKey:@"actionType" withInt:aActionType];
+    return [self.client queueObjectService:@"contentdistribution_genericdistributionprovideraction" withAction:@"getByProviderId" withExpectedType:@"KalturaGenericDistributionProviderAction"];
 }
 
 - (KalturaGenericDistributionProviderActionListResponse*)listWithFilter:(KalturaGenericDistributionProviderActionFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -4271,6 +4256,21 @@
 - (KalturaGenericDistributionProviderActionListResponse*)list
 {
     return [self listWithFilter:nil];
+}
+
+- (KalturaGenericDistributionProviderAction*)updateWithId:(int)aId withGenericDistributionProviderAction:(KalturaGenericDistributionProviderAction*)aGenericDistributionProviderAction
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"genericDistributionProviderAction" withObject:aGenericDistributionProviderAction];
+    return [self.client queueObjectService:@"contentdistribution_genericdistributionprovideraction" withAction:@"update" withExpectedType:@"KalturaGenericDistributionProviderAction"];
+}
+
+- (KalturaGenericDistributionProviderAction*)updateByProviderIdWithGenericDistributionProviderId:(int)aGenericDistributionProviderId withActionType:(int)aActionType withGenericDistributionProviderAction:(KalturaGenericDistributionProviderAction*)aGenericDistributionProviderAction
+{
+    [self.client.params addIfDefinedKey:@"genericDistributionProviderId" withInt:aGenericDistributionProviderId];
+    [self.client.params addIfDefinedKey:@"actionType" withInt:aActionType];
+    [self.client.params addIfDefinedKey:@"genericDistributionProviderAction" withObject:aGenericDistributionProviderAction];
+    return [self.client queueObjectService:@"contentdistribution_genericdistributionprovideraction" withAction:@"updateByProviderId" withExpectedType:@"KalturaGenericDistributionProviderAction"];
 }
 
 @end

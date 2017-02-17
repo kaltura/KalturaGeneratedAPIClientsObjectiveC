@@ -764,23 +764,23 @@
 @interface KalturaScheduleEventService : KalturaServiceBase
 // Allows you to add a new KalturaScheduleEvent object
 - (KalturaScheduleEvent*)addWithScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent;
-// Retrieve a KalturaScheduleEvent object by ID
-- (KalturaScheduleEvent*)getWithScheduleEventId:(int)aScheduleEventId;
-// Update an existing KalturaScheduleEvent object
-- (KalturaScheduleEvent*)updateWithScheduleEventId:(int)aScheduleEventId withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent;
-// Mark the KalturaScheduleEvent object as deleted
-- (KalturaScheduleEvent*)deleteWithScheduleEventId:(int)aScheduleEventId;
+// Add new bulk upload batch job
+- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadICalJobData*)aBulkUploadData;
+- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData;
 // Mark the KalturaScheduleEvent object as cancelled
 - (KalturaScheduleEvent*)cancelWithScheduleEventId:(int)aScheduleEventId;
+// Mark the KalturaScheduleEvent object as deleted
+- (KalturaScheduleEvent*)deleteWithScheduleEventId:(int)aScheduleEventId;
+// Retrieve a KalturaScheduleEvent object by ID
+- (KalturaScheduleEvent*)getWithScheduleEventId:(int)aScheduleEventId;
+// List conflicting events for resourcesIds by event's dates
+- (NSMutableArray*)getConflictsWithResourceIds:(NSString*)aResourceIds withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent;
 // List KalturaScheduleEvent objects
 - (KalturaScheduleEventListResponse*)listWithFilter:(KalturaScheduleEventFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaScheduleEventListResponse*)listWithFilter:(KalturaScheduleEventFilter*)aFilter;
 - (KalturaScheduleEventListResponse*)list;
-// List conflicting events for resourcesIds by event's dates
-- (NSMutableArray*)getConflictsWithResourceIds:(NSString*)aResourceIds withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent;
-// Add new bulk upload batch job
-- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadICalJobData*)aBulkUploadData;
-- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData;
+// Update an existing KalturaScheduleEvent object
+- (KalturaScheduleEvent*)updateWithScheduleEventId:(int)aScheduleEventId withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent;
 @end
 
 // @package Kaltura
@@ -791,19 +791,19 @@
 @interface KalturaScheduleResourceService : KalturaServiceBase
 // Allows you to add a new KalturaScheduleResource object
 - (KalturaScheduleResource*)addWithScheduleResource:(KalturaScheduleResource*)aScheduleResource;
-// Retrieve a KalturaScheduleResource object by ID
-- (KalturaScheduleResource*)getWithScheduleResourceId:(int)aScheduleResourceId;
-// Update an existing KalturaScheduleResource object
-- (KalturaScheduleResource*)updateWithScheduleResourceId:(int)aScheduleResourceId withScheduleResource:(KalturaScheduleResource*)aScheduleResource;
+// Add new bulk upload batch job
+- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadCsvJobData*)aBulkUploadData;
+- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData;
 // Mark the KalturaScheduleResource object as deleted
 - (KalturaScheduleResource*)deleteWithScheduleResourceId:(int)aScheduleResourceId;
+// Retrieve a KalturaScheduleResource object by ID
+- (KalturaScheduleResource*)getWithScheduleResourceId:(int)aScheduleResourceId;
 // List KalturaScheduleResource objects
 - (KalturaScheduleResourceListResponse*)listWithFilter:(KalturaScheduleResourceFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaScheduleResourceListResponse*)listWithFilter:(KalturaScheduleResourceFilter*)aFilter;
 - (KalturaScheduleResourceListResponse*)list;
-// Add new bulk upload batch job
-- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadCsvJobData*)aBulkUploadData;
-- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData;
+// Update an existing KalturaScheduleResource object
+- (KalturaScheduleResource*)updateWithScheduleResourceId:(int)aScheduleResourceId withScheduleResource:(KalturaScheduleResource*)aScheduleResource;
 @end
 
 // @package Kaltura
@@ -812,16 +812,16 @@
 @interface KalturaScheduleEventResourceService : KalturaServiceBase
 // Allows you to add a new KalturaScheduleEventResource object
 - (KalturaScheduleEventResource*)addWithScheduleEventResource:(KalturaScheduleEventResource*)aScheduleEventResource;
-// Retrieve a KalturaScheduleEventResource object by ID
-- (KalturaScheduleEventResource*)getWithScheduleEventId:(int)aScheduleEventId withScheduleResourceId:(int)aScheduleResourceId;
-// Update an existing KalturaScheduleEventResource object
-- (KalturaScheduleEventResource*)updateWithScheduleEventId:(int)aScheduleEventId withScheduleResourceId:(int)aScheduleResourceId withScheduleEventResource:(KalturaScheduleEventResource*)aScheduleEventResource;
 // Mark the KalturaScheduleEventResource object as deleted
 - (void)deleteWithScheduleEventId:(int)aScheduleEventId withScheduleResourceId:(int)aScheduleResourceId;
+// Retrieve a KalturaScheduleEventResource object by ID
+- (KalturaScheduleEventResource*)getWithScheduleEventId:(int)aScheduleEventId withScheduleResourceId:(int)aScheduleResourceId;
 // List KalturaScheduleEventResource objects
 - (KalturaScheduleEventResourceListResponse*)listWithFilter:(KalturaScheduleEventResourceFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaScheduleEventResourceListResponse*)listWithFilter:(KalturaScheduleEventResourceFilter*)aFilter;
 - (KalturaScheduleEventResourceListResponse*)list;
+// Update an existing KalturaScheduleEventResource object
+- (KalturaScheduleEventResource*)updateWithScheduleEventId:(int)aScheduleEventId withScheduleResourceId:(int)aScheduleResourceId withScheduleEventResource:(KalturaScheduleEventResource*)aScheduleEventResource;
 @end
 
 @interface KalturaScheduleClientPlugin : KalturaClientPlugin

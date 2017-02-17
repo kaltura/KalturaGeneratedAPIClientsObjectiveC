@@ -960,23 +960,22 @@
     return [self.client queueObjectService:@"scheduledtask_scheduledtaskprofile" withAction:@"add" withExpectedType:@"KalturaScheduledTaskProfile"];
 }
 
+- (void)deleteWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client queueVoidService:@"scheduledtask_scheduledtaskprofile" withAction:@"delete"];
+}
+
 - (KalturaScheduledTaskProfile*)getWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     return [self.client queueObjectService:@"scheduledtask_scheduledtaskprofile" withAction:@"get" withExpectedType:@"KalturaScheduledTaskProfile"];
 }
 
-- (KalturaScheduledTaskProfile*)updateWithId:(int)aId withScheduledTaskProfile:(KalturaScheduledTaskProfile*)aScheduledTaskProfile
+- (KalturaObjectListResponse*)getDryRunResultsWithRequestId:(int)aRequestId
 {
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"scheduledTaskProfile" withObject:aScheduledTaskProfile];
-    return [self.client queueObjectService:@"scheduledtask_scheduledtaskprofile" withAction:@"update" withExpectedType:@"KalturaScheduledTaskProfile"];
-}
-
-- (void)deleteWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client queueVoidService:@"scheduledtask_scheduledtaskprofile" withAction:@"delete"];
+    [self.client.params addIfDefinedKey:@"requestId" withInt:aRequestId];
+    return [self.client queueObjectService:@"scheduledtask_scheduledtaskprofile" withAction:@"getDryRunResults" withExpectedType:@"KalturaObjectListResponse"];
 }
 
 - (KalturaScheduledTaskProfileListResponse*)listWithFilter:(KalturaScheduledTaskProfileFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -1008,10 +1007,11 @@
     return [self requestDryRunWithScheduledTaskProfileId:aScheduledTaskProfileId withMaxResults:KALTURA_UNDEF_INT];
 }
 
-- (KalturaObjectListResponse*)getDryRunResultsWithRequestId:(int)aRequestId
+- (KalturaScheduledTaskProfile*)updateWithId:(int)aId withScheduledTaskProfile:(KalturaScheduledTaskProfile*)aScheduledTaskProfile
 {
-    [self.client.params addIfDefinedKey:@"requestId" withInt:aRequestId];
-    return [self.client queueObjectService:@"scheduledtask_scheduledtaskprofile" withAction:@"getDryRunResults" withExpectedType:@"KalturaObjectListResponse"];
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"scheduledTaskProfile" withObject:aScheduledTaskProfile];
+    return [self.client queueObjectService:@"scheduledtask_scheduledtaskprofile" withAction:@"update" withExpectedType:@"KalturaScheduledTaskProfile"];
 }
 
 @end

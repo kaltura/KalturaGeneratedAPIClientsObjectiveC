@@ -304,19 +304,19 @@
 @interface KalturaScheduledTaskProfileService : KalturaServiceBase
 // Add a new scheduled task profile
 - (KalturaScheduledTaskProfile*)addWithScheduledTaskProfile:(KalturaScheduledTaskProfile*)aScheduledTaskProfile;
-// Retrieve a scheduled task profile by id
-- (KalturaScheduledTaskProfile*)getWithId:(int)aId;
-// Update an existing scheduled task profile
-- (KalturaScheduledTaskProfile*)updateWithId:(int)aId withScheduledTaskProfile:(KalturaScheduledTaskProfile*)aScheduledTaskProfile;
 // Delete a scheduled task profile
 - (void)deleteWithId:(int)aId;
+// Retrieve a scheduled task profile by id
+- (KalturaScheduledTaskProfile*)getWithId:(int)aId;
+- (KalturaObjectListResponse*)getDryRunResultsWithRequestId:(int)aRequestId;
 // List scheduled task profiles
 - (KalturaScheduledTaskProfileListResponse*)listWithFilter:(KalturaScheduledTaskProfileFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaScheduledTaskProfileListResponse*)listWithFilter:(KalturaScheduledTaskProfileFilter*)aFilter;
 - (KalturaScheduledTaskProfileListResponse*)list;
 - (int)requestDryRunWithScheduledTaskProfileId:(int)aScheduledTaskProfileId withMaxResults:(int)aMaxResults;
 - (int)requestDryRunWithScheduledTaskProfileId:(int)aScheduledTaskProfileId;
-- (KalturaObjectListResponse*)getDryRunResultsWithRequestId:(int)aRequestId;
+// Update an existing scheduled task profile
+- (KalturaScheduledTaskProfile*)updateWithId:(int)aId withScheduledTaskProfile:(KalturaScheduledTaskProfile*)aScheduledTaskProfile;
 @end
 
 @interface KalturaScheduledTaskClientPlugin : KalturaClientPlugin

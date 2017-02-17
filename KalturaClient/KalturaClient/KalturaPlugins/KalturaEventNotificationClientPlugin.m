@@ -980,30 +980,23 @@
     return [self cloneWithId:aId withEventNotificationTemplate:nil];
 }
 
-- (KalturaEventNotificationTemplate*)getWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"eventnotification_eventnotificationtemplate" withAction:@"get" withExpectedType:@"KalturaEventNotificationTemplate"];
-}
-
-- (KalturaEventNotificationTemplate*)updateWithId:(int)aId withEventNotificationTemplate:(KalturaEventNotificationTemplate*)aEventNotificationTemplate
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"eventNotificationTemplate" withObject:aEventNotificationTemplate];
-    return [self.client queueObjectService:@"eventnotification_eventnotificationtemplate" withAction:@"update" withExpectedType:@"KalturaEventNotificationTemplate"];
-}
-
-- (KalturaEventNotificationTemplate*)updateStatusWithId:(int)aId withStatus:(int)aStatus
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"status" withInt:aStatus];
-    return [self.client queueObjectService:@"eventnotification_eventnotificationtemplate" withAction:@"updateStatus" withExpectedType:@"KalturaEventNotificationTemplate"];
-}
-
 - (void)deleteWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     [self.client queueVoidService:@"eventnotification_eventnotificationtemplate" withAction:@"delete"];
+}
+
+- (int)dispatchWithId:(int)aId withScope:(KalturaEventNotificationScope*)aScope
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"scope" withObject:aScope];
+    return [self.client queueIntService:@"eventnotification_eventnotificationtemplate" withAction:@"dispatch"];
+}
+
+- (KalturaEventNotificationTemplate*)getWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    return [self.client queueObjectService:@"eventnotification_eventnotificationtemplate" withAction:@"get" withExpectedType:@"KalturaEventNotificationTemplate"];
 }
 
 - (KalturaEventNotificationTemplateListResponse*)listWithFilter:(KalturaEventNotificationTemplateFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -1040,13 +1033,6 @@
     return [self listByPartnerWithFilter:nil];
 }
 
-- (int)dispatchWithId:(int)aId withScope:(KalturaEventNotificationScope*)aScope
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"scope" withObject:aScope];
-    return [self.client queueIntService:@"eventnotification_eventnotificationtemplate" withAction:@"dispatch"];
-}
-
 - (KalturaEventNotificationTemplateListResponse*)listTemplatesWithFilter:(KalturaEventNotificationTemplateFilter*)aFilter withPager:(KalturaFilterPager*)aPager
 {
     [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
@@ -1062,6 +1048,20 @@
 - (KalturaEventNotificationTemplateListResponse*)listTemplates
 {
     return [self listTemplatesWithFilter:nil];
+}
+
+- (KalturaEventNotificationTemplate*)updateWithId:(int)aId withEventNotificationTemplate:(KalturaEventNotificationTemplate*)aEventNotificationTemplate
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"eventNotificationTemplate" withObject:aEventNotificationTemplate];
+    return [self.client queueObjectService:@"eventnotification_eventnotificationtemplate" withAction:@"update" withExpectedType:@"KalturaEventNotificationTemplate"];
+}
+
+- (KalturaEventNotificationTemplate*)updateStatusWithId:(int)aId withStatus:(int)aStatus
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"status" withInt:aStatus];
+    return [self.client queueObjectService:@"eventnotification_eventnotificationtemplate" withAction:@"updateStatus" withExpectedType:@"KalturaEventNotificationTemplate"];
 }
 
 @end

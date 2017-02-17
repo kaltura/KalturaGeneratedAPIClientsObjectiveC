@@ -44798,23 +44798,16 @@
     return [self.client queueObjectService:@"accesscontrolprofile" withAction:@"add" withExpectedType:@"KalturaAccessControlProfile"];
 }
 
-- (KalturaAccessControlProfile*)getWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"accesscontrolprofile" withAction:@"get" withExpectedType:@"KalturaAccessControlProfile"];
-}
-
-- (KalturaAccessControlProfile*)updateWithId:(int)aId withAccessControlProfile:(KalturaAccessControlProfile*)aAccessControlProfile
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"accessControlProfile" withObject:aAccessControlProfile];
-    return [self.client queueObjectService:@"accesscontrolprofile" withAction:@"update" withExpectedType:@"KalturaAccessControlProfile"];
-}
-
 - (void)deleteWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     [self.client queueVoidService:@"accesscontrolprofile" withAction:@"delete"];
+}
+
+- (KalturaAccessControlProfile*)getWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    return [self.client queueObjectService:@"accesscontrolprofile" withAction:@"get" withExpectedType:@"KalturaAccessControlProfile"];
 }
 
 - (KalturaAccessControlProfileListResponse*)listWithFilter:(KalturaAccessControlProfileFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -44834,6 +44827,13 @@
     return [self listWithFilter:nil];
 }
 
+- (KalturaAccessControlProfile*)updateWithId:(int)aId withAccessControlProfile:(KalturaAccessControlProfile*)aAccessControlProfile
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"accessControlProfile" withObject:aAccessControlProfile];
+    return [self.client queueObjectService:@"accesscontrolprofile" withAction:@"update" withExpectedType:@"KalturaAccessControlProfile"];
+}
+
 @end
 
 @implementation KalturaAccessControlService
@@ -44843,23 +44843,16 @@
     return [self.client queueObjectService:@"accesscontrol" withAction:@"add" withExpectedType:@"KalturaAccessControl"];
 }
 
-- (KalturaAccessControl*)getWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"accesscontrol" withAction:@"get" withExpectedType:@"KalturaAccessControl"];
-}
-
-- (KalturaAccessControl*)updateWithId:(int)aId withAccessControl:(KalturaAccessControl*)aAccessControl
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"accessControl" withObject:aAccessControl];
-    return [self.client queueObjectService:@"accesscontrol" withAction:@"update" withExpectedType:@"KalturaAccessControl"];
-}
-
 - (void)deleteWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     [self.client queueVoidService:@"accesscontrol" withAction:@"delete"];
+}
+
+- (KalturaAccessControl*)getWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    return [self.client queueObjectService:@"accesscontrol" withAction:@"get" withExpectedType:@"KalturaAccessControl"];
 }
 
 - (KalturaAccessControlListResponse*)listWithFilter:(KalturaAccessControlFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -44879,9 +44872,42 @@
     return [self listWithFilter:nil];
 }
 
+- (KalturaAccessControl*)updateWithId:(int)aId withAccessControl:(KalturaAccessControl*)aAccessControl
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"accessControl" withObject:aAccessControl];
+    return [self.client queueObjectService:@"accesscontrol" withAction:@"update" withExpectedType:@"KalturaAccessControl"];
+}
+
 @end
 
 @implementation KalturaAdminUserService
+- (NSString*)loginWithEmail:(NSString*)aEmail withPassword:(NSString*)aPassword withPartnerId:(int)aPartnerId
+{
+    [self.client.params addIfDefinedKey:@"email" withString:aEmail];
+    [self.client.params addIfDefinedKey:@"password" withString:aPassword];
+    [self.client.params addIfDefinedKey:@"partnerId" withInt:aPartnerId];
+    return [self.client queueStringService:@"adminuser" withAction:@"login"];
+}
+
+- (NSString*)loginWithEmail:(NSString*)aEmail withPassword:(NSString*)aPassword
+{
+    return [self loginWithEmail:aEmail withPassword:aPassword withPartnerId:KALTURA_UNDEF_INT];
+}
+
+- (void)resetPasswordWithEmail:(NSString*)aEmail
+{
+    [self.client.params addIfDefinedKey:@"email" withString:aEmail];
+    [self.client queueVoidService:@"adminuser" withAction:@"resetPassword"];
+}
+
+- (void)setInitialPasswordWithHashKey:(NSString*)aHashKey withNewPassword:(NSString*)aNewPassword
+{
+    [self.client.params addIfDefinedKey:@"hashKey" withString:aHashKey];
+    [self.client.params addIfDefinedKey:@"newPassword" withString:aNewPassword];
+    [self.client queueVoidService:@"adminuser" withAction:@"setInitialPassword"];
+}
+
 - (KalturaAdminUser*)updatePasswordWithEmail:(NSString*)aEmail withPassword:(NSString*)aPassword withNewEmail:(NSString*)aNewEmail withNewPassword:(NSString*)aNewPassword
 {
     [self.client.params addIfDefinedKey:@"email" withString:aEmail];
@@ -44899,32 +44925,6 @@
 - (KalturaAdminUser*)updatePasswordWithEmail:(NSString*)aEmail withPassword:(NSString*)aPassword
 {
     return [self updatePasswordWithEmail:aEmail withPassword:aPassword withNewEmail:nil];
-}
-
-- (void)resetPasswordWithEmail:(NSString*)aEmail
-{
-    [self.client.params addIfDefinedKey:@"email" withString:aEmail];
-    [self.client queueVoidService:@"adminuser" withAction:@"resetPassword"];
-}
-
-- (NSString*)loginWithEmail:(NSString*)aEmail withPassword:(NSString*)aPassword withPartnerId:(int)aPartnerId
-{
-    [self.client.params addIfDefinedKey:@"email" withString:aEmail];
-    [self.client.params addIfDefinedKey:@"password" withString:aPassword];
-    [self.client.params addIfDefinedKey:@"partnerId" withInt:aPartnerId];
-    return [self.client queueStringService:@"adminuser" withAction:@"login"];
-}
-
-- (NSString*)loginWithEmail:(NSString*)aEmail withPassword:(NSString*)aPassword
-{
-    return [self loginWithEmail:aEmail withPassword:aPassword withPartnerId:KALTURA_UNDEF_INT];
-}
-
-- (void)setInitialPasswordWithHashKey:(NSString*)aHashKey withNewPassword:(NSString*)aNewPassword
-{
-    [self.client.params addIfDefinedKey:@"hashKey" withString:aHashKey];
-    [self.client.params addIfDefinedKey:@"newPassword" withString:aNewPassword];
-    [self.client queueVoidService:@"adminuser" withAction:@"setInitialPassword"];
 }
 
 @end
@@ -44951,23 +44951,16 @@
     return [self.client queueObjectService:@"apptoken" withAction:@"add" withExpectedType:@"KalturaAppToken"];
 }
 
-- (KalturaAppToken*)getWithId:(NSString*)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    return [self.client queueObjectService:@"apptoken" withAction:@"get" withExpectedType:@"KalturaAppToken"];
-}
-
-- (KalturaAppToken*)updateWithId:(NSString*)aId withAppToken:(KalturaAppToken*)aAppToken
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"appToken" withObject:aAppToken];
-    return [self.client queueObjectService:@"apptoken" withAction:@"update" withExpectedType:@"KalturaAppToken"];
-}
-
 - (void)deleteWithId:(NSString*)aId
 {
     [self.client.params addIfDefinedKey:@"id" withString:aId];
     [self.client queueVoidService:@"apptoken" withAction:@"delete"];
+}
+
+- (KalturaAppToken*)getWithId:(NSString*)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    return [self.client queueObjectService:@"apptoken" withAction:@"get" withExpectedType:@"KalturaAppToken"];
 }
 
 - (KalturaAppTokenListResponse*)listWithFilter:(KalturaAppTokenFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -45012,6 +45005,13 @@
     return [self startSessionWithId:aId withTokenHash:aTokenHash withUserId:nil];
 }
 
+- (KalturaAppToken*)updateWithId:(NSString*)aId withAppToken:(KalturaAppToken*)aAppToken
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"appToken" withObject:aAppToken];
+    return [self.client queueObjectService:@"apptoken" withAction:@"update" withExpectedType:@"KalturaAppToken"];
+}
+
 @end
 
 @implementation KalturaBaseEntryService
@@ -45047,6 +45047,61 @@
     return [self addFromUploadedFileWithEntry:aEntry withUploadTokenId:aUploadTokenId withType:nil];
 }
 
+- (void)anonymousRankWithEntryId:(NSString*)aEntryId withRank:(int)aRank
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"rank" withInt:aRank];
+    [self.client queueVoidService:@"baseentry" withAction:@"anonymousRank"];
+}
+
+- (void)approveWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client queueVoidService:@"baseentry" withAction:@"approve"];
+}
+
+- (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId withCloneOptions:(NSArray*)aCloneOptions
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"cloneOptions" withArray:aCloneOptions];
+    return [self.client queueObjectService:@"baseentry" withAction:@"clone" withExpectedType:@"KalturaBaseEntry"];
+}
+
+- (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId
+{
+    return [self cloneWithEntryId:aEntryId withCloneOptions:nil];
+}
+
+- (int)countWithFilter:(KalturaBaseEntryFilter*)aFilter
+{
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    return [self.client queueIntService:@"baseentry" withAction:@"count"];
+}
+
+- (int)count
+{
+    return [self countWithFilter:nil];
+}
+
+- (void)deleteWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client queueVoidService:@"baseentry" withAction:@"delete"];
+}
+
+- (KalturaBaseEntry*)exportWithEntryId:(NSString*)aEntryId withStorageProfileId:(int)aStorageProfileId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"storageProfileId" withInt:aStorageProfileId];
+    return [self.client queueObjectService:@"baseentry" withAction:@"export" withExpectedType:@"KalturaBaseEntry"];
+}
+
+- (void)flagWithModerationFlag:(KalturaModerationFlag*)aModerationFlag
+{
+    [self.client.params addIfDefinedKey:@"moderationFlag" withObject:aModerationFlag];
+    [self.client queueVoidService:@"baseentry" withAction:@"flag"];
+}
+
 - (KalturaBaseEntry*)getWithEntryId:(NSString*)aEntryId withVersion:(int)aVersion
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
@@ -45059,48 +45114,42 @@
     return [self getWithEntryId:aEntryId withVersion:KALTURA_UNDEF_INT];
 }
 
-- (KalturaRemotePathListResponse*)getRemotePathsWithEntryId:(NSString*)aEntryId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    return [self.client queueObjectService:@"baseentry" withAction:@"getRemotePaths" withExpectedType:@"KalturaRemotePathListResponse"];
-}
-
-- (KalturaBaseEntry*)updateWithEntryId:(NSString*)aEntryId withBaseEntry:(KalturaBaseEntry*)aBaseEntry
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"baseEntry" withObject:aBaseEntry];
-    return [self.client queueObjectService:@"baseentry" withAction:@"update" withExpectedType:@"KalturaBaseEntry"];
-}
-
-- (KalturaBaseEntry*)updateContentWithEntryId:(NSString*)aEntryId withResource:(KalturaResource*)aResource withConversionProfileId:(int)aConversionProfileId withAdvancedOptions:(KalturaEntryReplacementOptions*)aAdvancedOptions
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"resource" withObject:aResource];
-    [self.client.params addIfDefinedKey:@"conversionProfileId" withInt:aConversionProfileId];
-    [self.client.params addIfDefinedKey:@"advancedOptions" withObject:aAdvancedOptions];
-    return [self.client queueObjectService:@"baseentry" withAction:@"updateContent" withExpectedType:@"KalturaBaseEntry"];
-}
-
-- (KalturaBaseEntry*)updateContentWithEntryId:(NSString*)aEntryId withResource:(KalturaResource*)aResource withConversionProfileId:(int)aConversionProfileId
-{
-    return [self updateContentWithEntryId:aEntryId withResource:aResource withConversionProfileId:aConversionProfileId withAdvancedOptions:nil];
-}
-
-- (KalturaBaseEntry*)updateContentWithEntryId:(NSString*)aEntryId withResource:(KalturaResource*)aResource
-{
-    return [self updateContentWithEntryId:aEntryId withResource:aResource withConversionProfileId:KALTURA_UNDEF_INT];
-}
-
 - (NSMutableArray*)getByIdsWithEntryIds:(NSString*)aEntryIds
 {
     [self.client.params addIfDefinedKey:@"entryIds" withString:aEntryIds];
     return [self.client queueArrayService:@"baseentry" withAction:@"getByIds" withExpectedType:@"KalturaBaseEntry"];
 }
 
-- (void)deleteWithEntryId:(NSString*)aEntryId
+- (KalturaEntryContextDataResult*)getContextDataWithEntryId:(NSString*)aEntryId withContextDataParams:(KalturaEntryContextDataParams*)aContextDataParams
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client queueVoidService:@"baseentry" withAction:@"delete"];
+    [self.client.params addIfDefinedKey:@"contextDataParams" withObject:aContextDataParams];
+    return [self.client queueObjectService:@"baseentry" withAction:@"getContextData" withExpectedType:@"KalturaEntryContextDataResult"];
+}
+
+- (KalturaPlaybackContext*)getPlaybackContextWithEntryId:(NSString*)aEntryId withContextDataParams:(KalturaPlaybackContextOptions*)aContextDataParams
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"contextDataParams" withObject:aContextDataParams];
+    return [self.client queueObjectService:@"baseentry" withAction:@"getPlaybackContext" withExpectedType:@"KalturaPlaybackContext"];
+}
+
+- (KalturaRemotePathListResponse*)getRemotePathsWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    return [self.client queueObjectService:@"baseentry" withAction:@"getRemotePaths" withExpectedType:@"KalturaRemotePathListResponse"];
+}
+
+- (int)indexWithId:(NSString*)aId withShouldUpdate:(KALTURA_BOOL)aShouldUpdate
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"shouldUpdate" withBool:aShouldUpdate];
+    return [self.client queueIntService:@"baseentry" withAction:@"index"];
+}
+
+- (int)indexWithId:(NSString*)aId
+{
+    return [self indexWithId:aId withShouldUpdate:KALTURA_UNDEF_BOOL];
 }
 
 - (KalturaBaseEntryListResponse*)listWithFilter:(KalturaBaseEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -45132,63 +45181,6 @@
     return [self listByReferenceIdWithRefId:aRefId withPager:nil];
 }
 
-- (int)countWithFilter:(KalturaBaseEntryFilter*)aFilter
-{
-    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
-    return [self.client queueIntService:@"baseentry" withAction:@"count"];
-}
-
-- (int)count
-{
-    return [self countWithFilter:nil];
-}
-
-- (NSString*)uploadWithFileData:(NSString*)aFileData
-{
-    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
-    return [self.client queueStringService:@"baseentry" withAction:@"upload"];
-}
-
-- (KalturaBaseEntry*)updateThumbnailJpegWithEntryId:(NSString*)aEntryId withFileData:(NSString*)aFileData
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
-    return [self.client queueObjectService:@"baseentry" withAction:@"updateThumbnailJpeg" withExpectedType:@"KalturaBaseEntry"];
-}
-
-- (KalturaBaseEntry*)updateThumbnailFromUrlWithEntryId:(NSString*)aEntryId withUrl:(NSString*)aUrl
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"url" withString:aUrl];
-    return [self.client queueObjectService:@"baseentry" withAction:@"updateThumbnailFromUrl" withExpectedType:@"KalturaBaseEntry"];
-}
-
-- (KalturaBaseEntry*)updateThumbnailFromSourceEntryWithEntryId:(NSString*)aEntryId withSourceEntryId:(NSString*)aSourceEntryId withTimeOffset:(int)aTimeOffset
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"sourceEntryId" withString:aSourceEntryId];
-    [self.client.params addIfDefinedKey:@"timeOffset" withInt:aTimeOffset];
-    return [self.client queueObjectService:@"baseentry" withAction:@"updateThumbnailFromSourceEntry" withExpectedType:@"KalturaBaseEntry"];
-}
-
-- (void)flagWithModerationFlag:(KalturaModerationFlag*)aModerationFlag
-{
-    [self.client.params addIfDefinedKey:@"moderationFlag" withObject:aModerationFlag];
-    [self.client queueVoidService:@"baseentry" withAction:@"flag"];
-}
-
-- (void)rejectWithEntryId:(NSString*)aEntryId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client queueVoidService:@"baseentry" withAction:@"reject"];
-}
-
-- (void)approveWithEntryId:(NSString*)aEntryId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client queueVoidService:@"baseentry" withAction:@"approve"];
-}
-
 - (KalturaModerationFlagListResponse*)listFlagsWithEntryId:(NSString*)aEntryId withPager:(KalturaFilterPager*)aPager
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
@@ -45201,61 +45193,75 @@
     return [self listFlagsWithEntryId:aEntryId withPager:nil];
 }
 
-- (void)anonymousRankWithEntryId:(NSString*)aEntryId withRank:(int)aRank
+- (void)rejectWithEntryId:(NSString*)aEntryId
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"rank" withInt:aRank];
-    [self.client queueVoidService:@"baseentry" withAction:@"anonymousRank"];
+    [self.client queueVoidService:@"baseentry" withAction:@"reject"];
 }
 
-- (KalturaEntryContextDataResult*)getContextDataWithEntryId:(NSString*)aEntryId withContextDataParams:(KalturaEntryContextDataParams*)aContextDataParams
+- (KalturaBaseEntry*)updateWithEntryId:(NSString*)aEntryId withBaseEntry:(KalturaBaseEntry*)aBaseEntry
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"contextDataParams" withObject:aContextDataParams];
-    return [self.client queueObjectService:@"baseentry" withAction:@"getContextData" withExpectedType:@"KalturaEntryContextDataResult"];
+    [self.client.params addIfDefinedKey:@"baseEntry" withObject:aBaseEntry];
+    return [self.client queueObjectService:@"baseentry" withAction:@"update" withExpectedType:@"KalturaBaseEntry"];
 }
 
-- (KalturaBaseEntry*)exportWithEntryId:(NSString*)aEntryId withStorageProfileId:(int)aStorageProfileId
+- (KalturaBaseEntry*)updateContentWithEntryId:(NSString*)aEntryId withResource:(KalturaResource*)aResource withConversionProfileId:(int)aConversionProfileId withAdvancedOptions:(KalturaEntryReplacementOptions*)aAdvancedOptions
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"storageProfileId" withInt:aStorageProfileId];
-    return [self.client queueObjectService:@"baseentry" withAction:@"export" withExpectedType:@"KalturaBaseEntry"];
+    [self.client.params addIfDefinedKey:@"resource" withObject:aResource];
+    [self.client.params addIfDefinedKey:@"conversionProfileId" withInt:aConversionProfileId];
+    [self.client.params addIfDefinedKey:@"advancedOptions" withObject:aAdvancedOptions];
+    return [self.client queueObjectService:@"baseentry" withAction:@"updateContent" withExpectedType:@"KalturaBaseEntry"];
 }
 
-- (int)indexWithId:(NSString*)aId withShouldUpdate:(KALTURA_BOOL)aShouldUpdate
+- (KalturaBaseEntry*)updateContentWithEntryId:(NSString*)aEntryId withResource:(KalturaResource*)aResource withConversionProfileId:(int)aConversionProfileId
 {
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"shouldUpdate" withBool:aShouldUpdate];
-    return [self.client queueIntService:@"baseentry" withAction:@"index"];
+    return [self updateContentWithEntryId:aEntryId withResource:aResource withConversionProfileId:aConversionProfileId withAdvancedOptions:nil];
 }
 
-- (int)indexWithId:(NSString*)aId
+- (KalturaBaseEntry*)updateContentWithEntryId:(NSString*)aEntryId withResource:(KalturaResource*)aResource
 {
-    return [self indexWithId:aId withShouldUpdate:KALTURA_UNDEF_BOOL];
+    return [self updateContentWithEntryId:aEntryId withResource:aResource withConversionProfileId:KALTURA_UNDEF_INT];
 }
 
-- (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId withCloneOptions:(NSArray*)aCloneOptions
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"cloneOptions" withArray:aCloneOptions];
-    return [self.client queueObjectService:@"baseentry" withAction:@"clone" withExpectedType:@"KalturaBaseEntry"];
-}
-
-- (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId
-{
-    return [self cloneWithEntryId:aEntryId withCloneOptions:nil];
-}
-
-- (KalturaPlaybackContext*)getPlaybackContextWithEntryId:(NSString*)aEntryId withContextDataParams:(KalturaPlaybackContextOptions*)aContextDataParams
+- (KalturaBaseEntry*)updateThumbnailFromSourceEntryWithEntryId:(NSString*)aEntryId withSourceEntryId:(NSString*)aSourceEntryId withTimeOffset:(int)aTimeOffset
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"contextDataParams" withObject:aContextDataParams];
-    return [self.client queueObjectService:@"baseentry" withAction:@"getPlaybackContext" withExpectedType:@"KalturaPlaybackContext"];
+    [self.client.params addIfDefinedKey:@"sourceEntryId" withString:aSourceEntryId];
+    [self.client.params addIfDefinedKey:@"timeOffset" withInt:aTimeOffset];
+    return [self.client queueObjectService:@"baseentry" withAction:@"updateThumbnailFromSourceEntry" withExpectedType:@"KalturaBaseEntry"];
+}
+
+- (KalturaBaseEntry*)updateThumbnailFromUrlWithEntryId:(NSString*)aEntryId withUrl:(NSString*)aUrl
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"url" withString:aUrl];
+    return [self.client queueObjectService:@"baseentry" withAction:@"updateThumbnailFromUrl" withExpectedType:@"KalturaBaseEntry"];
+}
+
+- (KalturaBaseEntry*)updateThumbnailJpegWithEntryId:(NSString*)aEntryId withFileData:(NSString*)aFileData
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
+    return [self.client queueObjectService:@"baseentry" withAction:@"updateThumbnailJpeg" withExpectedType:@"KalturaBaseEntry"];
+}
+
+- (NSString*)uploadWithFileData:(NSString*)aFileData
+{
+    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
+    return [self.client queueStringService:@"baseentry" withAction:@"upload"];
 }
 
 @end
 
 @implementation KalturaBulkUploadService
+- (KalturaBulkUpload*)abortWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    return [self.client queueObjectService:@"bulkupload" withAction:@"abort" withExpectedType:@"KalturaBulkUpload"];
+}
+
 - (KalturaBulkUpload*)addWithConversionProfileId:(int)aConversionProfileId withCsvFileData:(NSString*)aCsvFileData withBulkUploadType:(NSString*)aBulkUploadType withUploadedBy:(NSString*)aUploadedBy withFileName:(NSString*)aFileName
 {
     [self.client.params addIfDefinedKey:@"conversionProfileId" withInt:aConversionProfileId];
@@ -45310,19 +45316,32 @@
     return [self.client queueServeService:@"bulkupload" withAction:@"serveLog"];
 }
 
-- (KalturaBulkUpload*)abortWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"bulkupload" withAction:@"abort" withExpectedType:@"KalturaBulkUpload"];
-}
-
 @end
 
 @implementation KalturaCategoryEntryService
+- (void)activateWithEntryId:(NSString*)aEntryId withCategoryId:(int)aCategoryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"categoryId" withInt:aCategoryId];
+    [self.client queueVoidService:@"categoryentry" withAction:@"activate"];
+}
+
 - (KalturaCategoryEntry*)addWithCategoryEntry:(KalturaCategoryEntry*)aCategoryEntry
 {
     [self.client.params addIfDefinedKey:@"categoryEntry" withObject:aCategoryEntry];
     return [self.client queueObjectService:@"categoryentry" withAction:@"add" withExpectedType:@"KalturaCategoryEntry"];
+}
+
+- (KalturaBulkUpload*)addFromBulkUploadWithBulkUploadData:(KalturaBulkServiceData*)aBulkUploadData withBulkUploadCategoryEntryData:(KalturaBulkUploadCategoryEntryData*)aBulkUploadCategoryEntryData
+{
+    [self.client.params addIfDefinedKey:@"bulkUploadData" withObject:aBulkUploadData];
+    [self.client.params addIfDefinedKey:@"bulkUploadCategoryEntryData" withObject:aBulkUploadCategoryEntryData];
+    return [self.client queueObjectService:@"categoryentry" withAction:@"addFromBulkUpload" withExpectedType:@"KalturaBulkUpload"];
+}
+
+- (KalturaBulkUpload*)addFromBulkUploadWithBulkUploadData:(KalturaBulkServiceData*)aBulkUploadData
+{
+    return [self addFromBulkUploadWithBulkUploadData:aBulkUploadData withBulkUploadCategoryEntryData:nil];
 }
 
 - (void)deleteWithEntryId:(NSString*)aEntryId withCategoryId:(int)aCategoryId
@@ -45330,6 +45349,19 @@
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
     [self.client.params addIfDefinedKey:@"categoryId" withInt:aCategoryId];
     [self.client queueVoidService:@"categoryentry" withAction:@"delete"];
+}
+
+- (int)indexWithEntryId:(NSString*)aEntryId withCategoryId:(int)aCategoryId withShouldUpdate:(KALTURA_BOOL)aShouldUpdate
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"categoryId" withInt:aCategoryId];
+    [self.client.params addIfDefinedKey:@"shouldUpdate" withBool:aShouldUpdate];
+    return [self.client queueIntService:@"categoryentry" withAction:@"index"];
+}
+
+- (int)indexWithEntryId:(NSString*)aEntryId withCategoryId:(int)aCategoryId
+{
+    return [self indexWithEntryId:aEntryId withCategoryId:aCategoryId withShouldUpdate:KALTURA_UNDEF_BOOL];
 }
 
 - (KalturaCategoryEntryListResponse*)listWithFilter:(KalturaCategoryEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -45349,26 +45381,6 @@
     return [self listWithFilter:nil];
 }
 
-- (int)indexWithEntryId:(NSString*)aEntryId withCategoryId:(int)aCategoryId withShouldUpdate:(KALTURA_BOOL)aShouldUpdate
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"categoryId" withInt:aCategoryId];
-    [self.client.params addIfDefinedKey:@"shouldUpdate" withBool:aShouldUpdate];
-    return [self.client queueIntService:@"categoryentry" withAction:@"index"];
-}
-
-- (int)indexWithEntryId:(NSString*)aEntryId withCategoryId:(int)aCategoryId
-{
-    return [self indexWithEntryId:aEntryId withCategoryId:aCategoryId withShouldUpdate:KALTURA_UNDEF_BOOL];
-}
-
-- (void)activateWithEntryId:(NSString*)aEntryId withCategoryId:(int)aCategoryId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"categoryId" withInt:aCategoryId];
-    [self.client queueVoidService:@"categoryentry" withAction:@"activate"];
-}
-
 - (void)rejectWithEntryId:(NSString*)aEntryId withCategoryId:(int)aCategoryId
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
@@ -45383,18 +45395,6 @@
     [self.client queueVoidService:@"categoryentry" withAction:@"syncPrivacyContext"];
 }
 
-- (KalturaBulkUpload*)addFromBulkUploadWithBulkUploadData:(KalturaBulkServiceData*)aBulkUploadData withBulkUploadCategoryEntryData:(KalturaBulkUploadCategoryEntryData*)aBulkUploadCategoryEntryData
-{
-    [self.client.params addIfDefinedKey:@"bulkUploadData" withObject:aBulkUploadData];
-    [self.client.params addIfDefinedKey:@"bulkUploadCategoryEntryData" withObject:aBulkUploadCategoryEntryData];
-    return [self.client queueObjectService:@"categoryentry" withAction:@"addFromBulkUpload" withExpectedType:@"KalturaBulkUpload"];
-}
-
-- (KalturaBulkUpload*)addFromBulkUploadWithBulkUploadData:(KalturaBulkServiceData*)aBulkUploadData
-{
-    return [self addFromBulkUploadWithBulkUploadData:aBulkUploadData withBulkUploadCategoryEntryData:nil];
-}
-
 @end
 
 @implementation KalturaCategoryService
@@ -45402,72 +45402,6 @@
 {
     [self.client.params addIfDefinedKey:@"category" withObject:aCategory];
     return [self.client queueObjectService:@"category" withAction:@"add" withExpectedType:@"KalturaCategory"];
-}
-
-- (KalturaCategory*)getWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"category" withAction:@"get" withExpectedType:@"KalturaCategory"];
-}
-
-- (KalturaCategory*)updateWithId:(int)aId withCategory:(KalturaCategory*)aCategory
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"category" withObject:aCategory];
-    return [self.client queueObjectService:@"category" withAction:@"update" withExpectedType:@"KalturaCategory"];
-}
-
-- (void)deleteWithId:(int)aId withMoveEntriesToParentCategory:(int)aMoveEntriesToParentCategory
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"moveEntriesToParentCategory" withInt:aMoveEntriesToParentCategory];
-    [self.client queueVoidService:@"category" withAction:@"delete"];
-}
-
-- (void)deleteWithId:(int)aId
-{
-    [self deleteWithId:aId withMoveEntriesToParentCategory:KALTURA_UNDEF_INT];
-}
-
-- (KalturaCategoryListResponse*)listWithFilter:(KalturaCategoryFilter*)aFilter withPager:(KalturaFilterPager*)aPager
-{
-    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
-    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
-    return [self.client queueObjectService:@"category" withAction:@"list" withExpectedType:@"KalturaCategoryListResponse"];
-}
-
-- (KalturaCategoryListResponse*)listWithFilter:(KalturaCategoryFilter*)aFilter
-{
-    return [self listWithFilter:aFilter withPager:nil];
-}
-
-- (KalturaCategoryListResponse*)list
-{
-    return [self listWithFilter:nil];
-}
-
-- (int)indexWithId:(int)aId withShouldUpdate:(KALTURA_BOOL)aShouldUpdate
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"shouldUpdate" withBool:aShouldUpdate];
-    return [self.client queueIntService:@"category" withAction:@"index"];
-}
-
-- (int)indexWithId:(int)aId
-{
-    return [self indexWithId:aId withShouldUpdate:KALTURA_UNDEF_BOOL];
-}
-
-- (KalturaCategoryListResponse*)moveWithCategoryIds:(NSString*)aCategoryIds withTargetCategoryParentId:(int)aTargetCategoryParentId
-{
-    [self.client.params addIfDefinedKey:@"categoryIds" withString:aCategoryIds];
-    [self.client.params addIfDefinedKey:@"targetCategoryParentId" withInt:aTargetCategoryParentId];
-    return [self.client queueObjectService:@"category" withAction:@"move" withExpectedType:@"KalturaCategoryListResponse"];
-}
-
-- (void)unlockCategories
-{
-    [self.client queueVoidService:@"category" withAction:@"unlockCategories"];
 }
 
 - (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData withBulkUploadCategoryData:(KalturaBulkUploadCategoryData*)aBulkUploadCategoryData
@@ -45488,34 +45422,117 @@
     return [self addFromBulkUploadWithFileData:aFileData withBulkUploadData:nil];
 }
 
+- (void)deleteWithId:(int)aId withMoveEntriesToParentCategory:(int)aMoveEntriesToParentCategory
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"moveEntriesToParentCategory" withInt:aMoveEntriesToParentCategory];
+    [self.client queueVoidService:@"category" withAction:@"delete"];
+}
+
+- (void)deleteWithId:(int)aId
+{
+    [self deleteWithId:aId withMoveEntriesToParentCategory:KALTURA_UNDEF_INT];
+}
+
+- (KalturaCategory*)getWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    return [self.client queueObjectService:@"category" withAction:@"get" withExpectedType:@"KalturaCategory"];
+}
+
+- (int)indexWithId:(int)aId withShouldUpdate:(KALTURA_BOOL)aShouldUpdate
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"shouldUpdate" withBool:aShouldUpdate];
+    return [self.client queueIntService:@"category" withAction:@"index"];
+}
+
+- (int)indexWithId:(int)aId
+{
+    return [self indexWithId:aId withShouldUpdate:KALTURA_UNDEF_BOOL];
+}
+
+- (KalturaCategoryListResponse*)listWithFilter:(KalturaCategoryFilter*)aFilter withPager:(KalturaFilterPager*)aPager
+{
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    return [self.client queueObjectService:@"category" withAction:@"list" withExpectedType:@"KalturaCategoryListResponse"];
+}
+
+- (KalturaCategoryListResponse*)listWithFilter:(KalturaCategoryFilter*)aFilter
+{
+    return [self listWithFilter:aFilter withPager:nil];
+}
+
+- (KalturaCategoryListResponse*)list
+{
+    return [self listWithFilter:nil];
+}
+
+- (KalturaCategoryListResponse*)moveWithCategoryIds:(NSString*)aCategoryIds withTargetCategoryParentId:(int)aTargetCategoryParentId
+{
+    [self.client.params addIfDefinedKey:@"categoryIds" withString:aCategoryIds];
+    [self.client.params addIfDefinedKey:@"targetCategoryParentId" withInt:aTargetCategoryParentId];
+    return [self.client queueObjectService:@"category" withAction:@"move" withExpectedType:@"KalturaCategoryListResponse"];
+}
+
+- (void)unlockCategories
+{
+    [self.client queueVoidService:@"category" withAction:@"unlockCategories"];
+}
+
+- (KalturaCategory*)updateWithId:(int)aId withCategory:(KalturaCategory*)aCategory
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"category" withObject:aCategory];
+    return [self.client queueObjectService:@"category" withAction:@"update" withExpectedType:@"KalturaCategory"];
+}
+
 @end
 
 @implementation KalturaCategoryUserService
+- (KalturaCategoryUser*)activateWithCategoryId:(int)aCategoryId withUserId:(NSString*)aUserId
+{
+    [self.client.params addIfDefinedKey:@"categoryId" withInt:aCategoryId];
+    [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
+    return [self.client queueObjectService:@"categoryuser" withAction:@"activate" withExpectedType:@"KalturaCategoryUser"];
+}
+
 - (KalturaCategoryUser*)addWithCategoryUser:(KalturaCategoryUser*)aCategoryUser
 {
     [self.client.params addIfDefinedKey:@"categoryUser" withObject:aCategoryUser];
     return [self.client queueObjectService:@"categoryuser" withAction:@"add" withExpectedType:@"KalturaCategoryUser"];
 }
 
-- (KalturaCategoryUser*)getWithCategoryId:(int)aCategoryId withUserId:(NSString*)aUserId
+- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData withBulkUploadCategoryUserData:(KalturaBulkUploadCategoryUserData*)aBulkUploadCategoryUserData
+{
+    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
+    [self.client.params addIfDefinedKey:@"bulkUploadData" withObject:aBulkUploadData];
+    [self.client.params addIfDefinedKey:@"bulkUploadCategoryUserData" withObject:aBulkUploadCategoryUserData];
+    return [self.client queueObjectService:@"categoryuser" withAction:@"addFromBulkUpload" withExpectedType:@"KalturaBulkUpload"];
+}
+
+- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData
+{
+    return [self addFromBulkUploadWithFileData:aFileData withBulkUploadData:aBulkUploadData withBulkUploadCategoryUserData:nil];
+}
+
+- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData
+{
+    return [self addFromBulkUploadWithFileData:aFileData withBulkUploadData:nil];
+}
+
+- (void)copyFromCategoryWithCategoryId:(int)aCategoryId
+{
+    [self.client.params addIfDefinedKey:@"categoryId" withInt:aCategoryId];
+    [self.client queueVoidService:@"categoryuser" withAction:@"copyFromCategory"];
+}
+
+- (KalturaCategoryUser*)deactivateWithCategoryId:(int)aCategoryId withUserId:(NSString*)aUserId
 {
     [self.client.params addIfDefinedKey:@"categoryId" withInt:aCategoryId];
     [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
-    return [self.client queueObjectService:@"categoryuser" withAction:@"get" withExpectedType:@"KalturaCategoryUser"];
-}
-
-- (KalturaCategoryUser*)updateWithCategoryId:(int)aCategoryId withUserId:(NSString*)aUserId withCategoryUser:(KalturaCategoryUser*)aCategoryUser withOverride:(KALTURA_BOOL)aOverride
-{
-    [self.client.params addIfDefinedKey:@"categoryId" withInt:aCategoryId];
-    [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
-    [self.client.params addIfDefinedKey:@"categoryUser" withObject:aCategoryUser];
-    [self.client.params addIfDefinedKey:@"override" withBool:aOverride];
-    return [self.client queueObjectService:@"categoryuser" withAction:@"update" withExpectedType:@"KalturaCategoryUser"];
-}
-
-- (KalturaCategoryUser*)updateWithCategoryId:(int)aCategoryId withUserId:(NSString*)aUserId withCategoryUser:(KalturaCategoryUser*)aCategoryUser
-{
-    return [self updateWithCategoryId:aCategoryId withUserId:aUserId withCategoryUser:aCategoryUser withOverride:KALTURA_UNDEF_BOOL];
+    return [self.client queueObjectService:@"categoryuser" withAction:@"deactivate" withExpectedType:@"KalturaCategoryUser"];
 }
 
 - (void)deleteWithCategoryId:(int)aCategoryId withUserId:(NSString*)aUserId
@@ -45525,18 +45542,24 @@
     [self.client queueVoidService:@"categoryuser" withAction:@"delete"];
 }
 
-- (KalturaCategoryUser*)activateWithCategoryId:(int)aCategoryId withUserId:(NSString*)aUserId
+- (KalturaCategoryUser*)getWithCategoryId:(int)aCategoryId withUserId:(NSString*)aUserId
 {
     [self.client.params addIfDefinedKey:@"categoryId" withInt:aCategoryId];
     [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
-    return [self.client queueObjectService:@"categoryuser" withAction:@"activate" withExpectedType:@"KalturaCategoryUser"];
+    return [self.client queueObjectService:@"categoryuser" withAction:@"get" withExpectedType:@"KalturaCategoryUser"];
 }
 
-- (KalturaCategoryUser*)deactivateWithCategoryId:(int)aCategoryId withUserId:(NSString*)aUserId
+- (int)indexWithUserId:(NSString*)aUserId withCategoryId:(int)aCategoryId withShouldUpdate:(KALTURA_BOOL)aShouldUpdate
 {
-    [self.client.params addIfDefinedKey:@"categoryId" withInt:aCategoryId];
     [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
-    return [self.client queueObjectService:@"categoryuser" withAction:@"deactivate" withExpectedType:@"KalturaCategoryUser"];
+    [self.client.params addIfDefinedKey:@"categoryId" withInt:aCategoryId];
+    [self.client.params addIfDefinedKey:@"shouldUpdate" withBool:aShouldUpdate];
+    return [self.client queueIntService:@"categoryuser" withAction:@"index"];
+}
+
+- (int)indexWithUserId:(NSString*)aUserId withCategoryId:(int)aCategoryId
+{
+    return [self indexWithUserId:aUserId withCategoryId:aCategoryId withShouldUpdate:KALTURA_UNDEF_BOOL];
 }
 
 - (KalturaCategoryUserListResponse*)listWithFilter:(KalturaCategoryUserFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -45556,41 +45579,18 @@
     return [self listWithFilter:nil];
 }
 
-- (void)copyFromCategoryWithCategoryId:(int)aCategoryId
+- (KalturaCategoryUser*)updateWithCategoryId:(int)aCategoryId withUserId:(NSString*)aUserId withCategoryUser:(KalturaCategoryUser*)aCategoryUser withOverride:(KALTURA_BOOL)aOverride
 {
     [self.client.params addIfDefinedKey:@"categoryId" withInt:aCategoryId];
-    [self.client queueVoidService:@"categoryuser" withAction:@"copyFromCategory"];
-}
-
-- (int)indexWithUserId:(NSString*)aUserId withCategoryId:(int)aCategoryId withShouldUpdate:(KALTURA_BOOL)aShouldUpdate
-{
     [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
-    [self.client.params addIfDefinedKey:@"categoryId" withInt:aCategoryId];
-    [self.client.params addIfDefinedKey:@"shouldUpdate" withBool:aShouldUpdate];
-    return [self.client queueIntService:@"categoryuser" withAction:@"index"];
+    [self.client.params addIfDefinedKey:@"categoryUser" withObject:aCategoryUser];
+    [self.client.params addIfDefinedKey:@"override" withBool:aOverride];
+    return [self.client queueObjectService:@"categoryuser" withAction:@"update" withExpectedType:@"KalturaCategoryUser"];
 }
 
-- (int)indexWithUserId:(NSString*)aUserId withCategoryId:(int)aCategoryId
+- (KalturaCategoryUser*)updateWithCategoryId:(int)aCategoryId withUserId:(NSString*)aUserId withCategoryUser:(KalturaCategoryUser*)aCategoryUser
 {
-    return [self indexWithUserId:aUserId withCategoryId:aCategoryId withShouldUpdate:KALTURA_UNDEF_BOOL];
-}
-
-- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData withBulkUploadCategoryUserData:(KalturaBulkUploadCategoryUserData*)aBulkUploadCategoryUserData
-{
-    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
-    [self.client.params addIfDefinedKey:@"bulkUploadData" withObject:aBulkUploadData];
-    [self.client.params addIfDefinedKey:@"bulkUploadCategoryUserData" withObject:aBulkUploadCategoryUserData];
-    return [self.client queueObjectService:@"categoryuser" withAction:@"addFromBulkUpload" withExpectedType:@"KalturaBulkUpload"];
-}
-
-- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData
-{
-    return [self addFromBulkUploadWithFileData:aFileData withBulkUploadData:aBulkUploadData withBulkUploadCategoryUserData:nil];
-}
-
-- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData
-{
-    return [self addFromBulkUploadWithFileData:aFileData withBulkUploadData:nil];
+    return [self updateWithCategoryId:aCategoryId withUserId:aUserId withCategoryUser:aCategoryUser withOverride:KALTURA_UNDEF_BOOL];
 }
 
 @end
@@ -45624,10 +45624,22 @@
 @end
 
 @implementation KalturaConversionProfileService
-- (KalturaConversionProfile*)setAsDefaultWithId:(int)aId
+- (KalturaConversionProfile*)addWithConversionProfile:(KalturaConversionProfile*)aConversionProfile
+{
+    [self.client.params addIfDefinedKey:@"conversionProfile" withObject:aConversionProfile];
+    return [self.client queueObjectService:@"conversionprofile" withAction:@"add" withExpectedType:@"KalturaConversionProfile"];
+}
+
+- (void)deleteWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"conversionprofile" withAction:@"setAsDefault" withExpectedType:@"KalturaConversionProfile"];
+    [self.client queueVoidService:@"conversionprofile" withAction:@"delete"];
+}
+
+- (KalturaConversionProfile*)getWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    return [self.client queueObjectService:@"conversionprofile" withAction:@"get" withExpectedType:@"KalturaConversionProfile"];
 }
 
 - (KalturaConversionProfile*)getDefaultWithType:(NSString*)aType
@@ -45639,31 +45651,6 @@
 - (KalturaConversionProfile*)getDefault
 {
     return [self getDefaultWithType:nil];
-}
-
-- (KalturaConversionProfile*)addWithConversionProfile:(KalturaConversionProfile*)aConversionProfile
-{
-    [self.client.params addIfDefinedKey:@"conversionProfile" withObject:aConversionProfile];
-    return [self.client queueObjectService:@"conversionprofile" withAction:@"add" withExpectedType:@"KalturaConversionProfile"];
-}
-
-- (KalturaConversionProfile*)getWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"conversionprofile" withAction:@"get" withExpectedType:@"KalturaConversionProfile"];
-}
-
-- (KalturaConversionProfile*)updateWithId:(int)aId withConversionProfile:(KalturaConversionProfile*)aConversionProfile
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"conversionProfile" withObject:aConversionProfile];
-    return [self.client queueObjectService:@"conversionprofile" withAction:@"update" withExpectedType:@"KalturaConversionProfile"];
-}
-
-- (void)deleteWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client queueVoidService:@"conversionprofile" withAction:@"delete"];
 }
 
 - (KalturaConversionProfileListResponse*)listWithFilter:(KalturaConversionProfileFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -45683,6 +45670,19 @@
     return [self listWithFilter:nil];
 }
 
+- (KalturaConversionProfile*)setAsDefaultWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    return [self.client queueObjectService:@"conversionprofile" withAction:@"setAsDefault" withExpectedType:@"KalturaConversionProfile"];
+}
+
+- (KalturaConversionProfile*)updateWithId:(int)aId withConversionProfile:(KalturaConversionProfile*)aConversionProfile
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"conversionProfile" withObject:aConversionProfile];
+    return [self.client queueObjectService:@"conversionprofile" withAction:@"update" withExpectedType:@"KalturaConversionProfile"];
+}
+
 @end
 
 @implementation KalturaDataService
@@ -45690,6 +45690,12 @@
 {
     [self.client.params addIfDefinedKey:@"dataEntry" withObject:aDataEntry];
     return [self.client queueObjectService:@"data" withAction:@"add" withExpectedType:@"KalturaDataEntry"];
+}
+
+- (void)deleteWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client queueVoidService:@"data" withAction:@"delete"];
 }
 
 - (KalturaDataEntry*)getWithEntryId:(NSString*)aEntryId withVersion:(int)aVersion
@@ -45702,19 +45708,6 @@
 - (KalturaDataEntry*)getWithEntryId:(NSString*)aEntryId
 {
     return [self getWithEntryId:aEntryId withVersion:KALTURA_UNDEF_INT];
-}
-
-- (KalturaDataEntry*)updateWithEntryId:(NSString*)aEntryId withDocumentEntry:(KalturaDataEntry*)aDocumentEntry
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"documentEntry" withObject:aDocumentEntry];
-    return [self.client queueObjectService:@"data" withAction:@"update" withExpectedType:@"KalturaDataEntry"];
-}
-
-- (void)deleteWithEntryId:(NSString*)aEntryId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client queueVoidService:@"data" withAction:@"delete"];
 }
 
 - (KalturaDataListResponse*)listWithFilter:(KalturaDataEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -45752,6 +45745,13 @@
     return [self serveWithEntryId:aEntryId withVersion:KALTURA_UNDEF_INT];
 }
 
+- (KalturaDataEntry*)updateWithEntryId:(NSString*)aEntryId withDocumentEntry:(KalturaDataEntry*)aDocumentEntry
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"documentEntry" withObject:aDocumentEntry];
+    return [self.client queueObjectService:@"data" withAction:@"update" withExpectedType:@"KalturaDataEntry"];
+}
+
 @end
 
 @implementation KalturaDeliveryProfileService
@@ -45761,23 +45761,16 @@
     return [self.client queueObjectService:@"deliveryprofile" withAction:@"add" withExpectedType:@"KalturaDeliveryProfile"];
 }
 
-- (KalturaDeliveryProfile*)updateWithId:(NSString*)aId withDelivery:(KalturaDeliveryProfile*)aDelivery
+- (KalturaDeliveryProfile*)cloneWithDeliveryId:(int)aDeliveryId
 {
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"delivery" withObject:aDelivery];
-    return [self.client queueObjectService:@"deliveryprofile" withAction:@"update" withExpectedType:@"KalturaDeliveryProfile"];
+    [self.client.params addIfDefinedKey:@"deliveryId" withInt:aDeliveryId];
+    return [self.client queueObjectService:@"deliveryprofile" withAction:@"clone" withExpectedType:@"KalturaDeliveryProfile"];
 }
 
 - (KalturaDeliveryProfile*)getWithId:(NSString*)aId
 {
     [self.client.params addIfDefinedKey:@"id" withString:aId];
     return [self.client queueObjectService:@"deliveryprofile" withAction:@"get" withExpectedType:@"KalturaDeliveryProfile"];
-}
-
-- (KalturaDeliveryProfile*)cloneWithDeliveryId:(int)aDeliveryId
-{
-    [self.client.params addIfDefinedKey:@"deliveryId" withInt:aDeliveryId];
-    return [self.client queueObjectService:@"deliveryprofile" withAction:@"clone" withExpectedType:@"KalturaDeliveryProfile"];
 }
 
 - (KalturaDeliveryProfileListResponse*)listWithFilter:(KalturaDeliveryProfileFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -45797,6 +45790,13 @@
     return [self listWithFilter:nil];
 }
 
+- (KalturaDeliveryProfile*)updateWithId:(NSString*)aId withDelivery:(KalturaDeliveryProfile*)aDelivery
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"delivery" withObject:aDelivery];
+    return [self.client queueObjectService:@"deliveryprofile" withAction:@"update" withExpectedType:@"KalturaDeliveryProfile"];
+}
+
 @end
 
 @implementation KalturaEmailIngestionProfileService
@@ -45804,31 +45804,6 @@
 {
     [self.client.params addIfDefinedKey:@"EmailIP" withObject:aEmailIP];
     return [self.client queueObjectService:@"emailingestionprofile" withAction:@"add" withExpectedType:@"KalturaEmailIngestionProfile"];
-}
-
-- (KalturaEmailIngestionProfile*)getByEmailAddressWithEmailAddress:(NSString*)aEmailAddress
-{
-    [self.client.params addIfDefinedKey:@"emailAddress" withString:aEmailAddress];
-    return [self.client queueObjectService:@"emailingestionprofile" withAction:@"getByEmailAddress" withExpectedType:@"KalturaEmailIngestionProfile"];
-}
-
-- (KalturaEmailIngestionProfile*)getWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"emailingestionprofile" withAction:@"get" withExpectedType:@"KalturaEmailIngestionProfile"];
-}
-
-- (KalturaEmailIngestionProfile*)updateWithId:(int)aId withEmailIP:(KalturaEmailIngestionProfile*)aEmailIP
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"EmailIP" withObject:aEmailIP];
-    return [self.client queueObjectService:@"emailingestionprofile" withAction:@"update" withExpectedType:@"KalturaEmailIngestionProfile"];
-}
-
-- (void)deleteWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client queueVoidService:@"emailingestionprofile" withAction:@"delete"];
 }
 
 - (KalturaMediaEntry*)addMediaEntryWithMediaEntry:(KalturaMediaEntry*)aMediaEntry withUploadTokenId:(NSString*)aUploadTokenId withEmailProfId:(int)aEmailProfId withFromAddress:(NSString*)aFromAddress withEmailMsgId:(NSString*)aEmailMsgId
@@ -45841,14 +45816,38 @@
     return [self.client queueObjectService:@"emailingestionprofile" withAction:@"addMediaEntry" withExpectedType:@"KalturaMediaEntry"];
 }
 
+- (void)deleteWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client queueVoidService:@"emailingestionprofile" withAction:@"delete"];
+}
+
+- (KalturaEmailIngestionProfile*)getWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    return [self.client queueObjectService:@"emailingestionprofile" withAction:@"get" withExpectedType:@"KalturaEmailIngestionProfile"];
+}
+
+- (KalturaEmailIngestionProfile*)getByEmailAddressWithEmailAddress:(NSString*)aEmailAddress
+{
+    [self.client.params addIfDefinedKey:@"emailAddress" withString:aEmailAddress];
+    return [self.client queueObjectService:@"emailingestionprofile" withAction:@"getByEmailAddress" withExpectedType:@"KalturaEmailIngestionProfile"];
+}
+
+- (KalturaEmailIngestionProfile*)updateWithId:(int)aId withEmailIP:(KalturaEmailIngestionProfile*)aEmailIP
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"EmailIP" withObject:aEmailIP];
+    return [self.client queueObjectService:@"emailingestionprofile" withAction:@"update" withExpectedType:@"KalturaEmailIngestionProfile"];
+}
+
 @end
 
 @implementation KalturaEntryServerNodeService
-- (KalturaEntryServerNode*)updateWithId:(int)aId withEntryServerNode:(KalturaEntryServerNode*)aEntryServerNode
+- (KalturaEntryServerNode*)getWithId:(NSString*)aId
 {
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"entryServerNode" withObject:aEntryServerNode];
-    return [self.client queueObjectService:@"entryservernode" withAction:@"update" withExpectedType:@"KalturaEntryServerNode"];
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    return [self.client queueObjectService:@"entryservernode" withAction:@"get" withExpectedType:@"KalturaEntryServerNode"];
 }
 
 - (KalturaEntryServerNodeListResponse*)listWithFilter:(KalturaEntryServerNodeFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -45868,10 +45867,11 @@
     return [self listWithFilter:nil];
 }
 
-- (KalturaEntryServerNode*)getWithId:(NSString*)aId
+- (KalturaEntryServerNode*)updateWithId:(int)aId withEntryServerNode:(KalturaEntryServerNode*)aEntryServerNode
 {
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    return [self.client queueObjectService:@"entryservernode" withAction:@"get" withExpectedType:@"KalturaEntryServerNode"];
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"entryServerNode" withObject:aEntryServerNode];
+    return [self.client queueObjectService:@"entryservernode" withAction:@"update" withExpectedType:@"KalturaEntryServerNode"];
 }
 
 - (void)validateRegisteredEntryServerNodeWithId:(int)aId
@@ -45889,23 +45889,28 @@
     return [self.client queueObjectService:@"fileasset" withAction:@"add" withExpectedType:@"KalturaFileAsset"];
 }
 
+- (void)deleteWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client queueVoidService:@"fileasset" withAction:@"delete"];
+}
+
 - (KalturaFileAsset*)getWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     return [self.client queueObjectService:@"fileasset" withAction:@"get" withExpectedType:@"KalturaFileAsset"];
 }
 
-- (KalturaFileAsset*)updateWithId:(int)aId withFileAsset:(KalturaFileAsset*)aFileAsset
+- (KalturaFileAssetListResponse*)listWithFilter:(KalturaFileAssetFilter*)aFilter withPager:(KalturaFilterPager*)aPager
 {
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"fileAsset" withObject:aFileAsset];
-    return [self.client queueObjectService:@"fileasset" withAction:@"update" withExpectedType:@"KalturaFileAsset"];
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    return [self.client queueObjectService:@"fileasset" withAction:@"list" withExpectedType:@"KalturaFileAssetListResponse"];
 }
 
-- (void)deleteWithId:(int)aId
+- (KalturaFileAssetListResponse*)listWithFilter:(KalturaFileAssetFilter*)aFilter
 {
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client queueVoidService:@"fileasset" withAction:@"delete"];
+    return [self listWithFilter:aFilter withPager:nil];
 }
 
 - (NSString*)serveWithId:(int)aId
@@ -45921,16 +45926,11 @@
     return [self.client queueObjectService:@"fileasset" withAction:@"setContent" withExpectedType:@"KalturaFileAsset"];
 }
 
-- (KalturaFileAssetListResponse*)listWithFilter:(KalturaFileAssetFilter*)aFilter withPager:(KalturaFilterPager*)aPager
+- (KalturaFileAsset*)updateWithId:(int)aId withFileAsset:(KalturaFileAsset*)aFileAsset
 {
-    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
-    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
-    return [self.client queueObjectService:@"fileasset" withAction:@"list" withExpectedType:@"KalturaFileAssetListResponse"];
-}
-
-- (KalturaFileAssetListResponse*)listWithFilter:(KalturaFileAssetFilter*)aFilter
-{
-    return [self listWithFilter:aFilter withPager:nil];
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"fileAsset" withObject:aFileAsset];
+    return [self.client queueObjectService:@"fileasset" withAction:@"update" withExpectedType:@"KalturaFileAsset"];
 }
 
 @end
@@ -45941,55 +45941,6 @@
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
     [self.client.params addIfDefinedKey:@"flavorAsset" withObject:aFlavorAsset];
     return [self.client queueObjectService:@"flavorasset" withAction:@"add" withExpectedType:@"KalturaFlavorAsset"];
-}
-
-- (KalturaFlavorAsset*)updateWithId:(NSString*)aId withFlavorAsset:(KalturaFlavorAsset*)aFlavorAsset
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"flavorAsset" withObject:aFlavorAsset];
-    return [self.client queueObjectService:@"flavorasset" withAction:@"update" withExpectedType:@"KalturaFlavorAsset"];
-}
-
-- (KalturaFlavorAsset*)setContentWithId:(NSString*)aId withContentResource:(KalturaContentResource*)aContentResource
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"contentResource" withObject:aContentResource];
-    return [self.client queueObjectService:@"flavorasset" withAction:@"setContent" withExpectedType:@"KalturaFlavorAsset"];
-}
-
-- (KalturaFlavorAsset*)getWithId:(NSString*)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    return [self.client queueObjectService:@"flavorasset" withAction:@"get" withExpectedType:@"KalturaFlavorAsset"];
-}
-
-- (NSMutableArray*)getByEntryIdWithEntryId:(NSString*)aEntryId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    return [self.client queueArrayService:@"flavorasset" withAction:@"getByEntryId" withExpectedType:@"KalturaFlavorAsset"];
-}
-
-- (KalturaFlavorAssetListResponse*)listWithFilter:(KalturaAssetFilter*)aFilter withPager:(KalturaFilterPager*)aPager
-{
-    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
-    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
-    return [self.client queueObjectService:@"flavorasset" withAction:@"list" withExpectedType:@"KalturaFlavorAssetListResponse"];
-}
-
-- (KalturaFlavorAssetListResponse*)listWithFilter:(KalturaAssetFilter*)aFilter
-{
-    return [self listWithFilter:aFilter withPager:nil];
-}
-
-- (KalturaFlavorAssetListResponse*)list
-{
-    return [self listWithFilter:nil];
-}
-
-- (NSMutableArray*)getWebPlayableByEntryIdWithEntryId:(NSString*)aEntryId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    return [self.client queueArrayService:@"flavorasset" withAction:@"getWebPlayableByEntryId" withExpectedType:@"KalturaFlavorAsset"];
 }
 
 - (void)convertWithEntryId:(NSString*)aEntryId withFlavorParamsId:(int)aFlavorParamsId withPriority:(int)aPriority
@@ -46005,16 +45956,59 @@
     [self convertWithEntryId:aEntryId withFlavorParamsId:aFlavorParamsId withPriority:KALTURA_UNDEF_INT];
 }
 
-- (void)reconvertWithId:(NSString*)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client queueVoidService:@"flavorasset" withAction:@"reconvert"];
-}
-
 - (void)deleteWithId:(NSString*)aId
 {
     [self.client.params addIfDefinedKey:@"id" withString:aId];
     [self.client queueVoidService:@"flavorasset" withAction:@"delete"];
+}
+
+- (void)deleteLocalContentWithAssetId:(NSString*)aAssetId
+{
+    [self.client.params addIfDefinedKey:@"assetId" withString:aAssetId];
+    [self.client queueVoidService:@"flavorasset" withAction:@"deleteLocalContent"];
+}
+
+- (KalturaFlavorAsset*)exportWithAssetId:(NSString*)aAssetId withStorageProfileId:(int)aStorageProfileId
+{
+    [self.client.params addIfDefinedKey:@"assetId" withString:aAssetId];
+    [self.client.params addIfDefinedKey:@"storageProfileId" withInt:aStorageProfileId];
+    return [self.client queueObjectService:@"flavorasset" withAction:@"export" withExpectedType:@"KalturaFlavorAsset"];
+}
+
+- (KalturaFlavorAsset*)getWithId:(NSString*)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    return [self.client queueObjectService:@"flavorasset" withAction:@"get" withExpectedType:@"KalturaFlavorAsset"];
+}
+
+- (NSMutableArray*)getByEntryIdWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    return [self.client queueArrayService:@"flavorasset" withAction:@"getByEntryId" withExpectedType:@"KalturaFlavorAsset"];
+}
+
+- (NSString*)getDownloadUrlWithId:(NSString*)aId withUseCdn:(KALTURA_BOOL)aUseCdn
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"useCdn" withBool:aUseCdn];
+    return [self.client queueStringService:@"flavorasset" withAction:@"getDownloadUrl"];
+}
+
+- (NSString*)getDownloadUrlWithId:(NSString*)aId
+{
+    return [self getDownloadUrlWithId:aId withUseCdn:KALTURA_UNDEF_BOOL];
+}
+
+- (NSMutableArray*)getFlavorAssetsWithParamsWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    return [self.client queueArrayService:@"flavorasset" withAction:@"getFlavorAssetsWithParams" withExpectedType:@"KalturaFlavorAssetWithParams"];
+}
+
+- (KalturaRemotePathListResponse*)getRemotePathsWithId:(NSString*)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    return [self.client queueObjectService:@"flavorasset" withAction:@"getRemotePaths" withExpectedType:@"KalturaRemotePathListResponse"];
 }
 
 - (NSString*)getUrlWithId:(NSString*)aId withStorageId:(int)aStorageId withForceProxy:(KALTURA_BOOL)aForceProxy withOptions:(KalturaFlavorAssetUrlOptions*)aOptions
@@ -46041,47 +46035,33 @@
     return [self getUrlWithId:aId withStorageId:KALTURA_UNDEF_INT];
 }
 
-- (KalturaRemotePathListResponse*)getRemotePathsWithId:(NSString*)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    return [self.client queueObjectService:@"flavorasset" withAction:@"getRemotePaths" withExpectedType:@"KalturaRemotePathListResponse"];
-}
-
-- (NSString*)getDownloadUrlWithId:(NSString*)aId withUseCdn:(KALTURA_BOOL)aUseCdn
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"useCdn" withBool:aUseCdn];
-    return [self.client queueStringService:@"flavorasset" withAction:@"getDownloadUrl"];
-}
-
-- (NSString*)getDownloadUrlWithId:(NSString*)aId
-{
-    return [self getDownloadUrlWithId:aId withUseCdn:KALTURA_UNDEF_BOOL];
-}
-
-- (NSMutableArray*)getFlavorAssetsWithParamsWithEntryId:(NSString*)aEntryId
+- (NSMutableArray*)getWebPlayableByEntryIdWithEntryId:(NSString*)aEntryId
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    return [self.client queueArrayService:@"flavorasset" withAction:@"getFlavorAssetsWithParams" withExpectedType:@"KalturaFlavorAssetWithParams"];
+    return [self.client queueArrayService:@"flavorasset" withAction:@"getWebPlayableByEntryId" withExpectedType:@"KalturaFlavorAsset"];
 }
 
-- (KalturaFlavorAsset*)exportWithAssetId:(NSString*)aAssetId withStorageProfileId:(int)aStorageProfileId
+- (KalturaFlavorAssetListResponse*)listWithFilter:(KalturaAssetFilter*)aFilter withPager:(KalturaFilterPager*)aPager
 {
-    [self.client.params addIfDefinedKey:@"assetId" withString:aAssetId];
-    [self.client.params addIfDefinedKey:@"storageProfileId" withInt:aStorageProfileId];
-    return [self.client queueObjectService:@"flavorasset" withAction:@"export" withExpectedType:@"KalturaFlavorAsset"];
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    return [self.client queueObjectService:@"flavorasset" withAction:@"list" withExpectedType:@"KalturaFlavorAssetListResponse"];
 }
 
-- (void)setAsSourceWithAssetId:(NSString*)aAssetId
+- (KalturaFlavorAssetListResponse*)listWithFilter:(KalturaAssetFilter*)aFilter
 {
-    [self.client.params addIfDefinedKey:@"assetId" withString:aAssetId];
-    [self.client queueVoidService:@"flavorasset" withAction:@"setAsSource"];
+    return [self listWithFilter:aFilter withPager:nil];
 }
 
-- (void)deleteLocalContentWithAssetId:(NSString*)aAssetId
+- (KalturaFlavorAssetListResponse*)list
 {
-    [self.client.params addIfDefinedKey:@"assetId" withString:aAssetId];
-    [self.client queueVoidService:@"flavorasset" withAction:@"deleteLocalContent"];
+    return [self listWithFilter:nil];
+}
+
+- (void)reconvertWithId:(NSString*)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client queueVoidService:@"flavorasset" withAction:@"reconvert"];
 }
 
 - (NSString*)serveAdStitchCmdWithAssetId:(NSString*)aAssetId withFfprobeJson:(NSString*)aFfprobeJson withDuration:(NSString*)aDuration
@@ -46100,6 +46080,26 @@
 - (NSString*)serveAdStitchCmdWithAssetId:(NSString*)aAssetId
 {
     return [self serveAdStitchCmdWithAssetId:aAssetId withFfprobeJson:nil];
+}
+
+- (void)setAsSourceWithAssetId:(NSString*)aAssetId
+{
+    [self.client.params addIfDefinedKey:@"assetId" withString:aAssetId];
+    [self.client queueVoidService:@"flavorasset" withAction:@"setAsSource"];
+}
+
+- (KalturaFlavorAsset*)setContentWithId:(NSString*)aId withContentResource:(KalturaContentResource*)aContentResource
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"contentResource" withObject:aContentResource];
+    return [self.client queueObjectService:@"flavorasset" withAction:@"setContent" withExpectedType:@"KalturaFlavorAsset"];
+}
+
+- (KalturaFlavorAsset*)updateWithId:(NSString*)aId withFlavorAsset:(KalturaFlavorAsset*)aFlavorAsset
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"flavorAsset" withObject:aFlavorAsset];
+    return [self.client queueObjectService:@"flavorasset" withAction:@"update" withExpectedType:@"KalturaFlavorAsset"];
 }
 
 @end
@@ -46137,23 +46137,22 @@
     return [self.client queueObjectService:@"flavorparams" withAction:@"add" withExpectedType:@"KalturaFlavorParams"];
 }
 
+- (void)deleteWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client queueVoidService:@"flavorparams" withAction:@"delete"];
+}
+
 - (KalturaFlavorParams*)getWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     return [self.client queueObjectService:@"flavorparams" withAction:@"get" withExpectedType:@"KalturaFlavorParams"];
 }
 
-- (KalturaFlavorParams*)updateWithId:(int)aId withFlavorParams:(KalturaFlavorParams*)aFlavorParams
+- (NSMutableArray*)getByConversionProfileIdWithConversionProfileId:(int)aConversionProfileId
 {
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"flavorParams" withObject:aFlavorParams];
-    return [self.client queueObjectService:@"flavorparams" withAction:@"update" withExpectedType:@"KalturaFlavorParams"];
-}
-
-- (void)deleteWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client queueVoidService:@"flavorparams" withAction:@"delete"];
+    [self.client.params addIfDefinedKey:@"conversionProfileId" withInt:aConversionProfileId];
+    return [self.client queueArrayService:@"flavorparams" withAction:@"getByConversionProfileId" withExpectedType:@"KalturaFlavorParams"];
 }
 
 - (KalturaFlavorParamsListResponse*)listWithFilter:(KalturaFlavorParamsFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -46173,10 +46172,11 @@
     return [self listWithFilter:nil];
 }
 
-- (NSMutableArray*)getByConversionProfileIdWithConversionProfileId:(int)aConversionProfileId
+- (KalturaFlavorParams*)updateWithId:(int)aId withFlavorParams:(KalturaFlavorParams*)aFlavorParams
 {
-    [self.client.params addIfDefinedKey:@"conversionProfileId" withInt:aConversionProfileId];
-    return [self.client queueArrayService:@"flavorparams" withAction:@"getByConversionProfileId" withExpectedType:@"KalturaFlavorParams"];
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"flavorParams" withObject:aFlavorParams];
+    return [self.client queueObjectService:@"flavorparams" withAction:@"update" withExpectedType:@"KalturaFlavorParams"];
 }
 
 @end
@@ -46221,23 +46221,16 @@
     return [self.client queueObjectService:@"livechannelsegment" withAction:@"add" withExpectedType:@"KalturaLiveChannelSegment"];
 }
 
-- (KalturaLiveChannelSegment*)getWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"livechannelsegment" withAction:@"get" withExpectedType:@"KalturaLiveChannelSegment"];
-}
-
-- (KalturaLiveChannelSegment*)updateWithId:(int)aId withLiveChannelSegment:(KalturaLiveChannelSegment*)aLiveChannelSegment
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"liveChannelSegment" withObject:aLiveChannelSegment];
-    return [self.client queueObjectService:@"livechannelsegment" withAction:@"update" withExpectedType:@"KalturaLiveChannelSegment"];
-}
-
 - (void)deleteWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     [self.client queueVoidService:@"livechannelsegment" withAction:@"delete"];
+}
+
+- (KalturaLiveChannelSegment*)getWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    return [self.client queueObjectService:@"livechannelsegment" withAction:@"get" withExpectedType:@"KalturaLiveChannelSegment"];
 }
 
 - (KalturaLiveChannelSegmentListResponse*)listWithFilter:(KalturaLiveChannelSegmentFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -46257,6 +46250,13 @@
     return [self listWithFilter:nil];
 }
 
+- (KalturaLiveChannelSegment*)updateWithId:(int)aId withLiveChannelSegment:(KalturaLiveChannelSegment*)aLiveChannelSegment
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"liveChannelSegment" withObject:aLiveChannelSegment];
+    return [self.client queueObjectService:@"livechannelsegment" withAction:@"update" withExpectedType:@"KalturaLiveChannelSegment"];
+}
+
 @end
 
 @implementation KalturaLiveChannelService
@@ -46266,23 +46266,38 @@
     return [self.client queueObjectService:@"livechannel" withAction:@"add" withExpectedType:@"KalturaLiveChannel"];
 }
 
-- (KalturaLiveChannel*)getWithId:(NSString*)aId
+- (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withIsLastChunk:(KALTURA_BOOL)aIsLastChunk
 {
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    return [self.client queueObjectService:@"livechannel" withAction:@"get" withExpectedType:@"KalturaLiveChannel"];
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"assetId" withString:aAssetId];
+    [self.client.params addIfDefinedKey:@"mediaServerIndex" withString:aMediaServerIndex];
+    [self.client.params addIfDefinedKey:@"resource" withObject:aResource];
+    [self.client.params addIfDefinedKey:@"duration" withFloat:aDuration];
+    [self.client.params addIfDefinedKey:@"isLastChunk" withBool:aIsLastChunk];
+    return [self.client queueObjectService:@"livechannel" withAction:@"appendRecording" withExpectedType:@"KalturaLiveEntry"];
 }
 
-- (KalturaLiveChannel*)updateWithId:(NSString*)aId withLiveChannel:(KalturaLiveChannel*)aLiveChannel
+- (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration
 {
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"liveChannel" withObject:aLiveChannel];
-    return [self.client queueObjectService:@"livechannel" withAction:@"update" withExpectedType:@"KalturaLiveChannel"];
+    return [self appendRecordingWithEntryId:aEntryId withAssetId:aAssetId withMediaServerIndex:aMediaServerIndex withResource:aResource withDuration:aDuration withIsLastChunk:KALTURA_UNDEF_BOOL];
 }
 
 - (void)deleteWithId:(NSString*)aId
 {
     [self.client.params addIfDefinedKey:@"id" withString:aId];
     [self.client queueVoidService:@"livechannel" withAction:@"delete"];
+}
+
+- (KalturaLiveChannel*)getWithId:(NSString*)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    return [self.client queueObjectService:@"livechannel" withAction:@"get" withExpectedType:@"KalturaLiveChannel"];
+}
+
+- (KALTURA_BOOL)isLiveWithId:(NSString*)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    return [self.client queueBoolService:@"livechannel" withAction:@"isLive"];
 }
 
 - (KalturaLiveChannelListResponse*)listWithFilter:(KalturaLiveChannelFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -46300,28 +46315,6 @@
 - (KalturaLiveChannelListResponse*)list
 {
     return [self listWithFilter:nil];
-}
-
-- (KALTURA_BOOL)isLiveWithId:(NSString*)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    return [self.client queueBoolService:@"livechannel" withAction:@"isLive"];
-}
-
-- (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withIsLastChunk:(KALTURA_BOOL)aIsLastChunk
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"assetId" withString:aAssetId];
-    [self.client.params addIfDefinedKey:@"mediaServerIndex" withString:aMediaServerIndex];
-    [self.client.params addIfDefinedKey:@"resource" withObject:aResource];
-    [self.client.params addIfDefinedKey:@"duration" withFloat:aDuration];
-    [self.client.params addIfDefinedKey:@"isLastChunk" withBool:aIsLastChunk];
-    return [self.client queueObjectService:@"livechannel" withAction:@"appendRecording" withExpectedType:@"KalturaLiveEntry"];
-}
-
-- (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration
-{
-    return [self appendRecordingWithEntryId:aEntryId withAssetId:aAssetId withMediaServerIndex:aMediaServerIndex withResource:aResource withDuration:aDuration withIsLastChunk:KALTURA_UNDEF_BOOL];
 }
 
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex withApplicationName:(NSString*)aApplicationName withLiveEntryStatus:(int)aLiveEntryStatus
@@ -46344,20 +46337,6 @@
     return [self registerMediaServerWithEntryId:aEntryId withHostname:aHostname withMediaServerIndex:aMediaServerIndex withApplicationName:nil];
 }
 
-- (KalturaLiveEntry*)unregisterMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"hostname" withString:aHostname];
-    [self.client.params addIfDefinedKey:@"mediaServerIndex" withString:aMediaServerIndex];
-    return [self.client queueObjectService:@"livechannel" withAction:@"unregisterMediaServer" withExpectedType:@"KalturaLiveEntry"];
-}
-
-- (void)validateRegisteredMediaServersWithEntryId:(NSString*)aEntryId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client queueVoidService:@"livechannel" withAction:@"validateRegisteredMediaServers"];
-}
-
 - (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withRecordedEntryId:(NSString*)aRecordedEntryId
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
@@ -46373,9 +46352,37 @@
     return [self setRecordedContentWithEntryId:aEntryId withMediaServerIndex:aMediaServerIndex withResource:aResource withDuration:aDuration withRecordedEntryId:nil];
 }
 
+- (KalturaLiveEntry*)unregisterMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"hostname" withString:aHostname];
+    [self.client.params addIfDefinedKey:@"mediaServerIndex" withString:aMediaServerIndex];
+    return [self.client queueObjectService:@"livechannel" withAction:@"unregisterMediaServer" withExpectedType:@"KalturaLiveEntry"];
+}
+
+- (KalturaLiveChannel*)updateWithId:(NSString*)aId withLiveChannel:(KalturaLiveChannel*)aLiveChannel
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"liveChannel" withObject:aLiveChannel];
+    return [self.client queueObjectService:@"livechannel" withAction:@"update" withExpectedType:@"KalturaLiveChannel"];
+}
+
+- (void)validateRegisteredMediaServersWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client queueVoidService:@"livechannel" withAction:@"validateRegisteredMediaServers"];
+}
+
 @end
 
 @implementation KalturaLiveReportsService
+- (KalturaLiveReportExportResponse*)exportToCsvWithReportType:(int)aReportType withParams:(KalturaLiveReportExportParams*)aParams
+{
+    [self.client.params addIfDefinedKey:@"reportType" withInt:aReportType];
+    [self.client.params addIfDefinedKey:@"params" withObject:aParams];
+    return [self.client queueObjectService:@"livereports" withAction:@"exportToCsv" withExpectedType:@"KalturaLiveReportExportResponse"];
+}
+
 - (NSMutableArray*)getEventsWithReportType:(NSString*)aReportType withFilter:(KalturaLiveReportInputFilter*)aFilter withPager:(KalturaFilterPager*)aPager
 {
     [self.client.params addIfDefinedKey:@"reportType" withString:aReportType];
@@ -46412,13 +46419,6 @@
     return [self getReportWithReportType:aReportType withFilter:nil];
 }
 
-- (KalturaLiveReportExportResponse*)exportToCsvWithReportType:(int)aReportType withParams:(KalturaLiveReportExportParams*)aParams
-{
-    [self.client.params addIfDefinedKey:@"reportType" withInt:aReportType];
-    [self.client.params addIfDefinedKey:@"params" withObject:aParams];
-    return [self.client queueObjectService:@"livereports" withAction:@"exportToCsv" withExpectedType:@"KalturaLiveReportExportResponse"];
-}
-
 - (NSString*)serveReportWithId:(NSString*)aId
 {
     [self.client.params addIfDefinedKey:@"id" withString:aId];
@@ -46449,16 +46449,39 @@
     return [self addWithLiveStreamEntry:aLiveStreamEntry withSourceType:nil];
 }
 
-- (KalturaLiveStreamEntry*)getWithEntryId:(NSString*)aEntryId withVersion:(int)aVersion
+- (KalturaLiveStreamEntry*)addLiveStreamPushPublishConfigurationWithEntryId:(NSString*)aEntryId withProtocol:(NSString*)aProtocol withUrl:(NSString*)aUrl withLiveStreamConfiguration:(KalturaLiveStreamConfiguration*)aLiveStreamConfiguration
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"version" withInt:aVersion];
-    return [self.client queueObjectService:@"livestream" withAction:@"get" withExpectedType:@"KalturaLiveStreamEntry"];
+    [self.client.params addIfDefinedKey:@"protocol" withString:aProtocol];
+    [self.client.params addIfDefinedKey:@"url" withString:aUrl];
+    [self.client.params addIfDefinedKey:@"liveStreamConfiguration" withObject:aLiveStreamConfiguration];
+    return [self.client queueObjectService:@"livestream" withAction:@"addLiveStreamPushPublishConfiguration" withExpectedType:@"KalturaLiveStreamEntry"];
 }
 
-- (KalturaLiveStreamEntry*)getWithEntryId:(NSString*)aEntryId
+- (KalturaLiveStreamEntry*)addLiveStreamPushPublishConfigurationWithEntryId:(NSString*)aEntryId withProtocol:(NSString*)aProtocol withUrl:(NSString*)aUrl
 {
-    return [self getWithEntryId:aEntryId withVersion:KALTURA_UNDEF_INT];
+    return [self addLiveStreamPushPublishConfigurationWithEntryId:aEntryId withProtocol:aProtocol withUrl:aUrl withLiveStreamConfiguration:nil];
+}
+
+- (KalturaLiveStreamEntry*)addLiveStreamPushPublishConfigurationWithEntryId:(NSString*)aEntryId withProtocol:(NSString*)aProtocol
+{
+    return [self addLiveStreamPushPublishConfigurationWithEntryId:aEntryId withProtocol:aProtocol withUrl:nil];
+}
+
+- (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withIsLastChunk:(KALTURA_BOOL)aIsLastChunk
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"assetId" withString:aAssetId];
+    [self.client.params addIfDefinedKey:@"mediaServerIndex" withString:aMediaServerIndex];
+    [self.client.params addIfDefinedKey:@"resource" withObject:aResource];
+    [self.client.params addIfDefinedKey:@"duration" withFloat:aDuration];
+    [self.client.params addIfDefinedKey:@"isLastChunk" withBool:aIsLastChunk];
+    return [self.client queueObjectService:@"livestream" withAction:@"appendRecording" withExpectedType:@"KalturaLiveEntry"];
+}
+
+- (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration
+{
+    return [self appendRecordingWithEntryId:aEntryId withAssetId:aAssetId withMediaServerIndex:aMediaServerIndex withResource:aResource withDuration:aDuration withIsLastChunk:KALTURA_UNDEF_BOOL];
 }
 
 - (KalturaLiveStreamEntry*)authenticateWithEntryId:(NSString*)aEntryId withToken:(NSString*)aToken withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex withApplicationName:(NSString*)aApplicationName
@@ -46486,17 +46509,37 @@
     return [self authenticateWithEntryId:aEntryId withToken:aToken withHostname:nil];
 }
 
-- (KalturaLiveStreamEntry*)updateWithEntryId:(NSString*)aEntryId withLiveStreamEntry:(KalturaLiveStreamEntry*)aLiveStreamEntry
+- (void)createPeriodicSyncPointsWithEntryId:(NSString*)aEntryId withInterval:(int)aInterval withDuration:(int)aDuration
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"liveStreamEntry" withObject:aLiveStreamEntry];
-    return [self.client queueObjectService:@"livestream" withAction:@"update" withExpectedType:@"KalturaLiveStreamEntry"];
+    [self.client.params addIfDefinedKey:@"interval" withInt:aInterval];
+    [self.client.params addIfDefinedKey:@"duration" withInt:aDuration];
+    [self.client queueVoidService:@"livestream" withAction:@"createPeriodicSyncPoints"];
 }
 
 - (void)deleteWithEntryId:(NSString*)aEntryId
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
     [self.client queueVoidService:@"livestream" withAction:@"delete"];
+}
+
+- (KalturaLiveStreamEntry*)getWithEntryId:(NSString*)aEntryId withVersion:(int)aVersion
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"version" withInt:aVersion];
+    return [self.client queueObjectService:@"livestream" withAction:@"get" withExpectedType:@"KalturaLiveStreamEntry"];
+}
+
+- (KalturaLiveStreamEntry*)getWithEntryId:(NSString*)aEntryId
+{
+    return [self getWithEntryId:aEntryId withVersion:KALTURA_UNDEF_INT];
+}
+
+- (KALTURA_BOOL)isLiveWithId:(NSString*)aId withProtocol:(NSString*)aProtocol
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"protocol" withString:aProtocol];
+    return [self.client queueBoolService:@"livestream" withAction:@"isLive"];
 }
 
 - (KalturaLiveStreamListResponse*)listWithFilter:(KalturaLiveStreamEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -46516,73 +46559,10 @@
     return [self listWithFilter:nil];
 }
 
-- (KalturaLiveStreamEntry*)updateOfflineThumbnailJpegWithEntryId:(NSString*)aEntryId withFileData:(NSString*)aFileData
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
-    return [self.client queueObjectService:@"livestream" withAction:@"updateOfflineThumbnailJpeg" withExpectedType:@"KalturaLiveStreamEntry"];
-}
-
-- (KalturaLiveStreamEntry*)updateOfflineThumbnailFromUrlWithEntryId:(NSString*)aEntryId withUrl:(NSString*)aUrl
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"url" withString:aUrl];
-    return [self.client queueObjectService:@"livestream" withAction:@"updateOfflineThumbnailFromUrl" withExpectedType:@"KalturaLiveStreamEntry"];
-}
-
-- (KALTURA_BOOL)isLiveWithId:(NSString*)aId withProtocol:(NSString*)aProtocol
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"protocol" withString:aProtocol];
-    return [self.client queueBoolService:@"livestream" withAction:@"isLive"];
-}
-
-- (KalturaLiveStreamEntry*)addLiveStreamPushPublishConfigurationWithEntryId:(NSString*)aEntryId withProtocol:(NSString*)aProtocol withUrl:(NSString*)aUrl withLiveStreamConfiguration:(KalturaLiveStreamConfiguration*)aLiveStreamConfiguration
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"protocol" withString:aProtocol];
-    [self.client.params addIfDefinedKey:@"url" withString:aUrl];
-    [self.client.params addIfDefinedKey:@"liveStreamConfiguration" withObject:aLiveStreamConfiguration];
-    return [self.client queueObjectService:@"livestream" withAction:@"addLiveStreamPushPublishConfiguration" withExpectedType:@"KalturaLiveStreamEntry"];
-}
-
-- (KalturaLiveStreamEntry*)addLiveStreamPushPublishConfigurationWithEntryId:(NSString*)aEntryId withProtocol:(NSString*)aProtocol withUrl:(NSString*)aUrl
-{
-    return [self addLiveStreamPushPublishConfigurationWithEntryId:aEntryId withProtocol:aProtocol withUrl:aUrl withLiveStreamConfiguration:nil];
-}
-
-- (KalturaLiveStreamEntry*)addLiveStreamPushPublishConfigurationWithEntryId:(NSString*)aEntryId withProtocol:(NSString*)aProtocol
-{
-    return [self addLiveStreamPushPublishConfigurationWithEntryId:aEntryId withProtocol:aProtocol withUrl:nil];
-}
-
-- (KalturaLiveStreamEntry*)removeLiveStreamPushPublishConfigurationWithEntryId:(NSString*)aEntryId withProtocol:(NSString*)aProtocol
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"protocol" withString:aProtocol];
-    return [self.client queueObjectService:@"livestream" withAction:@"removeLiveStreamPushPublishConfiguration" withExpectedType:@"KalturaLiveStreamEntry"];
-}
-
 - (void)regenerateStreamTokenWithEntryId:(NSString*)aEntryId
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
     [self.client queueVoidService:@"livestream" withAction:@"regenerateStreamToken"];
-}
-
-- (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withIsLastChunk:(KALTURA_BOOL)aIsLastChunk
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"assetId" withString:aAssetId];
-    [self.client.params addIfDefinedKey:@"mediaServerIndex" withString:aMediaServerIndex];
-    [self.client.params addIfDefinedKey:@"resource" withObject:aResource];
-    [self.client.params addIfDefinedKey:@"duration" withFloat:aDuration];
-    [self.client.params addIfDefinedKey:@"isLastChunk" withBool:aIsLastChunk];
-    return [self.client queueObjectService:@"livestream" withAction:@"appendRecording" withExpectedType:@"KalturaLiveEntry"];
-}
-
-- (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration
-{
-    return [self appendRecordingWithEntryId:aEntryId withAssetId:aAssetId withMediaServerIndex:aMediaServerIndex withResource:aResource withDuration:aDuration withIsLastChunk:KALTURA_UNDEF_BOOL];
 }
 
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex withApplicationName:(NSString*)aApplicationName withLiveEntryStatus:(int)aLiveEntryStatus
@@ -46605,18 +46585,11 @@
     return [self registerMediaServerWithEntryId:aEntryId withHostname:aHostname withMediaServerIndex:aMediaServerIndex withApplicationName:nil];
 }
 
-- (KalturaLiveEntry*)unregisterMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex
+- (KalturaLiveStreamEntry*)removeLiveStreamPushPublishConfigurationWithEntryId:(NSString*)aEntryId withProtocol:(NSString*)aProtocol
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"hostname" withString:aHostname];
-    [self.client.params addIfDefinedKey:@"mediaServerIndex" withString:aMediaServerIndex];
-    return [self.client queueObjectService:@"livestream" withAction:@"unregisterMediaServer" withExpectedType:@"KalturaLiveEntry"];
-}
-
-- (void)validateRegisteredMediaServersWithEntryId:(NSString*)aEntryId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client queueVoidService:@"livestream" withAction:@"validateRegisteredMediaServers"];
+    [self.client.params addIfDefinedKey:@"protocol" withString:aProtocol];
+    return [self.client queueObjectService:@"livestream" withAction:@"removeLiveStreamPushPublishConfiguration" withExpectedType:@"KalturaLiveStreamEntry"];
 }
 
 - (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withRecordedEntryId:(NSString*)aRecordedEntryId
@@ -46634,12 +46607,39 @@
     return [self setRecordedContentWithEntryId:aEntryId withMediaServerIndex:aMediaServerIndex withResource:aResource withDuration:aDuration withRecordedEntryId:nil];
 }
 
-- (void)createPeriodicSyncPointsWithEntryId:(NSString*)aEntryId withInterval:(int)aInterval withDuration:(int)aDuration
+- (KalturaLiveEntry*)unregisterMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"interval" withInt:aInterval];
-    [self.client.params addIfDefinedKey:@"duration" withInt:aDuration];
-    [self.client queueVoidService:@"livestream" withAction:@"createPeriodicSyncPoints"];
+    [self.client.params addIfDefinedKey:@"hostname" withString:aHostname];
+    [self.client.params addIfDefinedKey:@"mediaServerIndex" withString:aMediaServerIndex];
+    return [self.client queueObjectService:@"livestream" withAction:@"unregisterMediaServer" withExpectedType:@"KalturaLiveEntry"];
+}
+
+- (KalturaLiveStreamEntry*)updateWithEntryId:(NSString*)aEntryId withLiveStreamEntry:(KalturaLiveStreamEntry*)aLiveStreamEntry
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"liveStreamEntry" withObject:aLiveStreamEntry];
+    return [self.client queueObjectService:@"livestream" withAction:@"update" withExpectedType:@"KalturaLiveStreamEntry"];
+}
+
+- (KalturaLiveStreamEntry*)updateOfflineThumbnailFromUrlWithEntryId:(NSString*)aEntryId withUrl:(NSString*)aUrl
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"url" withString:aUrl];
+    return [self.client queueObjectService:@"livestream" withAction:@"updateOfflineThumbnailFromUrl" withExpectedType:@"KalturaLiveStreamEntry"];
+}
+
+- (KalturaLiveStreamEntry*)updateOfflineThumbnailJpegWithEntryId:(NSString*)aEntryId withFileData:(NSString*)aFileData
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
+    return [self.client queueObjectService:@"livestream" withAction:@"updateOfflineThumbnailJpeg" withExpectedType:@"KalturaLiveStreamEntry"];
+}
+
+- (void)validateRegisteredMediaServersWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client queueVoidService:@"livestream" withAction:@"validateRegisteredMediaServers"];
 }
 
 @end
@@ -46691,44 +46691,6 @@
     return [self.client queueObjectService:@"media" withAction:@"addFromBulk" withExpectedType:@"KalturaMediaEntry"];
 }
 
-- (KalturaMediaEntry*)addFromUrlWithMediaEntry:(KalturaMediaEntry*)aMediaEntry withUrl:(NSString*)aUrl
-{
-    [self.client.params addIfDefinedKey:@"mediaEntry" withObject:aMediaEntry];
-    [self.client.params addIfDefinedKey:@"url" withString:aUrl];
-    return [self.client queueObjectService:@"media" withAction:@"addFromUrl" withExpectedType:@"KalturaMediaEntry"];
-}
-
-- (KalturaMediaEntry*)addFromSearchResultWithMediaEntry:(KalturaMediaEntry*)aMediaEntry withSearchResult:(KalturaSearchResult*)aSearchResult
-{
-    [self.client.params addIfDefinedKey:@"mediaEntry" withObject:aMediaEntry];
-    [self.client.params addIfDefinedKey:@"searchResult" withObject:aSearchResult];
-    return [self.client queueObjectService:@"media" withAction:@"addFromSearchResult" withExpectedType:@"KalturaMediaEntry"];
-}
-
-- (KalturaMediaEntry*)addFromSearchResultWithMediaEntry:(KalturaMediaEntry*)aMediaEntry
-{
-    return [self addFromSearchResultWithMediaEntry:aMediaEntry withSearchResult:nil];
-}
-
-- (KalturaMediaEntry*)addFromSearchResult
-{
-    return [self addFromSearchResultWithMediaEntry:nil];
-}
-
-- (KalturaMediaEntry*)addFromUploadedFileWithMediaEntry:(KalturaMediaEntry*)aMediaEntry withUploadTokenId:(NSString*)aUploadTokenId
-{
-    [self.client.params addIfDefinedKey:@"mediaEntry" withObject:aMediaEntry];
-    [self.client.params addIfDefinedKey:@"uploadTokenId" withString:aUploadTokenId];
-    return [self.client queueObjectService:@"media" withAction:@"addFromUploadedFile" withExpectedType:@"KalturaMediaEntry"];
-}
-
-- (KalturaMediaEntry*)addFromRecordedWebcamWithMediaEntry:(KalturaMediaEntry*)aMediaEntry withWebcamTokenId:(NSString*)aWebcamTokenId
-{
-    [self.client.params addIfDefinedKey:@"mediaEntry" withObject:aMediaEntry];
-    [self.client.params addIfDefinedKey:@"webcamTokenId" withString:aWebcamTokenId];
-    return [self.client queueObjectService:@"media" withAction:@"addFromRecordedWebcam" withExpectedType:@"KalturaMediaEntry"];
-}
-
 - (KalturaMediaEntry*)addFromEntryWithSourceEntryId:(NSString*)aSourceEntryId withMediaEntry:(KalturaMediaEntry*)aMediaEntry withSourceFlavorParamsId:(int)aSourceFlavorParamsId
 {
     [self.client.params addIfDefinedKey:@"sourceEntryId" withString:aSourceEntryId];
@@ -46759,6 +46721,87 @@
     return [self addFromFlavorAssetWithSourceFlavorAssetId:aSourceFlavorAssetId withMediaEntry:nil];
 }
 
+- (KalturaMediaEntry*)addFromRecordedWebcamWithMediaEntry:(KalturaMediaEntry*)aMediaEntry withWebcamTokenId:(NSString*)aWebcamTokenId
+{
+    [self.client.params addIfDefinedKey:@"mediaEntry" withObject:aMediaEntry];
+    [self.client.params addIfDefinedKey:@"webcamTokenId" withString:aWebcamTokenId];
+    return [self.client queueObjectService:@"media" withAction:@"addFromRecordedWebcam" withExpectedType:@"KalturaMediaEntry"];
+}
+
+- (KalturaMediaEntry*)addFromSearchResultWithMediaEntry:(KalturaMediaEntry*)aMediaEntry withSearchResult:(KalturaSearchResult*)aSearchResult
+{
+    [self.client.params addIfDefinedKey:@"mediaEntry" withObject:aMediaEntry];
+    [self.client.params addIfDefinedKey:@"searchResult" withObject:aSearchResult];
+    return [self.client queueObjectService:@"media" withAction:@"addFromSearchResult" withExpectedType:@"KalturaMediaEntry"];
+}
+
+- (KalturaMediaEntry*)addFromSearchResultWithMediaEntry:(KalturaMediaEntry*)aMediaEntry
+{
+    return [self addFromSearchResultWithMediaEntry:aMediaEntry withSearchResult:nil];
+}
+
+- (KalturaMediaEntry*)addFromSearchResult
+{
+    return [self addFromSearchResultWithMediaEntry:nil];
+}
+
+- (KalturaMediaEntry*)addFromUploadedFileWithMediaEntry:(KalturaMediaEntry*)aMediaEntry withUploadTokenId:(NSString*)aUploadTokenId
+{
+    [self.client.params addIfDefinedKey:@"mediaEntry" withObject:aMediaEntry];
+    [self.client.params addIfDefinedKey:@"uploadTokenId" withString:aUploadTokenId];
+    return [self.client queueObjectService:@"media" withAction:@"addFromUploadedFile" withExpectedType:@"KalturaMediaEntry"];
+}
+
+- (KalturaMediaEntry*)addFromUrlWithMediaEntry:(KalturaMediaEntry*)aMediaEntry withUrl:(NSString*)aUrl
+{
+    [self.client.params addIfDefinedKey:@"mediaEntry" withObject:aMediaEntry];
+    [self.client.params addIfDefinedKey:@"url" withString:aUrl];
+    return [self.client queueObjectService:@"media" withAction:@"addFromUrl" withExpectedType:@"KalturaMediaEntry"];
+}
+
+- (void)anonymousRankWithEntryId:(NSString*)aEntryId withRank:(int)aRank
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"rank" withInt:aRank];
+    [self.client queueVoidService:@"media" withAction:@"anonymousRank"];
+}
+
+- (void)approveWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client queueVoidService:@"media" withAction:@"approve"];
+}
+
+- (KalturaMediaEntry*)approveReplaceWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    return [self.client queueObjectService:@"media" withAction:@"approveReplace" withExpectedType:@"KalturaMediaEntry"];
+}
+
+- (KalturaBulkUpload*)bulkUploadAddWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData withBulkUploadEntryData:(KalturaBulkUploadEntryData*)aBulkUploadEntryData
+{
+    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
+    [self.client.params addIfDefinedKey:@"bulkUploadData" withObject:aBulkUploadData];
+    [self.client.params addIfDefinedKey:@"bulkUploadEntryData" withObject:aBulkUploadEntryData];
+    return [self.client queueObjectService:@"media" withAction:@"bulkUploadAdd" withExpectedType:@"KalturaBulkUpload"];
+}
+
+- (KalturaBulkUpload*)bulkUploadAddWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData
+{
+    return [self bulkUploadAddWithFileData:aFileData withBulkUploadData:aBulkUploadData withBulkUploadEntryData:nil];
+}
+
+- (KalturaBulkUpload*)bulkUploadAddWithFileData:(NSString*)aFileData
+{
+    return [self bulkUploadAddWithFileData:aFileData withBulkUploadData:nil];
+}
+
+- (KalturaMediaEntry*)cancelReplaceWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    return [self.client queueObjectService:@"media" withAction:@"cancelReplace" withExpectedType:@"KalturaMediaEntry"];
+}
+
 - (int)convertWithEntryId:(NSString*)aEntryId withConversionProfileId:(int)aConversionProfileId withDynamicConversionAttributes:(NSArray*)aDynamicConversionAttributes
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
@@ -46775,6 +46818,29 @@
 - (int)convertWithEntryId:(NSString*)aEntryId
 {
     return [self convertWithEntryId:aEntryId withConversionProfileId:KALTURA_UNDEF_INT];
+}
+
+- (int)countWithFilter:(KalturaMediaEntryFilter*)aFilter
+{
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    return [self.client queueIntService:@"media" withAction:@"count"];
+}
+
+- (int)count
+{
+    return [self countWithFilter:nil];
+}
+
+- (void)deleteWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client queueVoidService:@"media" withAction:@"delete"];
+}
+
+- (void)flagWithModerationFlag:(KalturaModerationFlag*)aModerationFlag
+{
+    [self.client.params addIfDefinedKey:@"moderationFlag" withObject:aModerationFlag];
+    [self.client queueVoidService:@"media" withAction:@"flag"];
 }
 
 - (KalturaMediaEntry*)getWithEntryId:(NSString*)aEntryId withVersion:(int)aVersion
@@ -46807,6 +46873,48 @@
     return [self getMrssWithEntryId:aEntryId withExtendingItemsArray:nil];
 }
 
+- (KalturaMediaListResponse*)listWithFilter:(KalturaMediaEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager
+{
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    return [self.client queueObjectService:@"media" withAction:@"list" withExpectedType:@"KalturaMediaListResponse"];
+}
+
+- (KalturaMediaListResponse*)listWithFilter:(KalturaMediaEntryFilter*)aFilter
+{
+    return [self listWithFilter:aFilter withPager:nil];
+}
+
+- (KalturaMediaListResponse*)list
+{
+    return [self listWithFilter:nil];
+}
+
+- (KalturaModerationFlagListResponse*)listFlagsWithEntryId:(NSString*)aEntryId withPager:(KalturaFilterPager*)aPager
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    return [self.client queueObjectService:@"media" withAction:@"listFlags" withExpectedType:@"KalturaModerationFlagListResponse"];
+}
+
+- (KalturaModerationFlagListResponse*)listFlagsWithEntryId:(NSString*)aEntryId
+{
+    return [self listFlagsWithEntryId:aEntryId withPager:nil];
+}
+
+- (void)rejectWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client queueVoidService:@"media" withAction:@"reject"];
+}
+
+- (int)requestConversionWithEntryId:(NSString*)aEntryId withFileFormat:(NSString*)aFileFormat
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"fileFormat" withString:aFileFormat];
+    return [self.client queueIntService:@"media" withAction:@"requestConversion"];
+}
+
 - (KalturaMediaEntry*)updateWithEntryId:(NSString*)aEntryId withMediaEntry:(KalturaMediaEntry*)aMediaEntry
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
@@ -46831,58 +46939,6 @@
 - (KalturaMediaEntry*)updateContentWithEntryId:(NSString*)aEntryId withResource:(KalturaResource*)aResource
 {
     return [self updateContentWithEntryId:aEntryId withResource:aResource withConversionProfileId:KALTURA_UNDEF_INT];
-}
-
-- (void)deleteWithEntryId:(NSString*)aEntryId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client queueVoidService:@"media" withAction:@"delete"];
-}
-
-- (KalturaMediaEntry*)approveReplaceWithEntryId:(NSString*)aEntryId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    return [self.client queueObjectService:@"media" withAction:@"approveReplace" withExpectedType:@"KalturaMediaEntry"];
-}
-
-- (KalturaMediaEntry*)cancelReplaceWithEntryId:(NSString*)aEntryId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    return [self.client queueObjectService:@"media" withAction:@"cancelReplace" withExpectedType:@"KalturaMediaEntry"];
-}
-
-- (KalturaMediaListResponse*)listWithFilter:(KalturaMediaEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager
-{
-    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
-    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
-    return [self.client queueObjectService:@"media" withAction:@"list" withExpectedType:@"KalturaMediaListResponse"];
-}
-
-- (KalturaMediaListResponse*)listWithFilter:(KalturaMediaEntryFilter*)aFilter
-{
-    return [self listWithFilter:aFilter withPager:nil];
-}
-
-- (KalturaMediaListResponse*)list
-{
-    return [self listWithFilter:nil];
-}
-
-- (int)countWithFilter:(KalturaMediaEntryFilter*)aFilter
-{
-    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
-    return [self.client queueIntService:@"media" withAction:@"count"];
-}
-
-- (int)count
-{
-    return [self countWithFilter:nil];
-}
-
-- (NSString*)uploadWithFileData:(NSString*)aFileData
-{
-    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
-    return [self.client queueStringService:@"media" withAction:@"upload"];
 }
 
 - (KalturaMediaEntry*)updateThumbnailWithEntryId:(NSString*)aEntryId withTimeOffset:(int)aTimeOffset withFlavorParamsId:(int)aFlavorParamsId
@@ -46912,13 +46968,6 @@
     return [self updateThumbnailFromSourceEntryWithEntryId:aEntryId withSourceEntryId:aSourceEntryId withTimeOffset:aTimeOffset withFlavorParamsId:KALTURA_UNDEF_INT];
 }
 
-- (KalturaMediaEntry*)updateThumbnailJpegWithEntryId:(NSString*)aEntryId withFileData:(NSString*)aFileData
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
-    return [self.client queueObjectService:@"media" withAction:@"updateThumbnailJpeg" withExpectedType:@"KalturaMediaEntry"];
-}
-
 - (KalturaBaseEntry*)updateThumbnailFromUrlWithEntryId:(NSString*)aEntryId withUrl:(NSString*)aUrl
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
@@ -46926,66 +46975,17 @@
     return [self.client queueObjectService:@"media" withAction:@"updateThumbnailFromUrl" withExpectedType:@"KalturaBaseEntry"];
 }
 
-- (int)requestConversionWithEntryId:(NSString*)aEntryId withFileFormat:(NSString*)aFileFormat
+- (KalturaMediaEntry*)updateThumbnailJpegWithEntryId:(NSString*)aEntryId withFileData:(NSString*)aFileData
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"fileFormat" withString:aFileFormat];
-    return [self.client queueIntService:@"media" withAction:@"requestConversion"];
+    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
+    return [self.client queueObjectService:@"media" withAction:@"updateThumbnailJpeg" withExpectedType:@"KalturaMediaEntry"];
 }
 
-- (void)flagWithModerationFlag:(KalturaModerationFlag*)aModerationFlag
-{
-    [self.client.params addIfDefinedKey:@"moderationFlag" withObject:aModerationFlag];
-    [self.client queueVoidService:@"media" withAction:@"flag"];
-}
-
-- (void)rejectWithEntryId:(NSString*)aEntryId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client queueVoidService:@"media" withAction:@"reject"];
-}
-
-- (void)approveWithEntryId:(NSString*)aEntryId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client queueVoidService:@"media" withAction:@"approve"];
-}
-
-- (KalturaModerationFlagListResponse*)listFlagsWithEntryId:(NSString*)aEntryId withPager:(KalturaFilterPager*)aPager
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
-    return [self.client queueObjectService:@"media" withAction:@"listFlags" withExpectedType:@"KalturaModerationFlagListResponse"];
-}
-
-- (KalturaModerationFlagListResponse*)listFlagsWithEntryId:(NSString*)aEntryId
-{
-    return [self listFlagsWithEntryId:aEntryId withPager:nil];
-}
-
-- (void)anonymousRankWithEntryId:(NSString*)aEntryId withRank:(int)aRank
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"rank" withInt:aRank];
-    [self.client queueVoidService:@"media" withAction:@"anonymousRank"];
-}
-
-- (KalturaBulkUpload*)bulkUploadAddWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData withBulkUploadEntryData:(KalturaBulkUploadEntryData*)aBulkUploadEntryData
+- (NSString*)uploadWithFileData:(NSString*)aFileData
 {
     [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
-    [self.client.params addIfDefinedKey:@"bulkUploadData" withObject:aBulkUploadData];
-    [self.client.params addIfDefinedKey:@"bulkUploadEntryData" withObject:aBulkUploadEntryData];
-    return [self.client queueObjectService:@"media" withAction:@"bulkUploadAdd" withExpectedType:@"KalturaBulkUpload"];
-}
-
-- (KalturaBulkUpload*)bulkUploadAddWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData
-{
-    return [self bulkUploadAddWithFileData:aFileData withBulkUploadData:aBulkUploadData withBulkUploadEntryData:nil];
-}
-
-- (KalturaBulkUpload*)bulkUploadAddWithFileData:(NSString*)aFileData
-{
-    return [self bulkUploadAddWithFileData:aFileData withBulkUploadData:nil];
+    return [self.client queueStringService:@"media" withAction:@"upload"];
 }
 
 @end
@@ -46997,46 +46997,24 @@
     return [self.client queueObjectService:@"mixing" withAction:@"add" withExpectedType:@"KalturaMixEntry"];
 }
 
-- (KalturaMixEntry*)getWithEntryId:(NSString*)aEntryId withVersion:(int)aVersion
+- (void)anonymousRankWithEntryId:(NSString*)aEntryId withRank:(int)aRank
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"version" withInt:aVersion];
-    return [self.client queueObjectService:@"mixing" withAction:@"get" withExpectedType:@"KalturaMixEntry"];
+    [self.client.params addIfDefinedKey:@"rank" withInt:aRank];
+    [self.client queueVoidService:@"mixing" withAction:@"anonymousRank"];
 }
 
-- (KalturaMixEntry*)getWithEntryId:(NSString*)aEntryId
+- (KalturaMixEntry*)appendMediaEntryWithMixEntryId:(NSString*)aMixEntryId withMediaEntryId:(NSString*)aMediaEntryId
 {
-    return [self getWithEntryId:aEntryId withVersion:KALTURA_UNDEF_INT];
+    [self.client.params addIfDefinedKey:@"mixEntryId" withString:aMixEntryId];
+    [self.client.params addIfDefinedKey:@"mediaEntryId" withString:aMediaEntryId];
+    return [self.client queueObjectService:@"mixing" withAction:@"appendMediaEntry" withExpectedType:@"KalturaMixEntry"];
 }
 
-- (KalturaMixEntry*)updateWithEntryId:(NSString*)aEntryId withMixEntry:(KalturaMixEntry*)aMixEntry
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"mixEntry" withObject:aMixEntry];
-    return [self.client queueObjectService:@"mixing" withAction:@"update" withExpectedType:@"KalturaMixEntry"];
-}
-
-- (void)deleteWithEntryId:(NSString*)aEntryId
+- (KalturaMixEntry*)cloneWithEntryId:(NSString*)aEntryId
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client queueVoidService:@"mixing" withAction:@"delete"];
-}
-
-- (KalturaMixListResponse*)listWithFilter:(KalturaMixEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager
-{
-    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
-    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
-    return [self.client queueObjectService:@"mixing" withAction:@"list" withExpectedType:@"KalturaMixListResponse"];
-}
-
-- (KalturaMixListResponse*)listWithFilter:(KalturaMixEntryFilter*)aFilter
-{
-    return [self listWithFilter:aFilter withPager:nil];
-}
-
-- (KalturaMixListResponse*)list
-{
-    return [self listWithFilter:nil];
+    return [self.client queueObjectService:@"mixing" withAction:@"clone" withExpectedType:@"KalturaMixEntry"];
 }
 
 - (int)countWithFilter:(KalturaMediaEntryFilter*)aFilter
@@ -47050,17 +47028,22 @@
     return [self countWithFilter:nil];
 }
 
-- (KalturaMixEntry*)cloneWithEntryId:(NSString*)aEntryId
+- (void)deleteWithEntryId:(NSString*)aEntryId
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    return [self.client queueObjectService:@"mixing" withAction:@"clone" withExpectedType:@"KalturaMixEntry"];
+    [self.client queueVoidService:@"mixing" withAction:@"delete"];
 }
 
-- (KalturaMixEntry*)appendMediaEntryWithMixEntryId:(NSString*)aMixEntryId withMediaEntryId:(NSString*)aMediaEntryId
+- (KalturaMixEntry*)getWithEntryId:(NSString*)aEntryId withVersion:(int)aVersion
 {
-    [self.client.params addIfDefinedKey:@"mixEntryId" withString:aMixEntryId];
-    [self.client.params addIfDefinedKey:@"mediaEntryId" withString:aMediaEntryId];
-    return [self.client queueObjectService:@"mixing" withAction:@"appendMediaEntry" withExpectedType:@"KalturaMixEntry"];
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"version" withInt:aVersion];
+    return [self.client queueObjectService:@"mixing" withAction:@"get" withExpectedType:@"KalturaMixEntry"];
+}
+
+- (KalturaMixEntry*)getWithEntryId:(NSString*)aEntryId
+{
+    return [self getWithEntryId:aEntryId withVersion:KALTURA_UNDEF_INT];
 }
 
 - (NSMutableArray*)getMixesByMediaIdWithMediaEntryId:(NSString*)aMediaEntryId
@@ -47081,11 +47064,28 @@
     return [self getReadyMediaEntriesWithMixId:aMixId withVersion:KALTURA_UNDEF_INT];
 }
 
-- (void)anonymousRankWithEntryId:(NSString*)aEntryId withRank:(int)aRank
+- (KalturaMixListResponse*)listWithFilter:(KalturaMixEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager
+{
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    return [self.client queueObjectService:@"mixing" withAction:@"list" withExpectedType:@"KalturaMixListResponse"];
+}
+
+- (KalturaMixListResponse*)listWithFilter:(KalturaMixEntryFilter*)aFilter
+{
+    return [self listWithFilter:aFilter withPager:nil];
+}
+
+- (KalturaMixListResponse*)list
+{
+    return [self listWithFilter:nil];
+}
+
+- (KalturaMixEntry*)updateWithEntryId:(NSString*)aEntryId withMixEntry:(KalturaMixEntry*)aMixEntry
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"rank" withInt:aRank];
-    [self.client queueVoidService:@"mixing" withAction:@"anonymousRank"];
+    [self.client.params addIfDefinedKey:@"mixEntry" withObject:aMixEntry];
+    return [self.client queueObjectService:@"mixing" withAction:@"update" withExpectedType:@"KalturaMixEntry"];
 }
 
 @end
@@ -47101,6 +47101,108 @@
 @end
 
 @implementation KalturaPartnerService
+- (int)countWithFilter:(KalturaPartnerFilter*)aFilter
+{
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    return [self.client queueIntService:@"partner" withAction:@"count"];
+}
+
+- (int)count
+{
+    return [self countWithFilter:nil];
+}
+
+- (KalturaPartner*)getWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    return [self.client queueObjectService:@"partner" withAction:@"get" withExpectedType:@"KalturaPartner"];
+}
+
+- (KalturaPartner*)get
+{
+    return [self getWithId:KALTURA_UNDEF_INT];
+}
+
+- (KalturaPartner*)getInfo
+{
+    return [self.client queueObjectService:@"partner" withAction:@"getInfo" withExpectedType:@"KalturaPartner"];
+}
+
+- (KalturaPartner*)getSecretsWithPartnerId:(int)aPartnerId withAdminEmail:(NSString*)aAdminEmail withCmsPassword:(NSString*)aCmsPassword
+{
+    [self.client.params addIfDefinedKey:@"partnerId" withInt:aPartnerId];
+    [self.client.params addIfDefinedKey:@"adminEmail" withString:aAdminEmail];
+    [self.client.params addIfDefinedKey:@"cmsPassword" withString:aCmsPassword];
+    return [self.client queueObjectService:@"partner" withAction:@"getSecrets" withExpectedType:@"KalturaPartner"];
+}
+
+- (KalturaPartnerStatistics*)getStatistics
+{
+    return [self.client queueObjectService:@"partner" withAction:@"getStatistics" withExpectedType:@"KalturaPartnerStatistics"];
+}
+
+- (KalturaPartnerUsage*)getUsageWithYear:(int)aYear withMonth:(int)aMonth withResolution:(NSString*)aResolution
+{
+    [self.client.params addIfDefinedKey:@"year" withInt:aYear];
+    [self.client.params addIfDefinedKey:@"month" withInt:aMonth];
+    [self.client.params addIfDefinedKey:@"resolution" withString:aResolution];
+    return [self.client queueObjectService:@"partner" withAction:@"getUsage" withExpectedType:@"KalturaPartnerUsage"];
+}
+
+- (KalturaPartnerUsage*)getUsageWithYear:(int)aYear withMonth:(int)aMonth
+{
+    return [self getUsageWithYear:aYear withMonth:aMonth withResolution:nil];
+}
+
+- (KalturaPartnerUsage*)getUsageWithYear:(int)aYear
+{
+    return [self getUsageWithYear:aYear withMonth:KALTURA_UNDEF_INT];
+}
+
+- (KalturaPartnerUsage*)getUsage
+{
+    return [self getUsageWithYear:KALTURA_UNDEF_INT];
+}
+
+- (KalturaPartnerListResponse*)listWithFilter:(KalturaPartnerFilter*)aFilter withPager:(KalturaFilterPager*)aPager
+{
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    return [self.client queueObjectService:@"partner" withAction:@"list" withExpectedType:@"KalturaPartnerListResponse"];
+}
+
+- (KalturaPartnerListResponse*)listWithFilter:(KalturaPartnerFilter*)aFilter
+{
+    return [self listWithFilter:aFilter withPager:nil];
+}
+
+- (KalturaPartnerListResponse*)list
+{
+    return [self listWithFilter:nil];
+}
+
+- (KalturaFeatureStatusListResponse*)listFeatureStatus
+{
+    return [self.client queueObjectService:@"partner" withAction:@"listFeatureStatus" withExpectedType:@"KalturaFeatureStatusListResponse"];
+}
+
+- (KalturaPartnerListResponse*)listPartnersForUserWithPartnerFilter:(KalturaPartnerFilter*)aPartnerFilter withPager:(KalturaFilterPager*)aPager
+{
+    [self.client.params addIfDefinedKey:@"partnerFilter" withObject:aPartnerFilter];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    return [self.client queueObjectService:@"partner" withAction:@"listPartnersForUser" withExpectedType:@"KalturaPartnerListResponse"];
+}
+
+- (KalturaPartnerListResponse*)listPartnersForUserWithPartnerFilter:(KalturaPartnerFilter*)aPartnerFilter
+{
+    return [self listPartnersForUserWithPartnerFilter:aPartnerFilter withPager:nil];
+}
+
+- (KalturaPartnerListResponse*)listPartnersForUser
+{
+    return [self listPartnersForUserWithPartnerFilter:nil];
+}
+
 - (KalturaPartner*)registerWithPartner:(KalturaPartner*)aPartner withCmsPassword:(NSString*)aCmsPassword withTemplatePartnerId:(int)aTemplatePartnerId withSilent:(KALTURA_BOOL)aSilent
 {
     [self.client.params addIfDefinedKey:@"partner" withObject:aPartner];
@@ -47137,108 +47239,6 @@
     return [self updateWithPartner:aPartner withAllowEmpty:KALTURA_UNDEF_BOOL];
 }
 
-- (KalturaPartner*)getWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"partner" withAction:@"get" withExpectedType:@"KalturaPartner"];
-}
-
-- (KalturaPartner*)get
-{
-    return [self getWithId:KALTURA_UNDEF_INT];
-}
-
-- (KalturaPartner*)getSecretsWithPartnerId:(int)aPartnerId withAdminEmail:(NSString*)aAdminEmail withCmsPassword:(NSString*)aCmsPassword
-{
-    [self.client.params addIfDefinedKey:@"partnerId" withInt:aPartnerId];
-    [self.client.params addIfDefinedKey:@"adminEmail" withString:aAdminEmail];
-    [self.client.params addIfDefinedKey:@"cmsPassword" withString:aCmsPassword];
-    return [self.client queueObjectService:@"partner" withAction:@"getSecrets" withExpectedType:@"KalturaPartner"];
-}
-
-- (KalturaPartner*)getInfo
-{
-    return [self.client queueObjectService:@"partner" withAction:@"getInfo" withExpectedType:@"KalturaPartner"];
-}
-
-- (KalturaPartnerUsage*)getUsageWithYear:(int)aYear withMonth:(int)aMonth withResolution:(NSString*)aResolution
-{
-    [self.client.params addIfDefinedKey:@"year" withInt:aYear];
-    [self.client.params addIfDefinedKey:@"month" withInt:aMonth];
-    [self.client.params addIfDefinedKey:@"resolution" withString:aResolution];
-    return [self.client queueObjectService:@"partner" withAction:@"getUsage" withExpectedType:@"KalturaPartnerUsage"];
-}
-
-- (KalturaPartnerUsage*)getUsageWithYear:(int)aYear withMonth:(int)aMonth
-{
-    return [self getUsageWithYear:aYear withMonth:aMonth withResolution:nil];
-}
-
-- (KalturaPartnerUsage*)getUsageWithYear:(int)aYear
-{
-    return [self getUsageWithYear:aYear withMonth:KALTURA_UNDEF_INT];
-}
-
-- (KalturaPartnerUsage*)getUsage
-{
-    return [self getUsageWithYear:KALTURA_UNDEF_INT];
-}
-
-- (KalturaPartnerStatistics*)getStatistics
-{
-    return [self.client queueObjectService:@"partner" withAction:@"getStatistics" withExpectedType:@"KalturaPartnerStatistics"];
-}
-
-- (KalturaPartnerListResponse*)listPartnersForUserWithPartnerFilter:(KalturaPartnerFilter*)aPartnerFilter withPager:(KalturaFilterPager*)aPager
-{
-    [self.client.params addIfDefinedKey:@"partnerFilter" withObject:aPartnerFilter];
-    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
-    return [self.client queueObjectService:@"partner" withAction:@"listPartnersForUser" withExpectedType:@"KalturaPartnerListResponse"];
-}
-
-- (KalturaPartnerListResponse*)listPartnersForUserWithPartnerFilter:(KalturaPartnerFilter*)aPartnerFilter
-{
-    return [self listPartnersForUserWithPartnerFilter:aPartnerFilter withPager:nil];
-}
-
-- (KalturaPartnerListResponse*)listPartnersForUser
-{
-    return [self listPartnersForUserWithPartnerFilter:nil];
-}
-
-- (KalturaPartnerListResponse*)listWithFilter:(KalturaPartnerFilter*)aFilter withPager:(KalturaFilterPager*)aPager
-{
-    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
-    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
-    return [self.client queueObjectService:@"partner" withAction:@"list" withExpectedType:@"KalturaPartnerListResponse"];
-}
-
-- (KalturaPartnerListResponse*)listWithFilter:(KalturaPartnerFilter*)aFilter
-{
-    return [self listWithFilter:aFilter withPager:nil];
-}
-
-- (KalturaPartnerListResponse*)list
-{
-    return [self listWithFilter:nil];
-}
-
-- (KalturaFeatureStatusListResponse*)listFeatureStatus
-{
-    return [self.client queueObjectService:@"partner" withAction:@"listFeatureStatus" withExpectedType:@"KalturaFeatureStatusListResponse"];
-}
-
-- (int)countWithFilter:(KalturaPartnerFilter*)aFilter
-{
-    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
-    return [self.client queueIntService:@"partner" withAction:@"count"];
-}
-
-- (int)count
-{
-    return [self countWithFilter:nil];
-}
-
 @end
 
 @implementation KalturaPermissionItemService
@@ -47248,23 +47248,16 @@
     return [self.client queueObjectService:@"permissionitem" withAction:@"add" withExpectedType:@"KalturaPermissionItem"];
 }
 
-- (KalturaPermissionItem*)getWithPermissionItemId:(int)aPermissionItemId
-{
-    [self.client.params addIfDefinedKey:@"permissionItemId" withInt:aPermissionItemId];
-    return [self.client queueObjectService:@"permissionitem" withAction:@"get" withExpectedType:@"KalturaPermissionItem"];
-}
-
-- (KalturaPermissionItem*)updateWithPermissionItemId:(int)aPermissionItemId withPermissionItem:(KalturaPermissionItem*)aPermissionItem
-{
-    [self.client.params addIfDefinedKey:@"permissionItemId" withInt:aPermissionItemId];
-    [self.client.params addIfDefinedKey:@"permissionItem" withObject:aPermissionItem];
-    return [self.client queueObjectService:@"permissionitem" withAction:@"update" withExpectedType:@"KalturaPermissionItem"];
-}
-
 - (KalturaPermissionItem*)deleteWithPermissionItemId:(int)aPermissionItemId
 {
     [self.client.params addIfDefinedKey:@"permissionItemId" withInt:aPermissionItemId];
     return [self.client queueObjectService:@"permissionitem" withAction:@"delete" withExpectedType:@"KalturaPermissionItem"];
+}
+
+- (KalturaPermissionItem*)getWithPermissionItemId:(int)aPermissionItemId
+{
+    [self.client.params addIfDefinedKey:@"permissionItemId" withInt:aPermissionItemId];
+    return [self.client queueObjectService:@"permissionitem" withAction:@"get" withExpectedType:@"KalturaPermissionItem"];
 }
 
 - (KalturaPermissionItemListResponse*)listWithFilter:(KalturaPermissionItemFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -47284,6 +47277,13 @@
     return [self listWithFilter:nil];
 }
 
+- (KalturaPermissionItem*)updateWithPermissionItemId:(int)aPermissionItemId withPermissionItem:(KalturaPermissionItem*)aPermissionItem
+{
+    [self.client.params addIfDefinedKey:@"permissionItemId" withInt:aPermissionItemId];
+    [self.client.params addIfDefinedKey:@"permissionItem" withObject:aPermissionItem];
+    return [self.client queueObjectService:@"permissionitem" withAction:@"update" withExpectedType:@"KalturaPermissionItem"];
+}
+
 @end
 
 @implementation KalturaPermissionService
@@ -47293,23 +47293,21 @@
     return [self.client queueObjectService:@"permission" withAction:@"add" withExpectedType:@"KalturaPermission"];
 }
 
+- (KalturaPermission*)deleteWithPermissionName:(NSString*)aPermissionName
+{
+    [self.client.params addIfDefinedKey:@"permissionName" withString:aPermissionName];
+    return [self.client queueObjectService:@"permission" withAction:@"delete" withExpectedType:@"KalturaPermission"];
+}
+
 - (KalturaPermission*)getWithPermissionName:(NSString*)aPermissionName
 {
     [self.client.params addIfDefinedKey:@"permissionName" withString:aPermissionName];
     return [self.client queueObjectService:@"permission" withAction:@"get" withExpectedType:@"KalturaPermission"];
 }
 
-- (KalturaPermission*)updateWithPermissionName:(NSString*)aPermissionName withPermission:(KalturaPermission*)aPermission
+- (NSString*)getCurrentPermissions
 {
-    [self.client.params addIfDefinedKey:@"permissionName" withString:aPermissionName];
-    [self.client.params addIfDefinedKey:@"permission" withObject:aPermission];
-    return [self.client queueObjectService:@"permission" withAction:@"update" withExpectedType:@"KalturaPermission"];
-}
-
-- (KalturaPermission*)deleteWithPermissionName:(NSString*)aPermissionName
-{
-    [self.client.params addIfDefinedKey:@"permissionName" withString:aPermissionName];
-    return [self.client queueObjectService:@"permission" withAction:@"delete" withExpectedType:@"KalturaPermission"];
+    return [self.client queueStringService:@"permission" withAction:@"getCurrentPermissions"];
 }
 
 - (KalturaPermissionListResponse*)listWithFilter:(KalturaPermissionFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -47329,9 +47327,11 @@
     return [self listWithFilter:nil];
 }
 
-- (NSString*)getCurrentPermissions
+- (KalturaPermission*)updateWithPermissionName:(NSString*)aPermissionName withPermission:(KalturaPermission*)aPermission
 {
-    return [self.client queueStringService:@"permission" withAction:@"getCurrentPermissions"];
+    [self.client.params addIfDefinedKey:@"permissionName" withString:aPermissionName];
+    [self.client.params addIfDefinedKey:@"permission" withObject:aPermission];
+    return [self.client queueObjectService:@"permission" withAction:@"update" withExpectedType:@"KalturaPermission"];
 }
 
 @end
@@ -47349,37 +47349,6 @@
     return [self addWithPlaylist:aPlaylist withUpdateStats:KALTURA_UNDEF_BOOL];
 }
 
-- (KalturaPlaylist*)getWithId:(NSString*)aId withVersion:(int)aVersion
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"version" withInt:aVersion];
-    return [self.client queueObjectService:@"playlist" withAction:@"get" withExpectedType:@"KalturaPlaylist"];
-}
-
-- (KalturaPlaylist*)getWithId:(NSString*)aId
-{
-    return [self getWithId:aId withVersion:KALTURA_UNDEF_INT];
-}
-
-- (KalturaPlaylist*)updateWithId:(NSString*)aId withPlaylist:(KalturaPlaylist*)aPlaylist withUpdateStats:(KALTURA_BOOL)aUpdateStats
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"playlist" withObject:aPlaylist];
-    [self.client.params addIfDefinedKey:@"updateStats" withBool:aUpdateStats];
-    return [self.client queueObjectService:@"playlist" withAction:@"update" withExpectedType:@"KalturaPlaylist"];
-}
-
-- (KalturaPlaylist*)updateWithId:(NSString*)aId withPlaylist:(KalturaPlaylist*)aPlaylist
-{
-    return [self updateWithId:aId withPlaylist:aPlaylist withUpdateStats:KALTURA_UNDEF_BOOL];
-}
-
-- (void)deleteWithId:(NSString*)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client queueVoidService:@"playlist" withAction:@"delete"];
-}
-
 - (KalturaPlaylist*)cloneWithId:(NSString*)aId withNewPlaylist:(KalturaPlaylist*)aNewPlaylist
 {
     [self.client.params addIfDefinedKey:@"id" withString:aId];
@@ -47392,21 +47361,10 @@
     return [self cloneWithId:aId withNewPlaylist:nil];
 }
 
-- (KalturaPlaylistListResponse*)listWithFilter:(KalturaPlaylistFilter*)aFilter withPager:(KalturaFilterPager*)aPager
+- (void)deleteWithId:(NSString*)aId
 {
-    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
-    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
-    return [self.client queueObjectService:@"playlist" withAction:@"list" withExpectedType:@"KalturaPlaylistListResponse"];
-}
-
-- (KalturaPlaylistListResponse*)listWithFilter:(KalturaPlaylistFilter*)aFilter
-{
-    return [self listWithFilter:aFilter withPager:nil];
-}
-
-- (KalturaPlaylistListResponse*)list
-{
-    return [self listWithFilter:nil];
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client queueVoidService:@"playlist" withAction:@"delete"];
 }
 
 - (NSMutableArray*)executeWithId:(NSString*)aId withDetailed:(NSString*)aDetailed withPlaylistContext:(KalturaContext*)aPlaylistContext withFilter:(KalturaMediaEntryFilterForPlaylist*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -47477,6 +47435,18 @@
     return [self executeFromFiltersWithFilters:aFilters withTotalResults:aTotalResults withDetailed:nil];
 }
 
+- (KalturaPlaylist*)getWithId:(NSString*)aId withVersion:(int)aVersion
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"version" withInt:aVersion];
+    return [self.client queueObjectService:@"playlist" withAction:@"get" withExpectedType:@"KalturaPlaylist"];
+}
+
+- (KalturaPlaylist*)getWithId:(NSString*)aId
+{
+    return [self getWithId:aId withVersion:KALTURA_UNDEF_INT];
+}
+
 - (KalturaPlaylist*)getStatsFromContentWithPlaylistType:(int)aPlaylistType withPlaylistContent:(NSString*)aPlaylistContent
 {
     [self.client.params addIfDefinedKey:@"playlistType" withInt:aPlaylistType];
@@ -47484,9 +47454,88 @@
     return [self.client queueObjectService:@"playlist" withAction:@"getStatsFromContent" withExpectedType:@"KalturaPlaylist"];
 }
 
+- (KalturaPlaylistListResponse*)listWithFilter:(KalturaPlaylistFilter*)aFilter withPager:(KalturaFilterPager*)aPager
+{
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    return [self.client queueObjectService:@"playlist" withAction:@"list" withExpectedType:@"KalturaPlaylistListResponse"];
+}
+
+- (KalturaPlaylistListResponse*)listWithFilter:(KalturaPlaylistFilter*)aFilter
+{
+    return [self listWithFilter:aFilter withPager:nil];
+}
+
+- (KalturaPlaylistListResponse*)list
+{
+    return [self listWithFilter:nil];
+}
+
+- (KalturaPlaylist*)updateWithId:(NSString*)aId withPlaylist:(KalturaPlaylist*)aPlaylist withUpdateStats:(KALTURA_BOOL)aUpdateStats
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"playlist" withObject:aPlaylist];
+    [self.client.params addIfDefinedKey:@"updateStats" withBool:aUpdateStats];
+    return [self.client queueObjectService:@"playlist" withAction:@"update" withExpectedType:@"KalturaPlaylist"];
+}
+
+- (KalturaPlaylist*)updateWithId:(NSString*)aId withPlaylist:(KalturaPlaylist*)aPlaylist
+{
+    return [self updateWithId:aId withPlaylist:aPlaylist withUpdateStats:KALTURA_UNDEF_BOOL];
+}
+
 @end
 
 @implementation KalturaReportService
+- (KalturaReportResponse*)executeWithId:(int)aId withParams:(NSArray*)aParams
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"params" withArray:aParams];
+    return [self.client queueObjectService:@"report" withAction:@"execute" withExpectedType:@"KalturaReportResponse"];
+}
+
+- (KalturaReportResponse*)executeWithId:(int)aId
+{
+    return [self executeWithId:aId withParams:nil];
+}
+
+- (NSMutableArray*)getBaseTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withObjectIds:(NSString*)aObjectIds
+{
+    [self.client.params addIfDefinedKey:@"reportType" withString:aReportType];
+    [self.client.params addIfDefinedKey:@"reportInputFilter" withObject:aReportInputFilter];
+    [self.client.params addIfDefinedKey:@"objectIds" withString:aObjectIds];
+    return [self.client queueArrayService:@"report" withAction:@"getBaseTotal" withExpectedType:@"KalturaReportBaseTotal"];
+}
+
+- (NSMutableArray*)getBaseTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter
+{
+    return [self getBaseTotalWithReportType:aReportType withReportInputFilter:aReportInputFilter withObjectIds:nil];
+}
+
+- (NSString*)getCsvWithId:(int)aId withParams:(NSArray*)aParams
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"params" withArray:aParams];
+    return [self.client queueServeService:@"report" withAction:@"getCsv"];
+}
+
+- (NSString*)getCsvWithId:(int)aId
+{
+    return [self getCsvWithId:aId withParams:nil];
+}
+
+- (NSString*)getCsvFromStringParamsWithId:(int)aId withParams:(NSString*)aParams
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"params" withString:aParams];
+    return [self.client queueServeService:@"report" withAction:@"getCsvFromStringParams"];
+}
+
+- (NSString*)getCsvFromStringParamsWithId:(int)aId
+{
+    return [self getCsvFromStringParamsWithId:aId withParams:nil];
+}
+
 - (NSMutableArray*)getGraphsWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withObjectIds:(NSString*)aObjectIds
 {
     [self.client.params addIfDefinedKey:@"reportType" withString:aReportType];
@@ -47504,32 +47553,6 @@
 - (NSMutableArray*)getGraphsWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter
 {
     return [self getGraphsWithReportType:aReportType withReportInputFilter:aReportInputFilter withDimension:nil];
-}
-
-- (KalturaReportTotal*)getTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withObjectIds:(NSString*)aObjectIds
-{
-    [self.client.params addIfDefinedKey:@"reportType" withString:aReportType];
-    [self.client.params addIfDefinedKey:@"reportInputFilter" withObject:aReportInputFilter];
-    [self.client.params addIfDefinedKey:@"objectIds" withString:aObjectIds];
-    return [self.client queueObjectService:@"report" withAction:@"getTotal" withExpectedType:@"KalturaReportTotal"];
-}
-
-- (KalturaReportTotal*)getTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter
-{
-    return [self getTotalWithReportType:aReportType withReportInputFilter:aReportInputFilter withObjectIds:nil];
-}
-
-- (NSMutableArray*)getBaseTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withObjectIds:(NSString*)aObjectIds
-{
-    [self.client.params addIfDefinedKey:@"reportType" withString:aReportType];
-    [self.client.params addIfDefinedKey:@"reportInputFilter" withObject:aReportInputFilter];
-    [self.client.params addIfDefinedKey:@"objectIds" withString:aObjectIds];
-    return [self.client queueArrayService:@"report" withAction:@"getBaseTotal" withExpectedType:@"KalturaReportBaseTotal"];
-}
-
-- (NSMutableArray*)getBaseTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter
-{
-    return [self getBaseTotalWithReportType:aReportType withReportInputFilter:aReportInputFilter withObjectIds:nil];
 }
 
 - (KalturaReportTable*)getTableWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder withObjectIds:(NSString*)aObjectIds
@@ -47550,6 +47573,19 @@
 - (KalturaReportTable*)getTableWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withPager:(KalturaFilterPager*)aPager
 {
     return [self getTableWithReportType:aReportType withReportInputFilter:aReportInputFilter withPager:aPager withOrder:nil];
+}
+
+- (KalturaReportTotal*)getTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withObjectIds:(NSString*)aObjectIds
+{
+    [self.client.params addIfDefinedKey:@"reportType" withString:aReportType];
+    [self.client.params addIfDefinedKey:@"reportInputFilter" withObject:aReportInputFilter];
+    [self.client.params addIfDefinedKey:@"objectIds" withString:aObjectIds];
+    return [self.client queueObjectService:@"report" withAction:@"getTotal" withExpectedType:@"KalturaReportTotal"];
+}
+
+- (KalturaReportTotal*)getTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter
+{
+    return [self getTotalWithReportType:aReportType withReportInputFilter:aReportInputFilter withObjectIds:nil];
 }
 
 - (NSString*)getUrlForReportAsCsvWithReportTitle:(NSString*)aReportTitle withReportText:(NSString*)aReportText withHeaders:(NSString*)aHeaders withReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder withObjectIds:(NSString*)aObjectIds
@@ -47592,42 +47628,6 @@
     return [self.client queueStringService:@"report" withAction:@"serve"];
 }
 
-- (KalturaReportResponse*)executeWithId:(int)aId withParams:(NSArray*)aParams
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"params" withArray:aParams];
-    return [self.client queueObjectService:@"report" withAction:@"execute" withExpectedType:@"KalturaReportResponse"];
-}
-
-- (KalturaReportResponse*)executeWithId:(int)aId
-{
-    return [self executeWithId:aId withParams:nil];
-}
-
-- (NSString*)getCsvWithId:(int)aId withParams:(NSArray*)aParams
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"params" withArray:aParams];
-    return [self.client queueServeService:@"report" withAction:@"getCsv"];
-}
-
-- (NSString*)getCsvWithId:(int)aId
-{
-    return [self getCsvWithId:aId withParams:nil];
-}
-
-- (NSString*)getCsvFromStringParamsWithId:(int)aId withParams:(NSString*)aParams
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"params" withString:aParams];
-    return [self.client queueServeService:@"report" withAction:@"getCsvFromStringParams"];
-}
-
-- (NSString*)getCsvFromStringParamsWithId:(int)aId
-{
-    return [self getCsvFromStringParamsWithId:aId withParams:nil];
-}
-
 @end
 
 @implementation KalturaResponseProfileService
@@ -47637,30 +47637,23 @@
     return [self.client queueObjectService:@"responseprofile" withAction:@"add" withExpectedType:@"KalturaResponseProfile"];
 }
 
-- (KalturaResponseProfile*)getWithId:(int)aId
+- (KalturaResponseProfile*)cloneWithId:(int)aId withProfile:(KalturaResponseProfile*)aProfile
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"responseprofile" withAction:@"get" withExpectedType:@"KalturaResponseProfile"];
-}
-
-- (KalturaResponseProfile*)updateWithId:(int)aId withUpdateResponseProfile:(KalturaResponseProfile*)aUpdateResponseProfile
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"updateResponseProfile" withObject:aUpdateResponseProfile];
-    return [self.client queueObjectService:@"responseprofile" withAction:@"update" withExpectedType:@"KalturaResponseProfile"];
-}
-
-- (KalturaResponseProfile*)updateStatusWithId:(int)aId withStatus:(int)aStatus
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"status" withInt:aStatus];
-    return [self.client queueObjectService:@"responseprofile" withAction:@"updateStatus" withExpectedType:@"KalturaResponseProfile"];
+    [self.client.params addIfDefinedKey:@"profile" withObject:aProfile];
+    return [self.client queueObjectService:@"responseprofile" withAction:@"clone" withExpectedType:@"KalturaResponseProfile"];
 }
 
 - (void)deleteWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     [self.client queueVoidService:@"responseprofile" withAction:@"delete"];
+}
+
+- (KalturaResponseProfile*)getWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    return [self.client queueObjectService:@"responseprofile" withAction:@"get" withExpectedType:@"KalturaResponseProfile"];
 }
 
 - (KalturaResponseProfileListResponse*)listWithFilter:(KalturaResponseProfileFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -47686,11 +47679,18 @@
     return [self.client queueObjectService:@"responseprofile" withAction:@"recalculate" withExpectedType:@"KalturaResponseProfileCacheRecalculateResults"];
 }
 
-- (KalturaResponseProfile*)cloneWithId:(int)aId withProfile:(KalturaResponseProfile*)aProfile
+- (KalturaResponseProfile*)updateWithId:(int)aId withUpdateResponseProfile:(KalturaResponseProfile*)aUpdateResponseProfile
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"profile" withObject:aProfile];
-    return [self.client queueObjectService:@"responseprofile" withAction:@"clone" withExpectedType:@"KalturaResponseProfile"];
+    [self.client.params addIfDefinedKey:@"updateResponseProfile" withObject:aUpdateResponseProfile];
+    return [self.client queueObjectService:@"responseprofile" withAction:@"update" withExpectedType:@"KalturaResponseProfile"];
+}
+
+- (KalturaResponseProfile*)updateStatusWithId:(int)aId withStatus:(int)aStatus
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"status" withInt:aStatus];
+    return [self.client queueObjectService:@"responseprofile" withAction:@"updateStatus" withExpectedType:@"KalturaResponseProfile"];
 }
 
 @end
@@ -47705,6 +47705,20 @@
 @end
 
 @implementation KalturaSearchService
+- (KalturaSearchAuthData*)externalLoginWithSearchSource:(int)aSearchSource withUserName:(NSString*)aUserName withPassword:(NSString*)aPassword
+{
+    [self.client.params addIfDefinedKey:@"searchSource" withInt:aSearchSource];
+    [self.client.params addIfDefinedKey:@"userName" withString:aUserName];
+    [self.client.params addIfDefinedKey:@"password" withString:aPassword];
+    return [self.client queueObjectService:@"search" withAction:@"externalLogin" withExpectedType:@"KalturaSearchAuthData"];
+}
+
+- (KalturaSearchResult*)getMediaInfoWithSearchResult:(KalturaSearchResult*)aSearchResult
+{
+    [self.client.params addIfDefinedKey:@"searchResult" withObject:aSearchResult];
+    return [self.client queueObjectService:@"search" withAction:@"getMediaInfo" withExpectedType:@"KalturaSearchResult"];
+}
+
 - (KalturaSearchResultResponse*)searchWithSearch:(KalturaSearch*)aSearch withPager:(KalturaFilterPager*)aPager
 {
     [self.client.params addIfDefinedKey:@"search" withObject:aSearch];
@@ -47717,25 +47731,11 @@
     return [self searchWithSearch:aSearch withPager:nil];
 }
 
-- (KalturaSearchResult*)getMediaInfoWithSearchResult:(KalturaSearchResult*)aSearchResult
-{
-    [self.client.params addIfDefinedKey:@"searchResult" withObject:aSearchResult];
-    return [self.client queueObjectService:@"search" withAction:@"getMediaInfo" withExpectedType:@"KalturaSearchResult"];
-}
-
 - (KalturaSearchResult*)searchUrlWithMediaType:(int)aMediaType withUrl:(NSString*)aUrl
 {
     [self.client.params addIfDefinedKey:@"mediaType" withInt:aMediaType];
     [self.client.params addIfDefinedKey:@"url" withString:aUrl];
     return [self.client queueObjectService:@"search" withAction:@"searchUrl" withExpectedType:@"KalturaSearchResult"];
-}
-
-- (KalturaSearchAuthData*)externalLoginWithSearchSource:(int)aSearchSource withUserName:(NSString*)aUserName withPassword:(NSString*)aPassword
-{
-    [self.client.params addIfDefinedKey:@"searchSource" withInt:aSearchSource];
-    [self.client.params addIfDefinedKey:@"userName" withString:aUserName];
-    [self.client.params addIfDefinedKey:@"password" withString:aPassword];
-    return [self.client queueObjectService:@"search" withAction:@"externalLogin" withExpectedType:@"KalturaSearchAuthData"];
 }
 
 @end
@@ -47745,19 +47745,6 @@
 {
     [self.client.params addIfDefinedKey:@"serverNode" withObject:aServerNode];
     return [self.client queueObjectService:@"servernode" withAction:@"add" withExpectedType:@"KalturaServerNode"];
-}
-
-- (KalturaServerNode*)getWithServerNodeId:(int)aServerNodeId
-{
-    [self.client.params addIfDefinedKey:@"serverNodeId" withInt:aServerNodeId];
-    return [self.client queueObjectService:@"servernode" withAction:@"get" withExpectedType:@"KalturaServerNode"];
-}
-
-- (KalturaServerNode*)updateWithServerNodeId:(int)aServerNodeId withServerNode:(KalturaServerNode*)aServerNode
-{
-    [self.client.params addIfDefinedKey:@"serverNodeId" withInt:aServerNodeId];
-    [self.client.params addIfDefinedKey:@"serverNode" withObject:aServerNode];
-    return [self.client queueObjectService:@"servernode" withAction:@"update" withExpectedType:@"KalturaServerNode"];
 }
 
 - (void)deleteWithServerNodeId:(NSString*)aServerNodeId
@@ -47776,6 +47763,12 @@
 {
     [self.client.params addIfDefinedKey:@"serverNodeId" withString:aServerNodeId];
     return [self.client queueObjectService:@"servernode" withAction:@"enable" withExpectedType:@"KalturaServerNode"];
+}
+
+- (KalturaServerNode*)getWithServerNodeId:(int)aServerNodeId
+{
+    [self.client.params addIfDefinedKey:@"serverNodeId" withInt:aServerNodeId];
+    return [self.client queueObjectService:@"servernode" withAction:@"get" withExpectedType:@"KalturaServerNode"];
 }
 
 - (KalturaServerNodeListResponse*)listWithFilter:(KalturaServerNodeFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -47807,48 +47800,30 @@
     return [self reportStatusWithHostName:aHostName withServerNode:nil];
 }
 
+- (KalturaServerNode*)updateWithServerNodeId:(int)aServerNodeId withServerNode:(KalturaServerNode*)aServerNode
+{
+    [self.client.params addIfDefinedKey:@"serverNodeId" withInt:aServerNodeId];
+    [self.client.params addIfDefinedKey:@"serverNode" withObject:aServerNode];
+    return [self.client queueObjectService:@"servernode" withAction:@"update" withExpectedType:@"KalturaServerNode"];
+}
+
 @end
 
 @implementation KalturaSessionService
-- (NSString*)startWithSecret:(NSString*)aSecret withUserId:(NSString*)aUserId withType:(int)aType withPartnerId:(int)aPartnerId withExpiry:(int)aExpiry withPrivileges:(NSString*)aPrivileges
-{
-    [self.client.params addIfDefinedKey:@"secret" withString:aSecret];
-    [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
-    [self.client.params addIfDefinedKey:@"type" withInt:aType];
-    [self.client.params addIfDefinedKey:@"partnerId" withInt:aPartnerId];
-    [self.client.params addIfDefinedKey:@"expiry" withInt:aExpiry];
-    [self.client.params addIfDefinedKey:@"privileges" withString:aPrivileges];
-    return [self.client queueStringService:@"session" withAction:@"start"];
-}
-
-- (NSString*)startWithSecret:(NSString*)aSecret withUserId:(NSString*)aUserId withType:(int)aType withPartnerId:(int)aPartnerId withExpiry:(int)aExpiry
-{
-    return [self startWithSecret:aSecret withUserId:aUserId withType:aType withPartnerId:aPartnerId withExpiry:aExpiry withPrivileges:nil];
-}
-
-- (NSString*)startWithSecret:(NSString*)aSecret withUserId:(NSString*)aUserId withType:(int)aType withPartnerId:(int)aPartnerId
-{
-    return [self startWithSecret:aSecret withUserId:aUserId withType:aType withPartnerId:aPartnerId withExpiry:KALTURA_UNDEF_INT];
-}
-
-- (NSString*)startWithSecret:(NSString*)aSecret withUserId:(NSString*)aUserId withType:(int)aType
-{
-    return [self startWithSecret:aSecret withUserId:aUserId withType:aType withPartnerId:KALTURA_UNDEF_INT];
-}
-
-- (NSString*)startWithSecret:(NSString*)aSecret withUserId:(NSString*)aUserId
-{
-    return [self startWithSecret:aSecret withUserId:aUserId withType:KALTURA_UNDEF_INT];
-}
-
-- (NSString*)startWithSecret:(NSString*)aSecret
-{
-    return [self startWithSecret:aSecret withUserId:nil];
-}
-
 - (void)end
 {
     [self.client queueVoidService:@"session" withAction:@"end"];
+}
+
+- (KalturaSessionInfo*)getWithSession:(NSString*)aSession
+{
+    [self.client.params addIfDefinedKey:@"session" withString:aSession];
+    return [self.client queueObjectService:@"session" withAction:@"get" withExpectedType:@"KalturaSessionInfo"];
+}
+
+- (KalturaSessionInfo*)get
+{
+    return [self getWithSession:nil];
 }
 
 - (NSString*)impersonateWithSecret:(NSString*)aSecret withImpersonatedPartnerId:(int)aImpersonatedPartnerId withUserId:(NSString*)aUserId withType:(int)aType withPartnerId:(int)aPartnerId withExpiry:(int)aExpiry withPrivileges:(NSString*)aPrivileges
@@ -47912,15 +47887,40 @@
     return [self impersonateByKsWithSession:aSession withType:KALTURA_UNDEF_INT];
 }
 
-- (KalturaSessionInfo*)getWithSession:(NSString*)aSession
+- (NSString*)startWithSecret:(NSString*)aSecret withUserId:(NSString*)aUserId withType:(int)aType withPartnerId:(int)aPartnerId withExpiry:(int)aExpiry withPrivileges:(NSString*)aPrivileges
 {
-    [self.client.params addIfDefinedKey:@"session" withString:aSession];
-    return [self.client queueObjectService:@"session" withAction:@"get" withExpectedType:@"KalturaSessionInfo"];
+    [self.client.params addIfDefinedKey:@"secret" withString:aSecret];
+    [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
+    [self.client.params addIfDefinedKey:@"type" withInt:aType];
+    [self.client.params addIfDefinedKey:@"partnerId" withInt:aPartnerId];
+    [self.client.params addIfDefinedKey:@"expiry" withInt:aExpiry];
+    [self.client.params addIfDefinedKey:@"privileges" withString:aPrivileges];
+    return [self.client queueStringService:@"session" withAction:@"start"];
 }
 
-- (KalturaSessionInfo*)get
+- (NSString*)startWithSecret:(NSString*)aSecret withUserId:(NSString*)aUserId withType:(int)aType withPartnerId:(int)aPartnerId withExpiry:(int)aExpiry
 {
-    return [self getWithSession:nil];
+    return [self startWithSecret:aSecret withUserId:aUserId withType:aType withPartnerId:aPartnerId withExpiry:aExpiry withPrivileges:nil];
+}
+
+- (NSString*)startWithSecret:(NSString*)aSecret withUserId:(NSString*)aUserId withType:(int)aType withPartnerId:(int)aPartnerId
+{
+    return [self startWithSecret:aSecret withUserId:aUserId withType:aType withPartnerId:aPartnerId withExpiry:KALTURA_UNDEF_INT];
+}
+
+- (NSString*)startWithSecret:(NSString*)aSecret withUserId:(NSString*)aUserId withType:(int)aType
+{
+    return [self startWithSecret:aSecret withUserId:aUserId withType:aType withPartnerId:KALTURA_UNDEF_INT];
+}
+
+- (NSString*)startWithSecret:(NSString*)aSecret withUserId:(NSString*)aUserId
+{
+    return [self startWithSecret:aSecret withUserId:aUserId withType:KALTURA_UNDEF_INT];
+}
+
+- (NSString*)startWithSecret:(NSString*)aSecret
+{
+    return [self startWithSecret:aSecret withUserId:nil];
 }
 
 - (KalturaStartWidgetSessionResponse*)startWidgetSessionWithWidgetId:(NSString*)aWidgetId withExpiry:(int)aExpiry
@@ -47950,17 +47950,17 @@
     [self.client queueVoidService:@"stats" withAction:@"kmcCollect"];
 }
 
-- (KalturaCEError*)reportKceErrorWithKalturaCEError:(KalturaCEError*)aKalturaCEError
-{
-    [self.client.params addIfDefinedKey:@"kalturaCEError" withObject:aKalturaCEError];
-    return [self.client queueObjectService:@"stats" withAction:@"reportKceError" withExpectedType:@"KalturaCEError"];
-}
-
 - (void)reportErrorWithErrorCode:(NSString*)aErrorCode withErrorMessage:(NSString*)aErrorMessage
 {
     [self.client.params addIfDefinedKey:@"errorCode" withString:aErrorCode];
     [self.client.params addIfDefinedKey:@"errorMessage" withString:aErrorMessage];
     [self.client queueVoidService:@"stats" withAction:@"reportError"];
+}
+
+- (KalturaCEError*)reportKceErrorWithKalturaCEError:(KalturaCEError*)aKalturaCEError
+{
+    [self.client.params addIfDefinedKey:@"kalturaCEError" withObject:aKalturaCEError];
+    return [self.client queueObjectService:@"stats" withAction:@"reportKceError" withExpectedType:@"KalturaCEError"];
 }
 
 @end
@@ -47972,24 +47972,10 @@
     return [self.client queueObjectService:@"storageprofile" withAction:@"add" withExpectedType:@"KalturaStorageProfile"];
 }
 
-- (void)updateStatusWithStorageId:(int)aStorageId withStatus:(int)aStatus
-{
-    [self.client.params addIfDefinedKey:@"storageId" withInt:aStorageId];
-    [self.client.params addIfDefinedKey:@"status" withInt:aStatus];
-    [self.client queueVoidService:@"storageprofile" withAction:@"updateStatus"];
-}
-
 - (KalturaStorageProfile*)getWithStorageProfileId:(int)aStorageProfileId
 {
     [self.client.params addIfDefinedKey:@"storageProfileId" withInt:aStorageProfileId];
     return [self.client queueObjectService:@"storageprofile" withAction:@"get" withExpectedType:@"KalturaStorageProfile"];
-}
-
-- (KalturaStorageProfile*)updateWithStorageProfileId:(int)aStorageProfileId withStorageProfile:(KalturaStorageProfile*)aStorageProfile
-{
-    [self.client.params addIfDefinedKey:@"storageProfileId" withInt:aStorageProfileId];
-    [self.client.params addIfDefinedKey:@"storageProfile" withObject:aStorageProfile];
-    return [self.client queueObjectService:@"storageprofile" withAction:@"update" withExpectedType:@"KalturaStorageProfile"];
 }
 
 - (KalturaStorageProfileListResponse*)listWithFilter:(KalturaStorageProfileFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -48009,6 +47995,20 @@
     return [self listWithFilter:nil];
 }
 
+- (KalturaStorageProfile*)updateWithStorageProfileId:(int)aStorageProfileId withStorageProfile:(KalturaStorageProfile*)aStorageProfile
+{
+    [self.client.params addIfDefinedKey:@"storageProfileId" withInt:aStorageProfileId];
+    [self.client.params addIfDefinedKey:@"storageProfile" withObject:aStorageProfile];
+    return [self.client queueObjectService:@"storageprofile" withAction:@"update" withExpectedType:@"KalturaStorageProfile"];
+}
+
+- (void)updateStatusWithStorageId:(int)aStorageId withStatus:(int)aStatus
+{
+    [self.client.params addIfDefinedKey:@"storageId" withInt:aStorageId];
+    [self.client.params addIfDefinedKey:@"status" withInt:aStatus];
+    [self.client queueVoidService:@"storageprofile" withAction:@"updateStatus"];
+}
+
 @end
 
 @implementation KalturaSyndicationFeedService
@@ -48018,23 +48018,22 @@
     return [self.client queueObjectService:@"syndicationfeed" withAction:@"add" withExpectedType:@"KalturaBaseSyndicationFeed"];
 }
 
+- (void)deleteWithId:(NSString*)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client queueVoidService:@"syndicationfeed" withAction:@"delete"];
+}
+
 - (KalturaBaseSyndicationFeed*)getWithId:(NSString*)aId
 {
     [self.client.params addIfDefinedKey:@"id" withString:aId];
     return [self.client queueObjectService:@"syndicationfeed" withAction:@"get" withExpectedType:@"KalturaBaseSyndicationFeed"];
 }
 
-- (KalturaBaseSyndicationFeed*)updateWithId:(NSString*)aId withSyndicationFeed:(KalturaBaseSyndicationFeed*)aSyndicationFeed
+- (KalturaSyndicationFeedEntryCount*)getEntryCountWithFeedId:(NSString*)aFeedId
 {
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"syndicationFeed" withObject:aSyndicationFeed];
-    return [self.client queueObjectService:@"syndicationfeed" withAction:@"update" withExpectedType:@"KalturaBaseSyndicationFeed"];
-}
-
-- (void)deleteWithId:(NSString*)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client queueVoidService:@"syndicationfeed" withAction:@"delete"];
+    [self.client.params addIfDefinedKey:@"feedId" withString:aFeedId];
+    return [self.client queueObjectService:@"syndicationfeed" withAction:@"getEntryCount" withExpectedType:@"KalturaSyndicationFeedEntryCount"];
 }
 
 - (KalturaBaseSyndicationFeedListResponse*)listWithFilter:(KalturaBaseSyndicationFeedFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -48054,31 +48053,22 @@
     return [self listWithFilter:nil];
 }
 
-- (KalturaSyndicationFeedEntryCount*)getEntryCountWithFeedId:(NSString*)aFeedId
-{
-    [self.client.params addIfDefinedKey:@"feedId" withString:aFeedId];
-    return [self.client queueObjectService:@"syndicationfeed" withAction:@"getEntryCount" withExpectedType:@"KalturaSyndicationFeedEntryCount"];
-}
-
 - (NSString*)requestConversionWithFeedId:(NSString*)aFeedId
 {
     [self.client.params addIfDefinedKey:@"feedId" withString:aFeedId];
     return [self.client queueStringService:@"syndicationfeed" withAction:@"requestConversion"];
 }
 
+- (KalturaBaseSyndicationFeed*)updateWithId:(NSString*)aId withSyndicationFeed:(KalturaBaseSyndicationFeed*)aSyndicationFeed
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"syndicationFeed" withObject:aSyndicationFeed];
+    return [self.client queueObjectService:@"syndicationfeed" withAction:@"update" withExpectedType:@"KalturaBaseSyndicationFeed"];
+}
+
 @end
 
 @implementation KalturaSystemService
-- (KALTURA_BOOL)ping
-{
-    return [self.client queueBoolService:@"system" withAction:@"ping"];
-}
-
-- (KALTURA_BOOL)pingDatabase
-{
-    return [self.client queueBoolService:@"system" withAction:@"pingDatabase"];
-}
-
 - (int)getTime
 {
     return [self.client queueIntService:@"system" withAction:@"getTime"];
@@ -48087,6 +48077,16 @@
 - (NSString*)getVersion
 {
     return [self.client queueStringService:@"system" withAction:@"getVersion"];
+}
+
+- (KALTURA_BOOL)ping
+{
+    return [self.client queueBoolService:@"system" withAction:@"ping"];
+}
+
+- (KALTURA_BOOL)pingDatabase
+{
+    return [self.client queueBoolService:@"system" withAction:@"pingDatabase"];
 }
 
 @end
@@ -48099,30 +48099,110 @@
     return [self.client queueObjectService:@"thumbasset" withAction:@"add" withExpectedType:@"KalturaThumbAsset"];
 }
 
-- (KalturaThumbAsset*)setContentWithId:(NSString*)aId withContentResource:(KalturaContentResource*)aContentResource
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"contentResource" withObject:aContentResource];
-    return [self.client queueObjectService:@"thumbasset" withAction:@"setContent" withExpectedType:@"KalturaThumbAsset"];
-}
-
-- (KalturaThumbAsset*)updateWithId:(NSString*)aId withThumbAsset:(KalturaThumbAsset*)aThumbAsset
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"thumbAsset" withObject:aThumbAsset];
-    return [self.client queueObjectService:@"thumbasset" withAction:@"update" withExpectedType:@"KalturaThumbAsset"];
-}
-
-- (NSString*)serveByEntryIdWithEntryId:(NSString*)aEntryId withThumbParamId:(int)aThumbParamId
+- (KalturaThumbAsset*)addFromImageWithEntryId:(NSString*)aEntryId withFileData:(NSString*)aFileData
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"thumbParamId" withInt:aThumbParamId];
-    return [self.client queueServeService:@"thumbasset" withAction:@"serveByEntryId"];
+    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
+    return [self.client queueObjectService:@"thumbasset" withAction:@"addFromImage" withExpectedType:@"KalturaThumbAsset"];
 }
 
-- (NSString*)serveByEntryIdWithEntryId:(NSString*)aEntryId
+- (KalturaThumbAsset*)addFromUrlWithEntryId:(NSString*)aEntryId withUrl:(NSString*)aUrl
 {
-    return [self serveByEntryIdWithEntryId:aEntryId withThumbParamId:KALTURA_UNDEF_INT];
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"url" withString:aUrl];
+    return [self.client queueObjectService:@"thumbasset" withAction:@"addFromUrl" withExpectedType:@"KalturaThumbAsset"];
+}
+
+- (void)deleteWithThumbAssetId:(NSString*)aThumbAssetId
+{
+    [self.client.params addIfDefinedKey:@"thumbAssetId" withString:aThumbAssetId];
+    [self.client queueVoidService:@"thumbasset" withAction:@"delete"];
+}
+
+- (KalturaFlavorAsset*)exportWithAssetId:(NSString*)aAssetId withStorageProfileId:(int)aStorageProfileId
+{
+    [self.client.params addIfDefinedKey:@"assetId" withString:aAssetId];
+    [self.client.params addIfDefinedKey:@"storageProfileId" withInt:aStorageProfileId];
+    return [self.client queueObjectService:@"thumbasset" withAction:@"export" withExpectedType:@"KalturaFlavorAsset"];
+}
+
+- (KalturaThumbAsset*)generateWithEntryId:(NSString*)aEntryId withThumbParams:(KalturaThumbParams*)aThumbParams withSourceAssetId:(NSString*)aSourceAssetId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"thumbParams" withObject:aThumbParams];
+    [self.client.params addIfDefinedKey:@"sourceAssetId" withString:aSourceAssetId];
+    return [self.client queueObjectService:@"thumbasset" withAction:@"generate" withExpectedType:@"KalturaThumbAsset"];
+}
+
+- (KalturaThumbAsset*)generateWithEntryId:(NSString*)aEntryId withThumbParams:(KalturaThumbParams*)aThumbParams
+{
+    return [self generateWithEntryId:aEntryId withThumbParams:aThumbParams withSourceAssetId:nil];
+}
+
+- (KalturaThumbAsset*)generateByEntryIdWithEntryId:(NSString*)aEntryId withDestThumbParamsId:(int)aDestThumbParamsId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"destThumbParamsId" withInt:aDestThumbParamsId];
+    return [self.client queueObjectService:@"thumbasset" withAction:@"generateByEntryId" withExpectedType:@"KalturaThumbAsset"];
+}
+
+- (KalturaThumbAsset*)getWithThumbAssetId:(NSString*)aThumbAssetId
+{
+    [self.client.params addIfDefinedKey:@"thumbAssetId" withString:aThumbAssetId];
+    return [self.client queueObjectService:@"thumbasset" withAction:@"get" withExpectedType:@"KalturaThumbAsset"];
+}
+
+- (NSMutableArray*)getByEntryIdWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    return [self.client queueArrayService:@"thumbasset" withAction:@"getByEntryId" withExpectedType:@"KalturaThumbAsset"];
+}
+
+- (KalturaRemotePathListResponse*)getRemotePathsWithId:(NSString*)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    return [self.client queueObjectService:@"thumbasset" withAction:@"getRemotePaths" withExpectedType:@"KalturaRemotePathListResponse"];
+}
+
+- (NSString*)getUrlWithId:(NSString*)aId withStorageId:(int)aStorageId withThumbParams:(KalturaThumbParams*)aThumbParams
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"storageId" withInt:aStorageId];
+    [self.client.params addIfDefinedKey:@"thumbParams" withObject:aThumbParams];
+    return [self.client queueStringService:@"thumbasset" withAction:@"getUrl"];
+}
+
+- (NSString*)getUrlWithId:(NSString*)aId withStorageId:(int)aStorageId
+{
+    return [self getUrlWithId:aId withStorageId:aStorageId withThumbParams:nil];
+}
+
+- (NSString*)getUrlWithId:(NSString*)aId
+{
+    return [self getUrlWithId:aId withStorageId:KALTURA_UNDEF_INT];
+}
+
+- (KalturaThumbAssetListResponse*)listWithFilter:(KalturaAssetFilter*)aFilter withPager:(KalturaFilterPager*)aPager
+{
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    return [self.client queueObjectService:@"thumbasset" withAction:@"list" withExpectedType:@"KalturaThumbAssetListResponse"];
+}
+
+- (KalturaThumbAssetListResponse*)listWithFilter:(KalturaAssetFilter*)aFilter
+{
+    return [self listWithFilter:aFilter withPager:nil];
+}
+
+- (KalturaThumbAssetListResponse*)list
+{
+    return [self listWithFilter:nil];
+}
+
+- (KalturaThumbAsset*)regenerateWithThumbAssetId:(NSString*)aThumbAssetId
+{
+    [self.client.params addIfDefinedKey:@"thumbAssetId" withString:aThumbAssetId];
+    return [self.client queueObjectService:@"thumbasset" withAction:@"regenerate" withExpectedType:@"KalturaThumbAsset"];
 }
 
 - (NSString*)serveWithThumbAssetId:(NSString*)aThumbAssetId withVersion:(int)aVersion withThumbParams:(KalturaThumbParams*)aThumbParams withOptions:(KalturaThumbnailServeOptions*)aOptions
@@ -48149,116 +48229,36 @@
     return [self serveWithThumbAssetId:aThumbAssetId withVersion:KALTURA_UNDEF_INT];
 }
 
+- (NSString*)serveByEntryIdWithEntryId:(NSString*)aEntryId withThumbParamId:(int)aThumbParamId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"thumbParamId" withInt:aThumbParamId];
+    return [self.client queueServeService:@"thumbasset" withAction:@"serveByEntryId"];
+}
+
+- (NSString*)serveByEntryIdWithEntryId:(NSString*)aEntryId
+{
+    return [self serveByEntryIdWithEntryId:aEntryId withThumbParamId:KALTURA_UNDEF_INT];
+}
+
 - (void)setAsDefaultWithThumbAssetId:(NSString*)aThumbAssetId
 {
     [self.client.params addIfDefinedKey:@"thumbAssetId" withString:aThumbAssetId];
     [self.client queueVoidService:@"thumbasset" withAction:@"setAsDefault"];
 }
 
-- (KalturaThumbAsset*)generateByEntryIdWithEntryId:(NSString*)aEntryId withDestThumbParamsId:(int)aDestThumbParamsId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"destThumbParamsId" withInt:aDestThumbParamsId];
-    return [self.client queueObjectService:@"thumbasset" withAction:@"generateByEntryId" withExpectedType:@"KalturaThumbAsset"];
-}
-
-- (KalturaThumbAsset*)generateWithEntryId:(NSString*)aEntryId withThumbParams:(KalturaThumbParams*)aThumbParams withSourceAssetId:(NSString*)aSourceAssetId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"thumbParams" withObject:aThumbParams];
-    [self.client.params addIfDefinedKey:@"sourceAssetId" withString:aSourceAssetId];
-    return [self.client queueObjectService:@"thumbasset" withAction:@"generate" withExpectedType:@"KalturaThumbAsset"];
-}
-
-- (KalturaThumbAsset*)generateWithEntryId:(NSString*)aEntryId withThumbParams:(KalturaThumbParams*)aThumbParams
-{
-    return [self generateWithEntryId:aEntryId withThumbParams:aThumbParams withSourceAssetId:nil];
-}
-
-- (KalturaThumbAsset*)regenerateWithThumbAssetId:(NSString*)aThumbAssetId
-{
-    [self.client.params addIfDefinedKey:@"thumbAssetId" withString:aThumbAssetId];
-    return [self.client queueObjectService:@"thumbasset" withAction:@"regenerate" withExpectedType:@"KalturaThumbAsset"];
-}
-
-- (KalturaThumbAsset*)getWithThumbAssetId:(NSString*)aThumbAssetId
-{
-    [self.client.params addIfDefinedKey:@"thumbAssetId" withString:aThumbAssetId];
-    return [self.client queueObjectService:@"thumbasset" withAction:@"get" withExpectedType:@"KalturaThumbAsset"];
-}
-
-- (NSMutableArray*)getByEntryIdWithEntryId:(NSString*)aEntryId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    return [self.client queueArrayService:@"thumbasset" withAction:@"getByEntryId" withExpectedType:@"KalturaThumbAsset"];
-}
-
-- (KalturaThumbAssetListResponse*)listWithFilter:(KalturaAssetFilter*)aFilter withPager:(KalturaFilterPager*)aPager
-{
-    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
-    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
-    return [self.client queueObjectService:@"thumbasset" withAction:@"list" withExpectedType:@"KalturaThumbAssetListResponse"];
-}
-
-- (KalturaThumbAssetListResponse*)listWithFilter:(KalturaAssetFilter*)aFilter
-{
-    return [self listWithFilter:aFilter withPager:nil];
-}
-
-- (KalturaThumbAssetListResponse*)list
-{
-    return [self listWithFilter:nil];
-}
-
-- (KalturaThumbAsset*)addFromUrlWithEntryId:(NSString*)aEntryId withUrl:(NSString*)aUrl
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"url" withString:aUrl];
-    return [self.client queueObjectService:@"thumbasset" withAction:@"addFromUrl" withExpectedType:@"KalturaThumbAsset"];
-}
-
-- (KalturaThumbAsset*)addFromImageWithEntryId:(NSString*)aEntryId withFileData:(NSString*)aFileData
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
-    return [self.client queueObjectService:@"thumbasset" withAction:@"addFromImage" withExpectedType:@"KalturaThumbAsset"];
-}
-
-- (void)deleteWithThumbAssetId:(NSString*)aThumbAssetId
-{
-    [self.client.params addIfDefinedKey:@"thumbAssetId" withString:aThumbAssetId];
-    [self.client queueVoidService:@"thumbasset" withAction:@"delete"];
-}
-
-- (NSString*)getUrlWithId:(NSString*)aId withStorageId:(int)aStorageId withThumbParams:(KalturaThumbParams*)aThumbParams
+- (KalturaThumbAsset*)setContentWithId:(NSString*)aId withContentResource:(KalturaContentResource*)aContentResource
 {
     [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"storageId" withInt:aStorageId];
-    [self.client.params addIfDefinedKey:@"thumbParams" withObject:aThumbParams];
-    return [self.client queueStringService:@"thumbasset" withAction:@"getUrl"];
+    [self.client.params addIfDefinedKey:@"contentResource" withObject:aContentResource];
+    return [self.client queueObjectService:@"thumbasset" withAction:@"setContent" withExpectedType:@"KalturaThumbAsset"];
 }
 
-- (NSString*)getUrlWithId:(NSString*)aId withStorageId:(int)aStorageId
-{
-    return [self getUrlWithId:aId withStorageId:aStorageId withThumbParams:nil];
-}
-
-- (NSString*)getUrlWithId:(NSString*)aId
-{
-    return [self getUrlWithId:aId withStorageId:KALTURA_UNDEF_INT];
-}
-
-- (KalturaRemotePathListResponse*)getRemotePathsWithId:(NSString*)aId
+- (KalturaThumbAsset*)updateWithId:(NSString*)aId withThumbAsset:(KalturaThumbAsset*)aThumbAsset
 {
     [self.client.params addIfDefinedKey:@"id" withString:aId];
-    return [self.client queueObjectService:@"thumbasset" withAction:@"getRemotePaths" withExpectedType:@"KalturaRemotePathListResponse"];
-}
-
-- (KalturaFlavorAsset*)exportWithAssetId:(NSString*)aAssetId withStorageProfileId:(int)aStorageProfileId
-{
-    [self.client.params addIfDefinedKey:@"assetId" withString:aAssetId];
-    [self.client.params addIfDefinedKey:@"storageProfileId" withInt:aStorageProfileId];
-    return [self.client queueObjectService:@"thumbasset" withAction:@"export" withExpectedType:@"KalturaFlavorAsset"];
+    [self.client.params addIfDefinedKey:@"thumbAsset" withObject:aThumbAsset];
+    return [self.client queueObjectService:@"thumbasset" withAction:@"update" withExpectedType:@"KalturaThumbAsset"];
 }
 
 @end
@@ -48296,23 +48296,22 @@
     return [self.client queueObjectService:@"thumbparams" withAction:@"add" withExpectedType:@"KalturaThumbParams"];
 }
 
+- (void)deleteWithId:(int)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client queueVoidService:@"thumbparams" withAction:@"delete"];
+}
+
 - (KalturaThumbParams*)getWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     return [self.client queueObjectService:@"thumbparams" withAction:@"get" withExpectedType:@"KalturaThumbParams"];
 }
 
-- (KalturaThumbParams*)updateWithId:(int)aId withThumbParams:(KalturaThumbParams*)aThumbParams
+- (NSMutableArray*)getByConversionProfileIdWithConversionProfileId:(int)aConversionProfileId
 {
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"thumbParams" withObject:aThumbParams];
-    return [self.client queueObjectService:@"thumbparams" withAction:@"update" withExpectedType:@"KalturaThumbParams"];
-}
-
-- (void)deleteWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client queueVoidService:@"thumbparams" withAction:@"delete"];
+    [self.client.params addIfDefinedKey:@"conversionProfileId" withInt:aConversionProfileId];
+    return [self.client queueArrayService:@"thumbparams" withAction:@"getByConversionProfileId" withExpectedType:@"KalturaThumbParams"];
 }
 
 - (KalturaThumbParamsListResponse*)listWithFilter:(KalturaThumbParamsFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -48332,10 +48331,11 @@
     return [self listWithFilter:nil];
 }
 
-- (NSMutableArray*)getByConversionProfileIdWithConversionProfileId:(int)aConversionProfileId
+- (KalturaThumbParams*)updateWithId:(int)aId withThumbParams:(KalturaThumbParams*)aThumbParams
 {
-    [self.client.params addIfDefinedKey:@"conversionProfileId" withInt:aConversionProfileId];
-    return [self.client queueArrayService:@"thumbparams" withAction:@"getByConversionProfileId" withExpectedType:@"KalturaThumbParams"];
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"thumbParams" withObject:aThumbParams];
+    return [self.client queueObjectService:@"thumbparams" withAction:@"update" withExpectedType:@"KalturaThumbParams"];
 }
 
 @end
@@ -48347,17 +48347,10 @@
     return [self.client queueObjectService:@"uiconf" withAction:@"add" withExpectedType:@"KalturaUiConf"];
 }
 
-- (KalturaUiConf*)updateWithId:(int)aId withUiConf:(KalturaUiConf*)aUiConf
+- (KalturaUiConf*)cloneWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"uiConf" withObject:aUiConf];
-    return [self.client queueObjectService:@"uiconf" withAction:@"update" withExpectedType:@"KalturaUiConf"];
-}
-
-- (KalturaUiConf*)getWithId:(int)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"uiconf" withAction:@"get" withExpectedType:@"KalturaUiConf"];
+    return [self.client queueObjectService:@"uiconf" withAction:@"clone" withExpectedType:@"KalturaUiConf"];
 }
 
 - (void)deleteWithId:(int)aId
@@ -48366,27 +48359,15 @@
     [self.client queueVoidService:@"uiconf" withAction:@"delete"];
 }
 
-- (KalturaUiConf*)cloneWithId:(int)aId
+- (KalturaUiConf*)getWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    return [self.client queueObjectService:@"uiconf" withAction:@"clone" withExpectedType:@"KalturaUiConf"];
+    return [self.client queueObjectService:@"uiconf" withAction:@"get" withExpectedType:@"KalturaUiConf"];
 }
 
-- (KalturaUiConfListResponse*)listTemplatesWithFilter:(KalturaUiConfFilter*)aFilter withPager:(KalturaFilterPager*)aPager
+- (NSMutableArray*)getAvailableTypes
 {
-    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
-    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
-    return [self.client queueObjectService:@"uiconf" withAction:@"listTemplates" withExpectedType:@"KalturaUiConfListResponse"];
-}
-
-- (KalturaUiConfListResponse*)listTemplatesWithFilter:(KalturaUiConfFilter*)aFilter
-{
-    return [self listTemplatesWithFilter:aFilter withPager:nil];
-}
-
-- (KalturaUiConfListResponse*)listTemplates
-{
-    return [self listTemplatesWithFilter:nil];
+    return [self.client queueArrayService:@"uiconf" withAction:@"getAvailableTypes" withExpectedType:@"KalturaUiConfTypeInfo"];
 }
 
 - (KalturaUiConfListResponse*)listWithFilter:(KalturaUiConfFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -48406,24 +48387,43 @@
     return [self listWithFilter:nil];
 }
 
-- (NSMutableArray*)getAvailableTypes
+- (KalturaUiConfListResponse*)listTemplatesWithFilter:(KalturaUiConfFilter*)aFilter withPager:(KalturaFilterPager*)aPager
 {
-    return [self.client queueArrayService:@"uiconf" withAction:@"getAvailableTypes" withExpectedType:@"KalturaUiConfTypeInfo"];
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    return [self.client queueObjectService:@"uiconf" withAction:@"listTemplates" withExpectedType:@"KalturaUiConfListResponse"];
+}
+
+- (KalturaUiConfListResponse*)listTemplatesWithFilter:(KalturaUiConfFilter*)aFilter
+{
+    return [self listTemplatesWithFilter:aFilter withPager:nil];
+}
+
+- (KalturaUiConfListResponse*)listTemplates
+{
+    return [self listTemplatesWithFilter:nil];
+}
+
+- (KalturaUiConf*)updateWithId:(int)aId withUiConf:(KalturaUiConf*)aUiConf
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"uiConf" withObject:aUiConf];
+    return [self.client queueObjectService:@"uiconf" withAction:@"update" withExpectedType:@"KalturaUiConf"];
 }
 
 @end
 
 @implementation KalturaUploadService
-- (NSString*)uploadWithFileData:(NSString*)aFileData
-{
-    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
-    return [self.client queueStringService:@"upload" withAction:@"upload"];
-}
-
 - (KalturaUploadResponse*)getUploadedFileTokenByFileNameWithFileName:(NSString*)aFileName
 {
     [self.client.params addIfDefinedKey:@"fileName" withString:aFileName];
     return [self.client queueObjectService:@"upload" withAction:@"getUploadedFileTokenByFileName" withExpectedType:@"KalturaUploadResponse"];
+}
+
+- (NSString*)uploadWithFileData:(NSString*)aFileData
+{
+    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
+    return [self.client queueStringService:@"upload" withAction:@"upload"];
 }
 
 @end
@@ -48440,10 +48440,33 @@
     return [self addWithUploadToken:nil];
 }
 
+- (void)deleteWithUploadTokenId:(NSString*)aUploadTokenId
+{
+    [self.client.params addIfDefinedKey:@"uploadTokenId" withString:aUploadTokenId];
+    [self.client queueVoidService:@"uploadtoken" withAction:@"delete"];
+}
+
 - (KalturaUploadToken*)getWithUploadTokenId:(NSString*)aUploadTokenId
 {
     [self.client.params addIfDefinedKey:@"uploadTokenId" withString:aUploadTokenId];
     return [self.client queueObjectService:@"uploadtoken" withAction:@"get" withExpectedType:@"KalturaUploadToken"];
+}
+
+- (KalturaUploadTokenListResponse*)listWithFilter:(KalturaUploadTokenFilter*)aFilter withPager:(KalturaFilterPager*)aPager
+{
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    return [self.client queueObjectService:@"uploadtoken" withAction:@"list" withExpectedType:@"KalturaUploadTokenListResponse"];
+}
+
+- (KalturaUploadTokenListResponse*)listWithFilter:(KalturaUploadTokenFilter*)aFilter
+{
+    return [self listWithFilter:aFilter withPager:nil];
+}
+
+- (KalturaUploadTokenListResponse*)list
+{
+    return [self listWithFilter:nil];
 }
 
 - (KalturaUploadToken*)uploadWithUploadTokenId:(NSString*)aUploadTokenId withFileData:(NSString*)aFileData withResume:(KALTURA_BOOL)aResume withFinalChunk:(KALTURA_BOOL)aFinalChunk withResumeAt:(double)aResumeAt
@@ -48471,29 +48494,6 @@
     return [self uploadWithUploadTokenId:aUploadTokenId withFileData:aFileData withResume:KALTURA_UNDEF_BOOL];
 }
 
-- (void)deleteWithUploadTokenId:(NSString*)aUploadTokenId
-{
-    [self.client.params addIfDefinedKey:@"uploadTokenId" withString:aUploadTokenId];
-    [self.client queueVoidService:@"uploadtoken" withAction:@"delete"];
-}
-
-- (KalturaUploadTokenListResponse*)listWithFilter:(KalturaUploadTokenFilter*)aFilter withPager:(KalturaFilterPager*)aPager
-{
-    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
-    [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
-    return [self.client queueObjectService:@"uploadtoken" withAction:@"list" withExpectedType:@"KalturaUploadTokenListResponse"];
-}
-
-- (KalturaUploadTokenListResponse*)listWithFilter:(KalturaUploadTokenFilter*)aFilter
-{
-    return [self listWithFilter:aFilter withPager:nil];
-}
-
-- (KalturaUploadTokenListResponse*)list
-{
-    return [self listWithFilter:nil];
-}
-
 @end
 
 @implementation KalturaUserEntryService
@@ -48503,17 +48503,16 @@
     return [self.client queueObjectService:@"userentry" withAction:@"add" withExpectedType:@"KalturaUserEntry"];
 }
 
-- (void)updateWithId:(int)aId withUserEntry:(KalturaUserEntry*)aUserEntry
-{
-    [self.client.params addIfDefinedKey:@"id" withInt:aId];
-    [self.client.params addIfDefinedKey:@"userEntry" withObject:aUserEntry];
-    [self.client queueVoidService:@"userentry" withAction:@"update"];
-}
-
 - (KalturaUserEntry*)deleteWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     return [self.client queueObjectService:@"userentry" withAction:@"delete" withExpectedType:@"KalturaUserEntry"];
+}
+
+- (KalturaUserEntry*)getWithId:(NSString*)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    return [self.client queueObjectService:@"userentry" withAction:@"get" withExpectedType:@"KalturaUserEntry"];
 }
 
 - (KalturaUserEntryListResponse*)listWithFilter:(KalturaUserEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -48528,16 +48527,17 @@
     return [self listWithFilter:aFilter withPager:nil];
 }
 
-- (KalturaUserEntry*)getWithId:(NSString*)aId
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    return [self.client queueObjectService:@"userentry" withAction:@"get" withExpectedType:@"KalturaUserEntry"];
-}
-
 - (KalturaQuizUserEntry*)submitQuizWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     return [self.client queueObjectService:@"userentry" withAction:@"submitQuiz" withExpectedType:@"KalturaQuizUserEntry"];
+}
+
+- (void)updateWithId:(int)aId withUserEntry:(KalturaUserEntry*)aUserEntry
+{
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
+    [self.client.params addIfDefinedKey:@"userEntry" withObject:aUserEntry];
+    [self.client queueVoidService:@"userentry" withAction:@"update"];
 }
 
 @end
@@ -48549,23 +48549,22 @@
     return [self.client queueObjectService:@"userrole" withAction:@"add" withExpectedType:@"KalturaUserRole"];
 }
 
-- (KalturaUserRole*)getWithUserRoleId:(int)aUserRoleId
+- (KalturaUserRole*)cloneWithUserRoleId:(int)aUserRoleId
 {
     [self.client.params addIfDefinedKey:@"userRoleId" withInt:aUserRoleId];
-    return [self.client queueObjectService:@"userrole" withAction:@"get" withExpectedType:@"KalturaUserRole"];
-}
-
-- (KalturaUserRole*)updateWithUserRoleId:(int)aUserRoleId withUserRole:(KalturaUserRole*)aUserRole
-{
-    [self.client.params addIfDefinedKey:@"userRoleId" withInt:aUserRoleId];
-    [self.client.params addIfDefinedKey:@"userRole" withObject:aUserRole];
-    return [self.client queueObjectService:@"userrole" withAction:@"update" withExpectedType:@"KalturaUserRole"];
+    return [self.client queueObjectService:@"userrole" withAction:@"clone" withExpectedType:@"KalturaUserRole"];
 }
 
 - (KalturaUserRole*)deleteWithUserRoleId:(int)aUserRoleId
 {
     [self.client.params addIfDefinedKey:@"userRoleId" withInt:aUserRoleId];
     return [self.client queueObjectService:@"userrole" withAction:@"delete" withExpectedType:@"KalturaUserRole"];
+}
+
+- (KalturaUserRole*)getWithUserRoleId:(int)aUserRoleId
+{
+    [self.client.params addIfDefinedKey:@"userRoleId" withInt:aUserRoleId];
+    return [self.client queueObjectService:@"userrole" withAction:@"get" withExpectedType:@"KalturaUserRole"];
 }
 
 - (KalturaUserRoleListResponse*)listWithFilter:(KalturaUserRoleFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -48585,10 +48584,11 @@
     return [self listWithFilter:nil];
 }
 
-- (KalturaUserRole*)cloneWithUserRoleId:(int)aUserRoleId
+- (KalturaUserRole*)updateWithUserRoleId:(int)aUserRoleId withUserRole:(KalturaUserRole*)aUserRole
 {
     [self.client.params addIfDefinedKey:@"userRoleId" withInt:aUserRoleId];
-    return [self.client queueObjectService:@"userrole" withAction:@"clone" withExpectedType:@"KalturaUserRole"];
+    [self.client.params addIfDefinedKey:@"userRole" withObject:aUserRole];
+    return [self.client queueObjectService:@"userrole" withAction:@"update" withExpectedType:@"KalturaUserRole"];
 }
 
 @end
@@ -48600,11 +48600,64 @@
     return [self.client queueObjectService:@"user" withAction:@"add" withExpectedType:@"KalturaUser"];
 }
 
-- (KalturaUser*)updateWithUserId:(NSString*)aUserId withUser:(KalturaUser*)aUser
+- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData withBulkUploadUserData:(KalturaBulkUploadUserData*)aBulkUploadUserData
+{
+    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
+    [self.client.params addIfDefinedKey:@"bulkUploadData" withObject:aBulkUploadData];
+    [self.client.params addIfDefinedKey:@"bulkUploadUserData" withObject:aBulkUploadUserData];
+    return [self.client queueObjectService:@"user" withAction:@"addFromBulkUpload" withExpectedType:@"KalturaBulkUpload"];
+}
+
+- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData
+{
+    return [self addFromBulkUploadWithFileData:aFileData withBulkUploadData:aBulkUploadData withBulkUploadUserData:nil];
+}
+
+- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData
+{
+    return [self addFromBulkUploadWithFileData:aFileData withBulkUploadData:nil];
+}
+
+- (KALTURA_BOOL)checkLoginDataExistsWithFilter:(KalturaUserLoginDataFilter*)aFilter
+{
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    return [self.client queueBoolService:@"user" withAction:@"checkLoginDataExists"];
+}
+
+- (KalturaUser*)deleteWithUserId:(NSString*)aUserId
 {
     [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
-    [self.client.params addIfDefinedKey:@"user" withObject:aUser];
-    return [self.client queueObjectService:@"user" withAction:@"update" withExpectedType:@"KalturaUser"];
+    return [self.client queueObjectService:@"user" withAction:@"delete" withExpectedType:@"KalturaUser"];
+}
+
+- (KalturaUser*)disableLoginWithUserId:(NSString*)aUserId withLoginId:(NSString*)aLoginId
+{
+    [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
+    [self.client.params addIfDefinedKey:@"loginId" withString:aLoginId];
+    return [self.client queueObjectService:@"user" withAction:@"disableLogin" withExpectedType:@"KalturaUser"];
+}
+
+- (KalturaUser*)disableLoginWithUserId:(NSString*)aUserId
+{
+    return [self disableLoginWithUserId:aUserId withLoginId:nil];
+}
+
+- (KalturaUser*)disableLogin
+{
+    return [self disableLoginWithUserId:nil];
+}
+
+- (KalturaUser*)enableLoginWithUserId:(NSString*)aUserId withLoginId:(NSString*)aLoginId withPassword:(NSString*)aPassword
+{
+    [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
+    [self.client.params addIfDefinedKey:@"loginId" withString:aLoginId];
+    [self.client.params addIfDefinedKey:@"password" withString:aPassword];
+    return [self.client queueObjectService:@"user" withAction:@"enableLogin" withExpectedType:@"KalturaUser"];
+}
+
+- (KalturaUser*)enableLoginWithUserId:(NSString*)aUserId withLoginId:(NSString*)aLoginId
+{
+    return [self enableLoginWithUserId:aUserId withLoginId:aLoginId withPassword:nil];
 }
 
 - (KalturaUser*)getWithUserId:(NSString*)aUserId
@@ -48624,10 +48677,16 @@
     return [self.client queueObjectService:@"user" withAction:@"getByLoginId" withExpectedType:@"KalturaUser"];
 }
 
-- (KalturaUser*)deleteWithUserId:(NSString*)aUserId
+- (NSString*)indexWithId:(NSString*)aId withShouldUpdate:(KALTURA_BOOL)aShouldUpdate
 {
-    [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
-    return [self.client queueObjectService:@"user" withAction:@"delete" withExpectedType:@"KalturaUser"];
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"shouldUpdate" withBool:aShouldUpdate];
+    return [self.client queueStringService:@"user" withAction:@"index"];
+}
+
+- (NSString*)indexWithId:(NSString*)aId
+{
+    return [self indexWithId:aId withShouldUpdate:KALTURA_UNDEF_BOOL];
 }
 
 - (KalturaUserListResponse*)listWithFilter:(KalturaUserFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -48645,12 +48704,6 @@
 - (KalturaUserListResponse*)list
 {
     return [self listWithFilter:nil];
-}
-
-- (void)notifyBanWithUserId:(NSString*)aUserId
-{
-    [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
-    [self.client queueVoidService:@"user" withAction:@"notifyBan"];
 }
 
 - (NSString*)loginWithPartnerId:(int)aPartnerId withUserId:(NSString*)aUserId withPassword:(NSString*)aPassword withExpiry:(int)aExpiry withPrivileges:(NSString*)aPrivileges
@@ -48704,6 +48757,32 @@
     return [self loginByLoginIdWithLoginId:aLoginId withPassword:aPassword withPartnerId:KALTURA_UNDEF_INT];
 }
 
+- (void)notifyBanWithUserId:(NSString*)aUserId
+{
+    [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
+    [self.client queueVoidService:@"user" withAction:@"notifyBan"];
+}
+
+- (void)resetPasswordWithEmail:(NSString*)aEmail
+{
+    [self.client.params addIfDefinedKey:@"email" withString:aEmail];
+    [self.client queueVoidService:@"user" withAction:@"resetPassword"];
+}
+
+- (void)setInitialPasswordWithHashKey:(NSString*)aHashKey withNewPassword:(NSString*)aNewPassword
+{
+    [self.client.params addIfDefinedKey:@"hashKey" withString:aHashKey];
+    [self.client.params addIfDefinedKey:@"newPassword" withString:aNewPassword];
+    [self.client queueVoidService:@"user" withAction:@"setInitialPassword"];
+}
+
+- (KalturaUser*)updateWithUserId:(NSString*)aUserId withUser:(KalturaUser*)aUser
+{
+    [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
+    [self.client.params addIfDefinedKey:@"user" withObject:aUser];
+    return [self.client queueObjectService:@"user" withAction:@"update" withExpectedType:@"KalturaUser"];
+}
+
 - (void)updateLoginDataWithOldLoginId:(NSString*)aOldLoginId withPassword:(NSString*)aPassword withNewLoginId:(NSString*)aNewLoginId withNewPassword:(NSString*)aNewPassword withNewFirstName:(NSString*)aNewFirstName withNewLastName:(NSString*)aNewLastName
 {
     [self.client.params addIfDefinedKey:@"oldLoginId" withString:aOldLoginId];
@@ -48735,85 +48814,6 @@
     [self updateLoginDataWithOldLoginId:aOldLoginId withPassword:aPassword withNewLoginId:nil];
 }
 
-- (void)resetPasswordWithEmail:(NSString*)aEmail
-{
-    [self.client.params addIfDefinedKey:@"email" withString:aEmail];
-    [self.client queueVoidService:@"user" withAction:@"resetPassword"];
-}
-
-- (void)setInitialPasswordWithHashKey:(NSString*)aHashKey withNewPassword:(NSString*)aNewPassword
-{
-    [self.client.params addIfDefinedKey:@"hashKey" withString:aHashKey];
-    [self.client.params addIfDefinedKey:@"newPassword" withString:aNewPassword];
-    [self.client queueVoidService:@"user" withAction:@"setInitialPassword"];
-}
-
-- (KalturaUser*)enableLoginWithUserId:(NSString*)aUserId withLoginId:(NSString*)aLoginId withPassword:(NSString*)aPassword
-{
-    [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
-    [self.client.params addIfDefinedKey:@"loginId" withString:aLoginId];
-    [self.client.params addIfDefinedKey:@"password" withString:aPassword];
-    return [self.client queueObjectService:@"user" withAction:@"enableLogin" withExpectedType:@"KalturaUser"];
-}
-
-- (KalturaUser*)enableLoginWithUserId:(NSString*)aUserId withLoginId:(NSString*)aLoginId
-{
-    return [self enableLoginWithUserId:aUserId withLoginId:aLoginId withPassword:nil];
-}
-
-- (KalturaUser*)disableLoginWithUserId:(NSString*)aUserId withLoginId:(NSString*)aLoginId
-{
-    [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
-    [self.client.params addIfDefinedKey:@"loginId" withString:aLoginId];
-    return [self.client queueObjectService:@"user" withAction:@"disableLogin" withExpectedType:@"KalturaUser"];
-}
-
-- (KalturaUser*)disableLoginWithUserId:(NSString*)aUserId
-{
-    return [self disableLoginWithUserId:aUserId withLoginId:nil];
-}
-
-- (KalturaUser*)disableLogin
-{
-    return [self disableLoginWithUserId:nil];
-}
-
-- (NSString*)indexWithId:(NSString*)aId withShouldUpdate:(KALTURA_BOOL)aShouldUpdate
-{
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
-    [self.client.params addIfDefinedKey:@"shouldUpdate" withBool:aShouldUpdate];
-    return [self.client queueStringService:@"user" withAction:@"index"];
-}
-
-- (NSString*)indexWithId:(NSString*)aId
-{
-    return [self indexWithId:aId withShouldUpdate:KALTURA_UNDEF_BOOL];
-}
-
-- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData withBulkUploadUserData:(KalturaBulkUploadUserData*)aBulkUploadUserData
-{
-    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
-    [self.client.params addIfDefinedKey:@"bulkUploadData" withObject:aBulkUploadData];
-    [self.client.params addIfDefinedKey:@"bulkUploadUserData" withObject:aBulkUploadUserData];
-    return [self.client queueObjectService:@"user" withAction:@"addFromBulkUpload" withExpectedType:@"KalturaBulkUpload"];
-}
-
-- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData
-{
-    return [self addFromBulkUploadWithFileData:aFileData withBulkUploadData:aBulkUploadData withBulkUploadUserData:nil];
-}
-
-- (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData
-{
-    return [self addFromBulkUploadWithFileData:aFileData withBulkUploadData:nil];
-}
-
-- (KALTURA_BOOL)checkLoginDataExistsWithFilter:(KalturaUserLoginDataFilter*)aFilter
-{
-    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
-    return [self.client queueBoolService:@"user" withAction:@"checkLoginDataExists"];
-}
-
 @end
 
 @implementation KalturaWidgetService
@@ -48823,23 +48823,16 @@
     return [self.client queueObjectService:@"widget" withAction:@"add" withExpectedType:@"KalturaWidget"];
 }
 
-- (KalturaWidget*)updateWithId:(NSString*)aId withWidget:(KalturaWidget*)aWidget
+- (KalturaWidget*)cloneWithWidget:(KalturaWidget*)aWidget
 {
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
     [self.client.params addIfDefinedKey:@"widget" withObject:aWidget];
-    return [self.client queueObjectService:@"widget" withAction:@"update" withExpectedType:@"KalturaWidget"];
+    return [self.client queueObjectService:@"widget" withAction:@"clone" withExpectedType:@"KalturaWidget"];
 }
 
 - (KalturaWidget*)getWithId:(NSString*)aId
 {
     [self.client.params addIfDefinedKey:@"id" withString:aId];
     return [self.client queueObjectService:@"widget" withAction:@"get" withExpectedType:@"KalturaWidget"];
-}
-
-- (KalturaWidget*)cloneWithWidget:(KalturaWidget*)aWidget
-{
-    [self.client.params addIfDefinedKey:@"widget" withObject:aWidget];
-    return [self.client queueObjectService:@"widget" withAction:@"clone" withExpectedType:@"KalturaWidget"];
 }
 
 - (KalturaWidgetListResponse*)listWithFilter:(KalturaWidgetFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -48857,6 +48850,13 @@
 - (KalturaWidgetListResponse*)list
 {
     return [self listWithFilter:nil];
+}
+
+- (KalturaWidget*)updateWithId:(NSString*)aId withWidget:(KalturaWidget*)aWidget
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"widget" withObject:aWidget];
+    return [self.client queueObjectService:@"widget" withAction:@"update" withExpectedType:@"KalturaWidget"];
 }
 
 @end

@@ -2404,23 +2404,16 @@
     return [self.client queueObjectService:@"dropfolder_dropfolder" withAction:@"add" withExpectedType:@"KalturaDropFolder"];
 }
 
-- (KalturaDropFolder*)getWithDropFolderId:(int)aDropFolderId
-{
-    [self.client.params addIfDefinedKey:@"dropFolderId" withInt:aDropFolderId];
-    return [self.client queueObjectService:@"dropfolder_dropfolder" withAction:@"get" withExpectedType:@"KalturaDropFolder"];
-}
-
-- (KalturaDropFolder*)updateWithDropFolderId:(int)aDropFolderId withDropFolder:(KalturaDropFolder*)aDropFolder
-{
-    [self.client.params addIfDefinedKey:@"dropFolderId" withInt:aDropFolderId];
-    [self.client.params addIfDefinedKey:@"dropFolder" withObject:aDropFolder];
-    return [self.client queueObjectService:@"dropfolder_dropfolder" withAction:@"update" withExpectedType:@"KalturaDropFolder"];
-}
-
 - (KalturaDropFolder*)deleteWithDropFolderId:(int)aDropFolderId
 {
     [self.client.params addIfDefinedKey:@"dropFolderId" withInt:aDropFolderId];
     return [self.client queueObjectService:@"dropfolder_dropfolder" withAction:@"delete" withExpectedType:@"KalturaDropFolder"];
+}
+
+- (KalturaDropFolder*)getWithDropFolderId:(int)aDropFolderId
+{
+    [self.client.params addIfDefinedKey:@"dropFolderId" withInt:aDropFolderId];
+    return [self.client queueObjectService:@"dropfolder_dropfolder" withAction:@"get" withExpectedType:@"KalturaDropFolder"];
 }
 
 - (KalturaDropFolderListResponse*)listWithFilter:(KalturaDropFolderFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -2440,6 +2433,13 @@
     return [self listWithFilter:nil];
 }
 
+- (KalturaDropFolder*)updateWithDropFolderId:(int)aDropFolderId withDropFolder:(KalturaDropFolder*)aDropFolder
+{
+    [self.client.params addIfDefinedKey:@"dropFolderId" withInt:aDropFolderId];
+    [self.client.params addIfDefinedKey:@"dropFolder" withObject:aDropFolder];
+    return [self.client queueObjectService:@"dropfolder_dropfolder" withAction:@"update" withExpectedType:@"KalturaDropFolder"];
+}
+
 @end
 
 @implementation KalturaDropFolderFileService
@@ -2449,30 +2449,22 @@
     return [self.client queueObjectService:@"dropfolder_dropfolderfile" withAction:@"add" withExpectedType:@"KalturaDropFolderFile"];
 }
 
+- (KalturaDropFolderFile*)deleteWithDropFolderFileId:(int)aDropFolderFileId
+{
+    [self.client.params addIfDefinedKey:@"dropFolderFileId" withInt:aDropFolderFileId];
+    return [self.client queueObjectService:@"dropfolder_dropfolderfile" withAction:@"delete" withExpectedType:@"KalturaDropFolderFile"];
+}
+
 - (KalturaDropFolderFile*)getWithDropFolderFileId:(int)aDropFolderFileId
 {
     [self.client.params addIfDefinedKey:@"dropFolderFileId" withInt:aDropFolderFileId];
     return [self.client queueObjectService:@"dropfolder_dropfolderfile" withAction:@"get" withExpectedType:@"KalturaDropFolderFile"];
 }
 
-- (KalturaDropFolderFile*)updateWithDropFolderFileId:(int)aDropFolderFileId withDropFolderFile:(KalturaDropFolderFile*)aDropFolderFile
+- (KalturaDropFolderFile*)ignoreWithDropFolderFileId:(int)aDropFolderFileId
 {
     [self.client.params addIfDefinedKey:@"dropFolderFileId" withInt:aDropFolderFileId];
-    [self.client.params addIfDefinedKey:@"dropFolderFile" withObject:aDropFolderFile];
-    return [self.client queueObjectService:@"dropfolder_dropfolderfile" withAction:@"update" withExpectedType:@"KalturaDropFolderFile"];
-}
-
-- (KalturaDropFolderFile*)updateStatusWithDropFolderFileId:(int)aDropFolderFileId withStatus:(int)aStatus
-{
-    [self.client.params addIfDefinedKey:@"dropFolderFileId" withInt:aDropFolderFileId];
-    [self.client.params addIfDefinedKey:@"status" withInt:aStatus];
-    return [self.client queueObjectService:@"dropfolder_dropfolderfile" withAction:@"updateStatus" withExpectedType:@"KalturaDropFolderFile"];
-}
-
-- (KalturaDropFolderFile*)deleteWithDropFolderFileId:(int)aDropFolderFileId
-{
-    [self.client.params addIfDefinedKey:@"dropFolderFileId" withInt:aDropFolderFileId];
-    return [self.client queueObjectService:@"dropfolder_dropfolderfile" withAction:@"delete" withExpectedType:@"KalturaDropFolderFile"];
+    return [self.client queueObjectService:@"dropfolder_dropfolderfile" withAction:@"ignore" withExpectedType:@"KalturaDropFolderFile"];
 }
 
 - (KalturaDropFolderFileListResponse*)listWithFilter:(KalturaDropFolderFileFilter*)aFilter withPager:(KalturaFilterPager*)aPager
@@ -2492,10 +2484,18 @@
     return [self listWithFilter:nil];
 }
 
-- (KalturaDropFolderFile*)ignoreWithDropFolderFileId:(int)aDropFolderFileId
+- (KalturaDropFolderFile*)updateWithDropFolderFileId:(int)aDropFolderFileId withDropFolderFile:(KalturaDropFolderFile*)aDropFolderFile
 {
     [self.client.params addIfDefinedKey:@"dropFolderFileId" withInt:aDropFolderFileId];
-    return [self.client queueObjectService:@"dropfolder_dropfolderfile" withAction:@"ignore" withExpectedType:@"KalturaDropFolderFile"];
+    [self.client.params addIfDefinedKey:@"dropFolderFile" withObject:aDropFolderFile];
+    return [self.client queueObjectService:@"dropfolder_dropfolderfile" withAction:@"update" withExpectedType:@"KalturaDropFolderFile"];
+}
+
+- (KalturaDropFolderFile*)updateStatusWithDropFolderFileId:(int)aDropFolderFileId withStatus:(int)aStatus
+{
+    [self.client.params addIfDefinedKey:@"dropFolderFileId" withInt:aDropFolderFileId];
+    [self.client.params addIfDefinedKey:@"status" withInt:aStatus];
+    return [self.client queueObjectService:@"dropfolder_dropfolderfile" withAction:@"updateStatus" withExpectedType:@"KalturaDropFolderFile"];
 }
 
 @end

@@ -468,15 +468,29 @@
 @interface KalturaMetadataService : KalturaServiceBase
 // Allows you to add a metadata object and metadata content associated with Kaltura object
 - (KalturaMetadata*)addWithMetadataProfileId:(int)aMetadataProfileId withObjectType:(NSString*)aObjectType withObjectId:(NSString*)aObjectId withXmlData:(NSString*)aXmlData;
+// Allows you to add a metadata xml data from remote URL.
+// 	 Enables different permissions than addFromUrl action.
+- (KalturaMetadata*)addFromBulkWithMetadataProfileId:(int)aMetadataProfileId withObjectType:(NSString*)aObjectType withObjectId:(NSString*)aObjectId withUrl:(NSString*)aUrl;
 // Allows you to add a metadata object and metadata file associated with Kaltura object
 - (KalturaMetadata*)addFromFileWithMetadataProfileId:(int)aMetadataProfileId withObjectType:(NSString*)aObjectType withObjectId:(NSString*)aObjectId withXmlFile:(NSString*)aXmlFile;
 // Allows you to add a metadata xml data from remote URL
 - (KalturaMetadata*)addFromUrlWithMetadataProfileId:(int)aMetadataProfileId withObjectType:(NSString*)aObjectType withObjectId:(NSString*)aObjectId withUrl:(NSString*)aUrl;
-// Allows you to add a metadata xml data from remote URL.
-// 	 Enables different permissions than addFromUrl action.
-- (KalturaMetadata*)addFromBulkWithMetadataProfileId:(int)aMetadataProfileId withObjectType:(NSString*)aObjectType withObjectId:(NSString*)aObjectId withUrl:(NSString*)aUrl;
+// Delete an existing metadata
+- (void)deleteWithId:(int)aId;
 // Retrieve a metadata object by id
 - (KalturaMetadata*)getWithId:(int)aId;
+// Index metadata by id, will also index the related object
+- (int)indexWithId:(NSString*)aId withShouldUpdate:(KALTURA_BOOL)aShouldUpdate;
+// Mark existing metadata as invalid
+// 	 Used by batch metadata transform
+- (void)invalidateWithId:(int)aId withVersion:(int)aVersion;
+- (void)invalidateWithId:(int)aId;
+// List metadata objects by filter and pager
+- (KalturaMetadataListResponse*)listWithFilter:(KalturaMetadataFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
+- (KalturaMetadataListResponse*)listWithFilter:(KalturaMetadataFilter*)aFilter;
+- (KalturaMetadataListResponse*)list;
+// Serves metadata XML file
+- (NSString*)serveWithId:(int)aId;
 // Update an existing metadata object with new XML content
 - (KalturaMetadata*)updateWithId:(int)aId withXmlData:(NSString*)aXmlData withVersion:(int)aVersion;
 - (KalturaMetadata*)updateWithId:(int)aId withXmlData:(NSString*)aXmlData;
@@ -484,20 +498,6 @@
 // Update an existing metadata object with new XML file
 - (KalturaMetadata*)updateFromFileWithId:(int)aId withXmlFile:(NSString*)aXmlFile;
 - (KalturaMetadata*)updateFromFileWithId:(int)aId;
-// List metadata objects by filter and pager
-- (KalturaMetadataListResponse*)listWithFilter:(KalturaMetadataFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
-- (KalturaMetadataListResponse*)listWithFilter:(KalturaMetadataFilter*)aFilter;
-- (KalturaMetadataListResponse*)list;
-// Delete an existing metadata
-- (void)deleteWithId:(int)aId;
-// Mark existing metadata as invalid
-// 	 Used by batch metadata transform
-- (void)invalidateWithId:(int)aId withVersion:(int)aVersion;
-- (void)invalidateWithId:(int)aId;
-// Index metadata by id, will also index the related object
-- (int)indexWithId:(NSString*)aId withShouldUpdate:(KALTURA_BOOL)aShouldUpdate;
-// Serves metadata XML file
-- (NSString*)serveWithId:(int)aId;
 // Action transforms current metadata object XML using a provided XSL.
 - (KalturaMetadata*)updateFromXSLWithId:(int)aId withXslFile:(NSString*)aXslFile;
 @end
@@ -512,32 +512,32 @@
 // Allows you to add a metadata profile object and metadata profile file associated with Kaltura object type
 - (KalturaMetadataProfile*)addFromFileWithMetadataProfile:(KalturaMetadataProfile*)aMetadataProfile withXsdFile:(NSString*)aXsdFile withViewsFile:(NSString*)aViewsFile;
 - (KalturaMetadataProfile*)addFromFileWithMetadataProfile:(KalturaMetadataProfile*)aMetadataProfile withXsdFile:(NSString*)aXsdFile;
+// Delete an existing metadata profile
+- (void)deleteWithId:(int)aId;
 // Retrieve a metadata profile object by id
 - (KalturaMetadataProfile*)getWithId:(int)aId;
-// Update an existing metadata object
-- (KalturaMetadataProfile*)updateWithId:(int)aId withMetadataProfile:(KalturaMetadataProfile*)aMetadataProfile withXsdData:(NSString*)aXsdData withViewsData:(NSString*)aViewsData;
-- (KalturaMetadataProfile*)updateWithId:(int)aId withMetadataProfile:(KalturaMetadataProfile*)aMetadataProfile withXsdData:(NSString*)aXsdData;
-- (KalturaMetadataProfile*)updateWithId:(int)aId withMetadataProfile:(KalturaMetadataProfile*)aMetadataProfile;
 // List metadata profile objects by filter and pager
 - (KalturaMetadataProfileListResponse*)listWithFilter:(KalturaMetadataProfileFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaMetadataProfileListResponse*)listWithFilter:(KalturaMetadataProfileFilter*)aFilter;
 - (KalturaMetadataProfileListResponse*)list;
 // List metadata profile fields by metadata profile id
 - (KalturaMetadataProfileFieldListResponse*)listFieldsWithMetadataProfileId:(int)aMetadataProfileId;
-// Delete an existing metadata profile
-- (void)deleteWithId:(int)aId;
 // Update an existing metadata object definition file
 - (KalturaMetadataProfile*)revertWithId:(int)aId withToVersion:(int)aToVersion;
-// Update an existing metadata object definition file
-- (KalturaMetadataProfile*)updateDefinitionFromFileWithId:(int)aId withXsdFile:(NSString*)aXsdFile;
-// Update an existing metadata object views file
-- (KalturaMetadataProfile*)updateViewsFromFileWithId:(int)aId withViewsFile:(NSString*)aViewsFile;
-// Update an existing metadata object xslt file
-- (KalturaMetadataProfile*)updateTransformationFromFileWithId:(int)aId withXsltFile:(NSString*)aXsltFile;
 // Serves metadata profile XSD file
 - (NSString*)serveWithId:(int)aId;
 // Serves metadata profile view file
 - (NSString*)serveViewWithId:(int)aId;
+// Update an existing metadata object
+- (KalturaMetadataProfile*)updateWithId:(int)aId withMetadataProfile:(KalturaMetadataProfile*)aMetadataProfile withXsdData:(NSString*)aXsdData withViewsData:(NSString*)aViewsData;
+- (KalturaMetadataProfile*)updateWithId:(int)aId withMetadataProfile:(KalturaMetadataProfile*)aMetadataProfile withXsdData:(NSString*)aXsdData;
+- (KalturaMetadataProfile*)updateWithId:(int)aId withMetadataProfile:(KalturaMetadataProfile*)aMetadataProfile;
+// Update an existing metadata object definition file
+- (KalturaMetadataProfile*)updateDefinitionFromFileWithId:(int)aId withXsdFile:(NSString*)aXsdFile;
+// Update an existing metadata object xslt file
+- (KalturaMetadataProfile*)updateTransformationFromFileWithId:(int)aId withXsltFile:(NSString*)aXsltFile;
+// Update an existing metadata object views file
+- (KalturaMetadataProfile*)updateViewsFromFileWithId:(int)aId withViewsFile:(NSString*)aViewsFile;
 @end
 
 @interface KalturaMetadataClientPlugin : KalturaClientPlugin
