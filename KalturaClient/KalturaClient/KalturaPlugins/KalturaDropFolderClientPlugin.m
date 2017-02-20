@@ -2410,10 +2410,36 @@
     return [self.client queueObjectService:@"dropfolder_dropfolder" withAction:@"delete" withExpectedType:@"KalturaDropFolder"];
 }
 
+- (KalturaDropFolder*)freeExclusiveDropFolderWithDropFolderId:(int)aDropFolderId withStatus:(int)aStatus withErrorCode:(NSString*)aErrorCode withErrorDescription:(NSString*)aErrorDescription
+{
+    [self.client.params addIfDefinedKey:@"dropFolderId" withInt:aDropFolderId];
+    [self.client.params addIfDefinedKey:@"status" withInt:aStatus];
+    [self.client.params addIfDefinedKey:@"errorCode" withString:aErrorCode];
+    [self.client.params addIfDefinedKey:@"errorDescription" withString:aErrorDescription];
+    return [self.client queueObjectService:@"dropfolder_dropfolder" withAction:@"freeExclusiveDropFolder" withExpectedType:@"KalturaDropFolder"];
+}
+
+- (KalturaDropFolder*)freeExclusiveDropFolderWithDropFolderId:(int)aDropFolderId withStatus:(int)aStatus withErrorCode:(NSString*)aErrorCode
+{
+    return [self freeExclusiveDropFolderWithDropFolderId:aDropFolderId withStatus:aStatus withErrorCode:aErrorCode withErrorDescription:nil];
+}
+
+- (KalturaDropFolder*)freeExclusiveDropFolderWithDropFolderId:(int)aDropFolderId withStatus:(int)aStatus
+{
+    return [self freeExclusiveDropFolderWithDropFolderId:aDropFolderId withStatus:aStatus withErrorCode:nil];
+}
+
 - (KalturaDropFolder*)getWithDropFolderId:(int)aDropFolderId
 {
     [self.client.params addIfDefinedKey:@"dropFolderId" withInt:aDropFolderId];
     return [self.client queueObjectService:@"dropfolder_dropfolder" withAction:@"get" withExpectedType:@"KalturaDropFolder"];
+}
+
+- (KalturaDropFolder*)getExclusiveDropFolderWithTag:(NSString*)aTag withMaxTime:(int)aMaxTime
+{
+    [self.client.params addIfDefinedKey:@"tag" withString:aTag];
+    [self.client.params addIfDefinedKey:@"maxTime" withInt:aMaxTime];
+    return [self.client queueObjectService:@"dropfolder_dropfolder" withAction:@"getExclusiveDropFolder" withExpectedType:@"KalturaDropFolder"];
 }
 
 - (KalturaDropFolderListResponse*)listWithFilter:(KalturaDropFolderFilter*)aFilter withPager:(KalturaFilterPager*)aPager

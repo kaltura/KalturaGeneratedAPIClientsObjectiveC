@@ -715,8 +715,14 @@
 - (KalturaDropFolder*)addWithDropFolder:(KalturaDropFolder*)aDropFolder;
 // Mark the KalturaDropFolder object as deleted
 - (KalturaDropFolder*)deleteWithDropFolderId:(int)aDropFolderId;
+// freeExclusive KalturaDropFolder object
+- (KalturaDropFolder*)freeExclusiveDropFolderWithDropFolderId:(int)aDropFolderId withStatus:(int)aStatus withErrorCode:(NSString*)aErrorCode withErrorDescription:(NSString*)aErrorDescription;
+- (KalturaDropFolder*)freeExclusiveDropFolderWithDropFolderId:(int)aDropFolderId withStatus:(int)aStatus withErrorCode:(NSString*)aErrorCode;
+- (KalturaDropFolder*)freeExclusiveDropFolderWithDropFolderId:(int)aDropFolderId withStatus:(int)aStatus;
 // Retrieve a KalturaDropFolder object by ID
 - (KalturaDropFolder*)getWithDropFolderId:(int)aDropFolderId;
+// getExclusive KalturaDropFolder object
+- (KalturaDropFolder*)getExclusiveDropFolderWithTag:(NSString*)aTag withMaxTime:(int)aMaxTime;
 // List KalturaDropFolder objects
 - (KalturaDropFolderListResponse*)listWithFilter:(KalturaDropFolderFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaDropFolderListResponse*)listWithFilter:(KalturaDropFolderFilter*)aFilter;
