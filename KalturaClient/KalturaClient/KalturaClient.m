@@ -15580,6 +15580,8 @@
 @synthesize mediaParserType = _mediaParserType;
 @synthesize calculateComplexity = _calculateComplexity;
 @synthesize collectionTags = _collectionTags;
+@synthesize conditionalProfiles = _conditionalProfiles;
+@synthesize detectGOP = _detectGOP;
 
 - (id)init
 {
@@ -15595,6 +15597,7 @@
     self->_clipDuration = KALTURA_UNDEF_INT;
     self->_storageProfileId = KALTURA_UNDEF_INT;
     self->_calculateComplexity = KALTURA_UNDEF_INT;
+    self->_detectGOP = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -15708,6 +15711,16 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfConditionalProfiles
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfDetectGOP
+{
+    return KFT_Int;
+}
+
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -15753,6 +15766,11 @@
     self.calculateComplexity = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setDetectGOPFromString:(NSString*)aPropVal
+{
+    self.detectGOP = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -15775,6 +15793,8 @@
     [aParams addIfDefinedKey:@"mediaParserType" withString:self.mediaParserType];
     [aParams addIfDefinedKey:@"calculateComplexity" withInt:self.calculateComplexity];
     [aParams addIfDefinedKey:@"collectionTags" withString:self.collectionTags];
+    [aParams addIfDefinedKey:@"conditionalProfiles" withString:self.conditionalProfiles];
+    [aParams addIfDefinedKey:@"detectGOP" withInt:self.detectGOP];
 }
 
 - (void)dealloc
@@ -15791,6 +15811,7 @@
     [self->_xslTransformation release];
     [self->_mediaParserType release];
     [self->_collectionTags release];
+    [self->_conditionalProfiles release];
     [super dealloc];
 }
 
@@ -18284,6 +18305,7 @@
 @synthesize multiStream = _multiStream;
 @synthesize anamorphicPixels = _anamorphicPixels;
 @synthesize isAvoidForcedKeyFrames = _isAvoidForcedKeyFrames;
+@synthesize forcedKeyFramesMode = _forcedKeyFramesMode;
 @synthesize isCropIMX = _isCropIMX;
 @synthesize optimizationPolicy = _optimizationPolicy;
 @synthesize maxFrameRate = _maxFrameRate;
@@ -18321,6 +18343,7 @@
     self->_isVideoFrameRateForLowBrAppleHls = KALTURA_UNDEF_INT;
     self->_anamorphicPixels = KALTURA_UNDEF_FLOAT;
     self->_isAvoidForcedKeyFrames = KALTURA_UNDEF_INT;
+    self->_forcedKeyFramesMode = KALTURA_UNDEF_INT;
     self->_isCropIMX = KALTURA_UNDEF_INT;
     self->_optimizationPolicy = KALTURA_UNDEF_INT;
     self->_maxFrameRate = KALTURA_UNDEF_INT;
@@ -18464,6 +18487,11 @@
 }
 
 - (KalturaFieldType)getTypeOfIsAvoidForcedKeyFrames
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfForcedKeyFramesMode
 {
     return KFT_Int;
 }
@@ -18623,6 +18651,11 @@
     self.isAvoidForcedKeyFrames = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setForcedKeyFramesModeFromString:(NSString*)aPropVal
+{
+    self.forcedKeyFramesMode = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)setIsCropIMXFromString:(NSString*)aPropVal
 {
     self.isCropIMX = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -18700,6 +18733,7 @@
     [aParams addIfDefinedKey:@"multiStream" withString:self.multiStream];
     [aParams addIfDefinedKey:@"anamorphicPixels" withFloat:self.anamorphicPixels];
     [aParams addIfDefinedKey:@"isAvoidForcedKeyFrames" withInt:self.isAvoidForcedKeyFrames];
+    [aParams addIfDefinedKey:@"forcedKeyFramesMode" withInt:self.forcedKeyFramesMode];
     [aParams addIfDefinedKey:@"isCropIMX" withInt:self.isCropIMX];
     [aParams addIfDefinedKey:@"optimizationPolicy" withInt:self.optimizationPolicy];
     [aParams addIfDefinedKey:@"maxFrameRate" withInt:self.maxFrameRate];
@@ -19712,6 +19746,7 @@
 @synthesize isFastStart = _isFastStart;
 @synthesize contentStreams = _contentStreams;
 @synthesize complexityValue = _complexityValue;
+@synthesize maxGOP = _maxGOP;
 
 - (id)init
 {
@@ -19739,6 +19774,7 @@
     self->_scanType = KALTURA_UNDEF_INT;
     self->_isFastStart = KALTURA_UNDEF_INT;
     self->_complexityValue = KALTURA_UNDEF_INT;
+    self->_maxGOP = KALTURA_UNDEF_FLOAT;
     return self;
 }
 
@@ -19912,6 +19948,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfMaxGOP
+{
+    return KFT_Float;
+}
+
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -20017,6 +20058,11 @@
     self.complexityValue = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setMaxGOPFromString:(NSString*)aPropVal
+{
+    self.maxGOP = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -20055,6 +20101,7 @@
     [aParams addIfDefinedKey:@"isFastStart" withInt:self.isFastStart];
     [aParams addIfDefinedKey:@"contentStreams" withString:self.contentStreams];
     [aParams addIfDefinedKey:@"complexityValue" withInt:self.complexityValue];
+    [aParams addIfDefinedKey:@"maxGOP" withFloat:self.maxGOP];
 }
 
 - (void)dealloc
@@ -40007,6 +40054,7 @@
 @synthesize calculateComplexity = _calculateComplexity;
 @synthesize extractId3Tags = _extractId3Tags;
 @synthesize destDataFilePath = _destDataFilePath;
+@synthesize detectGOP = _detectGOP;
 
 - (id)init
 {
@@ -40015,6 +40063,7 @@
         return nil;
     self->_calculateComplexity = KALTURA_UNDEF_BOOL;
     self->_extractId3Tags = KALTURA_UNDEF_BOOL;
+    self->_detectGOP = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -40038,6 +40087,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfDetectGOP
+{
+    return KFT_Int;
+}
+
 - (void)setCalculateComplexityFromString:(NSString*)aPropVal
 {
     self.calculateComplexity = [KalturaSimpleTypeParser parseBool:aPropVal];
@@ -40046,6 +40100,11 @@
 - (void)setExtractId3TagsFromString:(NSString*)aPropVal
 {
     self.extractId3Tags = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)setDetectGOPFromString:(NSString*)aPropVal
+{
+    self.detectGOP = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -40057,6 +40116,7 @@
     [aParams addIfDefinedKey:@"calculateComplexity" withBool:self.calculateComplexity];
     [aParams addIfDefinedKey:@"extractId3Tags" withBool:self.extractId3Tags];
     [aParams addIfDefinedKey:@"destDataFilePath" withString:self.destDataFilePath];
+    [aParams addIfDefinedKey:@"detectGOP" withInt:self.detectGOP];
 }
 
 - (void)dealloc

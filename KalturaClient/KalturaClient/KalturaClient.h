@@ -5201,6 +5201,10 @@
 // Defines the tags that should be used to define 'collective'/group/multi-flavor processing,
 // 	 like 'mbr' or 'ism'
 @property (nonatomic,copy) NSString* collectionTags;
+// JSON string with array of "condition,profile-id" pairs.
+@property (nonatomic,copy) NSString* conditionalProfiles;
+// When set, the ExtractMedia job should detect the source file GOP using this value as the max calculated period
+@property (nonatomic,assign) int detectGOP;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfPartnerId;
 - (KalturaFieldType)getTypeOfStatus;
@@ -5223,6 +5227,8 @@
 - (KalturaFieldType)getTypeOfMediaParserType;
 - (KalturaFieldType)getTypeOfCalculateComplexity;
 - (KalturaFieldType)getTypeOfCollectionTags;
+- (KalturaFieldType)getTypeOfConditionalProfiles;
+- (KalturaFieldType)getTypeOfDetectGOP;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
@@ -5232,6 +5238,7 @@
 - (void)setClipDurationFromString:(NSString*)aPropVal;
 - (void)setStorageProfileIdFromString:(NSString*)aPropVal;
 - (void)setCalculateComplexityFromString:(NSString*)aPropVal;
+- (void)setDetectGOPFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -5936,6 +5943,7 @@
 @property (nonatomic,copy) NSString* multiStream;
 @property (nonatomic,assign) double anamorphicPixels;
 @property (nonatomic,assign) int isAvoidForcedKeyFrames;
+@property (nonatomic,assign) int forcedKeyFramesMode;
 @property (nonatomic,assign) int isCropIMX;
 @property (nonatomic,assign) int optimizationPolicy;
 @property (nonatomic,assign) int maxFrameRate;
@@ -5974,6 +5982,7 @@
 - (KalturaFieldType)getTypeOfMultiStream;
 - (KalturaFieldType)getTypeOfAnamorphicPixels;
 - (KalturaFieldType)getTypeOfIsAvoidForcedKeyFrames;
+- (KalturaFieldType)getTypeOfForcedKeyFramesMode;
 - (KalturaFieldType)getTypeOfIsCropIMX;
 - (KalturaFieldType)getTypeOfOptimizationPolicy;
 - (KalturaFieldType)getTypeOfMaxFrameRate;
@@ -6005,6 +6014,7 @@
 - (void)setIsVideoFrameRateForLowBrAppleHlsFromString:(NSString*)aPropVal;
 - (void)setAnamorphicPixelsFromString:(NSString*)aPropVal;
 - (void)setIsAvoidForcedKeyFramesFromString:(NSString*)aPropVal;
+- (void)setForcedKeyFramesModeFromString:(NSString*)aPropVal;
 - (void)setIsCropIMXFromString:(NSString*)aPropVal;
 - (void)setOptimizationPolicyFromString:(NSString*)aPropVal;
 - (void)setMaxFrameRateFromString:(NSString*)aPropVal;
@@ -6350,6 +6360,7 @@
 @property (nonatomic,assign) int isFastStart;
 @property (nonatomic,copy) NSString* contentStreams;
 @property (nonatomic,assign) int complexityValue;
+@property (nonatomic,assign) double maxGOP;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfFlavorAssetId;
 - (KalturaFieldType)getTypeOfFileSize;
@@ -6384,6 +6395,7 @@
 - (KalturaFieldType)getTypeOfIsFastStart;
 - (KalturaFieldType)getTypeOfContentStreams;
 - (KalturaFieldType)getTypeOfComplexityValue;
+- (KalturaFieldType)getTypeOfMaxGOP;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setFileSizeFromString:(NSString*)aPropVal;
 - (void)setContainerDurationFromString:(NSString*)aPropVal;
@@ -6405,6 +6417,7 @@
 - (void)setScanTypeFromString:(NSString*)aPropVal;
 - (void)setIsFastStartFromString:(NSString*)aPropVal;
 - (void)setComplexityValueFromString:(NSString*)aPropVal;
+- (void)setMaxGOPFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -11664,12 +11677,15 @@
 @property (nonatomic,assign) KALTURA_BOOL extractId3Tags;
 // The data output file
 @property (nonatomic,copy) NSString* destDataFilePath;
+@property (nonatomic,assign) int detectGOP;
 - (KalturaFieldType)getTypeOfFlavorAssetId;
 - (KalturaFieldType)getTypeOfCalculateComplexity;
 - (KalturaFieldType)getTypeOfExtractId3Tags;
 - (KalturaFieldType)getTypeOfDestDataFilePath;
+- (KalturaFieldType)getTypeOfDetectGOP;
 - (void)setCalculateComplexityFromString:(NSString*)aPropVal;
 - (void)setExtractId3TagsFromString:(NSString*)aPropVal;
+- (void)setDetectGOPFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
