@@ -3401,6 +3401,7 @@
 + (NSString*)RECORDED_LIVE;
 + (NSString*)CLIP;
 + (NSString*)KALTURA_RECORDED_LIVE;
++ (NSString*)LECTURE_CAPTURE;
 + (NSString*)LIVE_STREAM_ONTEXTDATA_CAPTIONS;
 @end
 
@@ -11019,7 +11020,9 @@
 // @subpackage Client
 @interface KalturaUrlTokenizerKs : KalturaUrlTokenizer
 @property (nonatomic,assign) KALTURA_BOOL usePath;
+@property (nonatomic,copy) NSString* additionalUris;
 - (KalturaFieldType)getTypeOfUsePath;
+- (KalturaFieldType)getTypeOfAdditionalUris;
 - (void)setUsePathFromString:(NSString*)aPropVal;
 @end
 

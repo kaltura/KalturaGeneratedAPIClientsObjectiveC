@@ -9634,6 +9634,10 @@
 {
     return @"36";
 }
++ (NSString*)LECTURE_CAPTURE
+{
+    return @"37";
+}
 + (NSString*)LIVE_STREAM_ONTEXTDATA_CAPTIONS
 {
     return @"42";
@@ -37516,6 +37520,7 @@
 
 @implementation KalturaUrlTokenizerKs
 @synthesize usePath = _usePath;
+@synthesize additionalUris = _additionalUris;
 
 - (id)init
 {
@@ -37531,6 +37536,11 @@
     return KFT_Bool;
 }
 
+- (KalturaFieldType)getTypeOfAdditionalUris
+{
+    return KFT_String;
+}
+
 - (void)setUsePathFromString:(NSString*)aPropVal
 {
     self.usePath = [KalturaSimpleTypeParser parseBool:aPropVal];
@@ -37542,6 +37552,13 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaUrlTokenizerKs"];
     [aParams addIfDefinedKey:@"usePath" withBool:self.usePath];
+    [aParams addIfDefinedKey:@"additionalUris" withString:self.additionalUris];
+}
+
+- (void)dealloc
+{
+    [self->_additionalUris release];
+    [super dealloc];
 }
 
 @end
