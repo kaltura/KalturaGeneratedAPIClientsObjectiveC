@@ -65,6 +65,7 @@
 + (NSString*)SRT;
 + (NSString*)DFXP;
 + (NSString*)WEBVTT;
++ (NSString*)CAP;
 @end
 
 ///////////////////////// classes /////////////////////////
