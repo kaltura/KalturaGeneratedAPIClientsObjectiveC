@@ -13276,7 +13276,6 @@
 @property (nonatomic,copy) NSString* cdnHost;
 @property (nonatomic,assign) KALTURA_BOOL isFirstLogin;
 @property (nonatomic,copy) NSString* logoutUrl;
-@property (nonatomic,assign) int partnerParentId;
 @property (nonatomic,copy) NSString* crmId;
 @property (nonatomic,assign) KALTURA_BOOL timeAlignedRenditions;
 @end
@@ -13789,6 +13788,7 @@
     [aParams addIfDefinedKey:@"country" withString:self.country];
     [aParams addIfDefinedKey:@"state" withString:self.state];
     [aParams addIfDefinedKey:@"additionalParams" withArray:self.additionalParams];
+    [aParams addIfDefinedKey:@"partnerParentId" withInt:self.partnerParentId];
     [aParams addIfDefinedKey:@"referenceId" withString:self.referenceId];
 }
 
@@ -33399,6 +33399,17 @@
 @implementation KalturaGenericSyndicationFeed
 @synthesize feedDescription = _feedDescription;
 @synthesize feedLandingPage = _feedLandingPage;
+@synthesize entryFilter = _entryFilter;
+@synthesize pageSize = _pageSize;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_pageSize = KALTURA_UNDEF_INT;
+    return self;
+}
 
 - (KalturaFieldType)getTypeOfFeedDescription
 {
@@ -33410,6 +33421,26 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfEntryFilter
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfEntryFilter
+{
+    return @"KalturaBaseEntryFilter";
+}
+
+- (KalturaFieldType)getTypeOfPageSize
+{
+    return KFT_Int;
+}
+
+- (void)setPageSizeFromString:(NSString*)aPropVal
+{
+    self.pageSize = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -33417,12 +33448,15 @@
         [aParams putKey:@"objectType" withString:@"KalturaGenericSyndicationFeed"];
     [aParams addIfDefinedKey:@"feedDescription" withString:self.feedDescription];
     [aParams addIfDefinedKey:@"feedLandingPage" withString:self.feedLandingPage];
+    [aParams addIfDefinedKey:@"entryFilter" withObject:self.entryFilter];
+    [aParams addIfDefinedKey:@"pageSize" withInt:self.pageSize];
 }
 
 - (void)dealloc
 {
     [self->_feedDescription release];
     [self->_feedLandingPage release];
+    [self->_entryFilter release];
     [super dealloc];
 }
 

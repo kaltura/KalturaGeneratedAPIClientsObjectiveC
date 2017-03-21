@@ -4577,7 +4577,7 @@
 @property (nonatomic,copy,readonly) NSString* cdnHost;
 @property (nonatomic,assign,readonly) KALTURA_BOOL isFirstLogin;
 @property (nonatomic,copy,readonly) NSString* logoutUrl;
-@property (nonatomic,assign,readonly) int partnerParentId;
+@property (nonatomic,assign) int partnerParentId;	// insertonly
 @property (nonatomic,copy,readonly) NSString* crmId;
 @property (nonatomic,copy) NSString* referenceId;
 @property (nonatomic,assign,readonly) KALTURA_BOOL timeAlignedRenditions;
@@ -9952,8 +9952,16 @@
 @property (nonatomic,copy) NSString* feedDescription;
 // feed landing page (i.e publisher website)
 @property (nonatomic,copy) NSString* feedLandingPage;
+// entry filter
+@property (nonatomic,retain) KalturaBaseEntryFilter* entryFilter;
+// page size
+@property (nonatomic,assign) int pageSize;
 - (KalturaFieldType)getTypeOfFeedDescription;
 - (KalturaFieldType)getTypeOfFeedLandingPage;
+- (KalturaFieldType)getTypeOfEntryFilter;
+- (NSString*)getObjectTypeOfEntryFilter;
+- (KalturaFieldType)getTypeOfPageSize;
+- (void)setPageSizeFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
