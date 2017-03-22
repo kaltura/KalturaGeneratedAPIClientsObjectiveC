@@ -774,6 +774,8 @@
 + (int)TUBE_MOGUL;
 + (int)KALTURA;
 + (int)KALTURA_XSLT;
++ (int)ROKU_DIRECT_PUBLISHER;
++ (int)OPERA_TV_SNAP;
 @end
 
 // @package Kaltura

@@ -1812,6 +1812,14 @@
 {
     return 6;
 }
++ (int)ROKU_DIRECT_PUBLISHER
+{
+    return 7;
+}
++ (int)OPERA_TV_SNAP
+{
+    return 8;
+}
 @end
 
 @implementation KalturaThumbAssetStatus
