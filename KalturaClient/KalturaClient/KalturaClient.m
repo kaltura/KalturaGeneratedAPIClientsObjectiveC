@@ -42728,6 +42728,16 @@
 
 @end
 
+@implementation KalturaConstantXsltSyndicationFeed
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaConstantXsltSyndicationFeed"];
+}
+
+@end
+
 @implementation KalturaConversionProfileFilter
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
@@ -43656,10 +43666,30 @@
 
 @implementation KalturaServerFileResource
 @synthesize localFilePath = _localFilePath;
+@synthesize keepOriginalFile = _keepOriginalFile;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_keepOriginalFile = KALTURA_UNDEF_BOOL;
+    return self;
+}
 
 - (KalturaFieldType)getTypeOfLocalFilePath
 {
     return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfKeepOriginalFile
+{
+    return KFT_Bool;
+}
+
+- (void)setKeepOriginalFileFromString:(NSString*)aPropVal
+{
+    self.keepOriginalFile = [KalturaSimpleTypeParser parseBool:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -43668,6 +43698,7 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaServerFileResource"];
     [aParams addIfDefinedKey:@"localFilePath" withString:self.localFilePath];
+    [aParams addIfDefinedKey:@"keepOriginalFile" withBool:self.keepOriginalFile];
 }
 
 - (void)dealloc
@@ -44201,6 +44232,16 @@
 
 @end
 
+@implementation KalturaOperaSyndicationFeed
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaOperaSyndicationFeed"];
+}
+
+@end
+
 @implementation KalturaPlaylistBaseFilter
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
@@ -44217,6 +44258,16 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaQuizUserEntryBaseFilter"];
+}
+
+@end
+
+@implementation KalturaRokuSyndicationFeed
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaRokuSyndicationFeed"];
 }
 
 @end

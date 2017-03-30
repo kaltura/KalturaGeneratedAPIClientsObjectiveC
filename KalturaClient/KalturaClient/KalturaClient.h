@@ -12417,6 +12417,11 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaConstantXsltSyndicationFeed : KalturaGenericXsltSyndicationFeed
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaConversionProfileFilter : KalturaConversionProfileBaseFilter
 @end
 
@@ -12811,7 +12816,11 @@
 @interface KalturaServerFileResource : KalturaDataCenterContentResource
 // Full path to the local file
 @property (nonatomic,copy) NSString* localFilePath;
+// Should keep original file (false = mv, true = cp)
+@property (nonatomic,assign) KALTURA_BOOL keepOriginalFile;
 - (KalturaFieldType)getTypeOfLocalFilePath;
+- (KalturaFieldType)getTypeOfKeepOriginalFile;
+- (void)setKeepOriginalFileFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -13026,12 +13035,22 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaOperaSyndicationFeed : KalturaConstantXsltSyndicationFeed
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaPlaylistBaseFilter : KalturaBaseEntryFilter
 @end
 
 // @package Kaltura
 // @subpackage Client
 @interface KalturaQuizUserEntryBaseFilter : KalturaUserEntryFilter
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaRokuSyndicationFeed : KalturaConstantXsltSyndicationFeed
 @end
 
 // @package Kaltura
