@@ -38588,6 +38588,8 @@
 @end
 
 @implementation KalturaAssetParamsBaseFilter
+@synthesize idEqual = _idEqual;
+@synthesize idIn = _idIn;
 @synthesize systemNameEqual = _systemNameEqual;
 @synthesize systemNameIn = _systemNameIn;
 @synthesize isSystemDefaultEqual = _isSystemDefaultEqual;
@@ -38598,8 +38600,19 @@
     self = [super init];
     if (self == nil)
         return nil;
+    self->_idEqual = KALTURA_UNDEF_INT;
     self->_isSystemDefaultEqual = KALTURA_UNDEF_INT;
     return self;
+}
+
+- (KalturaFieldType)getTypeOfIdEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfIdIn
+{
+    return KFT_String;
 }
 
 - (KalturaFieldType)getTypeOfSystemNameEqual
@@ -38622,6 +38635,11 @@
     return KFT_String;
 }
 
+- (void)setIdEqualFromString:(NSString*)aPropVal
+{
+    self.idEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)setIsSystemDefaultEqualFromString:(NSString*)aPropVal
 {
     self.isSystemDefaultEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -38632,6 +38650,8 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaAssetParamsBaseFilter"];
+    [aParams addIfDefinedKey:@"idEqual" withInt:self.idEqual];
+    [aParams addIfDefinedKey:@"idIn" withString:self.idIn];
     [aParams addIfDefinedKey:@"systemNameEqual" withString:self.systemNameEqual];
     [aParams addIfDefinedKey:@"systemNameIn" withString:self.systemNameIn];
     [aParams addIfDefinedKey:@"isSystemDefaultEqual" withInt:self.isSystemDefaultEqual];
@@ -38640,6 +38660,7 @@
 
 - (void)dealloc
 {
+    [self->_idIn release];
     [self->_systemNameEqual release];
     [self->_systemNameIn release];
     [self->_tagsEqual release];

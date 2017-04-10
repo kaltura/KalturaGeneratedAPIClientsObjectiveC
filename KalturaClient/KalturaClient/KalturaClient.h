@@ -11297,14 +11297,19 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaAssetParamsBaseFilter : KalturaRelatedFilter
+@property (nonatomic,assign) int idEqual;
+@property (nonatomic,copy) NSString* idIn;
 @property (nonatomic,copy) NSString* systemNameEqual;
 @property (nonatomic,copy) NSString* systemNameIn;
 @property (nonatomic,assign) int isSystemDefaultEqual;	// enum KalturaNullableBoolean
 @property (nonatomic,copy) NSString* tagsEqual;
+- (KalturaFieldType)getTypeOfIdEqual;
+- (KalturaFieldType)getTypeOfIdIn;
 - (KalturaFieldType)getTypeOfSystemNameEqual;
 - (KalturaFieldType)getTypeOfSystemNameIn;
 - (KalturaFieldType)getTypeOfIsSystemDefaultEqual;
 - (KalturaFieldType)getTypeOfTagsEqual;
+- (void)setIdEqualFromString:(NSString*)aPropVal;
 - (void)setIsSystemDefaultEqualFromString:(NSString*)aPropVal;
 @end
 
