@@ -1,0 +1,9 @@
+language: objective-c
+script: xcodebuild -project KalturaClient/KalturaClient.xcodeproj -sdk iphonesimulator VALID_ARCHS="arm64 armv7 i386 x86_64" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" && export PATH=~/:$PATH &&  xcodebuild VALID_ARCHS="arm64 armv7 i386 x86_64" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" -project KalturaClientTester/KalturaClientTester.xcodeproj -sdk iphonesimulator
+notifications:
+  email:
+    recipients:
+      - moshe.maor@kaltura.com
+      - jess.portnoy@kaltura.com
+    on_success: change
+    on_failure: always
