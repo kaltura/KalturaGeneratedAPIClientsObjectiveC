@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2016  Kaltura Inc.
+// Copyright (C) 2006-2017  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -133,6 +133,13 @@
 + (int)PENDING;
 + (int)NOT_ACTIVE;
 + (int)DELETED;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaChinaCacheAlgorithmType : NSObject
++ (int)SHA1;
++ (int)SHA256;
 @end
 
 // @package Kaltura
@@ -1051,6 +1058,7 @@
 + (NSString*)AC3;
 + (NSString*)AMRNB;
 + (NSString*)COPY;
++ (NSString*)EAC3;
 + (NSString*)MP3;
 + (NSString*)MPEG2;
 + (NSString*)PCM;
@@ -4550,7 +4558,7 @@
 @property (nonatomic,assign) int mergeEntryLists;
 @property (nonatomic,copy) NSString* notificationsConfig;
 @property (nonatomic,assign) int maxUploadSize;
-@property (nonatomic,assign,readonly) int partnerPackage;
+@property (nonatomic,assign) int partnerPackage;
 @property (nonatomic,copy,readonly) NSString* secret;
 @property (nonatomic,copy,readonly) NSString* adminSecret;
 @property (nonatomic,copy,readonly) NSString* cmsPassword;
@@ -4579,7 +4587,7 @@
 @property (nonatomic,copy,readonly) NSString* cdnHost;
 @property (nonatomic,assign,readonly) KALTURA_BOOL isFirstLogin;
 @property (nonatomic,copy,readonly) NSString* logoutUrl;
-@property (nonatomic,assign) int partnerParentId;	// insertonly
+@property (nonatomic,assign) int partnerParentId;
 @property (nonatomic,copy,readonly) NSString* crmId;
 @property (nonatomic,copy) NSString* referenceId;
 @property (nonatomic,assign,readonly) KALTURA_BOOL timeAlignedRenditions;
@@ -11010,6 +11018,17 @@
 // hashPatternRegex
 @property (nonatomic,copy) NSString* hashPatternRegex;
 - (KalturaFieldType)getTypeOfHashPatternRegex;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaUrlTokenizerChinaCache : KalturaUrlTokenizer
+@property (nonatomic,assign) int algorithmId;	// enum KalturaChinaCacheAlgorithmType
+@property (nonatomic,assign) int keyId;
+- (KalturaFieldType)getTypeOfAlgorithmId;
+- (KalturaFieldType)getTypeOfKeyId;
+- (void)setAlgorithmIdFromString:(NSString*)aPropVal;
+- (void)setKeyIdFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

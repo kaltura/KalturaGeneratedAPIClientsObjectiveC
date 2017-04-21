@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2016  Kaltura Inc.
+// Copyright (C) 2006-2017  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -250,6 +250,17 @@
 + (int)DELETED
 {
     return 4;
+}
+@end
+
+@implementation KalturaChinaCacheAlgorithmType
++ (int)SHA1
+{
+    return 1;
+}
++ (int)SHA256
+{
+    return 2;
 }
 @end
 
@@ -2426,6 +2437,10 @@
 + (NSString*)COPY
 {
     return @"copy";
+}
++ (NSString*)EAC3
+{
+    return @"eac3";
 }
 + (NSString*)MP3
 {
@@ -13266,7 +13281,6 @@
 @property (nonatomic,assign) int id;
 @property (nonatomic,assign) int createdAt;
 @property (nonatomic,assign) int status;
-@property (nonatomic,assign) int partnerPackage;
 @property (nonatomic,copy) NSString* secret;
 @property (nonatomic,copy) NSString* adminSecret;
 @property (nonatomic,copy) NSString* cmsPassword;
@@ -13789,6 +13803,7 @@
     [aParams addIfDefinedKey:@"mergeEntryLists" withInt:self.mergeEntryLists];
     [aParams addIfDefinedKey:@"notificationsConfig" withString:self.notificationsConfig];
     [aParams addIfDefinedKey:@"maxUploadSize" withInt:self.maxUploadSize];
+    [aParams addIfDefinedKey:@"partnerPackage" withInt:self.partnerPackage];
     [aParams addIfDefinedKey:@"allowMultiNotification" withInt:self.allowMultiNotification];
     [aParams addIfDefinedKey:@"adminUserId" withString:self.adminUserId];
     [aParams addIfDefinedKey:@"firstName" withString:self.firstName];
@@ -37514,6 +37529,51 @@
 {
     [self->_hashPatternRegex release];
     [super dealloc];
+}
+
+@end
+
+@implementation KalturaUrlTokenizerChinaCache
+@synthesize algorithmId = _algorithmId;
+@synthesize keyId = _keyId;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_algorithmId = KALTURA_UNDEF_INT;
+    self->_keyId = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfAlgorithmId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfKeyId
+{
+    return KFT_Int;
+}
+
+- (void)setAlgorithmIdFromString:(NSString*)aPropVal
+{
+    self.algorithmId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setKeyIdFromString:(NSString*)aPropVal
+{
+    self.keyId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaUrlTokenizerChinaCache"];
+    [aParams addIfDefinedKey:@"algorithmId" withInt:self.algorithmId];
+    [aParams addIfDefinedKey:@"keyId" withInt:self.keyId];
 }
 
 @end
