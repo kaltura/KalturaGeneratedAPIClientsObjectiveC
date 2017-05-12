@@ -74,6 +74,7 @@
 + (NSString*)DELETE_LOCAL_CONTENT;
 + (NSString*)STORAGE_EXPORT;
 + (NSString*)MODIFY_ENTRY;
++ (NSString*)MAIL_NOTIFICATION;
 @end
 
 // @package Kaltura
@@ -176,6 +177,21 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaDeleteLocalContentObjectTask : KalturaObjectTask
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaMailNotificationObjectTask : KalturaObjectTask
+// The mail to send the notification to
+@property (nonatomic,copy) NSString* mailAddress;
+// The message to send in the notification mail
+@property (nonatomic,copy) NSString* message;
+// Send the mail to each user
+@property (nonatomic,assign) KALTURA_BOOL sendToUsers;
+- (KalturaFieldType)getTypeOfMailAddress;
+- (KalturaFieldType)getTypeOfMessage;
+- (KalturaFieldType)getTypeOfSendToUsers;
+- (void)setSendToUsersFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

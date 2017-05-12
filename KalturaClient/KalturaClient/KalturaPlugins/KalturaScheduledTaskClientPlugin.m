@@ -125,6 +125,10 @@
 {
     return @"7";
 }
++ (NSString*)MAIL_NOTIFICATION
+{
+    return @"8";
+}
 @end
 
 @implementation KalturaScheduledTaskProfileOrderBy
@@ -493,6 +497,59 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaDeleteLocalContentObjectTask"];
+}
+
+@end
+
+@implementation KalturaMailNotificationObjectTask
+@synthesize mailAddress = _mailAddress;
+@synthesize message = _message;
+@synthesize sendToUsers = _sendToUsers;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_sendToUsers = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfMailAddress
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfMessage
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSendToUsers
+{
+    return KFT_Bool;
+}
+
+- (void)setSendToUsersFromString:(NSString*)aPropVal
+{
+    self.sendToUsers = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaMailNotificationObjectTask"];
+    [aParams addIfDefinedKey:@"mailAddress" withString:self.mailAddress];
+    [aParams addIfDefinedKey:@"message" withString:self.message];
+    [aParams addIfDefinedKey:@"sendToUsers" withBool:self.sendToUsers];
+}
+
+- (void)dealloc
+{
+    [self->_mailAddress release];
+    [self->_message release];
+    [super dealloc];
 }
 
 @end

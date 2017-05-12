@@ -441,6 +441,10 @@
 {
     return 3;
 }
++ (int)DELETED
+{
+    return 4;
+}
 + (int)FLAGGED_FOR_REVIEW
 {
     return 5;
@@ -3426,6 +3430,10 @@
 {
     return @"14";
 }
++ (NSString*)ANONYMOUS_IP
+{
+    return @"15";
+}
 @end
 
 @implementation KalturaContainerFormat
@@ -4976,6 +4984,10 @@
 + (NSString*)KALTURA
 {
     return @"1";
+}
++ (NSString*)MAX_MIND
+{
+    return @"2";
 }
 @end
 
@@ -8046,6 +8058,17 @@
 }
 @end
 
+@implementation KalturaMatchConditionType
++ (NSString*)MATCH_ANY
+{
+    return @"1";
+}
++ (NSString*)MATCH_ALL
+{
+    return @"2";
+}
+@end
+
 @implementation KalturaMediaEntryCompareAttribute
 + (NSString*)ACCESS_CONTROL_ID
 {
@@ -9916,6 +9939,21 @@
 }
 @end
 
+@implementation KalturaUserEntryExtendedStatus
++ (NSString*)PLAYBACK_COMPLETE
+{
+    return @"viewHistory.PLAYBACK_COMPLETE";
+}
++ (NSString*)PLAYBACK_STARTED
+{
+    return @"viewHistory.PLAYBACK_STARTED";
+}
++ (NSString*)VIEWED
+{
+    return @"viewHistory.VIEWED";
+}
+@end
+
 @implementation KalturaUserEntryOrderBy
 + (NSString*)CREATED_AT_ASC
 {
@@ -9954,6 +9992,10 @@
 + (NSString*)QUIZ
 {
     return @"quiz.QUIZ";
+}
++ (NSString*)VIEW_HISTORY
+{
+    return @"viewHistory.VIEW_HISTORY";
 }
 @end
 
@@ -21920,6 +21962,7 @@
 @synthesize codec = _codec;
 @synthesize frameRate = _frameRate;
 @synthesize keyFrameInterval = _keyFrameInterval;
+@synthesize language = _language;
 
 - (id)init
 {
@@ -21969,6 +22012,11 @@
     return KFT_Float;
 }
 
+- (KalturaFieldType)getTypeOfLanguage
+{
+    return KFT_String;
+}
+
 - (void)setBitrateFromString:(NSString*)aPropVal
 {
     self.bitrate = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -22006,12 +22054,14 @@
     [aParams addIfDefinedKey:@"codec" withString:self.codec];
     [aParams addIfDefinedKey:@"frameRate" withInt:self.frameRate];
     [aParams addIfDefinedKey:@"keyFrameInterval" withFloat:self.keyFrameInterval];
+    [aParams addIfDefinedKey:@"language" withString:self.language];
 }
 
 - (void)dealloc
 {
     [self->_flavorId release];
     [self->_codec release];
+    [self->_language release];
     [super dealloc];
 }
 
@@ -27331,6 +27381,7 @@
 @synthesize createdAt = _createdAt;
 @synthesize updatedAt = _updatedAt;
 @synthesize type = _type;
+@synthesize extendedStatus = _extendedStatus;
 
 - (id)init
 {
@@ -27384,6 +27435,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfExtendedStatus
+{
+    return KFT_String;
+}
+
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -27411,6 +27467,7 @@
         [aParams putKey:@"objectType" withString:@"KalturaUserEntry"];
     [aParams addIfDefinedKey:@"entryId" withString:self.entryId];
     [aParams addIfDefinedKey:@"userId" withString:self.userId];
+    [aParams addIfDefinedKey:@"extendedStatus" withString:self.extendedStatus];
 }
 
 - (void)dealloc
@@ -27419,6 +27476,7 @@
     [self->_userId release];
     [self->_status release];
     [self->_type release];
+    [self->_extendedStatus release];
     [super dealloc];
 }
 
@@ -34517,6 +34575,7 @@
 
 @implementation KalturaMatchCondition
 @synthesize values = _values;
+@synthesize matchType = _matchType;
 
 - (KalturaFieldType)getTypeOfValues
 {
@@ -34528,17 +34587,24 @@
     return @"KalturaStringValue";
 }
 
+- (KalturaFieldType)getTypeOfMatchType
+{
+    return KFT_String;
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaMatchCondition"];
     [aParams addIfDefinedKey:@"values" withArray:self.values];
+    [aParams addIfDefinedKey:@"matchType" withString:self.matchType];
 }
 
 - (void)dealloc
 {
     [self->_values release];
+    [self->_matchType release];
     [super dealloc];
 }
 
@@ -38637,6 +38703,30 @@
 
 @end
 
+@implementation KalturaAnonymousIPCondition
+@synthesize geoCoderType = _geoCoderType;
+
+- (KalturaFieldType)getTypeOfGeoCoderType
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaAnonymousIPCondition"];
+    [aParams addIfDefinedKey:@"geoCoderType" withString:self.geoCoderType];
+}
+
+- (void)dealloc
+{
+    [self->_geoCoderType release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaAppTokenFilter
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
@@ -42161,6 +42251,9 @@
 @synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
 @synthesize updatedAtGreaterThanOrEqual = _updatedAtGreaterThanOrEqual;
 @synthesize typeEqual = _typeEqual;
+@synthesize extendedStatusEqual = _extendedStatusEqual;
+@synthesize extendedStatusIn = _extendedStatusIn;
+@synthesize extendedStatusNotIn = _extendedStatusNotIn;
 
 - (id)init
 {
@@ -42250,6 +42343,21 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfExtendedStatusEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfExtendedStatusIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfExtendedStatusNotIn
+{
+    return KFT_String;
+}
+
 - (void)setIdEqualFromString:(NSString*)aPropVal
 {
     self.idEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -42295,6 +42403,9 @@
     [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
     [aParams addIfDefinedKey:@"updatedAtGreaterThanOrEqual" withInt:self.updatedAtGreaterThanOrEqual];
     [aParams addIfDefinedKey:@"typeEqual" withString:self.typeEqual];
+    [aParams addIfDefinedKey:@"extendedStatusEqual" withString:self.extendedStatusEqual];
+    [aParams addIfDefinedKey:@"extendedStatusIn" withString:self.extendedStatusIn];
+    [aParams addIfDefinedKey:@"extendedStatusNotIn" withString:self.extendedStatusNotIn];
 }
 
 - (void)dealloc
@@ -42309,6 +42420,9 @@
     [self->_userIdNotIn release];
     [self->_statusEqual release];
     [self->_typeEqual release];
+    [self->_extendedStatusEqual release];
+    [self->_extendedStatusIn release];
+    [self->_extendedStatusNotIn release];
     [super dealloc];
 }
 
@@ -42633,6 +42747,30 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaAmazonS3StorageProfileBaseFilter"];
+}
+
+@end
+
+@implementation KalturaAnonymousIPContextField
+@synthesize geoCoderType = _geoCoderType;
+
+- (KalturaFieldType)getTypeOfGeoCoderType
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaAnonymousIPContextField"];
+    [aParams addIfDefinedKey:@"geoCoderType" withString:self.geoCoderType];
+}
+
+- (void)dealloc
+{
+    [self->_geoCoderType release];
+    [super dealloc];
 }
 
 @end
@@ -43929,6 +44067,8 @@
 @implementation KalturaUserEntryFilter
 @synthesize userIdEqualCurrent = _userIdEqualCurrent;
 @synthesize isAnonymous = _isAnonymous;
+@synthesize privacyContextEqual = _privacyContextEqual;
+@synthesize privacyContextIn = _privacyContextIn;
 
 - (id)init
 {
@@ -43950,6 +44090,16 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfPrivacyContextEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfPrivacyContextIn
+{
+    return KFT_String;
+}
+
 - (void)setUserIdEqualCurrentFromString:(NSString*)aPropVal
 {
     self.userIdEqualCurrent = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -43967,6 +44117,15 @@
         [aParams putKey:@"objectType" withString:@"KalturaUserEntryFilter"];
     [aParams addIfDefinedKey:@"userIdEqualCurrent" withInt:self.userIdEqualCurrent];
     [aParams addIfDefinedKey:@"isAnonymous" withInt:self.isAnonymous];
+    [aParams addIfDefinedKey:@"privacyContextEqual" withString:self.privacyContextEqual];
+    [aParams addIfDefinedKey:@"privacyContextIn" withString:self.privacyContextIn];
+}
+
+- (void)dealloc
+{
+    [self->_privacyContextEqual release];
+    [self->_privacyContextIn release];
+    [super dealloc];
 }
 
 @end
@@ -44597,16 +44756,6 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaPlaylistFilter"];
-}
-
-@end
-
-@implementation KalturaQuizUserEntryFilter
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaQuizUserEntryFilter"];
 }
 
 @end
@@ -46588,14 +46737,20 @@
     return [self registerMediaServerWithEntryId:aEntryId withHostname:aHostname withMediaServerIndex:aMediaServerIndex withApplicationName:nil];
 }
 
-- (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withRecordedEntryId:(NSString*)aRecordedEntryId
+- (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withRecordedEntryId:(NSString*)aRecordedEntryId withFlavorParamsId:(int)aFlavorParamsId
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
     [self.client.params addIfDefinedKey:@"mediaServerIndex" withString:aMediaServerIndex];
     [self.client.params addIfDefinedKey:@"resource" withObject:aResource];
     [self.client.params addIfDefinedKey:@"duration" withFloat:aDuration];
     [self.client.params addIfDefinedKey:@"recordedEntryId" withString:aRecordedEntryId];
+    [self.client.params addIfDefinedKey:@"flavorParamsId" withInt:aFlavorParamsId];
     return [self.client queueObjectService:@"livechannel" withAction:@"setRecordedContent" withExpectedType:@"KalturaLiveEntry"];
+}
+
+- (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withRecordedEntryId:(NSString*)aRecordedEntryId
+{
+    return [self setRecordedContentWithEntryId:aEntryId withMediaServerIndex:aMediaServerIndex withResource:aResource withDuration:aDuration withRecordedEntryId:aRecordedEntryId withFlavorParamsId:KALTURA_UNDEF_INT];
 }
 
 - (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration
@@ -46843,14 +46998,20 @@
     return [self.client queueObjectService:@"livestream" withAction:@"removeLiveStreamPushPublishConfiguration" withExpectedType:@"KalturaLiveStreamEntry"];
 }
 
-- (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withRecordedEntryId:(NSString*)aRecordedEntryId
+- (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withRecordedEntryId:(NSString*)aRecordedEntryId withFlavorParamsId:(int)aFlavorParamsId
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
     [self.client.params addIfDefinedKey:@"mediaServerIndex" withString:aMediaServerIndex];
     [self.client.params addIfDefinedKey:@"resource" withObject:aResource];
     [self.client.params addIfDefinedKey:@"duration" withFloat:aDuration];
     [self.client.params addIfDefinedKey:@"recordedEntryId" withString:aRecordedEntryId];
+    [self.client.params addIfDefinedKey:@"flavorParamsId" withInt:aFlavorParamsId];
     return [self.client queueObjectService:@"livestream" withAction:@"setRecordedContent" withExpectedType:@"KalturaLiveEntry"];
+}
+
+- (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withRecordedEntryId:(NSString*)aRecordedEntryId
+{
+    return [self setRecordedContentWithEntryId:aEntryId withMediaServerIndex:aMediaServerIndex withResource:aResource withDuration:aDuration withRecordedEntryId:aRecordedEntryId withFlavorParamsId:KALTURA_UNDEF_INT];
 }
 
 - (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration
@@ -48752,6 +48913,12 @@
 {
     [self.client.params addIfDefinedKey:@"userEntry" withObject:aUserEntry];
     return [self.client queueObjectService:@"userentry" withAction:@"add" withExpectedType:@"KalturaUserEntry"];
+}
+
+- (int)bulkDeleteWithFilter:(KalturaUserEntryFilter*)aFilter
+{
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    return [self.client queueIntService:@"userentry" withAction:@"bulkDelete"];
 }
 
 - (KalturaUserEntry*)deleteWithId:(int)aId

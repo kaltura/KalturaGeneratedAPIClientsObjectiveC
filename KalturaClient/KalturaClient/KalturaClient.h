@@ -240,6 +240,7 @@
 + (int)PENDING_MODERATION;
 + (int)APPROVED;
 + (int)REJECTED;
++ (int)DELETED;
 + (int)FLAGGED_FOR_REVIEW;
 + (int)AUTO_APPROVED;
 @end
@@ -1390,6 +1391,7 @@
 + (NSString*)HASH;
 + (NSString*)DELIVERY_PROFILE;
 + (NSString*)ACTIVE_EDGE_VALIDATE;
++ (NSString*)ANONYMOUS_IP;
 @end
 
 // @package Kaltura
@@ -1969,6 +1971,7 @@
 // @subpackage Client
 @interface KalturaGeoCoderType : NSObject
 + (NSString*)KALTURA;
++ (NSString*)MAX_MIND;
 @end
 
 // @package Kaltura
@@ -2863,6 +2866,13 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaMatchConditionType : NSObject
++ (NSString*)MATCH_ANY;
++ (NSString*)MATCH_ALL;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaMediaEntryCompareAttribute : NSObject
 + (NSString*)ACCESS_CONTROL_ID;
 + (NSString*)CREATED_AT;
@@ -3526,6 +3536,14 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaUserEntryExtendedStatus : NSObject
++ (NSString*)PLAYBACK_COMPLETE;
++ (NSString*)PLAYBACK_STARTED;
++ (NSString*)VIEWED;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaUserEntryOrderBy : NSObject
 + (NSString*)CREATED_AT_ASC;
 + (NSString*)UPDATED_AT_ASC;
@@ -3545,6 +3563,7 @@
 // @subpackage Client
 @interface KalturaUserEntryType : NSObject
 + (NSString*)QUIZ;
++ (NSString*)VIEW_HISTORY;
 @end
 
 // @package Kaltura
@@ -6924,6 +6943,8 @@
 @property (nonatomic,assign) int frameRate;
 // Live stream's key frame interval
 @property (nonatomic,assign) double keyFrameInterval;
+// Live stream's language
+@property (nonatomic,copy) NSString* language;
 - (KalturaFieldType)getTypeOfBitrate;
 - (KalturaFieldType)getTypeOfFlavorId;
 - (KalturaFieldType)getTypeOfWidth;
@@ -6931,6 +6952,7 @@
 - (KalturaFieldType)getTypeOfCodec;
 - (KalturaFieldType)getTypeOfFrameRate;
 - (KalturaFieldType)getTypeOfKeyFrameInterval;
+- (KalturaFieldType)getTypeOfLanguage;
 - (void)setBitrateFromString:(NSString*)aPropVal;
 - (void)setWidthFromString:(NSString*)aPropVal;
 - (void)setHeightFromString:(NSString*)aPropVal;
@@ -8360,6 +8382,7 @@
 @property (nonatomic,assign,readonly) int createdAt;
 @property (nonatomic,assign,readonly) int updatedAt;
 @property (nonatomic,copy,readonly) NSString* type;	// enum KalturaUserEntryType
+@property (nonatomic,copy) NSString* extendedStatus;	// enum KalturaUserEntryExtendedStatus
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfEntryId;
 - (KalturaFieldType)getTypeOfUserId;
@@ -8368,6 +8391,7 @@
 - (KalturaFieldType)getTypeOfCreatedAt;
 - (KalturaFieldType)getTypeOfUpdatedAt;
 - (KalturaFieldType)getTypeOfType;
+- (KalturaFieldType)getTypeOfExtendedStatus;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
@@ -10253,8 +10277,10 @@
 // @subpackage Client
 @interface KalturaMatchCondition : KalturaCondition
 @property (nonatomic,retain) NSMutableArray* values;	// of KalturaStringValue elements
+@property (nonatomic,copy) NSString* matchType;	// enum KalturaMatchConditionType
 - (KalturaFieldType)getTypeOfValues;
 - (NSString*)getObjectTypeOfValues;
+- (KalturaFieldType)getTypeOfMatchType;
 @end
 
 // @package Kaltura
@@ -11310,6 +11336,14 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaAnonymousIPCondition : KalturaMatchCondition
+// The ip geo coder engine to be used
+@property (nonatomic,copy) NSString* geoCoderType;	// enum KalturaGeoCoderType
+- (KalturaFieldType)getTypeOfGeoCoderType;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaAppTokenFilter : KalturaAppTokenBaseFilter
 @end
 
@@ -12268,6 +12302,9 @@
 @property (nonatomic,assign) int updatedAtLessThanOrEqual;
 @property (nonatomic,assign) int updatedAtGreaterThanOrEqual;
 @property (nonatomic,copy) NSString* typeEqual;	// enum KalturaUserEntryType
+@property (nonatomic,copy) NSString* extendedStatusEqual;	// enum KalturaUserEntryExtendedStatus
+@property (nonatomic,copy) NSString* extendedStatusIn;
+@property (nonatomic,copy) NSString* extendedStatusNotIn;
 - (KalturaFieldType)getTypeOfIdEqual;
 - (KalturaFieldType)getTypeOfIdIn;
 - (KalturaFieldType)getTypeOfIdNotIn;
@@ -12283,6 +12320,9 @@
 - (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
 - (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual;
 - (KalturaFieldType)getTypeOfTypeEqual;
+- (KalturaFieldType)getTypeOfExtendedStatusEqual;
+- (KalturaFieldType)getTypeOfExtendedStatusIn;
+- (KalturaFieldType)getTypeOfExtendedStatusNotIn;
 - (void)setIdEqualFromString:(NSString*)aPropVal;
 - (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
@@ -12378,6 +12418,15 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaAmazonS3StorageProfileBaseFilter : KalturaStorageProfileFilter
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Represents the current request country context as calculated based on the IP address
+@interface KalturaAnonymousIPContextField : KalturaStringField
+// The ip geo coder engine to be used
+@property (nonatomic,copy) NSString* geoCoderType;	// enum KalturaGeoCoderType
+- (KalturaFieldType)getTypeOfGeoCoderType;
 @end
 
 // @package Kaltura
@@ -12908,8 +12957,12 @@
 @interface KalturaUserEntryFilter : KalturaUserEntryBaseFilter
 @property (nonatomic,assign) int userIdEqualCurrent;	// enum KalturaNullableBoolean
 @property (nonatomic,assign) int isAnonymous;	// enum KalturaNullableBoolean
+@property (nonatomic,copy) NSString* privacyContextEqual;
+@property (nonatomic,copy) NSString* privacyContextIn;
 - (KalturaFieldType)getTypeOfUserIdEqualCurrent;
 - (KalturaFieldType)getTypeOfIsAnonymous;
+- (KalturaFieldType)getTypeOfPrivacyContextEqual;
+- (KalturaFieldType)getTypeOfPrivacyContextIn;
 - (void)setUserIdEqualCurrentFromString:(NSString*)aPropVal;
 - (void)setIsAnonymousFromString:(NSString*)aPropVal;
 @end
@@ -13174,11 +13227,6 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaPlaylistFilter : KalturaPlaylistBaseFilter
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaQuizUserEntryFilter : KalturaQuizUserEntryBaseFilter
 @end
 
 // @package Kaltura
@@ -13889,6 +13937,7 @@
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex withApplicationName:(NSString*)aApplicationName;
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex;
 // Sey recorded video to live entry
+- (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withRecordedEntryId:(NSString*)aRecordedEntryId withFlavorParamsId:(int)aFlavorParamsId;
 - (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withRecordedEntryId:(NSString*)aRecordedEntryId;
 - (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration;
 // Unregister media server from live entry
@@ -13964,6 +14013,7 @@
 // Remove push publish configuration from entry
 - (KalturaLiveStreamEntry*)removeLiveStreamPushPublishConfigurationWithEntryId:(NSString*)aEntryId withProtocol:(NSString*)aProtocol;
 // Sey recorded video to live entry
+- (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withRecordedEntryId:(NSString*)aRecordedEntryId withFlavorParamsId:(int)aFlavorParamsId;
 - (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withRecordedEntryId:(NSString*)aRecordedEntryId;
 - (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration;
 // Unregister media server from live entry
@@ -14644,6 +14694,7 @@
 @interface KalturaUserEntryService : KalturaServiceBase
 // Adds a user_entry to the Kaltura DB.
 - (KalturaUserEntry*)addWithUserEntry:(KalturaUserEntry*)aUserEntry;
+- (int)bulkDeleteWithFilter:(KalturaUserEntryFilter*)aFilter;
 - (KalturaUserEntry*)deleteWithId:(int)aId;
 - (KalturaUserEntry*)getWithId:(NSString*)aId;
 - (KalturaUserEntryListResponse*)listWithFilter:(KalturaUserEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager;

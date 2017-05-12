@@ -654,6 +654,16 @@
 
 @end
 
+@implementation KalturaQuizUserEntryFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaQuizUserEntryFilter"];
+}
+
+@end
+
 ///////////////////////// services /////////////////////////
 @implementation KalturaQuizService
 - (KalturaQuiz*)addWithEntryId:(NSString*)aEntryId withQuiz:(KalturaQuiz*)aQuiz

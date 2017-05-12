@@ -2413,11 +2413,11 @@
     return [self.client queueObjectService:@"schedule_scheduleevent" withAction:@"get" withExpectedType:@"KalturaScheduleEvent"];
 }
 
-- (NSMutableArray*)getConflictsWithResourceIds:(NSString*)aResourceIds withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent
+- (KalturaScheduleEventListResponse*)getConflictsWithResourceIds:(NSString*)aResourceIds withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent
 {
     [self.client.params addIfDefinedKey:@"resourceIds" withString:aResourceIds];
     [self.client.params addIfDefinedKey:@"scheduleEvent" withObject:aScheduleEvent];
-    return [self.client queueArrayService:@"schedule_scheduleevent" withAction:@"getConflicts" withExpectedType:@"KalturaScheduleEvent"];
+    return [self.client queueObjectService:@"schedule_scheduleevent" withAction:@"getConflicts" withExpectedType:@"KalturaScheduleEventListResponse"];
 }
 
 - (KalturaScheduleEventListResponse*)listWithFilter:(KalturaScheduleEventFilter*)aFilter withPager:(KalturaFilterPager*)aPager

@@ -204,6 +204,11 @@
 @interface KalturaQuestionCuePointFilter : KalturaQuestionCuePointBaseFilter
 @end
 
+// @package Kaltura
+// @subpackage Client
+@interface KalturaQuizUserEntryFilter : KalturaQuizUserEntryBaseFilter
+@end
+
 ///////////////////////// services /////////////////////////
 // @package Kaltura
 // @subpackage Client
