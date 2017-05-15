@@ -33,6 +33,10 @@
 {
     return @"cielo24.Cielo24";
 }
++ (NSString*)EXAMPLE
+{
+    return @"exampleIntegration.Example";
+}
 + (NSString*)VOICEBASE
 {
     return @"voicebase.Voicebase";
@@ -40,6 +44,10 @@
 @end
 
 @implementation KalturaIntegrationTriggerType
++ (NSString*)BPM_EVENT_NOTIFICATION
+{
+    return @"bpmEventNotificationIntegration.BpmEventNotification";
+}
 + (NSString*)MANUAL
 {
     return @"1";

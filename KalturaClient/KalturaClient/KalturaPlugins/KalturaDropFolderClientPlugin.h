@@ -158,6 +158,7 @@
 // @subpackage Client
 @interface KalturaDropFolderType : NSObject
 + (NSString*)FEED;
++ (NSString*)WEBEX;
 + (NSString*)LOCAL;
 + (NSString*)FTP;
 + (NSString*)SCP;

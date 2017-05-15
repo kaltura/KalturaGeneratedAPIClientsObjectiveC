@@ -86,6 +86,18 @@
 {
     return @"clamAVScanEngine.ClamAV";
 }
++ (NSString*)SYMANTEC_SCAN_DIRECT_ENGINE
+{
+    return @"symantecScanEngine.SymantecScanDirectEngine";
+}
++ (NSString*)SYMANTEC_SCAN_ENGINE
+{
+    return @"symantecScanEngine.SymantecScanEngine";
+}
++ (NSString*)SYMANTEC_SCAN_JAVA_ENGINE
+{
+    return @"symantecScanEngine.SymantecScanJavaEngine";
+}
 @end
 
 @implementation KalturaVirusScanProfileOrderBy
