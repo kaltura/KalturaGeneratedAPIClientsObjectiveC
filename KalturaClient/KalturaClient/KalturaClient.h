@@ -1045,7 +1045,6 @@
 + (NSString*)SWF;
 + (NSString*)TIMED_THUMB_ASSET;
 + (NSString*)TRANSCRIPT;
-+ (NSString*)WIDEVINE_FLAVOR;
 + (NSString*)FLAVOR;
 + (NSString*)THUMBNAIL;
 + (NSString*)LIVE;
@@ -1201,10 +1200,10 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaBatchJobType : NSObject
++ (NSString*)CONVERT;
 + (NSString*)PARSE_MULTI_LANGUAGE_CAPTION_ASSET;
 + (NSString*)PARSE_CAPTION_ASSET;
 + (NSString*)DISTRIBUTION_DELETE;
-+ (NSString*)CONVERT;
 + (NSString*)DISTRIBUTION_DISABLE;
 + (NSString*)DISTRIBUTION_ENABLE;
 + (NSString*)DISTRIBUTION_FETCH_REPORT;
@@ -1219,7 +1218,6 @@
 + (NSString*)INDEX_TAGS;
 + (NSString*)TAG_RESOLVE;
 + (NSString*)VIRUS_SCAN;
-+ (NSString*)WIDEVINE_REPOSITORY_SYNC;
 + (NSString*)IMPORT;
 + (NSString*)DELETE;
 + (NSString*)FLATTEN;
@@ -3357,7 +3355,6 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaRuleActionType : NSObject
-+ (NSString*)DRM_POLICY;
 + (NSString*)BLOCK;
 + (NSString*)PREVIEW;
 + (NSString*)LIMIT_FLAVORS;
@@ -3411,7 +3408,6 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaSourceType : NSObject
-+ (NSString*)LIMELIGHT_LIVE;
 + (NSString*)VELOCIX_LIVE;
 + (NSString*)FILE;
 + (NSString*)WEBCAM;
@@ -5609,20 +5605,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaPluginData : KalturaObjectBase
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaDrmPlaybackPluginData : KalturaPluginData
-@property (nonatomic,copy) NSString* scheme;	// enum KalturaDrmSchemeName
-@property (nonatomic,copy) NSString* licenseURL;
-- (KalturaFieldType)getTypeOfScheme;
-- (KalturaFieldType)getTypeOfLicenseURL;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaEmailIngestionProfile : KalturaObjectBase
 @property (nonatomic,assign,readonly) int id;
 @property (nonatomic,copy) NSString* name;
@@ -6338,6 +6320,260 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaBatchJobListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaBatchJob elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaMediaInfo : KalturaObjectBase
+// The id of the media info
+@property (nonatomic,assign,readonly) int id;
+// The id of the related flavor asset
+@property (nonatomic,copy) NSString* flavorAssetId;
+// The file size
+@property (nonatomic,assign) int fileSize;
+// The container format
+@property (nonatomic,copy) NSString* containerFormat;
+// The container id
+@property (nonatomic,copy) NSString* containerId;
+// The container profile
+@property (nonatomic,copy) NSString* containerProfile;
+// The container duration
+@property (nonatomic,assign) int containerDuration;
+// The container bit rate
+@property (nonatomic,assign) int containerBitRate;
+// The video format
+@property (nonatomic,copy) NSString* videoFormat;
+// The video codec id
+@property (nonatomic,copy) NSString* videoCodecId;
+// The video duration
+@property (nonatomic,assign) int videoDuration;
+// The video bit rate
+@property (nonatomic,assign) int videoBitRate;
+// The video bit rate mode
+@property (nonatomic,assign) int videoBitRateMode;	// enum KalturaBitRateMode
+// The video width
+@property (nonatomic,assign) int videoWidth;
+// The video height
+@property (nonatomic,assign) int videoHeight;
+// The video frame rate
+@property (nonatomic,assign) double videoFrameRate;
+// The video display aspect ratio (dar)
+@property (nonatomic,assign) double videoDar;
+@property (nonatomic,assign) int videoRotation;
+// The audio format
+@property (nonatomic,copy) NSString* audioFormat;
+// The audio codec id
+@property (nonatomic,copy) NSString* audioCodecId;
+// The audio duration
+@property (nonatomic,assign) int audioDuration;
+// The audio bit rate
+@property (nonatomic,assign) int audioBitRate;
+// The audio bit rate mode
+@property (nonatomic,assign) int audioBitRateMode;	// enum KalturaBitRateMode
+// The number of audio channels
+@property (nonatomic,assign) int audioChannels;
+// The audio sampling rate
+@property (nonatomic,assign) int audioSamplingRate;
+// The audio resolution
+@property (nonatomic,assign) int audioResolution;
+// The writing library
+@property (nonatomic,copy) NSString* writingLib;
+// The data as returned by the mediainfo command line
+@property (nonatomic,copy) NSString* rawData;
+@property (nonatomic,copy) NSString* multiStreamInfo;
+@property (nonatomic,assign) int scanType;
+@property (nonatomic,copy) NSString* multiStream;
+@property (nonatomic,assign) int isFastStart;
+@property (nonatomic,copy) NSString* contentStreams;
+@property (nonatomic,assign) int complexityValue;
+@property (nonatomic,assign) double maxGOP;
+- (KalturaFieldType)getTypeOfId;
+- (KalturaFieldType)getTypeOfFlavorAssetId;
+- (KalturaFieldType)getTypeOfFileSize;
+- (KalturaFieldType)getTypeOfContainerFormat;
+- (KalturaFieldType)getTypeOfContainerId;
+- (KalturaFieldType)getTypeOfContainerProfile;
+- (KalturaFieldType)getTypeOfContainerDuration;
+- (KalturaFieldType)getTypeOfContainerBitRate;
+- (KalturaFieldType)getTypeOfVideoFormat;
+- (KalturaFieldType)getTypeOfVideoCodecId;
+- (KalturaFieldType)getTypeOfVideoDuration;
+- (KalturaFieldType)getTypeOfVideoBitRate;
+- (KalturaFieldType)getTypeOfVideoBitRateMode;
+- (KalturaFieldType)getTypeOfVideoWidth;
+- (KalturaFieldType)getTypeOfVideoHeight;
+- (KalturaFieldType)getTypeOfVideoFrameRate;
+- (KalturaFieldType)getTypeOfVideoDar;
+- (KalturaFieldType)getTypeOfVideoRotation;
+- (KalturaFieldType)getTypeOfAudioFormat;
+- (KalturaFieldType)getTypeOfAudioCodecId;
+- (KalturaFieldType)getTypeOfAudioDuration;
+- (KalturaFieldType)getTypeOfAudioBitRate;
+- (KalturaFieldType)getTypeOfAudioBitRateMode;
+- (KalturaFieldType)getTypeOfAudioChannels;
+- (KalturaFieldType)getTypeOfAudioSamplingRate;
+- (KalturaFieldType)getTypeOfAudioResolution;
+- (KalturaFieldType)getTypeOfWritingLib;
+- (KalturaFieldType)getTypeOfRawData;
+- (KalturaFieldType)getTypeOfMultiStreamInfo;
+- (KalturaFieldType)getTypeOfScanType;
+- (KalturaFieldType)getTypeOfMultiStream;
+- (KalturaFieldType)getTypeOfIsFastStart;
+- (KalturaFieldType)getTypeOfContentStreams;
+- (KalturaFieldType)getTypeOfComplexityValue;
+- (KalturaFieldType)getTypeOfMaxGOP;
+- (void)setIdFromString:(NSString*)aPropVal;
+- (void)setFileSizeFromString:(NSString*)aPropVal;
+- (void)setContainerDurationFromString:(NSString*)aPropVal;
+- (void)setContainerBitRateFromString:(NSString*)aPropVal;
+- (void)setVideoDurationFromString:(NSString*)aPropVal;
+- (void)setVideoBitRateFromString:(NSString*)aPropVal;
+- (void)setVideoBitRateModeFromString:(NSString*)aPropVal;
+- (void)setVideoWidthFromString:(NSString*)aPropVal;
+- (void)setVideoHeightFromString:(NSString*)aPropVal;
+- (void)setVideoFrameRateFromString:(NSString*)aPropVal;
+- (void)setVideoDarFromString:(NSString*)aPropVal;
+- (void)setVideoRotationFromString:(NSString*)aPropVal;
+- (void)setAudioDurationFromString:(NSString*)aPropVal;
+- (void)setAudioBitRateFromString:(NSString*)aPropVal;
+- (void)setAudioBitRateModeFromString:(NSString*)aPropVal;
+- (void)setAudioChannelsFromString:(NSString*)aPropVal;
+- (void)setAudioSamplingRateFromString:(NSString*)aPropVal;
+- (void)setAudioResolutionFromString:(NSString*)aPropVal;
+- (void)setScanTypeFromString:(NSString*)aPropVal;
+- (void)setIsFastStartFromString:(NSString*)aPropVal;
+- (void)setComplexityValueFromString:(NSString*)aPropVal;
+- (void)setMaxGOPFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaMediaInfoListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaMediaInfo elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaFlavorParamsOutputListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaFlavorParamsOutput elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaThumbAsset : KalturaAsset
+// The Flavor Params used to create this Flavor Asset
+@property (nonatomic,assign) int thumbParamsId;	// insertonly
+// The width of the Flavor Asset
+@property (nonatomic,assign,readonly) int width;
+// The height of the Flavor Asset
+@property (nonatomic,assign,readonly) int height;
+// The status of the asset
+@property (nonatomic,assign,readonly) int status;	// enum KalturaThumbAssetStatus
+- (KalturaFieldType)getTypeOfThumbParamsId;
+- (KalturaFieldType)getTypeOfWidth;
+- (KalturaFieldType)getTypeOfHeight;
+- (KalturaFieldType)getTypeOfStatus;
+- (void)setThumbParamsIdFromString:(NSString*)aPropVal;
+- (void)setWidthFromString:(NSString*)aPropVal;
+- (void)setHeightFromString:(NSString*)aPropVal;
+- (void)setStatusFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaThumbParams : KalturaAssetParams
+@property (nonatomic,assign) int cropType;	// enum KalturaThumbCropType
+@property (nonatomic,assign) int quality;
+@property (nonatomic,assign) int cropX;
+@property (nonatomic,assign) int cropY;
+@property (nonatomic,assign) int cropWidth;
+@property (nonatomic,assign) int cropHeight;
+@property (nonatomic,assign) double videoOffset;
+@property (nonatomic,assign) int width;
+@property (nonatomic,assign) int height;
+@property (nonatomic,assign) double scaleWidth;
+@property (nonatomic,assign) double scaleHeight;
+// Hexadecimal value
+@property (nonatomic,copy) NSString* backgroundColor;
+// Id of the flavor params or the thumbnail params to be used as source for the thumbnail creation
+@property (nonatomic,assign) int sourceParamsId;
+// The container format of the Flavor Params
+@property (nonatomic,copy) NSString* format;	// enum KalturaContainerFormat
+// The image density (dpi) for example: 72 or 96
+@property (nonatomic,assign) int density;
+// Strip profiles and comments
+@property (nonatomic,assign) KALTURA_BOOL stripProfiles;
+// Create thumbnail from the videoLengthpercentage second
+@property (nonatomic,assign) int videoOffsetInPercentage;
+- (KalturaFieldType)getTypeOfCropType;
+- (KalturaFieldType)getTypeOfQuality;
+- (KalturaFieldType)getTypeOfCropX;
+- (KalturaFieldType)getTypeOfCropY;
+- (KalturaFieldType)getTypeOfCropWidth;
+- (KalturaFieldType)getTypeOfCropHeight;
+- (KalturaFieldType)getTypeOfVideoOffset;
+- (KalturaFieldType)getTypeOfWidth;
+- (KalturaFieldType)getTypeOfHeight;
+- (KalturaFieldType)getTypeOfScaleWidth;
+- (KalturaFieldType)getTypeOfScaleHeight;
+- (KalturaFieldType)getTypeOfBackgroundColor;
+- (KalturaFieldType)getTypeOfSourceParamsId;
+- (KalturaFieldType)getTypeOfFormat;
+- (KalturaFieldType)getTypeOfDensity;
+- (KalturaFieldType)getTypeOfStripProfiles;
+- (KalturaFieldType)getTypeOfVideoOffsetInPercentage;
+- (void)setCropTypeFromString:(NSString*)aPropVal;
+- (void)setQualityFromString:(NSString*)aPropVal;
+- (void)setCropXFromString:(NSString*)aPropVal;
+- (void)setCropYFromString:(NSString*)aPropVal;
+- (void)setCropWidthFromString:(NSString*)aPropVal;
+- (void)setCropHeightFromString:(NSString*)aPropVal;
+- (void)setVideoOffsetFromString:(NSString*)aPropVal;
+- (void)setWidthFromString:(NSString*)aPropVal;
+- (void)setHeightFromString:(NSString*)aPropVal;
+- (void)setScaleWidthFromString:(NSString*)aPropVal;
+- (void)setScaleHeightFromString:(NSString*)aPropVal;
+- (void)setSourceParamsIdFromString:(NSString*)aPropVal;
+- (void)setDensityFromString:(NSString*)aPropVal;
+- (void)setStripProfilesFromString:(NSString*)aPropVal;
+- (void)setVideoOffsetInPercentageFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaThumbParamsOutput : KalturaThumbParams
+@property (nonatomic,assign) int thumbParamsId;
+@property (nonatomic,copy) NSString* thumbParamsVersion;
+@property (nonatomic,copy) NSString* thumbAssetId;
+@property (nonatomic,copy) NSString* thumbAssetVersion;
+@property (nonatomic,assign) int rotate;
+- (KalturaFieldType)getTypeOfThumbParamsId;
+- (KalturaFieldType)getTypeOfThumbParamsVersion;
+- (KalturaFieldType)getTypeOfThumbAssetId;
+- (KalturaFieldType)getTypeOfThumbAssetVersion;
+- (KalturaFieldType)getTypeOfRotate;
+- (void)setThumbParamsIdFromString:(NSString*)aPropVal;
+- (void)setRotateFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaThumbParamsOutputListResponse : KalturaListResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaThumbParamsOutput elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
 // A representation of a live stream configuration
 @interface KalturaLiveStreamConfiguration : KalturaObjectBase
 @property (nonatomic,copy) NSString* protocol;	// enum KalturaPlaybackProtocol
@@ -7025,130 +7261,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaMediaInfo : KalturaObjectBase
-// The id of the media info
-@property (nonatomic,assign,readonly) int id;
-// The id of the related flavor asset
-@property (nonatomic,copy) NSString* flavorAssetId;
-// The file size
-@property (nonatomic,assign) int fileSize;
-// The container format
-@property (nonatomic,copy) NSString* containerFormat;
-// The container id
-@property (nonatomic,copy) NSString* containerId;
-// The container profile
-@property (nonatomic,copy) NSString* containerProfile;
-// The container duration
-@property (nonatomic,assign) int containerDuration;
-// The container bit rate
-@property (nonatomic,assign) int containerBitRate;
-// The video format
-@property (nonatomic,copy) NSString* videoFormat;
-// The video codec id
-@property (nonatomic,copy) NSString* videoCodecId;
-// The video duration
-@property (nonatomic,assign) int videoDuration;
-// The video bit rate
-@property (nonatomic,assign) int videoBitRate;
-// The video bit rate mode
-@property (nonatomic,assign) int videoBitRateMode;	// enum KalturaBitRateMode
-// The video width
-@property (nonatomic,assign) int videoWidth;
-// The video height
-@property (nonatomic,assign) int videoHeight;
-// The video frame rate
-@property (nonatomic,assign) double videoFrameRate;
-// The video display aspect ratio (dar)
-@property (nonatomic,assign) double videoDar;
-@property (nonatomic,assign) int videoRotation;
-// The audio format
-@property (nonatomic,copy) NSString* audioFormat;
-// The audio codec id
-@property (nonatomic,copy) NSString* audioCodecId;
-// The audio duration
-@property (nonatomic,assign) int audioDuration;
-// The audio bit rate
-@property (nonatomic,assign) int audioBitRate;
-// The audio bit rate mode
-@property (nonatomic,assign) int audioBitRateMode;	// enum KalturaBitRateMode
-// The number of audio channels
-@property (nonatomic,assign) int audioChannels;
-// The audio sampling rate
-@property (nonatomic,assign) int audioSamplingRate;
-// The audio resolution
-@property (nonatomic,assign) int audioResolution;
-// The writing library
-@property (nonatomic,copy) NSString* writingLib;
-// The data as returned by the mediainfo command line
-@property (nonatomic,copy) NSString* rawData;
-@property (nonatomic,copy) NSString* multiStreamInfo;
-@property (nonatomic,assign) int scanType;
-@property (nonatomic,copy) NSString* multiStream;
-@property (nonatomic,assign) int isFastStart;
-@property (nonatomic,copy) NSString* contentStreams;
-@property (nonatomic,assign) int complexityValue;
-@property (nonatomic,assign) double maxGOP;
-- (KalturaFieldType)getTypeOfId;
-- (KalturaFieldType)getTypeOfFlavorAssetId;
-- (KalturaFieldType)getTypeOfFileSize;
-- (KalturaFieldType)getTypeOfContainerFormat;
-- (KalturaFieldType)getTypeOfContainerId;
-- (KalturaFieldType)getTypeOfContainerProfile;
-- (KalturaFieldType)getTypeOfContainerDuration;
-- (KalturaFieldType)getTypeOfContainerBitRate;
-- (KalturaFieldType)getTypeOfVideoFormat;
-- (KalturaFieldType)getTypeOfVideoCodecId;
-- (KalturaFieldType)getTypeOfVideoDuration;
-- (KalturaFieldType)getTypeOfVideoBitRate;
-- (KalturaFieldType)getTypeOfVideoBitRateMode;
-- (KalturaFieldType)getTypeOfVideoWidth;
-- (KalturaFieldType)getTypeOfVideoHeight;
-- (KalturaFieldType)getTypeOfVideoFrameRate;
-- (KalturaFieldType)getTypeOfVideoDar;
-- (KalturaFieldType)getTypeOfVideoRotation;
-- (KalturaFieldType)getTypeOfAudioFormat;
-- (KalturaFieldType)getTypeOfAudioCodecId;
-- (KalturaFieldType)getTypeOfAudioDuration;
-- (KalturaFieldType)getTypeOfAudioBitRate;
-- (KalturaFieldType)getTypeOfAudioBitRateMode;
-- (KalturaFieldType)getTypeOfAudioChannels;
-- (KalturaFieldType)getTypeOfAudioSamplingRate;
-- (KalturaFieldType)getTypeOfAudioResolution;
-- (KalturaFieldType)getTypeOfWritingLib;
-- (KalturaFieldType)getTypeOfRawData;
-- (KalturaFieldType)getTypeOfMultiStreamInfo;
-- (KalturaFieldType)getTypeOfScanType;
-- (KalturaFieldType)getTypeOfMultiStream;
-- (KalturaFieldType)getTypeOfIsFastStart;
-- (KalturaFieldType)getTypeOfContentStreams;
-- (KalturaFieldType)getTypeOfComplexityValue;
-- (KalturaFieldType)getTypeOfMaxGOP;
-- (void)setIdFromString:(NSString*)aPropVal;
-- (void)setFileSizeFromString:(NSString*)aPropVal;
-- (void)setContainerDurationFromString:(NSString*)aPropVal;
-- (void)setContainerBitRateFromString:(NSString*)aPropVal;
-- (void)setVideoDurationFromString:(NSString*)aPropVal;
-- (void)setVideoBitRateFromString:(NSString*)aPropVal;
-- (void)setVideoBitRateModeFromString:(NSString*)aPropVal;
-- (void)setVideoWidthFromString:(NSString*)aPropVal;
-- (void)setVideoHeightFromString:(NSString*)aPropVal;
-- (void)setVideoFrameRateFromString:(NSString*)aPropVal;
-- (void)setVideoDarFromString:(NSString*)aPropVal;
-- (void)setVideoRotationFromString:(NSString*)aPropVal;
-- (void)setAudioDurationFromString:(NSString*)aPropVal;
-- (void)setAudioBitRateFromString:(NSString*)aPropVal;
-- (void)setAudioBitRateModeFromString:(NSString*)aPropVal;
-- (void)setAudioChannelsFromString:(NSString*)aPropVal;
-- (void)setAudioSamplingRateFromString:(NSString*)aPropVal;
-- (void)setAudioResolutionFromString:(NSString*)aPropVal;
-- (void)setScanTypeFromString:(NSString*)aPropVal;
-- (void)setIsFastStartFromString:(NSString*)aPropVal;
-- (void)setComplexityValueFromString:(NSString*)aPropVal;
-- (void)setMaxGOPFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaMixEntry : KalturaPlayableEntry
 // Indicates whether the user has submited a real thumbnail to the mix (Not the one that was generated automaticaly)
 @property (nonatomic,assign,readonly) KALTURA_BOOL hasRealThumbnail;
@@ -7317,6 +7429,20 @@
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaPluginData : KalturaObjectBase
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaDrmPlaybackPluginData : KalturaPluginData
+@property (nonatomic,copy) NSString* scheme;	// enum KalturaDrmSchemeName
+@property (nonatomic,copy) NSString* licenseURL;
+- (KalturaFieldType)getTypeOfScheme;
+- (KalturaFieldType)getTypeOfLicenseURL;
 @end
 
 // @package Kaltura
@@ -8005,104 +8131,6 @@
 - (void)setTotalEntryCountFromString:(NSString*)aPropVal;
 - (void)setActualEntryCountFromString:(NSString*)aPropVal;
 - (void)setRequireTranscodingCountFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaThumbAsset : KalturaAsset
-// The Flavor Params used to create this Flavor Asset
-@property (nonatomic,assign) int thumbParamsId;	// insertonly
-// The width of the Flavor Asset
-@property (nonatomic,assign,readonly) int width;
-// The height of the Flavor Asset
-@property (nonatomic,assign,readonly) int height;
-// The status of the asset
-@property (nonatomic,assign,readonly) int status;	// enum KalturaThumbAssetStatus
-- (KalturaFieldType)getTypeOfThumbParamsId;
-- (KalturaFieldType)getTypeOfWidth;
-- (KalturaFieldType)getTypeOfHeight;
-- (KalturaFieldType)getTypeOfStatus;
-- (void)setThumbParamsIdFromString:(NSString*)aPropVal;
-- (void)setWidthFromString:(NSString*)aPropVal;
-- (void)setHeightFromString:(NSString*)aPropVal;
-- (void)setStatusFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaThumbParams : KalturaAssetParams
-@property (nonatomic,assign) int cropType;	// enum KalturaThumbCropType
-@property (nonatomic,assign) int quality;
-@property (nonatomic,assign) int cropX;
-@property (nonatomic,assign) int cropY;
-@property (nonatomic,assign) int cropWidth;
-@property (nonatomic,assign) int cropHeight;
-@property (nonatomic,assign) double videoOffset;
-@property (nonatomic,assign) int width;
-@property (nonatomic,assign) int height;
-@property (nonatomic,assign) double scaleWidth;
-@property (nonatomic,assign) double scaleHeight;
-// Hexadecimal value
-@property (nonatomic,copy) NSString* backgroundColor;
-// Id of the flavor params or the thumbnail params to be used as source for the thumbnail creation
-@property (nonatomic,assign) int sourceParamsId;
-// The container format of the Flavor Params
-@property (nonatomic,copy) NSString* format;	// enum KalturaContainerFormat
-// The image density (dpi) for example: 72 or 96
-@property (nonatomic,assign) int density;
-// Strip profiles and comments
-@property (nonatomic,assign) KALTURA_BOOL stripProfiles;
-// Create thumbnail from the videoLengthpercentage second
-@property (nonatomic,assign) int videoOffsetInPercentage;
-- (KalturaFieldType)getTypeOfCropType;
-- (KalturaFieldType)getTypeOfQuality;
-- (KalturaFieldType)getTypeOfCropX;
-- (KalturaFieldType)getTypeOfCropY;
-- (KalturaFieldType)getTypeOfCropWidth;
-- (KalturaFieldType)getTypeOfCropHeight;
-- (KalturaFieldType)getTypeOfVideoOffset;
-- (KalturaFieldType)getTypeOfWidth;
-- (KalturaFieldType)getTypeOfHeight;
-- (KalturaFieldType)getTypeOfScaleWidth;
-- (KalturaFieldType)getTypeOfScaleHeight;
-- (KalturaFieldType)getTypeOfBackgroundColor;
-- (KalturaFieldType)getTypeOfSourceParamsId;
-- (KalturaFieldType)getTypeOfFormat;
-- (KalturaFieldType)getTypeOfDensity;
-- (KalturaFieldType)getTypeOfStripProfiles;
-- (KalturaFieldType)getTypeOfVideoOffsetInPercentage;
-- (void)setCropTypeFromString:(NSString*)aPropVal;
-- (void)setQualityFromString:(NSString*)aPropVal;
-- (void)setCropXFromString:(NSString*)aPropVal;
-- (void)setCropYFromString:(NSString*)aPropVal;
-- (void)setCropWidthFromString:(NSString*)aPropVal;
-- (void)setCropHeightFromString:(NSString*)aPropVal;
-- (void)setVideoOffsetFromString:(NSString*)aPropVal;
-- (void)setWidthFromString:(NSString*)aPropVal;
-- (void)setHeightFromString:(NSString*)aPropVal;
-- (void)setScaleWidthFromString:(NSString*)aPropVal;
-- (void)setScaleHeightFromString:(NSString*)aPropVal;
-- (void)setSourceParamsIdFromString:(NSString*)aPropVal;
-- (void)setDensityFromString:(NSString*)aPropVal;
-- (void)setStripProfilesFromString:(NSString*)aPropVal;
-- (void)setVideoOffsetInPercentageFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaThumbParamsOutput : KalturaThumbParams
-@property (nonatomic,assign) int thumbParamsId;
-@property (nonatomic,copy) NSString* thumbParamsVersion;
-@property (nonatomic,copy) NSString* thumbAssetId;
-@property (nonatomic,copy) NSString* thumbAssetVersion;
-@property (nonatomic,assign) int rotate;
-- (KalturaFieldType)getTypeOfThumbParamsId;
-- (KalturaFieldType)getTypeOfThumbParamsVersion;
-- (KalturaFieldType)getTypeOfThumbAssetId;
-- (KalturaFieldType)getTypeOfThumbAssetVersion;
-- (KalturaFieldType)getTypeOfRotate;
-- (void)setThumbParamsIdFromString:(NSString*)aPropVal;
-- (void)setRotateFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -8823,14 +8851,6 @@
 // @subpackage Client
 @interface KalturaBaseSyndicationFeedListResponse : KalturaListResponse
 @property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaBaseSyndicationFeed elements
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaBatchJobListResponse : KalturaListResponse
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaBatchJob elements
 - (KalturaFieldType)getTypeOfObjects;
 - (NSString*)getObjectTypeOfObjects;
 @end
@@ -9961,14 +9981,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaFlavorParamsOutputListResponse : KalturaListResponse
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaFlavorParamsOutput elements
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaGenericSyndicationFeed : KalturaBaseSyndicationFeed
 // feed description
 @property (nonatomic,copy) NSString* feedDescription;
@@ -10276,14 +10288,6 @@
 @interface KalturaMediaInfoBaseFilter : KalturaFilter
 @property (nonatomic,copy) NSString* flavorAssetIdEqual;
 - (KalturaFieldType)getTypeOfFlavorAssetIdEqual;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaMediaInfoListResponse : KalturaListResponse
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaMediaInfo elements
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
 @end
 
 // @package Kaltura
@@ -10857,14 +10861,6 @@
 // @subpackage Client
 @interface KalturaThumbParamsListResponse : KalturaListResponse
 @property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaThumbParams elements
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaThumbParamsOutputListResponse : KalturaListResponse
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaThumbParamsOutput elements
 - (KalturaFieldType)getTypeOfObjects;
 - (NSString*)getObjectTypeOfObjects;
 @end

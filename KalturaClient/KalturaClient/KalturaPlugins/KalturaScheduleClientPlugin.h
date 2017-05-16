@@ -596,6 +596,7 @@
 @property (nonatomic,copy) NSString* idNotIn;
 @property (nonatomic,assign) int parentIdEqual;
 @property (nonatomic,copy) NSString* parentIdIn;
+@property (nonatomic,copy) NSString* nameEqual;
 @property (nonatomic,copy) NSString* systemNameEqual;
 @property (nonatomic,copy) NSString* systemNameIn;
 @property (nonatomic,assign) int statusEqual;	// enum KalturaScheduleResourceStatus
@@ -612,6 +613,7 @@
 - (KalturaFieldType)getTypeOfIdNotIn;
 - (KalturaFieldType)getTypeOfParentIdEqual;
 - (KalturaFieldType)getTypeOfParentIdIn;
+- (KalturaFieldType)getTypeOfNameEqual;
 - (KalturaFieldType)getTypeOfSystemNameEqual;
 - (KalturaFieldType)getTypeOfSystemNameIn;
 - (KalturaFieldType)getTypeOfStatusEqual;
@@ -647,6 +649,7 @@
 @property (nonatomic,copy) NSString* templateEntryCategoriesIdsLike;
 @property (nonatomic,copy) NSString* resourceSystemNamesMultiLikeAnd;
 @property (nonatomic,copy) NSString* resourceSystemNamesLike;
+@property (nonatomic,copy) NSString* resourceIdEqual;
 - (KalturaFieldType)getTypeOfResourceIdsLike;
 - (KalturaFieldType)getTypeOfResourceIdsMultiLikeOr;
 - (KalturaFieldType)getTypeOfResourceIdsMultiLikeAnd;
@@ -659,6 +662,7 @@
 - (KalturaFieldType)getTypeOfTemplateEntryCategoriesIdsLike;
 - (KalturaFieldType)getTypeOfResourceSystemNamesMultiLikeAnd;
 - (KalturaFieldType)getTypeOfResourceSystemNamesLike;
+- (KalturaFieldType)getTypeOfResourceIdEqual;
 @end
 
 // @package Kaltura

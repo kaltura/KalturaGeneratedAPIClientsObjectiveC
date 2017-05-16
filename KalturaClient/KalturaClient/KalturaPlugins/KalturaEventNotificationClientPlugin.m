@@ -227,10 +227,6 @@
 @end
 
 @implementation KalturaEventNotificationEventType
-+ (NSString*)INTEGRATION_JOB_CLOSED
-{
-    return @"integrationEventNotifications.INTEGRATION_JOB_CLOSED";
-}
 + (NSString*)BATCH_JOB_STATUS
 {
     return @"1";
@@ -313,18 +309,6 @@
 @end
 
 @implementation KalturaEventNotificationTemplateType
-+ (NSString*)BPM_ABORT
-{
-    return @"businessProcessNotification.BusinessProcessAbort";
-}
-+ (NSString*)BPM_SIGNAL
-{
-    return @"businessProcessNotification.BusinessProcessSignal";
-}
-+ (NSString*)BPM_START
-{
-    return @"businessProcessNotification.BusinessProcessStart";
-}
 + (NSString*)EMAIL
 {
     return @"emailNotification.Email";
@@ -332,10 +316,6 @@
 + (NSString*)HTTP
 {
     return @"httpNotification.Http";
-}
-+ (NSString*)PUSH
-{
-    return @"pushNotification.Push";
 }
 @end
 
@@ -1068,21 +1048,6 @@
 - (KalturaEventNotificationTemplateListResponse*)listTemplates
 {
     return [self listTemplatesWithFilter:nil];
-}
-
-- (KalturaPushNotificationData*)registerWithNotificationTemplateSystemName:(NSString*)aNotificationTemplateSystemName withPushNotificationParams:(KalturaPushNotificationParams*)aPushNotificationParams
-{
-    [self.client.params addIfDefinedKey:@"notificationTemplateSystemName" withString:aNotificationTemplateSystemName];
-    [self.client.params addIfDefinedKey:@"pushNotificationParams" withObject:aPushNotificationParams];
-    return [self.client queueObjectService:@"eventnotification_eventnotificationtemplate" withAction:@"register" withExpectedType:@"KalturaPushNotificationData"];
-}
-
-- (void)sendCommandWithNotificationTemplateSystemName:(NSString*)aNotificationTemplateSystemName withPushNotificationParams:(KalturaPushNotificationParams*)aPushNotificationParams withCommand:(NSString*)aCommand
-{
-    [self.client.params addIfDefinedKey:@"notificationTemplateSystemName" withString:aNotificationTemplateSystemName];
-    [self.client.params addIfDefinedKey:@"pushNotificationParams" withObject:aPushNotificationParams];
-    [self.client.params addIfDefinedKey:@"command" withString:aCommand];
-    [self.client queueVoidService:@"eventnotification_eventnotificationtemplate" withAction:@"sendCommand"];
 }
 
 - (KalturaEventNotificationTemplate*)updateWithId:(int)aId withEventNotificationTemplate:(KalturaEventNotificationTemplate*)aEventNotificationTemplate

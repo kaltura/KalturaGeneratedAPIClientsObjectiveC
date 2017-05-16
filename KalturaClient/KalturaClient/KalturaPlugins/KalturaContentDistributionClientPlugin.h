@@ -175,29 +175,8 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaDistributionProviderType : NSObject
-+ (NSString*)COMCAST_MRSS;
-+ (NSString*)CROSS_KALTURA;
-+ (NSString*)DAILYMOTION;
-+ (NSString*)DOUBLECLICK;
 + (NSString*)FACEBOOK;
-+ (NSString*)FREEWHEEL;
-+ (NSString*)FREEWHEEL_GENERIC;
-+ (NSString*)FTP;
-+ (NSString*)FTP_SCHEDULED;
-+ (NSString*)HULU;
 + (NSString*)IDETIC;
-+ (NSString*)METRO_PCS;
-+ (NSString*)MSN;
-+ (NSString*)NDN;
-+ (NSString*)PODCAST;
-+ (NSString*)QUICKPLAY;
-+ (NSString*)SYNACOR_HBO;
-+ (NSString*)TIME_WARNER;
-+ (NSString*)TVCOM;
-+ (NSString*)TVINCI;
-+ (NSString*)UNICORN;
-+ (NSString*)YAHOO;
-+ (NSString*)YOUTUBE;
 + (NSString*)YOUTUBE_API;
 + (NSString*)GENERIC;
 + (NSString*)SYNDICATION;

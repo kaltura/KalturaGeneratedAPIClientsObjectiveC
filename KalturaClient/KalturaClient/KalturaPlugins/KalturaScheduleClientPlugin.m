@@ -1828,6 +1828,7 @@
 @synthesize idNotIn = _idNotIn;
 @synthesize parentIdEqual = _parentIdEqual;
 @synthesize parentIdIn = _parentIdIn;
+@synthesize nameEqual = _nameEqual;
 @synthesize systemNameEqual = _systemNameEqual;
 @synthesize systemNameIn = _systemNameIn;
 @synthesize statusEqual = _statusEqual;
@@ -1876,6 +1877,11 @@
 }
 
 - (KalturaFieldType)getTypeOfParentIdIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfNameEqual
 {
     return KFT_String;
 }
@@ -1980,6 +1986,7 @@
     [aParams addIfDefinedKey:@"idNotIn" withString:self.idNotIn];
     [aParams addIfDefinedKey:@"parentIdEqual" withInt:self.parentIdEqual];
     [aParams addIfDefinedKey:@"parentIdIn" withString:self.parentIdIn];
+    [aParams addIfDefinedKey:@"nameEqual" withString:self.nameEqual];
     [aParams addIfDefinedKey:@"systemNameEqual" withString:self.systemNameEqual];
     [aParams addIfDefinedKey:@"systemNameIn" withString:self.systemNameIn];
     [aParams addIfDefinedKey:@"statusEqual" withInt:self.statusEqual];
@@ -1998,6 +2005,7 @@
     [self->_idIn release];
     [self->_idNotIn release];
     [self->_parentIdIn release];
+    [self->_nameEqual release];
     [self->_systemNameEqual release];
     [self->_systemNameIn release];
     [self->_statusIn release];
@@ -2022,6 +2030,7 @@
 @synthesize templateEntryCategoriesIdsLike = _templateEntryCategoriesIdsLike;
 @synthesize resourceSystemNamesMultiLikeAnd = _resourceSystemNamesMultiLikeAnd;
 @synthesize resourceSystemNamesLike = _resourceSystemNamesLike;
+@synthesize resourceIdEqual = _resourceIdEqual;
 
 - (KalturaFieldType)getTypeOfResourceIdsLike
 {
@@ -2083,6 +2092,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfResourceIdEqual
+{
+    return KFT_String;
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -2100,6 +2114,7 @@
     [aParams addIfDefinedKey:@"templateEntryCategoriesIdsLike" withString:self.templateEntryCategoriesIdsLike];
     [aParams addIfDefinedKey:@"resourceSystemNamesMultiLikeAnd" withString:self.resourceSystemNamesMultiLikeAnd];
     [aParams addIfDefinedKey:@"resourceSystemNamesLike" withString:self.resourceSystemNamesLike];
+    [aParams addIfDefinedKey:@"resourceIdEqual" withString:self.resourceIdEqual];
 }
 
 - (void)dealloc
@@ -2116,6 +2131,7 @@
     [self->_templateEntryCategoriesIdsLike release];
     [self->_resourceSystemNamesMultiLikeAnd release];
     [self->_resourceSystemNamesLike release];
+    [self->_resourceIdEqual release];
     [super dealloc];
 }
 

@@ -35,14 +35,12 @@
 // @subpackage Client
 @interface KalturaIntegrationProviderType : NSObject
 + (NSString*)CIELO24;
-+ (NSString*)EXAMPLE;
 + (NSString*)VOICEBASE;
 @end
 
 // @package Kaltura
 // @subpackage Client
 @interface KalturaIntegrationTriggerType : NSObject
-+ (NSString*)BPM_EVENT_NOTIFICATION;
 + (NSString*)MANUAL;
 @end
 

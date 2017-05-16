@@ -372,10 +372,6 @@
 {
     return @"FeedDropFolder.FEED";
 }
-+ (NSString*)WEBEX
-{
-    return @"WebexDropFolder.WEBEX";
-}
 + (NSString*)LOCAL
 {
     return @"1";

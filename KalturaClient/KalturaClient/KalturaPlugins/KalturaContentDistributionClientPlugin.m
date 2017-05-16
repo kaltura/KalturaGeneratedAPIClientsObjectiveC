@@ -338,97 +338,13 @@
 @end
 
 @implementation KalturaDistributionProviderType
-+ (NSString*)COMCAST_MRSS
-{
-    return @"comcastMrssDistribution.COMCAST_MRSS";
-}
-+ (NSString*)CROSS_KALTURA
-{
-    return @"crossKalturaDistribution.CROSS_KALTURA";
-}
-+ (NSString*)DAILYMOTION
-{
-    return @"dailymotionDistribution.DAILYMOTION";
-}
-+ (NSString*)DOUBLECLICK
-{
-    return @"doubleClickDistribution.DOUBLECLICK";
-}
 + (NSString*)FACEBOOK
 {
     return @"facebookDistribution.FACEBOOK";
 }
-+ (NSString*)FREEWHEEL
-{
-    return @"freewheelDistribution.FREEWHEEL";
-}
-+ (NSString*)FREEWHEEL_GENERIC
-{
-    return @"freewheelGenericDistribution.FREEWHEEL_GENERIC";
-}
-+ (NSString*)FTP
-{
-    return @"ftpDistribution.FTP";
-}
-+ (NSString*)FTP_SCHEDULED
-{
-    return @"ftpDistribution.FTP_SCHEDULED";
-}
-+ (NSString*)HULU
-{
-    return @"huluDistribution.HULU";
-}
 + (NSString*)IDETIC
 {
     return @"ideticDistribution.IDETIC";
-}
-+ (NSString*)METRO_PCS
-{
-    return @"metroPcsDistribution.METRO_PCS";
-}
-+ (NSString*)MSN
-{
-    return @"msnDistribution.MSN";
-}
-+ (NSString*)NDN
-{
-    return @"ndnDistribution.NDN";
-}
-+ (NSString*)PODCAST
-{
-    return @"podcastDistribution.PODCAST";
-}
-+ (NSString*)QUICKPLAY
-{
-    return @"quickPlayDistribution.QUICKPLAY";
-}
-+ (NSString*)SYNACOR_HBO
-{
-    return @"synacorHboDistribution.SYNACOR_HBO";
-}
-+ (NSString*)TIME_WARNER
-{
-    return @"timeWarnerDistribution.TIME_WARNER";
-}
-+ (NSString*)TVCOM
-{
-    return @"tvComDistribution.TVCOM";
-}
-+ (NSString*)TVINCI
-{
-    return @"tvinciDistribution.TVINCI";
-}
-+ (NSString*)UNICORN
-{
-    return @"unicornDistribution.UNICORN";
-}
-+ (NSString*)YAHOO
-{
-    return @"yahooDistribution.YAHOO";
-}
-+ (NSString*)YOUTUBE
-{
-    return @"youTubeDistribution.YOUTUBE";
 }
 + (NSString*)YOUTUBE_API
 {

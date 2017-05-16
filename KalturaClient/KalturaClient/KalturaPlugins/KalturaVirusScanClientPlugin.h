@@ -60,9 +60,6 @@
 // @subpackage Client
 @interface KalturaVirusScanEngineType : NSObject
 + (NSString*)CLAMAV_SCAN_ENGINE;
-+ (NSString*)SYMANTEC_SCAN_DIRECT_ENGINE;
-+ (NSString*)SYMANTEC_SCAN_ENGINE;
-+ (NSString*)SYMANTEC_SCAN_JAVA_ENGINE;
 @end
 
 // @package Kaltura
