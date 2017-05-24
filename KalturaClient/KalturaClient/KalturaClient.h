@@ -5235,6 +5235,8 @@
 @property (nonatomic,copy) NSString* conditionalProfiles;
 // When set, the ExtractMedia job should detect the source file GOP using this value as the max calculated period
 @property (nonatomic,assign) int detectGOP;
+// XSL to transform ingestion Media Info XML
+@property (nonatomic,copy) NSString* mediaInfoXslTransformation;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfPartnerId;
 - (KalturaFieldType)getTypeOfStatus;
@@ -5259,6 +5261,7 @@
 - (KalturaFieldType)getTypeOfCollectionTags;
 - (KalturaFieldType)getTypeOfConditionalProfiles;
 - (KalturaFieldType)getTypeOfDetectGOP;
+- (KalturaFieldType)getTypeOfMediaInfoXslTransformation;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;

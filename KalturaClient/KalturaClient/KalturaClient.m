@@ -15651,6 +15651,7 @@
 @synthesize collectionTags = _collectionTags;
 @synthesize conditionalProfiles = _conditionalProfiles;
 @synthesize detectGOP = _detectGOP;
+@synthesize mediaInfoXslTransformation = _mediaInfoXslTransformation;
 
 - (id)init
 {
@@ -15790,6 +15791,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfMediaInfoXslTransformation
+{
+    return KFT_String;
+}
+
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -15864,6 +15870,7 @@
     [aParams addIfDefinedKey:@"collectionTags" withString:self.collectionTags];
     [aParams addIfDefinedKey:@"conditionalProfiles" withString:self.conditionalProfiles];
     [aParams addIfDefinedKey:@"detectGOP" withInt:self.detectGOP];
+    [aParams addIfDefinedKey:@"mediaInfoXslTransformation" withString:self.mediaInfoXslTransformation];
 }
 
 - (void)dealloc
@@ -15881,6 +15888,7 @@
     [self->_mediaParserType release];
     [self->_collectionTags release];
     [self->_conditionalProfiles release];
+    [self->_mediaInfoXslTransformation release];
     [super dealloc];
 }
 
