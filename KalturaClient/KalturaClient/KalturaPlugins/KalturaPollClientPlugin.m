@@ -30,3 +30,65 @@
 ///////////////////////// enums /////////////////////////
 ///////////////////////// classes /////////////////////////
 ///////////////////////// services /////////////////////////
+@implementation KalturaPollService
+- (NSString*)addWithPollType:(NSString*)aPollType
+{
+    [self.client.params addIfDefinedKey:@"pollType" withString:aPollType];
+    return [self.client queueStringService:@"poll_poll" withAction:@"add"];
+}
+
+- (NSString*)add
+{
+    return [self addWithPollType:nil];
+}
+
+- (NSString*)getVotesWithPollId:(NSString*)aPollId withAnswerIds:(NSString*)aAnswerIds withOtherDCVotes:(NSString*)aOtherDCVotes
+{
+    [self.client.params addIfDefinedKey:@"pollId" withString:aPollId];
+    [self.client.params addIfDefinedKey:@"answerIds" withString:aAnswerIds];
+    [self.client.params addIfDefinedKey:@"otherDCVotes" withString:aOtherDCVotes];
+    return [self.client queueStringService:@"poll_poll" withAction:@"getVotes"];
+}
+
+- (NSString*)getVotesWithPollId:(NSString*)aPollId withAnswerIds:(NSString*)aAnswerIds
+{
+    return [self getVotesWithPollId:aPollId withAnswerIds:aAnswerIds withOtherDCVotes:nil];
+}
+
+- (NSString*)voteWithPollId:(NSString*)aPollId withUserId:(NSString*)aUserId withAnswerIds:(NSString*)aAnswerIds
+{
+    [self.client.params addIfDefinedKey:@"pollId" withString:aPollId];
+    [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
+    [self.client.params addIfDefinedKey:@"answerIds" withString:aAnswerIds];
+    return [self.client queueStringService:@"poll_poll" withAction:@"vote"];
+}
+
+@end
+
+@implementation KalturaPollClientPlugin
+@synthesize client = _client;
+
+- (id)initWithClient:(KalturaClient*)aClient
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self.client = aClient;
+    return self;
+}
+
+- (KalturaPollService*)poll
+{
+    if (self->_poll == nil)
+    	self->_poll = [[KalturaPollService alloc] initWithClient:self.client];
+    return self->_poll;
+}
+
+- (void)dealloc
+{
+    [self->_poll release];
+	[super dealloc];
+}
+
+@end
+

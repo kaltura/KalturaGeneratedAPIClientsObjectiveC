@@ -32,3 +32,27 @@
 ///////////////////////// enums /////////////////////////
 ///////////////////////// classes /////////////////////////
 ///////////////////////// services /////////////////////////
+// @package Kaltura
+// @subpackage Client
+// Poll service
+//  The poll service works against the cache entirely no DB instance should be used here
+@interface KalturaPollService : KalturaServiceBase
+// Add Action
+- (NSString*)addWithPollType:(NSString*)aPollType;
+- (NSString*)add;
+// Get Votes Action
+- (NSString*)getVotesWithPollId:(NSString*)aPollId withAnswerIds:(NSString*)aAnswerIds withOtherDCVotes:(NSString*)aOtherDCVotes;
+- (NSString*)getVotesWithPollId:(NSString*)aPollId withAnswerIds:(NSString*)aAnswerIds;
+// Vote Action
+- (NSString*)voteWithPollId:(NSString*)aPollId withUserId:(NSString*)aUserId withAnswerIds:(NSString*)aAnswerIds;
+@end
+
+@interface KalturaPollClientPlugin : KalturaClientPlugin
+{
+	KalturaPollService* _poll;
+}
+
+@property (nonatomic, assign) KalturaClientBase* client;
+@property (nonatomic, readonly) KalturaPollService* poll;
+@end
+
