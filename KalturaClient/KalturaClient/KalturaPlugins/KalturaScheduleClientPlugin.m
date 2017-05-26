@@ -2429,11 +2429,17 @@
     return [self.client queueObjectService:@"schedule_scheduleevent" withAction:@"get" withExpectedType:@"KalturaScheduleEvent"];
 }
 
-- (KalturaScheduleEventListResponse*)getConflictsWithResourceIds:(NSString*)aResourceIds withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent
+- (KalturaScheduleEventListResponse*)getConflictsWithResourceIds:(NSString*)aResourceIds withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent withScheduleEventIdToIgnore:(NSString*)aScheduleEventIdToIgnore
 {
     [self.client.params addIfDefinedKey:@"resourceIds" withString:aResourceIds];
     [self.client.params addIfDefinedKey:@"scheduleEvent" withObject:aScheduleEvent];
+    [self.client.params addIfDefinedKey:@"scheduleEventIdToIgnore" withString:aScheduleEventIdToIgnore];
     return [self.client queueObjectService:@"schedule_scheduleevent" withAction:@"getConflicts" withExpectedType:@"KalturaScheduleEventListResponse"];
+}
+
+- (KalturaScheduleEventListResponse*)getConflictsWithResourceIds:(NSString*)aResourceIds withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent
+{
+    return [self getConflictsWithResourceIds:aResourceIds withScheduleEvent:aScheduleEvent withScheduleEventIdToIgnore:nil];
 }
 
 - (KalturaScheduleEventListResponse*)listWithFilter:(KalturaScheduleEventFilter*)aFilter withPager:(KalturaFilterPager*)aPager

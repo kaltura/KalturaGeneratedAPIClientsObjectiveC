@@ -778,6 +778,7 @@
 // Retrieve a KalturaScheduleEvent object by ID
 - (KalturaScheduleEvent*)getWithScheduleEventId:(int)aScheduleEventId;
 // List conflicting events for resourcesIds by event's dates
+- (KalturaScheduleEventListResponse*)getConflictsWithResourceIds:(NSString*)aResourceIds withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent withScheduleEventIdToIgnore:(NSString*)aScheduleEventIdToIgnore;
 - (KalturaScheduleEventListResponse*)getConflictsWithResourceIds:(NSString*)aResourceIds withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent;
 // List KalturaScheduleEvent objects
 - (KalturaScheduleEventListResponse*)listWithFilter:(KalturaScheduleEventFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
