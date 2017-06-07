@@ -43,6 +43,7 @@
 @interface KalturaScheduledTaskAddOrRemoveType : NSObject
 + (int)ADD;
 + (int)REMOVE;
++ (int)MOVE;
 @end
 
 // @package Kaltura

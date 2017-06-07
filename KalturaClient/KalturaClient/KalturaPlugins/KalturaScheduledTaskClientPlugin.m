@@ -52,6 +52,10 @@
 {
     return 2;
 }
++ (int)MOVE
+{
+    return 3;
+}
 @end
 
 @implementation KalturaScheduledTaskProfileStatus
