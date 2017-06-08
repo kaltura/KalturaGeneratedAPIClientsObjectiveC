@@ -7843,7 +7843,7 @@
 // DC where the serverNode is located
 @property (nonatomic,assign,readonly) int dc;
 // Id of the parent serverNode
-@property (nonatomic,assign) int parentId;
+@property (nonatomic,copy) NSString* parentId;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfPartnerId;
 - (KalturaFieldType)getTypeOfCreatedAt;
@@ -7865,7 +7865,6 @@
 - (void)setHeartbeatTimeFromString:(NSString*)aPropVal;
 - (void)setStatusFromString:(NSString*)aPropVal;
 - (void)setDcFromString:(NSString*)aPropVal;
-- (void)setParentIdFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -9933,6 +9932,37 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaEntryServerNodeBaseFilter : KalturaFilter
+@property (nonatomic,copy) NSString* entryIdEqual;
+@property (nonatomic,copy) NSString* entryIdIn;
+@property (nonatomic,assign) int serverNodeIdEqual;
+@property (nonatomic,assign) int createdAtLessThanOrEqual;
+@property (nonatomic,assign) int createdAtGreaterThanOrEqual;
+@property (nonatomic,assign) int updatedAtGreaterThanOrEqual;
+@property (nonatomic,assign) int updatedAtLessThanOrEqual;
+@property (nonatomic,assign) int statusEqual;	// enum KalturaEntryServerNodeStatus
+@property (nonatomic,copy) NSString* statusIn;
+@property (nonatomic,copy) NSString* serverTypeEqual;	// enum KalturaEntryServerNodeType
+- (KalturaFieldType)getTypeOfEntryIdEqual;
+- (KalturaFieldType)getTypeOfEntryIdIn;
+- (KalturaFieldType)getTypeOfServerNodeIdEqual;
+- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfStatusEqual;
+- (KalturaFieldType)getTypeOfStatusIn;
+- (KalturaFieldType)getTypeOfServerTypeEqual;
+- (void)setServerNodeIdEqualFromString:(NSString*)aPropVal;
+- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setStatusEqualFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaEntryServerNodeListResponse : KalturaListResponse
 @property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaEntryServerNode elements
 - (KalturaFieldType)getTypeOfObjects;
@@ -10689,8 +10719,9 @@
 @property (nonatomic,copy) NSString* tagsMultiLikeAnd;
 @property (nonatomic,assign) int dcEqual;
 @property (nonatomic,copy) NSString* dcIn;
-@property (nonatomic,assign) int parentIdEqual;
-@property (nonatomic,copy) NSString* parentIdIn;
+@property (nonatomic,copy) NSString* parentIdLike;
+@property (nonatomic,copy) NSString* parentIdMultiLikeOr;
+@property (nonatomic,copy) NSString* parentIdMultiLikeAnd;
 - (KalturaFieldType)getTypeOfIdEqual;
 - (KalturaFieldType)getTypeOfIdIn;
 - (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
@@ -10715,8 +10746,9 @@
 - (KalturaFieldType)getTypeOfTagsMultiLikeAnd;
 - (KalturaFieldType)getTypeOfDcEqual;
 - (KalturaFieldType)getTypeOfDcIn;
-- (KalturaFieldType)getTypeOfParentIdEqual;
-- (KalturaFieldType)getTypeOfParentIdIn;
+- (KalturaFieldType)getTypeOfParentIdLike;
+- (KalturaFieldType)getTypeOfParentIdMultiLikeOr;
+- (KalturaFieldType)getTypeOfParentIdMultiLikeAnd;
 - (void)setIdEqualFromString:(NSString*)aPropVal;
 - (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
@@ -10726,7 +10758,6 @@
 - (void)setHeartbeatTimeLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setStatusEqualFromString:(NSString*)aPropVal;
 - (void)setDcEqualFromString:(NSString*)aPropVal;
-- (void)setParentIdEqualFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -11714,33 +11745,7 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaEntryServerNodeBaseFilter : KalturaRelatedFilter
-@property (nonatomic,copy) NSString* entryIdEqual;
-@property (nonatomic,copy) NSString* entryIdIn;
-@property (nonatomic,assign) int serverNodeIdEqual;
-@property (nonatomic,assign) int createdAtGreaterThanOrEqual;
-@property (nonatomic,assign) int createdAtLessThanOrEqual;
-@property (nonatomic,assign) int updatedAtGreaterThanOrEqual;
-@property (nonatomic,assign) int updatedAtLessThanOrEqual;
-@property (nonatomic,assign) int statusEqual;	// enum KalturaEntryServerNodeStatus
-@property (nonatomic,copy) NSString* statusIn;
-@property (nonatomic,copy) NSString* serverTypeEqual;	// enum KalturaEntryServerNodeType
-- (KalturaFieldType)getTypeOfEntryIdEqual;
-- (KalturaFieldType)getTypeOfEntryIdIn;
-- (KalturaFieldType)getTypeOfServerNodeIdEqual;
-- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual;
-- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual;
-- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
-- (KalturaFieldType)getTypeOfStatusEqual;
-- (KalturaFieldType)getTypeOfStatusIn;
-- (KalturaFieldType)getTypeOfServerTypeEqual;
-- (void)setServerNodeIdEqualFromString:(NSString*)aPropVal;
-- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
-- (void)setStatusEqualFromString:(NSString*)aPropVal;
+@interface KalturaEntryServerNodeFilter : KalturaEntryServerNodeBaseFilter
 @end
 
 // @package Kaltura
@@ -12598,12 +12603,6 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaDeliveryServerNodeBaseFilter : KalturaServerNodeFilter
-@property (nonatomic,copy) NSString* playbackDomainLike;
-@property (nonatomic,copy) NSString* playbackDomainMultiLikeOr;
-@property (nonatomic,copy) NSString* playbackDomainMultiLikeAnd;
-- (KalturaFieldType)getTypeOfPlaybackDomainLike;
-- (KalturaFieldType)getTypeOfPlaybackDomainMultiLikeOr;
-- (KalturaFieldType)getTypeOfPlaybackDomainMultiLikeAnd;
 @end
 
 // @package Kaltura
@@ -12624,11 +12623,6 @@
 @interface KalturaDocumentEntryMatchAttributeCondition : KalturaSearchMatchAttributeCondition
 @property (nonatomic,copy) NSString* attribute;	// enum KalturaDocumentEntryMatchAttribute
 - (KalturaFieldType)getTypeOfAttribute;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaEntryServerNodeFilter : KalturaEntryServerNodeBaseFilter
 @end
 
 // @package Kaltura
@@ -13200,6 +13194,12 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaEdgeServerNodeBaseFilter : KalturaDeliveryServerNodeFilter
+@property (nonatomic,copy) NSString* playbackDomainLike;
+@property (nonatomic,copy) NSString* playbackDomainMultiLikeOr;
+@property (nonatomic,copy) NSString* playbackDomainMultiLikeAnd;
+- (KalturaFieldType)getTypeOfPlaybackDomainLike;
+- (KalturaFieldType)getTypeOfPlaybackDomainMultiLikeOr;
+- (KalturaFieldType)getTypeOfPlaybackDomainMultiLikeAnd;
 @end
 
 // @package Kaltura

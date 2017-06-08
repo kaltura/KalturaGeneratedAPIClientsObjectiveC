@@ -25275,7 +25275,6 @@
     self->_heartbeatTime = KALTURA_UNDEF_INT;
     self->_status = KALTURA_UNDEF_INT;
     self->_dc = KALTURA_UNDEF_INT;
-    self->_parentId = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -25346,7 +25345,7 @@
 
 - (KalturaFieldType)getTypeOfParentId
 {
-    return KFT_Int;
+    return KFT_String;
 }
 
 - (void)setIdFromString:(NSString*)aPropVal
@@ -25384,11 +25383,6 @@
     self.dc = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
-- (void)setParentIdFromString:(NSString*)aPropVal
-{
-    self.parentId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -25399,7 +25393,7 @@
     [aParams addIfDefinedKey:@"description" withString:self.description];
     [aParams addIfDefinedKey:@"hostName" withString:self.hostName];
     [aParams addIfDefinedKey:@"tags" withString:self.tags];
-    [aParams addIfDefinedKey:@"parentId" withInt:self.parentId];
+    [aParams addIfDefinedKey:@"parentId" withString:self.parentId];
 }
 
 - (void)dealloc
@@ -25410,6 +25404,7 @@
     [self->_hostName release];
     [self->_type release];
     [self->_tags release];
+    [self->_parentId release];
     [super dealloc];
 }
 
@@ -33305,6 +33300,140 @@
 
 @end
 
+@implementation KalturaEntryServerNodeBaseFilter
+@synthesize entryIdEqual = _entryIdEqual;
+@synthesize entryIdIn = _entryIdIn;
+@synthesize serverNodeIdEqual = _serverNodeIdEqual;
+@synthesize createdAtLessThanOrEqual = _createdAtLessThanOrEqual;
+@synthesize createdAtGreaterThanOrEqual = _createdAtGreaterThanOrEqual;
+@synthesize updatedAtGreaterThanOrEqual = _updatedAtGreaterThanOrEqual;
+@synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
+@synthesize statusEqual = _statusEqual;
+@synthesize statusIn = _statusIn;
+@synthesize serverTypeEqual = _serverTypeEqual;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_serverNodeIdEqual = KALTURA_UNDEF_INT;
+    self->_createdAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_createdAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_updatedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_updatedAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_statusEqual = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfEntryIdEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEntryIdIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfServerNodeIdEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfStatusEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfStatusIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfServerTypeEqual
+{
+    return KFT_String;
+}
+
+- (void)setServerNodeIdEqualFromString:(NSString*)aPropVal
+{
+    self.serverNodeIdEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.createdAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.createdAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.updatedAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.updatedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setStatusEqualFromString:(NSString*)aPropVal
+{
+    self.statusEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaEntryServerNodeBaseFilter"];
+    [aParams addIfDefinedKey:@"entryIdEqual" withString:self.entryIdEqual];
+    [aParams addIfDefinedKey:@"entryIdIn" withString:self.entryIdIn];
+    [aParams addIfDefinedKey:@"serverNodeIdEqual" withInt:self.serverNodeIdEqual];
+    [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
+    [aParams addIfDefinedKey:@"createdAtGreaterThanOrEqual" withInt:self.createdAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"updatedAtGreaterThanOrEqual" withInt:self.updatedAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
+    [aParams addIfDefinedKey:@"statusEqual" withInt:self.statusEqual];
+    [aParams addIfDefinedKey:@"statusIn" withString:self.statusIn];
+    [aParams addIfDefinedKey:@"serverTypeEqual" withString:self.serverTypeEqual];
+}
+
+- (void)dealloc
+{
+    [self->_entryIdEqual release];
+    [self->_entryIdIn release];
+    [self->_statusIn release];
+    [self->_serverTypeEqual release];
+    [super dealloc];
+}
+
+@end
+
 @interface KalturaEntryServerNodeListResponse()
 @property (nonatomic,retain) NSMutableArray* objects;
 @end
@@ -36125,8 +36254,9 @@
 @synthesize tagsMultiLikeAnd = _tagsMultiLikeAnd;
 @synthesize dcEqual = _dcEqual;
 @synthesize dcIn = _dcIn;
-@synthesize parentIdEqual = _parentIdEqual;
-@synthesize parentIdIn = _parentIdIn;
+@synthesize parentIdLike = _parentIdLike;
+@synthesize parentIdMultiLikeOr = _parentIdMultiLikeOr;
+@synthesize parentIdMultiLikeAnd = _parentIdMultiLikeAnd;
 
 - (id)init
 {
@@ -36142,7 +36272,6 @@
     self->_heartbeatTimeLessThanOrEqual = KALTURA_UNDEF_INT;
     self->_statusEqual = KALTURA_UNDEF_INT;
     self->_dcEqual = KALTURA_UNDEF_INT;
-    self->_parentIdEqual = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -36266,12 +36395,17 @@
     return KFT_String;
 }
 
-- (KalturaFieldType)getTypeOfParentIdEqual
+- (KalturaFieldType)getTypeOfParentIdLike
 {
-    return KFT_Int;
+    return KFT_String;
 }
 
-- (KalturaFieldType)getTypeOfParentIdIn
+- (KalturaFieldType)getTypeOfParentIdMultiLikeOr
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfParentIdMultiLikeAnd
 {
     return KFT_String;
 }
@@ -36321,11 +36455,6 @@
     self.dcEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
-- (void)setParentIdEqualFromString:(NSString*)aPropVal
-{
-    self.parentIdEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -36355,8 +36484,9 @@
     [aParams addIfDefinedKey:@"tagsMultiLikeAnd" withString:self.tagsMultiLikeAnd];
     [aParams addIfDefinedKey:@"dcEqual" withInt:self.dcEqual];
     [aParams addIfDefinedKey:@"dcIn" withString:self.dcIn];
-    [aParams addIfDefinedKey:@"parentIdEqual" withInt:self.parentIdEqual];
-    [aParams addIfDefinedKey:@"parentIdIn" withString:self.parentIdIn];
+    [aParams addIfDefinedKey:@"parentIdLike" withString:self.parentIdLike];
+    [aParams addIfDefinedKey:@"parentIdMultiLikeOr" withString:self.parentIdMultiLikeOr];
+    [aParams addIfDefinedKey:@"parentIdMultiLikeAnd" withString:self.parentIdMultiLikeAnd];
 }
 
 - (void)dealloc
@@ -36376,7 +36506,9 @@
     [self->_tagsMultiLikeOr release];
     [self->_tagsMultiLikeAnd release];
     [self->_dcIn release];
-    [self->_parentIdIn release];
+    [self->_parentIdLike release];
+    [self->_parentIdMultiLikeOr release];
+    [self->_parentIdMultiLikeAnd release];
     [super dealloc];
 }
 
@@ -40153,136 +40285,12 @@
 
 @end
 
-@implementation KalturaEntryServerNodeBaseFilter
-@synthesize entryIdEqual = _entryIdEqual;
-@synthesize entryIdIn = _entryIdIn;
-@synthesize serverNodeIdEqual = _serverNodeIdEqual;
-@synthesize createdAtGreaterThanOrEqual = _createdAtGreaterThanOrEqual;
-@synthesize createdAtLessThanOrEqual = _createdAtLessThanOrEqual;
-@synthesize updatedAtGreaterThanOrEqual = _updatedAtGreaterThanOrEqual;
-@synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
-@synthesize statusEqual = _statusEqual;
-@synthesize statusIn = _statusIn;
-@synthesize serverTypeEqual = _serverTypeEqual;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_serverNodeIdEqual = KALTURA_UNDEF_INT;
-    self->_createdAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_createdAtLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_updatedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
-    self->_updatedAtLessThanOrEqual = KALTURA_UNDEF_INT;
-    self->_statusEqual = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfEntryIdEqual
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfEntryIdIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfServerNodeIdEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCreatedAtLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfUpdatedAtGreaterThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfStatusEqual
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfStatusIn
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfServerTypeEqual
-{
-    return KFT_String;
-}
-
-- (void)setServerNodeIdEqualFromString:(NSString*)aPropVal
-{
-    self.serverNodeIdEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.createdAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.createdAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.updatedAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal
-{
-    self.updatedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setStatusEqualFromString:(NSString*)aPropVal
-{
-    self.statusEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
+@implementation KalturaEntryServerNodeFilter
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaEntryServerNodeBaseFilter"];
-    [aParams addIfDefinedKey:@"entryIdEqual" withString:self.entryIdEqual];
-    [aParams addIfDefinedKey:@"entryIdIn" withString:self.entryIdIn];
-    [aParams addIfDefinedKey:@"serverNodeIdEqual" withInt:self.serverNodeIdEqual];
-    [aParams addIfDefinedKey:@"createdAtGreaterThanOrEqual" withInt:self.createdAtGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"createdAtLessThanOrEqual" withInt:self.createdAtLessThanOrEqual];
-    [aParams addIfDefinedKey:@"updatedAtGreaterThanOrEqual" withInt:self.updatedAtGreaterThanOrEqual];
-    [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
-    [aParams addIfDefinedKey:@"statusEqual" withInt:self.statusEqual];
-    [aParams addIfDefinedKey:@"statusIn" withString:self.statusIn];
-    [aParams addIfDefinedKey:@"serverTypeEqual" withString:self.serverTypeEqual];
-}
-
-- (void)dealloc
-{
-    [self->_entryIdEqual release];
-    [self->_entryIdIn release];
-    [self->_statusIn release];
-    [self->_serverTypeEqual release];
-    [super dealloc];
+        [aParams putKey:@"objectType" withString:@"KalturaEntryServerNodeFilter"];
 }
 
 @end
@@ -43204,41 +43212,11 @@
 @end
 
 @implementation KalturaDeliveryServerNodeBaseFilter
-@synthesize playbackDomainLike = _playbackDomainLike;
-@synthesize playbackDomainMultiLikeOr = _playbackDomainMultiLikeOr;
-@synthesize playbackDomainMultiLikeAnd = _playbackDomainMultiLikeAnd;
-
-- (KalturaFieldType)getTypeOfPlaybackDomainLike
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfPlaybackDomainMultiLikeOr
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfPlaybackDomainMultiLikeAnd
-{
-    return KFT_String;
-}
-
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaDeliveryServerNodeBaseFilter"];
-    [aParams addIfDefinedKey:@"playbackDomainLike" withString:self.playbackDomainLike];
-    [aParams addIfDefinedKey:@"playbackDomainMultiLikeOr" withString:self.playbackDomainMultiLikeOr];
-    [aParams addIfDefinedKey:@"playbackDomainMultiLikeAnd" withString:self.playbackDomainMultiLikeAnd];
-}
-
-- (void)dealloc
-{
-    [self->_playbackDomainLike release];
-    [self->_playbackDomainMultiLikeOr release];
-    [self->_playbackDomainMultiLikeAnd release];
-    [super dealloc];
 }
 
 @end
@@ -43287,16 +43265,6 @@
 {
     [self->_attribute release];
     [super dealloc];
-}
-
-@end
-
-@implementation KalturaEntryServerNodeFilter
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaEntryServerNodeFilter"];
 }
 
 @end
@@ -44699,11 +44667,41 @@
 @end
 
 @implementation KalturaEdgeServerNodeBaseFilter
+@synthesize playbackDomainLike = _playbackDomainLike;
+@synthesize playbackDomainMultiLikeOr = _playbackDomainMultiLikeOr;
+@synthesize playbackDomainMultiLikeAnd = _playbackDomainMultiLikeAnd;
+
+- (KalturaFieldType)getTypeOfPlaybackDomainLike
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfPlaybackDomainMultiLikeOr
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfPlaybackDomainMultiLikeAnd
+{
+    return KFT_String;
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaEdgeServerNodeBaseFilter"];
+    [aParams addIfDefinedKey:@"playbackDomainLike" withString:self.playbackDomainLike];
+    [aParams addIfDefinedKey:@"playbackDomainMultiLikeOr" withString:self.playbackDomainMultiLikeOr];
+    [aParams addIfDefinedKey:@"playbackDomainMultiLikeAnd" withString:self.playbackDomainMultiLikeAnd];
+}
+
+- (void)dealloc
+{
+    [self->_playbackDomainLike release];
+    [self->_playbackDomainMultiLikeOr release];
+    [self->_playbackDomainMultiLikeAnd release];
+    [super dealloc];
 }
 
 @end

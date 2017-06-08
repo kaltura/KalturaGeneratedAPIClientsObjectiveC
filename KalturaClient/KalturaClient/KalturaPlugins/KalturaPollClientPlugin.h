@@ -40,6 +40,8 @@
 // Add Action
 - (NSString*)addWithPollType:(NSString*)aPollType;
 - (NSString*)add;
+// Vote Action
+- (NSString*)getVoteWithPollId:(NSString*)aPollId withUserId:(NSString*)aUserId;
 // Get Votes Action
 - (NSString*)getVotesWithPollId:(NSString*)aPollId withAnswerIds:(NSString*)aAnswerIds withOtherDCVotes:(NSString*)aOtherDCVotes;
 - (NSString*)getVotesWithPollId:(NSString*)aPollId withAnswerIds:(NSString*)aAnswerIds;

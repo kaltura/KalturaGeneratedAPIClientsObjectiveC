@@ -42,6 +42,13 @@
     return [self addWithPollType:nil];
 }
 
+- (NSString*)getVoteWithPollId:(NSString*)aPollId withUserId:(NSString*)aUserId
+{
+    [self.client.params addIfDefinedKey:@"pollId" withString:aPollId];
+    [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
+    return [self.client queueStringService:@"poll_poll" withAction:@"getVote"];
+}
+
 - (NSString*)getVotesWithPollId:(NSString*)aPollId withAnswerIds:(NSString*)aAnswerIds withOtherDCVotes:(NSString*)aOtherDCVotes
 {
     [self.client.params addIfDefinedKey:@"pollId" withString:aPollId];
