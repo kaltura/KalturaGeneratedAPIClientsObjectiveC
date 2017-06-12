@@ -60,6 +60,8 @@
 + (NSString*)AD_CUE_POINT;
 + (NSString*)ANNOTATION;
 + (NSString*)CODE_CUE_POINT;
++ (NSString*)ANSWER_CUE_POINT;
++ (NSString*)QUESTION_CUE_POINT;
 + (NSString*)THUMB_CUE_POINT;
 + (NSString*)ENTRY;
 + (NSString*)CATEGORY;

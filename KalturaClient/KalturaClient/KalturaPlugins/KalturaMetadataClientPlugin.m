@@ -86,6 +86,14 @@
 {
     return @"codeCuePointMetadata.CodeCuePoint";
 }
++ (NSString*)ANSWER_CUE_POINT
+{
+    return @"quiz.AnswerCuePoint";
+}
++ (NSString*)QUESTION_CUE_POINT
+{
+    return @"quiz.QuestionCuePoint";
+}
 + (NSString*)THUMB_CUE_POINT
 {
     return @"thumbCuePointMetadata.thumbCuePoint";
