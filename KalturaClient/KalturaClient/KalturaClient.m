@@ -48368,6 +48368,12 @@
     [self.client queueVoidService:@"stats" withAction:@"kmcCollect"];
 }
 
+- (void)reportDeviceCapabilitiesWithData:(NSString*)aData
+{
+    [self.client.params addIfDefinedKey:@"data" withString:aData];
+    [self.client queueVoidService:@"stats" withAction:@"reportDeviceCapabilities"];
+}
+
 - (void)reportErrorWithErrorCode:(NSString*)aErrorCode withErrorMessage:(NSString*)aErrorMessage
 {
     [self.client.params addIfDefinedKey:@"errorCode" withString:aErrorCode];

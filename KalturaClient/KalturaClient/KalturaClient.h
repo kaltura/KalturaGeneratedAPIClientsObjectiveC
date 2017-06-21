@@ -14497,6 +14497,8 @@
 // Will collect the kmcEvent sent form the KMC client
 // 	 // this will actually be an empty function because all events will be sent using GET and will anyway be logged in the apache log
 - (void)kmcCollectWithKmcEvent:(KalturaStatsKmcEvent*)aKmcEvent;
+// Use this action to report device capabilities to the kaltura server.
+- (void)reportDeviceCapabilitiesWithData:(NSString*)aData;
 // Use this action to report errors to the kaltura server.
 - (void)reportErrorWithErrorCode:(NSString*)aErrorCode withErrorMessage:(NSString*)aErrorMessage;
 - (KalturaCEError*)reportKceErrorWithKalturaCEError:(KalturaCEError*)aKalturaCEError;
