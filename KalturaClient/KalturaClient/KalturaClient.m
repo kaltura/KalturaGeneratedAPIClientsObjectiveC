@@ -18169,7 +18169,6 @@
 @property (nonatomic,copy) NSString* containerFormat;
 @property (nonatomic,copy) NSString* videoCodecId;
 @property (nonatomic,assign) int status;
-@property (nonatomic,copy) NSString* label;
 @end
 
 @implementation KalturaFlavorAsset
@@ -18309,6 +18308,7 @@
         [aParams putKey:@"objectType" withString:@"KalturaFlavorAsset"];
     [aParams addIfDefinedKey:@"flavorParamsId" withInt:self.flavorParamsId];
     [aParams addIfDefinedKey:@"language" withString:self.language];
+    [aParams addIfDefinedKey:@"label" withString:self.label];
 }
 
 - (void)dealloc

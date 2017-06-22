@@ -5900,7 +5900,7 @@
 // The language of the flavor asset
 @property (nonatomic,copy) NSString* language;	// enum KalturaLanguage
 // The label of the flavor asset
-@property (nonatomic,copy,readonly) NSString* label;
+@property (nonatomic,copy) NSString* label;
 - (KalturaFieldType)getTypeOfFlavorParamsId;
 - (KalturaFieldType)getTypeOfWidth;
 - (KalturaFieldType)getTypeOfHeight;
