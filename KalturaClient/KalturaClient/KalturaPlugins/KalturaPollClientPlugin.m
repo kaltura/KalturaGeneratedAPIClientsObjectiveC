@@ -62,6 +62,13 @@
     return [self getVotesWithPollId:aPollId withAnswerIds:aAnswerIds withOtherDCVotes:nil];
 }
 
+- (void)resetVotesWithPollId:(NSString*)aPollId withAnswerIds:(NSString*)aAnswerIds
+{
+    [self.client.params addIfDefinedKey:@"pollId" withString:aPollId];
+    [self.client.params addIfDefinedKey:@"answerIds" withString:aAnswerIds];
+    [self.client queueVoidService:@"poll_poll" withAction:@"resetVotes"];
+}
+
 - (NSString*)voteWithPollId:(NSString*)aPollId withUserId:(NSString*)aUserId withAnswerIds:(NSString*)aAnswerIds
 {
     [self.client.params addIfDefinedKey:@"pollId" withString:aPollId];
