@@ -49,23 +49,16 @@
     return [self.client queueStringService:@"poll_poll" withAction:@"getVote"];
 }
 
-- (NSString*)getVotesWithPollId:(NSString*)aPollId withAnswerIds:(NSString*)aAnswerIds withOtherDCVotes:(NSString*)aOtherDCVotes
+- (NSString*)getVotesWithPollId:(NSString*)aPollId withAnswerIds:(NSString*)aAnswerIds
 {
     [self.client.params addIfDefinedKey:@"pollId" withString:aPollId];
     [self.client.params addIfDefinedKey:@"answerIds" withString:aAnswerIds];
-    [self.client.params addIfDefinedKey:@"otherDCVotes" withString:aOtherDCVotes];
     return [self.client queueStringService:@"poll_poll" withAction:@"getVotes"];
 }
 
-- (NSString*)getVotesWithPollId:(NSString*)aPollId withAnswerIds:(NSString*)aAnswerIds
-{
-    return [self getVotesWithPollId:aPollId withAnswerIds:aAnswerIds withOtherDCVotes:nil];
-}
-
-- (void)resetVotesWithPollId:(NSString*)aPollId withAnswerIds:(NSString*)aAnswerIds
+- (void)resetVotesWithPollId:(NSString*)aPollId
 {
     [self.client.params addIfDefinedKey:@"pollId" withString:aPollId];
-    [self.client.params addIfDefinedKey:@"answerIds" withString:aAnswerIds];
     [self.client queueVoidService:@"poll_poll" withAction:@"resetVotes"];
 }
 

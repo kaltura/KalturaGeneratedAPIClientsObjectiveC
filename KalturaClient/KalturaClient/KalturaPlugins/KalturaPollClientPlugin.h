@@ -43,10 +43,9 @@
 // Vote Action
 - (NSString*)getVoteWithPollId:(NSString*)aPollId withUserId:(NSString*)aUserId;
 // Get Votes Action
-- (NSString*)getVotesWithPollId:(NSString*)aPollId withAnswerIds:(NSString*)aAnswerIds withOtherDCVotes:(NSString*)aOtherDCVotes;
 - (NSString*)getVotesWithPollId:(NSString*)aPollId withAnswerIds:(NSString*)aAnswerIds;
 // Get resetVotes Action
-- (void)resetVotesWithPollId:(NSString*)aPollId withAnswerIds:(NSString*)aAnswerIds;
+- (void)resetVotesWithPollId:(NSString*)aPollId;
 // Vote Action
 - (NSString*)voteWithPollId:(NSString*)aPollId withUserId:(NSString*)aUserId withAnswerIds:(NSString*)aAnswerIds;
 @end
