@@ -38,9 +38,12 @@
 @property (nonatomic,copy) NSString* playbackContext;
 // Last playback time reached by user
 @property (nonatomic,assign) int lastTimeReached;
+@property (nonatomic,assign) int lastUpdateTime;
 - (KalturaFieldType)getTypeOfPlaybackContext;
 - (KalturaFieldType)getTypeOfLastTimeReached;
+- (KalturaFieldType)getTypeOfLastUpdateTime;
 - (void)setLastTimeReachedFromString:(NSString*)aPropVal;
+- (void)setLastUpdateTimeFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

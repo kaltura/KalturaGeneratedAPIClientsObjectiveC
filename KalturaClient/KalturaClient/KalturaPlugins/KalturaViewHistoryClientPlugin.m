@@ -32,6 +32,7 @@
 @implementation KalturaViewHistoryUserEntry
 @synthesize playbackContext = _playbackContext;
 @synthesize lastTimeReached = _lastTimeReached;
+@synthesize lastUpdateTime = _lastUpdateTime;
 
 - (id)init
 {
@@ -39,6 +40,7 @@
     if (self == nil)
         return nil;
     self->_lastTimeReached = KALTURA_UNDEF_INT;
+    self->_lastUpdateTime = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -52,9 +54,19 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfLastUpdateTime
+{
+    return KFT_Int;
+}
+
 - (void)setLastTimeReachedFromString:(NSString*)aPropVal
 {
     self.lastTimeReached = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setLastUpdateTimeFromString:(NSString*)aPropVal
+{
+    self.lastUpdateTime = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -64,6 +76,7 @@
         [aParams putKey:@"objectType" withString:@"KalturaViewHistoryUserEntry"];
     [aParams addIfDefinedKey:@"playbackContext" withString:self.playbackContext];
     [aParams addIfDefinedKey:@"lastTimeReached" withInt:self.lastTimeReached];
+    [aParams addIfDefinedKey:@"lastUpdateTime" withInt:self.lastUpdateTime];
 }
 
 - (void)dealloc
