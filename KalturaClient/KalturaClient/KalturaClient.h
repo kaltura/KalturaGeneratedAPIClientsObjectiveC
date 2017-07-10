@@ -1972,6 +1972,7 @@
 @interface KalturaGeoCoderType : NSObject
 + (NSString*)KALTURA;
 + (NSString*)MAX_MIND;
++ (NSString*)DIGITAL_ELEMENT;
 @end
 
 // @package Kaltura

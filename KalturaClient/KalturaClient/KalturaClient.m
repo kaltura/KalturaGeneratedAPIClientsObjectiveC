@@ -4989,6 +4989,10 @@
 {
     return @"2";
 }
++ (NSString*)DIGITAL_ELEMENT
+{
+    return @"3";
+}
 @end
 
 @implementation KalturaGoogleSyndicationFeedAdultValues
