@@ -2212,38 +2212,6 @@
 
 @end
 
-@implementation KalturaDropFolderFileResource
-@synthesize dropFolderFileId = _dropFolderFileId;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_dropFolderFileId = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfDropFolderFileId
-{
-    return KFT_Int;
-}
-
-- (void)setDropFolderFileIdFromString:(NSString*)aPropVal
-{
-    self.dropFolderFileId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaDropFolderFileResource"];
-    [aParams addIfDefinedKey:@"dropFolderFileId" withInt:self.dropFolderFileId];
-}
-
-@end
-
 @implementation KalturaDropFolderImportJobData
 @synthesize dropFolderFileId = _dropFolderFileId;
 
@@ -2302,6 +2270,38 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaSftpDropFolder"];
+}
+
+@end
+
+@implementation KalturaDropFolderFileResource
+@synthesize dropFolderFileId = _dropFolderFileId;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_dropFolderFileId = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfDropFolderFileId
+{
+    return KFT_Int;
+}
+
+- (void)setDropFolderFileIdFromString:(NSString*)aPropVal
+{
+    self.dropFolderFileId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaDropFolderFileResource"];
+    [aParams addIfDefinedKey:@"dropFolderFileId" withInt:self.dropFolderFileId];
 }
 
 @end

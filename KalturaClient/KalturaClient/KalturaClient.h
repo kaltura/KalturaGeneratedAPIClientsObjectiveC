@@ -12671,6 +12671,11 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaGenericDataCenterContentResource : KalturaDataCenterContentResource
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaGenericSyndicationFeedBaseFilter : KalturaBaseSyndicationFeedFilter
 @end
 
@@ -12883,19 +12888,6 @@
 
 // @package Kaltura
 // @subpackage Client
-// Used to ingest media file that is already accessible on the shared disc.
-@interface KalturaServerFileResource : KalturaDataCenterContentResource
-// Full path to the local file
-@property (nonatomic,copy) NSString* localFilePath;
-// Should keep original file (false = mv, true = cp)
-@property (nonatomic,assign) KALTURA_BOOL keepOriginalFile;
-- (KalturaFieldType)getTypeOfLocalFilePath;
-- (KalturaFieldType)getTypeOfKeepOriginalFile;
-- (void)setKeepOriginalFileFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
 // Used to ingest media that is available on remote SSH server and accessible using the supplied URL, media file will be downloaded using import job in order to make the asset ready.
 @interface KalturaSshUrlResource : KalturaUrlResource
 // SSH private key
@@ -12922,15 +12914,6 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaTubeMogulSyndicationFeedBaseFilter : KalturaBaseSyndicationFeedFilter
-@end
-
-// @package Kaltura
-// @subpackage Client
-// Used to ingest media that uploaded to the system and represented by token that returned from upload.upload action or uploadToken.add action.
-@interface KalturaUploadedFileTokenResource : KalturaDataCenterContentResource
-// Token that returned from upload.upload action or uploadToken.add action.
-@property (nonatomic,copy) NSString* token;
-- (KalturaFieldType)getTypeOfToken;
 @end
 
 // @package Kaltura
@@ -13130,6 +13113,19 @@
 
 // @package Kaltura
 // @subpackage Client
+// Used to ingest media file that is already accessible on the shared disc.
+@interface KalturaServerFileResource : KalturaGenericDataCenterContentResource
+// Full path to the local file
+@property (nonatomic,copy) NSString* localFilePath;
+// Should keep original file (false = mv, true = cp)
+@property (nonatomic,assign) KALTURA_BOOL keepOriginalFile;
+- (KalturaFieldType)getTypeOfLocalFilePath;
+- (KalturaFieldType)getTypeOfKeepOriginalFile;
+- (void)setKeepOriginalFileFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaThumbAssetBaseFilter : KalturaAssetFilter
 @property (nonatomic,assign) int thumbParamsIdEqual;
 @property (nonatomic,copy) NSString* thumbParamsIdIn;
@@ -13155,6 +13151,15 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaTubeMogulSyndicationFeedFilter : KalturaTubeMogulSyndicationFeedBaseFilter
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Used to ingest media that uploaded to the system and represented by token that returned from upload.upload action or uploadToken.add action.
+@interface KalturaUploadedFileTokenResource : KalturaGenericDataCenterContentResource
+// Token that returned from upload.upload action or uploadToken.add action.
+@property (nonatomic,copy) NSString* token;
+- (KalturaFieldType)getTypeOfToken;
 @end
 
 // @package Kaltura
@@ -13714,6 +13719,8 @@
 @interface KalturaDataService : KalturaServiceBase
 // Adds a new data entry
 - (KalturaDataEntry*)addWithDataEntry:(KalturaDataEntry*)aDataEntry;
+// Update the dataContent of data entry using a resource
+- (NSString*)addContentWithEntryId:(NSString*)aEntryId withResource:(KalturaGenericDataCenterContentResource*)aResource;
 // Delete a data entry.
 - (void)deleteWithEntryId:(NSString*)aEntryId;
 // Get data entry by ID.

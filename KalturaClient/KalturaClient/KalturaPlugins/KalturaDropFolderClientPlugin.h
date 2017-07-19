@@ -630,16 +630,6 @@
 
 // @package Kaltura
 // @subpackage Client
-// Used to ingest media that dropped through drop folder
-@interface KalturaDropFolderFileResource : KalturaDataCenterContentResource
-// Id of the drop folder file object
-@property (nonatomic,assign) int dropFolderFileId;
-- (KalturaFieldType)getTypeOfDropFolderFileId;
-- (void)setDropFolderFileIdFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaDropFolderImportJobData : KalturaSshImportJobData
 @property (nonatomic,assign) int dropFolderFileId;
 - (KalturaFieldType)getTypeOfDropFolderFileId;
@@ -659,6 +649,16 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaSftpDropFolder : KalturaSshDropFolder
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Used to ingest media that dropped through drop folder
+@interface KalturaDropFolderFileResource : KalturaGenericDataCenterContentResource
+// Id of the drop folder file object
+@property (nonatomic,assign) int dropFolderFileId;
+- (KalturaFieldType)getTypeOfDropFolderFileId;
+- (void)setDropFolderFileIdFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

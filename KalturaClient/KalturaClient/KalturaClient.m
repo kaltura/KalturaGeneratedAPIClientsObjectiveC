@@ -43379,6 +43379,16 @@
 
 @end
 
+@implementation KalturaGenericDataCenterContentResource
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaGenericDataCenterContentResource"];
+}
+
+@end
+
 @implementation KalturaGenericSyndicationFeedBaseFilter
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
@@ -43863,51 +43873,6 @@
 
 @end
 
-@implementation KalturaServerFileResource
-@synthesize localFilePath = _localFilePath;
-@synthesize keepOriginalFile = _keepOriginalFile;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_keepOriginalFile = KALTURA_UNDEF_BOOL;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfLocalFilePath
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfKeepOriginalFile
-{
-    return KFT_Bool;
-}
-
-- (void)setKeepOriginalFileFromString:(NSString*)aPropVal
-{
-    self.keepOriginalFile = [KalturaSimpleTypeParser parseBool:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaServerFileResource"];
-    [aParams addIfDefinedKey:@"localFilePath" withString:self.localFilePath];
-    [aParams addIfDefinedKey:@"keepOriginalFile" withBool:self.keepOriginalFile];
-}
-
-- (void)dealloc
-{
-    [self->_localFilePath release];
-    [super dealloc];
-}
-
-@end
-
 @implementation KalturaSshUrlResource
 @synthesize privateKey = _privateKey;
 @synthesize publicKey = _publicKey;
@@ -43986,30 +43951,6 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaTubeMogulSyndicationFeedBaseFilter"];
-}
-
-@end
-
-@implementation KalturaUploadedFileTokenResource
-@synthesize token = _token;
-
-- (KalturaFieldType)getTypeOfToken
-{
-    return KFT_String;
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaUploadedFileTokenResource"];
-    [aParams addIfDefinedKey:@"token" withString:self.token];
-}
-
-- (void)dealloc
-{
-    [self->_token release];
-    [super dealloc];
 }
 
 @end
@@ -44492,6 +44433,51 @@
 
 @end
 
+@implementation KalturaServerFileResource
+@synthesize localFilePath = _localFilePath;
+@synthesize keepOriginalFile = _keepOriginalFile;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_keepOriginalFile = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfLocalFilePath
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfKeepOriginalFile
+{
+    return KFT_Bool;
+}
+
+- (void)setKeepOriginalFileFromString:(NSString*)aPropVal
+{
+    self.keepOriginalFile = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaServerFileResource"];
+    [aParams addIfDefinedKey:@"localFilePath" withString:self.localFilePath];
+    [aParams addIfDefinedKey:@"keepOriginalFile" withBool:self.keepOriginalFile];
+}
+
+- (void)dealloc
+{
+    [self->_localFilePath release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaThumbAssetBaseFilter
 @synthesize thumbParamsIdEqual = _thumbParamsIdEqual;
 @synthesize thumbParamsIdIn = _thumbParamsIdIn;
@@ -44596,6 +44582,30 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaTubeMogulSyndicationFeedFilter"];
+}
+
+@end
+
+@implementation KalturaUploadedFileTokenResource
+@synthesize token = _token;
+
+- (KalturaFieldType)getTypeOfToken
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaUploadedFileTokenResource"];
+    [aParams addIfDefinedKey:@"token" withString:self.token];
+}
+
+- (void)dealloc
+{
+    [self->_token release];
+    [super dealloc];
 }
 
 @end
@@ -46100,6 +46110,13 @@
 {
     [self.client.params addIfDefinedKey:@"dataEntry" withObject:aDataEntry];
     return [self.client queueObjectService:@"data" withAction:@"add" withExpectedType:@"KalturaDataEntry"];
+}
+
+- (NSString*)addContentWithEntryId:(NSString*)aEntryId withResource:(KalturaGenericDataCenterContentResource*)aResource
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"resource" withObject:aResource];
+    return [self.client queueStringService:@"data" withAction:@"addContent"];
 }
 
 - (void)deleteWithEntryId:(NSString*)aEntryId

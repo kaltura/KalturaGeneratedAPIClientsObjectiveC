@@ -184,13 +184,22 @@
 // @subpackage Client
 @interface KalturaMailNotificationObjectTask : KalturaObjectTask
 // The mail to send the notification to
-@property (nonatomic,copy) NSString* mailAddress;
+@property (nonatomic,copy) NSString* mailTo;
+// The sender in the mail
+@property (nonatomic,copy) NSString* sender;
+// The subject of the entry
+@property (nonatomic,copy) NSString* subject;
 // The message to send in the notification mail
 @property (nonatomic,copy) NSString* message;
+// The basic link for the KMC site
+@property (nonatomic,copy) NSString* link;
 // Send the mail to each user
 @property (nonatomic,assign) KALTURA_BOOL sendToUsers;
-- (KalturaFieldType)getTypeOfMailAddress;
+- (KalturaFieldType)getTypeOfMailTo;
+- (KalturaFieldType)getTypeOfSender;
+- (KalturaFieldType)getTypeOfSubject;
 - (KalturaFieldType)getTypeOfMessage;
+- (KalturaFieldType)getTypeOfLink;
 - (KalturaFieldType)getTypeOfSendToUsers;
 - (void)setSendToUsersFromString:(NSString*)aPropVal;
 @end

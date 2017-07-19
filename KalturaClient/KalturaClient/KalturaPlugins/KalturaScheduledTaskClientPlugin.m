@@ -506,8 +506,11 @@
 @end
 
 @implementation KalturaMailNotificationObjectTask
-@synthesize mailAddress = _mailAddress;
+@synthesize mailTo = _mailTo;
+@synthesize sender = _sender;
+@synthesize subject = _subject;
 @synthesize message = _message;
+@synthesize link = _link;
 @synthesize sendToUsers = _sendToUsers;
 
 - (id)init
@@ -519,12 +522,27 @@
     return self;
 }
 
-- (KalturaFieldType)getTypeOfMailAddress
+- (KalturaFieldType)getTypeOfMailTo
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSender
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSubject
 {
     return KFT_String;
 }
 
 - (KalturaFieldType)getTypeOfMessage
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfLink
 {
     return KFT_String;
 }
@@ -544,15 +562,21 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaMailNotificationObjectTask"];
-    [aParams addIfDefinedKey:@"mailAddress" withString:self.mailAddress];
+    [aParams addIfDefinedKey:@"mailTo" withString:self.mailTo];
+    [aParams addIfDefinedKey:@"sender" withString:self.sender];
+    [aParams addIfDefinedKey:@"subject" withString:self.subject];
     [aParams addIfDefinedKey:@"message" withString:self.message];
+    [aParams addIfDefinedKey:@"link" withString:self.link];
     [aParams addIfDefinedKey:@"sendToUsers" withBool:self.sendToUsers];
 }
 
 - (void)dealloc
 {
-    [self->_mailAddress release];
+    [self->_mailTo release];
+    [self->_sender release];
+    [self->_subject release];
     [self->_message release];
+    [self->_link release];
     [super dealloc];
 }
 
