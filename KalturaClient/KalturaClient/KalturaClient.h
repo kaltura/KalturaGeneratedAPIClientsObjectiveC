@@ -5294,6 +5294,7 @@
 @property (nonatomic,assign) int deletePolicy;	// enum KalturaAssetParamsDeletePolicy
 @property (nonatomic,assign) int isEncrypted;	// enum KalturaNullableBoolean
 @property (nonatomic,assign) double contentAwareness;
+@property (nonatomic,assign) int chunkedEncodeMode;
 @property (nonatomic,assign) int twoPass;	// enum KalturaNullableBoolean
 @property (nonatomic,copy) NSString* tags;
 - (KalturaFieldType)getTypeOfConversionProfileId;
@@ -5305,6 +5306,7 @@
 - (KalturaFieldType)getTypeOfDeletePolicy;
 - (KalturaFieldType)getTypeOfIsEncrypted;
 - (KalturaFieldType)getTypeOfContentAwareness;
+- (KalturaFieldType)getTypeOfChunkedEncodeMode;
 - (KalturaFieldType)getTypeOfTwoPass;
 - (KalturaFieldType)getTypeOfTags;
 - (void)setConversionProfileIdFromString:(NSString*)aPropVal;
@@ -5315,6 +5317,7 @@
 - (void)setDeletePolicyFromString:(NSString*)aPropVal;
 - (void)setIsEncryptedFromString:(NSString*)aPropVal;
 - (void)setContentAwarenessFromString:(NSString*)aPropVal;
+- (void)setChunkedEncodeModeFromString:(NSString*)aPropVal;
 - (void)setTwoPassFromString:(NSString*)aPropVal;
 @end
 
@@ -5987,6 +5990,7 @@
 @property (nonatomic,copy) NSString* subtitlesData;
 @property (nonatomic,assign) int isEncrypted;
 @property (nonatomic,assign) double contentAwareness;
+@property (nonatomic,assign) int chunkedEncodeMode;
 @property (nonatomic,assign) int clipOffset;
 @property (nonatomic,assign) int clipDuration;
 - (KalturaFieldType)getTypeOfVideoCodec;
@@ -6026,6 +6030,7 @@
 - (KalturaFieldType)getTypeOfSubtitlesData;
 - (KalturaFieldType)getTypeOfIsEncrypted;
 - (KalturaFieldType)getTypeOfContentAwareness;
+- (KalturaFieldType)getTypeOfChunkedEncodeMode;
 - (KalturaFieldType)getTypeOfClipOffset;
 - (KalturaFieldType)getTypeOfClipDuration;
 - (void)setVideoBitrateFromString:(NSString*)aPropVal;
@@ -6056,6 +6061,7 @@
 - (void)setVideoBitrateToleranceFromString:(NSString*)aPropVal;
 - (void)setIsEncryptedFromString:(NSString*)aPropVal;
 - (void)setContentAwarenessFromString:(NSString*)aPropVal;
+- (void)setChunkedEncodeModeFromString:(NSString*)aPropVal;
 - (void)setClipOffsetFromString:(NSString*)aPropVal;
 - (void)setClipDurationFromString:(NSString*)aPropVal;
 @end

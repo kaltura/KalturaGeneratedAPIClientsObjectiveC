@@ -15913,6 +15913,7 @@
 @synthesize deletePolicy = _deletePolicy;
 @synthesize isEncrypted = _isEncrypted;
 @synthesize contentAwareness = _contentAwareness;
+@synthesize chunkedEncodeMode = _chunkedEncodeMode;
 @synthesize twoPass = _twoPass;
 @synthesize tags = _tags;
 
@@ -15929,6 +15930,7 @@
     self->_deletePolicy = KALTURA_UNDEF_INT;
     self->_isEncrypted = KALTURA_UNDEF_INT;
     self->_contentAwareness = KALTURA_UNDEF_FLOAT;
+    self->_chunkedEncodeMode = KALTURA_UNDEF_INT;
     self->_twoPass = KALTURA_UNDEF_INT;
     return self;
 }
@@ -15976,6 +15978,11 @@
 - (KalturaFieldType)getTypeOfContentAwareness
 {
     return KFT_Float;
+}
+
+- (KalturaFieldType)getTypeOfChunkedEncodeMode
+{
+    return KFT_Int;
 }
 
 - (KalturaFieldType)getTypeOfTwoPass
@@ -16028,6 +16035,11 @@
     self.contentAwareness = [KalturaSimpleTypeParser parseFloat:aPropVal];
 }
 
+- (void)setChunkedEncodeModeFromString:(NSString*)aPropVal
+{
+    self.chunkedEncodeMode = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)setTwoPassFromString:(NSString*)aPropVal
 {
     self.twoPass = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -16045,6 +16057,7 @@
     [aParams addIfDefinedKey:@"deletePolicy" withInt:self.deletePolicy];
     [aParams addIfDefinedKey:@"isEncrypted" withInt:self.isEncrypted];
     [aParams addIfDefinedKey:@"contentAwareness" withFloat:self.contentAwareness];
+    [aParams addIfDefinedKey:@"chunkedEncodeMode" withInt:self.chunkedEncodeMode];
     [aParams addIfDefinedKey:@"twoPass" withInt:self.twoPass];
     [aParams addIfDefinedKey:@"tags" withString:self.tags];
 }
@@ -18396,6 +18409,7 @@
 @synthesize subtitlesData = _subtitlesData;
 @synthesize isEncrypted = _isEncrypted;
 @synthesize contentAwareness = _contentAwareness;
+@synthesize chunkedEncodeMode = _chunkedEncodeMode;
 @synthesize clipOffset = _clipOffset;
 @synthesize clipDuration = _clipDuration;
 
@@ -18432,6 +18446,7 @@
     self->_videoBitrateTolerance = KALTURA_UNDEF_INT;
     self->_isEncrypted = KALTURA_UNDEF_INT;
     self->_contentAwareness = KALTURA_UNDEF_FLOAT;
+    self->_chunkedEncodeMode = KALTURA_UNDEF_INT;
     self->_clipOffset = KALTURA_UNDEF_INT;
     self->_clipDuration = KALTURA_UNDEF_INT;
     return self;
@@ -18622,6 +18637,11 @@
     return KFT_Float;
 }
 
+- (KalturaFieldType)getTypeOfChunkedEncodeMode
+{
+    return KFT_Int;
+}
+
 - (KalturaFieldType)getTypeOfClipOffset
 {
     return KFT_Int;
@@ -18772,6 +18792,11 @@
     self.contentAwareness = [KalturaSimpleTypeParser parseFloat:aPropVal];
 }
 
+- (void)setChunkedEncodeModeFromString:(NSString*)aPropVal
+{
+    self.chunkedEncodeMode = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)setClipOffsetFromString:(NSString*)aPropVal
 {
     self.clipOffset = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -18824,6 +18849,7 @@
     [aParams addIfDefinedKey:@"subtitlesData" withString:self.subtitlesData];
     [aParams addIfDefinedKey:@"isEncrypted" withInt:self.isEncrypted];
     [aParams addIfDefinedKey:@"contentAwareness" withFloat:self.contentAwareness];
+    [aParams addIfDefinedKey:@"chunkedEncodeMode" withInt:self.chunkedEncodeMode];
     [aParams addIfDefinedKey:@"clipOffset" withInt:self.clipOffset];
     [aParams addIfDefinedKey:@"clipDuration" withInt:self.clipDuration];
 }
