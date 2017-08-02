@@ -49004,6 +49004,11 @@
     return [self listWithFilter:aFilter withPager:nil];
 }
 
+- (KalturaUserEntryListResponse*)list
+{
+    return [self listWithFilter:nil];
+}
+
 - (KalturaQuizUserEntry*)submitQuizWithId:(int)aId
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];

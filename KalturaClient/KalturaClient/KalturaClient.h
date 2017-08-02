@@ -14718,6 +14718,7 @@
 - (KalturaUserEntry*)getWithId:(NSString*)aId;
 - (KalturaUserEntryListResponse*)listWithFilter:(KalturaUserEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaUserEntryListResponse*)listWithFilter:(KalturaUserEntryFilter*)aFilter;
+- (KalturaUserEntryListResponse*)list;
 // Submits the quiz so that it's status will be submitted and calculates the score for the quiz
 - (KalturaQuizUserEntry*)submitQuizWithId:(int)aId;
 - (void)updateWithId:(int)aId withUserEntry:(KalturaUserEntry*)aUserEntry;
