@@ -16955,7 +16955,7 @@
 
 @end
 
-@implementation KalturaFilterPager
+@implementation KalturaPager
 @synthesize pageSize = _pageSize;
 @synthesize pageIndex = _pageIndex;
 
@@ -16993,9 +16993,19 @@
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaFilterPager"];
+        [aParams putKey:@"objectType" withString:@"KalturaPager"];
     [aParams addIfDefinedKey:@"pageSize" withInt:self.pageSize];
     [aParams addIfDefinedKey:@"pageIndex" withInt:self.pageIndex];
+}
+
+@end
+
+@implementation KalturaFilterPager
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaFilterPager"];
 }
 
 @end

@@ -5560,8 +5560,8 @@
 
 // @package Kaltura
 // @subpackage Client
-// The KalturaFilterPager object enables paging management to be applied upon service list actions.
-@interface KalturaFilterPager : KalturaObjectBase
+// The KalturaPager object enables paging management to be applied upon service list/search actions.
+@interface KalturaPager : KalturaObjectBase
 // The number of objects to retrieve. (Default is 30, maximum page size is 500).
 @property (nonatomic,assign) int pageSize;
 // The page number for which {pageSize} of objects should be retrieved (Default is 1).
@@ -5570,6 +5570,12 @@
 - (KalturaFieldType)getTypeOfPageIndex;
 - (void)setPageSizeFromString:(NSString*)aPropVal;
 - (void)setPageIndexFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// The KalturaFilterPager object enables paging management to be applied upon service list actions.
+@interface KalturaFilterPager : KalturaPager
 @end
 
 // @package Kaltura
