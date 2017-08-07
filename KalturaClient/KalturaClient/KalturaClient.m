@@ -4395,6 +4395,9 @@
 }
 @end
 
+@implementation KalturaDrmSchemeName
+@end
+
 @implementation KalturaDurationType
 + (NSString*)LONG
 {

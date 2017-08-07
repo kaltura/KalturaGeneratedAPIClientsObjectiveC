@@ -1742,6 +1742,11 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaDrmSchemeName : NSObject
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaDurationType : NSObject
 + (NSString*)LONG;
 + (NSString*)MEDIUM;
