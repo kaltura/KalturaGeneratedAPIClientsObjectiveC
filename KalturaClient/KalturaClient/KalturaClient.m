@@ -40259,6 +40259,16 @@
 
 @end
 
+@implementation KalturaEntryIndexAdvancedFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaEntryIndexAdvancedFilter"];
+}
+
+@end
+
 @implementation KalturaEntryReferrerLiveStats
 @synthesize referrer = _referrer;
 

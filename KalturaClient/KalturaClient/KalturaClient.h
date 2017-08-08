@@ -11743,6 +11743,11 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaEntryIndexAdvancedFilter : KalturaIndexAdvancedFilter
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaEntryReferrerLiveStats : KalturaEntryLiveStats
 @property (nonatomic,copy) NSString* referrer;
 - (KalturaFieldType)getTypeOfReferrer;
