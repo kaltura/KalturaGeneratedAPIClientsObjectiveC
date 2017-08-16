@@ -13955,6 +13955,7 @@
 // Append recorded video to live entry
 - (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withIsLastChunk:(KALTURA_BOOL)aIsLastChunk;
 - (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration;
+- (KalturaLiveEntry*)createRecordedEntryWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withLiveEntryStatus:(int)aLiveEntryStatus;
 // Delete a live channel.
 - (void)deleteWithId:(NSString*)aId;
 // Get live channel by ID.
@@ -13966,6 +13967,7 @@
 - (KalturaLiveChannelListResponse*)listWithFilter:(KalturaLiveChannelFilter*)aFilter;
 - (KalturaLiveChannelListResponse*)list;
 // Register media server to live entry
+- (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex withApplicationName:(NSString*)aApplicationName withLiveEntryStatus:(int)aLiveEntryStatus withShouldCreateRecordedEntry:(KALTURA_BOOL)aShouldCreateRecordedEntry;
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex withApplicationName:(NSString*)aApplicationName withLiveEntryStatus:(int)aLiveEntryStatus;
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex withApplicationName:(NSString*)aApplicationName;
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex;
@@ -14026,6 +14028,7 @@
 - (KalturaLiveStreamEntry*)authenticateWithEntryId:(NSString*)aEntryId withToken:(NSString*)aToken;
 // Creates perioding metadata sync-point events on a live stream
 - (void)createPeriodicSyncPointsWithEntryId:(NSString*)aEntryId withInterval:(int)aInterval withDuration:(int)aDuration;
+- (KalturaLiveEntry*)createRecordedEntryWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withLiveEntryStatus:(int)aLiveEntryStatus;
 // Delete a live stream entry.
 - (void)deleteWithEntryId:(NSString*)aEntryId;
 // Get live stream entry by ID.
@@ -14040,6 +14043,7 @@
 // Regenerate new secure token for liveStream
 - (void)regenerateStreamTokenWithEntryId:(NSString*)aEntryId;
 // Register media server to live entry
+- (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex withApplicationName:(NSString*)aApplicationName withLiveEntryStatus:(int)aLiveEntryStatus withShouldCreateRecordedEntry:(KALTURA_BOOL)aShouldCreateRecordedEntry;
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex withApplicationName:(NSString*)aApplicationName withLiveEntryStatus:(int)aLiveEntryStatus;
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex withApplicationName:(NSString*)aApplicationName;
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex;
