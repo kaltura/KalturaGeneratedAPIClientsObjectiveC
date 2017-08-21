@@ -118,10 +118,6 @@
 @end
 
 @implementation KalturaDrmProviderType
-+ (NSString*)FAIRPLAY
-{
-    return @"fairplay.FAIRPLAY";
-}
 + (NSString*)PLAY_READY
 {
     return @"playReady.PLAY_READY";
@@ -133,29 +129,6 @@
 + (NSString*)CENC
 {
     return @"1";
-}
-@end
-
-@implementation KalturaDrmSchemeName
-+ (NSString*)PLAYREADY_CENC
-{
-    return @"drm.PLAYREADY_CENC";
-}
-+ (NSString*)WIDEVINE_CENC
-{
-    return @"drm.WIDEVINE_CENC";
-}
-+ (NSString*)FAIRPLAY
-{
-    return @"fairplay.FAIRPLAY";
-}
-+ (NSString*)PLAYREADY
-{
-    return @"playReady.PLAYREADY";
-}
-+ (NSString*)WIDEVINE
-{
-    return @"widevine.WIDEVINE";
 }
 @end
 

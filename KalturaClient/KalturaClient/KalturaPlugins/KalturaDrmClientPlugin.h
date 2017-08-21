@@ -85,20 +85,9 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaDrmProviderType : NSObject
-+ (NSString*)FAIRPLAY;
 + (NSString*)PLAY_READY;
 + (NSString*)WIDEVINE;
 + (NSString*)CENC;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaDrmSchemeName : NSObject
-+ (NSString*)PLAYREADY_CENC;
-+ (NSString*)WIDEVINE_CENC;
-+ (NSString*)FAIRPLAY;
-+ (NSString*)PLAYREADY;
-+ (NSString*)WIDEVINE;
 @end
 
 ///////////////////////// classes /////////////////////////

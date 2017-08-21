@@ -2403,6 +2403,10 @@
 {
     return @"transcript.Transcript";
 }
++ (NSString*)WIDEVINE_FLAVOR
+{
+    return @"widevine.WidevineFlavor";
+}
 + (NSString*)FLAVOR
 {
     return @"1";
@@ -2941,6 +2945,10 @@
 + (NSString*)VIRUS_SCAN
 {
     return @"virusScan.VirusScan";
+}
++ (NSString*)WIDEVINE_REPOSITORY_SYNC
+{
+    return @"widevine.WidevineRepositorySync";
 }
 + (NSString*)IMPORT
 {
@@ -4396,6 +4404,22 @@
 @end
 
 @implementation KalturaDrmSchemeName
++ (NSString*)PLAYREADY_CENC
+{
+    return @"drm.PLAYREADY_CENC";
+}
++ (NSString*)WIDEVINE_CENC
+{
+    return @"drm.WIDEVINE_CENC";
+}
++ (NSString*)PLAYREADY
+{
+    return @"playReady.PLAYREADY";
+}
++ (NSString*)WIDEVINE
+{
+    return @"widevine.WIDEVINE";
+}
 @end
 
 @implementation KalturaDurationType
@@ -9508,6 +9532,10 @@
 @end
 
 @implementation KalturaRuleActionType
++ (NSString*)DRM_POLICY
+{
+    return @"drm.DRM_POLICY";
+}
 + (NSString*)BLOCK
 {
     return @"1";
@@ -17171,6 +17199,48 @@
 
 @end
 
+@implementation KalturaPluginData
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaPluginData"];
+}
+
+@end
+
+@implementation KalturaDrmPlaybackPluginData
+@synthesize scheme = _scheme;
+@synthesize licenseURL = _licenseURL;
+
+- (KalturaFieldType)getTypeOfScheme
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfLicenseURL
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaDrmPlaybackPluginData"];
+    [aParams addIfDefinedKey:@"scheme" withString:self.scheme];
+    [aParams addIfDefinedKey:@"licenseURL" withString:self.licenseURL];
+}
+
+- (void)dealloc
+{
+    [self->_scheme release];
+    [self->_licenseURL release];
+    [super dealloc];
+}
+
+@end
+
 @interface KalturaEmailIngestionProfile()
 @property (nonatomic,assign) int id;
 @property (nonatomic,assign) int partnerId;
@@ -23878,48 +23948,6 @@
 {
     [self->_type release];
     [self->_tags release];
-    [super dealloc];
-}
-
-@end
-
-@implementation KalturaPluginData
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaPluginData"];
-}
-
-@end
-
-@implementation KalturaDrmPlaybackPluginData
-@synthesize scheme = _scheme;
-@synthesize licenseURL = _licenseURL;
-
-- (KalturaFieldType)getTypeOfScheme
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfLicenseURL
-{
-    return KFT_String;
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaDrmPlaybackPluginData"];
-    [aParams addIfDefinedKey:@"scheme" withString:self.scheme];
-    [aParams addIfDefinedKey:@"licenseURL" withString:self.licenseURL];
-}
-
-- (void)dealloc
-{
-    [self->_scheme release];
-    [self->_licenseURL release];
     [super dealloc];
 }
 
