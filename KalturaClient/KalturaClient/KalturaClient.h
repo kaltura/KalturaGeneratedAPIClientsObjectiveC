@@ -1045,7 +1045,6 @@
 + (NSString*)SWF;
 + (NSString*)TIMED_THUMB_ASSET;
 + (NSString*)TRANSCRIPT;
-+ (NSString*)WIDEVINE_FLAVOR;
 + (NSString*)FLAVOR;
 + (NSString*)THUMBNAIL;
 + (NSString*)LIVE;
@@ -1219,7 +1218,6 @@
 + (NSString*)INDEX_TAGS;
 + (NSString*)TAG_RESOLVE;
 + (NSString*)VIRUS_SCAN;
-+ (NSString*)WIDEVINE_REPOSITORY_SYNC;
 + (NSString*)IMPORT;
 + (NSString*)DELETE;
 + (NSString*)FLATTEN;
@@ -1745,10 +1743,6 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaDrmSchemeName : NSObject
-+ (NSString*)PLAYREADY_CENC;
-+ (NSString*)WIDEVINE_CENC;
-+ (NSString*)PLAYREADY;
-+ (NSString*)WIDEVINE;
 @end
 
 // @package Kaltura
@@ -3367,7 +3361,6 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaRuleActionType : NSObject
-+ (NSString*)DRM_POLICY;
 + (NSString*)BLOCK;
 + (NSString*)PREVIEW;
 + (NSString*)LIMIT_FLAVORS;
@@ -5630,20 +5623,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaPluginData : KalturaObjectBase
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaDrmPlaybackPluginData : KalturaPluginData
-@property (nonatomic,copy) NSString* scheme;	// enum KalturaDrmSchemeName
-@property (nonatomic,copy) NSString* licenseURL;
-- (KalturaFieldType)getTypeOfScheme;
-- (KalturaFieldType)getTypeOfLicenseURL;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaEmailIngestionProfile : KalturaObjectBase
 @property (nonatomic,assign,readonly) int id;
 @property (nonatomic,copy) NSString* name;
@@ -6789,6 +6768,16 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaLiveEntryServerNodeRecordingInfo : KalturaObjectBase
+@property (nonatomic,copy) NSString* recordedEntryId;
+@property (nonatomic,assign) int duration;
+- (KalturaFieldType)getTypeOfRecordedEntryId;
+- (KalturaFieldType)getTypeOfDuration;
+- (void)setDurationFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaLiveReportExportParams : KalturaObjectBase
 @property (nonatomic,copy) NSString* entryIds;
 @property (nonatomic,copy) NSString* recpientEmail;
@@ -7471,6 +7460,20 @@
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaPluginData : KalturaObjectBase
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaDrmPlaybackPluginData : KalturaPluginData
+@property (nonatomic,copy) NSString* scheme;	// enum KalturaDrmSchemeName
+@property (nonatomic,copy) NSString* licenseURL;
+- (KalturaFieldType)getTypeOfScheme;
+- (KalturaFieldType)getTypeOfLicenseURL;
 @end
 
 // @package Kaltura
@@ -10206,8 +10209,11 @@
 @interface KalturaLiveEntryServerNode : KalturaEntryServerNode
 // parameters of the stream we got
 @property (nonatomic,retain) NSMutableArray* streams;	// of KalturaLiveStreamParams elements
+@property (nonatomic,retain) NSMutableArray* recordingInfo;	// of KalturaLiveEntryServerNodeRecordingInfo elements
 - (KalturaFieldType)getTypeOfStreams;
 - (NSString*)getObjectTypeOfStreams;
+- (KalturaFieldType)getTypeOfRecordingInfo;
+- (NSString*)getObjectTypeOfRecordingInfo;
 @end
 
 // @package Kaltura
