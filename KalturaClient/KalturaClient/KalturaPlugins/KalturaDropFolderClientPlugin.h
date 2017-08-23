@@ -716,9 +716,9 @@
 // Mark the KalturaDropFolder object as deleted
 - (KalturaDropFolder*)deleteWithDropFolderId:(int)aDropFolderId;
 // freeExclusive KalturaDropFolder object
-- (KalturaDropFolder*)freeExclusiveDropFolderWithDropFolderId:(int)aDropFolderId withStatus:(int)aStatus withErrorCode:(NSString*)aErrorCode withErrorDescription:(NSString*)aErrorDescription;
-- (KalturaDropFolder*)freeExclusiveDropFolderWithDropFolderId:(int)aDropFolderId withStatus:(int)aStatus withErrorCode:(NSString*)aErrorCode;
-- (KalturaDropFolder*)freeExclusiveDropFolderWithDropFolderId:(int)aDropFolderId withStatus:(int)aStatus;
+- (KalturaDropFolder*)freeExclusiveDropFolderWithDropFolderId:(int)aDropFolderId withErrorCode:(NSString*)aErrorCode withErrorDescription:(NSString*)aErrorDescription;
+- (KalturaDropFolder*)freeExclusiveDropFolderWithDropFolderId:(int)aDropFolderId withErrorCode:(NSString*)aErrorCode;
+- (KalturaDropFolder*)freeExclusiveDropFolderWithDropFolderId:(int)aDropFolderId;
 // Retrieve a KalturaDropFolder object by ID
 - (KalturaDropFolder*)getWithDropFolderId:(int)aDropFolderId;
 // getExclusive KalturaDropFolder object

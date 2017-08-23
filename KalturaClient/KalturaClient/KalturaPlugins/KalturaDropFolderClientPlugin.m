@@ -2410,23 +2410,22 @@
     return [self.client queueObjectService:@"dropfolder_dropfolder" withAction:@"delete" withExpectedType:@"KalturaDropFolder"];
 }
 
-- (KalturaDropFolder*)freeExclusiveDropFolderWithDropFolderId:(int)aDropFolderId withStatus:(int)aStatus withErrorCode:(NSString*)aErrorCode withErrorDescription:(NSString*)aErrorDescription
+- (KalturaDropFolder*)freeExclusiveDropFolderWithDropFolderId:(int)aDropFolderId withErrorCode:(NSString*)aErrorCode withErrorDescription:(NSString*)aErrorDescription
 {
     [self.client.params addIfDefinedKey:@"dropFolderId" withInt:aDropFolderId];
-    [self.client.params addIfDefinedKey:@"status" withInt:aStatus];
     [self.client.params addIfDefinedKey:@"errorCode" withString:aErrorCode];
     [self.client.params addIfDefinedKey:@"errorDescription" withString:aErrorDescription];
     return [self.client queueObjectService:@"dropfolder_dropfolder" withAction:@"freeExclusiveDropFolder" withExpectedType:@"KalturaDropFolder"];
 }
 
-- (KalturaDropFolder*)freeExclusiveDropFolderWithDropFolderId:(int)aDropFolderId withStatus:(int)aStatus withErrorCode:(NSString*)aErrorCode
+- (KalturaDropFolder*)freeExclusiveDropFolderWithDropFolderId:(int)aDropFolderId withErrorCode:(NSString*)aErrorCode
 {
-    return [self freeExclusiveDropFolderWithDropFolderId:aDropFolderId withStatus:aStatus withErrorCode:aErrorCode withErrorDescription:nil];
+    return [self freeExclusiveDropFolderWithDropFolderId:aDropFolderId withErrorCode:aErrorCode withErrorDescription:nil];
 }
 
-- (KalturaDropFolder*)freeExclusiveDropFolderWithDropFolderId:(int)aDropFolderId withStatus:(int)aStatus
+- (KalturaDropFolder*)freeExclusiveDropFolderWithDropFolderId:(int)aDropFolderId
 {
-    return [self freeExclusiveDropFolderWithDropFolderId:aDropFolderId withStatus:aStatus withErrorCode:nil];
+    return [self freeExclusiveDropFolderWithDropFolderId:aDropFolderId withErrorCode:nil];
 }
 
 - (KalturaDropFolder*)getWithDropFolderId:(int)aDropFolderId
