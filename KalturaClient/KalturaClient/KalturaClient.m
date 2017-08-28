@@ -5401,9 +5401,53 @@
 @end
 
 @implementation KalturaLanguage
++ (NSString*)ABQ
+{
+    return @"Abaza";
+}
 + (NSString*)AB
 {
     return @"Abkhazian";
+}
++ (NSString*)ABE
+{
+    return @"Abnaki	 Western";
+}
++ (NSString*)ABU
+{
+    return @"Abure";
+}
++ (NSString*)ACN
+{
+    return @"Achang";
+}
++ (NSString*)ACE
+{
+    return @"Achinese";
+}
++ (NSString*)ACT
+{
+    return @"Achterhooks";
+}
++ (NSString*)ACV
+{
+    return @"Achumawi";
+}
++ (NSString*)ADJ
+{
+    return @"Adioukrou";
+}
++ (NSString*)ADY
+{
+    return @"Adyghe; Adygei";
+}
++ (NSString*)ADT
+{
+    return @"Adynyamathanha";
+}
++ (NSString*)AAL
+{
+    return @"Afade";
 }
 + (NSString*)AA
 {
@@ -5413,25 +5457,145 @@
 {
     return @"Afrikaans";
 }
++ (NSString*)AGQ
+{
+    return @"Aghem";
+}
++ (NSString*)AGX
+{
+    return @"Aghul";
+}
++ (NSString*)AGU
+{
+    return @"Aguacateco";
+}
++ (NSString*)AGR
+{
+    return @"Aguaruna";
+}
++ (NSString*)AIN
+{
+    return @"Ainu (Japan)";
+}
++ (NSString*)AKK
+{
+    return @"Akkadian";
+}
++ (NSString*)AKL
+{
+    return @"Aklanon";
+}
++ (NSString*)AKU
+{
+    return @"Akum";
+}
++ (NSString*)AKZ
+{
+    return @"Alabama";
+}
 + (NSString*)SQ
 {
     return @"Albanian";
+}
++ (NSString*)ALN
+{
+    return @"Albanian (Gheg)";
+}
++ (NSString*)ALS
+{
+    return @"Albanian (Tosk)";
+}
++ (NSString*)ALE
+{
+    return @"Aleut";
+}
++ (NSString*)ALQ
+{
+    return @"Algonquin";
+}
++ (NSString*)ALT
+{
+    return @"Altai (Southern)";
 }
 + (NSString*)AM
 {
     return @"Amharic";
 }
++ (NSString*)RME
+{
+    return @"Angloromani";
+}
++ (NSString*)APJ
+{
+    return @"Apache (Jicarilla)";
+}
++ (NSString*)APW
+{
+    return @"Apache (Western)";
+}
 + (NSString*)AR
 {
     return @"Arabic";
+}
++ (NSString*)ARB
+{
+    return @"Arabic (standard)";
+}
++ (NSString*)B_T
+{
+    return @"Arabic Tunisian Spoken";
+}
++ (NSString*)ARC
+{
+    return @"Aramaic";
+}
++ (NSString*)SAM
+{
+    return @"Aramaic	 Samaritan";
+}
++ (NSString*)ARP
+{
+    return @"Arapaho";
+}
++ (NSString*)ARN
+{
+    return @"Araucanian";
+}
++ (NSString*)ARI
+{
+    return @"Arikara";
 }
 + (NSString*)HY
 {
     return @"Armenian";
 }
++ (NSString*)RUP
+{
+    return @"Aromanian";
+}
 + (NSString*)AS_
 {
     return @"Assamese";
+}
++ (NSString*)ASB
+{
+    return @"Assiniboine";
+}
++ (NSString*)AII
+{
+    return @"Assyrian Neo-Aramaic";
+}
++ (NSString*)AST
+{
+    return @"Asturian";
+}
++ (NSString*)ATJ
+{
+    return @"Atikamekw";
+}
++ (NSString*)AWA
+{
+    return @"Awadhi";
 }
 + (NSString*)AY
 {
@@ -5441,6 +5605,38 @@
 {
     return @"Azerbaijani";
 }
++ (NSString*)BCR
+{
+    return @"Babine";
+}
++ (NSString*)BFQ
+{
+    return @"Badaga";
+}
++ (NSString*)BDJ
+{
+    return @"Bai";
+}
++ (NSString*)BAN
+{
+    return @"Balinese";
+}
++ (NSString*)BCC
+{
+    return @"Balochi Southern";
+}
++ (NSString*)BFT
+{
+    return @"Balti";
+}
++ (NSString*)BAL
+{
+    return @"Baluchi";
+}
++ (NSString*)BAS
+{
+    return @"Basa (Cameroon)";
+}
 + (NSString*)BA
 {
     return @"Bashkir";
@@ -5449,9 +5645,41 @@
 {
     return @"Basque";
 }
++ (NSString*)BAR
+{
+    return @"Bavarian";
+}
++ (NSString*)BEA
+{
+    return @"Beaver";
+}
++ (NSString*)BEJ
+{
+    return @"Beja";
+}
++ (NSString*)BEM
+{
+    return @"Bemba (Zambia)";
+}
 + (NSString*)BN
 {
     return @"Bengali (Bangla)";
+}
++ (NSString*)BEW
+{
+    return @"Betawi";
+}
++ (NSString*)KAP
+{
+    return @"Bezhta";
+}
++ (NSString*)BHB
+{
+    return @"Bhili";
+}
++ (NSString*)BHO
+{
+    return @"Bhojpuri";
 }
 + (NSString*)DZ
 {
@@ -5461,6 +5689,18 @@
 {
     return @"Bihari";
 }
++ (NSString*)BIK
+{
+    return @"Bikol";
+}
++ (NSString*)BIN
+{
+    return @"Bini";
+}
++ (NSString*)BPY
+{
+    return @"Bishnupriya Manipuri";
+}
 + (NSString*)BI
 {
     return @"Bislama";
@@ -5469,9 +5709,17 @@
 {
     return @"Breton";
 }
++ (NSString*)BUG
+{
+    return @"Buginese";
+}
 + (NSString*)BG
 {
     return @"Bulgarian";
+}
++ (NSString*)BUA
+{
+    return @"Buriat";
 }
 + (NSString*)MY
 {
@@ -5481,41 +5729,233 @@
 {
     return @"Byelorussian (Belarusian)";
 }
++ (NSString*)CAD
+{
+    return @"Caddo";
+}
 + (NSString*)KM
 {
     return @"Cambodian";
+}
++ (NSString*)YUE
+{
+    return @"Cantonese";
+}
++ (NSString*)CRX
+{
+    return @"Carrier";
+}
++ (NSString*)CAF
+{
+    return @"Carrier Southern";
 }
 + (NSString*)CA
 {
     return @"Catalan";
 }
++ (NSString*)CHC
+{
+    return @"Catawba";
+}
++ (NSString*)CAY
+{
+    return @"Cayuga";
+}
++ (NSString*)CEB
+{
+    return @"Cebuano";
+}
++ (NSString*)CHG
+{
+    return @"Chagatai";
+}
++ (NSString*)CLD
+{
+    return @"Chaldean Neo-Aramaic";
+}
++ (NSString*)CHR
+{
+    return @"Cherokee";
+}
++ (NSString*)CHY
+{
+    return @"Cheyenne";
+}
++ (NSString*)CIC
+{
+    return @"Chickasaw";
+}
++ (NSString*)CLC
+{
+    return @"Chilcotin";
+}
 + (NSString*)ZH
 {
     return @"Chinese";
+}
++ (NSString*)CHN
+{
+    return @"Chinook jargon";
+}
++ (NSString*)CHP
+{
+    return @"Chipewyan";
+}
++ (NSString*)CIW
+{
+    return @"Chippewa";
+}
++ (NSString*)CHO
+{
+    return @"Choctaw";
+}
++ (NSString*)CAA
+{
+    return @"Chor";
+}
++ (NSString*)CKT
+{
+    return @"Chukot";
+}
++ (NSString*)CIM
+{
+    return @"Cimbrian";
+}
++ (NSString*)CLM
+{
+    return @"Clallam	 Klallam";
+}
++ (NSString*)COJ
+{
+    return @"Cochimi";
+}
++ (NSString*)COC
+{
+    return @"Cocopa";
+}
++ (NSString*)KSH
+{
+    return @"Colognian";
+}
++ (NSString*)COM
+{
+    return @"Comanche";
+}
++ (NSString*)SWB
+{
+    return @"Comorian";
+}
++ (NSString*)COO
+{
+    return @"Comox";
+}
++ (NSString*)COP
+{
+    return @"Coptic";
 }
 + (NSString*)CO
 {
     return @"Corsican";
 }
++ (NSString*)MUS
+{
+    return @"Creek";
+}
++ (NSString*)CRH
+{
+    return @"Crimean Tatar";
+}
 + (NSString*)HR
 {
     return @"Croatian";
+}
++ (NSString*)CUP
+{
+    return @"Cupeo";
 }
 + (NSString*)CS
 {
     return @"Czech";
 }
++ (NSString*)DAK
+{
+    return @"Dakota";
+}
 + (NSString*)DA
 {
     return @"Danish";
+}
++ (NSString*)DAR
+{
+    return @"Dargwa";
+}
++ (NSString*)GBZ
+{
+    return @"Dari	 Zoroastrian";
+}
++ (NSString*)PRD
+{
+    return @"Dari (Persian)";
+}
++ (NSString*)DHV
+{
+    return @"Dehu";
+}
++ (NSString*)DEL
+{
+    return @"Delaware";
+}
++ (NSString*)DIN
+{
+    return @"Dinka";
+}
++ (NSString*)DOI
+{
+    return @"Dogri (generic)";
+}
++ (NSString*)DGR
+{
+    return @"Dogrib";
+}
++ (NSString*)DLG
+{
+    return @"Dolgan";
+}
++ (NSString*)DOH
+{
+    return @"Dong";
+}
++ (NSString*)DUA
+{
+    return @"Duala";
+}
++ (NSString*)DNG
+{
+    return @"Dungan";
 }
 + (NSString*)NL
 {
     return @"Dutch";
 }
++ (NSString*)DYU
+{
+    return @"Dyula";
+}
++ (NSString*)EEE
+{
+    return @"E";
+}
++ (NSString*)EGL
+{
+    return @"Emilian";
+}
 + (NSString*)EN
 {
     return @"English";
+}
++ (NSString*)ENM
+{
+    return @"English	 Middle (1100-1500)";
 }
 + (NSString*)EN_US
 {
@@ -5525,6 +5965,10 @@
 {
     return @"English (British)";
 }
++ (NSString*)MYV
+{
+    return @"Erzya";
+}
 + (NSString*)EO
 {
     return @"Esperanto";
@@ -5533,9 +5977,25 @@
 {
     return @"Estonian";
 }
++ (NSString*)EVE
+{
+    return @"Even";
+}
++ (NSString*)EVN
+{
+    return @"Evenki";
+}
 + (NSString*)FO
 {
     return @"Faeroese";
+}
++ (NSString*)FAX
+{
+    return @"Fala";
+}
++ (NSString*)FAN
+{
+    return @"Fang (Equatorial Guinea)";
 }
 + (NSString*)FA
 {
@@ -5545,9 +6005,29 @@
 {
     return @"Fiji";
 }
++ (NSString*)FIL
+{
+    return @"Filipino";
+}
 + (NSString*)FI
 {
     return @"Finnish";
+}
++ (NSString*)FIT
+{
+    return @"Finnish (Tornedalen)";
+}
++ (NSString*)FON
+{
+    return @"Fon";
+}
++ (NSString*)FRP
+{
+    return @"Franco-Prove";
+}
++ (NSString*)FRK
+{
+    return @"Frankish";
 }
 + (NSString*)FR
 {
@@ -5557,6 +6037,22 @@
 {
     return @"Frisian";
 }
++ (NSString*)FRR
+{
+    return @"Frisian	 Northern";
+}
++ (NSString*)FUR
+{
+    return @"Friulian";
+}
++ (NSString*)FVR
+{
+    return @"Fur";
+}
++ (NSString*)GAA
+{
+    return @"Ga";
+}
 + (NSString*)GV
 {
     return @"Gaelic (Manx)";
@@ -5565,9 +6061,21 @@
 {
     return @"Gaelic (Scottish)";
 }
++ (NSString*)GAG
+{
+    return @"Gagauz";
+}
 + (NSString*)GL
 {
     return @"Galician";
+}
++ (NSString*)GAN
+{
+    return @"Gan";
+}
++ (NSString*)GEZ
+{
+    return @"Geez";
 }
 + (NSString*)KA
 {
@@ -5577,9 +6085,33 @@
 {
     return @"German";
 }
++ (NSString*)GEH
+{
+    return @"German	 Hutterite";
+}
++ (NSString*)PDC
+{
+    return @"German	 Pennsylvania";
+}
++ (NSString*)GIL
+{
+    return @"Gilbertese";
+}
++ (NSString*)NIV
+{
+    return @"Gilyak Nivkh";
+}
++ (NSString*)GIT
+{
+    return @"Gitxsan";
+}
 + (NSString*)EL
 {
     return @"Greek";
+}
++ (NSString*)GRC
+{
+    return @"Greek	 Ancient (to 1453)";
 }
 + (NSString*)KL
 {
@@ -5593,21 +6125,73 @@
 {
     return @"Gujarati";
 }
++ (NSString*)GWI
+{
+    return @"Gwichin";
+}
++ (NSString*)HAI
+{
+    return @"Haida";
+}
++ (NSString*)HAS
+{
+    return @"Haisla";
+}
++ (NSString*)HUR
+{
+    return @"Halkomelem";
+}
++ (NSString*)HAA
+{
+    return @"Han";
+}
++ (NSString*)HNI
+{
+    return @"Hani";
+}
 + (NSString*)HA
 {
     return @"Hausa";
 }
-+ (NSString*)IW
++ (NSString*)HAW
 {
-    return @"Hebrew";
+    return @"Hawaiian";
 }
 + (NSString*)HE
 {
     return @"Hebrew";
 }
++ (NSString*)IW
+{
+    return @"Hebrew";
+}
++ (NSString*)HEI
+{
+    return @"Heiltsuk";
+}
++ (NSString*)HID
+{
+    return @"Hidatsa";
+}
++ (NSString*)HIL
+{
+    return @"Hiligaynon";
+}
 + (NSString*)HI
 {
     return @"Hindi";
+}
++ (NSString*)HMN
+{
+    return @"Hmong";
+}
++ (NSString*)HOP
+{
+    return @"Hopi";
+}
++ (NSString*)CZH
+{
+    return @"Huizhou Chinese";
 }
 + (NSString*)HU
 {
@@ -5617,13 +6201,33 @@
 {
     return @"Icelandic";
 }
-+ (NSString*)IN
++ (NSString*)KPO
 {
-    return @"Indonesian";
+    return @"Ikposo";
+}
++ (NSString*)ILO
+{
+    return @"Iloko";
+}
++ (NSString*)SMN
+{
+    return @"Inari Sami";
 }
 + (NSString*)ID
 {
     return @"Indonesian";
+}
++ (NSString*)IN
+{
+    return @"Indonesian";
+}
++ (NSString*)IZH
+{
+    return @"Ingrian";
+}
++ (NSString*)INH
+{
+    return @"Ingush";
 }
 + (NSString*)IA
 {
@@ -5649,6 +6253,10 @@
 {
     return @"Italian";
 }
++ (NSString*)ITL
+{
+    return @"Itelmen";
+}
 + (NSString*)JA
 {
     return @"Japanese";
@@ -5657,21 +6265,129 @@
 {
     return @"Javanese";
 }
++ (NSString*)CJY
+{
+    return @"Jinyu Chinese";
+}
++ (NSString*)KAJ
+{
+    return @"Jju";
+}
++ (NSString*)JCT
+{
+    return @"Judeo-Crimean Tatar";
+}
++ (NSString*)JGE
+{
+    return @"Judeo-Georgian";
+}
++ (NSString*)JUT
+{
+    return @"Jutish";
+}
++ (NSString*)KBD
+{
+    return @"Kabardian";
+}
++ (NSString*)KEA
+{
+    return @"Kabuverdianu";
+}
++ (NSString*)KAB
+{
+    return @"Kabyle";
+}
++ (NSString*)KFR
+{
+    return @"Kachchi";
+}
++ (NSString*)KJV
+{
+    return @"Kaikavian literary language (Kajkavian)";
+}
++ (NSString*)XAL
+{
+    return @"Kalmyk Oirat";
+}
 + (NSString*)KN
 {
     return @"Kannada";
+}
++ (NSString*)KSK
+{
+    return @"Kansa";
+}
++ (NSString*)KRC
+{
+    return @"Karachay-Balkar";
+}
++ (NSString*)KIM
+{
+    return @"Karagas";
+}
++ (NSString*)KDR
+{
+    return @"Karaim";
+}
++ (NSString*)KAA
+{
+    return @"Karakalpak";
+}
++ (NSString*)KRL
+{
+    return @"Karelian";
 }
 + (NSString*)KS
 {
     return @"Kashmiri";
 }
++ (NSString*)CSB
+{
+    return @"Kashubian";
+}
++ (NSString*)KKZ
+{
+    return @"Kaska";
+}
++ (NSString*)KAW
+{
+    return @"Kawi";
+}
 + (NSString*)KK
 {
     return @"Kazakh";
 }
++ (NSString*)KJH
+{
+    return @"Khakas";
+}
++ (NSString*)KLJ
+{
+    return @"Khalaj	 Turkic";
+}
++ (NSString*)KCA
+{
+    return @"Khanty";
+}
++ (NSString*)KHA
+{
+    return @"Khasi";
+}
++ (NSString*)KXM
+{
+    return @"Khmer	 Northern";
+}
++ (NSString*)KIC
+{
+    return @"Kickapoo";
+}
 + (NSString*)RW
 {
     return @"Kinyarwanda (Ruanda)";
+}
++ (NSString*)KIO
+{
+    return @"Kiowa";
 }
 + (NSString*)KY
 {
@@ -5681,13 +6397,101 @@
 {
     return @"Kirundi (Rundi)";
 }
++ (NSString*)TLH
+{
+    return @"Klingon tlhIngan-Hol";
+}
++ (NSString*)KFA
+{
+    return @"Kodava";
+}
++ (NSString*)KOI
+{
+    return @"Komi-Permyak";
+}
++ (NSString*)GOM
+{
+    return @"Konkani	 Goan";
+}
++ (NSString*)KOK
+{
+    return @"Konkani (generic)";
+}
++ (NSString*)KNN
+{
+    return @"Konkani (specific)";
+}
 + (NSString*)KO
 {
     return @"Korean";
 }
++ (NSString*)KPY
+{
+    return @"Koryak";
+}
++ (NSString*)KOS
+{
+    return @"Kosraean";
+}
++ (NSString*)AVK
+{
+    return @"Kotava";
+}
++ (NSString*)KPE
+{
+    return @"Kpelle";
+}
++ (NSString*)DIH
+{
+    return @"Kumiai";
+}
++ (NSString*)KUM
+{
+    return @"Kumyk";
+}
 + (NSString*)KU
 {
     return @"Kurdish";
+}
++ (NSString*)KUT
+{
+    return @"Kutenai";
+}
++ (NSString*)KWK
+{
+    return @"Kwakiutl";
+}
++ (NSString*)GDM
+{
+    return @"Laal";
+}
++ (NSString*)LLD
+{
+    return @"Ladin";
+}
++ (NSString*)LAD
+{
+    return @"Ladino";
+}
++ (NSString*)LAH
+{
+    return @"Lahnda";
+}
++ (NSString*)LHU
+{
+    return @"Lahu";
+}
++ (NSString*)LBE
+{
+    return @"Lak";
+}
++ (NSString*)LKI
+{
+    return @"Laki";
+}
++ (NSString*)LKT
+{
+    return @"Lakota";
 }
 + (NSString*)LO
 {
@@ -5701,6 +6505,26 @@
 {
     return @"Latvian (Lettish)";
 }
++ (NSString*)LZZ
+{
+    return @"Laz";
+}
++ (NSString*)LEZ
+{
+    return @"Lezghian";
+}
++ (NSString*)LIJ
+{
+    return @"Ligurian";
+}
++ (NSString*)LIL
+{
+    return @"Lillooet";
+}
++ (NSString*)LIF
+{
+    return @"Limbu";
+}
 + (NSString*)LI
 {
     return @"Limburgish ( Limburger)";
@@ -5713,9 +6537,69 @@
 {
     return @"Lithuanian";
 }
++ (NSString*)JBO
+{
+    return @"Lojban";
+}
++ (NSString*)LOM
+{
+    return @"Loma (Liberia)";
+}
++ (NSString*)LMO
+{
+    return @"Lombard";
+}
++ (NSString*)NDS
+{
+    return @"Low German Low Saxon";
+}
++ (NSString*)LOZ
+{
+    return @"Lozi";
+}
++ (NSString*)LUA
+{
+    return @"Luba-Lulua";
+}
++ (NSString*)LUQ
+{
+    return @"Lucumi";
+}
++ (NSString*)LUD
+{
+    return @"Ludian";
+}
++ (NSString*)SMJ
+{
+    return @"Lule Sami";
+}
++ (NSString*)LUN
+{
+    return @"Lunda";
+}
++ (NSString*)LUO
+{
+    return @"Luo (Kenya and Tanzania)";
+}
++ (NSString*)LUT
+{
+    return @"Lushootseed";
+}
 + (NSString*)MK
 {
     return @"Macedonian";
+}
++ (NSString*)MAD
+{
+    return @"Madurese";
+}
++ (NSString*)MAG
+{
+    return @"Magahi";
+}
++ (NSString*)MAI
+{
+    return @"Maithili";
 }
 + (NSString*)MG
 {
@@ -5729,45 +6613,249 @@
 {
     return @"Malayalam";
 }
++ (NSString*)PQM
+{
+    return @"Malecite-Passamaquoddy";
+}
 + (NSString*)MT
 {
     return @"Maltese";
+}
++ (NSString*)MNC
+{
+    return @"Manchu";
+}
++ (NSString*)MID
+{
+    return @"Mandaic";
+}
++ (NSString*)MHQ
+{
+    return @"Mandan";
+}
++ (NSString*)CMN
+{
+    return @"Mandarin Chinese";
+}
++ (NSString*)MNS
+{
+    return @"Mansi";
 }
 + (NSString*)MI
 {
     return @"Maori";
 }
++ (NSString*)MRW
+{
+    return @"Maranao";
+}
 + (NSString*)MR
 {
     return @"Marathi";
+}
++ (NSString*)CHM
+{
+    return @"Mari (Russia)";
+}
++ (NSString*)MWR
+{
+    return @"Marwari";
+}
++ (NSString*)MAS
+{
+    return @"Masai";
+}
++ (NSString*)MFY
+{
+    return @"Mayo";
+}
++ (NSString*)MNI
+{
+    return @"Meitei";
+}
++ (NSString*)MEN
+{
+    return @"Mende (Sierra Leone)";
+}
++ (NSString*)MEZ
+{
+    return @"Menominee";
+}
++ (NSString*)MIC
+{
+    return @"Micmac";
+}
++ (NSString*)MNP
+{
+    return @"Min Bei Chinese";
+}
++ (NSString*)CDO
+{
+    return @"Min Dong Chinese";
+}
++ (NSString*)MIN
+{
+    return @"Minangkabau";
+}
++ (NSString*)XMF
+{
+    return @"Mingrelian";
+}
++ (NSString*)MWL
+{
+    return @"Mirandese";
+}
++ (NSString*)MOH
+{
+    return @"Mohawk";
+}
++ (NSString*)MDF
+{
+    return @"Moksha";
 }
 + (NSString*)MO
 {
     return @"Moldavian";
 }
++ (NSString*)MNW
+{
+    return @"Mon";
+}
 + (NSString*)MN
 {
     return @"Mongolian";
+}
++ (NSString*)MFE
+{
+    return @"Morisyen";
+}
++ (NSString*)MOS
+{
+    return @"Mossi";
+}
++ (NSString*)MXI
+{
+    return @"Mozarabic";
 }
 + (NSString*)MU
 {
     return @"Multilingual";
 }
++ (NSString*)MTQ
+{
+    return @"Muong";
+}
++ (NSString*)NAQ
+{
+    return @"Nama (Namibia)";
+}
++ (NSString*)GLD
+{
+    return @"Nanai";
+}
++ (NSString*)NSK
+{
+    return @"Naskapi";
+}
 + (NSString*)NA
 {
     return @"Nauru";
+}
++ (NSString*)NAP
+{
+    return @"Neapolitan";
 }
 + (NSString*)NE
 {
     return @"Nepali";
 }
++ (NSString*)NEW_
+{
+    return @"Newari Nepal Bhasa";
+}
++ (NSString*)NIO
+{
+    return @"Nganasan";
+}
++ (NSString*)NCG
+{
+    return @"Nisga'a";
+}
++ (NSString*)NIU
+{
+    return @"Niuean";
+}
++ (NSString*)NOG
+{
+    return @"Nogai";
+}
++ (NSString*)NON
+{
+    return @"Norse	 Old";
+}
++ (NSString*)NSO
+{
+    return @"Northern Sotho	 Pedi Sepedi";
+}
 + (NSString*)NO_
 {
     return @"Norwegian";
 }
++ (NSString*)NOV
+{
+    return @"Novial";
+}
++ (NSString*)NYM
+{
+    return @"Nyamwezi";
+}
++ (NSString*)NYO
+{
+    return @"Nyoro";
+}
++ (NSString*)NYS
+{
+    return @"Nyungah";
+}
 + (NSString*)OC
 {
     return @"Occitan";
+}
++ (NSString*)OJC
+{
+    return @"Ojibwa	 Central";
+}
++ (NSString*)OJG
+{
+    return @"Ojibwa	 Eastern";
+}
++ (NSString*)OJB
+{
+    return @"Ojibwa	 Northwestern";
+}
++ (NSString*)OJS
+{
+    return @"Ojibwa	 Severn";
+}
++ (NSString*)OJW
+{
+    return @"Ojibwa	 Western";
+}
++ (NSString*)RYU
+{
+    return @"Okinawan	 Central";
+}
++ (NSString*)ANG
+{
+    return @"Old English";
+}
++ (NSString*)ONE
+{
+    return @"Oneida";
+}
++ (NSString*)ONO
+{
+    return @"Onondaga";
 }
 + (NSString*)OR_
 {
@@ -5777,37 +6865,185 @@
 {
     return @"Oromo (Afan, Galla)";
 }
++ (NSString*)OTW
+{
+    return @"Ottawa";
+}
++ (NSString*)PPI
+{
+    return @"Paipai";
+}
++ (NSString*)PAU
+{
+    return @"Palauan";
+}
++ (NSString*)PAM
+{
+    return @"Pampanga";
+}
++ (NSString*)PAG
+{
+    return @"Pangasinan";
+}
++ (NSString*)PAP
+{
+    return @"Papiamento";
+}
 + (NSString*)PS
 {
     return @"Pashto (Pushto)";
+}
++ (NSString*)PRP
+{
+    return @"Persian";
+}
++ (NSString*)PRS
+{
+    return @"Persian (Dari)";
+}
++ (NSString*)PFL
+{
+    return @"Pfaelzisch";
+}
++ (NSString*)PCD
+{
+    return @"Picard";
+}
++ (NSString*)PMS
+{
+    return @"Piedmontese";
+}
++ (NSString*)MYP
+{
+    return @"Pirah";
+}
++ (NSString*)PIH
+{
+    return @"Pitcairn-Norfolk";
+}
++ (NSString*)PDT
+{
+    return @"Plautdietsch";
 }
 + (NSString*)PL
 {
     return @"Polish";
 }
++ (NSString*)PNT
+{
+    return @"Pontic";
+}
 + (NSString*)PT
 {
     return @"Portuguese";
+}
++ (NSString*)POT
+{
+    return @"Potawatomi";
+}
++ (NSString*)PRG
+{
+    return @"Prussian";
+}
++ (NSString*)FUC
+{
+    return @"Pulaar";
 }
 + (NSString*)PA
 {
     return @"Punjabi";
 }
++ (NSString*)QXQ
+{
+    return @"Qashqa'i";
+}
++ (NSString*)ALC
+{
+    return @"Qawasqar";
+}
 + (NSString*)QU
 {
     return @"Quechua";
+}
++ (NSString*)QUC
+{
+    return @"Quich Central";
+}
++ (NSString*)RAP
+{
+    return @"Rapanui";
+}
++ (NSString*)RAR
+{
+    return @"Rarotongan";
+}
++ (NSString*)QTZ
+{
+    return @"Reserved for local use.";
 }
 + (NSString*)RM
 {
     return @"Rhaeto-Romance";
 }
++ (NSString*)RGN
+{
+    return @"Romagnol";
+}
++ (NSString*)RMF
+{
+    return @"Romani	 Kalo Finnish";
+}
++ (NSString*)RMO
+{
+    return @"Romani	 Sinte";
+}
 + (NSString*)RO
 {
     return @"Romanian";
 }
++ (NSString*)RUO
+{
+    return @"Romanian	 Istro";
+}
++ (NSString*)RUQ
+{
+    return @"Romanian	 Megleno";
+}
++ (NSString*)ROM
+{
+    return @"Romany";
+}
++ (NSString*)RCF
+{
+    return @"Runion Creole French";
+}
 + (NSString*)RU
 {
     return @"Russian";
+}
++ (NSString*)RUE
+{
+    return @"Rusyn";
+}
++ (NSString*)ACF
+{
+    return @"Saint Lucian Creole French";
+}
++ (NSString*)SAH
+{
+    return @"Sakha";
+}
++ (NSString*)SLR
+{
+    return @"Salar";
+}
++ (NSString*)STR
+{
+    return @"Salish	 Straits";
+}
++ (NSString*)SJD
+{
+    return @"Sami	 Kildin";
 }
 + (NSString*)SM
 {
@@ -5821,6 +7057,50 @@
 {
     return @"Sanskrit";
 }
++ (NSString*)SAT
+{
+    return @"Santali";
+}
++ (NSString*)SRM
+{
+    return @"Saramaccan";
+}
++ (NSString*)SDC
+{
+    return @"Sardinian	 Sassarese";
+}
++ (NSString*)STQ
+{
+    return @"Saterland Frisian";
+}
++ (NSString*)SXU
+{
+    return @"Saxon	 Upper";
+}
++ (NSString*)SCO
+{
+    return @"Scots";
+}
++ (NSString*)SEC
+{
+    return @"Sechelt";
+}
++ (NSString*)TRV
+{
+    return @"Seediq";
+}
++ (NSString*)SEK
+{
+    return @"Sekani";
+}
++ (NSString*)SEL
+{
+    return @"Selkup";
+}
++ (NSString*)SEE
+{
+    return @"Seneca";
+}
 + (NSString*)SR
 {
     return @"Serbian";
@@ -5828,6 +7108,10 @@
 + (NSString*)SH
 {
     return @"Serbo-Croatian";
+}
++ (NSString*)SEI
+{
+    return @"Seri";
 }
 + (NSString*)ST
 {
@@ -5837,9 +7121,37 @@
 {
     return @"Setswana";
 }
++ (NSString*)SJW
+{
+    return @"Shawnee";
+}
 + (NSString*)SN
 {
     return @"Shona";
+}
++ (NSString*)CJS
+{
+    return @"Shor";
+}
++ (NSString*)SHH
+{
+    return @"Shoshoni";
+}
++ (NSString*)SHS
+{
+    return @"Shuswap";
+}
++ (NSString*)SCN
+{
+    return @"Sicilian";
+}
++ (NSString*)SID
+{
+    return @"Sidamo";
+}
++ (NSString*)SZL
+{
+    return @"Silesian";
 }
 + (NSString*)SD
 {
@@ -5853,6 +7165,18 @@
 {
     return @"Siswati";
 }
++ (NSString*)SMS
+{
+    return @"Skolt Sami";
+}
++ (NSString*)SCS
+{
+    return @"Slavey	 North";
+}
++ (NSString*)XSL
+{
+    return @"Slavey	 South";
+}
 + (NSString*)SK
 {
     return @"Slovak";
@@ -5865,13 +7189,53 @@
 {
     return @"Somali";
 }
++ (NSString*)SNK
+{
+    return @"Soninke";
+}
++ (NSString*)DSB
+{
+    return @"Sorbian	 Lower";
+}
++ (NSString*)HSB
+{
+    return @"Sorbian	 Upper";
+}
++ (NSString*)SMA
+{
+    return @"Southern Sami";
+}
 + (NSString*)ES
 {
     return @"Spanish";
 }
++ (NSString*)SRN
+{
+    return @"Sranan";
+}
++ (NSString*)STO
+{
+    return @"Stoney";
+}
++ (NSString*)XSV
+{
+    return @"Sudovian";
+}
++ (NSString*)SUX
+{
+    return @"Sumerian";
+}
 + (NSString*)SU
 {
     return @"Sundanese";
+}
++ (NSString*)SVA
+{
+    return @"Svan";
+}
++ (NSString*)SWG
+{
+    return @"Swabian";
 }
 + (NSString*)SW
 {
@@ -5881,17 +7245,81 @@
 {
     return @"Swedish";
 }
++ (NSString*)SWL
+{
+    return @"Swedish Sign Language";
+}
++ (NSString*)GSW
+{
+    return @"Swiss German	 Alemannic	 Alsatian";
+}
++ (NSString*)SYR
+{
+    return @"Syriac";
+}
++ (NSString*)TAB
+{
+    return @"Tabassaran";
+}
++ (NSString*)SHY
+{
+    return @"Tachawit";
+}
++ (NSString*)SHI
+{
+    return @"Tachelhit";
+}
 + (NSString*)TL
 {
     return @"Tagalog";
+}
++ (NSString*)TBW
+{
+    return @"Tagbanwa";
+}
++ (NSString*)TGX
+{
+    return @"Tagish";
+}
++ (NSString*)THT
+{
+    return @"Tahltan";
+}
++ (NSString*)TDD
+{
+    return @"Tai Na";
 }
 + (NSString*)TG
 {
     return @"Tajik";
 }
++ (NSString*)TLY
+{
+    return @"Talysh";
+}
++ (NSString*)TTQ
+{
+    return @"Tamajaq	 Tawallammat";
+}
++ (NSString*)TAQ
+{
+    return @"Tamasheq";
+}
++ (NSString*)TZM
+{
+    return @"Tamazight	 Central Atlas";
+}
 + (NSString*)TA
 {
     return @"Tamil";
+}
++ (NSString*)TAR
+{
+    return @"Tarahumara	 Central";
+}
++ (NSString*)TTT
+{
+    return @"Tat	 Muslim";
 }
 + (NSString*)TT
 {
@@ -5901,37 +7329,133 @@
 {
     return @"Telugu";
 }
++ (NSString*)TET
+{
+    return @"Tetum";
+}
 + (NSString*)TH
 {
     return @"Thai";
+}
++ (NSString*)TTS
+{
+    return @"Thai	 Northeastern";
+}
++ (NSString*)NOD
+{
+    return @"Thai (Northern)";
+}
++ (NSString*)THP
+{
+    return @"Thompson";
 }
 + (NSString*)BO
 {
     return @"Tibetan";
 }
++ (NSString*)TIG
+{
+    return @"Tigre";
+}
 + (NSString*)TI
 {
     return @"Tigrinya";
+}
++ (NSString*)TLI
+{
+    return @"Tlingit";
+}
++ (NSString*)TCX
+{
+    return @"Toda";
+}
++ (NSString*)OOD
+{
+    return @"Tohono O'odham";
+}
++ (NSString*)TPI
+{
+    return @"Tok Pisin";
 }
 + (NSString*)TO
 {
     return @"Tonga";
 }
++ (NSString*)TOG
+{
+    return @"Tonga (Nyasa)";
+}
++ (NSString*)DDO
+{
+    return @"Tsez";
+}
++ (NSString*)TSI
+{
+    return @"Tsimshian";
+}
 + (NSString*)TS
 {
     return @"Tsonga";
+}
++ (NSString*)TCY
+{
+    return @"Tulu";
+}
++ (NSString*)TUM
+{
+    return @"Tumbuka";
+}
++ (NSString*)MZB
+{
+    return @"Tumzabt";
+}
++ (NSString*)TPN
+{
+    return @"Tupinamb";
+}
++ (NSString*)TUV
+{
+    return @"Turkana";
 }
 + (NSString*)TR
 {
     return @"Turkish";
 }
++ (NSString*)OTA
+{
+    return @"Turkish	 Ottoman";
+}
 + (NSString*)TK
 {
     return @"Turkmen";
 }
++ (NSString*)TUS
+{
+    return @"Tuscarora";
+}
++ (NSString*)TVL
+{
+    return @"Tuvalu";
+}
++ (NSString*)TYV
+{
+    return @"Tuvinian";
+}
 + (NSString*)TW
 {
     return @"Twi";
+}
++ (NSString*)UBY
+{
+    return @"Ubykh";
+}
++ (NSString*)UDI
+{
+    return @"Udi";
+}
++ (NSString*)UDM
+{
+    return @"Udmurt";
 }
 + (NSString*)UG
 {
@@ -5949,9 +7473,21 @@
 {
     return @"Urdu";
 }
++ (NSString*)UUM
+{
+    return @"Urum";
+}
 + (NSString*)UZ
 {
     return @"Uzbek";
+}
++ (NSString*)VEC
+{
+    return @"Venetian";
+}
++ (NSString*)VEP
+{
+    return @"Veps";
 }
 + (NSString*)VI
 {
@@ -5961,17 +7497,61 @@
 {
     return @"Volapuk";
 }
++ (NSString*)VOR
+{
+    return @"Voro";
+}
++ (NSString*)VOT
+{
+    return @"Votic";
+}
++ (NSString*)VRO
+{
+    return @"Vro";
+}
++ (NSString*)AUC
+{
+    return @"Waorani";
+}
++ (NSString*)WAR
+{
+    return @"Waray (Philippines)";
+}
 + (NSString*)CY
 {
     return @"Welsh";
+}
++ (NSString*)PES
+{
+    return @"Western Farsi";
+}
++ (NSString*)AMW
+{
+    return @"Western Neo-Aramaic";
+}
++ (NSString*)WIY
+{
+    return @"Wiyot";
 }
 + (NSString*)WO
 {
     return @"Wolof";
 }
++ (NSString*)WUU
+{
+    return @"Wu Chinese";
+}
++ (NSString*)WYM
+{
+    return @"Wymysorys";
+}
 + (NSString*)XH
 {
     return @"Xhosa";
+}
++ (NSString*)AME
+{
+    return @"Yanesha";
 }
 + (NSString*)JI
 {
@@ -5984,6 +7564,14 @@
 + (NSString*)YO
 {
     return @"Yoruba";
+}
++ (NSString*)ZAI
+{
+    return @"Zapotec	 Isthmus";
+}
++ (NSString*)DJE
+{
+    return @"Zarma";
 }
 + (NSString*)ZU
 {
