@@ -5411,7 +5411,7 @@
 }
 + (NSString*)ABE
 {
-    return @"Abnaki	 Western";
+    return @"Abnaki Western";
 }
 + (NSString*)ABU
 {
@@ -5551,7 +5551,7 @@
 }
 + (NSString*)SAM
 {
-    return @"Aramaic	 Samaritan";
+    return @"Aramaic Samaritan";
 }
 + (NSString*)ARP
 {
@@ -5823,7 +5823,7 @@
 }
 + (NSString*)CLM
 {
-    return @"Clallam	 Klallam";
+    return @"Clallam Klallam";
 }
 + (NSString*)COJ
 {
@@ -5889,13 +5889,13 @@
 {
     return @"Dargwa";
 }
-+ (NSString*)GBZ
-{
-    return @"Dari	 Zoroastrian";
-}
 + (NSString*)PRD
 {
     return @"Dari (Persian)";
+}
++ (NSString*)GBZ
+{
+    return @"Dari Zoroastrian";
 }
 + (NSString*)DHV
 {
@@ -6039,7 +6039,7 @@
 }
 + (NSString*)FRR
 {
-    return @"Frisian	 Northern";
+    return @"Frisian Northern";
 }
 + (NSString*)FUR
 {
@@ -6087,11 +6087,11 @@
 }
 + (NSString*)GEH
 {
-    return @"German	 Hutterite";
+    return @"German Hutterite";
 }
 + (NSString*)PDC
 {
-    return @"German	 Pennsylvania";
+    return @"German Pennsylvania";
 }
 + (NSString*)GIL
 {
@@ -6111,7 +6111,7 @@
 }
 + (NSString*)GRC
 {
-    return @"Greek	 Ancient (to 1453)";
+    return @"Greek Ancient (to 1453)";
 }
 + (NSString*)KL
 {
@@ -6363,7 +6363,7 @@
 }
 + (NSString*)KLJ
 {
-    return @"Khalaj	 Turkic";
+    return @"Khalaj Turkic";
 }
 + (NSString*)KCA
 {
@@ -6375,7 +6375,7 @@
 }
 + (NSString*)KXM
 {
-    return @"Khmer	 Northern";
+    return @"Khmer Northern";
 }
 + (NSString*)KIC
 {
@@ -6409,10 +6409,6 @@
 {
     return @"Komi-Permyak";
 }
-+ (NSString*)GOM
-{
-    return @"Konkani	 Goan";
-}
 + (NSString*)KOK
 {
     return @"Konkani (generic)";
@@ -6420,6 +6416,10 @@
 + (NSString*)KNN
 {
     return @"Konkani (specific)";
+}
++ (NSString*)GOM
+{
+    return @"Konkani Goan";
 }
 + (NSString*)KO
 {
@@ -6791,7 +6791,7 @@
 }
 + (NSString*)NON
 {
-    return @"Norse	 Old";
+    return @"Norse Old";
 }
 + (NSString*)NSO
 {
@@ -6823,27 +6823,27 @@
 }
 + (NSString*)OJC
 {
-    return @"Ojibwa	 Central";
+    return @"Ojibwa Central";
 }
 + (NSString*)OJG
 {
-    return @"Ojibwa	 Eastern";
+    return @"Ojibwa Eastern";
 }
 + (NSString*)OJB
 {
-    return @"Ojibwa	 Northwestern";
+    return @"Ojibwa Northwestern";
 }
 + (NSString*)OJS
 {
-    return @"Ojibwa	 Severn";
+    return @"Ojibwa Severn";
 }
 + (NSString*)OJW
 {
-    return @"Ojibwa	 Western";
+    return @"Ojibwa Western";
 }
 + (NSString*)RYU
 {
-    return @"Okinawan	 Central";
+    return @"Okinawan Central";
 }
 + (NSString*)ANG
 {
@@ -6991,11 +6991,11 @@
 }
 + (NSString*)RMF
 {
-    return @"Romani	 Kalo Finnish";
+    return @"Romani Kalo Finnish";
 }
 + (NSString*)RMO
 {
-    return @"Romani	 Sinte";
+    return @"Romani Sinte";
 }
 + (NSString*)RO
 {
@@ -7003,11 +7003,11 @@
 }
 + (NSString*)RUO
 {
-    return @"Romanian	 Istro";
+    return @"Romanian Istro";
 }
 + (NSString*)RUQ
 {
-    return @"Romanian	 Megleno";
+    return @"Romanian Megleno";
 }
 + (NSString*)ROM
 {
@@ -7039,11 +7039,11 @@
 }
 + (NSString*)STR
 {
-    return @"Salish	 Straits";
+    return @"Salish Straits";
 }
 + (NSString*)SJD
 {
-    return @"Sami	 Kildin";
+    return @"Sami Kildin";
 }
 + (NSString*)SM
 {
@@ -7067,7 +7067,7 @@
 }
 + (NSString*)SDC
 {
-    return @"Sardinian	 Sassarese";
+    return @"Sardinian Sassarese";
 }
 + (NSString*)STQ
 {
@@ -7075,7 +7075,7 @@
 }
 + (NSString*)SXU
 {
-    return @"Saxon	 Upper";
+    return @"Saxon Upper";
 }
 + (NSString*)SCO
 {
@@ -7171,11 +7171,11 @@
 }
 + (NSString*)SCS
 {
-    return @"Slavey	 North";
+    return @"Slavey North";
 }
 + (NSString*)XSL
 {
-    return @"Slavey	 South";
+    return @"Slavey South";
 }
 + (NSString*)SK
 {
@@ -7195,11 +7195,11 @@
 }
 + (NSString*)DSB
 {
-    return @"Sorbian	 Lower";
+    return @"Sorbian Lower";
 }
 + (NSString*)HSB
 {
-    return @"Sorbian	 Upper";
+    return @"Sorbian Upper";
 }
 + (NSString*)SMA
 {
@@ -7251,7 +7251,7 @@
 }
 + (NSString*)GSW
 {
-    return @"Swiss German	 Alemannic	 Alsatian";
+    return @"Swiss German Alemannic Alsatian";
 }
 + (NSString*)SYR
 {
@@ -7299,7 +7299,7 @@
 }
 + (NSString*)TTQ
 {
-    return @"Tamajaq	 Tawallammat";
+    return @"Tamajaq Tawallammat";
 }
 + (NSString*)TAQ
 {
@@ -7319,7 +7319,7 @@
 }
 + (NSString*)TTT
 {
-    return @"Tat	 Muslim";
+    return @"Tat Muslim";
 }
 + (NSString*)TT
 {
@@ -7337,13 +7337,13 @@
 {
     return @"Thai";
 }
-+ (NSString*)TTS
-{
-    return @"Thai	 Northeastern";
-}
 + (NSString*)NOD
 {
     return @"Thai (Northern)";
+}
++ (NSString*)TTS
+{
+    return @"Thai Northeastern";
 }
 + (NSString*)THP
 {
@@ -7567,7 +7567,7 @@
 }
 + (NSString*)ZAI
 {
-    return @"Zapotec	 Isthmus";
+    return @"Zapotec Isthmus";
 }
 + (NSString*)DJE
 {
@@ -22736,7 +22736,7 @@
 @end
 
 @interface KalturaLiveChannelSegment()
-@property (nonatomic,copy) NSString* id;
+@property (nonatomic,assign) int id;
 @property (nonatomic,assign) int partnerId;
 @property (nonatomic,assign) int createdAt;
 @property (nonatomic,assign) int updatedAt;
@@ -22765,9 +22765,11 @@
     self = [super init];
     if (self == nil)
         return nil;
+    self->_id = KALTURA_UNDEF_INT;
     self->_partnerId = KALTURA_UNDEF_INT;
     self->_createdAt = KALTURA_UNDEF_INT;
     self->_updatedAt = KALTURA_UNDEF_INT;
+    self->_triggerSegmentId = KALTURA_UNDEF_INT;
     self->_startTime = KALTURA_UNDEF_FLOAT;
     self->_duration = KALTURA_UNDEF_FLOAT;
     return self;
@@ -22775,7 +22777,7 @@
 
 - (KalturaFieldType)getTypeOfId
 {
-    return KFT_String;
+    return KFT_Int;
 }
 
 - (KalturaFieldType)getTypeOfPartnerId
@@ -22835,7 +22837,7 @@
 
 - (KalturaFieldType)getTypeOfTriggerSegmentId
 {
-    return KFT_String;
+    return KFT_Int;
 }
 
 - (KalturaFieldType)getTypeOfStartTime
@@ -22846,6 +22848,11 @@
 - (KalturaFieldType)getTypeOfDuration
 {
     return KFT_Float;
+}
+
+- (void)setIdFromString:(NSString*)aPropVal
+{
+    self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)setPartnerIdFromString:(NSString*)aPropVal
@@ -22861,6 +22868,11 @@
 - (void)setUpdatedAtFromString:(NSString*)aPropVal
 {
     self.updatedAt = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setTriggerSegmentIdFromString:(NSString*)aPropVal
+{
+    self.triggerSegmentId = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)setStartTimeFromString:(NSString*)aPropVal
@@ -22885,14 +22897,13 @@
     [aParams addIfDefinedKey:@"channelId" withString:self.channelId];
     [aParams addIfDefinedKey:@"entryId" withString:self.entryId];
     [aParams addIfDefinedKey:@"triggerType" withString:self.triggerType];
-    [aParams addIfDefinedKey:@"triggerSegmentId" withString:self.triggerSegmentId];
+    [aParams addIfDefinedKey:@"triggerSegmentId" withInt:self.triggerSegmentId];
     [aParams addIfDefinedKey:@"startTime" withFloat:self.startTime];
     [aParams addIfDefinedKey:@"duration" withFloat:self.duration];
 }
 
 - (void)dealloc
 {
-    [self->_id release];
     [self->_name release];
     [self->_description release];
     [self->_tags release];
@@ -22901,7 +22912,6 @@
     [self->_channelId release];
     [self->_entryId release];
     [self->_triggerType release];
-    [self->_triggerSegmentId release];
     [super dealloc];
 }
 
@@ -48041,9 +48051,9 @@
     return [self.client queueServeService:@"fileasset" withAction:@"serve"];
 }
 
-- (KalturaFileAsset*)setContentWithId:(NSString*)aId withContentResource:(KalturaContentResource*)aContentResource
+- (KalturaFileAsset*)setContentWithId:(int)aId withContentResource:(KalturaContentResource*)aContentResource
 {
-    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"id" withInt:aId];
     [self.client.params addIfDefinedKey:@"contentResource" withObject:aContentResource];
     return [self.client queueObjectService:@"fileasset" withAction:@"setContent" withExpectedType:@"KalturaFileAsset"];
 }

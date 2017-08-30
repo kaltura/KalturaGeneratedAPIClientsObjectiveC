@@ -2231,8 +2231,8 @@
 + (NSString*)DAK;
 + (NSString*)DA;
 + (NSString*)DAR;
-+ (NSString*)GBZ;
 + (NSString*)PRD;
++ (NSString*)GBZ;
 + (NSString*)DHV;
 + (NSString*)DEL;
 + (NSString*)DIN;
@@ -2361,9 +2361,9 @@
 + (NSString*)TLH;
 + (NSString*)KFA;
 + (NSString*)KOI;
-+ (NSString*)GOM;
 + (NSString*)KOK;
 + (NSString*)KNN;
++ (NSString*)GOM;
 + (NSString*)KO;
 + (NSString*)KPY;
 + (NSString*)KOS;
@@ -2593,8 +2593,8 @@
 + (NSString*)TE;
 + (NSString*)TET;
 + (NSString*)TH;
-+ (NSString*)TTS;
 + (NSString*)NOD;
++ (NSString*)TTS;
 + (NSString*)THP;
 + (NSString*)BO;
 + (NSString*)TIG;
@@ -7114,7 +7114,7 @@
 // @subpackage Client
 @interface KalturaLiveChannelSegment : KalturaObjectBase
 // Unique identifier
-@property (nonatomic,copy,readonly) NSString* id;
+@property (nonatomic,assign,readonly) int id;
 @property (nonatomic,assign,readonly) int partnerId;
 // Segment creation date as Unix timestamp (In seconds)
 @property (nonatomic,assign,readonly) int createdAt;
@@ -7136,7 +7136,7 @@
 // Segment start time trigger type
 @property (nonatomic,copy) NSString* triggerType;	// enum KalturaLiveChannelSegmentTriggerType
 // Live channel segment that the trigger relates to
-@property (nonatomic,copy) NSString* triggerSegmentId;
+@property (nonatomic,assign) int triggerSegmentId;
 // Segment play start time, in mili-seconds, according to trigger type
 @property (nonatomic,assign) double startTime;
 // Segment play duration time, in mili-seconds
@@ -7156,9 +7156,11 @@
 - (KalturaFieldType)getTypeOfTriggerSegmentId;
 - (KalturaFieldType)getTypeOfStartTime;
 - (KalturaFieldType)getTypeOfDuration;
+- (void)setIdFromString:(NSString*)aPropVal;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
+- (void)setTriggerSegmentIdFromString:(NSString*)aPropVal;
 - (void)setStartTimeFromString:(NSString*)aPropVal;
 - (void)setDurationFromString:(NSString*)aPropVal;
 @end
@@ -14236,7 +14238,7 @@
 // Serve file asset by id
 - (NSString*)serveWithId:(int)aId;
 // Set content of file asset
-- (KalturaFileAsset*)setContentWithId:(NSString*)aId withContentResource:(KalturaContentResource*)aContentResource;
+- (KalturaFileAsset*)setContentWithId:(int)aId withContentResource:(KalturaContentResource*)aContentResource;
 // Update file asset by id
 - (KalturaFileAsset*)updateWithId:(int)aId withFileAsset:(KalturaFileAsset*)aFileAsset;
 @end
