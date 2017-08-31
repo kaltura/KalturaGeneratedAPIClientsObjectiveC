@@ -5593,6 +5593,25 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaPluginReplacementOptionsItem : KalturaObjectBase
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Advanced configuration for entry replacement process
+@interface KalturaEntryReplacementOptions : KalturaObjectBase
+// If true manually created thumbnails will not be deleted on entry replacement
+@property (nonatomic,assign) int keepManualThumbnails;
+// Array of plugin replacement options
+@property (nonatomic,retain) NSMutableArray* pluginOptionItems;	// of KalturaPluginReplacementOptionsItem elements
+- (KalturaFieldType)getTypeOfKeepManualThumbnails;
+- (KalturaFieldType)getTypeOfPluginOptionItems;
+- (NSString*)getObjectTypeOfPluginOptionItems;
+- (void)setKeepManualThumbnailsFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaConversionProfile : KalturaObjectBase
 // The id of the Conversion Profile
 @property (nonatomic,assign,readonly) int id;
@@ -5640,6 +5659,8 @@
 @property (nonatomic,assign) int detectGOP;
 // XSL to transform ingestion Media Info XML
 @property (nonatomic,copy) NSString* mediaInfoXslTransformation;
+// Default replacement options to be applied to entries
+@property (nonatomic,retain) KalturaEntryReplacementOptions* defaultReplacementOptions;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfPartnerId;
 - (KalturaFieldType)getTypeOfStatus;
@@ -5665,6 +5686,8 @@
 - (KalturaFieldType)getTypeOfConditionalProfiles;
 - (KalturaFieldType)getTypeOfDetectGOP;
 - (KalturaFieldType)getTypeOfMediaInfoXslTransformation;
+- (KalturaFieldType)getTypeOfDefaultReplacementOptions;
+- (NSString*)getObjectTypeOfDefaultReplacementOptions;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
@@ -6068,25 +6091,6 @@
 @interface KalturaStringValue : KalturaValue
 @property (nonatomic,copy) NSString* value;
 - (KalturaFieldType)getTypeOfValue;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaPluginReplacementOptionsItem : KalturaObjectBase
-@end
-
-// @package Kaltura
-// @subpackage Client
-// Advanced configuration for entry replacement process
-@interface KalturaEntryReplacementOptions : KalturaObjectBase
-// If true manually created thumbnails will not be deleted on entry replacement
-@property (nonatomic,assign) int keepManualThumbnails;
-// Array of plugin replacement options
-@property (nonatomic,retain) NSMutableArray* pluginOptionItems;	// of KalturaPluginReplacementOptionsItem elements
-- (KalturaFieldType)getTypeOfKeepManualThumbnails;
-- (KalturaFieldType)getTypeOfPluginOptionItems;
-- (NSString*)getObjectTypeOfPluginOptionItems;
-- (void)setKeepManualThumbnailsFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

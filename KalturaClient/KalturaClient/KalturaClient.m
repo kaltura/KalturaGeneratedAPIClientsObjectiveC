@@ -17215,6 +17215,66 @@
 
 @end
 
+@implementation KalturaPluginReplacementOptionsItem
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaPluginReplacementOptionsItem"];
+}
+
+@end
+
+@implementation KalturaEntryReplacementOptions
+@synthesize keepManualThumbnails = _keepManualThumbnails;
+@synthesize pluginOptionItems = _pluginOptionItems;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_keepManualThumbnails = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfKeepManualThumbnails
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfPluginOptionItems
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfPluginOptionItems
+{
+    return @"KalturaPluginReplacementOptionsItem";
+}
+
+- (void)setKeepManualThumbnailsFromString:(NSString*)aPropVal
+{
+    self.keepManualThumbnails = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaEntryReplacementOptions"];
+    [aParams addIfDefinedKey:@"keepManualThumbnails" withInt:self.keepManualThumbnails];
+    [aParams addIfDefinedKey:@"pluginOptionItems" withArray:self.pluginOptionItems];
+}
+
+- (void)dealloc
+{
+    [self->_pluginOptionItems release];
+    [super dealloc];
+}
+
+@end
+
 @interface KalturaConversionProfile()
 @property (nonatomic,assign) int id;
 @property (nonatomic,assign) int partnerId;
@@ -17247,6 +17307,7 @@
 @synthesize conditionalProfiles = _conditionalProfiles;
 @synthesize detectGOP = _detectGOP;
 @synthesize mediaInfoXslTransformation = _mediaInfoXslTransformation;
+@synthesize defaultReplacementOptions = _defaultReplacementOptions;
 
 - (id)init
 {
@@ -17391,6 +17452,16 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfDefaultReplacementOptions
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfDefaultReplacementOptions
+{
+    return @"KalturaEntryReplacementOptions";
+}
+
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -17466,6 +17537,7 @@
     [aParams addIfDefinedKey:@"conditionalProfiles" withString:self.conditionalProfiles];
     [aParams addIfDefinedKey:@"detectGOP" withInt:self.detectGOP];
     [aParams addIfDefinedKey:@"mediaInfoXslTransformation" withString:self.mediaInfoXslTransformation];
+    [aParams addIfDefinedKey:@"defaultReplacementOptions" withObject:self.defaultReplacementOptions];
 }
 
 - (void)dealloc
@@ -17484,6 +17556,7 @@
     [self->_collectionTags release];
     [self->_conditionalProfiles release];
     [self->_mediaInfoXslTransformation release];
+    [self->_defaultReplacementOptions release];
     [super dealloc];
 }
 
@@ -18968,66 +19041,6 @@
 - (void)dealloc
 {
     [self->_value release];
-    [super dealloc];
-}
-
-@end
-
-@implementation KalturaPluginReplacementOptionsItem
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaPluginReplacementOptionsItem"];
-}
-
-@end
-
-@implementation KalturaEntryReplacementOptions
-@synthesize keepManualThumbnails = _keepManualThumbnails;
-@synthesize pluginOptionItems = _pluginOptionItems;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_keepManualThumbnails = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfKeepManualThumbnails
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfPluginOptionItems
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfPluginOptionItems
-{
-    return @"KalturaPluginReplacementOptionsItem";
-}
-
-- (void)setKeepManualThumbnailsFromString:(NSString*)aPropVal
-{
-    self.keepManualThumbnails = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaEntryReplacementOptions"];
-    [aParams addIfDefinedKey:@"keepManualThumbnails" withInt:self.keepManualThumbnails];
-    [aParams addIfDefinedKey:@"pluginOptionItems" withArray:self.pluginOptionItems];
-}
-
-- (void)dealloc
-{
-    [self->_pluginOptionItems release];
     [super dealloc];
 }
 
