@@ -3094,6 +3094,10 @@
 {
     return @"42";
 }
++ (NSString*)COPY_CAPTIONS
+{
+    return @"43";
+}
 @end
 
 @implementation KalturaBulkUploadAction
@@ -32390,6 +32394,54 @@
 - (void)dealloc
 {
     [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaClearBeaconsJobData()
+@property (nonatomic,copy) NSString* objectId;
+@end
+
+@implementation KalturaClearBeaconsJobData
+@synthesize objectId = _objectId;
+@synthesize relatedObjectType = _relatedObjectType;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_relatedObjectType = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfObjectId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfRelatedObjectType
+{
+    return KFT_Int;
+}
+
+- (void)setRelatedObjectTypeFromString:(NSString*)aPropVal
+{
+    self.relatedObjectType = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaClearBeaconsJobData"];
+    [aParams addIfDefinedKey:@"relatedObjectType" withInt:self.relatedObjectType];
+}
+
+- (void)dealloc
+{
+    [self->_objectId release];
     [super dealloc];
 }
 

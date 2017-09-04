@@ -370,6 +370,85 @@
 
 @end
 
+@implementation KalturaCopyCaptionsJobData
+@synthesize sourceEntryId = _sourceEntryId;
+@synthesize entryId = _entryId;
+@synthesize offset = _offset;
+@synthesize duration = _duration;
+@synthesize fullCopy = _fullCopy;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_offset = KALTURA_UNDEF_INT;
+    self->_duration = KALTURA_UNDEF_INT;
+    self->_fullCopy = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfSourceEntryId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEntryId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfOffset
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfDuration
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfFullCopy
+{
+    return KFT_Bool;
+}
+
+- (void)setOffsetFromString:(NSString*)aPropVal
+{
+    self.offset = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setDurationFromString:(NSString*)aPropVal
+{
+    self.duration = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setFullCopyFromString:(NSString*)aPropVal
+{
+    self.fullCopy = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaCopyCaptionsJobData"];
+    [aParams addIfDefinedKey:@"sourceEntryId" withString:self.sourceEntryId];
+    [aParams addIfDefinedKey:@"entryId" withString:self.entryId];
+    [aParams addIfDefinedKey:@"offset" withInt:self.offset];
+    [aParams addIfDefinedKey:@"duration" withInt:self.duration];
+    [aParams addIfDefinedKey:@"fullCopy" withBool:self.fullCopy];
+}
+
+- (void)dealloc
+{
+    [self->_sourceEntryId release];
+    [self->_entryId release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaParseMultiLanguageCaptionAssetJobData
 @synthesize multiLanaguageCaptionAssetId = _multiLanaguageCaptionAssetId;
 @synthesize entryId = _entryId;

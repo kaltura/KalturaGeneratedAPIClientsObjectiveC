@@ -145,6 +145,28 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaCopyCaptionsJobData : KalturaJobData
+// source entry Id
+@property (nonatomic,copy) NSString* sourceEntryId;
+// entry Id
+@property (nonatomic,copy) NSString* entryId;
+// clip offset
+@property (nonatomic,assign) int offset;
+// clip duration
+@property (nonatomic,assign) int duration;
+@property (nonatomic,assign) KALTURA_BOOL fullCopy;
+- (KalturaFieldType)getTypeOfSourceEntryId;
+- (KalturaFieldType)getTypeOfEntryId;
+- (KalturaFieldType)getTypeOfOffset;
+- (KalturaFieldType)getTypeOfDuration;
+- (KalturaFieldType)getTypeOfFullCopy;
+- (void)setOffsetFromString:(NSString*)aPropVal;
+- (void)setDurationFromString:(NSString*)aPropVal;
+- (void)setFullCopyFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaParseMultiLanguageCaptionAssetJobData : KalturaJobData
 @property (nonatomic,copy) NSString* multiLanaguageCaptionAssetId;
 @property (nonatomic,copy) NSString* entryId;

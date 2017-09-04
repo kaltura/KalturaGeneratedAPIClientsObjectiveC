@@ -1256,6 +1256,7 @@
 + (NSString*)LIVE_REPORT_EXPORT;
 + (NSString*)RECALCULATE_CACHE;
 + (NSString*)LIVE_TO_VOD;
++ (NSString*)COPY_CAPTIONS;
 @end
 
 // @package Kaltura
@@ -9668,6 +9669,18 @@
 @property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaCategoryUser elements
 - (KalturaFieldType)getTypeOfObjects;
 - (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaClearBeaconsJobData : KalturaJobData
+// Beacon object Id to clear info for
+@property (nonatomic,copy,readonly) NSString* objectId;
+// Beacon object Type to clear info for
+@property (nonatomic,assign) int relatedObjectType;
+- (KalturaFieldType)getTypeOfObjectId;
+- (KalturaFieldType)getTypeOfRelatedObjectType;
+- (void)setRelatedObjectTypeFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

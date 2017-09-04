@@ -114,6 +114,10 @@
 // @subpackage Client
 // Search caption asset items
 @interface KalturaCaptionAssetItemService : KalturaServiceBase
+// List caption asset items by filter and pager
+- (KalturaCaptionAssetItemListResponse*)listWithCaptionAssetId:(NSString*)aCaptionAssetId withCaptionAssetItemFilter:(KalturaCaptionAssetItemFilter*)aCaptionAssetItemFilter withCaptionAssetItemPager:(KalturaFilterPager*)aCaptionAssetItemPager;
+- (KalturaCaptionAssetItemListResponse*)listWithCaptionAssetId:(NSString*)aCaptionAssetId withCaptionAssetItemFilter:(KalturaCaptionAssetItemFilter*)aCaptionAssetItemFilter;
+- (KalturaCaptionAssetItemListResponse*)listWithCaptionAssetId:(NSString*)aCaptionAssetId;
 // Search caption asset items by filter, pager and free text
 - (KalturaCaptionAssetItemListResponse*)searchWithEntryFilter:(KalturaBaseEntryFilter*)aEntryFilter withCaptionAssetItemFilter:(KalturaCaptionAssetItemFilter*)aCaptionAssetItemFilter withCaptionAssetItemPager:(KalturaFilterPager*)aCaptionAssetItemPager;
 - (KalturaCaptionAssetItemListResponse*)searchWithEntryFilter:(KalturaBaseEntryFilter*)aEntryFilter withCaptionAssetItemFilter:(KalturaCaptionAssetItemFilter*)aCaptionAssetItemFilter;

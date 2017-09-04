@@ -343,6 +343,24 @@
 
 ///////////////////////// services /////////////////////////
 @implementation KalturaCaptionAssetItemService
+- (KalturaCaptionAssetItemListResponse*)listWithCaptionAssetId:(NSString*)aCaptionAssetId withCaptionAssetItemFilter:(KalturaCaptionAssetItemFilter*)aCaptionAssetItemFilter withCaptionAssetItemPager:(KalturaFilterPager*)aCaptionAssetItemPager
+{
+    [self.client.params addIfDefinedKey:@"captionAssetId" withString:aCaptionAssetId];
+    [self.client.params addIfDefinedKey:@"captionAssetItemFilter" withObject:aCaptionAssetItemFilter];
+    [self.client.params addIfDefinedKey:@"captionAssetItemPager" withObject:aCaptionAssetItemPager];
+    return [self.client queueObjectService:@"captionsearch_captionassetitem" withAction:@"list" withExpectedType:@"KalturaCaptionAssetItemListResponse"];
+}
+
+- (KalturaCaptionAssetItemListResponse*)listWithCaptionAssetId:(NSString*)aCaptionAssetId withCaptionAssetItemFilter:(KalturaCaptionAssetItemFilter*)aCaptionAssetItemFilter
+{
+    return [self listWithCaptionAssetId:aCaptionAssetId withCaptionAssetItemFilter:aCaptionAssetItemFilter withCaptionAssetItemPager:nil];
+}
+
+- (KalturaCaptionAssetItemListResponse*)listWithCaptionAssetId:(NSString*)aCaptionAssetId
+{
+    return [self listWithCaptionAssetId:aCaptionAssetId withCaptionAssetItemFilter:nil];
+}
+
 - (KalturaCaptionAssetItemListResponse*)searchWithEntryFilter:(KalturaBaseEntryFilter*)aEntryFilter withCaptionAssetItemFilter:(KalturaCaptionAssetItemFilter*)aCaptionAssetItemFilter withCaptionAssetItemPager:(KalturaFilterPager*)aCaptionAssetItemPager
 {
     [self.client.params addIfDefinedKey:@"entryFilter" withObject:aEntryFilter];
