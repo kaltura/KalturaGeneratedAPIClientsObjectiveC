@@ -455,6 +455,25 @@
 }
 @end
 
+@implementation KalturaEntryServerNodeRecordingStatus
++ (int)STOPPED
+{
+    return 0;
+}
++ (int)ON_GOING
+{
+    return 1;
+}
++ (int)DONE
+{
+    return 2;
+}
++ (int)DISMISSED
+{
+    return 3;
+}
+@end
+
 @implementation KalturaEntryServerNodeStatus
 + (int)STOPPED
 {
@@ -6783,7 +6802,7 @@
 }
 + (NSString*)NCG
 {
-    return @"Nisga'a";
+    return @"Nisgaa";
 }
 + (NSString*)NIU
 {
@@ -6959,7 +6978,7 @@
 }
 + (NSString*)QXQ
 {
-    return @"Qashqa'i";
+    return @"Qashqai";
 }
 + (NSString*)ALC
 {
@@ -7375,7 +7394,7 @@
 }
 + (NSString*)OOD
 {
-    return @"Tohono O'odham";
+    return @"Tohono Oodham";
 }
 + (NSString*)TPI
 {
@@ -22937,6 +22956,7 @@
 @implementation KalturaLiveEntryServerNodeRecordingInfo
 @synthesize recordedEntryId = _recordedEntryId;
 @synthesize duration = _duration;
+@synthesize recordingStatus = _recordingStatus;
 
 - (id)init
 {
@@ -22944,6 +22964,7 @@
     if (self == nil)
         return nil;
     self->_duration = KALTURA_UNDEF_INT;
+    self->_recordingStatus = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -22957,9 +22978,19 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfRecordingStatus
+{
+    return KFT_Int;
+}
+
 - (void)setDurationFromString:(NSString*)aPropVal
 {
     self.duration = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setRecordingStatusFromString:(NSString*)aPropVal
+{
+    self.recordingStatus = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -22969,6 +23000,7 @@
         [aParams putKey:@"objectType" withString:@"KalturaLiveEntryServerNodeRecordingInfo"];
     [aParams addIfDefinedKey:@"recordedEntryId" withString:self.recordedEntryId];
     [aParams addIfDefinedKey:@"duration" withInt:self.duration];
+    [aParams addIfDefinedKey:@"recordingStatus" withInt:self.recordingStatus];
 }
 
 - (void)dealloc

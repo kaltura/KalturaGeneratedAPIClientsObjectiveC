@@ -247,6 +247,15 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaEntryServerNodeRecordingStatus : NSObject
++ (int)STOPPED;
++ (int)ON_GOING;
++ (int)DONE;
++ (int)DISMISSED;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaEntryServerNodeStatus : NSObject
 + (int)STOPPED;
 + (int)PLAYABLE;
@@ -7175,9 +7184,12 @@
 @interface KalturaLiveEntryServerNodeRecordingInfo : KalturaObjectBase
 @property (nonatomic,copy) NSString* recordedEntryId;
 @property (nonatomic,assign) int duration;
+@property (nonatomic,assign) int recordingStatus;	// enum KalturaEntryServerNodeRecordingStatus
 - (KalturaFieldType)getTypeOfRecordedEntryId;
 - (KalturaFieldType)getTypeOfDuration;
+- (KalturaFieldType)getTypeOfRecordingStatus;
 - (void)setDurationFromString:(NSString*)aPropVal;
+- (void)setRecordingStatusFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
