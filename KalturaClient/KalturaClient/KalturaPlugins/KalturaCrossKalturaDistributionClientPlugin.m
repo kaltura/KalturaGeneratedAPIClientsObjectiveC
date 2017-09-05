@@ -67,6 +67,8 @@
 @synthesize distributedMetadata = _distributedMetadata;
 @synthesize distributedCaptionAssets = _distributedCaptionAssets;
 @synthesize distributedCuePoints = _distributedCuePoints;
+@synthesize distributedThumbCuePoints = _distributedThumbCuePoints;
+@synthesize distributedTimedThumbAssets = _distributedTimedThumbAssets;
 
 - (KalturaFieldType)getTypeOfDistributedFlavorAssets
 {
@@ -93,6 +95,16 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfDistributedThumbCuePoints
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfDistributedTimedThumbAssets
+{
+    return KFT_String;
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -103,6 +115,8 @@
     [aParams addIfDefinedKey:@"distributedMetadata" withString:self.distributedMetadata];
     [aParams addIfDefinedKey:@"distributedCaptionAssets" withString:self.distributedCaptionAssets];
     [aParams addIfDefinedKey:@"distributedCuePoints" withString:self.distributedCuePoints];
+    [aParams addIfDefinedKey:@"distributedThumbCuePoints" withString:self.distributedThumbCuePoints];
+    [aParams addIfDefinedKey:@"distributedTimedThumbAssets" withString:self.distributedTimedThumbAssets];
 }
 
 - (void)dealloc
@@ -112,6 +126,8 @@
     [self->_distributedMetadata release];
     [self->_distributedCaptionAssets release];
     [self->_distributedCuePoints release];
+    [self->_distributedThumbCuePoints release];
+    [self->_distributedTimedThumbAssets release];
     [super dealloc];
 }
 

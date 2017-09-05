@@ -118,6 +118,10 @@
 @end
 
 @implementation KalturaDrmProviderType
++ (NSString*)FAIRPLAY
+{
+    return @"fairplay.FAIRPLAY";
+}
 + (NSString*)PLAY_READY
 {
     return @"playReady.PLAY_READY";

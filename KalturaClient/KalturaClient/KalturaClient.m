@@ -2422,6 +2422,10 @@
 {
     return @"transcript.Transcript";
 }
++ (NSString*)WIDEVINE_FLAVOR
+{
+    return @"widevine.WidevineFlavor";
+}
 + (NSString*)FLAVOR
 {
     return @"1";
@@ -2889,10 +2893,6 @@
 @end
 
 @implementation KalturaBatchJobType
-+ (NSString*)CONVERT
-{
-    return @"0";
-}
 + (NSString*)PARSE_MULTI_LANGUAGE_CAPTION_ASSET
 {
     return @"caption.parsemultilanguagecaptionasset";
@@ -2929,6 +2929,10 @@
 {
     return @"contentDistribution.DistributionUpdate";
 }
++ (NSString*)CONVERT
+{
+    return @"0";
+}
 + (NSString*)DROP_FOLDER_CONTENT_PROCESSOR
 {
     return @"dropFolder.DropFolderContentProcessor";
@@ -2960,6 +2964,10 @@
 + (NSString*)VIRUS_SCAN
 {
     return @"virusScan.VirusScan";
+}
++ (NSString*)WIDEVINE_REPOSITORY_SYNC
+{
+    return @"widevine.WidevineRepositorySync";
 }
 + (NSString*)IMPORT
 {
@@ -4419,6 +4427,26 @@
 @end
 
 @implementation KalturaDrmSchemeName
++ (NSString*)PLAYREADY_CENC
+{
+    return @"drm.PLAYREADY_CENC";
+}
++ (NSString*)WIDEVINE_CENC
+{
+    return @"drm.WIDEVINE_CENC";
+}
++ (NSString*)FAIRPLAY
+{
+    return @"fairplay.FAIRPLAY";
+}
++ (NSString*)PLAYREADY
+{
+    return @"playReady.PLAYREADY";
+}
++ (NSString*)WIDEVINE
+{
+    return @"widevine.WIDEVINE";
+}
 @end
 
 @implementation KalturaDurationType
@@ -11119,6 +11147,10 @@
 @end
 
 @implementation KalturaRuleActionType
++ (NSString*)DRM_POLICY
+{
+    return @"drm.DRM_POLICY";
+}
 + (NSString*)BLOCK
 {
     return @"1";
@@ -11246,6 +11278,10 @@
 @end
 
 @implementation KalturaSourceType
++ (NSString*)LIMELIGHT_LIVE
+{
+    return @"limeLight.LIVE_STREAM";
+}
 + (NSString*)VELOCIX_LIVE
 {
     return @"velocix.VELOCIX_LIVE";
@@ -18855,6 +18891,80 @@
 
 @end
 
+@implementation KalturaPluginData
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaPluginData"];
+}
+
+@end
+
+@implementation KalturaDrmPlaybackPluginData
+@synthesize scheme = _scheme;
+@synthesize licenseURL = _licenseURL;
+
+- (KalturaFieldType)getTypeOfScheme
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfLicenseURL
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaDrmPlaybackPluginData"];
+    [aParams addIfDefinedKey:@"scheme" withString:self.scheme];
+    [aParams addIfDefinedKey:@"licenseURL" withString:self.licenseURL];
+}
+
+- (void)dealloc
+{
+    [self->_scheme release];
+    [self->_licenseURL release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaObject()
+@property (nonatomic,retain) NSMutableDictionary* relatedObjects;
+@end
+
+@implementation KalturaObject
+@synthesize relatedObjects = _relatedObjects;
+
+- (KalturaFieldType)getTypeOfRelatedObjects
+{
+    return KFT_Dictionary;
+}
+
+- (NSString*)getObjectTypeOfRelatedObjects
+{
+    return @"KalturaListResponse";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaObject"];
+}
+
+- (void)dealloc
+{
+    [self->_relatedObjects release];
+    [super dealloc];
+}
+
+@end
+
 @interface KalturaEmailIngestionProfile()
 @property (nonatomic,assign) int id;
 @property (nonatomic,assign) int partnerId;
@@ -21350,38 +21460,6 @@
 {
     [self->_userId release];
     [self->_groupId release];
-    [super dealloc];
-}
-
-@end
-
-@interface KalturaObject()
-@property (nonatomic,retain) NSMutableDictionary* relatedObjects;
-@end
-
-@implementation KalturaObject
-@synthesize relatedObjects = _relatedObjects;
-
-- (KalturaFieldType)getTypeOfRelatedObjects
-{
-    return KFT_Dictionary;
-}
-
-- (NSString*)getObjectTypeOfRelatedObjects
-{
-    return @"KalturaListResponse";
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaObject"];
-}
-
-- (void)dealloc
-{
-    [self->_relatedObjects release];
     [super dealloc];
 }
 
@@ -25570,48 +25648,6 @@
 {
     [self->_type release];
     [self->_tags release];
-    [super dealloc];
-}
-
-@end
-
-@implementation KalturaPluginData
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaPluginData"];
-}
-
-@end
-
-@implementation KalturaDrmPlaybackPluginData
-@synthesize scheme = _scheme;
-@synthesize licenseURL = _licenseURL;
-
-- (KalturaFieldType)getTypeOfScheme
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfLicenseURL
-{
-    return KFT_String;
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaDrmPlaybackPluginData"];
-    [aParams addIfDefinedKey:@"scheme" withString:self.scheme];
-    [aParams addIfDefinedKey:@"licenseURL" withString:self.licenseURL];
-}
-
-- (void)dealloc
-{
-    [self->_scheme release];
-    [self->_licenseURL release];
     [super dealloc];
 }
 

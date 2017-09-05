@@ -64,11 +64,17 @@
 @property (nonatomic,copy) NSString* distributedCaptionAssets;
 // Key-value array where the keys are IDs of distributed cue points in the source account and the values are the matching IDs in the target account
 @property (nonatomic,copy) NSString* distributedCuePoints;
+// Key-value array where the keys are IDs of distributed thumb cue points in the source account and the values are the matching IDs in the target account
+@property (nonatomic,copy) NSString* distributedThumbCuePoints;
+// Key-value array where the keys are IDs of distributed timed thumb assets in the source account and the values are the matching IDs in the target account
+@property (nonatomic,copy) NSString* distributedTimedThumbAssets;
 - (KalturaFieldType)getTypeOfDistributedFlavorAssets;
 - (KalturaFieldType)getTypeOfDistributedThumbAssets;
 - (KalturaFieldType)getTypeOfDistributedMetadata;
 - (KalturaFieldType)getTypeOfDistributedCaptionAssets;
 - (KalturaFieldType)getTypeOfDistributedCuePoints;
+- (KalturaFieldType)getTypeOfDistributedThumbCuePoints;
+- (KalturaFieldType)getTypeOfDistributedTimedThumbAssets;
 @end
 
 // @package Kaltura

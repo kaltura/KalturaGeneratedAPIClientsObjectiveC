@@ -1054,6 +1054,7 @@
 + (NSString*)SWF;
 + (NSString*)TIMED_THUMB_ASSET;
 + (NSString*)TRANSCRIPT;
++ (NSString*)WIDEVINE_FLAVOR;
 + (NSString*)FLAVOR;
 + (NSString*)THUMBNAIL;
 + (NSString*)LIVE;
@@ -1209,7 +1210,6 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaBatchJobType : NSObject
-+ (NSString*)CONVERT;
 + (NSString*)PARSE_MULTI_LANGUAGE_CAPTION_ASSET;
 + (NSString*)PARSE_CAPTION_ASSET;
 + (NSString*)DISTRIBUTION_DELETE;
@@ -1219,6 +1219,7 @@
 + (NSString*)DISTRIBUTION_SUBMIT;
 + (NSString*)DISTRIBUTION_SYNC;
 + (NSString*)DISTRIBUTION_UPDATE;
++ (NSString*)CONVERT;
 + (NSString*)DROP_FOLDER_CONTENT_PROCESSOR;
 + (NSString*)DROP_FOLDER_WATCHER;
 + (NSString*)EVENT_NOTIFICATION_HANDLER;
@@ -1227,6 +1228,7 @@
 + (NSString*)INDEX_TAGS;
 + (NSString*)TAG_RESOLVE;
 + (NSString*)VIRUS_SCAN;
++ (NSString*)WIDEVINE_REPOSITORY_SYNC;
 + (NSString*)IMPORT;
 + (NSString*)DELETE;
 + (NSString*)FLATTEN;
@@ -1753,6 +1755,11 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaDrmSchemeName : NSObject
++ (NSString*)PLAYREADY_CENC;
++ (NSString*)WIDEVINE_CENC;
++ (NSString*)FAIRPLAY;
++ (NSString*)PLAYREADY;
++ (NSString*)WIDEVINE;
 @end
 
 // @package Kaltura
@@ -3768,6 +3775,7 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaRuleActionType : NSObject
++ (NSString*)DRM_POLICY;
 + (NSString*)BLOCK;
 + (NSString*)PREVIEW;
 + (NSString*)LIMIT_FLAVORS;
@@ -3821,6 +3829,7 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaSourceType : NSObject
++ (NSString*)LIMELIGHT_LIVE;
 + (NSString*)VELOCIX_LIVE;
 + (NSString*)FILE;
 + (NSString*)WEBCAM;
@@ -6053,6 +6062,28 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaPluginData : KalturaObjectBase
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaDrmPlaybackPluginData : KalturaPluginData
+@property (nonatomic,copy) NSString* scheme;	// enum KalturaDrmSchemeName
+@property (nonatomic,copy) NSString* licenseURL;
+- (KalturaFieldType)getTypeOfScheme;
+- (KalturaFieldType)getTypeOfLicenseURL;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaObject : KalturaObjectBase
+@property (nonatomic,retain,readonly) NSMutableDictionary* relatedObjects;	// of KalturaListResponse elements
+- (KalturaFieldType)getTypeOfRelatedObjects;
+- (NSString*)getObjectTypeOfRelatedObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaEmailIngestionProfile : KalturaObjectBase
 @property (nonatomic,assign,readonly) int id;
 @property (nonatomic,copy) NSString* name;
@@ -6731,14 +6762,6 @@
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaObject : KalturaObjectBase
-@property (nonatomic,retain,readonly) NSMutableDictionary* relatedObjects;	// of KalturaListResponse elements
-- (KalturaFieldType)getTypeOfRelatedObjects;
-- (NSString*)getObjectTypeOfRelatedObjects;
 @end
 
 // @package Kaltura
@@ -7876,20 +7899,6 @@
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaPluginData : KalturaObjectBase
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaDrmPlaybackPluginData : KalturaPluginData
-@property (nonatomic,copy) NSString* scheme;	// enum KalturaDrmSchemeName
-@property (nonatomic,copy) NSString* licenseURL;
-- (KalturaFieldType)getTypeOfScheme;
-- (KalturaFieldType)getTypeOfLicenseURL;
 @end
 
 // @package Kaltura

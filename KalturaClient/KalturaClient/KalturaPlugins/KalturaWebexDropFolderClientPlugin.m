@@ -138,6 +138,9 @@
 @synthesize webexPartnerId = _webexPartnerId;
 @synthesize webexServiceUrl = _webexServiceUrl;
 @synthesize webexHostIdMetadataFieldName = _webexHostIdMetadataFieldName;
+@synthesize deleteFromRecycleBin = _deleteFromRecycleBin;
+@synthesize webexServiceType = _webexServiceType;
+@synthesize deleteFromTimestamp = _deleteFromTimestamp;
 
 - (id)init
 {
@@ -145,6 +148,8 @@
     if (self == nil)
         return nil;
     self->_webexSiteId = KALTURA_UNDEF_INT;
+    self->_deleteFromRecycleBin = KALTURA_UNDEF_BOOL;
+    self->_deleteFromTimestamp = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -178,9 +183,34 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfDeleteFromRecycleBin
+{
+    return KFT_Bool;
+}
+
+- (KalturaFieldType)getTypeOfWebexServiceType
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfDeleteFromTimestamp
+{
+    return KFT_Int;
+}
+
 - (void)setWebexSiteIdFromString:(NSString*)aPropVal
 {
     self.webexSiteId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setDeleteFromRecycleBinFromString:(NSString*)aPropVal
+{
+    self.deleteFromRecycleBin = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)setDeleteFromTimestampFromString:(NSString*)aPropVal
+{
+    self.deleteFromTimestamp = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -194,6 +224,9 @@
     [aParams addIfDefinedKey:@"webexPartnerId" withString:self.webexPartnerId];
     [aParams addIfDefinedKey:@"webexServiceUrl" withString:self.webexServiceUrl];
     [aParams addIfDefinedKey:@"webexHostIdMetadataFieldName" withString:self.webexHostIdMetadataFieldName];
+    [aParams addIfDefinedKey:@"deleteFromRecycleBin" withBool:self.deleteFromRecycleBin];
+    [aParams addIfDefinedKey:@"webexServiceType" withString:self.webexServiceType];
+    [aParams addIfDefinedKey:@"deleteFromTimestamp" withInt:self.deleteFromTimestamp];
 }
 
 - (void)dealloc
@@ -203,6 +236,7 @@
     [self->_webexPartnerId release];
     [self->_webexServiceUrl release];
     [self->_webexHostIdMetadataFieldName release];
+    [self->_webexServiceType release];
     [super dealloc];
 }
 
