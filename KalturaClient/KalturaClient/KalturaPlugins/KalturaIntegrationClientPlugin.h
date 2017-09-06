@@ -41,7 +41,6 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaIntegrationTriggerType : NSObject
-+ (NSString*)BPM_EVENT_NOTIFICATION;
 + (NSString*)MANUAL;
 @end
 

@@ -2422,10 +2422,6 @@
 {
     return @"transcript.Transcript";
 }
-+ (NSString*)WIDEVINE_FLAVOR
-{
-    return @"widevine.WidevineFlavor";
-}
 + (NSString*)FLAVOR
 {
     return @"1";
@@ -2893,6 +2889,10 @@
 @end
 
 @implementation KalturaBatchJobType
++ (NSString*)CONVERT
+{
+    return @"0";
+}
 + (NSString*)PARSE_MULTI_LANGUAGE_CAPTION_ASSET
 {
     return @"caption.parsemultilanguagecaptionasset";
@@ -2929,10 +2929,6 @@
 {
     return @"contentDistribution.DistributionUpdate";
 }
-+ (NSString*)CONVERT
-{
-    return @"0";
-}
 + (NSString*)DROP_FOLDER_CONTENT_PROCESSOR
 {
     return @"dropFolder.DropFolderContentProcessor";
@@ -2964,10 +2960,6 @@
 + (NSString*)VIRUS_SCAN
 {
     return @"virusScan.VirusScan";
-}
-+ (NSString*)WIDEVINE_REPOSITORY_SYNC
-{
-    return @"widevine.WidevineRepositorySync";
 }
 + (NSString*)IMPORT
 {
@@ -4243,6 +4235,10 @@
 {
     return @"68";
 }
++ (NSString*)VOD_PACKAGER_HLS_MANIFEST
+{
+    return @"69";
+}
 + (NSString*)LIVE_HLS
 {
     return @"1001";
@@ -4427,26 +4423,6 @@
 @end
 
 @implementation KalturaDrmSchemeName
-+ (NSString*)PLAYREADY_CENC
-{
-    return @"drm.PLAYREADY_CENC";
-}
-+ (NSString*)WIDEVINE_CENC
-{
-    return @"drm.WIDEVINE_CENC";
-}
-+ (NSString*)FAIRPLAY
-{
-    return @"fairplay.FAIRPLAY";
-}
-+ (NSString*)PLAYREADY
-{
-    return @"playReady.PLAYREADY";
-}
-+ (NSString*)WIDEVINE
-{
-    return @"widevine.WIDEVINE";
-}
 @end
 
 @implementation KalturaDurationType
@@ -6004,10 +5980,6 @@
 {
     return @"English";
 }
-+ (NSString*)ENM
-{
-    return @"English	 Middle (1100-1500)";
-}
 + (NSString*)EN_US
 {
     return @"English (American)";
@@ -6015,6 +5987,10 @@
 + (NSString*)EN_GB
 {
     return @"English (British)";
+}
++ (NSString*)ENM
+{
+    return @"English Middle (1100-1500)";
 }
 + (NSString*)MYV
 {
@@ -6846,7 +6822,7 @@
 }
 + (NSString*)NSO
 {
-    return @"Northern Sotho	 Pedi Sepedi";
+    return @"Northern Sotho Pedi Sepedi";
 }
 + (NSString*)NO_
 {
@@ -7358,7 +7334,7 @@
 }
 + (NSString*)TZM
 {
-    return @"Tamazight	 Central Atlas";
+    return @"Tamazight Central Atlas";
 }
 + (NSString*)TA
 {
@@ -7366,7 +7342,7 @@
 }
 + (NSString*)TAR
 {
-    return @"Tarahumara	 Central";
+    return @"Tarahumara Central";
 }
 + (NSString*)TTT
 {
@@ -7474,7 +7450,7 @@
 }
 + (NSString*)OTA
 {
-    return @"Turkish	 Ottoman";
+    return @"Turkish Ottoman";
 }
 + (NSString*)TK
 {
@@ -11147,10 +11123,6 @@
 @end
 
 @implementation KalturaRuleActionType
-+ (NSString*)DRM_POLICY
-{
-    return @"drm.DRM_POLICY";
-}
 + (NSString*)BLOCK
 {
     return @"1";
@@ -11278,10 +11250,6 @@
 @end
 
 @implementation KalturaSourceType
-+ (NSString*)LIMELIGHT_LIVE
-{
-    return @"limeLight.LIVE_STREAM";
-}
 + (NSString*)VELOCIX_LIVE
 {
     return @"velocix.VELOCIX_LIVE";
@@ -18891,80 +18859,6 @@
 
 @end
 
-@implementation KalturaPluginData
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaPluginData"];
-}
-
-@end
-
-@implementation KalturaDrmPlaybackPluginData
-@synthesize scheme = _scheme;
-@synthesize licenseURL = _licenseURL;
-
-- (KalturaFieldType)getTypeOfScheme
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfLicenseURL
-{
-    return KFT_String;
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaDrmPlaybackPluginData"];
-    [aParams addIfDefinedKey:@"scheme" withString:self.scheme];
-    [aParams addIfDefinedKey:@"licenseURL" withString:self.licenseURL];
-}
-
-- (void)dealloc
-{
-    [self->_scheme release];
-    [self->_licenseURL release];
-    [super dealloc];
-}
-
-@end
-
-@interface KalturaObject()
-@property (nonatomic,retain) NSMutableDictionary* relatedObjects;
-@end
-
-@implementation KalturaObject
-@synthesize relatedObjects = _relatedObjects;
-
-- (KalturaFieldType)getTypeOfRelatedObjects
-{
-    return KFT_Dictionary;
-}
-
-- (NSString*)getObjectTypeOfRelatedObjects
-{
-    return @"KalturaListResponse";
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaObject"];
-}
-
-- (void)dealloc
-{
-    [self->_relatedObjects release];
-    [super dealloc];
-}
-
-@end
-
 @interface KalturaEmailIngestionProfile()
 @property (nonatomic,assign) int id;
 @property (nonatomic,assign) int partnerId;
@@ -21460,6 +21354,38 @@
 {
     [self->_userId release];
     [self->_groupId release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaObject()
+@property (nonatomic,retain) NSMutableDictionary* relatedObjects;
+@end
+
+@implementation KalturaObject
+@synthesize relatedObjects = _relatedObjects;
+
+- (KalturaFieldType)getTypeOfRelatedObjects
+{
+    return KFT_Dictionary;
+}
+
+- (NSString*)getObjectTypeOfRelatedObjects
+{
+    return @"KalturaListResponse";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaObject"];
+}
+
+- (void)dealloc
+{
+    [self->_relatedObjects release];
     [super dealloc];
 }
 
@@ -25648,6 +25574,48 @@
 {
     [self->_type release];
     [self->_tags release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaPluginData
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaPluginData"];
+}
+
+@end
+
+@implementation KalturaDrmPlaybackPluginData
+@synthesize scheme = _scheme;
+@synthesize licenseURL = _licenseURL;
+
+- (KalturaFieldType)getTypeOfScheme
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfLicenseURL
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaDrmPlaybackPluginData"];
+    [aParams addIfDefinedKey:@"scheme" withString:self.scheme];
+    [aParams addIfDefinedKey:@"licenseURL" withString:self.licenseURL];
+}
+
+- (void)dealloc
+{
+    [self->_scheme release];
+    [self->_licenseURL release];
     [super dealloc];
 }
 
@@ -32462,54 +32430,6 @@
 - (void)dealloc
 {
     [self->_objects release];
-    [super dealloc];
-}
-
-@end
-
-@interface KalturaClearBeaconsJobData()
-@property (nonatomic,copy) NSString* objectId;
-@end
-
-@implementation KalturaClearBeaconsJobData
-@synthesize objectId = _objectId;
-@synthesize relatedObjectType = _relatedObjectType;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_relatedObjectType = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfObjectId
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfRelatedObjectType
-{
-    return KFT_Int;
-}
-
-- (void)setRelatedObjectTypeFromString:(NSString*)aPropVal
-{
-    self.relatedObjectType = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaClearBeaconsJobData"];
-    [aParams addIfDefinedKey:@"relatedObjectType" withInt:self.relatedObjectType];
-}
-
-- (void)dealloc
-{
-    [self->_objectId release];
     [super dealloc];
 }
 
