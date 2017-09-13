@@ -91,6 +91,7 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaEventNotificationEventType : NSObject
++ (NSString*)INTEGRATION_JOB_CLOSED;
 + (NSString*)BATCH_JOB_STATUS;
 + (NSString*)OBJECT_ADDED;
 + (NSString*)OBJECT_CHANGED;
@@ -120,8 +121,12 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaEventNotificationTemplateType : NSObject
++ (NSString*)BPM_ABORT;
++ (NSString*)BPM_SIGNAL;
++ (NSString*)BPM_START;
 + (NSString*)EMAIL;
 + (NSString*)HTTP;
++ (NSString*)PUSH;
 @end
 
 ///////////////////////// classes /////////////////////////
@@ -300,6 +305,9 @@
 // @package Kaltura
 // @subpackage Client
 // Event notification template service lets you create and manage event notification templates
+@class KalturaPushNotificationData;
+@class KalturaPushNotificationParams;
+@class KalturaPushNotificationParams;
 @interface KalturaEventNotificationTemplateService : KalturaServiceBase
 // This action allows for the creation of new backend event types in the system. This action requires access to the Kaltura server Admin Console. If you're looking to register to existing event types, please use the clone action instead.
 - (KalturaEventNotificationTemplate*)addWithEventNotificationTemplate:(KalturaEventNotificationTemplate*)aEventNotificationTemplate;
@@ -323,6 +331,10 @@
 - (KalturaEventNotificationTemplateListResponse*)listTemplatesWithFilter:(KalturaEventNotificationTemplateFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaEventNotificationTemplateListResponse*)listTemplatesWithFilter:(KalturaEventNotificationTemplateFilter*)aFilter;
 - (KalturaEventNotificationTemplateListResponse*)listTemplates;
+// Register to a queue from which event messages will be provided according to given template. Queue will be created if not already exists
+- (KalturaPushNotificationData*)registerWithNotificationTemplateSystemName:(NSString*)aNotificationTemplateSystemName withPushNotificationParams:(KalturaPushNotificationParams*)aPushNotificationParams;
+// Clear queue messages
+- (void)sendCommandWithNotificationTemplateSystemName:(NSString*)aNotificationTemplateSystemName withPushNotificationParams:(KalturaPushNotificationParams*)aPushNotificationParams withCommand:(NSString*)aCommand;
 // Update an existing event notification template object
 - (KalturaEventNotificationTemplate*)updateWithId:(int)aId withEventNotificationTemplate:(KalturaEventNotificationTemplate*)aEventNotificationTemplate;
 // Update event notification template status by id

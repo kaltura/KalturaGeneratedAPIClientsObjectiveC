@@ -338,13 +338,77 @@
 @end
 
 @implementation KalturaDistributionProviderType
++ (NSString*)AVN
+{
+    return @"avnDistribution.AVN";
+}
++ (NSString*)COMCAST_MRSS
+{
+    return @"comcastMrssDistribution.COMCAST_MRSS";
+}
++ (NSString*)CROSS_KALTURA
+{
+    return @"crossKalturaDistribution.CROSS_KALTURA";
+}
++ (NSString*)DAILYMOTION
+{
+    return @"dailymotionDistribution.DAILYMOTION";
+}
++ (NSString*)DOUBLECLICK
+{
+    return @"doubleClickDistribution.DOUBLECLICK";
+}
 + (NSString*)FACEBOOK
 {
     return @"facebookDistribution.FACEBOOK";
 }
++ (NSString*)FREEWHEEL
+{
+    return @"freewheelDistribution.FREEWHEEL";
+}
++ (NSString*)FREEWHEEL_GENERIC
+{
+    return @"freewheelGenericDistribution.FREEWHEEL_GENERIC";
+}
++ (NSString*)FTP
+{
+    return @"ftpDistribution.FTP";
+}
++ (NSString*)FTP_SCHEDULED
+{
+    return @"ftpDistribution.FTP_SCHEDULED";
+}
++ (NSString*)HULU
+{
+    return @"huluDistribution.HULU";
+}
 + (NSString*)IDETIC
 {
     return @"ideticDistribution.IDETIC";
+}
++ (NSString*)METRO_PCS
+{
+    return @"metroPcsDistribution.METRO_PCS";
+}
++ (NSString*)MSN
+{
+    return @"msnDistribution.MSN";
+}
++ (NSString*)QUICKPLAY
+{
+    return @"quickPlayDistribution.QUICKPLAY";
+}
++ (NSString*)UNICORN
+{
+    return @"unicornDistribution.UNICORN";
+}
++ (NSString*)YAHOO
+{
+    return @"yahooDistribution.YAHOO";
+}
++ (NSString*)YOUTUBE
+{
+    return @"youTubeDistribution.YOUTUBE";
 }
 + (NSString*)YOUTUBE_API
 {
