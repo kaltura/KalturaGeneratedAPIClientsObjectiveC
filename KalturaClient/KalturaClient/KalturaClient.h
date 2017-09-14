@@ -13969,6 +13969,7 @@
 // Approve the entry and mark the pending flags (if any) as moderated (this will make the entry playable).
 - (void)approveWithEntryId:(NSString*)aEntryId;
 // Clone an entry with optional attributes to apply to the clone
+- (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId withCloneOptions:(NSArray*)aCloneOptions withSetSourceAsRootEntryId:(KALTURA_BOOL)aSetSourceAsRootEntryId;
 - (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId withCloneOptions:(NSArray*)aCloneOptions;
 - (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId;
 // Count base entries by filter.
