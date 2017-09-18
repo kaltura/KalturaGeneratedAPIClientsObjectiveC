@@ -38338,6 +38338,16 @@
 
 @end
 
+@implementation KalturaSessionResponse
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaSessionResponse"];
+}
+
+@end
+
 @implementation KalturaSessionRestriction
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
@@ -51012,6 +51022,12 @@
 - (NSString*)loginWithPartnerId:(int)aPartnerId withUserId:(NSString*)aUserId withPassword:(NSString*)aPassword
 {
     return [self loginWithPartnerId:aPartnerId withUserId:aUserId withPassword:aPassword withExpiry:KALTURA_UNDEF_INT];
+}
+
+- (KalturaSessionResponse*)loginByKsWithRequestedPartnerId:(int)aRequestedPartnerId
+{
+    [self.client.params addIfDefinedKey:@"requestedPartnerId" withInt:aRequestedPartnerId];
+    return [self.client queueObjectService:@"user" withAction:@"loginByKs" withExpectedType:@"KalturaSessionResponse"];
 }
 
 - (NSString*)loginByLoginIdWithLoginId:(NSString*)aLoginId withPassword:(NSString*)aPassword withPartnerId:(int)aPartnerId withExpiry:(int)aExpiry withPrivileges:(NSString*)aPrivileges withOtp:(NSString*)aOtp

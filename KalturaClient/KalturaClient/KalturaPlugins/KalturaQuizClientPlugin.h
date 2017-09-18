@@ -132,7 +132,7 @@
 // @subpackage Client
 @interface KalturaQuestionCuePoint : KalturaCuePoint
 // Array of key value answerKey->optionAnswer objects
-@property (nonatomic,retain) NSMutableDictionary* optionalAnswers;	// of KalturaOptionalAnswer elements
+@property (nonatomic,retain) NSMutableArray* optionalAnswers;	// of KalturaOptionalAnswer elements
 @property (nonatomic,copy) NSString* hint;
 @property (nonatomic,copy) NSString* question;
 @property (nonatomic,copy) NSString* explanation;

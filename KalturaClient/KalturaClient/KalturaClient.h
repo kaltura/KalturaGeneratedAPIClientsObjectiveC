@@ -11228,6 +11228,11 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaSessionResponse : KalturaStartWidgetSessionResponse
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaSessionRestriction : KalturaBaseRestriction
 @end
 
@@ -15253,6 +15258,8 @@
 - (NSString*)loginWithPartnerId:(int)aPartnerId withUserId:(NSString*)aUserId withPassword:(NSString*)aPassword withExpiry:(int)aExpiry withPrivileges:(NSString*)aPrivileges;
 - (NSString*)loginWithPartnerId:(int)aPartnerId withUserId:(NSString*)aUserId withPassword:(NSString*)aPassword withExpiry:(int)aExpiry;
 - (NSString*)loginWithPartnerId:(int)aPartnerId withUserId:(NSString*)aUserId withPassword:(NSString*)aPassword;
+// Loges a user to the destination account as long the ks user id exists in the desc acount and the loginData id match for both accounts
+- (KalturaSessionResponse*)loginByKsWithRequestedPartnerId:(int)aRequestedPartnerId;
 // Logs a user into a partner account with a user login ID and a user password.
 - (NSString*)loginByLoginIdWithLoginId:(NSString*)aLoginId withPassword:(NSString*)aPassword withPartnerId:(int)aPartnerId withExpiry:(int)aExpiry withPrivileges:(NSString*)aPrivileges withOtp:(NSString*)aOtp;
 - (NSString*)loginByLoginIdWithLoginId:(NSString*)aLoginId withPassword:(NSString*)aPassword withPartnerId:(int)aPartnerId withExpiry:(int)aExpiry withPrivileges:(NSString*)aPrivileges;

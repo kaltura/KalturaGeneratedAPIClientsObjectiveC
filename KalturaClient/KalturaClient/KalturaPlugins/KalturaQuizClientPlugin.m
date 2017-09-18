@@ -405,7 +405,7 @@
 
 - (KalturaFieldType)getTypeOfOptionalAnswers
 {
-    return KFT_Dictionary;
+    return KFT_Array;
 }
 
 - (NSString*)getObjectTypeOfOptionalAnswers
@@ -433,7 +433,7 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaQuestionCuePoint"];
-    [aParams addIfDefinedKey:@"optionalAnswers" withDictionary:self.optionalAnswers];
+    [aParams addIfDefinedKey:@"optionalAnswers" withArray:self.optionalAnswers];
     [aParams addIfDefinedKey:@"hint" withString:self.hint];
     [aParams addIfDefinedKey:@"question" withString:self.question];
     [aParams addIfDefinedKey:@"explanation" withString:self.explanation];
