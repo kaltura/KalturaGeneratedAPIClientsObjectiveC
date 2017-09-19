@@ -47288,17 +47288,11 @@
     [self.client queueVoidService:@"baseentry" withAction:@"approve"];
 }
 
-- (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId withCloneOptions:(NSArray*)aCloneOptions withSetSourceAsRootEntryId:(KALTURA_BOOL)aSetSourceAsRootEntryId
+- (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId withCloneOptions:(NSArray*)aCloneOptions
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
     [self.client.params addIfDefinedKey:@"cloneOptions" withArray:aCloneOptions];
-    [self.client.params addIfDefinedKey:@"setSourceAsRootEntryId" withBool:aSetSourceAsRootEntryId];
     return [self.client queueObjectService:@"baseentry" withAction:@"clone" withExpectedType:@"KalturaBaseEntry"];
-}
-
-- (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId withCloneOptions:(NSArray*)aCloneOptions
-{
-    return [self cloneWithEntryId:aEntryId withCloneOptions:aCloneOptions withSetSourceAsRootEntryId:KALTURA_UNDEF_BOOL];
 }
 
 - (KalturaBaseEntry*)cloneWithEntryId:(NSString*)aEntryId
