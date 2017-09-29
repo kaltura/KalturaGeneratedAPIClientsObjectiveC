@@ -4627,10 +4627,12 @@
 @property (nonatomic,copy) NSString* parentEntryId;
 // clipping, skipping and cropping attributes that used to create this entry
 @property (nonatomic,retain) NSMutableArray* operationAttributes;	// of KalturaOperationAttributes elements
-// list of user ids that are entitled to edit the entry (no server enforcement) The difference between entitledUsersEdit and entitledUsersPublish is applicative only
+// list of user ids that are entitled to edit the entry (no server enforcement) The difference between entitledUsersEdit, entitledUsersPublish and entitledUsersView is applicative only
 @property (nonatomic,copy) NSString* entitledUsersEdit;
-// list of user ids that are entitled to publish the entry (no server enforcement) The difference between entitledUsersEdit and entitledUsersPublish is applicative only
+// list of user ids that are entitled to publish the entry (no server enforcement) The difference between entitledUsersEdit, entitledUsersPublish and entitledUsersView is applicative only
 @property (nonatomic,copy) NSString* entitledUsersPublish;
+// list of user ids that are entitled to view the entry (no server enforcement) The difference between entitledUsersEdit, entitledUsersPublish and entitledUsersView is applicative only
+@property (nonatomic,copy) NSString* entitledUsersView;
 // Comma seperated string of the capabilities of the entry. Any capability needed can be added to this list.
 @property (nonatomic,copy,readonly) NSString* capabilities;
 // Template entry id
@@ -4679,6 +4681,7 @@
 - (NSString*)getObjectTypeOfOperationAttributes;
 - (KalturaFieldType)getTypeOfEntitledUsersEdit;
 - (KalturaFieldType)getTypeOfEntitledUsersPublish;
+- (KalturaFieldType)getTypeOfEntitledUsersView;
 - (KalturaFieldType)getTypeOfCapabilities;
 - (KalturaFieldType)getTypeOfTemplateEntryId;
 - (KalturaFieldType)getTypeOfDisplayInSearch;
@@ -7534,6 +7537,8 @@
 @property (nonatomic,copy) NSString* entitledUsersEditMatchOr;
 @property (nonatomic,copy) NSString* entitledUsersPublishMatchAnd;
 @property (nonatomic,copy) NSString* entitledUsersPublishMatchOr;
+@property (nonatomic,copy) NSString* entitledUsersViewMatchAnd;
+@property (nonatomic,copy) NSString* entitledUsersViewMatchOr;
 @property (nonatomic,copy) NSString* tagsNameMultiLikeOr;
 @property (nonatomic,copy) NSString* tagsAdminTagsMultiLikeOr;
 @property (nonatomic,copy) NSString* tagsAdminTagsNameMultiLikeOr;
@@ -7612,6 +7617,8 @@
 - (KalturaFieldType)getTypeOfEntitledUsersEditMatchOr;
 - (KalturaFieldType)getTypeOfEntitledUsersPublishMatchAnd;
 - (KalturaFieldType)getTypeOfEntitledUsersPublishMatchOr;
+- (KalturaFieldType)getTypeOfEntitledUsersViewMatchAnd;
+- (KalturaFieldType)getTypeOfEntitledUsersViewMatchOr;
 - (KalturaFieldType)getTypeOfTagsNameMultiLikeOr;
 - (KalturaFieldType)getTypeOfTagsAdminTagsMultiLikeOr;
 - (KalturaFieldType)getTypeOfTagsAdminTagsNameMultiLikeOr;
@@ -8712,6 +8719,8 @@
 @property (nonatomic,assign,readonly) int createdAt;
 // Last update date as Unix timestamp (In seconds)
 @property (nonatomic,assign,readonly) int updatedAt;
+// Upload url - to explicitly determine to which domain to adress the uploadToken->upload call
+@property (nonatomic,copy,readonly) NSString* uploadUrl;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfPartnerId;
 - (KalturaFieldType)getTypeOfUserId;
@@ -8721,6 +8730,7 @@
 - (KalturaFieldType)getTypeOfUploadedFileSize;
 - (KalturaFieldType)getTypeOfCreatedAt;
 - (KalturaFieldType)getTypeOfUpdatedAt;
+- (KalturaFieldType)getTypeOfUploadUrl;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setStatusFromString:(NSString*)aPropVal;
 - (void)setFileSizeFromString:(NSString*)aPropVal;

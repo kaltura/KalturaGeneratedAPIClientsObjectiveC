@@ -13526,6 +13526,7 @@
 @synthesize operationAttributes = _operationAttributes;
 @synthesize entitledUsersEdit = _entitledUsersEdit;
 @synthesize entitledUsersPublish = _entitledUsersPublish;
+@synthesize entitledUsersView = _entitledUsersView;
 @synthesize capabilities = _capabilities;
 @synthesize templateEntryId = _templateEntryId;
 @synthesize displayInSearch = _displayInSearch;
@@ -13765,6 +13766,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfEntitledUsersView
+{
+    return KFT_String;
+}
+
 - (KalturaFieldType)getTypeOfCapabilities
 {
     return KFT_String;
@@ -13893,6 +13899,7 @@
     [aParams addIfDefinedKey:@"operationAttributes" withArray:self.operationAttributes];
     [aParams addIfDefinedKey:@"entitledUsersEdit" withString:self.entitledUsersEdit];
     [aParams addIfDefinedKey:@"entitledUsersPublish" withString:self.entitledUsersPublish];
+    [aParams addIfDefinedKey:@"entitledUsersView" withString:self.entitledUsersView];
     [aParams addIfDefinedKey:@"templateEntryId" withString:self.templateEntryId];
     [aParams addIfDefinedKey:@"displayInSearch" withInt:self.displayInSearch];
 }
@@ -13924,6 +13931,7 @@
     [self->_operationAttributes release];
     [self->_entitledUsersEdit release];
     [self->_entitledUsersPublish release];
+    [self->_entitledUsersView release];
     [self->_capabilities release];
     [self->_templateEntryId release];
     [super dealloc];
@@ -23969,6 +23977,8 @@
 @synthesize entitledUsersEditMatchOr = _entitledUsersEditMatchOr;
 @synthesize entitledUsersPublishMatchAnd = _entitledUsersPublishMatchAnd;
 @synthesize entitledUsersPublishMatchOr = _entitledUsersPublishMatchOr;
+@synthesize entitledUsersViewMatchAnd = _entitledUsersViewMatchAnd;
+@synthesize entitledUsersViewMatchOr = _entitledUsersViewMatchOr;
 @synthesize tagsNameMultiLikeOr = _tagsNameMultiLikeOr;
 @synthesize tagsAdminTagsMultiLikeOr = _tagsAdminTagsMultiLikeOr;
 @synthesize tagsAdminTagsNameMultiLikeOr = _tagsAdminTagsNameMultiLikeOr;
@@ -24366,6 +24376,16 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfEntitledUsersViewMatchAnd
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEntitledUsersViewMatchOr
+{
+    return KFT_String;
+}
+
 - (KalturaFieldType)getTypeOfTagsNameMultiLikeOr
 {
     return KFT_String;
@@ -24583,6 +24603,8 @@
     [aParams addIfDefinedKey:@"entitledUsersEditMatchOr" withString:self.entitledUsersEditMatchOr];
     [aParams addIfDefinedKey:@"entitledUsersPublishMatchAnd" withString:self.entitledUsersPublishMatchAnd];
     [aParams addIfDefinedKey:@"entitledUsersPublishMatchOr" withString:self.entitledUsersPublishMatchOr];
+    [aParams addIfDefinedKey:@"entitledUsersViewMatchAnd" withString:self.entitledUsersViewMatchAnd];
+    [aParams addIfDefinedKey:@"entitledUsersViewMatchOr" withString:self.entitledUsersViewMatchOr];
     [aParams addIfDefinedKey:@"tagsNameMultiLikeOr" withString:self.tagsNameMultiLikeOr];
     [aParams addIfDefinedKey:@"tagsAdminTagsMultiLikeOr" withString:self.tagsAdminTagsMultiLikeOr];
     [aParams addIfDefinedKey:@"tagsAdminTagsNameMultiLikeOr" withString:self.tagsAdminTagsNameMultiLikeOr];
@@ -24643,6 +24665,8 @@
     [self->_entitledUsersEditMatchOr release];
     [self->_entitledUsersPublishMatchAnd release];
     [self->_entitledUsersPublishMatchOr release];
+    [self->_entitledUsersViewMatchAnd release];
+    [self->_entitledUsersViewMatchOr release];
     [self->_tagsNameMultiLikeOr release];
     [self->_tagsAdminTagsMultiLikeOr release];
     [self->_tagsAdminTagsNameMultiLikeOr release];
@@ -28626,6 +28650,7 @@
 @property (nonatomic,assign) double uploadedFileSize;
 @property (nonatomic,assign) int createdAt;
 @property (nonatomic,assign) int updatedAt;
+@property (nonatomic,copy) NSString* uploadUrl;
 @end
 
 @implementation KalturaUploadToken
@@ -28638,6 +28663,7 @@
 @synthesize uploadedFileSize = _uploadedFileSize;
 @synthesize createdAt = _createdAt;
 @synthesize updatedAt = _updatedAt;
+@synthesize uploadUrl = _uploadUrl;
 
 - (id)init
 {
@@ -28698,6 +28724,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfUploadUrl
+{
+    return KFT_String;
+}
+
 - (void)setPartnerIdFromString:(NSString*)aPropVal
 {
     self.partnerId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -28742,6 +28773,7 @@
     [self->_id release];
     [self->_userId release];
     [self->_fileName release];
+    [self->_uploadUrl release];
     [super dealloc];
 }
 
