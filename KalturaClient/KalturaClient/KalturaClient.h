@@ -1089,6 +1089,8 @@
 + (NSString*)CATEGORIES;
 + (NSString*)CHILD_ENTRIES;
 + (NSString*)ACCESS_CONTROL;
++ (NSString*)METADATA;
++ (NSString*)FLAVORS;
 @end
 
 // @package Kaltura
@@ -14599,6 +14601,8 @@
 - (NSString*)getMrssWithEntryId:(NSString*)aEntryId withExtendingItemsArray:(NSArray*)aExtendingItemsArray withFeatures:(NSString*)aFeatures;
 - (NSString*)getMrssWithEntryId:(NSString*)aEntryId withExtendingItemsArray:(NSArray*)aExtendingItemsArray;
 - (NSString*)getMrssWithEntryId:(NSString*)aEntryId;
+// Get volume map by entry id
+- (NSString*)getVolumeMapWithEntryId:(NSString*)aEntryId;
 // List media entries by filter with paging support.
 - (KalturaMediaListResponse*)listWithFilter:(KalturaMediaEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaMediaListResponse*)listWithFilter:(KalturaMediaEntryFilter*)aFilter;

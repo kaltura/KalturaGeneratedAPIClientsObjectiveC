@@ -2528,6 +2528,14 @@
 {
     return @"4";
 }
++ (NSString*)METADATA
+{
+    return @"5";
+}
++ (NSString*)FLAVORS
+{
+    return @"6";
+}
 @end
 
 @implementation KalturaBaseEntryCompareAttribute
@@ -49178,6 +49186,12 @@
 - (NSString*)getMrssWithEntryId:(NSString*)aEntryId
 {
     return [self getMrssWithEntryId:aEntryId withExtendingItemsArray:nil];
+}
+
+- (NSString*)getVolumeMapWithEntryId:(NSString*)aEntryId
+{
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    return [self.client queueServeService:@"media" withAction:@"getVolumeMap"];
 }
 
 - (KalturaMediaListResponse*)listWithFilter:(KalturaMediaEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager
