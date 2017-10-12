@@ -11077,7 +11077,7 @@
 {
     return @"11";
 }
-+ (NSString*)SPEFICIC_USER_ENGAGEMENT
++ (NSString*)SPECIFIC_USER_ENGAGEMENT
 {
     return @"12";
 }
@@ -11117,7 +11117,7 @@
 {
     return @"21";
 }
-+ (NSString*)OPERATION_SYSTEM
++ (NSString*)OPERATING_SYSTEM
 {
     return @"22";
 }
@@ -49188,10 +49188,16 @@
     return [self getMrssWithEntryId:aEntryId withExtendingItemsArray:nil];
 }
 
-- (NSString*)getVolumeMapWithEntryId:(NSString*)aEntryId
+- (NSString*)getVolumeMapWithEntryId:(NSString*)aEntryId withFlavorId:(NSString*)aFlavorId
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    [self.client.params addIfDefinedKey:@"flavorId" withString:aFlavorId];
     return [self.client queueServeService:@"media" withAction:@"getVolumeMap"];
+}
+
+- (NSString*)getVolumeMapWithEntryId:(NSString*)aEntryId
+{
+    return [self getVolumeMapWithEntryId:aEntryId withFlavorId:nil];
 }
 
 - (KalturaMediaListResponse*)listWithFilter:(KalturaMediaEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager

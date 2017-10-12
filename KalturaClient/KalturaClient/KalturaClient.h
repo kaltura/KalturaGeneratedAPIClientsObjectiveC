@@ -3749,7 +3749,7 @@
 + (NSString*)TOP_SYNDICATION;
 + (NSString*)CONTENT_CONTRIBUTIONS;
 + (NSString*)USER_ENGAGEMENT;
-+ (NSString*)SPEFICIC_USER_ENGAGEMENT;
++ (NSString*)SPECIFIC_USER_ENGAGEMENT;
 + (NSString*)USER_TOP_CONTENT;
 + (NSString*)USER_CONTENT_DROPOFF;
 + (NSString*)USER_CONTENT_INTERACTIONS;
@@ -3759,7 +3759,7 @@
 + (NSString*)VAR_USAGE;
 + (NSString*)TOP_CREATORS;
 + (NSString*)PLATFORMS;
-+ (NSString*)OPERATION_SYSTEM;
++ (NSString*)OPERATING_SYSTEM;
 + (NSString*)BROWSERS;
 + (NSString*)LIVE;
 + (NSString*)TOP_PLAYBACK_CONTEXT;
@@ -14602,6 +14602,7 @@
 - (NSString*)getMrssWithEntryId:(NSString*)aEntryId withExtendingItemsArray:(NSArray*)aExtendingItemsArray;
 - (NSString*)getMrssWithEntryId:(NSString*)aEntryId;
 // Get volume map by entry id
+- (NSString*)getVolumeMapWithEntryId:(NSString*)aEntryId withFlavorId:(NSString*)aFlavorId;
 - (NSString*)getVolumeMapWithEntryId:(NSString*)aEntryId;
 // List media entries by filter with paging support.
 - (KalturaMediaListResponse*)listWithFilter:(KalturaMediaEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
