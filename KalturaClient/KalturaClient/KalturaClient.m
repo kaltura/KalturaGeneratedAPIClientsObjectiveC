@@ -2536,6 +2536,10 @@
 {
     return @"6";
 }
++ (NSString*)CAPTIONS
+{
+    return @"7";
+}
 @end
 
 @implementation KalturaBaseEntryCompareAttribute

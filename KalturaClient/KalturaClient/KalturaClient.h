@@ -1091,6 +1091,7 @@
 + (NSString*)ACCESS_CONTROL;
 + (NSString*)METADATA;
 + (NSString*)FLAVORS;
++ (NSString*)CAPTIONS;
 @end
 
 // @package Kaltura
