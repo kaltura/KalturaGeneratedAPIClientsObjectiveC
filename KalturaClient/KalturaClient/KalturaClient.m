@@ -48314,6 +48314,12 @@
     return [self getUrlWithId:aId withStorageId:KALTURA_UNDEF_INT];
 }
 
+- (NSString*)getVolumeMapWithFlavorId:(NSString*)aFlavorId
+{
+    [self.client.params addIfDefinedKey:@"flavorId" withString:aFlavorId];
+    return [self.client queueServeService:@"flavorasset" withAction:@"getVolumeMap"];
+}
+
 - (NSMutableArray*)getWebPlayableByEntryIdWithEntryId:(NSString*)aEntryId
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
@@ -49192,16 +49198,10 @@
     return [self getMrssWithEntryId:aEntryId withExtendingItemsArray:nil];
 }
 
-- (NSString*)getVolumeMapWithEntryId:(NSString*)aEntryId withFlavorId:(NSString*)aFlavorId
-{
-    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client.params addIfDefinedKey:@"flavorId" withString:aFlavorId];
-    return [self.client queueServeService:@"media" withAction:@"getVolumeMap"];
-}
-
 - (NSString*)getVolumeMapWithEntryId:(NSString*)aEntryId
 {
-    return [self getVolumeMapWithEntryId:aEntryId withFlavorId:nil];
+    [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
+    return [self.client queueServeService:@"media" withAction:@"getVolumeMap"];
 }
 
 - (KalturaMediaListResponse*)listWithFilter:(KalturaMediaEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager

@@ -1170,6 +1170,7 @@
 @implementation KalturaESearchMetadataItemData
 @synthesize xpath = _xpath;
 @synthesize metadataProfileId = _metadataProfileId;
+@synthesize metadataFieldId = _metadataFieldId;
 @synthesize valueText = _valueText;
 @synthesize valueInt = _valueInt;
 
@@ -1179,6 +1180,7 @@
     if (self == nil)
         return nil;
     self->_metadataProfileId = KALTURA_UNDEF_INT;
+    self->_metadataFieldId = KALTURA_UNDEF_INT;
     self->_valueInt = KALTURA_UNDEF_INT;
     return self;
 }
@@ -1189,6 +1191,11 @@
 }
 
 - (KalturaFieldType)getTypeOfMetadataProfileId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfMetadataFieldId
 {
     return KFT_Int;
 }
@@ -1208,6 +1215,11 @@
     self.metadataProfileId = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setMetadataFieldIdFromString:(NSString*)aPropVal
+{
+    self.metadataFieldId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)setValueIntFromString:(NSString*)aPropVal
 {
     self.valueInt = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -1220,6 +1232,7 @@
         [aParams putKey:@"objectType" withString:@"KalturaESearchMetadataItemData"];
     [aParams addIfDefinedKey:@"xpath" withString:self.xpath];
     [aParams addIfDefinedKey:@"metadataProfileId" withInt:self.metadataProfileId];
+    [aParams addIfDefinedKey:@"metadataFieldId" withInt:self.metadataFieldId];
     [aParams addIfDefinedKey:@"valueText" withString:self.valueText];
     [aParams addIfDefinedKey:@"valueInt" withInt:self.valueInt];
 }
@@ -1366,6 +1379,7 @@
 @implementation KalturaESearchMetadataItem
 @synthesize xpath = _xpath;
 @synthesize metadataProfileId = _metadataProfileId;
+@synthesize metadataFieldId = _metadataFieldId;
 
 - (id)init
 {
@@ -1373,6 +1387,7 @@
     if (self == nil)
         return nil;
     self->_metadataProfileId = KALTURA_UNDEF_INT;
+    self->_metadataFieldId = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -1386,9 +1401,19 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfMetadataFieldId
+{
+    return KFT_Int;
+}
+
 - (void)setMetadataProfileIdFromString:(NSString*)aPropVal
 {
     self.metadataProfileId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setMetadataFieldIdFromString:(NSString*)aPropVal
+{
+    self.metadataFieldId = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -1398,6 +1423,7 @@
         [aParams putKey:@"objectType" withString:@"KalturaESearchMetadataItem"];
     [aParams addIfDefinedKey:@"xpath" withString:self.xpath];
     [aParams addIfDefinedKey:@"metadataProfileId" withInt:self.metadataProfileId];
+    [aParams addIfDefinedKey:@"metadataFieldId" withInt:self.metadataFieldId];
 }
 
 - (void)dealloc

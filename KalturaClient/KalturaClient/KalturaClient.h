@@ -14320,6 +14320,8 @@
 - (NSString*)getUrlWithId:(NSString*)aId withStorageId:(int)aStorageId withForceProxy:(KALTURA_BOOL)aForceProxy;
 - (NSString*)getUrlWithId:(NSString*)aId withStorageId:(int)aStorageId;
 - (NSString*)getUrlWithId:(NSString*)aId;
+// Get volume map by entry id
+- (NSString*)getVolumeMapWithFlavorId:(NSString*)aFlavorId;
 // Get web playable Flavor Assets for Entry
 - (NSMutableArray*)getWebPlayableByEntryIdWithEntryId:(NSString*)aEntryId;
 // List Flavor Assets by filter and pager
@@ -14603,7 +14605,6 @@
 - (NSString*)getMrssWithEntryId:(NSString*)aEntryId withExtendingItemsArray:(NSArray*)aExtendingItemsArray;
 - (NSString*)getMrssWithEntryId:(NSString*)aEntryId;
 // Get volume map by entry id
-- (NSString*)getVolumeMapWithEntryId:(NSString*)aEntryId withFlavorId:(NSString*)aFlavorId;
 - (NSString*)getVolumeMapWithEntryId:(NSString*)aEntryId;
 // List media entries by filter with paging support.
 - (KalturaMediaListResponse*)listWithFilter:(KalturaMediaEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager;

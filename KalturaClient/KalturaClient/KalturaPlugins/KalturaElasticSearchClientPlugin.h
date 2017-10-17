@@ -374,13 +374,16 @@
 @interface KalturaESearchMetadataItemData : KalturaESearchItemData
 @property (nonatomic,copy) NSString* xpath;
 @property (nonatomic,assign) int metadataProfileId;
+@property (nonatomic,assign) int metadataFieldId;
 @property (nonatomic,copy) NSString* valueText;
 @property (nonatomic,assign) int valueInt;
 - (KalturaFieldType)getTypeOfXpath;
 - (KalturaFieldType)getTypeOfMetadataProfileId;
+- (KalturaFieldType)getTypeOfMetadataFieldId;
 - (KalturaFieldType)getTypeOfValueText;
 - (KalturaFieldType)getTypeOfValueInt;
 - (void)setMetadataProfileIdFromString:(NSString*)aPropVal;
+- (void)setMetadataFieldIdFromString:(NSString*)aPropVal;
 - (void)setValueIntFromString:(NSString*)aPropVal;
 @end
 
@@ -429,9 +432,12 @@
 @interface KalturaESearchMetadataItem : KalturaESearchItem
 @property (nonatomic,copy) NSString* xpath;
 @property (nonatomic,assign) int metadataProfileId;
+@property (nonatomic,assign) int metadataFieldId;
 - (KalturaFieldType)getTypeOfXpath;
 - (KalturaFieldType)getTypeOfMetadataProfileId;
+- (KalturaFieldType)getTypeOfMetadataFieldId;
 - (void)setMetadataProfileIdFromString:(NSString*)aPropVal;
+- (void)setMetadataFieldIdFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
