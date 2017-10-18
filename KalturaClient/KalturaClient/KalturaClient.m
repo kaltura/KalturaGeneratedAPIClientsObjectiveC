@@ -28676,6 +28676,7 @@
 @synthesize createdAt = _createdAt;
 @synthesize updatedAt = _updatedAt;
 @synthesize uploadUrl = _uploadUrl;
+@synthesize autoFinalize = _autoFinalize;
 
 - (id)init
 {
@@ -28688,6 +28689,7 @@
     self->_uploadedFileSize = KALTURA_UNDEF_FLOAT;
     self->_createdAt = KALTURA_UNDEF_INT;
     self->_updatedAt = KALTURA_UNDEF_INT;
+    self->_autoFinalize = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -28741,6 +28743,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfAutoFinalize
+{
+    return KFT_Int;
+}
+
 - (void)setPartnerIdFromString:(NSString*)aPropVal
 {
     self.partnerId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -28771,6 +28778,11 @@
     self.updatedAt = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setAutoFinalizeFromString:(NSString*)aPropVal
+{
+    self.autoFinalize = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -28778,6 +28790,7 @@
         [aParams putKey:@"objectType" withString:@"KalturaUploadToken"];
     [aParams addIfDefinedKey:@"fileName" withString:self.fileName];
     [aParams addIfDefinedKey:@"fileSize" withFloat:self.fileSize];
+    [aParams addIfDefinedKey:@"autoFinalize" withInt:self.autoFinalize];
 }
 
 - (void)dealloc

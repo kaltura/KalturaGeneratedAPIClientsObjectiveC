@@ -8724,6 +8724,8 @@
 @property (nonatomic,assign,readonly) int updatedAt;
 // Upload url - to explicitly determine to which domain to adress the uploadToken->upload call
 @property (nonatomic,copy,readonly) NSString* uploadUrl;
+// autoFinalize - Should the upload be finalized once the file size on disk matches the file size reproted when adding the upload token.
+@property (nonatomic,assign) int autoFinalize;	// enum KalturaNullableBoolean, insertonly
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfPartnerId;
 - (KalturaFieldType)getTypeOfUserId;
@@ -8734,12 +8736,14 @@
 - (KalturaFieldType)getTypeOfCreatedAt;
 - (KalturaFieldType)getTypeOfUpdatedAt;
 - (KalturaFieldType)getTypeOfUploadUrl;
+- (KalturaFieldType)getTypeOfAutoFinalize;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setStatusFromString:(NSString*)aPropVal;
 - (void)setFileSizeFromString:(NSString*)aPropVal;
 - (void)setUploadedFileSizeFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
+- (void)setAutoFinalizeFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

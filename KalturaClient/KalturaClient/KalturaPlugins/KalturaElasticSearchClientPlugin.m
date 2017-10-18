@@ -375,6 +375,14 @@
 {
     return @"updated_at";
 }
++ (NSString*)ENTRY_VIEWS
+{
+    return @"views";
+}
++ (NSString*)ENTRY_VOTES
+{
+    return @"votes";
+}
 @end
 
 @implementation KalturaESearchEntryOrderByFieldName
@@ -386,6 +394,10 @@
 {
     return @"end_date";
 }
++ (NSString*)ENTRY_NAME
+{
+    return @"name.keyword";
+}
 + (NSString*)ENTRY_START_DATE
 {
     return @"start_date";
@@ -393,6 +405,14 @@
 + (NSString*)ENTRY_UPDATED_AT
 {
     return @"updated_at";
+}
++ (NSString*)ENTRY_VIEWS
+{
+    return @"views";
+}
++ (NSString*)ENTRY_VOTES
+{
+    return @"votes";
 }
 @end
 

@@ -145,6 +145,8 @@
 + (NSString*)ENTRY_TAGS;
 + (NSString*)ENTRY_TEMPLATE_ENTRY_ID;
 + (NSString*)ENTRY_UPDATED_AT;
++ (NSString*)ENTRY_VIEWS;
++ (NSString*)ENTRY_VOTES;
 @end
 
 // @package Kaltura
@@ -152,8 +154,11 @@
 @interface KalturaESearchEntryOrderByFieldName : NSObject
 + (NSString*)ENTRY_CREATED_AT;
 + (NSString*)ENTRY_END_DATE;
++ (NSString*)ENTRY_NAME;
 + (NSString*)ENTRY_START_DATE;
 + (NSString*)ENTRY_UPDATED_AT;
++ (NSString*)ENTRY_VIEWS;
++ (NSString*)ENTRY_VOTES;
 @end
 
 // @package Kaltura
