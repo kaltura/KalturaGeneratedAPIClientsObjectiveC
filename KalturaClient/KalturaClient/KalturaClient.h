@@ -14419,6 +14419,7 @@
 // Append recorded video to live entry
 - (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withIsLastChunk:(KALTURA_BOOL)aIsLastChunk;
 - (KalturaLiveEntry*)appendRecordingWithEntryId:(NSString*)aEntryId withAssetId:(NSString*)aAssetId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration;
+// Create recorded entry id if it doesn't exist and make sure it happens on the DC that the live entry was created on.
 - (KalturaLiveEntry*)createRecordedEntryWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withLiveEntryStatus:(int)aLiveEntryStatus;
 // Delete a live channel.
 - (void)deleteWithId:(NSString*)aId;
@@ -14435,7 +14436,7 @@
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex withApplicationName:(NSString*)aApplicationName withLiveEntryStatus:(int)aLiveEntryStatus;
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex withApplicationName:(NSString*)aApplicationName;
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex;
-// Sey recorded video to live entry
+// Set recorded video to live entry
 - (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withRecordedEntryId:(NSString*)aRecordedEntryId withFlavorParamsId:(int)aFlavorParamsId;
 - (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withRecordedEntryId:(NSString*)aRecordedEntryId;
 - (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration;
@@ -14492,6 +14493,7 @@
 - (KalturaLiveStreamEntry*)authenticateWithEntryId:(NSString*)aEntryId withToken:(NSString*)aToken;
 // Creates perioding metadata sync-point events on a live stream
 - (void)createPeriodicSyncPointsWithEntryId:(NSString*)aEntryId withInterval:(int)aInterval withDuration:(int)aDuration;
+// Create recorded entry id if it doesn't exist and make sure it happens on the DC that the live entry was created on.
 - (KalturaLiveEntry*)createRecordedEntryWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withLiveEntryStatus:(int)aLiveEntryStatus;
 // Delete a live stream entry.
 - (void)deleteWithEntryId:(NSString*)aEntryId;
@@ -14513,7 +14515,7 @@
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex;
 // Remove push publish configuration from entry
 - (KalturaLiveStreamEntry*)removeLiveStreamPushPublishConfigurationWithEntryId:(NSString*)aEntryId withProtocol:(NSString*)aProtocol;
-// Sey recorded video to live entry
+// Set recorded video to live entry
 - (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withRecordedEntryId:(NSString*)aRecordedEntryId withFlavorParamsId:(int)aFlavorParamsId;
 - (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration withRecordedEntryId:(NSString*)aRecordedEntryId;
 - (KalturaLiveEntry*)setRecordedContentWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withResource:(KalturaDataCenterContentResource*)aResource withDuration:(double)aDuration;
