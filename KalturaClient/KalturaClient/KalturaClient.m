@@ -6204,9 +6204,17 @@
 {
     return @"Haida";
 }
++ (NSString*)HNN
+{
+    return @"Hainanese";
+}
 + (NSString*)HAS
 {
     return @"Haisla";
+}
++ (NSString*)HAK
+{
+    return @"Hakka";
 }
 + (NSString*)HUR
 {
@@ -6256,6 +6264,10 @@
 {
     return @"Hmong";
 }
++ (NSString*)HKK
+{
+    return @"Hokkien";
+}
 + (NSString*)HOP
 {
     return @"Hopi";
@@ -6284,11 +6296,11 @@
 {
     return @"Inari Sami";
 }
-+ (NSString*)ID
++ (NSString*)IN
 {
     return @"Indonesian";
 }
-+ (NSString*)IN
++ (NSString*)ID
 {
     return @"Indonesian";
 }
@@ -7400,6 +7412,10 @@
 {
     return @"Telugu";
 }
++ (NSString*)TEO
+{
+    return @"Teo Chew";
+}
 + (NSString*)TET
 {
     return @"Tetum";
@@ -7624,11 +7640,11 @@
 {
     return @"Yanesha";
 }
-+ (NSString*)JI
++ (NSString*)YI
 {
     return @"Yiddish";
 }
-+ (NSString*)YI
++ (NSString*)JI
 {
     return @"Yiddish";
 }

@@ -2314,7 +2314,9 @@
 + (NSString*)GU;
 + (NSString*)GWI;
 + (NSString*)HAI;
++ (NSString*)HNN;
 + (NSString*)HAS;
++ (NSString*)HAK;
 + (NSString*)HUR;
 + (NSString*)HAA;
 + (NSString*)HNI;
@@ -2327,6 +2329,7 @@
 + (NSString*)HIL;
 + (NSString*)HI;
 + (NSString*)HMN;
++ (NSString*)HKK;
 + (NSString*)HOP;
 + (NSString*)CZH;
 + (NSString*)HU;
@@ -2334,8 +2337,8 @@
 + (NSString*)KPO;
 + (NSString*)ILO;
 + (NSString*)SMN;
-+ (NSString*)ID;
 + (NSString*)IN;
++ (NSString*)ID;
 + (NSString*)IZH;
 + (NSString*)INH;
 + (NSString*)IA;
@@ -2613,6 +2616,7 @@
 + (NSString*)TTT;
 + (NSString*)TT;
 + (NSString*)TE;
++ (NSString*)TEO;
 + (NSString*)TET;
 + (NSString*)TH;
 + (NSString*)NOD;
@@ -2669,8 +2673,8 @@
 + (NSString*)WYM;
 + (NSString*)XH;
 + (NSString*)AME;
-+ (NSString*)JI;
 + (NSString*)YI;
++ (NSString*)JI;
 + (NSString*)YO;
 + (NSString*)ZAI;
 + (NSString*)DJE;
