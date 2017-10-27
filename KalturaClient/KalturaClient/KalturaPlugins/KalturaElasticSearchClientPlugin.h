@@ -333,6 +333,7 @@
 @property (nonatomic,copy) NSString* startTime;
 @property (nonatomic,copy) NSString* endTime;
 @property (nonatomic,copy) NSString* subType;
+@property (nonatomic,copy) NSString* question;
 @property (nonatomic,copy) NSString* answers;
 @property (nonatomic,copy) NSString* hint;
 @property (nonatomic,copy) NSString* explanation;
@@ -344,6 +345,7 @@
 - (KalturaFieldType)getTypeOfStartTime;
 - (KalturaFieldType)getTypeOfEndTime;
 - (KalturaFieldType)getTypeOfSubType;
+- (KalturaFieldType)getTypeOfQuestion;
 - (KalturaFieldType)getTypeOfAnswers;
 - (KalturaFieldType)getTypeOfHint;
 - (KalturaFieldType)getTypeOfExplanation;

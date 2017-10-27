@@ -1000,6 +1000,7 @@
 @synthesize startTime = _startTime;
 @synthesize endTime = _endTime;
 @synthesize subType = _subType;
+@synthesize question = _question;
 @synthesize answers = _answers;
 @synthesize hint = _hint;
 @synthesize explanation = _explanation;
@@ -1044,6 +1045,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfQuestion
+{
+    return KFT_String;
+}
+
 - (KalturaFieldType)getTypeOfAnswers
 {
     return KFT_String;
@@ -1072,6 +1078,7 @@
     [aParams addIfDefinedKey:@"startTime" withString:self.startTime];
     [aParams addIfDefinedKey:@"endTime" withString:self.endTime];
     [aParams addIfDefinedKey:@"subType" withString:self.subType];
+    [aParams addIfDefinedKey:@"question" withString:self.question];
     [aParams addIfDefinedKey:@"answers" withString:self.answers];
     [aParams addIfDefinedKey:@"hint" withString:self.hint];
     [aParams addIfDefinedKey:@"explanation" withString:self.explanation];
@@ -1087,6 +1094,7 @@
     [self->_startTime release];
     [self->_endTime release];
     [self->_subType release];
+    [self->_question release];
     [self->_answers release];
     [self->_hint release];
     [self->_explanation release];
