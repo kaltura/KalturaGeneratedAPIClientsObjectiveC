@@ -217,6 +217,11 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaESearchObject : KalturaObjectBase
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaESearchOrderByItem : KalturaObjectBase
 @property (nonatomic,copy) NSString* sortOrder;	// enum KalturaESearchSortOrder
 - (KalturaFieldType)getTypeOfSortOrder;
@@ -228,30 +233,6 @@
 @property (nonatomic,retain) NSMutableArray* orderItems;	// of KalturaESearchOrderByItem elements
 - (KalturaFieldType)getTypeOfOrderItems;
 - (NSString*)getObjectTypeOfOrderItems;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaESearchOperator : KalturaESearchBaseItem
-@property (nonatomic,assign) int operator;	// enum KalturaESearchOperatorType
-@property (nonatomic,retain) NSMutableArray* searchItems;	// of KalturaESearchBaseItem elements
-- (KalturaFieldType)getTypeOfOperator;
-- (KalturaFieldType)getTypeOfSearchItems;
-- (NSString*)getObjectTypeOfSearchItems;
-- (void)setOperatorFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaESearchParams : KalturaObjectBase
-@property (nonatomic,retain) KalturaESearchOperator* searchOperator;
-@property (nonatomic,copy) NSString* objectStatuses;
-@property (nonatomic,retain) KalturaESearchOrderBy* orderBy;
-- (KalturaFieldType)getTypeOfSearchOperator;
-- (NSString*)getObjectTypeOfSearchOperator;
-- (KalturaFieldType)getTypeOfObjectStatuses;
-- (KalturaFieldType)getTypeOfOrderBy;
-- (NSString*)getObjectTypeOfOrderBy;
 @end
 
 // @package Kaltura
@@ -396,6 +377,30 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaESearchOperator : KalturaESearchBaseItem
+@property (nonatomic,assign) int operator;	// enum KalturaESearchOperatorType
+@property (nonatomic,retain) NSMutableArray* searchItems;	// of KalturaESearchBaseItem elements
+- (KalturaFieldType)getTypeOfOperator;
+- (KalturaFieldType)getTypeOfSearchItems;
+- (NSString*)getObjectTypeOfSearchItems;
+- (void)setOperatorFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaESearchParams : KalturaESearchObject
+@property (nonatomic,retain) KalturaESearchOperator* searchOperator;
+@property (nonatomic,copy) NSString* objectStatuses;
+@property (nonatomic,retain) KalturaESearchOrderBy* orderBy;
+- (KalturaFieldType)getTypeOfSearchOperator;
+- (NSString*)getObjectTypeOfSearchOperator;
+- (KalturaFieldType)getTypeOfObjectStatuses;
+- (KalturaFieldType)getTypeOfOrderBy;
+- (NSString*)getObjectTypeOfOrderBy;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaESearchUserOrderByItem : KalturaESearchOrderByItem
 @property (nonatomic,copy) NSString* sortField;	// enum KalturaESearchUserOrderByFieldName
 - (KalturaFieldType)getTypeOfSortField;
@@ -464,12 +469,12 @@
 // @subpackage Client
 @interface KalturaESearchService : KalturaServiceBase
 - (NSMutableArray*)getAllowedSearchTypesWithSearchItem:(KalturaESearchItem*)aSearchItem;
-- (KalturaESearchResponse*)searchCategoryWithSearchParams:(KalturaESearchParams*)aSearchParams withPager:(KalturaPager*)aPager;
-- (KalturaESearchResponse*)searchCategoryWithSearchParams:(KalturaESearchParams*)aSearchParams;
-- (KalturaESearchResponse*)searchEntryWithSearchParams:(KalturaESearchParams*)aSearchParams withPager:(KalturaPager*)aPager;
-- (KalturaESearchResponse*)searchEntryWithSearchParams:(KalturaESearchParams*)aSearchParams;
-- (KalturaESearchResponse*)searchUserWithSearchParams:(KalturaESearchParams*)aSearchParams withPager:(KalturaPager*)aPager;
-- (KalturaESearchResponse*)searchUserWithSearchParams:(KalturaESearchParams*)aSearchParams;
+- (KalturaESearchResponse*)searchCategoryWithSearchParams:(KalturaESearchObject*)aSearchParams withPager:(KalturaPager*)aPager;
+- (KalturaESearchResponse*)searchCategoryWithSearchParams:(KalturaESearchObject*)aSearchParams;
+- (KalturaESearchResponse*)searchEntryWithSearchParams:(KalturaESearchObject*)aSearchParams withPager:(KalturaPager*)aPager;
+- (KalturaESearchResponse*)searchEntryWithSearchParams:(KalturaESearchObject*)aSearchParams;
+- (KalturaESearchResponse*)searchUserWithSearchParams:(KalturaESearchObject*)aSearchParams withPager:(KalturaPager*)aPager;
+- (KalturaESearchResponse*)searchUserWithSearchParams:(KalturaESearchObject*)aSearchParams;
 @end
 
 @interface KalturaElasticSearchClientPlugin : KalturaClientPlugin
