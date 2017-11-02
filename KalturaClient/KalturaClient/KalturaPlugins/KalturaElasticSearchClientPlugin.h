@@ -401,6 +401,13 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaESearchQuery : KalturaESearchObject
+@property (nonatomic,copy) NSString* eSerachQuery;
+- (KalturaFieldType)getTypeOfESerachQuery;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaESearchUserOrderByItem : KalturaESearchOrderByItem
 @property (nonatomic,copy) NSString* sortField;	// enum KalturaESearchUserOrderByFieldName
 - (KalturaFieldType)getTypeOfSortField;

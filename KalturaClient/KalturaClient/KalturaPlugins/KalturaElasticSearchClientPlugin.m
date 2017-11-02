@@ -1284,6 +1284,30 @@
 
 @end
 
+@implementation KalturaESearchQuery
+@synthesize eSerachQuery = _eSerachQuery;
+
+- (KalturaFieldType)getTypeOfESerachQuery
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchQuery"];
+    [aParams addIfDefinedKey:@"eSerachQuery" withString:self.eSerachQuery];
+}
+
+- (void)dealloc
+{
+    [self->_eSerachQuery release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaESearchUserOrderByItem
 @synthesize sortField = _sortField;
 
