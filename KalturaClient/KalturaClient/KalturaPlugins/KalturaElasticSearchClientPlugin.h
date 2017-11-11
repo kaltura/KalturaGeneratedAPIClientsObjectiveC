@@ -402,8 +402,8 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaESearchQuery : KalturaESearchObject
-@property (nonatomic,copy) NSString* eSerachQuery;
-- (KalturaFieldType)getTypeOfESerachQuery;
+@property (nonatomic,copy) NSString* eSearchQuery;
+- (KalturaFieldType)getTypeOfESearchQuery;
 @end
 
 // @package Kaltura

@@ -171,9 +171,11 @@
 @property (nonatomic,copy) NSString* multiLanaguageCaptionAssetId;
 @property (nonatomic,copy) NSString* entryId;
 @property (nonatomic,copy) NSString* fileLocation;
+@property (nonatomic,copy) NSString* fileEncryptionKey;
 - (KalturaFieldType)getTypeOfMultiLanaguageCaptionAssetId;
 - (KalturaFieldType)getTypeOfEntryId;
 - (KalturaFieldType)getTypeOfFileLocation;
+- (KalturaFieldType)getTypeOfFileEncryptionKey;
 @end
 
 // @package Kaltura

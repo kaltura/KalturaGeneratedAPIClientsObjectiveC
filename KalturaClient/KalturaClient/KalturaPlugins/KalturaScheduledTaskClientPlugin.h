@@ -191,6 +191,8 @@
 @property (nonatomic,copy) NSString* subject;
 // The message to send in the notification mail
 @property (nonatomic,copy) NSString* message;
+// The footer of the message to send in the notification mail
+@property (nonatomic,copy) NSString* footer;
 // The basic link for the KMC site
 @property (nonatomic,copy) NSString* link;
 // Send the mail to each user
@@ -199,6 +201,7 @@
 - (KalturaFieldType)getTypeOfSender;
 - (KalturaFieldType)getTypeOfSubject;
 - (KalturaFieldType)getTypeOfMessage;
+- (KalturaFieldType)getTypeOfFooter;
 - (KalturaFieldType)getTypeOfLink;
 - (KalturaFieldType)getTypeOfSendToUsers;
 - (void)setSendToUsersFromString:(NSString*)aPropVal;

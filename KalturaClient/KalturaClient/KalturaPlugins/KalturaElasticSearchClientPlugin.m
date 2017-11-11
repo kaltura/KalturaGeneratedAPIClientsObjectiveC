@@ -1285,9 +1285,9 @@
 @end
 
 @implementation KalturaESearchQuery
-@synthesize eSerachQuery = _eSerachQuery;
+@synthesize eSearchQuery = _eSearchQuery;
 
-- (KalturaFieldType)getTypeOfESerachQuery
+- (KalturaFieldType)getTypeOfESearchQuery
 {
     return KFT_String;
 }
@@ -1297,12 +1297,12 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaESearchQuery"];
-    [aParams addIfDefinedKey:@"eSerachQuery" withString:self.eSerachQuery];
+    [aParams addIfDefinedKey:@"eSearchQuery" withString:self.eSearchQuery];
 }
 
 - (void)dealloc
 {
-    [self->_eSerachQuery release];
+    [self->_eSearchQuery release];
     [super dealloc];
 }
 

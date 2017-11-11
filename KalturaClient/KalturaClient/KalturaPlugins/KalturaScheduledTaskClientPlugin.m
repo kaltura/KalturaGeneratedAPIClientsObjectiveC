@@ -510,6 +510,7 @@
 @synthesize sender = _sender;
 @synthesize subject = _subject;
 @synthesize message = _message;
+@synthesize footer = _footer;
 @synthesize link = _link;
 @synthesize sendToUsers = _sendToUsers;
 
@@ -542,6 +543,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfFooter
+{
+    return KFT_String;
+}
+
 - (KalturaFieldType)getTypeOfLink
 {
     return KFT_String;
@@ -566,6 +572,7 @@
     [aParams addIfDefinedKey:@"sender" withString:self.sender];
     [aParams addIfDefinedKey:@"subject" withString:self.subject];
     [aParams addIfDefinedKey:@"message" withString:self.message];
+    [aParams addIfDefinedKey:@"footer" withString:self.footer];
     [aParams addIfDefinedKey:@"link" withString:self.link];
     [aParams addIfDefinedKey:@"sendToUsers" withBool:self.sendToUsers];
 }
@@ -576,6 +583,7 @@
     [self->_sender release];
     [self->_subject release];
     [self->_message release];
+    [self->_footer release];
     [self->_link release];
     [super dealloc];
 }

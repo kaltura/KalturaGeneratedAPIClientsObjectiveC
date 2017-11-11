@@ -224,6 +224,10 @@
 {
     return @"37";
 }
++ (NSString*)LIVE_STREAM
+{
+    return @"38";
+}
 @end
 
 @implementation KalturaEventNotificationEventType

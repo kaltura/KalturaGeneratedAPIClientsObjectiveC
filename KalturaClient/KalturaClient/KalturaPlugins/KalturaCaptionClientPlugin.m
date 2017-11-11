@@ -453,6 +453,7 @@
 @synthesize multiLanaguageCaptionAssetId = _multiLanaguageCaptionAssetId;
 @synthesize entryId = _entryId;
 @synthesize fileLocation = _fileLocation;
+@synthesize fileEncryptionKey = _fileEncryptionKey;
 
 - (KalturaFieldType)getTypeOfMultiLanaguageCaptionAssetId
 {
@@ -469,6 +470,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfFileEncryptionKey
+{
+    return KFT_String;
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -477,6 +483,7 @@
     [aParams addIfDefinedKey:@"multiLanaguageCaptionAssetId" withString:self.multiLanaguageCaptionAssetId];
     [aParams addIfDefinedKey:@"entryId" withString:self.entryId];
     [aParams addIfDefinedKey:@"fileLocation" withString:self.fileLocation];
+    [aParams addIfDefinedKey:@"fileEncryptionKey" withString:self.fileEncryptionKey];
 }
 
 - (void)dealloc
@@ -484,6 +491,7 @@
     [self->_multiLanaguageCaptionAssetId release];
     [self->_entryId release];
     [self->_fileLocation release];
+    [self->_fileEncryptionKey release];
     [super dealloc];
 }
 

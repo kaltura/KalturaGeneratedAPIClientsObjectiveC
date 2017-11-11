@@ -544,6 +544,15 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaRecordingStatus : NSObject
++ (int)STOPPED;
++ (int)PAUSED;
++ (int)ACTIVE;
++ (int)DISABLED;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaResponseProfileStatus : NSObject
 + (int)DISABLED;
 + (int)ENABLED;
@@ -912,6 +921,13 @@
 @interface KalturaUserType : NSObject
 + (int)USER;
 + (int)GROUP;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaViewMode : NSObject
++ (int)PREVIEW;
++ (int)ALLOW_ALL;
 @end
 
 // @package Kaltura
@@ -6000,10 +6016,12 @@
 // @subpackage Client
 @interface KalturaFileSyncDescriptor : KalturaObjectBase
 @property (nonatomic,copy) NSString* fileSyncLocalPath;
+@property (nonatomic,copy) NSString* fileEncryptionKey;
 // The translated path as used by the scheduler
 @property (nonatomic,copy) NSString* fileSyncRemoteUrl;
 @property (nonatomic,assign) int fileSyncObjectSubType;
 - (KalturaFieldType)getTypeOfFileSyncLocalPath;
+- (KalturaFieldType)getTypeOfFileEncryptionKey;
 - (KalturaFieldType)getTypeOfFileSyncRemoteUrl;
 - (KalturaFieldType)getTypeOfFileSyncObjectSubType;
 - (void)setFileSyncObjectSubTypeFromString:(NSString*)aPropVal;
@@ -7117,6 +7135,9 @@
 @property (nonatomic,assign,readonly) int liveStatus;	// enum KalturaEntryServerNodeStatus
 // The chunk duration value in milliseconds
 @property (nonatomic,assign) int segmentDuration;
+@property (nonatomic,assign) KALTURA_BOOL explicitLive;
+@property (nonatomic,assign) int viewMode;	// enum KalturaViewMode
+@property (nonatomic,assign) int recordingStatus;	// enum KalturaRecordingStatus
 - (KalturaFieldType)getTypeOfOfflineMessage;
 - (KalturaFieldType)getTypeOfRecordStatus;
 - (KalturaFieldType)getTypeOfDvrStatus;
@@ -7135,6 +7156,9 @@
 - (NSString*)getObjectTypeOfRecordingOptions;
 - (KalturaFieldType)getTypeOfLiveStatus;
 - (KalturaFieldType)getTypeOfSegmentDuration;
+- (KalturaFieldType)getTypeOfExplicitLive;
+- (KalturaFieldType)getTypeOfViewMode;
+- (KalturaFieldType)getTypeOfRecordingStatus;
 - (void)setRecordStatusFromString:(NSString*)aPropVal;
 - (void)setDvrStatusFromString:(NSString*)aPropVal;
 - (void)setDvrWindowFromString:(NSString*)aPropVal;
@@ -7145,6 +7169,9 @@
 - (void)setCurrentBroadcastStartTimeFromString:(NSString*)aPropVal;
 - (void)setLiveStatusFromString:(NSString*)aPropVal;
 - (void)setSegmentDurationFromString:(NSString*)aPropVal;
+- (void)setExplicitLiveFromString:(NSString*)aPropVal;
+- (void)setViewModeFromString:(NSString*)aPropVal;
+- (void)setRecordingStatusFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -14125,7 +14152,7 @@
 - (KalturaCategoryListResponse*)listWithFilter:(KalturaCategoryFilter*)aFilter;
 - (KalturaCategoryListResponse*)list;
 // Move categories that belong to the same parent category to a target categroy - enabled only for ks with disable entitlement
-- (KalturaCategoryListResponse*)moveWithCategoryIds:(NSString*)aCategoryIds withTargetCategoryParentId:(int)aTargetCategoryParentId;
+- (KALTURA_BOOL)moveWithCategoryIds:(NSString*)aCategoryIds withTargetCategoryParentId:(int)aTargetCategoryParentId;
 // Unlock categories
 - (void)unlockCategories;
 // Update Category

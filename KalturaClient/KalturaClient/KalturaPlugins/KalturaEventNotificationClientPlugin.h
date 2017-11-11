@@ -86,6 +86,7 @@
 + (NSString*)USERROLE;
 + (NSString*)WIDGET;
 + (NSString*)CATEGORYENTRY;
++ (NSString*)LIVE_STREAM;
 @end
 
 // @package Kaltura

@@ -1133,6 +1133,25 @@
 }
 @end
 
+@implementation KalturaRecordingStatus
++ (int)STOPPED
+{
+    return 0;
+}
++ (int)PAUSED
+{
+    return 1;
+}
++ (int)ACTIVE
+{
+    return 2;
+}
++ (int)DISABLED
+{
+    return 3;
+}
+@end
+
 @implementation KalturaResponseProfileStatus
 + (int)DISABLED
 {
@@ -2123,6 +2142,17 @@
     return 0;
 }
 + (int)GROUP
+{
+    return 1;
+}
+@end
+
+@implementation KalturaViewMode
++ (int)PREVIEW
+{
+    return 0;
+}
++ (int)ALLOW_ALL
 {
     return 1;
 }
@@ -18661,6 +18691,7 @@
 
 @implementation KalturaFileSyncDescriptor
 @synthesize fileSyncLocalPath = _fileSyncLocalPath;
+@synthesize fileEncryptionKey = _fileEncryptionKey;
 @synthesize fileSyncRemoteUrl = _fileSyncRemoteUrl;
 @synthesize fileSyncObjectSubType = _fileSyncObjectSubType;
 
@@ -18674,6 +18705,11 @@
 }
 
 - (KalturaFieldType)getTypeOfFileSyncLocalPath
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfFileEncryptionKey
 {
     return KFT_String;
 }
@@ -18699,6 +18735,7 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaFileSyncDescriptor"];
     [aParams addIfDefinedKey:@"fileSyncLocalPath" withString:self.fileSyncLocalPath];
+    [aParams addIfDefinedKey:@"fileEncryptionKey" withString:self.fileEncryptionKey];
     [aParams addIfDefinedKey:@"fileSyncRemoteUrl" withString:self.fileSyncRemoteUrl];
     [aParams addIfDefinedKey:@"fileSyncObjectSubType" withInt:self.fileSyncObjectSubType];
 }
@@ -18706,6 +18743,7 @@
 - (void)dealloc
 {
     [self->_fileSyncLocalPath release];
+    [self->_fileEncryptionKey release];
     [self->_fileSyncRemoteUrl release];
     [super dealloc];
 }
@@ -22658,6 +22696,9 @@
 @synthesize recordingOptions = _recordingOptions;
 @synthesize liveStatus = _liveStatus;
 @synthesize segmentDuration = _segmentDuration;
+@synthesize explicitLive = _explicitLive;
+@synthesize viewMode = _viewMode;
+@synthesize recordingStatus = _recordingStatus;
 
 - (id)init
 {
@@ -22674,6 +22715,9 @@
     self->_currentBroadcastStartTime = KALTURA_UNDEF_FLOAT;
     self->_liveStatus = KALTURA_UNDEF_INT;
     self->_segmentDuration = KALTURA_UNDEF_INT;
+    self->_explicitLive = KALTURA_UNDEF_BOOL;
+    self->_viewMode = KALTURA_UNDEF_INT;
+    self->_recordingStatus = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -22767,6 +22811,21 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfExplicitLive
+{
+    return KFT_Bool;
+}
+
+- (KalturaFieldType)getTypeOfViewMode
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfRecordingStatus
+{
+    return KFT_Int;
+}
+
 - (void)setRecordStatusFromString:(NSString*)aPropVal
 {
     self.recordStatus = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -22817,6 +22876,21 @@
     self.segmentDuration = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setExplicitLiveFromString:(NSString*)aPropVal
+{
+    self.explicitLive = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)setViewModeFromString:(NSString*)aPropVal
+{
+    self.viewMode = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setRecordingStatusFromString:(NSString*)aPropVal
+{
+    self.recordingStatus = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -22834,6 +22908,9 @@
     [aParams addIfDefinedKey:@"currentBroadcastStartTime" withFloat:self.currentBroadcastStartTime];
     [aParams addIfDefinedKey:@"recordingOptions" withObject:self.recordingOptions];
     [aParams addIfDefinedKey:@"segmentDuration" withInt:self.segmentDuration];
+    [aParams addIfDefinedKey:@"explicitLive" withBool:self.explicitLive];
+    [aParams addIfDefinedKey:@"viewMode" withInt:self.viewMode];
+    [aParams addIfDefinedKey:@"recordingStatus" withInt:self.recordingStatus];
 }
 
 - (void)dealloc
@@ -47770,11 +47847,11 @@
     return [self listWithFilter:nil];
 }
 
-- (KalturaCategoryListResponse*)moveWithCategoryIds:(NSString*)aCategoryIds withTargetCategoryParentId:(int)aTargetCategoryParentId
+- (KALTURA_BOOL)moveWithCategoryIds:(NSString*)aCategoryIds withTargetCategoryParentId:(int)aTargetCategoryParentId
 {
     [self.client.params addIfDefinedKey:@"categoryIds" withString:aCategoryIds];
     [self.client.params addIfDefinedKey:@"targetCategoryParentId" withInt:aTargetCategoryParentId];
-    return [self.client queueObjectService:@"category" withAction:@"move" withExpectedType:@"KalturaCategoryListResponse"];
+    return [self.client queueBoolService:@"category" withAction:@"move"];
 }
 
 - (void)unlockCategories
