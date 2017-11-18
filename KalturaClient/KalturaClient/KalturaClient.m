@@ -20030,6 +20030,7 @@
 @synthesize status = _status;
 @synthesize language = _language;
 @synthesize label = _label;
+@synthesize isDefault = _isDefault;
 
 - (id)init
 {
@@ -20044,6 +20045,7 @@
     self->_isOriginal = KALTURA_UNDEF_BOOL;
     self->_isWeb = KALTURA_UNDEF_BOOL;
     self->_status = KALTURA_UNDEF_INT;
+    self->_isDefault = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -20107,6 +20109,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfIsDefault
+{
+    return KFT_Int;
+}
+
 - (void)setFlavorParamsIdFromString:(NSString*)aPropVal
 {
     self.flavorParamsId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -20147,6 +20154,11 @@
     self.status = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setIsDefaultFromString:(NSString*)aPropVal
+{
+    self.isDefault = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -20155,6 +20167,7 @@
     [aParams addIfDefinedKey:@"flavorParamsId" withInt:self.flavorParamsId];
     [aParams addIfDefinedKey:@"language" withString:self.language];
     [aParams addIfDefinedKey:@"label" withString:self.label];
+    [aParams addIfDefinedKey:@"isDefault" withInt:self.isDefault];
 }
 
 - (void)dealloc
@@ -28905,9 +28918,7 @@
 @property (nonatomic,assign) int lastLoginTime;
 @property (nonatomic,assign) int statusUpdatedAt;
 @property (nonatomic,assign) int deletedAt;
-@property (nonatomic,assign) KALTURA_BOOL loginEnabled;
 @property (nonatomic,copy) NSString* roleNames;
-@property (nonatomic,assign) KALTURA_BOOL isAccountOwner;
 @end
 
 @implementation KalturaUser
@@ -29261,7 +29272,9 @@
     [aParams addIfDefinedKey:@"lastName" withString:self.lastName];
     [aParams addIfDefinedKey:@"isAdmin" withBool:self.isAdmin];
     [aParams addIfDefinedKey:@"language" withString:self.language];
+    [aParams addIfDefinedKey:@"loginEnabled" withBool:self.loginEnabled];
     [aParams addIfDefinedKey:@"roleIds" withString:self.roleIds];
+    [aParams addIfDefinedKey:@"isAccountOwner" withBool:self.isAccountOwner];
     [aParams addIfDefinedKey:@"allowedPartnerIds" withString:self.allowedPartnerIds];
     [aParams addIfDefinedKey:@"allowedPartnerPackages" withString:self.allowedPartnerPackages];
 }

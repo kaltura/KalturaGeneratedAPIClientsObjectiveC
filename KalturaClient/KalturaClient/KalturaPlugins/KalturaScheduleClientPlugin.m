@@ -1354,11 +1354,33 @@
 @end
 
 @implementation KalturaLiveStreamScheduleEvent
+@synthesize projectedAudience = _projectedAudience;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_projectedAudience = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfProjectedAudience
+{
+    return KFT_Int;
+}
+
+- (void)setProjectedAudienceFromString:(NSString*)aPropVal
+{
+    self.projectedAudience = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaLiveStreamScheduleEvent"];
+    [aParams addIfDefinedKey:@"projectedAudience" withInt:self.projectedAudience];
 }
 
 @end

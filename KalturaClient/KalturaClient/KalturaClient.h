@@ -6388,6 +6388,8 @@
 @property (nonatomic,copy) NSString* language;	// enum KalturaLanguage
 // The label of the flavor asset
 @property (nonatomic,copy) NSString* label;
+// Is default flavor asset of the entry (This field will be taken into account selectign which audio flavor will be selected as default)
+@property (nonatomic,assign) int isDefault;	// enum KalturaNullableBoolean
 - (KalturaFieldType)getTypeOfFlavorParamsId;
 - (KalturaFieldType)getTypeOfWidth;
 - (KalturaFieldType)getTypeOfHeight;
@@ -6400,6 +6402,7 @@
 - (KalturaFieldType)getTypeOfStatus;
 - (KalturaFieldType)getTypeOfLanguage;
 - (KalturaFieldType)getTypeOfLabel;
+- (KalturaFieldType)getTypeOfIsDefault;
 - (void)setFlavorParamsIdFromString:(NSString*)aPropVal;
 - (void)setWidthFromString:(NSString*)aPropVal;
 - (void)setHeightFromString:(NSString*)aPropVal;
@@ -6408,6 +6411,7 @@
 - (void)setIsOriginalFromString:(NSString*)aPropVal;
 - (void)setIsWebFromString:(NSString*)aPropVal;
 - (void)setStatusFromString:(NSString*)aPropVal;
+- (void)setIsDefaultFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -8815,10 +8819,10 @@
 @property (nonatomic,assign,readonly) int lastLoginTime;
 @property (nonatomic,assign,readonly) int statusUpdatedAt;
 @property (nonatomic,assign,readonly) int deletedAt;
-@property (nonatomic,assign,readonly) KALTURA_BOOL loginEnabled;
+@property (nonatomic,assign) KALTURA_BOOL loginEnabled;	// insertonly
 @property (nonatomic,copy) NSString* roleIds;
 @property (nonatomic,copy,readonly) NSString* roleNames;
-@property (nonatomic,assign,readonly) KALTURA_BOOL isAccountOwner;
+@property (nonatomic,assign) KALTURA_BOOL isAccountOwner;	// insertonly
 @property (nonatomic,copy) NSString* allowedPartnerIds;
 @property (nonatomic,copy) NSString* allowedPartnerPackages;
 - (KalturaFieldType)getTypeOfId;

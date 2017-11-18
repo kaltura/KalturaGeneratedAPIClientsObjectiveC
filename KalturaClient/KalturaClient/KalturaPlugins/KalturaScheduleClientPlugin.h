@@ -476,6 +476,10 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaLiveStreamScheduleEvent : KalturaEntryScheduleEvent
+// Defines the expected audience.
+@property (nonatomic,assign) int projectedAudience;
+- (KalturaFieldType)getTypeOfProjectedAudience;
+- (void)setProjectedAudienceFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
