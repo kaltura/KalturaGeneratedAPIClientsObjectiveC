@@ -20005,6 +20005,59 @@
 
 @end
 
+@implementation KalturaFileContainer
+@synthesize filePath = _filePath;
+@synthesize encryptionKey = _encryptionKey;
+@synthesize fileSize = _fileSize;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_fileSize = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfFilePath
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEncryptionKey
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfFileSize
+{
+    return KFT_Int;
+}
+
+- (void)setFileSizeFromString:(NSString*)aPropVal
+{
+    self.fileSize = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaFileContainer"];
+    [aParams addIfDefinedKey:@"filePath" withString:self.filePath];
+    [aParams addIfDefinedKey:@"encryptionKey" withString:self.encryptionKey];
+    [aParams addIfDefinedKey:@"fileSize" withInt:self.fileSize];
+}
+
+- (void)dealloc
+{
+    [self->_filePath release];
+    [self->_encryptionKey release];
+    [super dealloc];
+}
+
+@end
+
 @interface KalturaFlavorAsset()
 @property (nonatomic,assign) int width;
 @property (nonatomic,assign) int height;

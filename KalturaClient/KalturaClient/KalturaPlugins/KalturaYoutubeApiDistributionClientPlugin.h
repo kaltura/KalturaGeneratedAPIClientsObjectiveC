@@ -60,6 +60,7 @@
 @property (nonatomic,copy) NSString* language;
 @property (nonatomic,copy) NSString* label;
 @property (nonatomic,copy) NSString* filePath;
+@property (nonatomic,copy) NSString* encryptionKey;
 @property (nonatomic,copy) NSString* remoteId;
 @property (nonatomic,assign) int action;	// enum KalturaYouTubeApiDistributionCaptionAction
 @property (nonatomic,copy) NSString* version;
@@ -67,6 +68,7 @@
 - (KalturaFieldType)getTypeOfLanguage;
 - (KalturaFieldType)getTypeOfLabel;
 - (KalturaFieldType)getTypeOfFilePath;
+- (KalturaFieldType)getTypeOfEncryptionKey;
 - (KalturaFieldType)getTypeOfRemoteId;
 - (KalturaFieldType)getTypeOfAction;
 - (KalturaFieldType)getTypeOfVersion;

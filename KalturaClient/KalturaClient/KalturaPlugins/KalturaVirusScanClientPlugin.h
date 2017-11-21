@@ -115,11 +115,12 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaVirusScanJobData : KalturaJobData
-@property (nonatomic,copy) NSString* srcFilePath;
+@property (nonatomic,retain) KalturaFileContainer* fileContainer;
 @property (nonatomic,copy) NSString* flavorAssetId;
 @property (nonatomic,assign) int scanResult;	// enum KalturaVirusScanJobResult
 @property (nonatomic,assign) int virusFoundAction;	// enum KalturaVirusFoundAction
-- (KalturaFieldType)getTypeOfSrcFilePath;
+- (KalturaFieldType)getTypeOfFileContainer;
+- (NSString*)getObjectTypeOfFileContainer;
 - (KalturaFieldType)getTypeOfFlavorAssetId;
 - (KalturaFieldType)getTypeOfScanResult;
 - (KalturaFieldType)getTypeOfVirusFoundAction;

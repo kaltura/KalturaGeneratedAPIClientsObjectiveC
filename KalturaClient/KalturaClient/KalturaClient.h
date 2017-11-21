@@ -6363,6 +6363,18 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaFileContainer : KalturaObjectBase
+@property (nonatomic,copy) NSString* filePath;
+@property (nonatomic,copy) NSString* encryptionKey;
+@property (nonatomic,assign) int fileSize;
+- (KalturaFieldType)getTypeOfFilePath;
+- (KalturaFieldType)getTypeOfEncryptionKey;
+- (KalturaFieldType)getTypeOfFileSize;
+- (void)setFileSizeFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaFlavorAsset : KalturaAsset
 // The Flavor Params used to create this Flavor Asset
 @property (nonatomic,assign) int flavorParamsId;	// insertonly

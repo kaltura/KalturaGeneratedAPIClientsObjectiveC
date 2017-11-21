@@ -70,6 +70,7 @@
 @synthesize language = _language;
 @synthesize label = _label;
 @synthesize filePath = _filePath;
+@synthesize encryptionKey = _encryptionKey;
 @synthesize remoteId = _remoteId;
 @synthesize action = _action;
 @synthesize version = _version;
@@ -95,6 +96,11 @@
 }
 
 - (KalturaFieldType)getTypeOfFilePath
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEncryptionKey
 {
     return KFT_String;
 }
@@ -132,6 +138,7 @@
     [aParams addIfDefinedKey:@"language" withString:self.language];
     [aParams addIfDefinedKey:@"label" withString:self.label];
     [aParams addIfDefinedKey:@"filePath" withString:self.filePath];
+    [aParams addIfDefinedKey:@"encryptionKey" withString:self.encryptionKey];
     [aParams addIfDefinedKey:@"remoteId" withString:self.remoteId];
     [aParams addIfDefinedKey:@"action" withInt:self.action];
     [aParams addIfDefinedKey:@"version" withString:self.version];
@@ -143,6 +150,7 @@
     [self->_language release];
     [self->_label release];
     [self->_filePath release];
+    [self->_encryptionKey release];
     [self->_remoteId release];
     [self->_version release];
     [self->_assetId release];

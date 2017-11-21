@@ -279,7 +279,7 @@
 @end
 
 @implementation KalturaVirusScanJobData
-@synthesize srcFilePath = _srcFilePath;
+@synthesize fileContainer = _fileContainer;
 @synthesize flavorAssetId = _flavorAssetId;
 @synthesize scanResult = _scanResult;
 @synthesize virusFoundAction = _virusFoundAction;
@@ -294,9 +294,14 @@
     return self;
 }
 
-- (KalturaFieldType)getTypeOfSrcFilePath
+- (KalturaFieldType)getTypeOfFileContainer
 {
-    return KFT_String;
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfFileContainer
+{
+    return @"KalturaFileContainer";
 }
 
 - (KalturaFieldType)getTypeOfFlavorAssetId
@@ -329,7 +334,7 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaVirusScanJobData"];
-    [aParams addIfDefinedKey:@"srcFilePath" withString:self.srcFilePath];
+    [aParams addIfDefinedKey:@"fileContainer" withObject:self.fileContainer];
     [aParams addIfDefinedKey:@"flavorAssetId" withString:self.flavorAssetId];
     [aParams addIfDefinedKey:@"scanResult" withInt:self.scanResult];
     [aParams addIfDefinedKey:@"virusFoundAction" withInt:self.virusFoundAction];
@@ -337,7 +342,7 @@
 
 - (void)dealloc
 {
-    [self->_srcFilePath release];
+    [self->_fileContainer release];
     [self->_flavorAssetId release];
     [super dealloc];
 }
