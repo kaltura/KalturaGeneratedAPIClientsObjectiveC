@@ -357,6 +357,7 @@
 
 @implementation KalturaEmailNotificationCategoryRecipientProvider
 @synthesize categoryId = _categoryId;
+@synthesize categoryIds = _categoryIds;
 @synthesize categoryUserFilter = _categoryUserFilter;
 
 - (KalturaFieldType)getTypeOfCategoryId
@@ -365,6 +366,16 @@
 }
 
 - (NSString*)getObjectTypeOfCategoryId
+{
+    return @"KalturaStringValue";
+}
+
+- (KalturaFieldType)getTypeOfCategoryIds
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfCategoryIds
 {
     return @"KalturaStringValue";
 }
@@ -385,12 +396,14 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaEmailNotificationCategoryRecipientProvider"];
     [aParams addIfDefinedKey:@"categoryId" withObject:self.categoryId];
+    [aParams addIfDefinedKey:@"categoryIds" withObject:self.categoryIds];
     [aParams addIfDefinedKey:@"categoryUserFilter" withObject:self.categoryUserFilter];
 }
 
 - (void)dealloc
 {
     [self->_categoryId release];
+    [self->_categoryIds release];
     [self->_categoryUserFilter release];
     [super dealloc];
 }

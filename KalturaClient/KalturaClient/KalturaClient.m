@@ -4518,6 +4518,141 @@
 }
 @end
 
+@implementation KalturaESearchLanguage
++ (NSString*)ARABIC
+{
+    return @"Arabic";
+}
++ (NSString*)BASQUE
+{
+    return @"Basque";
+}
++ (NSString*)BRAZILIAN
+{
+    return @"Brazilian";
+}
++ (NSString*)BULGARIAN
+{
+    return @"Bulgarian";
+}
++ (NSString*)CATALAN
+{
+    return @"Catalan";
+}
++ (NSString*)CHINESE
+{
+    return @"Chinese";
+}
++ (NSString*)CZECH
+{
+    return @"Czech";
+}
++ (NSString*)DANISH
+{
+    return @"Danish";
+}
++ (NSString*)DUTCH
+{
+    return @"Dutch";
+}
++ (NSString*)ENGLISH
+{
+    return @"English";
+}
++ (NSString*)FINNISH
+{
+    return @"Finnish";
+}
++ (NSString*)FRENCH
+{
+    return @"French";
+}
++ (NSString*)GALICIAN
+{
+    return @"Galician";
+}
++ (NSString*)GERMAN
+{
+    return @"German";
+}
++ (NSString*)GREEK
+{
+    return @"Greek";
+}
++ (NSString*)HINDI
+{
+    return @"Hindi";
+}
++ (NSString*)HUNGRIAN
+{
+    return @"Hungarian";
+}
++ (NSString*)INDONESIAN
+{
+    return @"Indonesian";
+}
++ (NSString*)ITALIAN
+{
+    return @"Italian";
+}
++ (NSString*)JAPANESE
+{
+    return @"Japanese";
+}
++ (NSString*)KOREAN
+{
+    return @"Korean";
+}
++ (NSString*)LATVIAN
+{
+    return @"Latvian";
+}
++ (NSString*)LITHUANIAN
+{
+    return @"Lithuanian";
+}
++ (NSString*)NORWEGIAN
+{
+    return @"Norwegian";
+}
++ (NSString*)PERSIAN
+{
+    return @"Persian";
+}
++ (NSString*)PORTUGUESE
+{
+    return @"Prtuguese";
+}
++ (NSString*)ROMANIAN
+{
+    return @"Romanian";
+}
++ (NSString*)RUSSIAN
+{
+    return @"Russian";
+}
++ (NSString*)SORANI
+{
+    return @"Sorani";
+}
++ (NSString*)SPANISH
+{
+    return @"Spanish";
+}
++ (NSString*)SWEDISH
+{
+    return @"Swedish";
+}
++ (NSString*)THAI
+{
+    return @"Thai";
+}
++ (NSString*)TURKISH
+{
+    return @"Turkish";
+}
+@end
+
 @implementation KalturaEdgeServerNodeOrderBy
 + (NSString*)CREATED_AT_ASC
 {
@@ -12900,6 +13035,7 @@
 @synthesize sessionDuration = _sessionDuration;
 @synthesize sessionPrivileges = _sessionPrivileges;
 @synthesize hashType = _hashType;
+@synthesize description = _description;
 
 - (id)init
 {
@@ -12976,6 +13112,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfDescription
+{
+    return KFT_String;
+}
+
 - (void)setPartnerIdFromString:(NSString*)aPropVal
 {
     self.partnerId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -13022,6 +13163,7 @@
     [aParams addIfDefinedKey:@"sessionDuration" withInt:self.sessionDuration];
     [aParams addIfDefinedKey:@"sessionPrivileges" withString:self.sessionPrivileges];
     [aParams addIfDefinedKey:@"hashType" withString:self.hashType];
+    [aParams addIfDefinedKey:@"description" withString:self.description];
 }
 
 - (void)dealloc
@@ -13031,6 +13173,7 @@
     [self->_sessionUserId release];
     [self->_sessionPrivileges release];
     [self->_hashType release];
+    [self->_description release];
     [super dealloc];
 }
 
@@ -15047,6 +15190,30 @@
 
 @end
 
+@implementation KalturaESearchLanguageItem
+@synthesize eSerachLanguage = _eSerachLanguage;
+
+- (KalturaFieldType)getTypeOfESerachLanguage
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchLanguageItem"];
+    [aParams addIfDefinedKey:@"eSerachLanguage" withString:self.eSerachLanguage];
+}
+
+- (void)dealloc
+{
+    [self->_eSerachLanguage release];
+    [super dealloc];
+}
+
+@end
+
 @interface KalturaPartner()
 @property (nonatomic,assign) int id;
 @property (nonatomic,assign) int createdAt;
@@ -15126,6 +15293,7 @@
 @synthesize crmId = _crmId;
 @synthesize referenceId = _referenceId;
 @synthesize timeAlignedRenditions = _timeAlignedRenditions;
+@synthesize eSearchLanguages = _eSearchLanguages;
 
 - (id)init
 {
@@ -15437,6 +15605,16 @@
     return KFT_Bool;
 }
 
+- (KalturaFieldType)getTypeOfESearchLanguages
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfESearchLanguages
+{
+    return @"KalturaESearchLanguageItem";
+}
+
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -15583,6 +15761,7 @@
     [aParams addIfDefinedKey:@"additionalParams" withArray:self.additionalParams];
     [aParams addIfDefinedKey:@"partnerParentId" withInt:self.partnerParentId];
     [aParams addIfDefinedKey:@"referenceId" withString:self.referenceId];
+    [aParams addIfDefinedKey:@"eSearchLanguages" withArray:self.eSearchLanguages];
 }
 
 - (void)dealloc
@@ -15618,6 +15797,7 @@
     [self->_logoutUrl release];
     [self->_crmId release];
     [self->_referenceId release];
+    [self->_eSearchLanguages release];
     [super dealloc];
 }
 
@@ -22781,7 +22961,7 @@
     self->_currentBroadcastStartTime = KALTURA_UNDEF_FLOAT;
     self->_liveStatus = KALTURA_UNDEF_INT;
     self->_segmentDuration = KALTURA_UNDEF_INT;
-    self->_explicitLive = KALTURA_UNDEF_BOOL;
+    self->_explicitLive = KALTURA_UNDEF_INT;
     self->_viewMode = KALTURA_UNDEF_INT;
     self->_recordingStatus = KALTURA_UNDEF_INT;
     return self;
@@ -22879,7 +23059,7 @@
 
 - (KalturaFieldType)getTypeOfExplicitLive
 {
-    return KFT_Bool;
+    return KFT_Int;
 }
 
 - (KalturaFieldType)getTypeOfViewMode
@@ -22944,7 +23124,7 @@
 
 - (void)setExplicitLiveFromString:(NSString*)aPropVal
 {
-    self.explicitLive = [KalturaSimpleTypeParser parseBool:aPropVal];
+    self.explicitLive = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)setViewModeFromString:(NSString*)aPropVal
@@ -22974,7 +23154,7 @@
     [aParams addIfDefinedKey:@"currentBroadcastStartTime" withFloat:self.currentBroadcastStartTime];
     [aParams addIfDefinedKey:@"recordingOptions" withObject:self.recordingOptions];
     [aParams addIfDefinedKey:@"segmentDuration" withInt:self.segmentDuration];
-    [aParams addIfDefinedKey:@"explicitLive" withBool:self.explicitLive];
+    [aParams addIfDefinedKey:@"explicitLive" withInt:self.explicitLive];
     [aParams addIfDefinedKey:@"viewMode" withInt:self.viewMode];
     [aParams addIfDefinedKey:@"recordingStatus" withInt:self.recordingStatus];
 }
@@ -30816,6 +30996,7 @@
 @synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
 @synthesize statusEqual = _statusEqual;
 @synthesize statusIn = _statusIn;
+@synthesize sessionUserIdEqual = _sessionUserIdEqual;
 
 - (id)init
 {
@@ -30870,6 +31051,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfSessionUserIdEqual
+{
+    return KFT_String;
+}
+
 - (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
 {
     self.createdAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -30908,6 +31094,7 @@
     [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
     [aParams addIfDefinedKey:@"statusEqual" withInt:self.statusEqual];
     [aParams addIfDefinedKey:@"statusIn" withString:self.statusIn];
+    [aParams addIfDefinedKey:@"sessionUserIdEqual" withString:self.sessionUserIdEqual];
 }
 
 - (void)dealloc
@@ -30915,6 +31102,7 @@
     [self->_idEqual release];
     [self->_idIn release];
     [self->_statusIn release];
+    [self->_sessionUserIdEqual release];
     [super dealloc];
 }
 
@@ -32370,7 +32558,7 @@
 @end
 
 @implementation KalturaCaptureThumbJobData
-@synthesize srcFileSyncLocalPath = _srcFileSyncLocalPath;
+@synthesize fileContainer = _fileContainer;
 @synthesize actualSrcFileSyncLocalPath = _actualSrcFileSyncLocalPath;
 @synthesize srcFileSyncRemoteUrl = _srcFileSyncRemoteUrl;
 @synthesize thumbParamsOutputId = _thumbParamsOutputId;
@@ -32388,9 +32576,14 @@
     return self;
 }
 
-- (KalturaFieldType)getTypeOfSrcFileSyncLocalPath
+- (KalturaFieldType)getTypeOfFileContainer
 {
-    return KFT_String;
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfFileContainer
+{
+    return @"KalturaFileContainer";
 }
 
 - (KalturaFieldType)getTypeOfActualSrcFileSyncLocalPath
@@ -32438,7 +32631,7 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaCaptureThumbJobData"];
-    [aParams addIfDefinedKey:@"srcFileSyncLocalPath" withString:self.srcFileSyncLocalPath];
+    [aParams addIfDefinedKey:@"fileContainer" withObject:self.fileContainer];
     [aParams addIfDefinedKey:@"actualSrcFileSyncLocalPath" withString:self.actualSrcFileSyncLocalPath];
     [aParams addIfDefinedKey:@"srcFileSyncRemoteUrl" withString:self.srcFileSyncRemoteUrl];
     [aParams addIfDefinedKey:@"thumbParamsOutputId" withInt:self.thumbParamsOutputId];
@@ -32450,7 +32643,7 @@
 
 - (void)dealloc
 {
-    [self->_srcFileSyncLocalPath release];
+    [self->_fileContainer release];
     [self->_actualSrcFileSyncLocalPath release];
     [self->_srcFileSyncRemoteUrl release];
     [self->_thumbAssetId release];

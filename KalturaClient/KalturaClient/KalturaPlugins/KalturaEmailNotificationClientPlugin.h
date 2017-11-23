@@ -144,9 +144,13 @@
 @interface KalturaEmailNotificationCategoryRecipientProvider : KalturaEmailNotificationRecipientProvider
 // The ID of the category whose subscribers should receive the email notification.
 @property (nonatomic,retain) KalturaStringValue* categoryId;
+// The IDs of the categories whose subscribers should receive the email notification.
+@property (nonatomic,retain) KalturaStringValue* categoryIds;
 @property (nonatomic,retain) KalturaCategoryUserProviderFilter* categoryUserFilter;
 - (KalturaFieldType)getTypeOfCategoryId;
 - (NSString*)getObjectTypeOfCategoryId;
+- (KalturaFieldType)getTypeOfCategoryIds;
+- (NSString*)getObjectTypeOfCategoryIds;
 - (KalturaFieldType)getTypeOfCategoryUserFilter;
 - (NSString*)getObjectTypeOfCategoryUserFilter;
 @end

@@ -1794,6 +1794,44 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaESearchLanguage : NSObject
++ (NSString*)ARABIC;
++ (NSString*)BASQUE;
++ (NSString*)BRAZILIAN;
++ (NSString*)BULGARIAN;
++ (NSString*)CATALAN;
++ (NSString*)CHINESE;
++ (NSString*)CZECH;
++ (NSString*)DANISH;
++ (NSString*)DUTCH;
++ (NSString*)ENGLISH;
++ (NSString*)FINNISH;
++ (NSString*)FRENCH;
++ (NSString*)GALICIAN;
++ (NSString*)GERMAN;
++ (NSString*)GREEK;
++ (NSString*)HINDI;
++ (NSString*)HUNGRIAN;
++ (NSString*)INDONESIAN;
++ (NSString*)ITALIAN;
++ (NSString*)JAPANESE;
++ (NSString*)KOREAN;
++ (NSString*)LATVIAN;
++ (NSString*)LITHUANIAN;
++ (NSString*)NORWEGIAN;
++ (NSString*)PERSIAN;
++ (NSString*)PORTUGUESE;
++ (NSString*)ROMANIAN;
++ (NSString*)RUSSIAN;
++ (NSString*)SORANI;
++ (NSString*)SPANISH;
++ (NSString*)SWEDISH;
++ (NSString*)THAI;
++ (NSString*)TURKISH;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaEdgeServerNodeOrderBy : NSObject
 + (NSString*)CREATED_AT_ASC;
 + (NSString*)HEARTBEAT_TIME_ASC;
@@ -4403,6 +4441,7 @@
 // Comma separated privileges to be applied on KS (Kaltura Session) that created using the current token
 @property (nonatomic,copy) NSString* sessionPrivileges;
 @property (nonatomic,copy) NSString* hashType;	// enum KalturaAppTokenHashType
+@property (nonatomic,copy) NSString* description;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfToken;
 - (KalturaFieldType)getTypeOfPartnerId;
@@ -4415,6 +4454,7 @@
 - (KalturaFieldType)getTypeOfSessionDuration;
 - (KalturaFieldType)getTypeOfSessionPrivileges;
 - (KalturaFieldType)getTypeOfHashType;
+- (KalturaFieldType)getTypeOfDescription;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
@@ -5001,6 +5041,13 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaESearchLanguageItem : KalturaObjectBase
+@property (nonatomic,copy) NSString* eSerachLanguage;	// enum KalturaESearchLanguage
+- (KalturaFieldType)getTypeOfESerachLanguage;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaPartner : KalturaObjectBase
 @property (nonatomic,assign,readonly) int id;
 @property (nonatomic,copy) NSString* name;
@@ -5060,6 +5107,7 @@
 @property (nonatomic,copy,readonly) NSString* crmId;
 @property (nonatomic,copy) NSString* referenceId;
 @property (nonatomic,assign,readonly) KALTURA_BOOL timeAlignedRenditions;
+@property (nonatomic,retain) NSMutableArray* eSearchLanguages;	// of KalturaESearchLanguageItem elements
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfName;
 - (KalturaFieldType)getTypeOfWebsite;
@@ -5116,6 +5164,8 @@
 - (KalturaFieldType)getTypeOfCrmId;
 - (KalturaFieldType)getTypeOfReferenceId;
 - (KalturaFieldType)getTypeOfTimeAlignedRenditions;
+- (KalturaFieldType)getTypeOfESearchLanguages;
+- (NSString*)getObjectTypeOfESearchLanguages;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setAppearInSearchFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
@@ -7151,7 +7201,7 @@
 @property (nonatomic,assign,readonly) int liveStatus;	// enum KalturaEntryServerNodeStatus
 // The chunk duration value in milliseconds
 @property (nonatomic,assign) int segmentDuration;
-@property (nonatomic,assign) KALTURA_BOOL explicitLive;
+@property (nonatomic,assign) int explicitLive;	// enum KalturaNullableBoolean
 @property (nonatomic,assign) int viewMode;	// enum KalturaViewMode
 @property (nonatomic,assign) int recordingStatus;	// enum KalturaRecordingStatus
 - (KalturaFieldType)getTypeOfOfflineMessage;
@@ -9268,6 +9318,7 @@
 @property (nonatomic,assign) int updatedAtLessThanOrEqual;
 @property (nonatomic,assign) int statusEqual;	// enum KalturaAppTokenStatus
 @property (nonatomic,copy) NSString* statusIn;
+@property (nonatomic,copy) NSString* sessionUserIdEqual;
 - (KalturaFieldType)getTypeOfIdEqual;
 - (KalturaFieldType)getTypeOfIdIn;
 - (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
@@ -9276,6 +9327,7 @@
 - (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
 - (KalturaFieldType)getTypeOfStatusEqual;
 - (KalturaFieldType)getTypeOfStatusIn;
+- (KalturaFieldType)getTypeOfSessionUserIdEqual;
 - (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
@@ -9679,7 +9731,7 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaCaptureThumbJobData : KalturaJobData
-@property (nonatomic,copy) NSString* srcFileSyncLocalPath;
+@property (nonatomic,retain) KalturaFileContainer* fileContainer;
 // The translated path as used by the scheduler
 @property (nonatomic,copy) NSString* actualSrcFileSyncLocalPath;
 @property (nonatomic,copy) NSString* srcFileSyncRemoteUrl;
@@ -9688,7 +9740,8 @@
 @property (nonatomic,copy) NSString* srcAssetId;
 @property (nonatomic,copy) NSString* srcAssetType;	// enum KalturaAssetType
 @property (nonatomic,copy) NSString* thumbPath;
-- (KalturaFieldType)getTypeOfSrcFileSyncLocalPath;
+- (KalturaFieldType)getTypeOfFileContainer;
+- (NSString*)getObjectTypeOfFileContainer;
 - (KalturaFieldType)getTypeOfActualSrcFileSyncLocalPath;
 - (KalturaFieldType)getTypeOfSrcFileSyncRemoteUrl;
 - (KalturaFieldType)getTypeOfThumbParamsOutputId;
