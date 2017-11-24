@@ -295,10 +295,6 @@
 {
     return @"description";
 }
-+ (NSString*)ENTRY_DISPLAY_IN_SEARCH
-{
-    return @"display_in_search";
-}
 + (NSString*)ENTRY_END_DATE
 {
     return @"end_date";
@@ -314,6 +310,10 @@
 + (NSString*)ENTRY_TYPE
 {
     return @"entry_type";
+}
++ (NSString*)ENTRY_EXTERNAL_SOURCE_TYPE
+{
+    return @"external_source_type";
 }
 + (NSString*)ENTRY_USER_ID
 {

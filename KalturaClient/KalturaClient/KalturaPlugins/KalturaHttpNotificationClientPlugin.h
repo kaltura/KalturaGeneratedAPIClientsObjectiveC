@@ -147,10 +147,14 @@
 @property (nonatomic,assign) KALTURA_BOOL ignoreNull;
 // PHP code
 @property (nonatomic,copy) NSString* code;
+// An array of pattern-replacement pairs used for data string regex replacements
+@property (nonatomic,retain) NSMutableArray* dataStringReplacements;	// of KalturaKeyValue elements
 - (KalturaFieldType)getTypeOfApiObjectType;
 - (KalturaFieldType)getTypeOfFormat;
 - (KalturaFieldType)getTypeOfIgnoreNull;
 - (KalturaFieldType)getTypeOfCode;
+- (KalturaFieldType)getTypeOfDataStringReplacements;
+- (NSString*)getObjectTypeOfDataStringReplacements;
 - (void)setFormatFromString:(NSString*)aPropVal;
 - (void)setIgnoreNullFromString:(NSString*)aPropVal;
 @end

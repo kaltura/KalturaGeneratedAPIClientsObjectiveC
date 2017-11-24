@@ -292,6 +292,7 @@
 @synthesize format = _format;
 @synthesize ignoreNull = _ignoreNull;
 @synthesize code = _code;
+@synthesize dataStringReplacements = _dataStringReplacements;
 
 - (id)init
 {
@@ -323,6 +324,16 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfDataStringReplacements
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfDataStringReplacements
+{
+    return @"KalturaKeyValue";
+}
+
 - (void)setFormatFromString:(NSString*)aPropVal
 {
     self.format = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -342,12 +353,14 @@
     [aParams addIfDefinedKey:@"format" withInt:self.format];
     [aParams addIfDefinedKey:@"ignoreNull" withBool:self.ignoreNull];
     [aParams addIfDefinedKey:@"code" withString:self.code];
+    [aParams addIfDefinedKey:@"dataStringReplacements" withArray:self.dataStringReplacements];
 }
 
 - (void)dealloc
 {
     [self->_apiObjectType release];
     [self->_code release];
+    [self->_dataStringReplacements release];
     [super dealloc];
 }
 
