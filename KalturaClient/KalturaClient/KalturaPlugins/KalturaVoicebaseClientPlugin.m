@@ -33,6 +33,7 @@
 @property (nonatomic,copy) NSString* apiKey;
 @property (nonatomic,copy) NSString* apiPassword;
 @property (nonatomic,copy) NSString* fileLocation;
+@property (nonatomic,copy) NSString* additionalParameters;
 @end
 
 @implementation KalturaVoicebaseJobProviderData
@@ -45,6 +46,7 @@
 @synthesize spokenLanguage = _spokenLanguage;
 @synthesize fileLocation = _fileLocation;
 @synthesize replaceMediaContent = _replaceMediaContent;
+@synthesize additionalParameters = _additionalParameters;
 
 - (id)init
 {
@@ -100,6 +102,11 @@
     return KFT_Bool;
 }
 
+- (KalturaFieldType)getTypeOfAdditionalParameters
+{
+    return KFT_String;
+}
+
 - (void)setReplaceMediaContentFromString:(NSString*)aPropVal
 {
     self.replaceMediaContent = [KalturaSimpleTypeParser parseBool:aPropVal];
@@ -128,6 +135,7 @@
     [self->_apiPassword release];
     [self->_spokenLanguage release];
     [self->_fileLocation release];
+    [self->_additionalParameters release];
     [super dealloc];
 }
 

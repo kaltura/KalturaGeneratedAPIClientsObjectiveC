@@ -54,6 +54,8 @@
 @property (nonatomic,copy,readonly) NSString* fileLocation;
 // should replace remote media content
 @property (nonatomic,assign) KALTURA_BOOL replaceMediaContent;
+// additional parameters to send to VoiceBase
+@property (nonatomic,copy,readonly) NSString* additionalParameters;
 - (KalturaFieldType)getTypeOfEntryId;
 - (KalturaFieldType)getTypeOfFlavorAssetId;
 - (KalturaFieldType)getTypeOfTranscriptId;
@@ -63,6 +65,7 @@
 - (KalturaFieldType)getTypeOfSpokenLanguage;
 - (KalturaFieldType)getTypeOfFileLocation;
 - (KalturaFieldType)getTypeOfReplaceMediaContent;
+- (KalturaFieldType)getTypeOfAdditionalParameters;
 - (void)setReplaceMediaContentFromString:(NSString*)aPropVal;
 @end
 
