@@ -290,12 +290,13 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaTransformMetadataJobData : KalturaJobData
-@property (nonatomic,copy) NSString* srcXslPath;
+@property (nonatomic,retain) KalturaFileContainer* srcXsl;
 @property (nonatomic,assign) int srcVersion;
 @property (nonatomic,assign) int destVersion;
 @property (nonatomic,copy) NSString* destXsdPath;
 @property (nonatomic,assign) int metadataProfileId;
-- (KalturaFieldType)getTypeOfSrcXslPath;
+- (KalturaFieldType)getTypeOfSrcXsl;
+- (NSString*)getObjectTypeOfSrcXsl;
 - (KalturaFieldType)getTypeOfSrcVersion;
 - (KalturaFieldType)getTypeOfDestVersion;
 - (KalturaFieldType)getTypeOfDestXsdPath;

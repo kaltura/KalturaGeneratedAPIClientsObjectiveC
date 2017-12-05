@@ -11381,6 +11381,7 @@
 @property (nonatomic,copy) NSString* serverPassPhrase;
 @property (nonatomic,assign) KALTURA_BOOL ftpPassiveMode;
 @property (nonatomic,copy) NSString* srcFileSyncLocalPath;
+@property (nonatomic,copy) NSString* srcFileEncryptionKey;
 @property (nonatomic,copy) NSString* srcFileSyncId;
 @property (nonatomic,copy) NSString* destFileSyncStoredPath;
 - (KalturaFieldType)getTypeOfServerUrl;
@@ -11391,6 +11392,7 @@
 - (KalturaFieldType)getTypeOfServerPassPhrase;
 - (KalturaFieldType)getTypeOfFtpPassiveMode;
 - (KalturaFieldType)getTypeOfSrcFileSyncLocalPath;
+- (KalturaFieldType)getTypeOfSrcFileEncryptionKey;
 - (KalturaFieldType)getTypeOfSrcFileSyncId;
 - (KalturaFieldType)getTypeOfDestFileSyncStoredPath;
 - (void)setFtpPassiveModeFromString:(NSString*)aPropVal;

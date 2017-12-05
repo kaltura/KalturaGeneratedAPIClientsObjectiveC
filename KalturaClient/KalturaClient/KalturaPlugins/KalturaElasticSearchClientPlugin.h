@@ -108,7 +108,6 @@
 + (NSString*)CUE_POINT_SUB_TYPE;
 + (NSString*)CUE_POINT_TAGS;
 + (NSString*)CUE_POINT_TEXT;
-+ (NSString*)CUE_POINT_TYPE;
 @end
 
 // @package Kaltura
@@ -441,7 +440,9 @@
 // @subpackage Client
 @interface KalturaESearchCuePointItem : KalturaESearchItem
 @property (nonatomic,copy) NSString* fieldName;	// enum KalturaESearchCuePointFieldName
+@property (nonatomic,copy) NSString* cuePointType;	// enum KalturaCuePointType
 - (KalturaFieldType)getTypeOfFieldName;
+- (KalturaFieldType)getTypeOfCuePointType;
 @end
 
 // @package Kaltura

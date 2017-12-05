@@ -244,10 +244,6 @@
 {
     return @"cue_points.cue_point_text";
 }
-+ (NSString*)CUE_POINT_TYPE
-{
-    return @"cue_points.cue_point_type";
-}
 @end
 
 @implementation KalturaESearchEntryFieldName
@@ -1437,8 +1433,14 @@
 
 @implementation KalturaESearchCuePointItem
 @synthesize fieldName = _fieldName;
+@synthesize cuePointType = _cuePointType;
 
 - (KalturaFieldType)getTypeOfFieldName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCuePointType
 {
     return KFT_String;
 }
@@ -1449,11 +1451,13 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaESearchCuePointItem"];
     [aParams addIfDefinedKey:@"fieldName" withString:self.fieldName];
+    [aParams addIfDefinedKey:@"cuePointType" withString:self.cuePointType];
 }
 
 - (void)dealloc
 {
     [self->_fieldName release];
+    [self->_cuePointType release];
     [super dealloc];
 }
 

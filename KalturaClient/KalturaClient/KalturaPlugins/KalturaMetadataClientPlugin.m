@@ -991,7 +991,7 @@
 @end
 
 @implementation KalturaTransformMetadataJobData
-@synthesize srcXslPath = _srcXslPath;
+@synthesize srcXsl = _srcXsl;
 @synthesize srcVersion = _srcVersion;
 @synthesize destVersion = _destVersion;
 @synthesize destXsdPath = _destXsdPath;
@@ -1008,9 +1008,14 @@
     return self;
 }
 
-- (KalturaFieldType)getTypeOfSrcXslPath
+- (KalturaFieldType)getTypeOfSrcXsl
 {
-    return KFT_String;
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfSrcXsl
+{
+    return @"KalturaFileContainer";
 }
 
 - (KalturaFieldType)getTypeOfSrcVersion
@@ -1053,7 +1058,7 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaTransformMetadataJobData"];
-    [aParams addIfDefinedKey:@"srcXslPath" withString:self.srcXslPath];
+    [aParams addIfDefinedKey:@"srcXsl" withObject:self.srcXsl];
     [aParams addIfDefinedKey:@"srcVersion" withInt:self.srcVersion];
     [aParams addIfDefinedKey:@"destVersion" withInt:self.destVersion];
     [aParams addIfDefinedKey:@"destXsdPath" withString:self.destXsdPath];
@@ -1062,7 +1067,7 @@
 
 - (void)dealloc
 {
-    [self->_srcXslPath release];
+    [self->_srcXsl release];
     [self->_destXsdPath release];
     [super dealloc];
 }

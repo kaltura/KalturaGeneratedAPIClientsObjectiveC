@@ -38831,6 +38831,7 @@
 @synthesize serverPassPhrase = _serverPassPhrase;
 @synthesize ftpPassiveMode = _ftpPassiveMode;
 @synthesize srcFileSyncLocalPath = _srcFileSyncLocalPath;
+@synthesize srcFileEncryptionKey = _srcFileEncryptionKey;
 @synthesize srcFileSyncId = _srcFileSyncId;
 @synthesize destFileSyncStoredPath = _destFileSyncStoredPath;
 
@@ -38883,6 +38884,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfSrcFileEncryptionKey
+{
+    return KFT_String;
+}
+
 - (KalturaFieldType)getTypeOfSrcFileSyncId
 {
     return KFT_String;
@@ -38911,6 +38917,7 @@
     [aParams addIfDefinedKey:@"serverPassPhrase" withString:self.serverPassPhrase];
     [aParams addIfDefinedKey:@"ftpPassiveMode" withBool:self.ftpPassiveMode];
     [aParams addIfDefinedKey:@"srcFileSyncLocalPath" withString:self.srcFileSyncLocalPath];
+    [aParams addIfDefinedKey:@"srcFileEncryptionKey" withString:self.srcFileEncryptionKey];
     [aParams addIfDefinedKey:@"srcFileSyncId" withString:self.srcFileSyncId];
     [aParams addIfDefinedKey:@"destFileSyncStoredPath" withString:self.destFileSyncStoredPath];
 }
@@ -38924,6 +38931,7 @@
     [self->_serverPublicKey release];
     [self->_serverPassPhrase release];
     [self->_srcFileSyncLocalPath release];
+    [self->_srcFileEncryptionKey release];
     [self->_srcFileSyncId release];
     [self->_destFileSyncStoredPath release];
     [super dealloc];
