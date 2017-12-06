@@ -25349,6 +25349,7 @@
 
 @implementation KalturaMediaEntryFilterForPlaylist
 @synthesize limit = _limit;
+@synthesize name = _name;
 
 - (id)init
 {
@@ -25364,6 +25365,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfName
+{
+    return KFT_String;
+}
+
 - (void)setLimitFromString:(NSString*)aPropVal
 {
     self.limit = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -25375,6 +25381,13 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaMediaEntryFilterForPlaylist"];
     [aParams addIfDefinedKey:@"limit" withInt:self.limit];
+    [aParams addIfDefinedKey:@"name" withString:self.name];
+}
+
+- (void)dealloc
+{
+    [self->_name release];
+    [super dealloc];
 }
 
 @end

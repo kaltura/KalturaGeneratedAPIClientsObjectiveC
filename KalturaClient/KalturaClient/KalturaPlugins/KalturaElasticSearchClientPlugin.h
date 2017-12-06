@@ -199,9 +199,20 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaESearchHighlight : KalturaObjectBase
+@property (nonatomic,copy) NSString* fieldName;
+@property (nonatomic,retain) NSMutableArray* hits;	// of KalturaString elements
+- (KalturaFieldType)getTypeOfFieldName;
+- (KalturaFieldType)getTypeOfHits;
+- (NSString*)getObjectTypeOfHits;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaESearchItemData : KalturaObjectBase
-@property (nonatomic,copy) NSString* highlight;
+@property (nonatomic,retain) NSMutableArray* highlight;	// of KalturaESearchHighlight elements
 - (KalturaFieldType)getTypeOfHighlight;
+- (NSString*)getObjectTypeOfHighlight;
 @end
 
 // @package Kaltura
@@ -282,11 +293,12 @@
 // @subpackage Client
 @interface KalturaESearchResult : KalturaObjectBase
 @property (nonatomic,retain) KalturaObjectBase* object;
-@property (nonatomic,copy) NSString* highlight;
+@property (nonatomic,retain) NSMutableArray* highlight;	// of KalturaESearchHighlight elements
 @property (nonatomic,retain) NSMutableArray* itemsData;	// of KalturaESearchItemDataResult elements
 - (KalturaFieldType)getTypeOfObject;
 - (NSString*)getObjectTypeOfObject;
 - (KalturaFieldType)getTypeOfHighlight;
+- (NSString*)getObjectTypeOfHighlight;
 - (KalturaFieldType)getTypeOfItemsData;
 - (NSString*)getObjectTypeOfItemsData;
 @end

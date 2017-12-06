@@ -7834,7 +7834,9 @@
 // @subpackage Client
 @interface KalturaMediaEntryFilterForPlaylist : KalturaMediaEntryFilter
 @property (nonatomic,assign) int limit;
+@property (nonatomic,copy) NSString* name;
 - (KalturaFieldType)getTypeOfLimit;
+- (KalturaFieldType)getTypeOfName;
 - (void)setLimitFromString:(NSString*)aPropVal;
 @end
 

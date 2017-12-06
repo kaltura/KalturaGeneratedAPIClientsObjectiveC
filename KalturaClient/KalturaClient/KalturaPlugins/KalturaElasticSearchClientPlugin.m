@@ -496,12 +496,54 @@
 
 @end
 
+@implementation KalturaESearchHighlight
+@synthesize fieldName = _fieldName;
+@synthesize hits = _hits;
+
+- (KalturaFieldType)getTypeOfFieldName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfHits
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfHits
+{
+    return @"KalturaString";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchHighlight"];
+    [aParams addIfDefinedKey:@"fieldName" withString:self.fieldName];
+    [aParams addIfDefinedKey:@"hits" withArray:self.hits];
+}
+
+- (void)dealloc
+{
+    [self->_fieldName release];
+    [self->_hits release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaESearchItemData
 @synthesize highlight = _highlight;
 
 - (KalturaFieldType)getTypeOfHighlight
 {
-    return KFT_String;
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfHighlight
+{
+    return @"KalturaESearchHighlight";
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -509,7 +551,7 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaESearchItemData"];
-    [aParams addIfDefinedKey:@"highlight" withString:self.highlight];
+    [aParams addIfDefinedKey:@"highlight" withArray:self.highlight];
 }
 
 - (void)dealloc
@@ -848,7 +890,12 @@
 
 - (KalturaFieldType)getTypeOfHighlight
 {
-    return KFT_String;
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfHighlight
+{
+    return @"KalturaESearchHighlight";
 }
 
 - (KalturaFieldType)getTypeOfItemsData
@@ -867,7 +914,7 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaESearchResult"];
     [aParams addIfDefinedKey:@"object" withObject:self.object];
-    [aParams addIfDefinedKey:@"highlight" withString:self.highlight];
+    [aParams addIfDefinedKey:@"highlight" withArray:self.highlight];
     [aParams addIfDefinedKey:@"itemsData" withArray:self.itemsData];
 }
 
