@@ -346,7 +346,7 @@
 + (int)GPL;
 + (int)AFFERO_GPL;
 + (int)LGPL;
-+ (int)BSD;
++ (int)BSD_;
 + (int)APACHE;
 + (int)MOZILLA;
 @end

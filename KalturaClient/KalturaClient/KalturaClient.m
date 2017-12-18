@@ -695,7 +695,7 @@
 {
     return 12;
 }
-+ (int)BSD
++ (int)BSD_
 {
     return 13;
 }
