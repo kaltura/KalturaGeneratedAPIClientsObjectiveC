@@ -6349,6 +6349,10 @@
 @property (nonatomic,assign,readonly) int isTrimDisabled;	// enum KalturaNullableBoolean
 // Array of streams that exists on the entry
 @property (nonatomic,retain) NSMutableArray* streams;	// of KalturaStreamContainer elements
+// True if the entry is a sequence entry
+@property (nonatomic,assign) int isSequenceEntry;	// enum KalturaNullableBoolean
+// The sequence entries of the entry
+@property (nonatomic,copy) NSString* sequenceEntryIds;
 - (KalturaFieldType)getTypeOfMediaType;
 - (KalturaFieldType)getTypeOfConversionQuality;
 - (KalturaFieldType)getTypeOfSourceType;
@@ -6362,10 +6366,13 @@
 - (KalturaFieldType)getTypeOfIsTrimDisabled;
 - (KalturaFieldType)getTypeOfStreams;
 - (NSString*)getObjectTypeOfStreams;
+- (KalturaFieldType)getTypeOfIsSequenceEntry;
+- (KalturaFieldType)getTypeOfSequenceEntryIds;
 - (void)setMediaTypeFromString:(NSString*)aPropVal;
 - (void)setSearchProviderTypeFromString:(NSString*)aPropVal;
 - (void)setMediaDateFromString:(NSString*)aPropVal;
 - (void)setIsTrimDisabledFromString:(NSString*)aPropVal;
+- (void)setIsSequenceEntryFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -7828,6 +7835,11 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaMediaEntryFilter : KalturaMediaEntryBaseFilter
+@property (nonatomic,assign) int isSequenceEntry;	// enum KalturaNullableBoolean
+@property (nonatomic,copy) NSString* sequenceEntryIdsIn;
+- (KalturaFieldType)getTypeOfIsSequenceEntry;
+- (KalturaFieldType)getTypeOfSequenceEntryIdsIn;
+- (void)setIsSequenceEntryFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
