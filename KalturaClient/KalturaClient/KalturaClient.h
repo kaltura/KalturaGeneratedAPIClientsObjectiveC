@@ -5108,6 +5108,9 @@
 @property (nonatomic,copy) NSString* referenceId;
 @property (nonatomic,assign,readonly) KALTURA_BOOL timeAlignedRenditions;
 @property (nonatomic,retain) NSMutableArray* eSearchLanguages;	// of KalturaESearchLanguageItem elements
+@property (nonatomic,assign,readonly) int publisherEnvironmentType;
+@property (nonatomic,copy,readonly) NSString* ovpEnvironmentUrl;
+@property (nonatomic,copy,readonly) NSString* ottEnvironmentUrl;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfName;
 - (KalturaFieldType)getTypeOfWebsite;
@@ -5166,6 +5169,9 @@
 - (KalturaFieldType)getTypeOfTimeAlignedRenditions;
 - (KalturaFieldType)getTypeOfESearchLanguages;
 - (NSString*)getObjectTypeOfESearchLanguages;
+- (KalturaFieldType)getTypeOfPublisherEnvironmentType;
+- (KalturaFieldType)getTypeOfOvpEnvironmentUrl;
+- (KalturaFieldType)getTypeOfOttEnvironmentUrl;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setAppearInSearchFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
@@ -5188,6 +5194,7 @@
 - (void)setIsFirstLoginFromString:(NSString*)aPropVal;
 - (void)setPartnerParentIdFromString:(NSString*)aPropVal;
 - (void)setTimeAlignedRenditionsFromString:(NSString*)aPropVal;
+- (void)setPublisherEnvironmentTypeFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -7835,11 +7842,6 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaMediaEntryFilter : KalturaMediaEntryBaseFilter
-@property (nonatomic,assign) int isSequenceEntry;	// enum KalturaNullableBoolean
-@property (nonatomic,copy) NSString* sequenceEntryIdsIn;
-- (KalturaFieldType)getTypeOfIsSequenceEntry;
-- (KalturaFieldType)getTypeOfSequenceEntryIdsIn;
-- (void)setIsSequenceEntryFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

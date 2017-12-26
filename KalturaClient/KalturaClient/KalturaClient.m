@@ -15237,6 +15237,9 @@
 @property (nonatomic,copy) NSString* logoutUrl;
 @property (nonatomic,copy) NSString* crmId;
 @property (nonatomic,assign) KALTURA_BOOL timeAlignedRenditions;
+@property (nonatomic,assign) int publisherEnvironmentType;
+@property (nonatomic,copy) NSString* ovpEnvironmentUrl;
+@property (nonatomic,copy) NSString* ottEnvironmentUrl;
 @end
 
 @implementation KalturaPartner
@@ -15294,6 +15297,9 @@
 @synthesize referenceId = _referenceId;
 @synthesize timeAlignedRenditions = _timeAlignedRenditions;
 @synthesize eSearchLanguages = _eSearchLanguages;
+@synthesize publisherEnvironmentType = _publisherEnvironmentType;
+@synthesize ovpEnvironmentUrl = _ovpEnvironmentUrl;
+@synthesize ottEnvironmentUrl = _ottEnvironmentUrl;
 
 - (id)init
 {
@@ -15322,6 +15328,7 @@
     self->_isFirstLogin = KALTURA_UNDEF_BOOL;
     self->_partnerParentId = KALTURA_UNDEF_INT;
     self->_timeAlignedRenditions = KALTURA_UNDEF_BOOL;
+    self->_publisherEnvironmentType = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -15615,6 +15622,21 @@
     return @"KalturaESearchLanguageItem";
 }
 
+- (KalturaFieldType)getTypeOfPublisherEnvironmentType
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfOvpEnvironmentUrl
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfOttEnvironmentUrl
+{
+    return KFT_String;
+}
+
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -15725,6 +15747,11 @@
     self.timeAlignedRenditions = [KalturaSimpleTypeParser parseBool:aPropVal];
 }
 
+- (void)setPublisherEnvironmentTypeFromString:(NSString*)aPropVal
+{
+    self.publisherEnvironmentType = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -15798,6 +15825,8 @@
     [self->_crmId release];
     [self->_referenceId release];
     [self->_eSearchLanguages release];
+    [self->_ovpEnvironmentUrl release];
+    [self->_ottEnvironmentUrl release];
     [super dealloc];
 }
 
@@ -25359,46 +25388,11 @@
 @end
 
 @implementation KalturaMediaEntryFilter
-@synthesize isSequenceEntry = _isSequenceEntry;
-@synthesize sequenceEntryIdsIn = _sequenceEntryIdsIn;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_isSequenceEntry = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfIsSequenceEntry
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfSequenceEntryIdsIn
-{
-    return KFT_String;
-}
-
-- (void)setIsSequenceEntryFromString:(NSString*)aPropVal
-{
-    self.isSequenceEntry = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaMediaEntryFilter"];
-    [aParams addIfDefinedKey:@"isSequenceEntry" withInt:self.isSequenceEntry];
-    [aParams addIfDefinedKey:@"sequenceEntryIdsIn" withString:self.sequenceEntryIdsIn];
-}
-
-- (void)dealloc
-{
-    [self->_sequenceEntryIdsIn release];
-    [super dealloc];
 }
 
 @end
