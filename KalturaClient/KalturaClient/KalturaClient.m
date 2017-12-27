@@ -19901,8 +19901,6 @@
 @synthesize flavorParamsIds = _flavorParamsIds;
 @synthesize isTrimDisabled = _isTrimDisabled;
 @synthesize streams = _streams;
-@synthesize isSequenceEntry = _isSequenceEntry;
-@synthesize sequenceEntryIds = _sequenceEntryIds;
 
 - (id)init
 {
@@ -19913,7 +19911,6 @@
     self->_searchProviderType = KALTURA_UNDEF_INT;
     self->_mediaDate = KALTURA_UNDEF_INT;
     self->_isTrimDisabled = KALTURA_UNDEF_INT;
-    self->_isSequenceEntry = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -19982,16 +19979,6 @@
     return @"KalturaStreamContainer";
 }
 
-- (KalturaFieldType)getTypeOfIsSequenceEntry
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfSequenceEntryIds
-{
-    return KFT_String;
-}
-
 - (void)setMediaTypeFromString:(NSString*)aPropVal
 {
     self.mediaType = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -20012,11 +19999,6 @@
     self.isTrimDisabled = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
-- (void)setIsSequenceEntryFromString:(NSString*)aPropVal
-{
-    self.isSequenceEntry = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -20030,8 +20012,6 @@
     [aParams addIfDefinedKey:@"creditUserName" withString:self.creditUserName];
     [aParams addIfDefinedKey:@"creditUrl" withString:self.creditUrl];
     [aParams addIfDefinedKey:@"streams" withArray:self.streams];
-    [aParams addIfDefinedKey:@"isSequenceEntry" withInt:self.isSequenceEntry];
-    [aParams addIfDefinedKey:@"sequenceEntryIds" withString:self.sequenceEntryIds];
 }
 
 - (void)dealloc
@@ -20044,7 +20024,6 @@
     [self->_dataUrl release];
     [self->_flavorParamsIds release];
     [self->_streams release];
-    [self->_sequenceEntryIds release];
     [super dealloc];
 }
 
