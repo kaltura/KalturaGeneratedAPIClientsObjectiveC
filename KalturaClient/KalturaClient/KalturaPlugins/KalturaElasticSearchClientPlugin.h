@@ -58,6 +58,16 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaESearchCategoryEntryFieldName : NSObject
++ (NSString*)ANCESTOR_ID;
++ (NSString*)ANCESTOR_NAME;
++ (NSString*)FULL_IDS;
++ (NSString*)ID;
++ (NSString*)NAME;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaESearchCategoryFieldName : NSObject
 + (NSString*)CONTRIBUTION_POLICY;
 + (NSString*)CREATED_AT;
@@ -115,9 +125,6 @@
 @interface KalturaESearchEntryFieldName : NSObject
 + (NSString*)ACCESS_CONTROL_ID;
 + (NSString*)ADMIN_TAGS;
-+ (NSString*)CATEGORIES;
-+ (NSString*)CATEGORY_IDS;
-+ (NSString*)CATEGORY_NAME;
 + (NSString*)CONVERSION_PROFILE_ID;
 + (NSString*)CREATED_AT;
 + (NSString*)CREATOR_ID;
@@ -551,6 +558,16 @@
 @interface KalturaESearchCaptionItem : KalturaESearchAbstractEntryItem
 @property (nonatomic,copy) NSString* fieldName;	// enum KalturaESearchCaptionFieldName
 - (KalturaFieldType)getTypeOfFieldName;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaESearchCategoryEntryItem : KalturaESearchAbstractEntryItem
+@property (nonatomic,copy) NSString* fieldName;	// enum KalturaESearchCategoryEntryFieldName
+@property (nonatomic,assign) int categoryEntryStatus;	// enum KalturaCategoryEntryStatus
+- (KalturaFieldType)getTypeOfFieldName;
+- (KalturaFieldType)getTypeOfCategoryEntryStatus;
+- (void)setCategoryEntryStatusFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

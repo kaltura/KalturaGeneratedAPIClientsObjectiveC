@@ -81,6 +81,29 @@
 }
 @end
 
+@implementation KalturaESearchCategoryEntryFieldName
++ (NSString*)ANCESTOR_ID
+{
+    return @"ancestor_id";
+}
++ (NSString*)ANCESTOR_NAME
+{
+    return @"ancestor_name";
+}
++ (NSString*)FULL_IDS
+{
+    return @"full_ids";
+}
++ (NSString*)ID
+{
+    return @"id";
+}
++ (NSString*)NAME
+{
+    return @"name";
+}
+@end
+
 @implementation KalturaESearchCategoryFieldName
 + (NSString*)CONTRIBUTION_POLICY
 {
@@ -254,18 +277,6 @@
 + (NSString*)ADMIN_TAGS
 {
     return @"admin_tags";
-}
-+ (NSString*)CATEGORIES
-{
-    return @"categories";
-}
-+ (NSString*)CATEGORY_IDS
-{
-    return @"category_ids";
-}
-+ (NSString*)CATEGORY_NAME
-{
-    return @"category_name";
 }
 + (NSString*)CONVERSION_PROFILE_ID
 {
@@ -1873,6 +1884,51 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaESearchCaptionItem"];
     [aParams addIfDefinedKey:@"fieldName" withString:self.fieldName];
+}
+
+- (void)dealloc
+{
+    [self->_fieldName release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaESearchCategoryEntryItem
+@synthesize fieldName = _fieldName;
+@synthesize categoryEntryStatus = _categoryEntryStatus;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_categoryEntryStatus = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfFieldName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCategoryEntryStatus
+{
+    return KFT_Int;
+}
+
+- (void)setCategoryEntryStatusFromString:(NSString*)aPropVal
+{
+    self.categoryEntryStatus = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchCategoryEntryItem"];
+    [aParams addIfDefinedKey:@"fieldName" withString:self.fieldName];
+    [aParams addIfDefinedKey:@"categoryEntryStatus" withInt:self.categoryEntryStatus];
 }
 
 - (void)dealloc
