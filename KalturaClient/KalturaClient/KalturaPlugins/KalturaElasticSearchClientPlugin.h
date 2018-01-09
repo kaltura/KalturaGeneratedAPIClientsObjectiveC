@@ -268,13 +268,10 @@
 @property (nonatomic,copy) NSString* objectStatuses;
 @property (nonatomic,copy) NSString* objectId;
 @property (nonatomic,retain) KalturaESearchOrderBy* orderBy;
-@property (nonatomic,assign) KALTURA_BOOL useHighlight;
 - (KalturaFieldType)getTypeOfObjectStatuses;
 - (KalturaFieldType)getTypeOfObjectId;
 - (KalturaFieldType)getTypeOfOrderBy;
 - (NSString*)getObjectTypeOfOrderBy;
-- (KalturaFieldType)getTypeOfUseHighlight;
-- (void)setUseHighlightFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -499,11 +496,14 @@
 @property (nonatomic,copy) NSString* searchTerm;
 @property (nonatomic,assign) int itemType;	// enum KalturaESearchItemType
 @property (nonatomic,retain) KalturaESearchRange* range;
+@property (nonatomic,assign) KALTURA_BOOL addHighlight;
 - (KalturaFieldType)getTypeOfSearchTerm;
 - (KalturaFieldType)getTypeOfItemType;
 - (KalturaFieldType)getTypeOfRange;
 - (NSString*)getObjectTypeOfRange;
+- (KalturaFieldType)getTypeOfAddHighlight;
 - (void)setItemTypeFromString:(NSString*)aPropVal;
+- (void)setAddHighlightFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -512,11 +512,14 @@
 @property (nonatomic,copy) NSString* searchTerm;
 @property (nonatomic,assign) int itemType;	// enum KalturaESearchItemType
 @property (nonatomic,retain) KalturaESearchRange* range;
+@property (nonatomic,assign) KALTURA_BOOL addHighlight;
 - (KalturaFieldType)getTypeOfSearchTerm;
 - (KalturaFieldType)getTypeOfItemType;
 - (KalturaFieldType)getTypeOfRange;
 - (NSString*)getObjectTypeOfRange;
+- (KalturaFieldType)getTypeOfAddHighlight;
 - (void)setItemTypeFromString:(NSString*)aPropVal;
+- (void)setAddHighlightFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -525,11 +528,14 @@
 @property (nonatomic,copy) NSString* searchTerm;
 @property (nonatomic,assign) int itemType;	// enum KalturaESearchItemType
 @property (nonatomic,retain) KalturaESearchRange* range;
+@property (nonatomic,assign) KALTURA_BOOL addHighlight;
 - (KalturaFieldType)getTypeOfSearchTerm;
 - (KalturaFieldType)getTypeOfItemType;
 - (KalturaFieldType)getTypeOfRange;
 - (NSString*)getObjectTypeOfRange;
+- (KalturaFieldType)getTypeOfAddHighlight;
 - (void)setItemTypeFromString:(NSString*)aPropVal;
+- (void)setAddHighlightFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

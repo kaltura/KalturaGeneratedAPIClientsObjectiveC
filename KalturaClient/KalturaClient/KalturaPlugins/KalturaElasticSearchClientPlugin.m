@@ -716,16 +716,6 @@
 @synthesize objectStatuses = _objectStatuses;
 @synthesize objectId = _objectId;
 @synthesize orderBy = _orderBy;
-@synthesize useHighlight = _useHighlight;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_useHighlight = KALTURA_UNDEF_BOOL;
-    return self;
-}
 
 - (KalturaFieldType)getTypeOfObjectStatuses
 {
@@ -747,16 +737,6 @@
     return @"KalturaESearchOrderBy";
 }
 
-- (KalturaFieldType)getTypeOfUseHighlight
-{
-    return KFT_Bool;
-}
-
-- (void)setUseHighlightFromString:(NSString*)aPropVal
-{
-    self.useHighlight = [KalturaSimpleTypeParser parseBool:aPropVal];
-}
-
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -765,7 +745,6 @@
     [aParams addIfDefinedKey:@"objectStatuses" withString:self.objectStatuses];
     [aParams addIfDefinedKey:@"objectId" withString:self.objectId];
     [aParams addIfDefinedKey:@"orderBy" withObject:self.orderBy];
-    [aParams addIfDefinedKey:@"useHighlight" withBool:self.useHighlight];
 }
 
 - (void)dealloc
@@ -1628,6 +1607,7 @@
 @synthesize searchTerm = _searchTerm;
 @synthesize itemType = _itemType;
 @synthesize range = _range;
+@synthesize addHighlight = _addHighlight;
 
 - (id)init
 {
@@ -1635,6 +1615,7 @@
     if (self == nil)
         return nil;
     self->_itemType = KALTURA_UNDEF_INT;
+    self->_addHighlight = KALTURA_UNDEF_BOOL;
     return self;
 }
 
@@ -1658,9 +1639,19 @@
     return @"KalturaESearchRange";
 }
 
+- (KalturaFieldType)getTypeOfAddHighlight
+{
+    return KFT_Bool;
+}
+
 - (void)setItemTypeFromString:(NSString*)aPropVal
 {
     self.itemType = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAddHighlightFromString:(NSString*)aPropVal
+{
+    self.addHighlight = [KalturaSimpleTypeParser parseBool:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -1671,6 +1662,7 @@
     [aParams addIfDefinedKey:@"searchTerm" withString:self.searchTerm];
     [aParams addIfDefinedKey:@"itemType" withInt:self.itemType];
     [aParams addIfDefinedKey:@"range" withObject:self.range];
+    [aParams addIfDefinedKey:@"addHighlight" withBool:self.addHighlight];
 }
 
 - (void)dealloc
@@ -1686,6 +1678,7 @@
 @synthesize searchTerm = _searchTerm;
 @synthesize itemType = _itemType;
 @synthesize range = _range;
+@synthesize addHighlight = _addHighlight;
 
 - (id)init
 {
@@ -1693,6 +1686,7 @@
     if (self == nil)
         return nil;
     self->_itemType = KALTURA_UNDEF_INT;
+    self->_addHighlight = KALTURA_UNDEF_BOOL;
     return self;
 }
 
@@ -1716,9 +1710,19 @@
     return @"KalturaESearchRange";
 }
 
+- (KalturaFieldType)getTypeOfAddHighlight
+{
+    return KFT_Bool;
+}
+
 - (void)setItemTypeFromString:(NSString*)aPropVal
 {
     self.itemType = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAddHighlightFromString:(NSString*)aPropVal
+{
+    self.addHighlight = [KalturaSimpleTypeParser parseBool:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -1729,6 +1733,7 @@
     [aParams addIfDefinedKey:@"searchTerm" withString:self.searchTerm];
     [aParams addIfDefinedKey:@"itemType" withInt:self.itemType];
     [aParams addIfDefinedKey:@"range" withObject:self.range];
+    [aParams addIfDefinedKey:@"addHighlight" withBool:self.addHighlight];
 }
 
 - (void)dealloc
@@ -1744,6 +1749,7 @@
 @synthesize searchTerm = _searchTerm;
 @synthesize itemType = _itemType;
 @synthesize range = _range;
+@synthesize addHighlight = _addHighlight;
 
 - (id)init
 {
@@ -1751,6 +1757,7 @@
     if (self == nil)
         return nil;
     self->_itemType = KALTURA_UNDEF_INT;
+    self->_addHighlight = KALTURA_UNDEF_BOOL;
     return self;
 }
 
@@ -1774,9 +1781,19 @@
     return @"KalturaESearchRange";
 }
 
+- (KalturaFieldType)getTypeOfAddHighlight
+{
+    return KFT_Bool;
+}
+
 - (void)setItemTypeFromString:(NSString*)aPropVal
 {
     self.itemType = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAddHighlightFromString:(NSString*)aPropVal
+{
+    self.addHighlight = [KalturaSimpleTypeParser parseBool:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -1787,6 +1804,7 @@
     [aParams addIfDefinedKey:@"searchTerm" withString:self.searchTerm];
     [aParams addIfDefinedKey:@"itemType" withInt:self.itemType];
     [aParams addIfDefinedKey:@"range" withObject:self.range];
+    [aParams addIfDefinedKey:@"addHighlight" withBool:self.addHighlight];
 }
 
 - (void)dealloc
