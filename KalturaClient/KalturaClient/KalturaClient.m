@@ -3511,6 +3511,10 @@
 {
     return @"15";
 }
++ (NSString*)ASSET_TYPE
+{
+    return @"16";
+}
 @end
 
 @implementation KalturaContainerFormat
@@ -31288,6 +31292,30 @@
 - (void)dealloc
 {
     [self->_properties release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaAssetTypeCondition
+@synthesize assetTypes = _assetTypes;
+
+- (KalturaFieldType)getTypeOfAssetTypes
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaAssetTypeCondition"];
+    [aParams addIfDefinedKey:@"assetTypes" withString:self.assetTypes];
+}
+
+- (void)dealloc
+{
+    [self->_assetTypes release];
     [super dealloc];
 }
 

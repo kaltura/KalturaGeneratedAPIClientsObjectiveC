@@ -1424,6 +1424,7 @@
 + (NSString*)DELIVERY_PROFILE;
 + (NSString*)ACTIVE_EDGE_VALIDATE;
 + (NSString*)ANONYMOUS_IP;
++ (NSString*)ASSET_TYPE;
 @end
 
 // @package Kaltura
@@ -9379,6 +9380,13 @@
 @property (nonatomic,retain) NSMutableArray* properties;	// of KalturaKeyValue elements
 - (KalturaFieldType)getTypeOfProperties;
 - (NSString*)getObjectTypeOfProperties;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaAssetTypeCondition : KalturaCondition
+@property (nonatomic,copy) NSString* assetTypes;
+- (KalturaFieldType)getTypeOfAssetTypes;
 @end
 
 // @package Kaltura
