@@ -2947,10 +2947,6 @@
 {
     return @"contentDistribution.DistributionDelete";
 }
-+ (NSString*)CONVERT
-{
-    return @"0";
-}
 + (NSString*)DISTRIBUTION_DISABLE
 {
     return @"contentDistribution.DistributionDisable";
@@ -2978,6 +2974,10 @@
 + (NSString*)DROP_FOLDER_CONTENT_PROCESSOR
 {
     return @"dropFolder.DropFolderContentProcessor";
+}
++ (NSString*)CONVERT
+{
+    return @"0";
 }
 + (NSString*)DROP_FOLDER_WATCHER
 {
@@ -3170,6 +3170,10 @@
 + (NSString*)CHUNKED_ENCODE_JOB_SCHEDULER
 {
     return @"44";
+}
++ (NSString*)SERVER_NODE_MONITOR
+{
+    return @"45";
 }
 @end
 
@@ -50560,6 +50564,12 @@
 - (KalturaServerNodeListResponse*)list
 {
     return [self listWithFilter:nil];
+}
+
+- (KalturaServerNode*)markOfflineWithServerNodeId:(NSString*)aServerNodeId
+{
+    [self.client.params addIfDefinedKey:@"serverNodeId" withString:aServerNodeId];
+    return [self.client queueObjectService:@"servernode" withAction:@"markOffline" withExpectedType:@"KalturaServerNode"];
 }
 
 - (KalturaServerNode*)reportStatusWithHostName:(NSString*)aHostName withServerNode:(KalturaServerNode*)aServerNode

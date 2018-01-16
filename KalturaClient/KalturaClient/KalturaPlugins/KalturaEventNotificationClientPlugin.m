@@ -228,6 +228,10 @@
 {
     return @"38";
 }
++ (NSString*)SERVER_NODE
+{
+    return @"39";
+}
 @end
 
 @implementation KalturaEventNotificationEventType

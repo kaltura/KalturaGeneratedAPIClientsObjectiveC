@@ -1232,7 +1232,6 @@
 + (NSString*)PARSE_MULTI_LANGUAGE_CAPTION_ASSET;
 + (NSString*)PARSE_CAPTION_ASSET;
 + (NSString*)DISTRIBUTION_DELETE;
-+ (NSString*)CONVERT;
 + (NSString*)DISTRIBUTION_DISABLE;
 + (NSString*)DISTRIBUTION_ENABLE;
 + (NSString*)DISTRIBUTION_FETCH_REPORT;
@@ -1240,6 +1239,7 @@
 + (NSString*)DISTRIBUTION_SYNC;
 + (NSString*)DISTRIBUTION_UPDATE;
 + (NSString*)DROP_FOLDER_CONTENT_PROCESSOR;
++ (NSString*)CONVERT;
 + (NSString*)DROP_FOLDER_WATCHER;
 + (NSString*)EVENT_NOTIFICATION_HANDLER;
 + (NSString*)INTEGRATION;
@@ -1288,6 +1288,7 @@
 + (NSString*)LIVE_TO_VOD;
 + (NSString*)COPY_CAPTIONS;
 + (NSString*)CHUNKED_ENCODE_JOB_SCHEDULER;
++ (NSString*)SERVER_NODE_MONITOR;
 @end
 
 // @package Kaltura
@@ -15044,6 +15045,8 @@
 - (KalturaServerNodeListResponse*)listWithFilter:(KalturaServerNodeFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaServerNodeListResponse*)listWithFilter:(KalturaServerNodeFilter*)aFilter;
 - (KalturaServerNodeListResponse*)list;
+// Mark server node offline
+- (KalturaServerNode*)markOfflineWithServerNodeId:(NSString*)aServerNodeId;
 // Update server node status
 - (KalturaServerNode*)reportStatusWithHostName:(NSString*)aHostName withServerNode:(KalturaServerNode*)aServerNode;
 - (KalturaServerNode*)reportStatusWithHostName:(NSString*)aHostName;
