@@ -394,13 +394,9 @@
 {
     return @"updated_at";
 }
-+ (NSString*)VIEWS
++ (NSString*)USER_NAMES
 {
-    return @"views";
-}
-+ (NSString*)VOTES
-{
-    return @"votes";
+    return @"user_names";
 }
 @end
 
@@ -413,9 +409,17 @@
 {
     return @"end_date";
 }
++ (NSString*)LAST_PLAYED_AT
+{
+    return @"last_played_at";
+}
 + (NSString*)NAME
 {
     return @"name";
+}
++ (NSString*)PLAYS
+{
+    return @"plays";
 }
 + (NSString*)START_DATE
 {
