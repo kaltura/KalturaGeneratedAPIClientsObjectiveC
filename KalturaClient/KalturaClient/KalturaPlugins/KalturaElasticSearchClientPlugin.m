@@ -267,6 +267,10 @@
 {
     return @"text";
 }
++ (NSString*)TYPE
+{
+    return @"type";
+}
 @end
 
 @implementation KalturaESearchEntryFieldName
@@ -535,6 +539,26 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaESearchEntryBaseItem"];
+}
+
+@end
+
+@implementation KalturaESearchEntryBaseNestedObject
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchEntryBaseNestedObject"];
+}
+
+@end
+
+@implementation KalturaESearchEntryNestedBaseItem
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchEntryNestedBaseItem"];
 }
 
 @end
@@ -1174,7 +1198,12 @@
 
 - (KalturaFieldType)getTypeOfTags
 {
-    return KFT_String;
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfTags
+{
+    return @"KalturaString";
 }
 
 - (KalturaFieldType)getTypeOfStartTime
@@ -1199,7 +1228,12 @@
 
 - (KalturaFieldType)getTypeOfAnswers
 {
-    return KFT_String;
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfAnswers
+{
+    return @"KalturaString";
 }
 
 - (KalturaFieldType)getTypeOfHint
@@ -1226,12 +1260,12 @@
     [aParams addIfDefinedKey:@"id" withString:self.id];
     [aParams addIfDefinedKey:@"name" withString:self.name];
     [aParams addIfDefinedKey:@"text" withString:self.text];
-    [aParams addIfDefinedKey:@"tags" withString:self.tags];
+    [aParams addIfDefinedKey:@"tags" withArray:self.tags];
     [aParams addIfDefinedKey:@"startTime" withString:self.startTime];
     [aParams addIfDefinedKey:@"endTime" withString:self.endTime];
     [aParams addIfDefinedKey:@"subType" withString:self.subType];
     [aParams addIfDefinedKey:@"question" withString:self.question];
-    [aParams addIfDefinedKey:@"answers" withString:self.answers];
+    [aParams addIfDefinedKey:@"answers" withArray:self.answers];
     [aParams addIfDefinedKey:@"hint" withString:self.hint];
     [aParams addIfDefinedKey:@"explanation" withString:self.explanation];
     [aParams addIfDefinedKey:@"assetId" withString:self.assetId];
@@ -1892,30 +1926,6 @@
 
 @end
 
-@implementation KalturaESearchCaptionItem
-@synthesize fieldName = _fieldName;
-
-- (KalturaFieldType)getTypeOfFieldName
-{
-    return KFT_String;
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaESearchCaptionItem"];
-    [aParams addIfDefinedKey:@"fieldName" withString:self.fieldName];
-}
-
-- (void)dealloc
-{
-    [self->_fieldName release];
-    [super dealloc];
-}
-
-@end
-
 @implementation KalturaESearchCategoryEntryItem
 @synthesize fieldName = _fieldName;
 @synthesize categoryEntryStatus = _categoryEntryStatus;
@@ -2043,38 +2053,6 @@
 
 @end
 
-@implementation KalturaESearchCuePointItem
-@synthesize fieldName = _fieldName;
-@synthesize cuePointType = _cuePointType;
-
-- (KalturaFieldType)getTypeOfFieldName
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfCuePointType
-{
-    return KFT_String;
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaESearchCuePointItem"];
-    [aParams addIfDefinedKey:@"fieldName" withString:self.fieldName];
-    [aParams addIfDefinedKey:@"cuePointType" withString:self.cuePointType];
-}
-
-- (void)dealloc
-{
-    [self->_fieldName release];
-    [self->_cuePointType release];
-    [super dealloc];
-}
-
-@end
-
 @implementation KalturaESearchEntryItem
 @synthesize fieldName = _fieldName;
 
@@ -2094,64 +2072,6 @@
 - (void)dealloc
 {
     [self->_fieldName release];
-    [super dealloc];
-}
-
-@end
-
-@implementation KalturaESearchEntryMetadataItem
-@synthesize xpath = _xpath;
-@synthesize metadataProfileId = _metadataProfileId;
-@synthesize metadataFieldId = _metadataFieldId;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_metadataProfileId = KALTURA_UNDEF_INT;
-    self->_metadataFieldId = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfXpath
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfMetadataProfileId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfMetadataFieldId
-{
-    return KFT_Int;
-}
-
-- (void)setMetadataProfileIdFromString:(NSString*)aPropVal
-{
-    self.metadataProfileId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setMetadataFieldIdFromString:(NSString*)aPropVal
-{
-    self.metadataFieldId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaESearchEntryMetadataItem"];
-    [aParams addIfDefinedKey:@"xpath" withString:self.xpath];
-    [aParams addIfDefinedKey:@"metadataProfileId" withInt:self.metadataProfileId];
-    [aParams addIfDefinedKey:@"metadataFieldId" withInt:self.metadataFieldId];
-}
-
-- (void)dealloc
-{
-    [self->_xpath release];
     [super dealloc];
 }
 
@@ -2236,6 +2156,233 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaESearchUserMetadataItem"];
+    [aParams addIfDefinedKey:@"xpath" withString:self.xpath];
+    [aParams addIfDefinedKey:@"metadataProfileId" withInt:self.metadataProfileId];
+    [aParams addIfDefinedKey:@"metadataFieldId" withInt:self.metadataFieldId];
+}
+
+- (void)dealloc
+{
+    [self->_xpath release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaESearchEntryAbstractNestedItem
+@synthesize searchTerm = _searchTerm;
+@synthesize itemType = _itemType;
+@synthesize range = _range;
+@synthesize addHighlight = _addHighlight;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_itemType = KALTURA_UNDEF_INT;
+    self->_addHighlight = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfSearchTerm
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfItemType
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfRange
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfRange
+{
+    return @"KalturaESearchRange";
+}
+
+- (KalturaFieldType)getTypeOfAddHighlight
+{
+    return KFT_Bool;
+}
+
+- (void)setItemTypeFromString:(NSString*)aPropVal
+{
+    self.itemType = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAddHighlightFromString:(NSString*)aPropVal
+{
+    self.addHighlight = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchEntryAbstractNestedItem"];
+    [aParams addIfDefinedKey:@"searchTerm" withString:self.searchTerm];
+    [aParams addIfDefinedKey:@"itemType" withInt:self.itemType];
+    [aParams addIfDefinedKey:@"range" withObject:self.range];
+    [aParams addIfDefinedKey:@"addHighlight" withBool:self.addHighlight];
+}
+
+- (void)dealloc
+{
+    [self->_searchTerm release];
+    [self->_range release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaESearchNestedOperator
+@synthesize operator = _operator;
+@synthesize searchItems = _searchItems;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_operator = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfOperator
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfSearchItems
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfSearchItems
+{
+    return @"KalturaESearchEntryNestedBaseItem";
+}
+
+- (void)setOperatorFromString:(NSString*)aPropVal
+{
+    self.operator = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchNestedOperator"];
+    [aParams addIfDefinedKey:@"operator" withInt:self.operator];
+    [aParams addIfDefinedKey:@"searchItems" withArray:self.searchItems];
+}
+
+- (void)dealloc
+{
+    [self->_searchItems release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaESearchCaptionItem
+@synthesize fieldName = _fieldName;
+
+- (KalturaFieldType)getTypeOfFieldName
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchCaptionItem"];
+    [aParams addIfDefinedKey:@"fieldName" withString:self.fieldName];
+}
+
+- (void)dealloc
+{
+    [self->_fieldName release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaESearchCuePointItem
+@synthesize fieldName = _fieldName;
+
+- (KalturaFieldType)getTypeOfFieldName
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchCuePointItem"];
+    [aParams addIfDefinedKey:@"fieldName" withString:self.fieldName];
+}
+
+- (void)dealloc
+{
+    [self->_fieldName release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaESearchEntryMetadataItem
+@synthesize xpath = _xpath;
+@synthesize metadataProfileId = _metadataProfileId;
+@synthesize metadataFieldId = _metadataFieldId;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_metadataProfileId = KALTURA_UNDEF_INT;
+    self->_metadataFieldId = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfXpath
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfMetadataProfileId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfMetadataFieldId
+{
+    return KFT_Int;
+}
+
+- (void)setMetadataProfileIdFromString:(NSString*)aPropVal
+{
+    self.metadataProfileId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setMetadataFieldIdFromString:(NSString*)aPropVal
+{
+    self.metadataFieldId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchEntryMetadataItem"];
     [aParams addIfDefinedKey:@"xpath" withString:self.xpath];
     [aParams addIfDefinedKey:@"metadataProfileId" withInt:self.metadataProfileId];
     [aParams addIfDefinedKey:@"metadataFieldId" withInt:self.metadataFieldId];

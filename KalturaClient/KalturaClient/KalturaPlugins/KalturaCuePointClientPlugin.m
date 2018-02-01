@@ -47,6 +47,37 @@
 }
 @end
 
+@implementation KalturaQuestionType
++ (int)MULTIPLE_CHOICE_ANSWER
+{
+    return 1;
+}
++ (int)TRUE_FALSE
+{
+    return 2;
+}
++ (int)REFLECTION_POINT
+{
+    return 3;
+}
++ (int)MULTIPLE_ANSWER_QUESTION
+{
+    return 4;
+}
++ (int)FILL_IN_BLANK
+{
+    return 5;
+}
++ (int)HOT_SPOT
+{
+    return 6;
+}
++ (int)GO_TO
+{
+    return 7;
+}
+@end
+
 @implementation KalturaQuizOutputType
 + (int)PDF
 {

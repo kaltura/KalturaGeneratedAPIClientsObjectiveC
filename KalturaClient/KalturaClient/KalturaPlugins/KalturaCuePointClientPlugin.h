@@ -41,6 +41,18 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaQuestionType : NSObject
++ (int)MULTIPLE_CHOICE_ANSWER;
++ (int)TRUE_FALSE;
++ (int)REFLECTION_POINT;
++ (int)MULTIPLE_ANSWER_QUESTION;
++ (int)FILL_IN_BLANK;
++ (int)HOT_SPOT;
++ (int)GO_TO;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaQuizOutputType : NSObject
 + (int)PDF;
 @end

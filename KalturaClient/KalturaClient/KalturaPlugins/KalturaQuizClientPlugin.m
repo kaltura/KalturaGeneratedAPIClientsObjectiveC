@@ -402,6 +402,16 @@
 @synthesize hint = _hint;
 @synthesize question = _question;
 @synthesize explanation = _explanation;
+@synthesize questionType = _questionType;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_questionType = KALTURA_UNDEF_INT;
+    return self;
+}
 
 - (KalturaFieldType)getTypeOfOptionalAnswers
 {
@@ -428,6 +438,16 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfQuestionType
+{
+    return KFT_Int;
+}
+
+- (void)setQuestionTypeFromString:(NSString*)aPropVal
+{
+    self.questionType = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -437,6 +457,7 @@
     [aParams addIfDefinedKey:@"hint" withString:self.hint];
     [aParams addIfDefinedKey:@"question" withString:self.question];
     [aParams addIfDefinedKey:@"explanation" withString:self.explanation];
+    [aParams addIfDefinedKey:@"questionType" withInt:self.questionType];
 }
 
 - (void)dealloc

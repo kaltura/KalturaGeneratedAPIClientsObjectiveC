@@ -118,6 +118,7 @@
 + (NSString*)SUB_TYPE;
 + (NSString*)TAGS;
 + (NSString*)TEXT;
++ (NSString*)TYPE;
 @end
 
 // @package Kaltura
@@ -215,6 +216,16 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaESearchEntryBaseItem : KalturaESearchBaseItem
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaESearchEntryBaseNestedObject : KalturaESearchEntryBaseItem
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaESearchEntryNestedBaseItem : KalturaESearchEntryBaseNestedObject
 @end
 
 // @package Kaltura
@@ -377,12 +388,12 @@
 @property (nonatomic,copy) NSString* id;
 @property (nonatomic,copy) NSString* name;
 @property (nonatomic,copy) NSString* text;
-@property (nonatomic,copy) NSString* tags;
+@property (nonatomic,retain) NSMutableArray* tags;	// of KalturaString elements
 @property (nonatomic,copy) NSString* startTime;
 @property (nonatomic,copy) NSString* endTime;
 @property (nonatomic,copy) NSString* subType;
 @property (nonatomic,copy) NSString* question;
-@property (nonatomic,copy) NSString* answers;
+@property (nonatomic,retain) NSMutableArray* answers;	// of KalturaString elements
 @property (nonatomic,copy) NSString* hint;
 @property (nonatomic,copy) NSString* explanation;
 @property (nonatomic,copy) NSString* assetId;
@@ -391,11 +402,13 @@
 - (KalturaFieldType)getTypeOfName;
 - (KalturaFieldType)getTypeOfText;
 - (KalturaFieldType)getTypeOfTags;
+- (NSString*)getObjectTypeOfTags;
 - (KalturaFieldType)getTypeOfStartTime;
 - (KalturaFieldType)getTypeOfEndTime;
 - (KalturaFieldType)getTypeOfSubType;
 - (KalturaFieldType)getTypeOfQuestion;
 - (KalturaFieldType)getTypeOfAnswers;
+- (NSString*)getObjectTypeOfAnswers;
 - (KalturaFieldType)getTypeOfHint;
 - (KalturaFieldType)getTypeOfExplanation;
 - (KalturaFieldType)getTypeOfAssetId;
@@ -562,13 +575,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaESearchCaptionItem : KalturaESearchAbstractEntryItem
-@property (nonatomic,copy) NSString* fieldName;	// enum KalturaESearchCaptionFieldName
-- (KalturaFieldType)getTypeOfFieldName;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaESearchCategoryEntryItem : KalturaESearchAbstractEntryItem
 @property (nonatomic,copy) NSString* fieldName;	// enum KalturaESearchCategoryEntryFieldName
 @property (nonatomic,assign) int categoryEntryStatus;	// enum KalturaCategoryEntryStatus
@@ -599,31 +605,9 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaESearchCuePointItem : KalturaESearchAbstractEntryItem
-@property (nonatomic,copy) NSString* fieldName;	// enum KalturaESearchCuePointFieldName
-@property (nonatomic,copy) NSString* cuePointType;	// enum KalturaCuePointType
-- (KalturaFieldType)getTypeOfFieldName;
-- (KalturaFieldType)getTypeOfCuePointType;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaESearchEntryItem : KalturaESearchAbstractEntryItem
 @property (nonatomic,copy) NSString* fieldName;	// enum KalturaESearchEntryFieldName
 - (KalturaFieldType)getTypeOfFieldName;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaESearchEntryMetadataItem : KalturaESearchAbstractEntryItem
-@property (nonatomic,copy) NSString* xpath;
-@property (nonatomic,assign) int metadataProfileId;
-@property (nonatomic,assign) int metadataFieldId;
-- (KalturaFieldType)getTypeOfXpath;
-- (KalturaFieldType)getTypeOfMetadataProfileId;
-- (KalturaFieldType)getTypeOfMetadataFieldId;
-- (void)setMetadataProfileIdFromString:(NSString*)aPropVal;
-- (void)setMetadataFieldIdFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -641,6 +625,60 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaESearchUserMetadataItem : KalturaESearchAbstractUserItem
+@property (nonatomic,copy) NSString* xpath;
+@property (nonatomic,assign) int metadataProfileId;
+@property (nonatomic,assign) int metadataFieldId;
+- (KalturaFieldType)getTypeOfXpath;
+- (KalturaFieldType)getTypeOfMetadataProfileId;
+- (KalturaFieldType)getTypeOfMetadataFieldId;
+- (void)setMetadataProfileIdFromString:(NSString*)aPropVal;
+- (void)setMetadataFieldIdFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaESearchEntryAbstractNestedItem : KalturaESearchEntryNestedBaseItem
+@property (nonatomic,copy) NSString* searchTerm;
+@property (nonatomic,assign) int itemType;	// enum KalturaESearchItemType
+@property (nonatomic,retain) KalturaESearchRange* range;
+@property (nonatomic,assign) KALTURA_BOOL addHighlight;
+- (KalturaFieldType)getTypeOfSearchTerm;
+- (KalturaFieldType)getTypeOfItemType;
+- (KalturaFieldType)getTypeOfRange;
+- (NSString*)getObjectTypeOfRange;
+- (KalturaFieldType)getTypeOfAddHighlight;
+- (void)setItemTypeFromString:(NSString*)aPropVal;
+- (void)setAddHighlightFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaESearchNestedOperator : KalturaESearchEntryNestedBaseItem
+@property (nonatomic,assign) int operator;	// enum KalturaESearchOperatorType
+@property (nonatomic,retain) NSMutableArray* searchItems;	// of KalturaESearchEntryNestedBaseItem elements
+- (KalturaFieldType)getTypeOfOperator;
+- (KalturaFieldType)getTypeOfSearchItems;
+- (NSString*)getObjectTypeOfSearchItems;
+- (void)setOperatorFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaESearchCaptionItem : KalturaESearchEntryAbstractNestedItem
+@property (nonatomic,copy) NSString* fieldName;	// enum KalturaESearchCaptionFieldName
+- (KalturaFieldType)getTypeOfFieldName;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaESearchCuePointItem : KalturaESearchEntryAbstractNestedItem
+@property (nonatomic,copy) NSString* fieldName;	// enum KalturaESearchCuePointFieldName
+- (KalturaFieldType)getTypeOfFieldName;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaESearchEntryMetadataItem : KalturaESearchEntryAbstractNestedItem
 @property (nonatomic,copy) NSString* xpath;
 @property (nonatomic,assign) int metadataProfileId;
 @property (nonatomic,assign) int metadataFieldId;
