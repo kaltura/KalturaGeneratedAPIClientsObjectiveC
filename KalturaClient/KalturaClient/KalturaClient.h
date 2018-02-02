@@ -1238,8 +1238,8 @@
 + (NSString*)DISTRIBUTION_SUBMIT;
 + (NSString*)DISTRIBUTION_SYNC;
 + (NSString*)DISTRIBUTION_UPDATE;
-+ (NSString*)DROP_FOLDER_CONTENT_PROCESSOR;
 + (NSString*)CONVERT;
++ (NSString*)DROP_FOLDER_CONTENT_PROCESSOR;
 + (NSString*)DROP_FOLDER_WATCHER;
 + (NSString*)EVENT_NOTIFICATION_HANDLER;
 + (NSString*)INTEGRATION;
@@ -1289,6 +1289,7 @@
 + (NSString*)COPY_CAPTIONS;
 + (NSString*)CHUNKED_ENCODE_JOB_SCHEDULER;
 + (NSString*)SERVER_NODE_MONITOR;
++ (NSString*)USERS_CSV;
 @end
 
 // @package Kaltura
@@ -3347,6 +3348,7 @@
 + (NSString*)MAIL_TYPE_LIVE_REPORT_EXPORT_SUCCESS;
 + (NSString*)MAIL_TYPE_LIVE_REPORT_EXPORT_FAILURE;
 + (NSString*)MAIL_TYPE_LIVE_REPORT_EXPORT_ABORT;
++ (NSString*)MAIL_TYPE_USERS_CSV;
 @end
 
 // @package Kaltura
@@ -5886,6 +5888,15 @@
 - (KalturaFieldType)getTypeOfName;
 - (void)setLatitudeFromString:(NSString*)aPropVal;
 - (void)setLongitudeFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaCsvAdditionalFieldInfo : KalturaObjectBase
+@property (nonatomic,copy) NSString* fieldName;
+@property (nonatomic,copy) NSString* xpath;
+- (KalturaFieldType)getTypeOfFieldName;
+- (KalturaFieldType)getTypeOfXpath;
 @end
 
 // @package Kaltura
@@ -11813,6 +11824,32 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaUsersCsvJobData : KalturaJobData
+// The filter should return the list of users that need to be specified in the csv.
+@property (nonatomic,retain) KalturaUserFilter* filter;
+// The metadata profile we should look the xpath in
+@property (nonatomic,assign) int metadataProfileId;
+// The xpath to look in the metadataProfileId  and the wanted csv field name
+@property (nonatomic,retain) NSMutableArray* additionalFields;	// of KalturaCsvAdditionalFieldInfo elements
+// The users name
+@property (nonatomic,copy) NSString* userName;
+// The users email
+@property (nonatomic,copy) NSString* userMail;
+// The file location
+@property (nonatomic,copy) NSString* outputPath;
+- (KalturaFieldType)getTypeOfFilter;
+- (NSString*)getObjectTypeOfFilter;
+- (KalturaFieldType)getTypeOfMetadataProfileId;
+- (KalturaFieldType)getTypeOfAdditionalFields;
+- (NSString*)getObjectTypeOfAdditionalFields;
+- (KalturaFieldType)getTypeOfUserName;
+- (KalturaFieldType)getTypeOfUserMail;
+- (KalturaFieldType)getTypeOfOutputPath;
+- (void)setMetadataProfileIdFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaValidateActiveEdgeCondition : KalturaCondition
 // Comma separated list of edge servers to validate are active
 @property (nonatomic,copy) NSString* edgeServerIds;
@@ -15383,6 +15420,10 @@
 // Enables a user to log into a partner account using an email address and a password
 - (KalturaUser*)enableLoginWithUserId:(NSString*)aUserId withLoginId:(NSString*)aLoginId withPassword:(NSString*)aPassword;
 - (KalturaUser*)enableLoginWithUserId:(NSString*)aUserId withLoginId:(NSString*)aLoginId;
+// add batch job that sends an email with a link to download an updated CSV that contains list of users
+- (NSString*)exportToCsvWithFilter:(KalturaUserFilter*)aFilter withMetadataProfileId:(int)aMetadataProfileId withAdditionalFields:(NSArray*)aAdditionalFields;
+- (NSString*)exportToCsvWithFilter:(KalturaUserFilter*)aFilter withMetadataProfileId:(int)aMetadataProfileId;
+- (NSString*)exportToCsvWithFilter:(KalturaUserFilter*)aFilter;
 // Retrieves a user object for a specified user ID.
 - (KalturaUser*)getWithUserId:(NSString*)aUserId;
 - (KalturaUser*)get;
@@ -15414,6 +15455,8 @@
 - (void)notifyBanWithUserId:(NSString*)aUserId;
 // Reset user's password and send the user an email to generate a new one.
 - (void)resetPasswordWithEmail:(NSString*)aEmail;
+// Will serve a requested csv
+- (NSString*)serveCsvWithId:(NSString*)aId;
 // Set initial users password
 - (void)setInitialPasswordWithHashKey:(NSString*)aHashKey withNewPassword:(NSString*)aNewPassword;
 // Updates an existing user object.

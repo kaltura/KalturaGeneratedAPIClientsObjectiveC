@@ -341,11 +341,13 @@
 @property (nonatomic,assign) int endsAt;
 @property (nonatomic,copy) NSString* language;
 @property (nonatomic,copy) NSString* captionAssetId;
+@property (nonatomic,copy) NSString* label;
 - (KalturaFieldType)getTypeOfLine;
 - (KalturaFieldType)getTypeOfStartsAt;
 - (KalturaFieldType)getTypeOfEndsAt;
 - (KalturaFieldType)getTypeOfLanguage;
 - (KalturaFieldType)getTypeOfCaptionAssetId;
+- (KalturaFieldType)getTypeOfLabel;
 - (void)setStartsAtFromString:(NSString*)aPropVal;
 - (void)setEndsAtFromString:(NSString*)aPropVal;
 @end

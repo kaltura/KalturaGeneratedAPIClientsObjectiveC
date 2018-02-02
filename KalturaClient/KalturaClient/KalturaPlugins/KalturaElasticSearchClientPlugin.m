@@ -980,6 +980,7 @@
 @synthesize endsAt = _endsAt;
 @synthesize language = _language;
 @synthesize captionAssetId = _captionAssetId;
+@synthesize label = _label;
 
 - (id)init
 {
@@ -1016,6 +1017,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfLabel
+{
+    return KFT_String;
+}
+
 - (void)setStartsAtFromString:(NSString*)aPropVal
 {
     self.startsAt = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -1036,6 +1042,7 @@
     [aParams addIfDefinedKey:@"endsAt" withInt:self.endsAt];
     [aParams addIfDefinedKey:@"language" withString:self.language];
     [aParams addIfDefinedKey:@"captionAssetId" withString:self.captionAssetId];
+    [aParams addIfDefinedKey:@"label" withString:self.label];
 }
 
 - (void)dealloc
@@ -1043,6 +1050,7 @@
     [self->_line release];
     [self->_language release];
     [self->_captionAssetId release];
+    [self->_label release];
     [super dealloc];
 }
 

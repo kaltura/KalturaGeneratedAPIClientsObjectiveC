@@ -2971,13 +2971,13 @@
 {
     return @"contentDistribution.DistributionUpdate";
 }
-+ (NSString*)DROP_FOLDER_CONTENT_PROCESSOR
-{
-    return @"dropFolder.DropFolderContentProcessor";
-}
 + (NSString*)CONVERT
 {
     return @"0";
+}
++ (NSString*)DROP_FOLDER_CONTENT_PROCESSOR
+{
+    return @"dropFolder.DropFolderContentProcessor";
 }
 + (NSString*)DROP_FOLDER_WATCHER
 {
@@ -3174,6 +3174,10 @@
 + (NSString*)SERVER_NODE_MONITOR
 {
     return @"45";
+}
++ (NSString*)USERS_CSV
+{
+    return @"46";
 }
 @end
 
@@ -9910,6 +9914,10 @@
 + (NSString*)MAIL_TYPE_LIVE_REPORT_EXPORT_ABORT
 {
     return @"132";
+}
++ (NSString*)MAIL_TYPE_USERS_CSV
+{
+    return @"133";
 }
 @end
 
@@ -18238,6 +18246,38 @@
 - (void)dealloc
 {
     [self->_name release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaCsvAdditionalFieldInfo
+@synthesize fieldName = _fieldName;
+@synthesize xpath = _xpath;
+
+- (KalturaFieldType)getTypeOfFieldName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfXpath
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaCsvAdditionalFieldInfo"];
+    [aParams addIfDefinedKey:@"fieldName" withString:self.fieldName];
+    [aParams addIfDefinedKey:@"xpath" withString:self.xpath];
+}
+
+- (void)dealloc
+{
+    [self->_fieldName release];
+    [self->_xpath release];
     [super dealloc];
 }
 
@@ -40496,6 +40536,93 @@
 
 @end
 
+@implementation KalturaUsersCsvJobData
+@synthesize filter = _filter;
+@synthesize metadataProfileId = _metadataProfileId;
+@synthesize additionalFields = _additionalFields;
+@synthesize userName = _userName;
+@synthesize userMail = _userMail;
+@synthesize outputPath = _outputPath;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_metadataProfileId = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfFilter
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfFilter
+{
+    return @"KalturaUserFilter";
+}
+
+- (KalturaFieldType)getTypeOfMetadataProfileId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfAdditionalFields
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfAdditionalFields
+{
+    return @"KalturaCsvAdditionalFieldInfo";
+}
+
+- (KalturaFieldType)getTypeOfUserName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfUserMail
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfOutputPath
+{
+    return KFT_String;
+}
+
+- (void)setMetadataProfileIdFromString:(NSString*)aPropVal
+{
+    self.metadataProfileId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaUsersCsvJobData"];
+    [aParams addIfDefinedKey:@"filter" withObject:self.filter];
+    [aParams addIfDefinedKey:@"metadataProfileId" withInt:self.metadataProfileId];
+    [aParams addIfDefinedKey:@"additionalFields" withArray:self.additionalFields];
+    [aParams addIfDefinedKey:@"userName" withString:self.userName];
+    [aParams addIfDefinedKey:@"userMail" withString:self.userMail];
+    [aParams addIfDefinedKey:@"outputPath" withString:self.outputPath];
+}
+
+- (void)dealloc
+{
+    [self->_filter release];
+    [self->_additionalFields release];
+    [self->_userName release];
+    [self->_userMail release];
+    [self->_outputPath release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaValidateActiveEdgeCondition
 @synthesize edgeServerIds = _edgeServerIds;
 
@@ -51461,6 +51588,24 @@
     return [self enableLoginWithUserId:aUserId withLoginId:aLoginId withPassword:nil];
 }
 
+- (NSString*)exportToCsvWithFilter:(KalturaUserFilter*)aFilter withMetadataProfileId:(int)aMetadataProfileId withAdditionalFields:(NSArray*)aAdditionalFields
+{
+    [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
+    [self.client.params addIfDefinedKey:@"metadataProfileId" withInt:aMetadataProfileId];
+    [self.client.params addIfDefinedKey:@"additionalFields" withArray:aAdditionalFields];
+    return [self.client queueStringService:@"user" withAction:@"exportToCsv"];
+}
+
+- (NSString*)exportToCsvWithFilter:(KalturaUserFilter*)aFilter withMetadataProfileId:(int)aMetadataProfileId
+{
+    return [self exportToCsvWithFilter:aFilter withMetadataProfileId:aMetadataProfileId withAdditionalFields:nil];
+}
+
+- (NSString*)exportToCsvWithFilter:(KalturaUserFilter*)aFilter
+{
+    return [self exportToCsvWithFilter:aFilter withMetadataProfileId:KALTURA_UNDEF_INT];
+}
+
 - (KalturaUser*)getWithUserId:(NSString*)aUserId
 {
     [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
@@ -51574,6 +51719,12 @@
 {
     [self.client.params addIfDefinedKey:@"email" withString:aEmail];
     [self.client queueVoidService:@"user" withAction:@"resetPassword"];
+}
+
+- (NSString*)serveCsvWithId:(NSString*)aId
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    return [self.client queueStringService:@"user" withAction:@"serveCsv"];
 }
 
 - (void)setInitialPasswordWithHashKey:(NSString*)aHashKey withNewPassword:(NSString*)aNewPassword
