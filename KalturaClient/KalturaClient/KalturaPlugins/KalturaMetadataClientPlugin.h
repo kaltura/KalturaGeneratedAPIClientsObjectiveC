@@ -293,13 +293,14 @@
 @property (nonatomic,retain) KalturaFileContainer* srcXsl;
 @property (nonatomic,assign) int srcVersion;
 @property (nonatomic,assign) int destVersion;
-@property (nonatomic,copy) NSString* destXsdPath;
+@property (nonatomic,retain) KalturaFileContainer* destXsd;
 @property (nonatomic,assign) int metadataProfileId;
 - (KalturaFieldType)getTypeOfSrcXsl;
 - (NSString*)getObjectTypeOfSrcXsl;
 - (KalturaFieldType)getTypeOfSrcVersion;
 - (KalturaFieldType)getTypeOfDestVersion;
-- (KalturaFieldType)getTypeOfDestXsdPath;
+- (KalturaFieldType)getTypeOfDestXsd;
+- (NSString*)getObjectTypeOfDestXsd;
 - (KalturaFieldType)getTypeOfMetadataProfileId;
 - (void)setSrcVersionFromString:(NSString*)aPropVal;
 - (void)setDestVersionFromString:(NSString*)aPropVal;

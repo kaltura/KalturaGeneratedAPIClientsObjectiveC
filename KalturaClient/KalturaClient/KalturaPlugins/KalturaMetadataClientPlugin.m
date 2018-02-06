@@ -994,7 +994,7 @@
 @synthesize srcXsl = _srcXsl;
 @synthesize srcVersion = _srcVersion;
 @synthesize destVersion = _destVersion;
-@synthesize destXsdPath = _destXsdPath;
+@synthesize destXsd = _destXsd;
 @synthesize metadataProfileId = _metadataProfileId;
 
 - (id)init
@@ -1028,9 +1028,14 @@
     return KFT_Int;
 }
 
-- (KalturaFieldType)getTypeOfDestXsdPath
+- (KalturaFieldType)getTypeOfDestXsd
 {
-    return KFT_String;
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfDestXsd
+{
+    return @"KalturaFileContainer";
 }
 
 - (KalturaFieldType)getTypeOfMetadataProfileId
@@ -1061,14 +1066,14 @@
     [aParams addIfDefinedKey:@"srcXsl" withObject:self.srcXsl];
     [aParams addIfDefinedKey:@"srcVersion" withInt:self.srcVersion];
     [aParams addIfDefinedKey:@"destVersion" withInt:self.destVersion];
-    [aParams addIfDefinedKey:@"destXsdPath" withString:self.destXsdPath];
+    [aParams addIfDefinedKey:@"destXsd" withObject:self.destXsd];
     [aParams addIfDefinedKey:@"metadataProfileId" withInt:self.metadataProfileId];
 }
 
 - (void)dealloc
 {
     [self->_srcXsl release];
-    [self->_destXsdPath release];
+    [self->_destXsd release];
     [super dealloc];
 }
 
