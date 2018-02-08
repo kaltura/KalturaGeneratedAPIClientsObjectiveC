@@ -6041,14 +6041,6 @@
 {
     return @"Chinese";
 }
-+ (NSString*)ZH_HANS
-{
-    return @"Chinese (Simplified)";
-}
-+ (NSString*)ZH_HANT
-{
-    return @"Chinese (Traditional)";
-}
 + (NSString*)CHN
 {
     return @"Chinook jargon";
@@ -7825,11 +7817,11 @@
 {
     return @"Yanesha";
 }
-+ (NSString*)JI
++ (NSString*)YI
 {
     return @"Yiddish";
 }
-+ (NSString*)YI
++ (NSString*)JI
 {
     return @"Yiddish";
 }
@@ -8431,14 +8423,6 @@
 + (NSString*)ZH
 {
     return @"zh";
-}
-+ (NSString*)ZH_HANS
-{
-    return @"zh_s";
-}
-+ (NSString*)ZH_HANT
-{
-    return @"zh_t";
 }
 + (NSString*)ZU
 {

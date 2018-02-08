@@ -2286,8 +2286,6 @@
 + (NSString*)CIC;
 + (NSString*)CLC;
 + (NSString*)ZH;
-+ (NSString*)ZH_HANS;
-+ (NSString*)ZH_HANT;
 + (NSString*)CHN;
 + (NSString*)CHP;
 + (NSString*)CIW;
@@ -2732,8 +2730,8 @@
 + (NSString*)WYM;
 + (NSString*)XH;
 + (NSString*)AME;
-+ (NSString*)JI;
 + (NSString*)YI;
++ (NSString*)JI;
 + (NSString*)YO;
 + (NSString*)ZAI;
 + (NSString*)DJE;
@@ -2888,8 +2886,6 @@
 + (NSString*)YI;
 + (NSString*)YO;
 + (NSString*)ZH;
-+ (NSString*)ZH_HANS;
-+ (NSString*)ZH_HANT;
 + (NSString*)ZU;
 @end
 
