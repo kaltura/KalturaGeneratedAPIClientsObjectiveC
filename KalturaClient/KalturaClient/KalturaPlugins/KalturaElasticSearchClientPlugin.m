@@ -374,6 +374,10 @@
 {
     return @"reference_id";
 }
++ (NSString*)ROOT_ID
+{
+    return @"root_id";
+}
 + (NSString*)SITE_URL
 {
     return @"site_url";

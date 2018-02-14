@@ -149,6 +149,7 @@
 + (NSString*)RECORDED_ENTRY_ID;
 + (NSString*)REDIRECT_ENTRY_ID;
 + (NSString*)REFERENCE_ID;
++ (NSString*)ROOT_ID;
 + (NSString*)SITE_URL;
 + (NSString*)SOURCE_TYPE;
 + (NSString*)START_DATE;
