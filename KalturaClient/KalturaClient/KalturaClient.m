@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2017  Kaltura Inc.
+// Copyright (C) 2006-2018  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -36521,6 +36521,16 @@
 @implementation KalturaLiveEntryServerNode
 @synthesize streams = _streams;
 @synthesize recordingInfo = _recordingInfo;
+@synthesize isPlayableUser = _isPlayableUser;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_isPlayableUser = KALTURA_UNDEF_BOOL;
+    return self;
+}
 
 - (KalturaFieldType)getTypeOfStreams
 {
@@ -36542,6 +36552,16 @@
     return @"KalturaLiveEntryServerNodeRecordingInfo";
 }
 
+- (KalturaFieldType)getTypeOfIsPlayableUser
+{
+    return KFT_Bool;
+}
+
+- (void)setIsPlayableUserFromString:(NSString*)aPropVal
+{
+    self.isPlayableUser = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -36549,6 +36569,7 @@
         [aParams putKey:@"objectType" withString:@"KalturaLiveEntryServerNode"];
     [aParams addIfDefinedKey:@"streams" withArray:self.streams];
     [aParams addIfDefinedKey:@"recordingInfo" withArray:self.recordingInfo];
+    [aParams addIfDefinedKey:@"isPlayableUser" withBool:self.isPlayableUser];
 }
 
 - (void)dealloc

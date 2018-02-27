@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2017  Kaltura Inc.
+// Copyright (C) 2006-2018  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -10783,10 +10783,13 @@
 // parameters of the stream we got
 @property (nonatomic,retain) NSMutableArray* streams;	// of KalturaLiveStreamParams elements
 @property (nonatomic,retain) NSMutableArray* recordingInfo;	// of KalturaLiveEntryServerNodeRecordingInfo elements
+@property (nonatomic,assign) KALTURA_BOOL isPlayableUser;
 - (KalturaFieldType)getTypeOfStreams;
 - (NSString*)getObjectTypeOfStreams;
 - (KalturaFieldType)getTypeOfRecordingInfo;
 - (NSString*)getObjectTypeOfRecordingInfo;
+- (KalturaFieldType)getTypeOfIsPlayableUser;
+- (void)setIsPlayableUserFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
