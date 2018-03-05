@@ -403,6 +403,7 @@
 @synthesize question = _question;
 @synthesize explanation = _explanation;
 @synthesize questionType = _questionType;
+@synthesize presentationOrder = _presentationOrder;
 
 - (id)init
 {
@@ -410,6 +411,7 @@
     if (self == nil)
         return nil;
     self->_questionType = KALTURA_UNDEF_INT;
+    self->_presentationOrder = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -443,9 +445,19 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfPresentationOrder
+{
+    return KFT_Int;
+}
+
 - (void)setQuestionTypeFromString:(NSString*)aPropVal
 {
     self.questionType = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setPresentationOrderFromString:(NSString*)aPropVal
+{
+    self.presentationOrder = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -458,6 +470,7 @@
     [aParams addIfDefinedKey:@"question" withString:self.question];
     [aParams addIfDefinedKey:@"explanation" withString:self.explanation];
     [aParams addIfDefinedKey:@"questionType" withInt:self.questionType];
+    [aParams addIfDefinedKey:@"presentationOrder" withInt:self.presentationOrder];
 }
 
 - (void)dealloc

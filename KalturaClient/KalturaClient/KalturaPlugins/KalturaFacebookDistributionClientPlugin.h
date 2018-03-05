@@ -72,10 +72,10 @@
 // @subpackage Client
 @interface KalturaFacebookDistributionJobProviderData : KalturaConfigurableDistributionJobProviderData
 @property (nonatomic,copy) NSString* videoAssetFilePath;
-@property (nonatomic,copy) NSString* thumbAssetFilePath;
+@property (nonatomic,copy) NSString* thumbAssetId;
 @property (nonatomic,retain) NSMutableArray* captionsInfo;	// of KalturaFacebookCaptionDistributionInfo elements
 - (KalturaFieldType)getTypeOfVideoAssetFilePath;
-- (KalturaFieldType)getTypeOfThumbAssetFilePath;
+- (KalturaFieldType)getTypeOfThumbAssetId;
 - (KalturaFieldType)getTypeOfCaptionsInfo;
 - (NSString*)getObjectTypeOfCaptionsInfo;
 @end

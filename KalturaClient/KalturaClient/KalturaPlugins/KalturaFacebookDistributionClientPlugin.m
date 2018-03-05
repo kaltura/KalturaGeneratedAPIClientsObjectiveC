@@ -127,7 +127,7 @@
 
 @implementation KalturaFacebookDistributionJobProviderData
 @synthesize videoAssetFilePath = _videoAssetFilePath;
-@synthesize thumbAssetFilePath = _thumbAssetFilePath;
+@synthesize thumbAssetId = _thumbAssetId;
 @synthesize captionsInfo = _captionsInfo;
 
 - (KalturaFieldType)getTypeOfVideoAssetFilePath
@@ -135,7 +135,7 @@
     return KFT_String;
 }
 
-- (KalturaFieldType)getTypeOfThumbAssetFilePath
+- (KalturaFieldType)getTypeOfThumbAssetId
 {
     return KFT_String;
 }
@@ -156,14 +156,14 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaFacebookDistributionJobProviderData"];
     [aParams addIfDefinedKey:@"videoAssetFilePath" withString:self.videoAssetFilePath];
-    [aParams addIfDefinedKey:@"thumbAssetFilePath" withString:self.thumbAssetFilePath];
+    [aParams addIfDefinedKey:@"thumbAssetId" withString:self.thumbAssetId];
     [aParams addIfDefinedKey:@"captionsInfo" withArray:self.captionsInfo];
 }
 
 - (void)dealloc
 {
     [self->_videoAssetFilePath release];
-    [self->_thumbAssetFilePath release];
+    [self->_thumbAssetId release];
     [self->_captionsInfo release];
     [super dealloc];
 }

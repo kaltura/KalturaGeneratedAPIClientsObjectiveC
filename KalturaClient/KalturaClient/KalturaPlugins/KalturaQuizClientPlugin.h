@@ -137,13 +137,16 @@
 @property (nonatomic,copy) NSString* question;
 @property (nonatomic,copy) NSString* explanation;
 @property (nonatomic,assign) int questionType;	// enum KalturaQuestionType
+@property (nonatomic,assign) int presentationOrder;
 - (KalturaFieldType)getTypeOfOptionalAnswers;
 - (NSString*)getObjectTypeOfOptionalAnswers;
 - (KalturaFieldType)getTypeOfHint;
 - (KalturaFieldType)getTypeOfQuestion;
 - (KalturaFieldType)getTypeOfExplanation;
 - (KalturaFieldType)getTypeOfQuestionType;
+- (KalturaFieldType)getTypeOfPresentationOrder;
 - (void)setQuestionTypeFromString:(NSString*)aPropVal;
+- (void)setPresentationOrderFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
