@@ -600,6 +600,7 @@
 @synthesize userFriendlyFieldName = _userFriendlyFieldName;
 @synthesize entryMrssXslt = _entryMrssXslt;
 @synthesize isRequired = _isRequired;
+@synthesize type = _type;
 @synthesize updateOnChange = _updateOnChange;
 @synthesize updateParams = _updateParams;
 @synthesize isDefault = _isDefault;
@@ -635,6 +636,11 @@
 - (KalturaFieldType)getTypeOfIsRequired
 {
     return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfType
+{
+    return KFT_String;
 }
 
 - (KalturaFieldType)getTypeOfUpdateOnChange
@@ -691,6 +697,7 @@
     [aParams addIfDefinedKey:@"userFriendlyFieldName" withString:self.userFriendlyFieldName];
     [aParams addIfDefinedKey:@"entryMrssXslt" withString:self.entryMrssXslt];
     [aParams addIfDefinedKey:@"isRequired" withInt:self.isRequired];
+    [aParams addIfDefinedKey:@"type" withString:self.type];
     [aParams addIfDefinedKey:@"updateOnChange" withBool:self.updateOnChange];
     [aParams addIfDefinedKey:@"updateParams" withArray:self.updateParams];
     [aParams addIfDefinedKey:@"triggerDeleteOnError" withBool:self.triggerDeleteOnError];
@@ -701,6 +708,7 @@
     [self->_fieldName release];
     [self->_userFriendlyFieldName release];
     [self->_entryMrssXslt release];
+    [self->_type release];
     [self->_updateParams release];
     [super dealloc];
 }

@@ -281,6 +281,7 @@
 @property (nonatomic,copy) NSString* entryMrssXslt;
 // Is the field required to have a value for submission ?
 @property (nonatomic,assign) int isRequired;	// enum KalturaDistributionFieldRequiredStatus
+@property (nonatomic,copy) NSString* type;
 // Trigger distribution update when this field changes or not ?
 @property (nonatomic,assign) KALTURA_BOOL updateOnChange;
 // Entry column or metadata xpath that should trigger an update
@@ -293,6 +294,7 @@
 - (KalturaFieldType)getTypeOfUserFriendlyFieldName;
 - (KalturaFieldType)getTypeOfEntryMrssXslt;
 - (KalturaFieldType)getTypeOfIsRequired;
+- (KalturaFieldType)getTypeOfType;
 - (KalturaFieldType)getTypeOfUpdateOnChange;
 - (KalturaFieldType)getTypeOfUpdateParams;
 - (NSString*)getObjectTypeOfUpdateParams;
