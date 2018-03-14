@@ -1957,6 +1957,7 @@
 // @subpackage Client
 @interface KalturaFileAssetObjectType : NSObject
 + (NSString*)UI_CONF;
++ (NSString*)ENTRY;
 @end
 
 // @package Kaltura

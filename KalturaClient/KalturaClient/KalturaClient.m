@@ -4997,6 +4997,10 @@
 {
     return @"2";
 }
++ (NSString*)ENTRY
+{
+    return @"3";
+}
 @end
 
 @implementation KalturaFileAssetOrderBy
