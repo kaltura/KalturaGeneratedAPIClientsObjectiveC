@@ -10545,6 +10545,7 @@
 @property (nonatomic,assign) int statusEqual;	// enum KalturaEntryServerNodeStatus
 @property (nonatomic,copy) NSString* statusIn;
 @property (nonatomic,copy) NSString* serverTypeEqual;	// enum KalturaEntryServerNodeType
+@property (nonatomic,copy) NSString* serverTypeIn;
 - (KalturaFieldType)getTypeOfEntryIdEqual;
 - (KalturaFieldType)getTypeOfEntryIdIn;
 - (KalturaFieldType)getTypeOfServerNodeIdEqual;
@@ -10555,6 +10556,7 @@
 - (KalturaFieldType)getTypeOfStatusEqual;
 - (KalturaFieldType)getTypeOfStatusIn;
 - (KalturaFieldType)getTypeOfServerTypeEqual;
+- (KalturaFieldType)getTypeOfServerTypeIn;
 - (void)setServerNodeIdEqualFromString:(NSString*)aPropVal;
 - (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
@@ -13392,6 +13394,11 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaLiveEntryServerNodeBaseFilter : KalturaEntryServerNodeFilter
+@end
+
+// @package Kaltura
+// @subpackage Client
 // Auto-generated class.
 //  Used to search KalturaLiveStreamAdminEntry attributes. Use KalturaLiveStreamAdminEntryCompareAttribute enum to provide attribute name.
 // /
@@ -13734,6 +13741,11 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaITunesSyndicationFeedFilter : KalturaITunesSyndicationFeedBaseFilter
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaLiveEntryServerNodeFilter : KalturaLiveEntryServerNodeBaseFilter
 @end
 
 // @package Kaltura

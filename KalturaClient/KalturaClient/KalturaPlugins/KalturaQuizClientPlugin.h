@@ -138,6 +138,7 @@
 @property (nonatomic,copy) NSString* explanation;
 @property (nonatomic,assign) int questionType;	// enum KalturaQuestionType
 @property (nonatomic,assign) int presentationOrder;
+@property (nonatomic,assign) int excludeFromScore;	// enum KalturaNullableBoolean
 - (KalturaFieldType)getTypeOfOptionalAnswers;
 - (NSString*)getObjectTypeOfOptionalAnswers;
 - (KalturaFieldType)getTypeOfHint;
@@ -145,8 +146,10 @@
 - (KalturaFieldType)getTypeOfExplanation;
 - (KalturaFieldType)getTypeOfQuestionType;
 - (KalturaFieldType)getTypeOfPresentationOrder;
+- (KalturaFieldType)getTypeOfExcludeFromScore;
 - (void)setQuestionTypeFromString:(NSString*)aPropVal;
 - (void)setPresentationOrderFromString:(NSString*)aPropVal;
+- (void)setExcludeFromScoreFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

@@ -35617,6 +35617,7 @@
 @synthesize statusEqual = _statusEqual;
 @synthesize statusIn = _statusIn;
 @synthesize serverTypeEqual = _serverTypeEqual;
+@synthesize serverTypeIn = _serverTypeIn;
 
 - (id)init
 {
@@ -35682,6 +35683,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfServerTypeIn
+{
+    return KFT_String;
+}
+
 - (void)setServerNodeIdEqualFromString:(NSString*)aPropVal
 {
     self.serverNodeIdEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -35727,6 +35733,7 @@
     [aParams addIfDefinedKey:@"statusEqual" withInt:self.statusEqual];
     [aParams addIfDefinedKey:@"statusIn" withString:self.statusIn];
     [aParams addIfDefinedKey:@"serverTypeEqual" withString:self.serverTypeEqual];
+    [aParams addIfDefinedKey:@"serverTypeIn" withString:self.serverTypeIn];
 }
 
 - (void)dealloc
@@ -35735,6 +35742,7 @@
     [self->_entryIdIn release];
     [self->_statusIn release];
     [self->_serverTypeEqual release];
+    [self->_serverTypeIn release];
     [super dealloc];
 }
 
@@ -45996,6 +46004,16 @@
 
 @end
 
+@implementation KalturaLiveEntryServerNodeBaseFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaLiveEntryServerNodeBaseFilter"];
+}
+
+@end
+
 @implementation KalturaLiveStreamAdminEntryCompareAttributeCondition
 @synthesize attribute = _attribute;
 
@@ -46840,6 +46858,16 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaITunesSyndicationFeedFilter"];
+}
+
+@end
+
+@implementation KalturaLiveEntryServerNodeFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaLiveEntryServerNodeFilter"];
 }
 
 @end

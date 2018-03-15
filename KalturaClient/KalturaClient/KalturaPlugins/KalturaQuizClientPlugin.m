@@ -404,6 +404,7 @@
 @synthesize explanation = _explanation;
 @synthesize questionType = _questionType;
 @synthesize presentationOrder = _presentationOrder;
+@synthesize excludeFromScore = _excludeFromScore;
 
 - (id)init
 {
@@ -412,6 +413,7 @@
         return nil;
     self->_questionType = KALTURA_UNDEF_INT;
     self->_presentationOrder = KALTURA_UNDEF_INT;
+    self->_excludeFromScore = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -450,6 +452,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfExcludeFromScore
+{
+    return KFT_Int;
+}
+
 - (void)setQuestionTypeFromString:(NSString*)aPropVal
 {
     self.questionType = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -458,6 +465,11 @@
 - (void)setPresentationOrderFromString:(NSString*)aPropVal
 {
     self.presentationOrder = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setExcludeFromScoreFromString:(NSString*)aPropVal
+{
+    self.excludeFromScore = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -471,6 +483,7 @@
     [aParams addIfDefinedKey:@"explanation" withString:self.explanation];
     [aParams addIfDefinedKey:@"questionType" withInt:self.questionType];
     [aParams addIfDefinedKey:@"presentationOrder" withInt:self.presentationOrder];
+    [aParams addIfDefinedKey:@"excludeFromScore" withInt:self.excludeFromScore];
 }
 
 - (void)dealloc
