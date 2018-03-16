@@ -216,6 +216,18 @@
 {
     return @"created_at";
 }
++ (NSString*)ENTRIES_COUNT
+{
+    return @"entries_count";
+}
++ (NSString*)MEMBERS_COUNT
+{
+    return @"members_count";
+}
++ (NSString*)NAME
+{
+    return @"name";
+}
 + (NSString*)UPDATED_AT
 {
     return @"updated_at";

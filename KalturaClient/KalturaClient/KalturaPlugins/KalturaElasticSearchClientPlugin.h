@@ -101,6 +101,9 @@
 // @subpackage Client
 @interface KalturaESearchCategoryOrderByFieldName : NSObject
 + (NSString*)CREATED_AT;
++ (NSString*)ENTRIES_COUNT;
++ (NSString*)MEMBERS_COUNT;
++ (NSString*)NAME;
 + (NSString*)UPDATED_AT;
 @end
 

@@ -17670,6 +17670,7 @@
 @synthesize detectGOP = _detectGOP;
 @synthesize mediaInfoXslTransformation = _mediaInfoXslTransformation;
 @synthesize defaultReplacementOptions = _defaultReplacementOptions;
+@synthesize defaultAudioLang = _defaultAudioLang;
 
 - (id)init
 {
@@ -17824,6 +17825,11 @@
     return @"KalturaEntryReplacementOptions";
 }
 
+- (KalturaFieldType)getTypeOfDefaultAudioLang
+{
+    return KFT_String;
+}
+
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -17900,6 +17906,7 @@
     [aParams addIfDefinedKey:@"detectGOP" withInt:self.detectGOP];
     [aParams addIfDefinedKey:@"mediaInfoXslTransformation" withString:self.mediaInfoXslTransformation];
     [aParams addIfDefinedKey:@"defaultReplacementOptions" withObject:self.defaultReplacementOptions];
+    [aParams addIfDefinedKey:@"defaultAudioLang" withString:self.defaultAudioLang];
 }
 
 - (void)dealloc
@@ -17919,6 +17926,7 @@
     [self->_conditionalProfiles release];
     [self->_mediaInfoXslTransformation release];
     [self->_defaultReplacementOptions release];
+    [self->_defaultAudioLang release];
     [super dealloc];
 }
 

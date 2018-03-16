@@ -5770,6 +5770,7 @@
 @property (nonatomic,copy) NSString* mediaInfoXslTransformation;
 // Default replacement options to be applied to entries
 @property (nonatomic,retain) KalturaEntryReplacementOptions* defaultReplacementOptions;
+@property (nonatomic,copy) NSString* defaultAudioLang;	// enum KalturaLanguage
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfPartnerId;
 - (KalturaFieldType)getTypeOfStatus;
@@ -5797,6 +5798,7 @@
 - (KalturaFieldType)getTypeOfMediaInfoXslTransformation;
 - (KalturaFieldType)getTypeOfDefaultReplacementOptions;
 - (NSString*)getObjectTypeOfDefaultReplacementOptions;
+- (KalturaFieldType)getTypeOfDefaultAudioLang;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
