@@ -40,6 +40,13 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaDryRunFileType : NSObject
++ (int)LIST_RESPONSE;
++ (int)CSV;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaScheduledTaskAddOrRemoveType : NSObject
 + (int)ADD;
 + (int)REMOVE;
@@ -254,12 +261,18 @@
 // @subpackage Client
 @interface KalturaScheduledTaskJobData : KalturaJobData
 @property (nonatomic,assign) int maxResults;
+@property (nonatomic,assign) int totalCount;
+@property (nonatomic,assign) int fileFormat;	// enum KalturaDryRunFileType
 @property (nonatomic,copy) NSString* resultsFilePath;
 @property (nonatomic,assign) int referenceTime;
 - (KalturaFieldType)getTypeOfMaxResults;
+- (KalturaFieldType)getTypeOfTotalCount;
+- (KalturaFieldType)getTypeOfFileFormat;
 - (KalturaFieldType)getTypeOfResultsFilePath;
 - (KalturaFieldType)getTypeOfReferenceTime;
 - (void)setMaxResultsFromString:(NSString*)aPropVal;
+- (void)setTotalCountFromString:(NSString*)aPropVal;
+- (void)setFileFormatFromString:(NSString*)aPropVal;
 - (void)setReferenceTimeFromString:(NSString*)aPropVal;
 @end
 
@@ -344,6 +357,8 @@
 - (KalturaScheduledTaskProfileListResponse*)list;
 - (int)requestDryRunWithScheduledTaskProfileId:(int)aScheduledTaskProfileId withMaxResults:(int)aMaxResults;
 - (int)requestDryRunWithScheduledTaskProfileId:(int)aScheduledTaskProfileId;
+// Serves dry run results by its request id
+- (NSString*)serveDryRunResultsWithRequestId:(int)aRequestId;
 // Update an existing scheduled task profile
 - (KalturaScheduledTaskProfile*)updateWithId:(int)aId withScheduledTaskProfile:(KalturaScheduledTaskProfile*)aScheduledTaskProfile;
 @end

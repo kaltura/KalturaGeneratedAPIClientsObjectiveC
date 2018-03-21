@@ -43,6 +43,17 @@
 }
 @end
 
+@implementation KalturaDryRunFileType
++ (int)LIST_RESPONSE
+{
+    return 1;
+}
++ (int)CSV
+{
+    return 2;
+}
+@end
+
 @implementation KalturaScheduledTaskAddOrRemoveType
 + (int)ADD
 {
@@ -742,6 +753,8 @@
 
 @implementation KalturaScheduledTaskJobData
 @synthesize maxResults = _maxResults;
+@synthesize totalCount = _totalCount;
+@synthesize fileFormat = _fileFormat;
 @synthesize resultsFilePath = _resultsFilePath;
 @synthesize referenceTime = _referenceTime;
 
@@ -751,11 +764,23 @@
     if (self == nil)
         return nil;
     self->_maxResults = KALTURA_UNDEF_INT;
+    self->_totalCount = KALTURA_UNDEF_INT;
+    self->_fileFormat = KALTURA_UNDEF_INT;
     self->_referenceTime = KALTURA_UNDEF_INT;
     return self;
 }
 
 - (KalturaFieldType)getTypeOfMaxResults
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfTotalCount
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfFileFormat
 {
     return KFT_Int;
 }
@@ -775,6 +800,16 @@
     self.maxResults = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setTotalCountFromString:(NSString*)aPropVal
+{
+    self.totalCount = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setFileFormatFromString:(NSString*)aPropVal
+{
+    self.fileFormat = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)setReferenceTimeFromString:(NSString*)aPropVal
 {
     self.referenceTime = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -786,6 +821,8 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaScheduledTaskJobData"];
     [aParams addIfDefinedKey:@"maxResults" withInt:self.maxResults];
+    [aParams addIfDefinedKey:@"totalCount" withInt:self.totalCount];
+    [aParams addIfDefinedKey:@"fileFormat" withInt:self.fileFormat];
     [aParams addIfDefinedKey:@"resultsFilePath" withString:self.resultsFilePath];
     [aParams addIfDefinedKey:@"referenceTime" withInt:self.referenceTime];
 }
@@ -1098,6 +1135,12 @@
 - (int)requestDryRunWithScheduledTaskProfileId:(int)aScheduledTaskProfileId
 {
     return [self requestDryRunWithScheduledTaskProfileId:aScheduledTaskProfileId withMaxResults:KALTURA_UNDEF_INT];
+}
+
+- (NSString*)serveDryRunResultsWithRequestId:(int)aRequestId
+{
+    [self.client.params addIfDefinedKey:@"requestId" withInt:aRequestId];
+    return [self.client queueServeService:@"scheduledtask_scheduledtaskprofile" withAction:@"serveDryRunResults"];
 }
 
 - (KalturaScheduledTaskProfile*)updateWithId:(int)aId withScheduledTaskProfile:(KalturaScheduledTaskProfile*)aScheduledTaskProfile
