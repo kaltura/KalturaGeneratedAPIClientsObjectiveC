@@ -19284,38 +19284,6 @@
 
 @end
 
-@interface KalturaObject()
-@property (nonatomic,retain) NSMutableDictionary* relatedObjects;
-@end
-
-@implementation KalturaObject
-@synthesize relatedObjects = _relatedObjects;
-
-- (KalturaFieldType)getTypeOfRelatedObjects
-{
-    return KFT_Dictionary;
-}
-
-- (NSString*)getObjectTypeOfRelatedObjects
-{
-    return @"KalturaListResponse";
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaObject"];
-}
-
-- (void)dealloc
-{
-    [self->_relatedObjects release];
-    [super dealloc];
-}
-
-@end
-
 @interface KalturaEmailIngestionProfile()
 @property (nonatomic,assign) int id;
 @property (nonatomic,assign) int partnerId;
@@ -21877,6 +21845,38 @@
 {
     [self->_userId release];
     [self->_groupId release];
+    [super dealloc];
+}
+
+@end
+
+@interface KalturaObject()
+@property (nonatomic,retain) NSMutableDictionary* relatedObjects;
+@end
+
+@implementation KalturaObject
+@synthesize relatedObjects = _relatedObjects;
+
+- (KalturaFieldType)getTypeOfRelatedObjects
+{
+    return KFT_Dictionary;
+}
+
+- (NSString*)getObjectTypeOfRelatedObjects
+{
+    return @"KalturaListResponse";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaObject"];
+}
+
+- (void)dealloc
+{
+    [self->_relatedObjects release];
     [super dealloc];
 }
 
@@ -51665,6 +51665,11 @@
 - (NSString*)exportToCsvWithFilter:(KalturaUserFilter*)aFilter
 {
     return [self exportToCsvWithFilter:aFilter withMetadataProfileId:KALTURA_UNDEF_INT];
+}
+
+- (NSString*)exportToCsv
+{
+    return [self exportToCsvWithFilter:nil];
 }
 
 - (KalturaUser*)getWithUserId:(NSString*)aUserId

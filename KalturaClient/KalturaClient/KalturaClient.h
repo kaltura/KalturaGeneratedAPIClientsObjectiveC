@@ -6179,14 +6179,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaObject : KalturaObjectBase
-@property (nonatomic,retain,readonly) NSMutableDictionary* relatedObjects;	// of KalturaListResponse elements
-- (KalturaFieldType)getTypeOfRelatedObjects;
-- (NSString*)getObjectTypeOfRelatedObjects;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaEmailIngestionProfile : KalturaObjectBase
 @property (nonatomic,assign,readonly) int id;
 @property (nonatomic,copy) NSString* name;
@@ -6881,6 +6873,14 @@
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaObject : KalturaObjectBase
+@property (nonatomic,retain,readonly) NSMutableDictionary* relatedObjects;	// of KalturaListResponse elements
+- (KalturaFieldType)getTypeOfRelatedObjects;
+- (NSString*)getObjectTypeOfRelatedObjects;
 @end
 
 // @package Kaltura
@@ -15442,6 +15442,7 @@
 - (NSString*)exportToCsvWithFilter:(KalturaUserFilter*)aFilter withMetadataProfileId:(int)aMetadataProfileId withAdditionalFields:(NSArray*)aAdditionalFields;
 - (NSString*)exportToCsvWithFilter:(KalturaUserFilter*)aFilter withMetadataProfileId:(int)aMetadataProfileId;
 - (NSString*)exportToCsvWithFilter:(KalturaUserFilter*)aFilter;
+- (NSString*)exportToCsv;
 // Retrieves a user object for a specified user ID.
 - (KalturaUser*)getWithUserId:(NSString*)aUserId;
 - (KalturaUser*)get;

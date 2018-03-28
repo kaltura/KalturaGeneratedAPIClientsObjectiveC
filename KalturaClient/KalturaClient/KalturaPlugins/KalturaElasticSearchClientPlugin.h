@@ -79,6 +79,7 @@
 + (NSString*)ENTRIES_COUNT;
 + (NSString*)FULL_IDS;
 + (NSString*)FULL_NAME;
++ (NSString*)ID;
 + (NSString*)INHERITANCE_TYPE;
 + (NSString*)INHERITED_PARENT_ID;
 + (NSString*)MEMBERS_COUNT;
@@ -310,11 +311,8 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaESearchResult : KalturaObjectBase
-@property (nonatomic,retain) KalturaObjectBase* object;
 @property (nonatomic,retain) NSMutableArray* highlight;	// of KalturaESearchHighlight elements
 @property (nonatomic,retain) NSMutableArray* itemsData;	// of KalturaESearchItemDataResult elements
-- (KalturaFieldType)getTypeOfObject;
-- (NSString*)getObjectTypeOfObject;
 - (KalturaFieldType)getTypeOfHighlight;
 - (NSString*)getObjectTypeOfHighlight;
 - (KalturaFieldType)getTypeOfItemsData;
@@ -385,6 +383,9 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaESearchCategoryResult : KalturaESearchResult
+@property (nonatomic,retain) KalturaCategory* object;
+- (KalturaFieldType)getTypeOfObject;
+- (NSString*)getObjectTypeOfObject;
 @end
 
 // @package Kaltura
@@ -449,6 +450,9 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaESearchEntryResult : KalturaESearchResult
+@property (nonatomic,retain) KalturaBaseEntry* object;
+- (KalturaFieldType)getTypeOfObject;
+- (NSString*)getObjectTypeOfObject;
 @end
 
 // @package Kaltura
@@ -508,6 +512,9 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaESearchUserResult : KalturaESearchResult
+@property (nonatomic,retain) KalturaUser* object;
+- (KalturaFieldType)getTypeOfObject;
+- (NSString*)getObjectTypeOfObject;
 @end
 
 // @package Kaltura

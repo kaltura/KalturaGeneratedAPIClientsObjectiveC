@@ -145,6 +145,10 @@
 {
     return @"full_name";
 }
++ (NSString*)ID
+{
+    return @"id";
+}
 + (NSString*)INHERITANCE_TYPE
 {
     return @"inheritance_type";
@@ -873,19 +877,8 @@
 @end
 
 @implementation KalturaESearchResult
-@synthesize object = _object;
 @synthesize highlight = _highlight;
 @synthesize itemsData = _itemsData;
-
-- (KalturaFieldType)getTypeOfObject
-{
-    return KFT_Object;
-}
-
-- (NSString*)getObjectTypeOfObject
-{
-    return @"KalturaObjectBase";
-}
 
 - (KalturaFieldType)getTypeOfHighlight
 {
@@ -912,14 +905,12 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaESearchResult"];
-    [aParams addIfDefinedKey:@"object" withObject:self.object];
     [aParams addIfDefinedKey:@"highlight" withArray:self.highlight];
     [aParams addIfDefinedKey:@"itemsData" withArray:self.itemsData];
 }
 
 - (void)dealloc
 {
-    [self->_object release];
     [self->_highlight release];
     [self->_itemsData release];
     [super dealloc];
@@ -1176,11 +1167,30 @@
 @end
 
 @implementation KalturaESearchCategoryResult
+@synthesize object = _object;
+
+- (KalturaFieldType)getTypeOfObject
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfObject
+{
+    return @"KalturaCategory";
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaESearchCategoryResult"];
+    [aParams addIfDefinedKey:@"object" withObject:self.object];
+}
+
+- (void)dealloc
+{
+    [self->_object release];
+    [super dealloc];
 }
 
 @end
@@ -1419,11 +1429,30 @@
 @end
 
 @implementation KalturaESearchEntryResult
+@synthesize object = _object;
+
+- (KalturaFieldType)getTypeOfObject
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfObject
+{
+    return @"KalturaBaseEntry";
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaESearchEntryResult"];
+    [aParams addIfDefinedKey:@"object" withObject:self.object];
+}
+
+- (void)dealloc
+{
+    [self->_object release];
+    [super dealloc];
 }
 
 @end
@@ -1656,11 +1685,30 @@
 @end
 
 @implementation KalturaESearchUserResult
+@synthesize object = _object;
+
+- (KalturaFieldType)getTypeOfObject
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfObject
+{
+    return @"KalturaUser";
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaESearchUserResult"];
+    [aParams addIfDefinedKey:@"object" withObject:self.object];
+}
+
+- (void)dealloc
+{
+    [self->_object release];
+    [super dealloc];
 }
 
 @end
