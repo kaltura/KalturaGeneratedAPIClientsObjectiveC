@@ -23013,6 +23013,7 @@
 @property (nonatomic,assign) int firstBroadcast;
 @property (nonatomic,assign) int lastBroadcast;
 @property (nonatomic,assign) int liveStatus;
+@property (nonatomic,assign) int lastBroadcastEndTime;
 @end
 
 @implementation KalturaLiveEntry
@@ -23034,6 +23035,7 @@
 @synthesize explicitLive = _explicitLive;
 @synthesize viewMode = _viewMode;
 @synthesize recordingStatus = _recordingStatus;
+@synthesize lastBroadcastEndTime = _lastBroadcastEndTime;
 
 - (id)init
 {
@@ -23053,6 +23055,7 @@
     self->_explicitLive = KALTURA_UNDEF_INT;
     self->_viewMode = KALTURA_UNDEF_INT;
     self->_recordingStatus = KALTURA_UNDEF_INT;
+    self->_lastBroadcastEndTime = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -23161,6 +23164,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfLastBroadcastEndTime
+{
+    return KFT_Int;
+}
+
 - (void)setRecordStatusFromString:(NSString*)aPropVal
 {
     self.recordStatus = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -23224,6 +23232,11 @@
 - (void)setRecordingStatusFromString:(NSString*)aPropVal
 {
     self.recordingStatus = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setLastBroadcastEndTimeFromString:(NSString*)aPropVal
+{
+    self.lastBroadcastEndTime = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper

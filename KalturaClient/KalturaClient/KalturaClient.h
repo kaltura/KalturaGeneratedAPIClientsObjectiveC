@@ -7227,6 +7227,8 @@
 @property (nonatomic,assign) int explicitLive;	// enum KalturaNullableBoolean
 @property (nonatomic,assign) int viewMode;	// enum KalturaViewMode
 @property (nonatomic,assign) int recordingStatus;	// enum KalturaRecordingStatus
+// The time the last broadcast finished.
+@property (nonatomic,assign,readonly) int lastBroadcastEndTime;
 - (KalturaFieldType)getTypeOfOfflineMessage;
 - (KalturaFieldType)getTypeOfRecordStatus;
 - (KalturaFieldType)getTypeOfDvrStatus;
@@ -7248,6 +7250,7 @@
 - (KalturaFieldType)getTypeOfExplicitLive;
 - (KalturaFieldType)getTypeOfViewMode;
 - (KalturaFieldType)getTypeOfRecordingStatus;
+- (KalturaFieldType)getTypeOfLastBroadcastEndTime;
 - (void)setRecordStatusFromString:(NSString*)aPropVal;
 - (void)setDvrStatusFromString:(NSString*)aPropVal;
 - (void)setDvrWindowFromString:(NSString*)aPropVal;
@@ -7261,6 +7264,7 @@
 - (void)setExplicitLiveFromString:(NSString*)aPropVal;
 - (void)setViewModeFromString:(NSString*)aPropVal;
 - (void)setRecordingStatusFromString:(NSString*)aPropVal;
+- (void)setLastBroadcastEndTimeFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
