@@ -2963,21 +2963,21 @@
 {
     return @"contentDistribution.DistributionSubmit";
 }
-+ (NSString*)DISTRIBUTION_SYNC
-{
-    return @"contentDistribution.DistributionSync";
-}
 + (NSString*)DISTRIBUTION_UPDATE
 {
     return @"contentDistribution.DistributionUpdate";
+}
++ (NSString*)DROP_FOLDER_CONTENT_PROCESSOR
+{
+    return @"dropFolder.DropFolderContentProcessor";
 }
 + (NSString*)CONVERT
 {
     return @"0";
 }
-+ (NSString*)DROP_FOLDER_CONTENT_PROCESSOR
++ (NSString*)DISTRIBUTION_SYNC
 {
-    return @"dropFolder.DropFolderContentProcessor";
+    return @"contentDistribution.DistributionSync";
 }
 + (NSString*)DROP_FOLDER_WATCHER
 {
@@ -3178,6 +3178,14 @@
 + (NSString*)USERS_CSV
 {
     return @"46";
+}
++ (NSString*)CLIP_CONCAT
+{
+    return @"47";
+}
++ (NSString*)COPY_CUE_POINTS
+{
+    return @"48";
 }
 @end
 
@@ -33026,6 +33034,7 @@
 @implementation KalturaClipAttributes
 @synthesize offset = _offset;
 @synthesize duration = _duration;
+@synthesize globalOffsetInDestination = _globalOffsetInDestination;
 
 - (id)init
 {
@@ -33034,6 +33043,7 @@
         return nil;
     self->_offset = KALTURA_UNDEF_INT;
     self->_duration = KALTURA_UNDEF_INT;
+    self->_globalOffsetInDestination = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -33043,6 +33053,11 @@
 }
 
 - (KalturaFieldType)getTypeOfDuration
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfGlobalOffsetInDestination
 {
     return KFT_Int;
 }
@@ -33057,6 +33072,11 @@
     self.duration = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setGlobalOffsetInDestinationFromString:(NSString*)aPropVal
+{
+    self.globalOffsetInDestination = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -33064,6 +33084,70 @@
         [aParams putKey:@"objectType" withString:@"KalturaClipAttributes"];
     [aParams addIfDefinedKey:@"offset" withInt:self.offset];
     [aParams addIfDefinedKey:@"duration" withInt:self.duration];
+    [aParams addIfDefinedKey:@"globalOffsetInDestination" withInt:self.globalOffsetInDestination];
+}
+
+@end
+
+@implementation KalturaClipConcatJobData
+@synthesize partnerId = _partnerId;
+@synthesize priority = _priority;
+@synthesize operationAttributes = _operationAttributes;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_partnerId = KALTURA_UNDEF_INT;
+    self->_priority = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfPartnerId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfPriority
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfOperationAttributes
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfOperationAttributes
+{
+    return @"KalturaObject";
+}
+
+- (void)setPartnerIdFromString:(NSString*)aPropVal
+{
+    self.partnerId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setPriorityFromString:(NSString*)aPropVal
+{
+    self.priority = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaClipConcatJobData"];
+    [aParams addIfDefinedKey:@"partnerId" withInt:self.partnerId];
+    [aParams addIfDefinedKey:@"priority" withInt:self.priority];
+    [aParams addIfDefinedKey:@"operationAttributes" withArray:self.operationAttributes];
+}
+
+- (void)dealloc
+{
+    [self->_operationAttributes release];
+    [super dealloc];
 }
 
 @end
@@ -33151,6 +33235,7 @@
 @synthesize offset = _offset;
 @synthesize duration = _duration;
 @synthesize concatenatedDuration = _concatenatedDuration;
+@synthesize shouldSort = _shouldSort;
 
 - (id)init
 {
@@ -33160,6 +33245,7 @@
     self->_offset = KALTURA_UNDEF_FLOAT;
     self->_duration = KALTURA_UNDEF_FLOAT;
     self->_concatenatedDuration = KALTURA_UNDEF_FLOAT;
+    self->_shouldSort = KALTURA_UNDEF_BOOL;
     return self;
 }
 
@@ -33198,6 +33284,11 @@
     return KFT_Float;
 }
 
+- (KalturaFieldType)getTypeOfShouldSort
+{
+    return KFT_Bool;
+}
+
 - (void)setOffsetFromString:(NSString*)aPropVal
 {
     self.offset = [KalturaSimpleTypeParser parseFloat:aPropVal];
@@ -33213,6 +33304,11 @@
     self.concatenatedDuration = [KalturaSimpleTypeParser parseFloat:aPropVal];
 }
 
+- (void)setShouldSortFromString:(NSString*)aPropVal
+{
+    self.shouldSort = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -33224,6 +33320,7 @@
     [aParams addIfDefinedKey:@"offset" withFloat:self.offset];
     [aParams addIfDefinedKey:@"duration" withFloat:self.duration];
     [aParams addIfDefinedKey:@"concatenatedDuration" withFloat:self.concatenatedDuration];
+    [aParams addIfDefinedKey:@"shouldSort" withBool:self.shouldSort];
 }
 
 - (void)dealloc

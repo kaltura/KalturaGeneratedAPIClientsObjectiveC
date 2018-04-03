@@ -859,6 +859,19 @@
     return [self.client queueObjectService:@"cuepoint_cuepoint" withAction:@"update" withExpectedType:@"KalturaCuePoint"];
 }
 
+- (KalturaCuePoint*)updateCuePointsTimesWithId:(NSString*)aId withStartTime:(int)aStartTime withEndTime:(int)aEndTime
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"startTime" withInt:aStartTime];
+    [self.client.params addIfDefinedKey:@"endTime" withInt:aEndTime];
+    return [self.client queueObjectService:@"cuepoint_cuepoint" withAction:@"updateCuePointsTimes" withExpectedType:@"KalturaCuePoint"];
+}
+
+- (KalturaCuePoint*)updateCuePointsTimesWithId:(NSString*)aId withStartTime:(int)aStartTime
+{
+    return [self updateCuePointsTimesWithId:aId withStartTime:aStartTime withEndTime:KALTURA_UNDEF_INT];
+}
+
 - (void)updateStatusWithId:(NSString*)aId withStatus:(int)aStatus
 {
     [self.client.params addIfDefinedKey:@"id" withString:aId];

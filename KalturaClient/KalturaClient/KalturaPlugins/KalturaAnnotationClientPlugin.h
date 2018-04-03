@@ -159,6 +159,8 @@
 - (NSString*)serveBulk;
 // Update annotation by id
 - (KalturaAnnotation*)updateWithId:(NSString*)aId withAnnotation:(KalturaCuePoint*)aAnnotation;
+- (KalturaCuePoint*)updateCuePointsTimesWithId:(NSString*)aId withStartTime:(int)aStartTime withEndTime:(int)aEndTime;
+- (KalturaCuePoint*)updateCuePointsTimesWithId:(NSString*)aId withStartTime:(int)aStartTime;
 // Update cuePoint status by id
 - (void)updateStatusWithId:(NSString*)aId withStatus:(int)aStatus;
 @end

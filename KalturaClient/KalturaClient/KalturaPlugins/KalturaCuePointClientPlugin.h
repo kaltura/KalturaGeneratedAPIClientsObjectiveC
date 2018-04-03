@@ -262,6 +262,8 @@
 - (NSString*)serveBulk;
 // Update cue point by id
 - (KalturaCuePoint*)updateWithId:(NSString*)aId withCuePoint:(KalturaCuePoint*)aCuePoint;
+- (KalturaCuePoint*)updateCuePointsTimesWithId:(NSString*)aId withStartTime:(int)aStartTime withEndTime:(int)aEndTime;
+- (KalturaCuePoint*)updateCuePointsTimesWithId:(NSString*)aId withStartTime:(int)aStartTime;
 // Update cuePoint status by id
 - (void)updateStatusWithId:(NSString*)aId withStatus:(int)aStatus;
 @end

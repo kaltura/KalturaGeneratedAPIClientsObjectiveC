@@ -1236,10 +1236,10 @@
 + (NSString*)DISTRIBUTION_ENABLE;
 + (NSString*)DISTRIBUTION_FETCH_REPORT;
 + (NSString*)DISTRIBUTION_SUBMIT;
-+ (NSString*)DISTRIBUTION_SYNC;
 + (NSString*)DISTRIBUTION_UPDATE;
-+ (NSString*)CONVERT;
 + (NSString*)DROP_FOLDER_CONTENT_PROCESSOR;
++ (NSString*)CONVERT;
++ (NSString*)DISTRIBUTION_SYNC;
 + (NSString*)DROP_FOLDER_WATCHER;
 + (NSString*)EVENT_NOTIFICATION_HANDLER;
 + (NSString*)INTEGRATION;
@@ -1290,6 +1290,8 @@
 + (NSString*)CHUNKED_ENCODE_JOB_SCHEDULER;
 + (NSString*)SERVER_NODE_MONITOR;
 + (NSString*)USERS_CSV;
++ (NSString*)CLIP_CONCAT;
++ (NSString*)COPY_CUE_POINTS;
 @end
 
 // @package Kaltura
@@ -9855,10 +9857,36 @@
 @property (nonatomic,assign) int offset;
 // Duration in milliseconds
 @property (nonatomic,assign) int duration;
+// global Offset In Destination in milliseconds
+@property (nonatomic,assign) int globalOffsetInDestination;
 - (KalturaFieldType)getTypeOfOffset;
 - (KalturaFieldType)getTypeOfDuration;
+- (KalturaFieldType)getTypeOfGlobalOffsetInDestination;
 - (void)setOffsetFromString:(NSString*)aPropVal;
 - (void)setDurationFromString:(NSString*)aPropVal;
+- (void)setGlobalOffsetInDestinationFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// Created by IntelliJ IDEA.
+//  User: roie.beck
+//  Date: 3/12/2018
+//  Time: 11:20 AM
+//  /
+@interface KalturaClipConcatJobData : KalturaJobData
+// $partnerId
+@property (nonatomic,assign) int partnerId;
+// $priority
+@property (nonatomic,assign) int priority;
+// clip operations
+@property (nonatomic,retain) NSMutableArray* operationAttributes;	// of KalturaObject elements
+- (KalturaFieldType)getTypeOfPartnerId;
+- (KalturaFieldType)getTypeOfPriority;
+- (KalturaFieldType)getTypeOfOperationAttributes;
+- (NSString*)getObjectTypeOfOperationAttributes;
+- (void)setPartnerIdFromString:(NSString*)aPropVal;
+- (void)setPriorityFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -9903,6 +9931,8 @@
 @property (nonatomic,assign) double duration;
 // duration of the concated video
 @property (nonatomic,assign) double concatenatedDuration;
+// Should Sort the clip parts
+@property (nonatomic,assign) KALTURA_BOOL shouldSort;
 - (KalturaFieldType)getTypeOfSrcFiles;
 - (NSString*)getObjectTypeOfSrcFiles;
 - (KalturaFieldType)getTypeOfDestFilePath;
@@ -9910,9 +9940,11 @@
 - (KalturaFieldType)getTypeOfOffset;
 - (KalturaFieldType)getTypeOfDuration;
 - (KalturaFieldType)getTypeOfConcatenatedDuration;
+- (KalturaFieldType)getTypeOfShouldSort;
 - (void)setOffsetFromString:(NSString*)aPropVal;
 - (void)setDurationFromString:(NSString*)aPropVal;
 - (void)setConcatenatedDurationFromString:(NSString*)aPropVal;
+- (void)setShouldSortFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
