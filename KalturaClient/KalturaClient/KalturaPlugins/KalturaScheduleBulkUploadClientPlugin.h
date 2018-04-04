@@ -28,7 +28,7 @@
 // @package Kaltura
 // @subpackage Client
 #import "../KalturaClient.h"
-#import "KalturaBulkUploadClientPlugin.h"
+#import "KalturaBulkUploadCsvClientPlugin.h"
 #import "KalturaScheduleClientPlugin.h"
 
 ///////////////////////// enums /////////////////////////
