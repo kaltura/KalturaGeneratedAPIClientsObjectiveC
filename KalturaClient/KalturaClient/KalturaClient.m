@@ -11350,6 +11350,10 @@
 {
     return @"26";
 }
++ (NSString*)ENTRY_USAGE
+{
+    return @"27";
+}
 + (NSString*)PARTNER_USAGE
 {
     return @"201";
@@ -17181,6 +17185,77 @@
 {
     [self->_url release];
     [self->_data release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaClipDescription
+@synthesize sourceEntryId = _sourceEntryId;
+@synthesize startTime = _startTime;
+@synthesize duration = _duration;
+@synthesize offsetInDestination = _offsetInDestination;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_startTime = KALTURA_UNDEF_INT;
+    self->_duration = KALTURA_UNDEF_INT;
+    self->_offsetInDestination = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfSourceEntryId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfStartTime
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfDuration
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfOffsetInDestination
+{
+    return KFT_Int;
+}
+
+- (void)setStartTimeFromString:(NSString*)aPropVal
+{
+    self.startTime = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setDurationFromString:(NSString*)aPropVal
+{
+    self.duration = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setOffsetInDestinationFromString:(NSString*)aPropVal
+{
+    self.offsetInDestination = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaClipDescription"];
+    [aParams addIfDefinedKey:@"sourceEntryId" withString:self.sourceEntryId];
+    [aParams addIfDefinedKey:@"startTime" withInt:self.startTime];
+    [aParams addIfDefinedKey:@"duration" withInt:self.duration];
+    [aParams addIfDefinedKey:@"offsetInDestination" withInt:self.offsetInDestination];
+}
+
+- (void)dealloc
+{
+    [self->_sourceEntryId release];
     [super dealloc];
 }
 

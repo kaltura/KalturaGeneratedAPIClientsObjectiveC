@@ -3830,6 +3830,7 @@
 + (NSString*)LIVE;
 + (NSString*)TOP_PLAYBACK_CONTEXT;
 + (NSString*)VPAAS_USAGE;
++ (NSString*)ENTRY_USAGE;
 + (NSString*)PARTNER_USAGE;
 @end
 
@@ -5578,6 +5579,22 @@
 @property (nonatomic,copy) NSString* data;
 - (KalturaFieldType)getTypeOfUrl;
 - (KalturaFieldType)getTypeOfData;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaClipDescription : KalturaObjectBase
+@property (nonatomic,copy) NSString* sourceEntryId;
+@property (nonatomic,assign) int startTime;
+@property (nonatomic,assign) int duration;
+@property (nonatomic,assign) int offsetInDestination;
+- (KalturaFieldType)getTypeOfSourceEntryId;
+- (KalturaFieldType)getTypeOfStartTime;
+- (KalturaFieldType)getTypeOfDuration;
+- (KalturaFieldType)getTypeOfOffsetInDestination;
+- (void)setStartTimeFromString:(NSString*)aPropVal;
+- (void)setDurationFromString:(NSString*)aPropVal;
+- (void)setOffsetInDestinationFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

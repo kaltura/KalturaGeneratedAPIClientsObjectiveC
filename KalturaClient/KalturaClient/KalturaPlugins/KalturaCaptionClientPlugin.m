@@ -371,10 +371,8 @@
 @end
 
 @implementation KalturaCopyCaptionsJobData
-@synthesize sourceEntryId = _sourceEntryId;
 @synthesize entryId = _entryId;
-@synthesize offset = _offset;
-@synthesize duration = _duration;
+@synthesize clipsDescriptionArray = _clipsDescriptionArray;
 @synthesize fullCopy = _fullCopy;
 
 - (id)init
@@ -382,15 +380,8 @@
     self = [super init];
     if (self == nil)
         return nil;
-    self->_offset = KALTURA_UNDEF_INT;
-    self->_duration = KALTURA_UNDEF_INT;
     self->_fullCopy = KALTURA_UNDEF_BOOL;
     return self;
-}
-
-- (KalturaFieldType)getTypeOfSourceEntryId
-{
-    return KFT_String;
 }
 
 - (KalturaFieldType)getTypeOfEntryId
@@ -398,29 +389,19 @@
     return KFT_String;
 }
 
-- (KalturaFieldType)getTypeOfOffset
+- (KalturaFieldType)getTypeOfClipsDescriptionArray
 {
-    return KFT_Int;
+    return KFT_Array;
 }
 
-- (KalturaFieldType)getTypeOfDuration
+- (NSString*)getObjectTypeOfClipsDescriptionArray
 {
-    return KFT_Int;
+    return @"KalturaClipDescription";
 }
 
 - (KalturaFieldType)getTypeOfFullCopy
 {
     return KFT_Bool;
-}
-
-- (void)setOffsetFromString:(NSString*)aPropVal
-{
-    self.offset = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setDurationFromString:(NSString*)aPropVal
-{
-    self.duration = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)setFullCopyFromString:(NSString*)aPropVal
@@ -433,17 +414,15 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaCopyCaptionsJobData"];
-    [aParams addIfDefinedKey:@"sourceEntryId" withString:self.sourceEntryId];
     [aParams addIfDefinedKey:@"entryId" withString:self.entryId];
-    [aParams addIfDefinedKey:@"offset" withInt:self.offset];
-    [aParams addIfDefinedKey:@"duration" withInt:self.duration];
+    [aParams addIfDefinedKey:@"clipsDescriptionArray" withArray:self.clipsDescriptionArray];
     [aParams addIfDefinedKey:@"fullCopy" withBool:self.fullCopy];
 }
 
 - (void)dealloc
 {
-    [self->_sourceEntryId release];
     [self->_entryId release];
+    [self->_clipsDescriptionArray release];
     [super dealloc];
 }
 
