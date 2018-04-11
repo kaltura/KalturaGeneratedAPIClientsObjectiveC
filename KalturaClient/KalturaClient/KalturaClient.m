@@ -49692,10 +49692,10 @@
     return [self listWithFilter:nil];
 }
 
-- (void)regenerateStreamTokenWithEntryId:(NSString*)aEntryId
+- (KalturaLiveEntry*)regenerateStreamTokenWithEntryId:(NSString*)aEntryId
 {
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
-    [self.client queueVoidService:@"livestream" withAction:@"regenerateStreamToken"];
+    return [self.client queueObjectService:@"livestream" withAction:@"regenerateStreamToken" withExpectedType:@"KalturaLiveEntry"];
 }
 
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex withApplicationName:(NSString*)aApplicationName withLiveEntryStatus:(int)aLiveEntryStatus withShouldCreateRecordedEntry:(KALTURA_BOOL)aShouldCreateRecordedEntry

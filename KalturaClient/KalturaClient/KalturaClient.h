@@ -14735,7 +14735,7 @@
 - (KalturaLiveStreamListResponse*)listWithFilter:(KalturaLiveStreamEntryFilter*)aFilter;
 - (KalturaLiveStreamListResponse*)list;
 // Regenerate new secure token for liveStream
-- (void)regenerateStreamTokenWithEntryId:(NSString*)aEntryId;
+- (KalturaLiveEntry*)regenerateStreamTokenWithEntryId:(NSString*)aEntryId;
 // Register media server to live entry
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex withApplicationName:(NSString*)aApplicationName withLiveEntryStatus:(int)aLiveEntryStatus withShouldCreateRecordedEntry:(KALTURA_BOOL)aShouldCreateRecordedEntry;
 - (KalturaLiveEntry*)registerMediaServerWithEntryId:(NSString*)aEntryId withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex withApplicationName:(NSString*)aApplicationName withLiveEntryStatus:(int)aLiveEntryStatus;
