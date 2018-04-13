@@ -77,6 +77,7 @@
 @property (nonatomic,copy) NSString* webexHostIdMetadataFieldName;
 @property (nonatomic,assign) KALTURA_BOOL deleteFromRecycleBin;
 @property (nonatomic,copy) NSString* webexServiceType;
+@property (nonatomic,copy) NSString* webexSiteName;
 @property (nonatomic,assign) int deleteFromTimestamp;
 - (KalturaFieldType)getTypeOfWebexUserId;
 - (KalturaFieldType)getTypeOfWebexPassword;
@@ -86,6 +87,7 @@
 - (KalturaFieldType)getTypeOfWebexHostIdMetadataFieldName;
 - (KalturaFieldType)getTypeOfDeleteFromRecycleBin;
 - (KalturaFieldType)getTypeOfWebexServiceType;
+- (KalturaFieldType)getTypeOfWebexSiteName;
 - (KalturaFieldType)getTypeOfDeleteFromTimestamp;
 - (void)setWebexSiteIdFromString:(NSString*)aPropVal;
 - (void)setDeleteFromRecycleBinFromString:(NSString*)aPropVal;

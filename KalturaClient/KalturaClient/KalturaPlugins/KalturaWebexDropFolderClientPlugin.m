@@ -140,6 +140,7 @@
 @synthesize webexHostIdMetadataFieldName = _webexHostIdMetadataFieldName;
 @synthesize deleteFromRecycleBin = _deleteFromRecycleBin;
 @synthesize webexServiceType = _webexServiceType;
+@synthesize webexSiteName = _webexSiteName;
 @synthesize deleteFromTimestamp = _deleteFromTimestamp;
 
 - (id)init
@@ -193,6 +194,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfWebexSiteName
+{
+    return KFT_String;
+}
+
 - (KalturaFieldType)getTypeOfDeleteFromTimestamp
 {
     return KFT_Int;
@@ -226,6 +232,7 @@
     [aParams addIfDefinedKey:@"webexHostIdMetadataFieldName" withString:self.webexHostIdMetadataFieldName];
     [aParams addIfDefinedKey:@"deleteFromRecycleBin" withBool:self.deleteFromRecycleBin];
     [aParams addIfDefinedKey:@"webexServiceType" withString:self.webexServiceType];
+    [aParams addIfDefinedKey:@"webexSiteName" withString:self.webexSiteName];
     [aParams addIfDefinedKey:@"deleteFromTimestamp" withInt:self.deleteFromTimestamp];
 }
 
@@ -237,6 +244,7 @@
     [self->_webexServiceUrl release];
     [self->_webexHostIdMetadataFieldName release];
     [self->_webexServiceType release];
+    [self->_webexSiteName release];
     [super dealloc];
 }
 
