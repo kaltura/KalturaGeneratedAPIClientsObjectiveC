@@ -95,7 +95,6 @@
 + (NSString*)TAGS;
 + (NSString*)UPDATED_AT;
 + (NSString*)USER_ID;
-+ (NSString*)USER_IDS;
 @end
 
 // @package Kaltura
@@ -106,6 +105,12 @@
 + (NSString*)MEMBERS_COUNT;
 + (NSString*)NAME;
 + (NSString*)UPDATED_AT;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaESearchCategoryUserFieldName : NSObject
++ (NSString*)USER_ID;
 @end
 
 // @package Kaltura
@@ -614,6 +619,18 @@
 - (KalturaFieldType)getTypeOfMetadataFieldId;
 - (void)setMetadataProfileIdFromString:(NSString*)aPropVal;
 - (void)setMetadataFieldIdFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaESearchCategoryUserItem : KalturaESearchAbstractCategoryItem
+@property (nonatomic,copy) NSString* fieldName;	// enum KalturaESearchCategoryUserFieldName
+@property (nonatomic,assign) int permissionLevel;	// enum KalturaCategoryUserPermissionLevel
+@property (nonatomic,copy) NSString* permissionName;
+- (KalturaFieldType)getTypeOfFieldName;
+- (KalturaFieldType)getTypeOfPermissionLevel;
+- (KalturaFieldType)getTypeOfPermissionName;
+- (void)setPermissionLevelFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

@@ -209,10 +209,6 @@
 {
     return @"user_id";
 }
-+ (NSString*)USER_IDS
-{
-    return @"user_ids";
-}
 @end
 
 @implementation KalturaESearchCategoryOrderByFieldName
@@ -235,6 +231,13 @@
 + (NSString*)UPDATED_AT
 {
     return @"updated_at";
+}
+@end
+
+@implementation KalturaESearchCategoryUserFieldName
++ (NSString*)USER_ID
+{
+    return @"user_id";
 }
 @end
 
@@ -2120,6 +2123,59 @@
 - (void)dealloc
 {
     [self->_xpath release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaESearchCategoryUserItem
+@synthesize fieldName = _fieldName;
+@synthesize permissionLevel = _permissionLevel;
+@synthesize permissionName = _permissionName;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_permissionLevel = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfFieldName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfPermissionLevel
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfPermissionName
+{
+    return KFT_String;
+}
+
+- (void)setPermissionLevelFromString:(NSString*)aPropVal
+{
+    self.permissionLevel = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchCategoryUserItem"];
+    [aParams addIfDefinedKey:@"fieldName" withString:self.fieldName];
+    [aParams addIfDefinedKey:@"permissionLevel" withInt:self.permissionLevel];
+    [aParams addIfDefinedKey:@"permissionName" withString:self.permissionName];
+}
+
+- (void)dealloc
+{
+    [self->_fieldName release];
+    [self->_permissionName release];
     [super dealloc];
 }
 
