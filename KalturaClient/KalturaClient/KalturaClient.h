@@ -10734,6 +10734,7 @@
 @property (nonatomic,copy,readonly) NSString* category;	// enum KalturaITunesSyndicationFeedCategories
 @property (nonatomic,copy) NSString* adultContent;	// enum KalturaITunesSyndicationFeedAdultValues
 @property (nonatomic,copy) NSString* feedAuthor;
+@property (nonatomic,assign) KALTURA_BOOL enforceFeedAuthor;
 // true in case you want to enfore the palylist order on the
 @property (nonatomic,assign) int enforceOrder;	// enum KalturaNullableBoolean
 - (KalturaFieldType)getTypeOfFeedDescription;
@@ -10745,7 +10746,9 @@
 - (KalturaFieldType)getTypeOfCategory;
 - (KalturaFieldType)getTypeOfAdultContent;
 - (KalturaFieldType)getTypeOfFeedAuthor;
+- (KalturaFieldType)getTypeOfEnforceFeedAuthor;
 - (KalturaFieldType)getTypeOfEnforceOrder;
+- (void)setEnforceFeedAuthorFromString:(NSString*)aPropVal;
 - (void)setEnforceOrderFromString:(NSString*)aPropVal;
 @end
 

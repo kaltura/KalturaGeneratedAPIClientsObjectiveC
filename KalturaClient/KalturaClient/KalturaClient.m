@@ -36289,6 +36289,7 @@
 @synthesize category = _category;
 @synthesize adultContent = _adultContent;
 @synthesize feedAuthor = _feedAuthor;
+@synthesize enforceFeedAuthor = _enforceFeedAuthor;
 @synthesize enforceOrder = _enforceOrder;
 
 - (id)init
@@ -36296,6 +36297,7 @@
     self = [super init];
     if (self == nil)
         return nil;
+    self->_enforceFeedAuthor = KALTURA_UNDEF_BOOL;
     self->_enforceOrder = KALTURA_UNDEF_INT;
     return self;
 }
@@ -36345,9 +36347,19 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfEnforceFeedAuthor
+{
+    return KFT_Bool;
+}
+
 - (KalturaFieldType)getTypeOfEnforceOrder
 {
     return KFT_Int;
+}
+
+- (void)setEnforceFeedAuthorFromString:(NSString*)aPropVal
+{
+    self.enforceFeedAuthor = [KalturaSimpleTypeParser parseBool:aPropVal];
 }
 
 - (void)setEnforceOrderFromString:(NSString*)aPropVal
@@ -36368,6 +36380,7 @@
     [aParams addIfDefinedKey:@"feedImageUrl" withString:self.feedImageUrl];
     [aParams addIfDefinedKey:@"adultContent" withString:self.adultContent];
     [aParams addIfDefinedKey:@"feedAuthor" withString:self.feedAuthor];
+    [aParams addIfDefinedKey:@"enforceFeedAuthor" withBool:self.enforceFeedAuthor];
     [aParams addIfDefinedKey:@"enforceOrder" withInt:self.enforceOrder];
 }
 
