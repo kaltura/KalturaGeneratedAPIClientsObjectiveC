@@ -398,6 +398,17 @@
 }
 @end
 
+@implementation KalturaEffectType
++ (int)VIDEO_FADE_IN
+{
+    return 1;
+}
++ (int)VIDEO_FADE_OUT
+{
+    return 2;
+}
+@end
+
 @implementation KalturaEmailIngestionProfileStatus
 + (int)INACTIVE
 {
@@ -19367,6 +19378,51 @@
 
 @end
 
+@implementation KalturaEffect
+@synthesize effectType = _effectType;
+@synthesize value = _value;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_effectType = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfEffectType
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfValue
+{
+    return KFT_String;
+}
+
+- (void)setEffectTypeFromString:(NSString*)aPropVal
+{
+    self.effectType = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaEffect"];
+    [aParams addIfDefinedKey:@"effectType" withInt:self.effectType];
+    [aParams addIfDefinedKey:@"value" withString:self.value];
+}
+
+- (void)dealloc
+{
+    [self->_value release];
+    [super dealloc];
+}
+
+@end
+
 @interface KalturaEmailIngestionProfile()
 @property (nonatomic,assign) int id;
 @property (nonatomic,assign) int partnerId;
@@ -33110,6 +33166,7 @@
 @synthesize offset = _offset;
 @synthesize duration = _duration;
 @synthesize globalOffsetInDestination = _globalOffsetInDestination;
+@synthesize effectArray = _effectArray;
 
 - (id)init
 {
@@ -33137,6 +33194,16 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfEffectArray
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfEffectArray
+{
+    return @"KalturaEffect";
+}
+
 - (void)setOffsetFromString:(NSString*)aPropVal
 {
     self.offset = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -33160,6 +33227,13 @@
     [aParams addIfDefinedKey:@"offset" withInt:self.offset];
     [aParams addIfDefinedKey:@"duration" withInt:self.duration];
     [aParams addIfDefinedKey:@"globalOffsetInDestination" withInt:self.globalOffsetInDestination];
+    [aParams addIfDefinedKey:@"effectArray" withArray:self.effectArray];
+}
+
+- (void)dealloc
+{
+    [self->_effectArray release];
+    [super dealloc];
 }
 
 @end

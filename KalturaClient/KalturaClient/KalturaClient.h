@@ -220,6 +220,13 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaEffectType : NSObject
++ (int)VIDEO_FADE_IN;
++ (int)VIDEO_FADE_OUT;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaEmailIngestionProfileStatus : NSObject
 + (int)INACTIVE;
 + (int)ACTIVE;
@@ -6198,6 +6205,18 @@
 
 // @package Kaltura
 // @subpackage Client
+// Effects attributes
+@interface KalturaEffect : KalturaObjectBase
+@property (nonatomic,assign) int effectType;	// enum KalturaEffectType
+// value
+@property (nonatomic,copy) NSString* value;
+- (KalturaFieldType)getTypeOfEffectType;
+- (KalturaFieldType)getTypeOfValue;
+- (void)setEffectTypeFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaEmailIngestionProfile : KalturaObjectBase
 @property (nonatomic,assign,readonly) int id;
 @property (nonatomic,copy) NSString* name;
@@ -9876,9 +9895,13 @@
 @property (nonatomic,assign) int duration;
 // global Offset In Destination in milliseconds
 @property (nonatomic,assign) int globalOffsetInDestination;
+// global Offset In Destination in milliseconds
+@property (nonatomic,retain) NSMutableArray* effectArray;	// of KalturaEffect elements
 - (KalturaFieldType)getTypeOfOffset;
 - (KalturaFieldType)getTypeOfDuration;
 - (KalturaFieldType)getTypeOfGlobalOffsetInDestination;
+- (KalturaFieldType)getTypeOfEffectArray;
+- (NSString*)getObjectTypeOfEffectArray;
 - (void)setOffsetFromString:(NSString*)aPropVal;
 - (void)setDurationFromString:(NSString*)aPropVal;
 - (void)setGlobalOffsetInDestinationFromString:(NSString*)aPropVal;
@@ -9886,11 +9909,6 @@
 
 // @package Kaltura
 // @subpackage Client
-// Created by IntelliJ IDEA.
-//  User: roie.beck
-//  Date: 3/12/2018
-//  Time: 11:20 AM
-//  /
 @interface KalturaClipConcatJobData : KalturaJobData
 // $partnerId
 @property (nonatomic,assign) int partnerId;
