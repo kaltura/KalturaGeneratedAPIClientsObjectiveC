@@ -486,6 +486,10 @@
 @end
 
 @implementation KalturaEntryServerNodeStatus
++ (int)ERROR
+{
+    return -1;
+}
 + (int)STOPPED
 {
     return 0;
@@ -505,6 +509,26 @@
 + (int)MARKED_FOR_DELETION
 {
     return 4;
+}
++ (int)TASK_PENDING
+{
+    return 5;
+}
++ (int)TASK_QUEUED
+{
+    return 6;
+}
++ (int)TASK_PROCESSING
+{
+    return 7;
+}
++ (int)TASK_UPLOADING
+{
+    return 8;
+}
++ (int)TASK_FINISHED
+{
+    return 9;
 }
 @end
 
@@ -4772,6 +4796,10 @@
 + (NSString*)LIVE_BACKUP
 {
     return @"1";
+}
++ (NSString*)LIVE_CLIPPING_TASK
+{
+    return @"2";
 }
 @end
 
@@ -39627,6 +39655,16 @@
 
 @end
 
+@implementation KalturaTaskEntryServerNode
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaTaskEntryServerNode"];
+}
+
+@end
+
 @interface KalturaThumbAssetListResponse()
 @property (nonatomic,retain) NSMutableArray* objects;
 @end
@@ -42307,6 +42345,51 @@
     [self->_statusIn release];
     [self->_creatorUserIdEqual release];
     [self->_creatorUserIdIn release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaClippingTaskEntryServerNode
+@synthesize clipAttributes = _clipAttributes;
+@synthesize clippedEntryId = _clippedEntryId;
+@synthesize liveEntryId = _liveEntryId;
+
+- (KalturaFieldType)getTypeOfClipAttributes
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfClipAttributes
+{
+    return @"KalturaClipAttributes";
+}
+
+- (KalturaFieldType)getTypeOfClippedEntryId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfLiveEntryId
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaClippingTaskEntryServerNode"];
+    [aParams addIfDefinedKey:@"clipAttributes" withObject:self.clipAttributes];
+    [aParams addIfDefinedKey:@"clippedEntryId" withString:self.clippedEntryId];
+    [aParams addIfDefinedKey:@"liveEntryId" withString:self.liveEntryId];
+}
+
+- (void)dealloc
+{
+    [self->_clipAttributes release];
+    [self->_clippedEntryId release];
+    [self->_liveEntryId release];
     [super dealloc];
 }
 
@@ -49058,6 +49141,13 @@
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     [self.client.params addIfDefinedKey:@"entryServerNode" withObject:aEntryServerNode];
     return [self.client queueObjectService:@"entryservernode" withAction:@"update" withExpectedType:@"KalturaEntryServerNode"];
+}
+
+- (KalturaEntryServerNode*)updateStatusWithId:(NSString*)aId withStatus:(int)aStatus
+{
+    [self.client.params addIfDefinedKey:@"id" withString:aId];
+    [self.client.params addIfDefinedKey:@"status" withInt:aStatus];
+    return [self.client queueObjectService:@"entryservernode" withAction:@"updateStatus" withExpectedType:@"KalturaEntryServerNode"];
 }
 
 - (void)validateRegisteredEntryServerNodeWithId:(int)aId

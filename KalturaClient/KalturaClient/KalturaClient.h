@@ -264,11 +264,17 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaEntryServerNodeStatus : NSObject
++ (int)ERROR;
 + (int)STOPPED;
 + (int)PLAYABLE;
 + (int)BROADCASTING;
 + (int)AUTHENTICATED;
 + (int)MARKED_FOR_DELETION;
++ (int)TASK_PENDING;
++ (int)TASK_QUEUED;
++ (int)TASK_PROCESSING;
++ (int)TASK_UPLOADING;
++ (int)TASK_FINISHED;
 @end
 
 // @package Kaltura
@@ -1884,6 +1890,7 @@
 @interface KalturaEntryServerNodeType : NSObject
 + (NSString*)LIVE_PRIMARY;
 + (NSString*)LIVE_BACKUP;
++ (NSString*)LIVE_CLIPPING_TASK;
 @end
 
 // @package Kaltura
@@ -11578,6 +11585,11 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaTaskEntryServerNode : KalturaEntryServerNode
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaThumbAssetListResponse : KalturaListResponse
 @property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaThumbAsset elements
 - (KalturaFieldType)getTypeOfObjects;
@@ -12272,6 +12284,18 @@
 - (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setStatusEqualFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaClippingTaskEntryServerNode : KalturaTaskEntryServerNode
+@property (nonatomic,retain) KalturaClipAttributes* clipAttributes;
+@property (nonatomic,copy) NSString* clippedEntryId;
+@property (nonatomic,copy) NSString* liveEntryId;
+- (KalturaFieldType)getTypeOfClipAttributes;
+- (NSString*)getObjectTypeOfClipAttributes;
+- (KalturaFieldType)getTypeOfClippedEntryId;
+- (KalturaFieldType)getTypeOfLiveEntryId;
 @end
 
 // @package Kaltura
@@ -14517,6 +14541,7 @@
 - (KalturaEntryServerNodeListResponse*)listWithFilter:(KalturaEntryServerNodeFilter*)aFilter;
 - (KalturaEntryServerNodeListResponse*)list;
 - (KalturaEntryServerNode*)updateWithId:(int)aId withEntryServerNode:(KalturaEntryServerNode*)aEntryServerNode;
+- (KalturaEntryServerNode*)updateStatusWithId:(NSString*)aId withStatus:(int)aStatus;
 // Validates server node still registered on entry
 - (void)validateRegisteredEntryServerNodeWithId:(int)aId;
 @end

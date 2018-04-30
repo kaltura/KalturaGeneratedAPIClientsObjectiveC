@@ -232,6 +232,10 @@
 {
     return @"39";
 }
++ (NSString*)ENTRY_SERVER_NODE
+{
+    return @"40";
+}
 @end
 
 @implementation KalturaEventNotificationEventType

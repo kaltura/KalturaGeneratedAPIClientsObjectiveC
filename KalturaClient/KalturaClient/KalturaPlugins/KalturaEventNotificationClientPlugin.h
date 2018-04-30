@@ -88,6 +88,7 @@
 + (NSString*)CATEGORYENTRY;
 + (NSString*)LIVE_STREAM;
 + (NSString*)SERVER_NODE;
++ (NSString*)ENTRY_SERVER_NODE;
 @end
 
 // @package Kaltura
