@@ -33,7 +33,7 @@
 /*
  String constants
  */
-static NSString* const KalturaServiceBaseUrl = @"/api_v3/";
+static NSString* const KalturaServiceBaseUrl = @"/api_v3";
 static NSString* const KalturaServiceFormatXml = @"2";
 NSString* const KalturaClientErrorDomain = @"KalturaClientErrorDomain";
 
@@ -602,7 +602,7 @@ NSString* const KalturaClientErrorDomain = @"KalturaClientErrorDomain";
     if (self == nil)
         return nil;
 
-    self.clientTag = @"objCLib:18-05-08";
+    self.clientTag = @"objCLib:18-05-09";
     self.partnerId = -1;
     self.serviceUrl = @"http://www.kaltura.com";
     self.requestTimeout = 120;

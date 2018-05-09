@@ -556,36 +556,6 @@
 
 @end
 
-@implementation KalturaESearchEntryBaseItem
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaESearchEntryBaseItem"];
-}
-
-@end
-
-@implementation KalturaESearchEntryBaseNestedObject
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaESearchEntryBaseNestedObject"];
-}
-
-@end
-
-@implementation KalturaESearchEntryNestedBaseItem
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaESearchEntryNestedBaseItem"];
-}
-
-@end
-
 @implementation KalturaESearchHighlight
 @synthesize fieldName = _fieldName;
 @synthesize hits = _hits;
@@ -705,6 +675,136 @@
 {
     [self->_items release];
     [self->_itemsType release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaESearchResult
+@synthesize highlight = _highlight;
+@synthesize itemsData = _itemsData;
+
+- (KalturaFieldType)getTypeOfHighlight
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfHighlight
+{
+    return @"KalturaESearchHighlight";
+}
+
+- (KalturaFieldType)getTypeOfItemsData
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfItemsData
+{
+    return @"KalturaESearchItemDataResult";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchResult"];
+    [aParams addIfDefinedKey:@"highlight" withArray:self.highlight];
+    [aParams addIfDefinedKey:@"itemsData" withArray:self.itemsData];
+}
+
+- (void)dealloc
+{
+    [self->_highlight release];
+    [self->_itemsData release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaESearchCategoryResult
+@synthesize object = _object;
+
+- (KalturaFieldType)getTypeOfObject
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfObject
+{
+    return @"KalturaCategory";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchCategoryResult"];
+    [aParams addIfDefinedKey:@"object" withObject:self.object];
+}
+
+- (void)dealloc
+{
+    [self->_object release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaESearchEntryBaseItem
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchEntryBaseItem"];
+}
+
+@end
+
+@implementation KalturaESearchEntryBaseNestedObject
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchEntryBaseNestedObject"];
+}
+
+@end
+
+@implementation KalturaESearchEntryNestedBaseItem
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchEntryNestedBaseItem"];
+}
+
+@end
+
+@implementation KalturaESearchEntryResult
+@synthesize object = _object;
+
+- (KalturaFieldType)getTypeOfObject
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfObject
+{
+    return @"KalturaBaseEntry";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchEntryResult"];
+    [aParams addIfDefinedKey:@"object" withObject:self.object];
+}
+
+- (void)dealloc
+{
+    [self->_object release];
     [super dealloc];
 }
 
@@ -879,56 +979,12 @@
 
 @end
 
-@implementation KalturaESearchResult
-@synthesize highlight = _highlight;
-@synthesize itemsData = _itemsData;
-
-- (KalturaFieldType)getTypeOfHighlight
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfHighlight
-{
-    return @"KalturaESearchHighlight";
-}
-
-- (KalturaFieldType)getTypeOfItemsData
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfItemsData
-{
-    return @"KalturaESearchItemDataResult";
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaESearchResult"];
-    [aParams addIfDefinedKey:@"highlight" withArray:self.highlight];
-    [aParams addIfDefinedKey:@"itemsData" withArray:self.itemsData];
-}
-
-- (void)dealloc
-{
-    [self->_highlight release];
-    [self->_itemsData release];
-    [super dealloc];
-}
-
-@end
-
 @interface KalturaESearchResponse()
 @property (nonatomic,assign) int totalCount;
-@property (nonatomic,retain) NSMutableArray* objects;
 @end
 
 @implementation KalturaESearchResponse
 @synthesize totalCount = _totalCount;
-@synthesize objects = _objects;
 
 - (id)init
 {
@@ -944,16 +1000,6 @@
     return KFT_Int;
 }
 
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaESearchResult";
-}
-
 - (void)setTotalCountFromString:(NSString*)aPropVal
 {
     self.totalCount = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -966,12 +1012,6 @@
         [aParams putKey:@"objectType" withString:@"KalturaESearchResponse"];
 }
 
-- (void)dealloc
-{
-    [self->_objects release];
-    [super dealloc];
-}
-
 @end
 
 @implementation KalturaESearchUserBaseItem
@@ -980,6 +1020,35 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaESearchUserBaseItem"];
+}
+
+@end
+
+@implementation KalturaESearchUserResult
+@synthesize object = _object;
+
+- (KalturaFieldType)getTypeOfObject
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfObject
+{
+    return @"KalturaUser";
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchUserResult"];
+    [aParams addIfDefinedKey:@"object" withObject:self.object];
+}
+
+- (void)dealloc
+{
+    [self->_object release];
+    [super dealloc];
 }
 
 @end
@@ -1169,30 +1238,33 @@
 
 @end
 
-@implementation KalturaESearchCategoryResult
-@synthesize object = _object;
+@interface KalturaESearchCategoryResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
 
-- (KalturaFieldType)getTypeOfObject
+@implementation KalturaESearchCategoryResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
 {
-    return KFT_Object;
+    return KFT_Array;
 }
 
-- (NSString*)getObjectTypeOfObject
+- (NSString*)getObjectTypeOfObjects
 {
-    return @"KalturaCategory";
+    return @"KalturaESearchCategoryResult";
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaESearchCategoryResult"];
-    [aParams addIfDefinedKey:@"object" withObject:self.object];
+        [aParams putKey:@"objectType" withString:@"KalturaESearchCategoryResponse"];
 }
 
 - (void)dealloc
 {
-    [self->_object release];
+    [self->_objects release];
     [super dealloc];
 }
 
@@ -1431,30 +1503,33 @@
 
 @end
 
-@implementation KalturaESearchEntryResult
-@synthesize object = _object;
+@interface KalturaESearchEntryResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
 
-- (KalturaFieldType)getTypeOfObject
+@implementation KalturaESearchEntryResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
 {
-    return KFT_Object;
+    return KFT_Array;
 }
 
-- (NSString*)getObjectTypeOfObject
+- (NSString*)getObjectTypeOfObjects
 {
-    return @"KalturaBaseEntry";
+    return @"KalturaESearchEntryResult";
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaESearchEntryResult"];
-    [aParams addIfDefinedKey:@"object" withObject:self.object];
+        [aParams putKey:@"objectType" withString:@"KalturaESearchEntryResponse"];
 }
 
 - (void)dealloc
 {
-    [self->_object release];
+    [self->_objects release];
     [super dealloc];
 }
 
@@ -1687,30 +1762,33 @@
 
 @end
 
-@implementation KalturaESearchUserResult
-@synthesize object = _object;
+@interface KalturaESearchUserResponse()
+@property (nonatomic,retain) NSMutableArray* objects;
+@end
 
-- (KalturaFieldType)getTypeOfObject
+@implementation KalturaESearchUserResponse
+@synthesize objects = _objects;
+
+- (KalturaFieldType)getTypeOfObjects
 {
-    return KFT_Object;
+    return KFT_Array;
 }
 
-- (NSString*)getObjectTypeOfObject
+- (NSString*)getObjectTypeOfObjects
 {
-    return @"KalturaUser";
+    return @"KalturaESearchUserResult";
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaESearchUserResult"];
-    [aParams addIfDefinedKey:@"object" withObject:self.object];
+        [aParams putKey:@"objectType" withString:@"KalturaESearchUserResponse"];
 }
 
 - (void)dealloc
 {
-    [self->_object release];
+    [self->_objects release];
     [super dealloc];
 }
 
@@ -2526,38 +2604,38 @@
 
 ///////////////////////// services /////////////////////////
 @implementation KalturaESearchService
-- (KalturaESearchResponse*)searchCategoryWithSearchParams:(KalturaESearchCategoryParams*)aSearchParams withPager:(KalturaPager*)aPager
+- (KalturaESearchCategoryResponse*)searchCategoryWithSearchParams:(KalturaESearchCategoryParams*)aSearchParams withPager:(KalturaPager*)aPager
 {
     [self.client.params addIfDefinedKey:@"searchParams" withObject:aSearchParams];
     [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
-    return [self.client queueObjectService:@"elasticsearch_esearch" withAction:@"searchCategory" withExpectedType:@"KalturaESearchResponse"];
+    return [self.client queueObjectService:@"elasticsearch_esearch" withAction:@"searchCategory" withExpectedType:@"KalturaESearchCategoryResponse"];
 }
 
-- (KalturaESearchResponse*)searchCategoryWithSearchParams:(KalturaESearchCategoryParams*)aSearchParams
+- (KalturaESearchCategoryResponse*)searchCategoryWithSearchParams:(KalturaESearchCategoryParams*)aSearchParams
 {
     return [self searchCategoryWithSearchParams:aSearchParams withPager:nil];
 }
 
-- (KalturaESearchResponse*)searchEntryWithSearchParams:(KalturaESearchEntryParams*)aSearchParams withPager:(KalturaPager*)aPager
+- (KalturaESearchEntryResponse*)searchEntryWithSearchParams:(KalturaESearchEntryParams*)aSearchParams withPager:(KalturaPager*)aPager
 {
     [self.client.params addIfDefinedKey:@"searchParams" withObject:aSearchParams];
     [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
-    return [self.client queueObjectService:@"elasticsearch_esearch" withAction:@"searchEntry" withExpectedType:@"KalturaESearchResponse"];
+    return [self.client queueObjectService:@"elasticsearch_esearch" withAction:@"searchEntry" withExpectedType:@"KalturaESearchEntryResponse"];
 }
 
-- (KalturaESearchResponse*)searchEntryWithSearchParams:(KalturaESearchEntryParams*)aSearchParams
+- (KalturaESearchEntryResponse*)searchEntryWithSearchParams:(KalturaESearchEntryParams*)aSearchParams
 {
     return [self searchEntryWithSearchParams:aSearchParams withPager:nil];
 }
 
-- (KalturaESearchResponse*)searchUserWithSearchParams:(KalturaESearchUserParams*)aSearchParams withPager:(KalturaPager*)aPager
+- (KalturaESearchUserResponse*)searchUserWithSearchParams:(KalturaESearchUserParams*)aSearchParams withPager:(KalturaPager*)aPager
 {
     [self.client.params addIfDefinedKey:@"searchParams" withObject:aSearchParams];
     [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
-    return [self.client queueObjectService:@"elasticsearch_esearch" withAction:@"searchUser" withExpectedType:@"KalturaESearchResponse"];
+    return [self.client queueObjectService:@"elasticsearch_esearch" withAction:@"searchUser" withExpectedType:@"KalturaESearchUserResponse"];
 }
 
-- (KalturaESearchResponse*)searchUserWithSearchParams:(KalturaESearchUserParams*)aSearchParams
+- (KalturaESearchUserResponse*)searchUserWithSearchParams:(KalturaESearchUserParams*)aSearchParams
 {
     return [self searchUserWithSearchParams:aSearchParams withPager:nil];
 }

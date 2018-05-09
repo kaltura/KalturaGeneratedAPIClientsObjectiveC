@@ -225,21 +225,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaESearchEntryBaseItem : KalturaESearchBaseItem
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaESearchEntryBaseNestedObject : KalturaESearchEntryBaseItem
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaESearchEntryNestedBaseItem : KalturaESearchEntryBaseNestedObject
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaESearchHighlight : KalturaObjectBase
 @property (nonatomic,copy) NSString* fieldName;
 @property (nonatomic,retain) NSMutableArray* hits;	// of KalturaString elements
@@ -267,6 +252,48 @@
 - (NSString*)getObjectTypeOfItems;
 - (KalturaFieldType)getTypeOfItemsType;
 - (void)setTotalCountFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaESearchResult : KalturaObjectBase
+@property (nonatomic,retain) NSMutableArray* highlight;	// of KalturaESearchHighlight elements
+@property (nonatomic,retain) NSMutableArray* itemsData;	// of KalturaESearchItemDataResult elements
+- (KalturaFieldType)getTypeOfHighlight;
+- (NSString*)getObjectTypeOfHighlight;
+- (KalturaFieldType)getTypeOfItemsData;
+- (NSString*)getObjectTypeOfItemsData;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaESearchCategoryResult : KalturaESearchResult
+@property (nonatomic,retain) KalturaCategory* object;
+- (KalturaFieldType)getTypeOfObject;
+- (NSString*)getObjectTypeOfObject;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaESearchEntryBaseItem : KalturaESearchBaseItem
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaESearchEntryBaseNestedObject : KalturaESearchEntryBaseItem
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaESearchEntryNestedBaseItem : KalturaESearchEntryBaseNestedObject
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaESearchEntryResult : KalturaESearchResult
+@property (nonatomic,retain) KalturaBaseEntry* object;
+- (KalturaFieldType)getTypeOfObject;
+- (NSString*)getObjectTypeOfObject;
 @end
 
 // @package Kaltura
@@ -315,29 +342,23 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaESearchResult : KalturaObjectBase
-@property (nonatomic,retain) NSMutableArray* highlight;	// of KalturaESearchHighlight elements
-@property (nonatomic,retain) NSMutableArray* itemsData;	// of KalturaESearchItemDataResult elements
-- (KalturaFieldType)getTypeOfHighlight;
-- (NSString*)getObjectTypeOfHighlight;
-- (KalturaFieldType)getTypeOfItemsData;
-- (NSString*)getObjectTypeOfItemsData;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaESearchResponse : KalturaObjectBase
 @property (nonatomic,assign,readonly) int totalCount;
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaESearchResult elements
 - (KalturaFieldType)getTypeOfTotalCount;
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
 - (void)setTotalCountFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
 // @subpackage Client
 @interface KalturaESearchUserBaseItem : KalturaESearchBaseItem
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaESearchUserResult : KalturaESearchResult
+@property (nonatomic,retain) KalturaUser* object;
+- (KalturaFieldType)getTypeOfObject;
+- (NSString*)getObjectTypeOfObject;
 @end
 
 // @package Kaltura
@@ -387,10 +408,10 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaESearchCategoryResult : KalturaESearchResult
-@property (nonatomic,retain) KalturaCategory* object;
-- (KalturaFieldType)getTypeOfObject;
-- (NSString*)getObjectTypeOfObject;
+@interface KalturaESearchCategoryResponse : KalturaESearchResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaESearchCategoryResult elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
 @end
 
 // @package Kaltura
@@ -454,10 +475,10 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaESearchEntryResult : KalturaESearchResult
-@property (nonatomic,retain) KalturaBaseEntry* object;
-- (KalturaFieldType)getTypeOfObject;
-- (NSString*)getObjectTypeOfObject;
+@interface KalturaESearchEntryResponse : KalturaESearchResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaESearchEntryResult elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
 @end
 
 // @package Kaltura
@@ -516,10 +537,10 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaESearchUserResult : KalturaESearchResult
-@property (nonatomic,retain) KalturaUser* object;
-- (KalturaFieldType)getTypeOfObject;
-- (NSString*)getObjectTypeOfObject;
+@interface KalturaESearchUserResponse : KalturaESearchResponse
+@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaESearchUserResult elements
+- (KalturaFieldType)getTypeOfObjects;
+- (NSString*)getObjectTypeOfObjects;
 @end
 
 // @package Kaltura
@@ -723,12 +744,12 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaESearchService : KalturaServiceBase
-- (KalturaESearchResponse*)searchCategoryWithSearchParams:(KalturaESearchCategoryParams*)aSearchParams withPager:(KalturaPager*)aPager;
-- (KalturaESearchResponse*)searchCategoryWithSearchParams:(KalturaESearchCategoryParams*)aSearchParams;
-- (KalturaESearchResponse*)searchEntryWithSearchParams:(KalturaESearchEntryParams*)aSearchParams withPager:(KalturaPager*)aPager;
-- (KalturaESearchResponse*)searchEntryWithSearchParams:(KalturaESearchEntryParams*)aSearchParams;
-- (KalturaESearchResponse*)searchUserWithSearchParams:(KalturaESearchUserParams*)aSearchParams withPager:(KalturaPager*)aPager;
-- (KalturaESearchResponse*)searchUserWithSearchParams:(KalturaESearchUserParams*)aSearchParams;
+- (KalturaESearchCategoryResponse*)searchCategoryWithSearchParams:(KalturaESearchCategoryParams*)aSearchParams withPager:(KalturaPager*)aPager;
+- (KalturaESearchCategoryResponse*)searchCategoryWithSearchParams:(KalturaESearchCategoryParams*)aSearchParams;
+- (KalturaESearchEntryResponse*)searchEntryWithSearchParams:(KalturaESearchEntryParams*)aSearchParams withPager:(KalturaPager*)aPager;
+- (KalturaESearchEntryResponse*)searchEntryWithSearchParams:(KalturaESearchEntryParams*)aSearchParams;
+- (KalturaESearchUserResponse*)searchUserWithSearchParams:(KalturaESearchUserParams*)aSearchParams withPager:(KalturaPager*)aPager;
+- (KalturaESearchUserResponse*)searchUserWithSearchParams:(KalturaESearchUserParams*)aSearchParams;
 @end
 
 @interface KalturaElasticSearchClientPlugin : KalturaClientPlugin

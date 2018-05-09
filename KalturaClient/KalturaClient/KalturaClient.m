@@ -19406,6 +19406,404 @@
 
 @end
 
+@interface KalturaUser()
+@property (nonatomic,assign) int partnerId;
+@property (nonatomic,assign) int createdAt;
+@property (nonatomic,assign) int updatedAt;
+@property (nonatomic,assign) int storageSize;
+@property (nonatomic,assign) int lastLoginTime;
+@property (nonatomic,assign) int statusUpdatedAt;
+@property (nonatomic,assign) int deletedAt;
+@property (nonatomic,copy) NSString* roleNames;
+@end
+
+@implementation KalturaUser
+@synthesize id = _id;
+@synthesize partnerId = _partnerId;
+@synthesize type = _type;
+@synthesize screenName = _screenName;
+@synthesize fullName = _fullName;
+@synthesize email = _email;
+@synthesize dateOfBirth = _dateOfBirth;
+@synthesize country = _country;
+@synthesize state = _state;
+@synthesize city = _city;
+@synthesize zip = _zip;
+@synthesize thumbnailUrl = _thumbnailUrl;
+@synthesize description = _description;
+@synthesize tags = _tags;
+@synthesize adminTags = _adminTags;
+@synthesize gender = _gender;
+@synthesize status = _status;
+@synthesize createdAt = _createdAt;
+@synthesize updatedAt = _updatedAt;
+@synthesize partnerData = _partnerData;
+@synthesize indexedPartnerDataInt = _indexedPartnerDataInt;
+@synthesize indexedPartnerDataString = _indexedPartnerDataString;
+@synthesize storageSize = _storageSize;
+@synthesize password = _password;
+@synthesize firstName = _firstName;
+@synthesize lastName = _lastName;
+@synthesize isAdmin = _isAdmin;
+@synthesize language = _language;
+@synthesize lastLoginTime = _lastLoginTime;
+@synthesize statusUpdatedAt = _statusUpdatedAt;
+@synthesize deletedAt = _deletedAt;
+@synthesize loginEnabled = _loginEnabled;
+@synthesize roleIds = _roleIds;
+@synthesize roleNames = _roleNames;
+@synthesize isAccountOwner = _isAccountOwner;
+@synthesize allowedPartnerIds = _allowedPartnerIds;
+@synthesize allowedPartnerPackages = _allowedPartnerPackages;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_partnerId = KALTURA_UNDEF_INT;
+    self->_type = KALTURA_UNDEF_INT;
+    self->_dateOfBirth = KALTURA_UNDEF_INT;
+    self->_gender = KALTURA_UNDEF_INT;
+    self->_status = KALTURA_UNDEF_INT;
+    self->_createdAt = KALTURA_UNDEF_INT;
+    self->_updatedAt = KALTURA_UNDEF_INT;
+    self->_indexedPartnerDataInt = KALTURA_UNDEF_INT;
+    self->_storageSize = KALTURA_UNDEF_INT;
+    self->_isAdmin = KALTURA_UNDEF_BOOL;
+    self->_lastLoginTime = KALTURA_UNDEF_INT;
+    self->_statusUpdatedAt = KALTURA_UNDEF_INT;
+    self->_deletedAt = KALTURA_UNDEF_INT;
+    self->_loginEnabled = KALTURA_UNDEF_BOOL;
+    self->_isAccountOwner = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfPartnerId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfType
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfScreenName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfFullName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEmail
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfDateOfBirth
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCountry
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfState
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCity
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfZip
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfThumbnailUrl
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfDescription
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfTags
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfAdminTags
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfGender
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfStatus
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfCreatedAt
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfUpdatedAt
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfPartnerData
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfIndexedPartnerDataInt
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfIndexedPartnerDataString
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfStorageSize
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfPassword
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfFirstName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfLastName
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfIsAdmin
+{
+    return KFT_Bool;
+}
+
+- (KalturaFieldType)getTypeOfLanguage
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfLastLoginTime
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfStatusUpdatedAt
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfDeletedAt
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfLoginEnabled
+{
+    return KFT_Bool;
+}
+
+- (KalturaFieldType)getTypeOfRoleIds
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfRoleNames
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfIsAccountOwner
+{
+    return KFT_Bool;
+}
+
+- (KalturaFieldType)getTypeOfAllowedPartnerIds
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfAllowedPartnerPackages
+{
+    return KFT_String;
+}
+
+- (void)setPartnerIdFromString:(NSString*)aPropVal
+{
+    self.partnerId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setTypeFromString:(NSString*)aPropVal
+{
+    self.type = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setDateOfBirthFromString:(NSString*)aPropVal
+{
+    self.dateOfBirth = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setGenderFromString:(NSString*)aPropVal
+{
+    self.gender = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setStatusFromString:(NSString*)aPropVal
+{
+    self.status = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setCreatedAtFromString:(NSString*)aPropVal
+{
+    self.createdAt = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setUpdatedAtFromString:(NSString*)aPropVal
+{
+    self.updatedAt = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setIndexedPartnerDataIntFromString:(NSString*)aPropVal
+{
+    self.indexedPartnerDataInt = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setStorageSizeFromString:(NSString*)aPropVal
+{
+    self.storageSize = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setIsAdminFromString:(NSString*)aPropVal
+{
+    self.isAdmin = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)setLastLoginTimeFromString:(NSString*)aPropVal
+{
+    self.lastLoginTime = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setStatusUpdatedAtFromString:(NSString*)aPropVal
+{
+    self.statusUpdatedAt = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setDeletedAtFromString:(NSString*)aPropVal
+{
+    self.deletedAt = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setLoginEnabledFromString:(NSString*)aPropVal
+{
+    self.loginEnabled = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)setIsAccountOwnerFromString:(NSString*)aPropVal
+{
+    self.isAccountOwner = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaUser"];
+    [aParams addIfDefinedKey:@"id" withString:self.id];
+    [aParams addIfDefinedKey:@"type" withInt:self.type];
+    [aParams addIfDefinedKey:@"screenName" withString:self.screenName];
+    [aParams addIfDefinedKey:@"fullName" withString:self.fullName];
+    [aParams addIfDefinedKey:@"email" withString:self.email];
+    [aParams addIfDefinedKey:@"dateOfBirth" withInt:self.dateOfBirth];
+    [aParams addIfDefinedKey:@"country" withString:self.country];
+    [aParams addIfDefinedKey:@"state" withString:self.state];
+    [aParams addIfDefinedKey:@"city" withString:self.city];
+    [aParams addIfDefinedKey:@"zip" withString:self.zip];
+    [aParams addIfDefinedKey:@"thumbnailUrl" withString:self.thumbnailUrl];
+    [aParams addIfDefinedKey:@"description" withString:self.description];
+    [aParams addIfDefinedKey:@"tags" withString:self.tags];
+    [aParams addIfDefinedKey:@"adminTags" withString:self.adminTags];
+    [aParams addIfDefinedKey:@"gender" withInt:self.gender];
+    [aParams addIfDefinedKey:@"status" withInt:self.status];
+    [aParams addIfDefinedKey:@"partnerData" withString:self.partnerData];
+    [aParams addIfDefinedKey:@"indexedPartnerDataInt" withInt:self.indexedPartnerDataInt];
+    [aParams addIfDefinedKey:@"indexedPartnerDataString" withString:self.indexedPartnerDataString];
+    [aParams addIfDefinedKey:@"password" withString:self.password];
+    [aParams addIfDefinedKey:@"firstName" withString:self.firstName];
+    [aParams addIfDefinedKey:@"lastName" withString:self.lastName];
+    [aParams addIfDefinedKey:@"isAdmin" withBool:self.isAdmin];
+    [aParams addIfDefinedKey:@"language" withString:self.language];
+    [aParams addIfDefinedKey:@"loginEnabled" withBool:self.loginEnabled];
+    [aParams addIfDefinedKey:@"roleIds" withString:self.roleIds];
+    [aParams addIfDefinedKey:@"isAccountOwner" withBool:self.isAccountOwner];
+    [aParams addIfDefinedKey:@"allowedPartnerIds" withString:self.allowedPartnerIds];
+    [aParams addIfDefinedKey:@"allowedPartnerPackages" withString:self.allowedPartnerPackages];
+}
+
+- (void)dealloc
+{
+    [self->_id release];
+    [self->_screenName release];
+    [self->_fullName release];
+    [self->_email release];
+    [self->_country release];
+    [self->_state release];
+    [self->_city release];
+    [self->_zip release];
+    [self->_thumbnailUrl release];
+    [self->_description release];
+    [self->_tags release];
+    [self->_adminTags release];
+    [self->_partnerData release];
+    [self->_indexedPartnerDataString release];
+    [self->_password release];
+    [self->_firstName release];
+    [self->_lastName release];
+    [self->_language release];
+    [self->_roleIds release];
+    [self->_roleNames release];
+    [self->_allowedPartnerIds release];
+    [self->_allowedPartnerPackages release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaEffect
 @synthesize effectType = _effectType;
 @synthesize value = _value;
@@ -29420,404 +29818,6 @@
     [self->_userId release];
     [self->_fileName release];
     [self->_uploadUrl release];
-    [super dealloc];
-}
-
-@end
-
-@interface KalturaUser()
-@property (nonatomic,assign) int partnerId;
-@property (nonatomic,assign) int createdAt;
-@property (nonatomic,assign) int updatedAt;
-@property (nonatomic,assign) int storageSize;
-@property (nonatomic,assign) int lastLoginTime;
-@property (nonatomic,assign) int statusUpdatedAt;
-@property (nonatomic,assign) int deletedAt;
-@property (nonatomic,copy) NSString* roleNames;
-@end
-
-@implementation KalturaUser
-@synthesize id = _id;
-@synthesize partnerId = _partnerId;
-@synthesize type = _type;
-@synthesize screenName = _screenName;
-@synthesize fullName = _fullName;
-@synthesize email = _email;
-@synthesize dateOfBirth = _dateOfBirth;
-@synthesize country = _country;
-@synthesize state = _state;
-@synthesize city = _city;
-@synthesize zip = _zip;
-@synthesize thumbnailUrl = _thumbnailUrl;
-@synthesize description = _description;
-@synthesize tags = _tags;
-@synthesize adminTags = _adminTags;
-@synthesize gender = _gender;
-@synthesize status = _status;
-@synthesize createdAt = _createdAt;
-@synthesize updatedAt = _updatedAt;
-@synthesize partnerData = _partnerData;
-@synthesize indexedPartnerDataInt = _indexedPartnerDataInt;
-@synthesize indexedPartnerDataString = _indexedPartnerDataString;
-@synthesize storageSize = _storageSize;
-@synthesize password = _password;
-@synthesize firstName = _firstName;
-@synthesize lastName = _lastName;
-@synthesize isAdmin = _isAdmin;
-@synthesize language = _language;
-@synthesize lastLoginTime = _lastLoginTime;
-@synthesize statusUpdatedAt = _statusUpdatedAt;
-@synthesize deletedAt = _deletedAt;
-@synthesize loginEnabled = _loginEnabled;
-@synthesize roleIds = _roleIds;
-@synthesize roleNames = _roleNames;
-@synthesize isAccountOwner = _isAccountOwner;
-@synthesize allowedPartnerIds = _allowedPartnerIds;
-@synthesize allowedPartnerPackages = _allowedPartnerPackages;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_partnerId = KALTURA_UNDEF_INT;
-    self->_type = KALTURA_UNDEF_INT;
-    self->_dateOfBirth = KALTURA_UNDEF_INT;
-    self->_gender = KALTURA_UNDEF_INT;
-    self->_status = KALTURA_UNDEF_INT;
-    self->_createdAt = KALTURA_UNDEF_INT;
-    self->_updatedAt = KALTURA_UNDEF_INT;
-    self->_indexedPartnerDataInt = KALTURA_UNDEF_INT;
-    self->_storageSize = KALTURA_UNDEF_INT;
-    self->_isAdmin = KALTURA_UNDEF_BOOL;
-    self->_lastLoginTime = KALTURA_UNDEF_INT;
-    self->_statusUpdatedAt = KALTURA_UNDEF_INT;
-    self->_deletedAt = KALTURA_UNDEF_INT;
-    self->_loginEnabled = KALTURA_UNDEF_BOOL;
-    self->_isAccountOwner = KALTURA_UNDEF_BOOL;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfId
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfPartnerId
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfType
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfScreenName
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfFullName
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfEmail
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfDateOfBirth
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCountry
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfState
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfCity
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfZip
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfThumbnailUrl
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfDescription
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfTags
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfAdminTags
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfGender
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfStatus
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfCreatedAt
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfUpdatedAt
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfPartnerData
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfIndexedPartnerDataInt
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfIndexedPartnerDataString
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfStorageSize
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfPassword
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfFirstName
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfLastName
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfIsAdmin
-{
-    return KFT_Bool;
-}
-
-- (KalturaFieldType)getTypeOfLanguage
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfLastLoginTime
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfStatusUpdatedAt
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfDeletedAt
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfLoginEnabled
-{
-    return KFT_Bool;
-}
-
-- (KalturaFieldType)getTypeOfRoleIds
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfRoleNames
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfIsAccountOwner
-{
-    return KFT_Bool;
-}
-
-- (KalturaFieldType)getTypeOfAllowedPartnerIds
-{
-    return KFT_String;
-}
-
-- (KalturaFieldType)getTypeOfAllowedPartnerPackages
-{
-    return KFT_String;
-}
-
-- (void)setPartnerIdFromString:(NSString*)aPropVal
-{
-    self.partnerId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setTypeFromString:(NSString*)aPropVal
-{
-    self.type = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setDateOfBirthFromString:(NSString*)aPropVal
-{
-    self.dateOfBirth = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setGenderFromString:(NSString*)aPropVal
-{
-    self.gender = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setStatusFromString:(NSString*)aPropVal
-{
-    self.status = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setCreatedAtFromString:(NSString*)aPropVal
-{
-    self.createdAt = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setUpdatedAtFromString:(NSString*)aPropVal
-{
-    self.updatedAt = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setIndexedPartnerDataIntFromString:(NSString*)aPropVal
-{
-    self.indexedPartnerDataInt = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setStorageSizeFromString:(NSString*)aPropVal
-{
-    self.storageSize = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setIsAdminFromString:(NSString*)aPropVal
-{
-    self.isAdmin = [KalturaSimpleTypeParser parseBool:aPropVal];
-}
-
-- (void)setLastLoginTimeFromString:(NSString*)aPropVal
-{
-    self.lastLoginTime = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setStatusUpdatedAtFromString:(NSString*)aPropVal
-{
-    self.statusUpdatedAt = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setDeletedAtFromString:(NSString*)aPropVal
-{
-    self.deletedAt = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)setLoginEnabledFromString:(NSString*)aPropVal
-{
-    self.loginEnabled = [KalturaSimpleTypeParser parseBool:aPropVal];
-}
-
-- (void)setIsAccountOwnerFromString:(NSString*)aPropVal
-{
-    self.isAccountOwner = [KalturaSimpleTypeParser parseBool:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaUser"];
-    [aParams addIfDefinedKey:@"id" withString:self.id];
-    [aParams addIfDefinedKey:@"type" withInt:self.type];
-    [aParams addIfDefinedKey:@"screenName" withString:self.screenName];
-    [aParams addIfDefinedKey:@"fullName" withString:self.fullName];
-    [aParams addIfDefinedKey:@"email" withString:self.email];
-    [aParams addIfDefinedKey:@"dateOfBirth" withInt:self.dateOfBirth];
-    [aParams addIfDefinedKey:@"country" withString:self.country];
-    [aParams addIfDefinedKey:@"state" withString:self.state];
-    [aParams addIfDefinedKey:@"city" withString:self.city];
-    [aParams addIfDefinedKey:@"zip" withString:self.zip];
-    [aParams addIfDefinedKey:@"thumbnailUrl" withString:self.thumbnailUrl];
-    [aParams addIfDefinedKey:@"description" withString:self.description];
-    [aParams addIfDefinedKey:@"tags" withString:self.tags];
-    [aParams addIfDefinedKey:@"adminTags" withString:self.adminTags];
-    [aParams addIfDefinedKey:@"gender" withInt:self.gender];
-    [aParams addIfDefinedKey:@"status" withInt:self.status];
-    [aParams addIfDefinedKey:@"partnerData" withString:self.partnerData];
-    [aParams addIfDefinedKey:@"indexedPartnerDataInt" withInt:self.indexedPartnerDataInt];
-    [aParams addIfDefinedKey:@"indexedPartnerDataString" withString:self.indexedPartnerDataString];
-    [aParams addIfDefinedKey:@"password" withString:self.password];
-    [aParams addIfDefinedKey:@"firstName" withString:self.firstName];
-    [aParams addIfDefinedKey:@"lastName" withString:self.lastName];
-    [aParams addIfDefinedKey:@"isAdmin" withBool:self.isAdmin];
-    [aParams addIfDefinedKey:@"language" withString:self.language];
-    [aParams addIfDefinedKey:@"loginEnabled" withBool:self.loginEnabled];
-    [aParams addIfDefinedKey:@"roleIds" withString:self.roleIds];
-    [aParams addIfDefinedKey:@"isAccountOwner" withBool:self.isAccountOwner];
-    [aParams addIfDefinedKey:@"allowedPartnerIds" withString:self.allowedPartnerIds];
-    [aParams addIfDefinedKey:@"allowedPartnerPackages" withString:self.allowedPartnerPackages];
-}
-
-- (void)dealloc
-{
-    [self->_id release];
-    [self->_screenName release];
-    [self->_fullName release];
-    [self->_email release];
-    [self->_country release];
-    [self->_state release];
-    [self->_city release];
-    [self->_zip release];
-    [self->_thumbnailUrl release];
-    [self->_description release];
-    [self->_tags release];
-    [self->_adminTags release];
-    [self->_partnerData release];
-    [self->_indexedPartnerDataString release];
-    [self->_password release];
-    [self->_firstName release];
-    [self->_lastName release];
-    [self->_language release];
-    [self->_roleIds release];
-    [self->_roleNames release];
-    [self->_allowedPartnerIds release];
-    [self->_allowedPartnerPackages release];
     [super dealloc];
 }
 
