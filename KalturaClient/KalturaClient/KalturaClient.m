@@ -1273,6 +1273,10 @@
 {
     return 7;
 }
++ (int)RUNNING_BATCHES_LAST_EXECUTION_TIME
+{
+    return 8;
+}
 @end
 
 @implementation KalturaSearchOperatorType
