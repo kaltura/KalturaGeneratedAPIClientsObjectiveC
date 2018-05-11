@@ -323,6 +323,13 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaGroupUserCreationMode : NSObject
++ (int)MANUAL;
++ (int)AUTOMATIC;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaGroupUserStatus : NSObject
 + (int)ACTIVE;
 + (int)DELETED;
@@ -912,6 +919,13 @@
 + (int)AUTO_JOIN;
 + (int)REQUEST_TO_JOIN;
 + (int)NOT_ALLOWED;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaUserMode : NSObject
++ (int)NONE;
++ (int)PROTECTED_USER;
 @end
 
 // @package Kaltura
@@ -6255,6 +6269,7 @@
 @property (nonatomic,assign) KALTURA_BOOL isAccountOwner;	// insertonly
 @property (nonatomic,copy) NSString* allowedPartnerIds;
 @property (nonatomic,copy) NSString* allowedPartnerPackages;
+@property (nonatomic,assign) int userMode;	// enum KalturaUserMode
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfPartnerId;
 - (KalturaFieldType)getTypeOfType;
@@ -6292,6 +6307,7 @@
 - (KalturaFieldType)getTypeOfIsAccountOwner;
 - (KalturaFieldType)getTypeOfAllowedPartnerIds;
 - (KalturaFieldType)getTypeOfAllowedPartnerPackages;
+- (KalturaFieldType)getTypeOfUserMode;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setTypeFromString:(NSString*)aPropVal;
 - (void)setDateOfBirthFromString:(NSString*)aPropVal;
@@ -6307,6 +6323,7 @@
 - (void)setDeletedAtFromString:(NSString*)aPropVal;
 - (void)setLoginEnabledFromString:(NSString*)aPropVal;
 - (void)setIsAccountOwnerFromString:(NSString*)aPropVal;
+- (void)setUserModeFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -7007,16 +7024,19 @@
 @property (nonatomic,assign,readonly) int createdAt;
 // Last update date as Unix timestamp (In seconds)
 @property (nonatomic,assign,readonly) int updatedAt;
+@property (nonatomic,assign) int creationMode;	// enum KalturaGroupUserCreationMode, insertonly
 - (KalturaFieldType)getTypeOfUserId;
 - (KalturaFieldType)getTypeOfGroupId;
 - (KalturaFieldType)getTypeOfStatus;
 - (KalturaFieldType)getTypeOfPartnerId;
 - (KalturaFieldType)getTypeOfCreatedAt;
 - (KalturaFieldType)getTypeOfUpdatedAt;
+- (KalturaFieldType)getTypeOfCreationMode;
 - (void)setStatusFromString:(NSString*)aPropVal;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
+- (void)setCreationModeFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -14656,6 +14676,7 @@
 // @package Kaltura
 // @subpackage Client
 // Add & Manage GroupUser
+@class KalturaBulkUpload;
 @interface KalturaGroupUserService : KalturaServiceBase
 // Add new GroupUser
 - (KalturaGroupUser*)addWithGroupUser:(KalturaGroupUser*)aGroupUser;
@@ -14665,6 +14686,8 @@
 - (KalturaGroupUserListResponse*)listWithFilter:(KalturaGroupUserFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaGroupUserListResponse*)listWithFilter:(KalturaGroupUserFilter*)aFilter;
 - (KalturaGroupUserListResponse*)list;
+// sync by userId and groupIds
+- (KalturaBulkUpload*)syncWithUserId:(NSString*)aUserId withGroupIds:(NSString*)aGroupIds;
 @end
 
 // @package Kaltura

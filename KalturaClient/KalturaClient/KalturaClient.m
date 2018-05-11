@@ -640,6 +640,17 @@
 }
 @end
 
+@implementation KalturaGroupUserCreationMode
++ (int)MANUAL
+{
+    return 1;
+}
++ (int)AUTOMATIC
+{
+    return 2;
+}
+@end
+
 @implementation KalturaGroupUserStatus
 + (int)ACTIVE
 {
@@ -2142,6 +2153,17 @@
 + (int)NOT_ALLOWED
 {
     return 3;
+}
+@end
+
+@implementation KalturaUserMode
++ (int)NONE
+{
+    return 0;
+}
++ (int)PROTECTED_USER
+{
+    return 1;
 }
 @end
 
@@ -19459,6 +19481,7 @@
 @synthesize isAccountOwner = _isAccountOwner;
 @synthesize allowedPartnerIds = _allowedPartnerIds;
 @synthesize allowedPartnerPackages = _allowedPartnerPackages;
+@synthesize userMode = _userMode;
 
 - (id)init
 {
@@ -19480,6 +19503,7 @@
     self->_deletedAt = KALTURA_UNDEF_INT;
     self->_loginEnabled = KALTURA_UNDEF_BOOL;
     self->_isAccountOwner = KALTURA_UNDEF_BOOL;
+    self->_userMode = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -19668,6 +19692,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfUserMode
+{
+    return KFT_Int;
+}
+
 - (void)setPartnerIdFromString:(NSString*)aPropVal
 {
     self.partnerId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -19743,6 +19772,11 @@
     self.isAccountOwner = [KalturaSimpleTypeParser parseBool:aPropVal];
 }
 
+- (void)setUserModeFromString:(NSString*)aPropVal
+{
+    self.userMode = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -19777,6 +19811,7 @@
     [aParams addIfDefinedKey:@"isAccountOwner" withBool:self.isAccountOwner];
     [aParams addIfDefinedKey:@"allowedPartnerIds" withString:self.allowedPartnerIds];
     [aParams addIfDefinedKey:@"allowedPartnerPackages" withString:self.allowedPartnerPackages];
+    [aParams addIfDefinedKey:@"userMode" withInt:self.userMode];
 }
 
 - (void)dealloc
@@ -22338,6 +22373,7 @@
 @synthesize partnerId = _partnerId;
 @synthesize createdAt = _createdAt;
 @synthesize updatedAt = _updatedAt;
+@synthesize creationMode = _creationMode;
 
 - (id)init
 {
@@ -22348,6 +22384,7 @@
     self->_partnerId = KALTURA_UNDEF_INT;
     self->_createdAt = KALTURA_UNDEF_INT;
     self->_updatedAt = KALTURA_UNDEF_INT;
+    self->_creationMode = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -22381,6 +22418,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfCreationMode
+{
+    return KFT_Int;
+}
+
 - (void)setStatusFromString:(NSString*)aPropVal
 {
     self.status = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -22401,6 +22443,11 @@
     self.updatedAt = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setCreationModeFromString:(NSString*)aPropVal
+{
+    self.creationMode = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -22408,6 +22455,7 @@
         [aParams putKey:@"objectType" withString:@"KalturaGroupUser"];
     [aParams addIfDefinedKey:@"userId" withString:self.userId];
     [aParams addIfDefinedKey:@"groupId" withString:self.groupId];
+    [aParams addIfDefinedKey:@"creationMode" withInt:self.creationMode];
 }
 
 - (void)dealloc
@@ -49496,6 +49544,13 @@
 - (KalturaGroupUserListResponse*)list
 {
     return [self listWithFilter:nil];
+}
+
+- (KalturaBulkUpload*)syncWithUserId:(NSString*)aUserId withGroupIds:(NSString*)aGroupIds
+{
+    [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
+    [self.client.params addIfDefinedKey:@"groupIds" withString:aGroupIds];
+    return [self.client queueObjectService:@"groupuser" withAction:@"sync" withExpectedType:@"KalturaBulkUpload"];
 }
 
 @end
