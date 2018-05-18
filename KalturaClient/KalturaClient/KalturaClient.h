@@ -15537,7 +15537,7 @@
 // @package Kaltura
 // @subpackage Client
 // Manage partner users on Kaltura's side
-//  The userId in kaltura is the unique Id in the partner's system, and the [partnerId,Id] couple are unique key in kaltura's DB
+//  The userId in kaltura is the unique ID in the partner's system, and the [partnerId,Id] couple are unique key in kaltura's DB
 @class KalturaBulkUpload;
 @class KalturaBulkUploadJobData;
 @class KalturaBulkUploadUserData;
@@ -15561,7 +15561,7 @@
 // Enables a user to log into a partner account using an email address and a password
 - (KalturaUser*)enableLoginWithUserId:(NSString*)aUserId withLoginId:(NSString*)aLoginId withPassword:(NSString*)aPassword;
 - (KalturaUser*)enableLoginWithUserId:(NSString*)aUserId withLoginId:(NSString*)aLoginId;
-// add batch job that sends an email with a link to download an updated CSV that contains list of users
+// Creates a batch job that sends an email with a link to download a CSV containing a list of users
 - (NSString*)exportToCsvWithFilter:(KalturaUserFilter*)aFilter withMetadataProfileId:(int)aMetadataProfileId withAdditionalFields:(NSArray*)aAdditionalFields;
 - (NSString*)exportToCsvWithFilter:(KalturaUserFilter*)aFilter withMetadataProfileId:(int)aMetadataProfileId;
 - (NSString*)exportToCsvWithFilter:(KalturaUserFilter*)aFilter;
@@ -15585,7 +15585,7 @@
 - (NSString*)loginWithPartnerId:(int)aPartnerId withUserId:(NSString*)aUserId withPassword:(NSString*)aPassword withExpiry:(int)aExpiry withPrivileges:(NSString*)aPrivileges;
 - (NSString*)loginWithPartnerId:(int)aPartnerId withUserId:(NSString*)aUserId withPassword:(NSString*)aPassword withExpiry:(int)aExpiry;
 - (NSString*)loginWithPartnerId:(int)aPartnerId withUserId:(NSString*)aUserId withPassword:(NSString*)aPassword;
-// Loges a user to the destination account as long the ks user id exists in the desc acount and the loginData id match for both accounts
+// Logs a user to the destination account provided the KS' user ID is associated with the destination account and the loginData ID matches
 - (KalturaSessionResponse*)loginByKsWithRequestedPartnerId:(int)aRequestedPartnerId;
 // Logs a user into a partner account with a user login ID and a user password.
 - (NSString*)loginByLoginIdWithLoginId:(NSString*)aLoginId withPassword:(NSString*)aPassword withPartnerId:(int)aPartnerId withExpiry:(int)aExpiry withPrivileges:(NSString*)aPrivileges withOtp:(NSString*)aOtp;
@@ -15597,9 +15597,9 @@
 - (void)notifyBanWithUserId:(NSString*)aUserId;
 // Reset user's password and send the user an email to generate a new one.
 - (void)resetPasswordWithEmail:(NSString*)aEmail;
-// Will serve a requested csv
+// Will serve a requested CSV
 - (NSString*)serveCsvWithId:(NSString*)aId;
-// Set initial users password
+// Set initial user password
 - (void)setInitialPasswordWithHashKey:(NSString*)aHashKey withNewPassword:(NSString*)aNewPassword;
 // Updates an existing user object.
 // 	 You can also use this action to update the userId.
