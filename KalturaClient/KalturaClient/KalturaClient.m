@@ -49546,11 +49546,23 @@
     return [self listWithFilter:nil];
 }
 
-- (KalturaBulkUpload*)syncWithUserId:(NSString*)aUserId withGroupIds:(NSString*)aGroupIds
+- (KalturaBulkUpload*)syncWithUserId:(NSString*)aUserId withGroupIds:(NSString*)aGroupIds withRemoveFromExistingGroups:(KALTURA_BOOL)aRemoveFromExistingGroups withCreateNewGroups:(KALTURA_BOOL)aCreateNewGroups
 {
     [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
     [self.client.params addIfDefinedKey:@"groupIds" withString:aGroupIds];
+    [self.client.params addIfDefinedKey:@"removeFromExistingGroups" withBool:aRemoveFromExistingGroups];
+    [self.client.params addIfDefinedKey:@"createNewGroups" withBool:aCreateNewGroups];
     return [self.client queueObjectService:@"groupuser" withAction:@"sync" withExpectedType:@"KalturaBulkUpload"];
+}
+
+- (KalturaBulkUpload*)syncWithUserId:(NSString*)aUserId withGroupIds:(NSString*)aGroupIds withRemoveFromExistingGroups:(KALTURA_BOOL)aRemoveFromExistingGroups
+{
+    return [self syncWithUserId:aUserId withGroupIds:aGroupIds withRemoveFromExistingGroups:aRemoveFromExistingGroups withCreateNewGroups:KALTURA_UNDEF_BOOL];
+}
+
+- (KalturaBulkUpload*)syncWithUserId:(NSString*)aUserId withGroupIds:(NSString*)aGroupIds
+{
+    return [self syncWithUserId:aUserId withGroupIds:aGroupIds withRemoveFromExistingGroups:KALTURA_UNDEF_BOOL];
 }
 
 @end

@@ -14687,6 +14687,8 @@
 - (KalturaGroupUserListResponse*)listWithFilter:(KalturaGroupUserFilter*)aFilter;
 - (KalturaGroupUserListResponse*)list;
 // sync by userId and groupIds
+- (KalturaBulkUpload*)syncWithUserId:(NSString*)aUserId withGroupIds:(NSString*)aGroupIds withRemoveFromExistingGroups:(KALTURA_BOOL)aRemoveFromExistingGroups withCreateNewGroups:(KALTURA_BOOL)aCreateNewGroups;
+- (KalturaBulkUpload*)syncWithUserId:(NSString*)aUserId withGroupIds:(NSString*)aGroupIds withRemoveFromExistingGroups:(KALTURA_BOOL)aRemoveFromExistingGroups;
 - (KalturaBulkUpload*)syncWithUserId:(NSString*)aUserId withGroupIds:(NSString*)aGroupIds;
 @end
 
