@@ -15334,7 +15334,6 @@
 @property (nonatomic,copy) NSString* logoutUrl;
 @property (nonatomic,copy) NSString* crmId;
 @property (nonatomic,assign) KALTURA_BOOL timeAlignedRenditions;
-@property (nonatomic,assign) int publisherEnvironmentType;
 @property (nonatomic,copy) NSString* ovpEnvironmentUrl;
 @property (nonatomic,copy) NSString* ottEnvironmentUrl;
 @end
@@ -15393,10 +15392,9 @@
 @synthesize crmId = _crmId;
 @synthesize referenceId = _referenceId;
 @synthesize timeAlignedRenditions = _timeAlignedRenditions;
-@synthesize eSearchLanguages = _eSearchLanguages;
-@synthesize publisherEnvironmentType = _publisherEnvironmentType;
 @synthesize ovpEnvironmentUrl = _ovpEnvironmentUrl;
 @synthesize ottEnvironmentUrl = _ottEnvironmentUrl;
+@synthesize eSearchLanguages = _eSearchLanguages;
 
 - (id)init
 {
@@ -15425,7 +15423,6 @@
     self->_isFirstLogin = KALTURA_UNDEF_BOOL;
     self->_partnerParentId = KALTURA_UNDEF_INT;
     self->_timeAlignedRenditions = KALTURA_UNDEF_BOOL;
-    self->_publisherEnvironmentType = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -15709,21 +15706,6 @@
     return KFT_Bool;
 }
 
-- (KalturaFieldType)getTypeOfESearchLanguages
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfESearchLanguages
-{
-    return @"KalturaESearchLanguageItem";
-}
-
-- (KalturaFieldType)getTypeOfPublisherEnvironmentType
-{
-    return KFT_Int;
-}
-
 - (KalturaFieldType)getTypeOfOvpEnvironmentUrl
 {
     return KFT_String;
@@ -15732,6 +15714,16 @@
 - (KalturaFieldType)getTypeOfOttEnvironmentUrl
 {
     return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfESearchLanguages
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfESearchLanguages
+{
+    return @"KalturaESearchLanguageItem";
 }
 
 - (void)setIdFromString:(NSString*)aPropVal
@@ -15844,11 +15836,6 @@
     self.timeAlignedRenditions = [KalturaSimpleTypeParser parseBool:aPropVal];
 }
 
-- (void)setPublisherEnvironmentTypeFromString:(NSString*)aPropVal
-{
-    self.publisherEnvironmentType = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -15921,9 +15908,9 @@
     [self->_logoutUrl release];
     [self->_crmId release];
     [self->_referenceId release];
-    [self->_eSearchLanguages release];
     [self->_ovpEnvironmentUrl release];
     [self->_ottEnvironmentUrl release];
+    [self->_eSearchLanguages release];
     [super dealloc];
 }
 

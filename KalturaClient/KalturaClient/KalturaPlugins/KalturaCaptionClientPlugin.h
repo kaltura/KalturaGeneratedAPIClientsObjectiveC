@@ -90,6 +90,8 @@
 @property (nonatomic,copy) NSString* parentId;	// insertonly
 // The Accuracy of the caption content
 @property (nonatomic,assign) int accuracy;
+// The Accuracy of the caption content
+@property (nonatomic,assign) KALTURA_BOOL displayOnPlayer;
 - (KalturaFieldType)getTypeOfCaptionParamsId;
 - (KalturaFieldType)getTypeOfLanguage;
 - (KalturaFieldType)getTypeOfLanguageCode;
@@ -99,10 +101,12 @@
 - (KalturaFieldType)getTypeOfStatus;
 - (KalturaFieldType)getTypeOfParentId;
 - (KalturaFieldType)getTypeOfAccuracy;
+- (KalturaFieldType)getTypeOfDisplayOnPlayer;
 - (void)setCaptionParamsIdFromString:(NSString*)aPropVal;
 - (void)setIsDefaultFromString:(NSString*)aPropVal;
 - (void)setStatusFromString:(NSString*)aPropVal;
 - (void)setAccuracyFromString:(NSString*)aPropVal;
+- (void)setDisplayOnPlayerFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

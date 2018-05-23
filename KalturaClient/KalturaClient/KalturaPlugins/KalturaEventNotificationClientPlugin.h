@@ -89,6 +89,8 @@
 + (NSString*)LIVE_STREAM;
 + (NSString*)SERVER_NODE;
 + (NSString*)ENTRY_SERVER_NODE;
++ (NSString*)REACH_PROFILE;
++ (NSString*)ENTRY_VENDOR_TASK;
 @end
 
 // @package Kaltura

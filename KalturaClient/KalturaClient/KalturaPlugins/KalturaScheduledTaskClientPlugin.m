@@ -97,6 +97,10 @@
 {
     return @"1";
 }
++ (NSString*)ENTRY_VENDOR_TASK
+{
+    return @"2";
+}
 @end
 
 @implementation KalturaObjectTaskType

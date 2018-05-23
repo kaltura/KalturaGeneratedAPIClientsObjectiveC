@@ -128,6 +128,7 @@
 @synthesize status = _status;
 @synthesize parentId = _parentId;
 @synthesize accuracy = _accuracy;
+@synthesize displayOnPlayer = _displayOnPlayer;
 
 - (id)init
 {
@@ -138,6 +139,7 @@
     self->_isDefault = KALTURA_UNDEF_INT;
     self->_status = KALTURA_UNDEF_INT;
     self->_accuracy = KALTURA_UNDEF_INT;
+    self->_displayOnPlayer = KALTURA_UNDEF_BOOL;
     return self;
 }
 
@@ -186,6 +188,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfDisplayOnPlayer
+{
+    return KFT_Bool;
+}
+
 - (void)setCaptionParamsIdFromString:(NSString*)aPropVal
 {
     self.captionParamsId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -206,6 +213,11 @@
     self.accuracy = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setDisplayOnPlayerFromString:(NSString*)aPropVal
+{
+    self.displayOnPlayer = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -218,6 +230,7 @@
     [aParams addIfDefinedKey:@"format" withString:self.format];
     [aParams addIfDefinedKey:@"parentId" withString:self.parentId];
     [aParams addIfDefinedKey:@"accuracy" withInt:self.accuracy];
+    [aParams addIfDefinedKey:@"displayOnPlayer" withBool:self.displayOnPlayer];
 }
 
 - (void)dealloc

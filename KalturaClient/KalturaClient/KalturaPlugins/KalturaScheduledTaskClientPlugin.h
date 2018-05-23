@@ -67,6 +67,7 @@
 // @subpackage Client
 @interface KalturaObjectFilterEngineType : NSObject
 + (NSString*)ENTRY;
++ (NSString*)ENTRY_VENDOR_TASK;
 @end
 
 // @package Kaltura

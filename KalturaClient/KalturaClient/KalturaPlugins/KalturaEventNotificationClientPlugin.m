@@ -236,6 +236,14 @@
 {
     return @"40";
 }
++ (NSString*)REACH_PROFILE
+{
+    return @"41";
+}
++ (NSString*)ENTRY_VENDOR_TASK
+{
+    return @"42";
+}
 @end
 
 @implementation KalturaEventNotificationEventType

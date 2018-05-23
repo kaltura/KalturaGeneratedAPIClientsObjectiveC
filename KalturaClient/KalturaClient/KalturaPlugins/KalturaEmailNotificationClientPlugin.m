@@ -67,6 +67,10 @@
 {
     return @"3";
 }
++ (NSString*)GROUP
+{
+    return @"4";
+}
 @end
 
 @implementation KalturaEmailNotificationTemplateOrderBy
@@ -405,6 +409,54 @@
     [self->_categoryId release];
     [self->_categoryIds release];
     [self->_categoryUserFilter release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaEmailNotificationGroupRecipientJobData
+@synthesize groupId = _groupId;
+
+- (KalturaFieldType)getTypeOfGroupId
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaEmailNotificationGroupRecipientJobData"];
+    [aParams addIfDefinedKey:@"groupId" withString:self.groupId];
+}
+
+- (void)dealloc
+{
+    [self->_groupId release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaEmailNotificationGroupRecipientProvider
+@synthesize groupId = _groupId;
+
+- (KalturaFieldType)getTypeOfGroupId
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaEmailNotificationGroupRecipientProvider"];
+    [aParams addIfDefinedKey:@"groupId" withString:self.groupId];
+}
+
+- (void)dealloc
+{
+    [self->_groupId release];
     [super dealloc];
 }
 

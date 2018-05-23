@@ -52,6 +52,7 @@
 + (NSString*)STATIC_LIST;
 + (NSString*)CATEGORY;
 + (NSString*)USER;
++ (NSString*)GROUP;
 @end
 
 // @package Kaltura
@@ -153,6 +154,22 @@
 - (NSString*)getObjectTypeOfCategoryIds;
 - (KalturaFieldType)getTypeOfCategoryUserFilter;
 - (NSString*)getObjectTypeOfCategoryUserFilter;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// JobData representing the dynamic user receipient array
+@interface KalturaEmailNotificationGroupRecipientJobData : KalturaEmailNotificationRecipientJobData
+@property (nonatomic,copy) NSString* groupId;
+- (KalturaFieldType)getTypeOfGroupId;
+@end
+
+// @package Kaltura
+// @subpackage Client
+// API class for recipient provider which constructs a dynamic list of recipients according to a user filter
+@interface KalturaEmailNotificationGroupRecipientProvider : KalturaEmailNotificationRecipientProvider
+@property (nonatomic,copy) NSString* groupId;
+- (KalturaFieldType)getTypeOfGroupId;
 @end
 
 // @package Kaltura
