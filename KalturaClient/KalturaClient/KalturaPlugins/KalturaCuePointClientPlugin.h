@@ -112,6 +112,7 @@
 @property (nonatomic,assign) int forceStop;	// enum KalturaNullableBoolean
 @property (nonatomic,assign) int thumbOffset;
 @property (nonatomic,copy) NSString* systemName;
+@property (nonatomic,assign) KALTURA_BOOL isMomentary;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfCuePointType;
 - (KalturaFieldType)getTypeOfStatus;
@@ -128,6 +129,7 @@
 - (KalturaFieldType)getTypeOfForceStop;
 - (KalturaFieldType)getTypeOfThumbOffset;
 - (KalturaFieldType)getTypeOfSystemName;
+- (KalturaFieldType)getTypeOfIsMomentary;
 - (void)setStatusFromString:(NSString*)aPropVal;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
@@ -137,6 +139,7 @@
 - (void)setPartnerSortValueFromString:(NSString*)aPropVal;
 - (void)setForceStopFromString:(NSString*)aPropVal;
 - (void)setThumbOffsetFromString:(NSString*)aPropVal;
+- (void)setIsMomentaryFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

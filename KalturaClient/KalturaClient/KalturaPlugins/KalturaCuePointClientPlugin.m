@@ -198,6 +198,7 @@
 @synthesize forceStop = _forceStop;
 @synthesize thumbOffset = _thumbOffset;
 @synthesize systemName = _systemName;
+@synthesize isMomentary = _isMomentary;
 
 - (id)init
 {
@@ -213,6 +214,7 @@
     self->_partnerSortValue = KALTURA_UNDEF_INT;
     self->_forceStop = KALTURA_UNDEF_INT;
     self->_thumbOffset = KALTURA_UNDEF_INT;
+    self->_isMomentary = KALTURA_UNDEF_BOOL;
     return self;
 }
 
@@ -296,6 +298,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfIsMomentary
+{
+    return KFT_Bool;
+}
+
 - (void)setStatusFromString:(NSString*)aPropVal
 {
     self.status = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -341,6 +348,11 @@
     self.thumbOffset = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setIsMomentaryFromString:(NSString*)aPropVal
+{
+    self.isMomentary = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -355,6 +367,7 @@
     [aParams addIfDefinedKey:@"forceStop" withInt:self.forceStop];
     [aParams addIfDefinedKey:@"thumbOffset" withInt:self.thumbOffset];
     [aParams addIfDefinedKey:@"systemName" withString:self.systemName];
+    [aParams addIfDefinedKey:@"isMomentary" withBool:self.isMomentary];
 }
 
 - (void)dealloc
