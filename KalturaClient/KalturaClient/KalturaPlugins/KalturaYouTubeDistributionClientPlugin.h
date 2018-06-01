@@ -36,6 +36,7 @@
 @interface KalturaYouTubeDistributionFeedSpecVersion : NSObject
 + (NSString*)VERSION_1;
 + (NSString*)VERSION_2;
++ (NSString*)VERSION_3;
 @end
 
 // @package Kaltura
@@ -74,6 +75,10 @@
 @property (nonatomic,copy) NSString* googleClientId;
 @property (nonatomic,copy) NSString* googleClientSecret;
 @property (nonatomic,copy) NSString* googleTokenData;
+@property (nonatomic,copy) NSString* captionsCsvMap;
+@property (nonatomic,copy) NSString* submitCsvMap;
+@property (nonatomic,copy) NSString* updateCsvMap;
+@property (nonatomic,copy) NSString* deleteVideoIds;
 - (KalturaFieldType)getTypeOfVideoAssetFilePath;
 - (KalturaFieldType)getTypeOfThumbAssetFilePath;
 - (KalturaFieldType)getTypeOfCaptionAssetIds;
@@ -87,6 +92,10 @@
 - (KalturaFieldType)getTypeOfGoogleClientId;
 - (KalturaFieldType)getTypeOfGoogleClientSecret;
 - (KalturaFieldType)getTypeOfGoogleTokenData;
+- (KalturaFieldType)getTypeOfCaptionsCsvMap;
+- (KalturaFieldType)getTypeOfSubmitCsvMap;
+- (KalturaFieldType)getTypeOfUpdateCsvMap;
+- (KalturaFieldType)getTypeOfDeleteVideoIds;
 @end
 
 // @package Kaltura
@@ -130,6 +139,12 @@
 @property (nonatomic,assign) KALTURA_BOOL deleteReference;
 @property (nonatomic,assign) KALTURA_BOOL releaseClaims;
 @property (nonatomic,copy) NSString* apiAuthorizeUrl;
+@property (nonatomic,copy) NSString* privacyStatus;
+@property (nonatomic,copy) NSString* enableContentId;
+@property (nonatomic,copy) NSString* thirdPartyAds;
+@property (nonatomic,copy) NSString* productListingAds;
+@property (nonatomic,copy) NSString* domainWhitelist;
+@property (nonatomic,copy) NSString* notifySubscribers;
 - (KalturaFieldType)getTypeOfFeedSpecVersion;
 - (KalturaFieldType)getTypeOfUsername;
 - (KalturaFieldType)getTypeOfNotificationEmail;
@@ -168,6 +183,12 @@
 - (KalturaFieldType)getTypeOfDeleteReference;
 - (KalturaFieldType)getTypeOfReleaseClaims;
 - (KalturaFieldType)getTypeOfApiAuthorizeUrl;
+- (KalturaFieldType)getTypeOfPrivacyStatus;
+- (KalturaFieldType)getTypeOfEnableContentId;
+- (KalturaFieldType)getTypeOfThirdPartyAds;
+- (KalturaFieldType)getTypeOfProductListingAds;
+- (KalturaFieldType)getTypeOfDomainWhitelist;
+- (KalturaFieldType)getTypeOfNotifySubscribers;
 - (void)setSftpPortFromString:(NSString*)aPropVal;
 - (void)setEnableAdServerFromString:(NSString*)aPropVal;
 - (void)setAllowPreRollAdsFromString:(NSString*)aPropVal;

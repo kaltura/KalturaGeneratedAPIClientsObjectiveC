@@ -37,6 +37,10 @@
 {
     return @"2";
 }
++ (NSString*)VERSION_3
+{
+    return @"3";
+}
 @end
 
 @implementation KalturaYouTubeDistributionProfileOrderBy
@@ -86,6 +90,10 @@
 @synthesize googleClientId = _googleClientId;
 @synthesize googleClientSecret = _googleClientSecret;
 @synthesize googleTokenData = _googleTokenData;
+@synthesize captionsCsvMap = _captionsCsvMap;
+@synthesize submitCsvMap = _submitCsvMap;
+@synthesize updateCsvMap = _updateCsvMap;
+@synthesize deleteVideoIds = _deleteVideoIds;
 
 - (KalturaFieldType)getTypeOfVideoAssetFilePath
 {
@@ -152,6 +160,26 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfCaptionsCsvMap
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSubmitCsvMap
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfUpdateCsvMap
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfDeleteVideoIds
+{
+    return KFT_String;
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -170,6 +198,10 @@
     [aParams addIfDefinedKey:@"googleClientId" withString:self.googleClientId];
     [aParams addIfDefinedKey:@"googleClientSecret" withString:self.googleClientSecret];
     [aParams addIfDefinedKey:@"googleTokenData" withString:self.googleTokenData];
+    [aParams addIfDefinedKey:@"captionsCsvMap" withString:self.captionsCsvMap];
+    [aParams addIfDefinedKey:@"submitCsvMap" withString:self.submitCsvMap];
+    [aParams addIfDefinedKey:@"updateCsvMap" withString:self.updateCsvMap];
+    [aParams addIfDefinedKey:@"deleteVideoIds" withString:self.deleteVideoIds];
 }
 
 - (void)dealloc
@@ -187,6 +219,10 @@
     [self->_googleClientId release];
     [self->_googleClientSecret release];
     [self->_googleTokenData release];
+    [self->_captionsCsvMap release];
+    [self->_submitCsvMap release];
+    [self->_updateCsvMap release];
+    [self->_deleteVideoIds release];
     [super dealloc];
 }
 
@@ -231,6 +267,12 @@
 @synthesize deleteReference = _deleteReference;
 @synthesize releaseClaims = _releaseClaims;
 @synthesize apiAuthorizeUrl = _apiAuthorizeUrl;
+@synthesize privacyStatus = _privacyStatus;
+@synthesize enableContentId = _enableContentId;
+@synthesize thirdPartyAds = _thirdPartyAds;
+@synthesize productListingAds = _productListingAds;
+@synthesize domainWhitelist = _domainWhitelist;
+@synthesize notifySubscribers = _notifySubscribers;
 
 - (id)init
 {
@@ -437,6 +479,36 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfPrivacyStatus
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEnableContentId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfThirdPartyAds
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfProductListingAds
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfDomainWhitelist
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfNotifySubscribers
+{
+    return KFT_String;
+}
+
 - (void)setSftpPortFromString:(NSString*)aPropVal
 {
     self.sftpPort = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -515,6 +587,12 @@
     [aParams addIfDefinedKey:@"deleteReference" withBool:self.deleteReference];
     [aParams addIfDefinedKey:@"releaseClaims" withBool:self.releaseClaims];
     [aParams addIfDefinedKey:@"apiAuthorizeUrl" withString:self.apiAuthorizeUrl];
+    [aParams addIfDefinedKey:@"privacyStatus" withString:self.privacyStatus];
+    [aParams addIfDefinedKey:@"enableContentId" withString:self.enableContentId];
+    [aParams addIfDefinedKey:@"thirdPartyAds" withString:self.thirdPartyAds];
+    [aParams addIfDefinedKey:@"productListingAds" withString:self.productListingAds];
+    [aParams addIfDefinedKey:@"domainWhitelist" withString:self.domainWhitelist];
+    [aParams addIfDefinedKey:@"notifySubscribers" withString:self.notifySubscribers];
 }
 
 - (void)dealloc
@@ -550,6 +628,12 @@
     [self->_blockOutsideOwnership release];
     [self->_captionAutosync release];
     [self->_apiAuthorizeUrl release];
+    [self->_privacyStatus release];
+    [self->_enableContentId release];
+    [self->_thirdPartyAds release];
+    [self->_productListingAds release];
+    [self->_domainWhitelist release];
+    [self->_notifySubscribers release];
     [super dealloc];
 }
 

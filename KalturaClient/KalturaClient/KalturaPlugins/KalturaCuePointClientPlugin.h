@@ -112,7 +112,7 @@
 @property (nonatomic,assign) int forceStop;	// enum KalturaNullableBoolean
 @property (nonatomic,assign) int thumbOffset;
 @property (nonatomic,copy) NSString* systemName;
-@property (nonatomic,assign) KALTURA_BOOL isMomentary;
+@property (nonatomic,assign,readonly) KALTURA_BOOL isMomentary;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfCuePointType;
 - (KalturaFieldType)getTypeOfStatus;

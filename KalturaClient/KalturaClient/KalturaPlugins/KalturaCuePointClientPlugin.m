@@ -179,6 +179,7 @@
 @property (nonatomic,assign) int createdAt;
 @property (nonatomic,assign) int updatedAt;
 @property (nonatomic,copy) NSString* userId;
+@property (nonatomic,assign) KALTURA_BOOL isMomentary;
 @end
 
 @implementation KalturaCuePoint
@@ -367,7 +368,6 @@
     [aParams addIfDefinedKey:@"forceStop" withInt:self.forceStop];
     [aParams addIfDefinedKey:@"thumbOffset" withInt:self.thumbOffset];
     [aParams addIfDefinedKey:@"systemName" withString:self.systemName];
-    [aParams addIfDefinedKey:@"isMomentary" withBool:self.isMomentary];
 }
 
 - (void)dealloc
