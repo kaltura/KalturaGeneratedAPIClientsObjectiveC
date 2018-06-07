@@ -79,6 +79,7 @@
 @implementation KalturaYouTubeDistributionJobProviderData
 @synthesize videoAssetFilePath = _videoAssetFilePath;
 @synthesize thumbAssetFilePath = _thumbAssetFilePath;
+@synthesize thumbAssetId = _thumbAssetId;
 @synthesize captionAssetIds = _captionAssetIds;
 @synthesize sftpDirectory = _sftpDirectory;
 @synthesize sftpMetadataFilename = _sftpMetadataFilename;
@@ -101,6 +102,11 @@
 }
 
 - (KalturaFieldType)getTypeOfThumbAssetFilePath
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfThumbAssetId
 {
     return KFT_String;
 }
@@ -187,6 +193,7 @@
         [aParams putKey:@"objectType" withString:@"KalturaYouTubeDistributionJobProviderData"];
     [aParams addIfDefinedKey:@"videoAssetFilePath" withString:self.videoAssetFilePath];
     [aParams addIfDefinedKey:@"thumbAssetFilePath" withString:self.thumbAssetFilePath];
+    [aParams addIfDefinedKey:@"thumbAssetId" withString:self.thumbAssetId];
     [aParams addIfDefinedKey:@"captionAssetIds" withString:self.captionAssetIds];
     [aParams addIfDefinedKey:@"sftpDirectory" withString:self.sftpDirectory];
     [aParams addIfDefinedKey:@"sftpMetadataFilename" withString:self.sftpMetadataFilename];
@@ -208,6 +215,7 @@
 {
     [self->_videoAssetFilePath release];
     [self->_thumbAssetFilePath release];
+    [self->_thumbAssetId release];
     [self->_captionAssetIds release];
     [self->_sftpDirectory release];
     [self->_sftpMetadataFilename release];

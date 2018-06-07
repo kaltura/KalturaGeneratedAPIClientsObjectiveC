@@ -64,6 +64,7 @@
 @interface KalturaYouTubeDistributionJobProviderData : KalturaConfigurableDistributionJobProviderData
 @property (nonatomic,copy) NSString* videoAssetFilePath;
 @property (nonatomic,copy) NSString* thumbAssetFilePath;
+@property (nonatomic,copy) NSString* thumbAssetId;
 @property (nonatomic,copy) NSString* captionAssetIds;
 @property (nonatomic,copy) NSString* sftpDirectory;
 @property (nonatomic,copy) NSString* sftpMetadataFilename;
@@ -81,6 +82,7 @@
 @property (nonatomic,copy) NSString* deleteVideoIds;
 - (KalturaFieldType)getTypeOfVideoAssetFilePath;
 - (KalturaFieldType)getTypeOfThumbAssetFilePath;
+- (KalturaFieldType)getTypeOfThumbAssetId;
 - (KalturaFieldType)getTypeOfCaptionAssetIds;
 - (KalturaFieldType)getTypeOfSftpDirectory;
 - (KalturaFieldType)getTypeOfSftpMetadataFilename;
