@@ -10328,6 +10328,14 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaDeliveryProfileLivePackager : KalturaDeliveryProfile
+// Domain used to sign the live url
+@property (nonatomic,copy) NSString* livePackagerSigningDomain;
+- (KalturaFieldType)getTypeOfLivePackagerSigningDomain;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaDeliveryProfileRtmp : KalturaDeliveryProfile
 // enforceRtmpe
 @property (nonatomic,assign) KALTURA_BOOL enforceRtmpe;
@@ -12450,6 +12458,17 @@
 @property (nonatomic,copy) NSString* rendererClass;
 - (KalturaFieldType)getTypeOfPattern;
 - (KalturaFieldType)getTypeOfRendererClass;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaDeliveryProfileLivePackagerHls : KalturaDeliveryProfileLivePackager
+@property (nonatomic,assign) KALTURA_BOOL disableExtraAttributes;
+@property (nonatomic,assign) KALTURA_BOOL forceProxy;
+- (KalturaFieldType)getTypeOfDisableExtraAttributes;
+- (KalturaFieldType)getTypeOfForceProxy;
+- (void)setDisableExtraAttributesFromString:(NSString*)aPropVal;
+- (void)setForceProxyFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

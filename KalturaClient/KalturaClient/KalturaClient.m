@@ -34773,6 +34773,30 @@
 
 @end
 
+@implementation KalturaDeliveryProfileLivePackager
+@synthesize livePackagerSigningDomain = _livePackagerSigningDomain;
+
+- (KalturaFieldType)getTypeOfLivePackagerSigningDomain
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaDeliveryProfileLivePackager"];
+    [aParams addIfDefinedKey:@"livePackagerSigningDomain" withString:self.livePackagerSigningDomain];
+}
+
+- (void)dealloc
+{
+    [self->_livePackagerSigningDomain release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaDeliveryProfileRtmp
 @synthesize enforceRtmpe = _enforceRtmpe;
 @synthesize prefix = _prefix;
@@ -42955,6 +42979,51 @@
     [self->_pattern release];
     [self->_rendererClass release];
     [super dealloc];
+}
+
+@end
+
+@implementation KalturaDeliveryProfileLivePackagerHls
+@synthesize disableExtraAttributes = _disableExtraAttributes;
+@synthesize forceProxy = _forceProxy;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_disableExtraAttributes = KALTURA_UNDEF_BOOL;
+    self->_forceProxy = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfDisableExtraAttributes
+{
+    return KFT_Bool;
+}
+
+- (KalturaFieldType)getTypeOfForceProxy
+{
+    return KFT_Bool;
+}
+
+- (void)setDisableExtraAttributesFromString:(NSString*)aPropVal
+{
+    self.disableExtraAttributes = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)setForceProxyFromString:(NSString*)aPropVal
+{
+    self.forceProxy = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaDeliveryProfileLivePackagerHls"];
+    [aParams addIfDefinedKey:@"disableExtraAttributes" withBool:self.disableExtraAttributes];
+    [aParams addIfDefinedKey:@"forceProxy" withBool:self.forceProxy];
 }
 
 @end
