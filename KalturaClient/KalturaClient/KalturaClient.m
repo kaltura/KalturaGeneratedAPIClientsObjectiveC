@@ -15334,6 +15334,7 @@
 @property (nonatomic,copy) NSString* logoutUrl;
 @property (nonatomic,copy) NSString* crmId;
 @property (nonatomic,assign) KALTURA_BOOL timeAlignedRenditions;
+@property (nonatomic,assign) int publisherEnvironmentType;
 @property (nonatomic,copy) NSString* ovpEnvironmentUrl;
 @property (nonatomic,copy) NSString* ottEnvironmentUrl;
 @end
@@ -15392,6 +15393,7 @@
 @synthesize crmId = _crmId;
 @synthesize referenceId = _referenceId;
 @synthesize timeAlignedRenditions = _timeAlignedRenditions;
+@synthesize publisherEnvironmentType = _publisherEnvironmentType;
 @synthesize ovpEnvironmentUrl = _ovpEnvironmentUrl;
 @synthesize ottEnvironmentUrl = _ottEnvironmentUrl;
 @synthesize eSearchLanguages = _eSearchLanguages;
@@ -15423,6 +15425,7 @@
     self->_isFirstLogin = KALTURA_UNDEF_BOOL;
     self->_partnerParentId = KALTURA_UNDEF_INT;
     self->_timeAlignedRenditions = KALTURA_UNDEF_BOOL;
+    self->_publisherEnvironmentType = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -15706,6 +15709,11 @@
     return KFT_Bool;
 }
 
+- (KalturaFieldType)getTypeOfPublisherEnvironmentType
+{
+    return KFT_Int;
+}
+
 - (KalturaFieldType)getTypeOfOvpEnvironmentUrl
 {
     return KFT_String;
@@ -15834,6 +15842,11 @@
 - (void)setTimeAlignedRenditionsFromString:(NSString*)aPropVal
 {
     self.timeAlignedRenditions = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)setPublisherEnvironmentTypeFromString:(NSString*)aPropVal
+{
+    self.publisherEnvironmentType = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper

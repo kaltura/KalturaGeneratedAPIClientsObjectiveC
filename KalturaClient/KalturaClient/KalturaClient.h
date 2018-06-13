@@ -5144,6 +5144,7 @@
 @property (nonatomic,copy,readonly) NSString* crmId;
 @property (nonatomic,copy) NSString* referenceId;
 @property (nonatomic,assign,readonly) KALTURA_BOOL timeAlignedRenditions;
+@property (nonatomic,assign,readonly) int publisherEnvironmentType;
 @property (nonatomic,copy,readonly) NSString* ovpEnvironmentUrl;
 @property (nonatomic,copy,readonly) NSString* ottEnvironmentUrl;
 @property (nonatomic,retain) NSMutableArray* eSearchLanguages;	// of KalturaESearchLanguageItem elements
@@ -5203,6 +5204,7 @@
 - (KalturaFieldType)getTypeOfCrmId;
 - (KalturaFieldType)getTypeOfReferenceId;
 - (KalturaFieldType)getTypeOfTimeAlignedRenditions;
+- (KalturaFieldType)getTypeOfPublisherEnvironmentType;
 - (KalturaFieldType)getTypeOfOvpEnvironmentUrl;
 - (KalturaFieldType)getTypeOfOttEnvironmentUrl;
 - (KalturaFieldType)getTypeOfESearchLanguages;
@@ -5229,6 +5231,7 @@
 - (void)setIsFirstLoginFromString:(NSString*)aPropVal;
 - (void)setPartnerParentIdFromString:(NSString*)aPropVal;
 - (void)setTimeAlignedRenditionsFromString:(NSString*)aPropVal;
+- (void)setPublisherEnvironmentTypeFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
