@@ -160,6 +160,14 @@
 {
     return 12;
 }
++ (int)SUSPEND
+{
+    return 13;
+}
++ (int)SUSPEND_ALMOST_DONE
+{
+    return 14;
+}
 @end
 
 @implementation KalturaBitRateMode
@@ -40762,6 +40770,38 @@
         [aParams putKey:@"objectType" withString:@"KalturaUrlTokenizerVnpt"];
     [aParams addIfDefinedKey:@"tokenizationFormat" withInt:self.tokenizationFormat];
     [aParams addIfDefinedKey:@"shouldIncludeClientIp" withBool:self.shouldIncludeClientIp];
+}
+
+@end
+
+@implementation KalturaUrlTokenizerWowzaSecureToken
+@synthesize paramPrefix = _paramPrefix;
+@synthesize hashAlgorithm = _hashAlgorithm;
+
+- (KalturaFieldType)getTypeOfParamPrefix
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfHashAlgorithm
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaUrlTokenizerWowzaSecureToken"];
+    [aParams addIfDefinedKey:@"paramPrefix" withString:self.paramPrefix];
+    [aParams addIfDefinedKey:@"hashAlgorithm" withString:self.hashAlgorithm];
+}
+
+- (void)dealloc
+{
+    [self->_paramPrefix release];
+    [self->_hashAlgorithm release];
+    [super dealloc];
 }
 
 @end

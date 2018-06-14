@@ -89,6 +89,8 @@
 + (int)FATAL;
 + (int)DONT_PROCESS;
 + (int)FINISHED_PARTIALLY;
++ (int)SUSPEND;
++ (int)SUSPEND_ALMOST_DONE;
 @end
 
 // @package Kaltura
@@ -11891,6 +11893,15 @@
 - (KalturaFieldType)getTypeOfShouldIncludeClientIp;
 - (void)setTokenizationFormatFromString:(NSString*)aPropVal;
 - (void)setShouldIncludeClientIpFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaUrlTokenizerWowzaSecureToken : KalturaUrlTokenizer
+@property (nonatomic,copy) NSString* paramPrefix;
+@property (nonatomic,copy) NSString* hashAlgorithm;
+- (KalturaFieldType)getTypeOfParamPrefix;
+- (KalturaFieldType)getTypeOfHashAlgorithm;
 @end
 
 // @package Kaltura
