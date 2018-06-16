@@ -1223,38 +1223,6 @@
 
 @end
 
-@interface KalturaEntryVendorTaskListResponse()
-@property (nonatomic,retain) NSMutableArray* objects;
-@end
-
-@implementation KalturaEntryVendorTaskListResponse
-@synthesize objects = _objects;
-
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaEntryVendorTask";
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaEntryVendorTaskListResponse"];
-}
-
-- (void)dealloc
-{
-    [self->_objects release];
-    [super dealloc];
-}
-
-@end
-
 @implementation KalturaLiveEntryScheduleResource
 @synthesize entryId = _entryId;
 
@@ -1285,38 +1253,6 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaLocationScheduleResource"];
-}
-
-@end
-
-@interface KalturaReachProfileListResponse()
-@property (nonatomic,retain) NSMutableArray* objects;
-@end
-
-@implementation KalturaReachProfileListResponse
-@synthesize objects = _objects;
-
-- (KalturaFieldType)getTypeOfObjects
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfObjects
-{
-    return @"KalturaReachProfile";
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaReachProfileListResponse"];
-}
-
-- (void)dealloc
-{
-    [self->_objects release];
-    [super dealloc];
 }
 
 @end

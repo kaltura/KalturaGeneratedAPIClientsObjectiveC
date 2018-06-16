@@ -439,14 +439,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaEntryVendorTaskListResponse : KalturaListResponse
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaEntryVendorTask elements
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaLiveEntryScheduleResource : KalturaScheduleResource
 @property (nonatomic,copy) NSString* entryId;
 - (KalturaFieldType)getTypeOfEntryId;
@@ -455,14 +447,6 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaLocationScheduleResource : KalturaScheduleResource
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaReachProfileListResponse : KalturaListResponse
-@property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaReachProfile elements
-- (KalturaFieldType)getTypeOfObjects;
-- (NSString*)getObjectTypeOfObjects;
 @end
 
 // @package Kaltura
