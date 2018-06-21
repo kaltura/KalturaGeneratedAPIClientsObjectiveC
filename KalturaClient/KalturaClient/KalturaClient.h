@@ -14281,20 +14281,20 @@
 @interface KalturaAppTokenService : KalturaServiceBase
 // Add new application authentication token
 - (KalturaAppToken*)addWithAppToken:(KalturaAppToken*)aAppToken;
-// Delete application authentication token by id
+// Delete application authentication token by ID
 - (void)deleteWithId:(NSString*)aId;
-// Get application authentication token by id
+// Get application authentication token by ID
 - (KalturaAppToken*)getWithId:(NSString*)aId;
 // List application authentication tokens by filter and pager
 - (KalturaAppTokenListResponse*)listWithFilter:(KalturaAppTokenFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaAppTokenListResponse*)listWithFilter:(KalturaAppTokenFilter*)aFilter;
 - (KalturaAppTokenListResponse*)list;
-// Starts a new KS (kaltura Session) based on application authentication token id
+// Starts a new KS (kaltura Session) based on an application authentication token ID
 - (KalturaSessionInfo*)startSessionWithId:(NSString*)aId withTokenHash:(NSString*)aTokenHash withUserId:(NSString*)aUserId withType:(int)aType withExpiry:(int)aExpiry;
 - (KalturaSessionInfo*)startSessionWithId:(NSString*)aId withTokenHash:(NSString*)aTokenHash withUserId:(NSString*)aUserId withType:(int)aType;
 - (KalturaSessionInfo*)startSessionWithId:(NSString*)aId withTokenHash:(NSString*)aTokenHash withUserId:(NSString*)aUserId;
 - (KalturaSessionInfo*)startSessionWithId:(NSString*)aId withTokenHash:(NSString*)aTokenHash;
-// Update application authentication token by id
+// Update application authentication token by ID
 - (KalturaAppToken*)updateWithId:(NSString*)aId withAppToken:(KalturaAppToken*)aAppToken;
 @end
 
