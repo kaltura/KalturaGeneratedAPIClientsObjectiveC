@@ -180,6 +180,7 @@
 @property (nonatomic,assign) int updatedAt;
 @property (nonatomic,copy) NSString* userId;
 @property (nonatomic,assign) KALTURA_BOOL isMomentary;
+@property (nonatomic,copy) NSString* copiedFrom;
 @end
 
 @implementation KalturaCuePoint
@@ -200,6 +201,7 @@
 @synthesize thumbOffset = _thumbOffset;
 @synthesize systemName = _systemName;
 @synthesize isMomentary = _isMomentary;
+@synthesize copiedFrom = _copiedFrom;
 
 - (id)init
 {
@@ -304,6 +306,11 @@
     return KFT_Bool;
 }
 
+- (KalturaFieldType)getTypeOfCopiedFrom
+{
+    return KFT_String;
+}
+
 - (void)setStatusFromString:(NSString*)aPropVal
 {
     self.status = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -379,6 +386,7 @@
     [self->_userId release];
     [self->_partnerData release];
     [self->_systemName release];
+    [self->_copiedFrom release];
     [super dealloc];
 }
 

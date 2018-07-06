@@ -113,6 +113,7 @@
 @property (nonatomic,assign) int thumbOffset;
 @property (nonatomic,copy) NSString* systemName;
 @property (nonatomic,assign,readonly) KALTURA_BOOL isMomentary;
+@property (nonatomic,copy,readonly) NSString* copiedFrom;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfCuePointType;
 - (KalturaFieldType)getTypeOfStatus;
@@ -130,6 +131,7 @@
 - (KalturaFieldType)getTypeOfThumbOffset;
 - (KalturaFieldType)getTypeOfSystemName;
 - (KalturaFieldType)getTypeOfIsMomentary;
+- (KalturaFieldType)getTypeOfCopiedFrom;
 - (void)setStatusFromString:(NSString*)aPropVal;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
