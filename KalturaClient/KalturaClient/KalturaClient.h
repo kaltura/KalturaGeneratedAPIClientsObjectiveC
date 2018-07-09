@@ -10364,8 +10364,11 @@
 @interface KalturaDeliveryServerNode : KalturaServerNode
 // Delivery profile ids
 @property (nonatomic,retain) NSMutableArray* deliveryProfileIds;	// of KalturaKeyValue elements
+// Override server node default configuration - json format
+@property (nonatomic,copy) NSString* config;
 - (KalturaFieldType)getTypeOfDeliveryProfileIds;
 - (NSString*)getObjectTypeOfDeliveryProfileIds;
+- (KalturaFieldType)getTypeOfConfig;
 @end
 
 // @package Kaltura
@@ -12498,10 +12501,7 @@
 @interface KalturaEdgeServerNode : KalturaDeliveryServerNode
 // Delivery server playback Domain
 @property (nonatomic,copy) NSString* playbackDomain;
-// Overdie edge server default configuration - json format
-@property (nonatomic,copy) NSString* config;
 - (KalturaFieldType)getTypeOfPlaybackDomain;
-- (KalturaFieldType)getTypeOfConfig;
 @end
 
 // @package Kaltura
