@@ -593,27 +593,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaESearchCategoryQuery : KalturaESearchCategoryBaseItem
-@property (nonatomic,copy) NSString* eSearchQuery;
-- (KalturaFieldType)getTypeOfESearchQuery;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaESearchEntryQuery : KalturaESearchEntryBaseItem
-@property (nonatomic,copy) NSString* eSearchQuery;
-- (KalturaFieldType)getTypeOfESearchQuery;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaESearchUserQuery : KalturaESearchUserBaseItem
-@property (nonatomic,copy) NSString* eSearchQuery;
-- (KalturaFieldType)getTypeOfESearchQuery;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaESearchCategoryEntryItem : KalturaESearchAbstractEntryItem
 @property (nonatomic,copy) NSString* fieldName;	// enum KalturaESearchCategoryEntryFieldName
 @property (nonatomic,assign) int categoryEntryStatus;	// enum KalturaCategoryEntryStatus
