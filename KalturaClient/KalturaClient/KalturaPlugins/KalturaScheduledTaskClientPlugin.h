@@ -294,6 +294,7 @@
 @property (nonatomic,assign) int updatedAtLessThanOrEqual;
 @property (nonatomic,assign) int lastExecutionStartedAtGreaterThanOrEqual;
 @property (nonatomic,assign) int lastExecutionStartedAtLessThanOrEqual;
+@property (nonatomic,assign) int lastExecutionStartedAtLessThanOrEqualOrNull;
 - (KalturaFieldType)getTypeOfIdEqual;
 - (KalturaFieldType)getTypeOfIdIn;
 - (KalturaFieldType)getTypeOfPartnerIdEqual;
@@ -308,6 +309,7 @@
 - (KalturaFieldType)getTypeOfUpdatedAtLessThanOrEqual;
 - (KalturaFieldType)getTypeOfLastExecutionStartedAtGreaterThanOrEqual;
 - (KalturaFieldType)getTypeOfLastExecutionStartedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfLastExecutionStartedAtLessThanOrEqualOrNull;
 - (void)setIdEqualFromString:(NSString*)aPropVal;
 - (void)setPartnerIdEqualFromString:(NSString*)aPropVal;
 - (void)setStatusEqualFromString:(NSString*)aPropVal;
@@ -317,6 +319,7 @@
 - (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setLastExecutionStartedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setLastExecutionStartedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setLastExecutionStartedAtLessThanOrEqualOrNullFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

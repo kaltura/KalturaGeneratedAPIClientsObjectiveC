@@ -854,6 +854,7 @@
 @synthesize updatedAtLessThanOrEqual = _updatedAtLessThanOrEqual;
 @synthesize lastExecutionStartedAtGreaterThanOrEqual = _lastExecutionStartedAtGreaterThanOrEqual;
 @synthesize lastExecutionStartedAtLessThanOrEqual = _lastExecutionStartedAtLessThanOrEqual;
+@synthesize lastExecutionStartedAtLessThanOrEqualOrNull = _lastExecutionStartedAtLessThanOrEqualOrNull;
 
 - (id)init
 {
@@ -869,6 +870,7 @@
     self->_updatedAtLessThanOrEqual = KALTURA_UNDEF_INT;
     self->_lastExecutionStartedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
     self->_lastExecutionStartedAtLessThanOrEqual = KALTURA_UNDEF_INT;
+    self->_lastExecutionStartedAtLessThanOrEqualOrNull = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -942,6 +944,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfLastExecutionStartedAtLessThanOrEqualOrNull
+{
+    return KFT_Int;
+}
+
 - (void)setIdEqualFromString:(NSString*)aPropVal
 {
     self.idEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -987,6 +994,11 @@
     self.lastExecutionStartedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setLastExecutionStartedAtLessThanOrEqualOrNullFromString:(NSString*)aPropVal
+{
+    self.lastExecutionStartedAtLessThanOrEqualOrNull = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -1006,6 +1018,7 @@
     [aParams addIfDefinedKey:@"updatedAtLessThanOrEqual" withInt:self.updatedAtLessThanOrEqual];
     [aParams addIfDefinedKey:@"lastExecutionStartedAtGreaterThanOrEqual" withInt:self.lastExecutionStartedAtGreaterThanOrEqual];
     [aParams addIfDefinedKey:@"lastExecutionStartedAtLessThanOrEqual" withInt:self.lastExecutionStartedAtLessThanOrEqual];
+    [aParams addIfDefinedKey:@"lastExecutionStartedAtLessThanOrEqualOrNull" withInt:self.lastExecutionStartedAtLessThanOrEqualOrNull];
 }
 
 - (void)dealloc
