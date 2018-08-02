@@ -53,6 +53,8 @@
 @interface KalturaESearchCaptionFieldName : NSObject
 + (NSString*)CONTENT;
 + (NSString*)END_TIME;
++ (NSString*)LABEL;
++ (NSString*)LANGUAGE;
 + (NSString*)START_TIME;
 @end
 

@@ -75,6 +75,14 @@
 {
     return @"end_time";
 }
++ (NSString*)LABEL
+{
+    return @"label";
+}
++ (NSString*)LANGUAGE
+{
+    return @"language";
+}
 + (NSString*)START_TIME
 {
     return @"start_time";
