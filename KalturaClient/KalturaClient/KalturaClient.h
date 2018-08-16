@@ -3862,6 +3862,7 @@
 + (NSString*)TOP_PLAYBACK_CONTEXT;
 + (NSString*)VPAAS_USAGE;
 + (NSString*)ENTRY_USAGE;
++ (NSString*)REACH_USAGE;
 + (NSString*)PARTNER_USAGE;
 @end
 

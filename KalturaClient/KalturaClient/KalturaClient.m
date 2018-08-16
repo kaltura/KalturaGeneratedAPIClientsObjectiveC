@@ -11427,6 +11427,10 @@
 {
     return @"27";
 }
++ (NSString*)REACH_USAGE
+{
+    return @"28";
+}
 + (NSString*)PARTNER_USAGE
 {
     return @"201";
