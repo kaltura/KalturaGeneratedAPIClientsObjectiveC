@@ -48407,14 +48407,20 @@
     return [self listWithFilter:nil];
 }
 
-- (KalturaSessionInfo*)startSessionWithId:(NSString*)aId withTokenHash:(NSString*)aTokenHash withUserId:(NSString*)aUserId withType:(int)aType withExpiry:(int)aExpiry
+- (KalturaSessionInfo*)startSessionWithId:(NSString*)aId withTokenHash:(NSString*)aTokenHash withUserId:(NSString*)aUserId withType:(int)aType withExpiry:(int)aExpiry withSessionPrivileges:(NSString*)aSessionPrivileges
 {
     [self.client.params addIfDefinedKey:@"id" withString:aId];
     [self.client.params addIfDefinedKey:@"tokenHash" withString:aTokenHash];
     [self.client.params addIfDefinedKey:@"userId" withString:aUserId];
     [self.client.params addIfDefinedKey:@"type" withInt:aType];
     [self.client.params addIfDefinedKey:@"expiry" withInt:aExpiry];
+    [self.client.params addIfDefinedKey:@"sessionPrivileges" withString:aSessionPrivileges];
     return [self.client queueObjectService:@"apptoken" withAction:@"startSession" withExpectedType:@"KalturaSessionInfo"];
+}
+
+- (KalturaSessionInfo*)startSessionWithId:(NSString*)aId withTokenHash:(NSString*)aTokenHash withUserId:(NSString*)aUserId withType:(int)aType withExpiry:(int)aExpiry
+{
+    return [self startSessionWithId:aId withTokenHash:aTokenHash withUserId:aUserId withType:aType withExpiry:aExpiry withSessionPrivileges:nil];
 }
 
 - (KalturaSessionInfo*)startSessionWithId:(NSString*)aId withTokenHash:(NSString*)aTokenHash withUserId:(NSString*)aUserId withType:(int)aType

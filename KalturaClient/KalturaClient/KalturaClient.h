@@ -29,7 +29,7 @@
 // @subpackage Client
 #import "KalturaClientBase.h"
 
-#define API_VERSION @"14.5.0"
+#define API_VERSION @"14.6.0"
 
 ///////////////////////// enums /////////////////////////
 // @package Kaltura
@@ -14291,6 +14291,7 @@
 - (KalturaAppTokenListResponse*)listWithFilter:(KalturaAppTokenFilter*)aFilter;
 - (KalturaAppTokenListResponse*)list;
 // Starts a new KS (kaltura Session) based on an application authentication token ID
+- (KalturaSessionInfo*)startSessionWithId:(NSString*)aId withTokenHash:(NSString*)aTokenHash withUserId:(NSString*)aUserId withType:(int)aType withExpiry:(int)aExpiry withSessionPrivileges:(NSString*)aSessionPrivileges;
 - (KalturaSessionInfo*)startSessionWithId:(NSString*)aId withTokenHash:(NSString*)aTokenHash withUserId:(NSString*)aUserId withType:(int)aType withExpiry:(int)aExpiry;
 - (KalturaSessionInfo*)startSessionWithId:(NSString*)aId withTokenHash:(NSString*)aTokenHash withUserId:(NSString*)aUserId withType:(int)aType;
 - (KalturaSessionInfo*)startSessionWithId:(NSString*)aId withTokenHash:(NSString*)aTokenHash withUserId:(NSString*)aUserId;
