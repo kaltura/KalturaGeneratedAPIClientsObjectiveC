@@ -1393,6 +1393,10 @@
 {
     return 4;
 }
++ (int)NOT_HEALTHY
+{
+    return 5;
+}
 @end
 
 @implementation KalturaSessionType
@@ -31165,10 +31169,30 @@
 
 @implementation KalturaAccessControlServeRemoteEdgeServerAction
 @synthesize edgeServerIds = _edgeServerIds;
+@synthesize seamlessFallbackEnabled = _seamlessFallbackEnabled;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_seamlessFallbackEnabled = KALTURA_UNDEF_INT;
+    return self;
+}
 
 - (KalturaFieldType)getTypeOfEdgeServerIds
 {
     return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSeamlessFallbackEnabled
+{
+    return KFT_Int;
+}
+
+- (void)setSeamlessFallbackEnabledFromString:(NSString*)aPropVal
+{
+    self.seamlessFallbackEnabled = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -31177,6 +31201,7 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaAccessControlServeRemoteEdgeServerAction"];
     [aParams addIfDefinedKey:@"edgeServerIds" withString:self.edgeServerIds];
+    [aParams addIfDefinedKey:@"seamlessFallbackEnabled" withInt:self.seamlessFallbackEnabled];
 }
 
 - (void)dealloc
@@ -51289,6 +51314,30 @@
     return [self.client queueObjectService:@"servernode" withAction:@"get" withExpectedType:@"KalturaServerNode"];
 }
 
+- (NSString*)getFullPathWithHostName:(NSString*)aHostName withProtocol:(NSString*)aProtocol withDeliveryFormat:(NSString*)aDeliveryFormat withDeliveryType:(NSString*)aDeliveryType
+{
+    [self.client.params addIfDefinedKey:@"hostName" withString:aHostName];
+    [self.client.params addIfDefinedKey:@"protocol" withString:aProtocol];
+    [self.client.params addIfDefinedKey:@"deliveryFormat" withString:aDeliveryFormat];
+    [self.client.params addIfDefinedKey:@"deliveryType" withString:aDeliveryType];
+    return [self.client queueStringService:@"servernode" withAction:@"getFullPath"];
+}
+
+- (NSString*)getFullPathWithHostName:(NSString*)aHostName withProtocol:(NSString*)aProtocol withDeliveryFormat:(NSString*)aDeliveryFormat
+{
+    return [self getFullPathWithHostName:aHostName withProtocol:aProtocol withDeliveryFormat:aDeliveryFormat withDeliveryType:nil];
+}
+
+- (NSString*)getFullPathWithHostName:(NSString*)aHostName withProtocol:(NSString*)aProtocol
+{
+    return [self getFullPathWithHostName:aHostName withProtocol:aProtocol withDeliveryFormat:nil];
+}
+
+- (NSString*)getFullPathWithHostName:(NSString*)aHostName
+{
+    return [self getFullPathWithHostName:aHostName withProtocol:nil];
+}
+
 - (KalturaServerNodeListResponse*)listWithFilter:(KalturaServerNodeFilter*)aFilter withPager:(KalturaFilterPager*)aPager
 {
     [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
@@ -51312,11 +51361,17 @@
     return [self.client queueObjectService:@"servernode" withAction:@"markOffline" withExpectedType:@"KalturaServerNode"];
 }
 
-- (KalturaServerNode*)reportStatusWithHostName:(NSString*)aHostName withServerNode:(KalturaServerNode*)aServerNode
+- (KalturaServerNode*)reportStatusWithHostName:(NSString*)aHostName withServerNode:(KalturaServerNode*)aServerNode withServerNodeStatus:(int)aServerNodeStatus
 {
     [self.client.params addIfDefinedKey:@"hostName" withString:aHostName];
     [self.client.params addIfDefinedKey:@"serverNode" withObject:aServerNode];
+    [self.client.params addIfDefinedKey:@"serverNodeStatus" withInt:aServerNodeStatus];
     return [self.client queueObjectService:@"servernode" withAction:@"reportStatus" withExpectedType:@"KalturaServerNode"];
+}
+
+- (KalturaServerNode*)reportStatusWithHostName:(NSString*)aHostName withServerNode:(KalturaServerNode*)aServerNode
+{
+    return [self reportStatusWithHostName:aHostName withServerNode:aServerNode withServerNodeStatus:KALTURA_UNDEF_INT];
 }
 
 - (KalturaServerNode*)reportStatusWithHostName:(NSString*)aHostName

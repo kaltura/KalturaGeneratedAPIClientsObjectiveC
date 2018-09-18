@@ -648,6 +648,7 @@
 + (int)DISABLED;
 + (int)DELETED;
 + (int)NOT_REGISTERED;
++ (int)NOT_HEALTHY;
 @end
 
 // @package Kaltura
@@ -9360,7 +9361,10 @@
 @interface KalturaAccessControlServeRemoteEdgeServerAction : KalturaRuleAction
 // Comma separated list of edge servers playBack should be done from
 @property (nonatomic,copy) NSString* edgeServerIds;
+@property (nonatomic,assign) int seamlessFallbackEnabled;	// enum KalturaNullableBoolean
 - (KalturaFieldType)getTypeOfEdgeServerIds;
+- (KalturaFieldType)getTypeOfSeamlessFallbackEnabled;
+- (void)setSeamlessFallbackEnabledFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -15254,12 +15258,18 @@
 - (KalturaServerNode*)enableWithServerNodeId:(NSString*)aServerNodeId;
 // Get server node by id
 - (KalturaServerNode*)getWithServerNodeId:(int)aServerNodeId;
+// Get the edge server node full path
+- (NSString*)getFullPathWithHostName:(NSString*)aHostName withProtocol:(NSString*)aProtocol withDeliveryFormat:(NSString*)aDeliveryFormat withDeliveryType:(NSString*)aDeliveryType;
+- (NSString*)getFullPathWithHostName:(NSString*)aHostName withProtocol:(NSString*)aProtocol withDeliveryFormat:(NSString*)aDeliveryFormat;
+- (NSString*)getFullPathWithHostName:(NSString*)aHostName withProtocol:(NSString*)aProtocol;
+- (NSString*)getFullPathWithHostName:(NSString*)aHostName;
 - (KalturaServerNodeListResponse*)listWithFilter:(KalturaServerNodeFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaServerNodeListResponse*)listWithFilter:(KalturaServerNodeFilter*)aFilter;
 - (KalturaServerNodeListResponse*)list;
 // Mark server node offline
 - (KalturaServerNode*)markOfflineWithServerNodeId:(NSString*)aServerNodeId;
 // Update server node status
+- (KalturaServerNode*)reportStatusWithHostName:(NSString*)aHostName withServerNode:(KalturaServerNode*)aServerNode withServerNodeStatus:(int)aServerNodeStatus;
 - (KalturaServerNode*)reportStatusWithHostName:(NSString*)aHostName withServerNode:(KalturaServerNode*)aServerNode;
 - (KalturaServerNode*)reportStatusWithHostName:(NSString*)aHostName;
 // Update server node by id
