@@ -1393,7 +1393,7 @@
 {
     return 4;
 }
-+ (int)NOT_HEALTHY
++ (int)NOT_OPERATIONAL
 {
     return 5;
 }

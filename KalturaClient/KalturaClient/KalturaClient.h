@@ -648,7 +648,7 @@
 + (int)DISABLED;
 + (int)DELETED;
 + (int)NOT_REGISTERED;
-+ (int)NOT_HEALTHY;
++ (int)NOT_OPERATIONAL;
 @end
 
 // @package Kaltura
