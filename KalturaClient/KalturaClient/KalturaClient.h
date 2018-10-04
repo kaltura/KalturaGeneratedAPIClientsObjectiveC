@@ -14712,7 +14712,6 @@
 // @package Kaltura
 // @subpackage Client
 // Add & Manage GroupUser
-@class KalturaBulkUpload;
 @interface KalturaGroupUserService : KalturaServiceBase
 // Add new GroupUser
 - (KalturaGroupUser*)addWithGroupUser:(KalturaGroupUser*)aGroupUser;
