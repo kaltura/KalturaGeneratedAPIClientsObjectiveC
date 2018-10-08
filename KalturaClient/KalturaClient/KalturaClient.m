@@ -32959,6 +32959,7 @@
 @synthesize thumbParamsOutputId = _thumbParamsOutputId;
 @synthesize thumbAssetId = _thumbAssetId;
 @synthesize srcAssetId = _srcAssetId;
+@synthesize srcAssetEncryptionKey = _srcAssetEncryptionKey;
 @synthesize srcAssetType = _srcAssetType;
 @synthesize thumbPath = _thumbPath;
 
@@ -33006,6 +33007,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfSrcAssetEncryptionKey
+{
+    return KFT_String;
+}
+
 - (KalturaFieldType)getTypeOfSrcAssetType
 {
     return KFT_String;
@@ -33032,6 +33038,7 @@
     [aParams addIfDefinedKey:@"thumbParamsOutputId" withInt:self.thumbParamsOutputId];
     [aParams addIfDefinedKey:@"thumbAssetId" withString:self.thumbAssetId];
     [aParams addIfDefinedKey:@"srcAssetId" withString:self.srcAssetId];
+    [aParams addIfDefinedKey:@"srcAssetEncryptionKey" withString:self.srcAssetEncryptionKey];
     [aParams addIfDefinedKey:@"srcAssetType" withString:self.srcAssetType];
     [aParams addIfDefinedKey:@"thumbPath" withString:self.thumbPath];
 }
@@ -33043,6 +33050,7 @@
     [self->_srcFileSyncRemoteUrl release];
     [self->_thumbAssetId release];
     [self->_srcAssetId release];
+    [self->_srcAssetEncryptionKey release];
     [self->_srcAssetType release];
     [self->_thumbPath release];
     [super dealloc];
@@ -44717,6 +44725,7 @@
 
 @implementation KalturaPostConvertJobData
 @synthesize flavorAssetId = _flavorAssetId;
+@synthesize flavorAssetEncryptionKey = _flavorAssetEncryptionKey;
 @synthesize createThumb = _createThumb;
 @synthesize thumbPath = _thumbPath;
 @synthesize thumbOffset = _thumbOffset;
@@ -44737,6 +44746,11 @@
 }
 
 - (KalturaFieldType)getTypeOfFlavorAssetId
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfFlavorAssetEncryptionKey
 {
     return KFT_String;
 }
@@ -44797,6 +44811,7 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaPostConvertJobData"];
     [aParams addIfDefinedKey:@"flavorAssetId" withString:self.flavorAssetId];
+    [aParams addIfDefinedKey:@"flavorAssetEncryptionKey" withString:self.flavorAssetEncryptionKey];
     [aParams addIfDefinedKey:@"createThumb" withBool:self.createThumb];
     [aParams addIfDefinedKey:@"thumbPath" withString:self.thumbPath];
     [aParams addIfDefinedKey:@"thumbOffset" withInt:self.thumbOffset];
@@ -44808,6 +44823,7 @@
 - (void)dealloc
 {
     [self->_flavorAssetId release];
+    [self->_flavorAssetEncryptionKey release];
     [self->_thumbPath release];
     [self->_customData release];
     [super dealloc];

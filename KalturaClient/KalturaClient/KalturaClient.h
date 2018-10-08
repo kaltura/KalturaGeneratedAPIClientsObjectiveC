@@ -9847,6 +9847,7 @@
 @property (nonatomic,assign) int thumbParamsOutputId;
 @property (nonatomic,copy) NSString* thumbAssetId;
 @property (nonatomic,copy) NSString* srcAssetId;
+@property (nonatomic,copy) NSString* srcAssetEncryptionKey;
 @property (nonatomic,copy) NSString* srcAssetType;	// enum KalturaAssetType
 @property (nonatomic,copy) NSString* thumbPath;
 - (KalturaFieldType)getTypeOfFileContainer;
@@ -9856,6 +9857,7 @@
 - (KalturaFieldType)getTypeOfThumbParamsOutputId;
 - (KalturaFieldType)getTypeOfThumbAssetId;
 - (KalturaFieldType)getTypeOfSrcAssetId;
+- (KalturaFieldType)getTypeOfSrcAssetEncryptionKey;
 - (KalturaFieldType)getTypeOfSrcAssetType;
 - (KalturaFieldType)getTypeOfThumbPath;
 - (void)setThumbParamsOutputIdFromString:(NSString*)aPropVal;
@@ -12929,6 +12931,7 @@
 // @subpackage Client
 @interface KalturaPostConvertJobData : KalturaConvartableJobData
 @property (nonatomic,copy) NSString* flavorAssetId;
+@property (nonatomic,copy) NSString* flavorAssetEncryptionKey;
 // Indicates if a thumbnail should be created
 @property (nonatomic,assign) KALTURA_BOOL createThumb;
 // The path of the created thumbnail
@@ -12941,6 +12944,7 @@
 @property (nonatomic,assign) int thumbBitrate;
 @property (nonatomic,copy) NSString* customData;
 - (KalturaFieldType)getTypeOfFlavorAssetId;
+- (KalturaFieldType)getTypeOfFlavorAssetEncryptionKey;
 - (KalturaFieldType)getTypeOfCreateThumb;
 - (KalturaFieldType)getTypeOfThumbPath;
 - (KalturaFieldType)getTypeOfThumbOffset;
