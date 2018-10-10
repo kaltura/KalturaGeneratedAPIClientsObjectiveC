@@ -11435,6 +11435,10 @@
 {
     return @"28";
 }
++ (NSString*)TOP_CUSTOM_VAR1
+{
+    return @"29";
+}
 + (NSString*)PARTNER_USAGE
 {
     return @"201";
@@ -38543,6 +38547,9 @@
 @synthesize searchInTags = _searchInTags;
 @synthesize searchInAdminTags = _searchInAdminTags;
 @synthesize categories = _categories;
+@synthesize customVar1In = _customVar1In;
+@synthesize customVar2In = _customVar2In;
+@synthesize customVar3In = _customVar3In;
 @synthesize timeZoneOffset = _timeZoneOffset;
 @synthesize interval = _interval;
 
@@ -38573,6 +38580,21 @@
 }
 
 - (KalturaFieldType)getTypeOfCategories
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCustomVar1In
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCustomVar2In
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCustomVar3In
 {
     return KFT_String;
 }
@@ -38611,6 +38633,9 @@
     [aParams addIfDefinedKey:@"searchInTags" withBool:self.searchInTags];
     [aParams addIfDefinedKey:@"searchInAdminTags" withBool:self.searchInAdminTags];
     [aParams addIfDefinedKey:@"categories" withString:self.categories];
+    [aParams addIfDefinedKey:@"customVar1In" withString:self.customVar1In];
+    [aParams addIfDefinedKey:@"customVar2In" withString:self.customVar2In];
+    [aParams addIfDefinedKey:@"customVar3In" withString:self.customVar3In];
     [aParams addIfDefinedKey:@"timeZoneOffset" withInt:self.timeZoneOffset];
     [aParams addIfDefinedKey:@"interval" withString:self.interval];
 }
@@ -38619,6 +38644,9 @@
 {
     [self->_keywords release];
     [self->_categories release];
+    [self->_customVar1In release];
+    [self->_customVar2In release];
+    [self->_customVar3In release];
     [self->_interval release];
     [super dealloc];
 }

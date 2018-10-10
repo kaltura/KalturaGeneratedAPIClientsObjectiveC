@@ -3864,6 +3864,7 @@
 + (NSString*)VPAAS_USAGE;
 + (NSString*)ENTRY_USAGE;
 + (NSString*)REACH_USAGE;
++ (NSString*)TOP_CUSTOM_VAR1;
 + (NSString*)PARTNER_USAGE;
 @end
 
@@ -11316,6 +11317,12 @@
 @property (nonatomic,assign) KALTURA_BOOL searchInAdminTags;
 // Search onjects in specified categories
 @property (nonatomic,copy) NSString* categories;
+// Filter by customVar1
+@property (nonatomic,copy) NSString* customVar1In;
+// Filter by customVar2
+@property (nonatomic,copy) NSString* customVar2In;
+// Filter by customVar3
+@property (nonatomic,copy) NSString* customVar3In;
 // Time zone offset in minutes
 @property (nonatomic,assign) int timeZoneOffset;
 // Aggregated results according to interval
@@ -11324,6 +11331,9 @@
 - (KalturaFieldType)getTypeOfSearchInTags;
 - (KalturaFieldType)getTypeOfSearchInAdminTags;
 - (KalturaFieldType)getTypeOfCategories;
+- (KalturaFieldType)getTypeOfCustomVar1In;
+- (KalturaFieldType)getTypeOfCustomVar2In;
+- (KalturaFieldType)getTypeOfCustomVar3In;
 - (KalturaFieldType)getTypeOfTimeZoneOffset;
 - (KalturaFieldType)getTypeOfInterval;
 - (void)setSearchInTagsFromString:(NSString*)aPropVal;
