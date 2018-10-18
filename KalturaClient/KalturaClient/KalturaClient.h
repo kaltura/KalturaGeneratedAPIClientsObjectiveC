@@ -29,7 +29,7 @@
 // @subpackage Client
 #import "KalturaClientBase.h"
 
-#define API_VERSION @"14.6.0"
+#define API_VERSION @"14.7.0"
 
 ///////////////////////// enums /////////////////////////
 // @package Kaltura
@@ -9638,6 +9638,8 @@
 @property (nonatomic,copy) NSString* emailRecipients;
 // Number of objects that finished on error status
 @property (nonatomic,assign) int numOfErrorObjects;
+// privileges for the job
+@property (nonatomic,copy) NSString* privileges;
 - (KalturaFieldType)getTypeOfUserId;
 - (KalturaFieldType)getTypeOfUploadedBy;
 - (KalturaFieldType)getTypeOfConversionProfileId;
@@ -9653,6 +9655,7 @@
 - (KalturaFieldType)getTypeOfType;
 - (KalturaFieldType)getTypeOfEmailRecipients;
 - (KalturaFieldType)getTypeOfNumOfErrorObjects;
+- (KalturaFieldType)getTypeOfPrivileges;
 - (void)setConversionProfileIdFromString:(NSString*)aPropVal;
 - (void)setNumOfEntriesFromString:(NSString*)aPropVal;
 - (void)setNumOfObjectsFromString:(NSString*)aPropVal;
@@ -14406,7 +14409,7 @@
 // List bulk upload batch jobs
 - (KalturaBulkUploadListResponse*)listWithPager:(KalturaFilterPager*)aPager;
 - (KalturaBulkUploadListResponse*)list;
-// serve action returan the original file.
+// serve action return the original file.
 - (NSString*)serveWithId:(int)aId;
 // serveLog action returan the original file.
 - (NSString*)serveLogWithId:(int)aId;

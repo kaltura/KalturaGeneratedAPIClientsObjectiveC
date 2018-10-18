@@ -32082,6 +32082,7 @@
 @synthesize type = _type;
 @synthesize emailRecipients = _emailRecipients;
 @synthesize numOfErrorObjects = _numOfErrorObjects;
+@synthesize privileges = _privileges;
 
 - (id)init
 {
@@ -32170,6 +32171,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfPrivileges
+{
+    return KFT_String;
+}
+
 - (void)setConversionProfileIdFromString:(NSString*)aPropVal
 {
     self.conversionProfileId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -32198,6 +32204,7 @@
     [aParams addIfDefinedKey:@"fileName" withString:self.fileName];
     [aParams addIfDefinedKey:@"emailRecipients" withString:self.emailRecipients];
     [aParams addIfDefinedKey:@"numOfErrorObjects" withInt:self.numOfErrorObjects];
+    [aParams addIfDefinedKey:@"privileges" withString:self.privileges];
 }
 
 - (void)dealloc
@@ -32212,6 +32219,7 @@
     [self->_objectData release];
     [self->_type release];
     [self->_emailRecipients release];
+    [self->_privileges release];
     [super dealloc];
 }
 
