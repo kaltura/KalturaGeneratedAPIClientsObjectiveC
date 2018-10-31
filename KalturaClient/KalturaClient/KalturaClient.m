@@ -18118,6 +18118,7 @@
 @synthesize chunkedEncodeMode = _chunkedEncodeMode;
 @synthesize twoPass = _twoPass;
 @synthesize tags = _tags;
+@synthesize overloadParams = _overloadParams;
 
 - (id)init
 {
@@ -18197,6 +18198,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfOverloadParams
+{
+    return KFT_String;
+}
+
 - (void)setConversionProfileIdFromString:(NSString*)aPropVal
 {
     self.conversionProfileId = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -18262,12 +18268,14 @@
     [aParams addIfDefinedKey:@"chunkedEncodeMode" withInt:self.chunkedEncodeMode];
     [aParams addIfDefinedKey:@"twoPass" withInt:self.twoPass];
     [aParams addIfDefinedKey:@"tags" withString:self.tags];
+    [aParams addIfDefinedKey:@"overloadParams" withString:self.overloadParams];
 }
 
 - (void)dealloc
 {
     [self->_systemName release];
     [self->_tags release];
+    [self->_overloadParams release];
     [super dealloc];
 }
 

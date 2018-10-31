@@ -29,7 +29,7 @@
 // @subpackage Client
 #import "KalturaClientBase.h"
 
-#define API_VERSION @"14.7.0"
+#define API_VERSION @"14.8.0"
 
 ///////////////////////// enums /////////////////////////
 // @package Kaltura
@@ -5886,6 +5886,8 @@
 @property (nonatomic,assign) int chunkedEncodeMode;
 @property (nonatomic,assign) int twoPass;	// enum KalturaNullableBoolean
 @property (nonatomic,copy) NSString* tags;
+// JSON string containing an array of flavotParams field-value pairs.
+@property (nonatomic,copy) NSString* overloadParams;
 - (KalturaFieldType)getTypeOfConversionProfileId;
 - (KalturaFieldType)getTypeOfAssetParamsId;
 - (KalturaFieldType)getTypeOfReadyBehavior;
@@ -5898,6 +5900,7 @@
 - (KalturaFieldType)getTypeOfChunkedEncodeMode;
 - (KalturaFieldType)getTypeOfTwoPass;
 - (KalturaFieldType)getTypeOfTags;
+- (KalturaFieldType)getTypeOfOverloadParams;
 - (void)setConversionProfileIdFromString:(NSString*)aPropVal;
 - (void)setAssetParamsIdFromString:(NSString*)aPropVal;
 - (void)setReadyBehaviorFromString:(NSString*)aPropVal;
