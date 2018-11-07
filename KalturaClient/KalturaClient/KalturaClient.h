@@ -13451,6 +13451,16 @@
 
 // @package Kaltura
 // @subpackage Client
+// Represents the Bulk upload job data for drop folder xml bulk upload
+@interface KalturaDropFolderXmlBulkUploadJobData : KalturaBulkUploadXmlJobData
+// the job drop folder id
+@property (nonatomic,assign) int dropFolderId;
+- (KalturaFieldType)getTypeOfDropFolderId;
+- (void)setDropFolderIdFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
 // Evaluates PHP statement, depends on the execution context
 @interface KalturaEvalBooleanField : KalturaBooleanField
 // PHP code
