@@ -46345,38 +46345,6 @@
 
 @end
 
-@implementation KalturaDropFolderXmlBulkUploadJobData
-@synthesize dropFolderId = _dropFolderId;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_dropFolderId = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfDropFolderId
-{
-    return KFT_Int;
-}
-
-- (void)setDropFolderIdFromString:(NSString*)aPropVal
-{
-    self.dropFolderId = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaDropFolderXmlBulkUploadJobData"];
-    [aParams addIfDefinedKey:@"dropFolderId" withInt:self.dropFolderId];
-}
-
-@end
-
 @implementation KalturaEvalBooleanField
 @synthesize code = _code;
 
