@@ -204,6 +204,7 @@
 + (NSString*)SCREEN_NAME;
 + (NSString*)TAGS;
 + (NSString*)UPDATED_AT;
++ (NSString*)USER_ID;
 + (NSString*)TYPE;
 @end
 

@@ -526,6 +526,10 @@
 {
     return @"updated_at";
 }
++ (NSString*)USER_ID
+{
+    return @"user_id";
+}
 + (NSString*)TYPE
 {
     return @"user_type";
