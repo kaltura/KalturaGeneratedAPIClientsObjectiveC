@@ -28176,6 +28176,7 @@
 @synthesize tags = _tags;
 @synthesize dc = _dc;
 @synthesize parentId = _parentId;
+@synthesize environment = _environment;
 
 - (id)init
 {
@@ -28262,6 +28263,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfEnvironment
+{
+    return KFT_String;
+}
+
 - (void)setIdFromString:(NSString*)aPropVal
 {
     self.id = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -28308,6 +28314,7 @@
     [aParams addIfDefinedKey:@"hostName" withString:self.hostName];
     [aParams addIfDefinedKey:@"tags" withString:self.tags];
     [aParams addIfDefinedKey:@"parentId" withString:self.parentId];
+    [aParams addIfDefinedKey:@"environment" withString:self.environment];
 }
 
 - (void)dealloc
@@ -28319,6 +28326,7 @@
     [self->_type release];
     [self->_tags release];
     [self->_parentId release];
+    [self->_environment release];
     [super dealloc];
 }
 
@@ -39086,6 +39094,8 @@
 @synthesize parentIdLike = _parentIdLike;
 @synthesize parentIdMultiLikeOr = _parentIdMultiLikeOr;
 @synthesize parentIdMultiLikeAnd = _parentIdMultiLikeAnd;
+@synthesize environmentEqual = _environmentEqual;
+@synthesize environmentIn = _environmentIn;
 
 - (id)init
 {
@@ -39239,6 +39249,16 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfEnvironmentEqual
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEnvironmentIn
+{
+    return KFT_String;
+}
+
 - (void)setIdEqualFromString:(NSString*)aPropVal
 {
     self.idEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -39316,6 +39336,8 @@
     [aParams addIfDefinedKey:@"parentIdLike" withString:self.parentIdLike];
     [aParams addIfDefinedKey:@"parentIdMultiLikeOr" withString:self.parentIdMultiLikeOr];
     [aParams addIfDefinedKey:@"parentIdMultiLikeAnd" withString:self.parentIdMultiLikeAnd];
+    [aParams addIfDefinedKey:@"environmentEqual" withString:self.environmentEqual];
+    [aParams addIfDefinedKey:@"environmentIn" withString:self.environmentIn];
 }
 
 - (void)dealloc
@@ -39338,6 +39360,8 @@
     [self->_parentIdLike release];
     [self->_parentIdMultiLikeOr release];
     [self->_parentIdMultiLikeAnd release];
+    [self->_environmentEqual release];
+    [self->_environmentIn release];
     [super dealloc];
 }
 

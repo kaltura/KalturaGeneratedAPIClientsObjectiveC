@@ -8607,6 +8607,8 @@
 @property (nonatomic,assign,readonly) int dc;
 // Id of the parent serverNode
 @property (nonatomic,copy) NSString* parentId;
+// Environment
+@property (nonatomic,copy) NSString* environment;
 - (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfPartnerId;
 - (KalturaFieldType)getTypeOfCreatedAt;
@@ -8621,6 +8623,7 @@
 - (KalturaFieldType)getTypeOfTags;
 - (KalturaFieldType)getTypeOfDc;
 - (KalturaFieldType)getTypeOfParentId;
+- (KalturaFieldType)getTypeOfEnvironment;
 - (void)setIdFromString:(NSString*)aPropVal;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
@@ -11472,6 +11475,8 @@
 @property (nonatomic,copy) NSString* parentIdLike;
 @property (nonatomic,copy) NSString* parentIdMultiLikeOr;
 @property (nonatomic,copy) NSString* parentIdMultiLikeAnd;
+@property (nonatomic,copy) NSString* environmentEqual;
+@property (nonatomic,copy) NSString* environmentIn;
 - (KalturaFieldType)getTypeOfIdEqual;
 - (KalturaFieldType)getTypeOfIdIn;
 - (KalturaFieldType)getTypeOfCreatedAtGreaterThanOrEqual;
@@ -11499,6 +11504,8 @@
 - (KalturaFieldType)getTypeOfParentIdLike;
 - (KalturaFieldType)getTypeOfParentIdMultiLikeOr;
 - (KalturaFieldType)getTypeOfParentIdMultiLikeAnd;
+- (KalturaFieldType)getTypeOfEnvironmentEqual;
+- (KalturaFieldType)getTypeOfEnvironmentIn;
 - (void)setIdEqualFromString:(NSString*)aPropVal;
 - (void)setCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
