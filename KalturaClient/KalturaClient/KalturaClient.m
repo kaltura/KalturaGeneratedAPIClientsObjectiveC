@@ -38574,6 +38574,7 @@
 @synthesize customVar1In = _customVar1In;
 @synthesize customVar2In = _customVar2In;
 @synthesize customVar3In = _customVar3In;
+@synthesize devicesIn = _devicesIn;
 @synthesize timeZoneOffset = _timeZoneOffset;
 @synthesize interval = _interval;
 
@@ -38623,6 +38624,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfDevicesIn
+{
+    return KFT_String;
+}
+
 - (KalturaFieldType)getTypeOfTimeZoneOffset
 {
     return KFT_Int;
@@ -38660,6 +38666,7 @@
     [aParams addIfDefinedKey:@"customVar1In" withString:self.customVar1In];
     [aParams addIfDefinedKey:@"customVar2In" withString:self.customVar2In];
     [aParams addIfDefinedKey:@"customVar3In" withString:self.customVar3In];
+    [aParams addIfDefinedKey:@"devicesIn" withString:self.devicesIn];
     [aParams addIfDefinedKey:@"timeZoneOffset" withInt:self.timeZoneOffset];
     [aParams addIfDefinedKey:@"interval" withString:self.interval];
 }
@@ -38671,6 +38678,7 @@
     [self->_customVar1In release];
     [self->_customVar2In release];
     [self->_customVar3In release];
+    [self->_devicesIn release];
     [self->_interval release];
     [super dealloc];
 }

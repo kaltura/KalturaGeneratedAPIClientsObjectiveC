@@ -11332,6 +11332,8 @@
 @property (nonatomic,copy) NSString* customVar2In;
 // Filter by customVar3
 @property (nonatomic,copy) NSString* customVar3In;
+// Filter by device
+@property (nonatomic,copy) NSString* devicesIn;
 // Time zone offset in minutes
 @property (nonatomic,assign) int timeZoneOffset;
 // Aggregated results according to interval
@@ -11343,6 +11345,7 @@
 - (KalturaFieldType)getTypeOfCustomVar1In;
 - (KalturaFieldType)getTypeOfCustomVar2In;
 - (KalturaFieldType)getTypeOfCustomVar3In;
+- (KalturaFieldType)getTypeOfDevicesIn;
 - (KalturaFieldType)getTypeOfTimeZoneOffset;
 - (KalturaFieldType)getTypeOfInterval;
 - (void)setSearchInTagsFromString:(NSString*)aPropVal;
@@ -14421,7 +14424,7 @@
 - (KalturaBulkUploadListResponse*)list;
 // serve action return the original file.
 - (NSString*)serveWithId:(int)aId;
-// serveLog action returan the original file.
+// serveLog action return the original file.
 - (NSString*)serveLogWithId:(int)aId;
 @end
 
