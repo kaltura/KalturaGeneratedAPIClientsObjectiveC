@@ -3865,6 +3865,7 @@
 + (NSString*)ENTRY_USAGE;
 + (NSString*)REACH_USAGE;
 + (NSString*)TOP_CUSTOM_VAR1;
++ (NSString*)CITIES;
 + (NSString*)PARTNER_USAGE;
 @end
 
@@ -11334,6 +11335,10 @@
 @property (nonatomic,copy) NSString* customVar3In;
 // Filter by device
 @property (nonatomic,copy) NSString* devicesIn;
+// Filter by country
+@property (nonatomic,copy) NSString* countriesIn;
+// Filter by region
+@property (nonatomic,copy) NSString* regionsIn;
 // Time zone offset in minutes
 @property (nonatomic,assign) int timeZoneOffset;
 // Aggregated results according to interval
@@ -11346,6 +11351,8 @@
 - (KalturaFieldType)getTypeOfCustomVar2In;
 - (KalturaFieldType)getTypeOfCustomVar3In;
 - (KalturaFieldType)getTypeOfDevicesIn;
+- (KalturaFieldType)getTypeOfCountriesIn;
+- (KalturaFieldType)getTypeOfRegionsIn;
 - (KalturaFieldType)getTypeOfTimeZoneOffset;
 - (KalturaFieldType)getTypeOfInterval;
 - (void)setSearchInTagsFromString:(NSString*)aPropVal;
