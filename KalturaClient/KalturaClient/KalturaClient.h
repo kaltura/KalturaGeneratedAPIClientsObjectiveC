@@ -29,7 +29,7 @@
 // @subpackage Client
 #import "KalturaClientBase.h"
 
-#define API_VERSION @"14.8.0"
+#define API_VERSION @"14.9.0"
 
 ///////////////////////// enums /////////////////////////
 // @package Kaltura
@@ -1335,6 +1335,8 @@
 + (NSString*)REPLACE;
 + (NSString*)TRANSFORM_XSLT;
 + (NSString*)ADD_OR_UPDATE;
++ (NSString*)ACTIVATE;
++ (NSString*)REJECT;
 @end
 
 // @package Kaltura
@@ -14441,6 +14443,9 @@
 @class KalturaBulkUpload;
 @class KalturaBulkServiceData;
 @class KalturaBulkUploadCategoryEntryData;
+@class KalturaBulkUpload;
+@class KalturaBulkUploadJobData;
+@class KalturaBulkUploadCategoryEntryData;
 @interface KalturaCategoryEntryService : KalturaServiceBase
 // activate CategoryEntry when it is pending moderation
 - (void)activateWithEntryId:(NSString*)aEntryId withCategoryId:(int)aCategoryId;
@@ -14461,6 +14466,9 @@
 - (void)rejectWithEntryId:(NSString*)aEntryId withCategoryId:(int)aCategoryId;
 // update privacy context from the category
 - (void)syncPrivacyContextWithEntryId:(NSString*)aEntryId withCategoryId:(int)aCategoryId;
+- (KalturaBulkUpload*)updateStatusfrombulkWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData withBulkUploadCategoryEntryData:(KalturaBulkUploadCategoryEntryData*)aBulkUploadCategoryEntryData;
+- (KalturaBulkUpload*)updateStatusfrombulkWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData;
+- (KalturaBulkUpload*)updateStatusfrombulkWithFileData:(NSString*)aFileData;
 @end
 
 // @package Kaltura

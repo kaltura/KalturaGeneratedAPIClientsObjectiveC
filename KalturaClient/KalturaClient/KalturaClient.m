@@ -3291,6 +3291,14 @@
 {
     return @"6";
 }
++ (NSString*)ACTIVATE
+{
+    return @"7";
+}
++ (NSString*)REJECT
+{
+    return @"8";
+}
 @end
 
 @implementation KalturaBulkUploadObjectType
@@ -48963,6 +48971,24 @@
     [self.client.params addIfDefinedKey:@"entryId" withString:aEntryId];
     [self.client.params addIfDefinedKey:@"categoryId" withInt:aCategoryId];
     [self.client queueVoidService:@"categoryentry" withAction:@"syncPrivacyContext"];
+}
+
+- (KalturaBulkUpload*)updateStatusfrombulkWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData withBulkUploadCategoryEntryData:(KalturaBulkUploadCategoryEntryData*)aBulkUploadCategoryEntryData
+{
+    [self.client.params addIfDefinedKey:@"fileData" withFileName:aFileData];
+    [self.client.params addIfDefinedKey:@"bulkUploadData" withObject:aBulkUploadData];
+    [self.client.params addIfDefinedKey:@"bulkUploadCategoryEntryData" withObject:aBulkUploadCategoryEntryData];
+    return [self.client queueObjectService:@"categoryentry" withAction:@"updateStatusfrombulk" withExpectedType:@"KalturaBulkUpload"];
+}
+
+- (KalturaBulkUpload*)updateStatusfrombulkWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData
+{
+    return [self updateStatusfrombulkWithFileData:aFileData withBulkUploadData:aBulkUploadData withBulkUploadCategoryEntryData:nil];
+}
+
+- (KalturaBulkUpload*)updateStatusfrombulkWithFileData:(NSString*)aFileData
+{
+    return [self updateStatusfrombulkWithFileData:aFileData withBulkUploadData:nil];
 }
 
 @end
