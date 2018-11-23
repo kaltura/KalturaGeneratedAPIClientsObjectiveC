@@ -3868,6 +3868,8 @@
 + (NSString*)REACH_USAGE;
 + (NSString*)TOP_CUSTOM_VAR1;
 + (NSString*)CITIES;
++ (NSString*)OPERATING_SYSTEM_FAMILIES;
++ (NSString*)BROWSERS_FAMIILES;
 + (NSString*)PARTNER_USAGE;
 @end
 
@@ -11336,11 +11338,15 @@
 // Filter by customVar3
 @property (nonatomic,copy) NSString* customVar3In;
 // Filter by device
-@property (nonatomic,copy) NSString* devicesIn;
+@property (nonatomic,copy) NSString* deviceIn;
 // Filter by country
-@property (nonatomic,copy) NSString* countriesIn;
+@property (nonatomic,copy) NSString* countryIn;
 // Filter by region
-@property (nonatomic,copy) NSString* regionsIn;
+@property (nonatomic,copy) NSString* regionIn;
+// Filter by operating system family
+@property (nonatomic,copy) NSString* operatingSystemFamilyIn;
+// Filter by browser family
+@property (nonatomic,copy) NSString* browserFamilyIn;
 // Time zone offset in minutes
 @property (nonatomic,assign) int timeZoneOffset;
 // Aggregated results according to interval
@@ -11352,9 +11358,11 @@
 - (KalturaFieldType)getTypeOfCustomVar1In;
 - (KalturaFieldType)getTypeOfCustomVar2In;
 - (KalturaFieldType)getTypeOfCustomVar3In;
-- (KalturaFieldType)getTypeOfDevicesIn;
-- (KalturaFieldType)getTypeOfCountriesIn;
-- (KalturaFieldType)getTypeOfRegionsIn;
+- (KalturaFieldType)getTypeOfDeviceIn;
+- (KalturaFieldType)getTypeOfCountryIn;
+- (KalturaFieldType)getTypeOfRegionIn;
+- (KalturaFieldType)getTypeOfOperatingSystemFamilyIn;
+- (KalturaFieldType)getTypeOfBrowserFamilyIn;
 - (KalturaFieldType)getTypeOfTimeZoneOffset;
 - (KalturaFieldType)getTypeOfInterval;
 - (void)setSearchInTagsFromString:(NSString*)aPropVal;

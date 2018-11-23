@@ -11451,6 +11451,14 @@
 {
     return @"30";
 }
++ (NSString*)OPERATING_SYSTEM_FAMILIES
+{
+    return @"32";
+}
++ (NSString*)BROWSERS_FAMIILES
+{
+    return @"33";
+}
 + (NSString*)PARTNER_USAGE
 {
     return @"201";
@@ -38586,9 +38594,11 @@
 @synthesize customVar1In = _customVar1In;
 @synthesize customVar2In = _customVar2In;
 @synthesize customVar3In = _customVar3In;
-@synthesize devicesIn = _devicesIn;
-@synthesize countriesIn = _countriesIn;
-@synthesize regionsIn = _regionsIn;
+@synthesize deviceIn = _deviceIn;
+@synthesize countryIn = _countryIn;
+@synthesize regionIn = _regionIn;
+@synthesize operatingSystemFamilyIn = _operatingSystemFamilyIn;
+@synthesize browserFamilyIn = _browserFamilyIn;
 @synthesize timeZoneOffset = _timeZoneOffset;
 @synthesize interval = _interval;
 
@@ -38638,17 +38648,27 @@
     return KFT_String;
 }
 
-- (KalturaFieldType)getTypeOfDevicesIn
+- (KalturaFieldType)getTypeOfDeviceIn
 {
     return KFT_String;
 }
 
-- (KalturaFieldType)getTypeOfCountriesIn
+- (KalturaFieldType)getTypeOfCountryIn
 {
     return KFT_String;
 }
 
-- (KalturaFieldType)getTypeOfRegionsIn
+- (KalturaFieldType)getTypeOfRegionIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfOperatingSystemFamilyIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfBrowserFamilyIn
 {
     return KFT_String;
 }
@@ -38690,9 +38710,11 @@
     [aParams addIfDefinedKey:@"customVar1In" withString:self.customVar1In];
     [aParams addIfDefinedKey:@"customVar2In" withString:self.customVar2In];
     [aParams addIfDefinedKey:@"customVar3In" withString:self.customVar3In];
-    [aParams addIfDefinedKey:@"devicesIn" withString:self.devicesIn];
-    [aParams addIfDefinedKey:@"countriesIn" withString:self.countriesIn];
-    [aParams addIfDefinedKey:@"regionsIn" withString:self.regionsIn];
+    [aParams addIfDefinedKey:@"deviceIn" withString:self.deviceIn];
+    [aParams addIfDefinedKey:@"countryIn" withString:self.countryIn];
+    [aParams addIfDefinedKey:@"regionIn" withString:self.regionIn];
+    [aParams addIfDefinedKey:@"operatingSystemFamilyIn" withString:self.operatingSystemFamilyIn];
+    [aParams addIfDefinedKey:@"browserFamilyIn" withString:self.browserFamilyIn];
     [aParams addIfDefinedKey:@"timeZoneOffset" withInt:self.timeZoneOffset];
     [aParams addIfDefinedKey:@"interval" withString:self.interval];
 }
@@ -38704,9 +38726,11 @@
     [self->_customVar1In release];
     [self->_customVar2In release];
     [self->_customVar3In release];
-    [self->_devicesIn release];
-    [self->_countriesIn release];
-    [self->_regionsIn release];
+    [self->_deviceIn release];
+    [self->_countryIn release];
+    [self->_regionIn release];
+    [self->_operatingSystemFamilyIn release];
+    [self->_browserFamilyIn release];
     [self->_interval release];
     [super dealloc];
 }
