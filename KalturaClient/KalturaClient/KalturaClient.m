@@ -11455,7 +11455,7 @@
 {
     return @"32";
 }
-+ (NSString*)BROWSERS_FAMIILES
++ (NSString*)BROWSERS_FAMILIES
 {
     return @"33";
 }
