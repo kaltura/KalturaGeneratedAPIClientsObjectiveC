@@ -11459,6 +11459,14 @@
 {
     return @"33";
 }
++ (NSString*)USER_ENGAGEMENT_TIMELINE
+{
+    return @"34";
+}
++ (NSString*)UNIQUE_USERS_PLAY
+{
+    return @"35";
+}
 + (NSString*)PARTNER_USAGE
 {
     return @"201";
