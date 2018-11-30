@@ -14476,9 +14476,9 @@
 - (void)rejectWithEntryId:(NSString*)aEntryId withCategoryId:(int)aCategoryId;
 // update privacy context from the category
 - (void)syncPrivacyContextWithEntryId:(NSString*)aEntryId withCategoryId:(int)aCategoryId;
-- (KalturaBulkUpload*)updateStatusfrombulkWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData withBulkUploadCategoryEntryData:(KalturaBulkUploadCategoryEntryData*)aBulkUploadCategoryEntryData;
-- (KalturaBulkUpload*)updateStatusfrombulkWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData;
-- (KalturaBulkUpload*)updateStatusfrombulkWithFileData:(NSString*)aFileData;
+- (KalturaBulkUpload*)updateStatusFromBulkWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData withBulkUploadCategoryEntryData:(KalturaBulkUploadCategoryEntryData*)aBulkUploadCategoryEntryData;
+- (KalturaBulkUpload*)updateStatusFromBulkWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData;
+- (KalturaBulkUpload*)updateStatusFromBulkWithFileData:(NSString*)aFileData;
 @end
 
 // @package Kaltura
