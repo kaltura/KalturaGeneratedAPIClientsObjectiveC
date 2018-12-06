@@ -29,7 +29,7 @@
 // @subpackage Client
 #import "KalturaClientBase.h"
 
-#define API_VERSION @"14.9.0"
+#define API_VERSION @"14.10.0"
 
 ///////////////////////// enums /////////////////////////
 // @package Kaltura

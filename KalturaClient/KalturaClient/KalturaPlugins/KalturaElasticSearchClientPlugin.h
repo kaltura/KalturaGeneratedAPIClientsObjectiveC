@@ -223,6 +223,11 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaBeaconScheduledResourceBaseItem : KalturaESearchBaseItem
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaESearchCategoryBaseItem : KalturaESearchBaseItem
 @end
 
@@ -544,6 +549,19 @@
 @property (nonatomic,retain,readonly) NSMutableArray* objects;	// of KalturaESearchUserResult elements
 - (KalturaFieldType)getTypeOfObjects;
 - (NSString*)getObjectTypeOfObjects;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaBeaconAbstractScheduledResourceItem : KalturaBeaconScheduledResourceBaseItem
+@property (nonatomic,copy) NSString* searchTerm;
+@property (nonatomic,assign) int itemType;	// enum KalturaESearchItemType
+@property (nonatomic,retain) KalturaESearchRange* range;
+- (KalturaFieldType)getTypeOfSearchTerm;
+- (KalturaFieldType)getTypeOfItemType;
+- (KalturaFieldType)getTypeOfRange;
+- (NSString*)getObjectTypeOfRange;
+- (void)setItemTypeFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

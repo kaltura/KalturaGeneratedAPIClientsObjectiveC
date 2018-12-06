@@ -558,6 +558,16 @@
 
 @end
 
+@implementation KalturaBeaconScheduledResourceBaseItem
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaBeaconScheduledResourceBaseItem"];
+}
+
+@end
+
 @implementation KalturaESearchCategoryBaseItem
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
@@ -1801,6 +1811,64 @@
 - (void)dealloc
 {
     [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaBeaconAbstractScheduledResourceItem
+@synthesize searchTerm = _searchTerm;
+@synthesize itemType = _itemType;
+@synthesize range = _range;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_itemType = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfSearchTerm
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfItemType
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfRange
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfRange
+{
+    return @"KalturaESearchRange";
+}
+
+- (void)setItemTypeFromString:(NSString*)aPropVal
+{
+    self.itemType = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaBeaconAbstractScheduledResourceItem"];
+    [aParams addIfDefinedKey:@"searchTerm" withString:self.searchTerm];
+    [aParams addIfDefinedKey:@"itemType" withInt:self.itemType];
+    [aParams addIfDefinedKey:@"range" withObject:self.range];
+}
+
+- (void)dealloc
+{
+    [self->_searchTerm release];
+    [self->_range release];
     [super dealloc];
 }
 
