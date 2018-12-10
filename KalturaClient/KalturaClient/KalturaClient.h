@@ -11327,12 +11327,14 @@
 @interface KalturaReportInputFilter : KalturaReportInputBaseFilter
 // Search keywords to filter objects
 @property (nonatomic,copy) NSString* keywords;
-// Search keywords in onjects tags
+// Search keywords in objects tags
 @property (nonatomic,assign) KALTURA_BOOL searchInTags;
-// Search keywords in onjects admin tags
+// Search keywords in objects admin tags
 @property (nonatomic,assign) KALTURA_BOOL searchInAdminTags;
-// Search onjects in specified categories
+// Search objects in specified categories
 @property (nonatomic,copy) NSString* categories;
+// Search objects in specified category ids
+@property (nonatomic,copy) NSString* categoriesIdsIn;
 // Filter by customVar1
 @property (nonatomic,copy) NSString* customVar1In;
 // Filter by customVar2
@@ -11345,6 +11347,8 @@
 @property (nonatomic,copy) NSString* countryIn;
 // Filter by region
 @property (nonatomic,copy) NSString* regionIn;
+// Filter by city
+@property (nonatomic,copy) NSString* citiesIn;
 // Filter by operating system family
 @property (nonatomic,copy) NSString* operatingSystemFamilyIn;
 // Filter by browser family
@@ -11353,20 +11357,28 @@
 @property (nonatomic,assign) int timeZoneOffset;
 // Aggregated results according to interval
 @property (nonatomic,copy) NSString* interval;	// enum KalturaReportInterval
+// Filter by media types
+@property (nonatomic,copy) NSString* mediaTypeIn;
+// Filter by source types
+@property (nonatomic,copy) NSString* sourceTypeIn;
 - (KalturaFieldType)getTypeOfKeywords;
 - (KalturaFieldType)getTypeOfSearchInTags;
 - (KalturaFieldType)getTypeOfSearchInAdminTags;
 - (KalturaFieldType)getTypeOfCategories;
+- (KalturaFieldType)getTypeOfCategoriesIdsIn;
 - (KalturaFieldType)getTypeOfCustomVar1In;
 - (KalturaFieldType)getTypeOfCustomVar2In;
 - (KalturaFieldType)getTypeOfCustomVar3In;
 - (KalturaFieldType)getTypeOfDeviceIn;
 - (KalturaFieldType)getTypeOfCountryIn;
 - (KalturaFieldType)getTypeOfRegionIn;
+- (KalturaFieldType)getTypeOfCitiesIn;
 - (KalturaFieldType)getTypeOfOperatingSystemFamilyIn;
 - (KalturaFieldType)getTypeOfBrowserFamilyIn;
 - (KalturaFieldType)getTypeOfTimeZoneOffset;
 - (KalturaFieldType)getTypeOfInterval;
+- (KalturaFieldType)getTypeOfMediaTypeIn;
+- (KalturaFieldType)getTypeOfSourceTypeIn;
 - (void)setSearchInTagsFromString:(NSString*)aPropVal;
 - (void)setSearchInAdminTagsFromString:(NSString*)aPropVal;
 - (void)setTimeZoneOffsetFromString:(NSString*)aPropVal;

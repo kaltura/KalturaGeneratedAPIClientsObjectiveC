@@ -38599,16 +38599,20 @@
 @synthesize searchInTags = _searchInTags;
 @synthesize searchInAdminTags = _searchInAdminTags;
 @synthesize categories = _categories;
+@synthesize categoriesIdsIn = _categoriesIdsIn;
 @synthesize customVar1In = _customVar1In;
 @synthesize customVar2In = _customVar2In;
 @synthesize customVar3In = _customVar3In;
 @synthesize deviceIn = _deviceIn;
 @synthesize countryIn = _countryIn;
 @synthesize regionIn = _regionIn;
+@synthesize citiesIn = _citiesIn;
 @synthesize operatingSystemFamilyIn = _operatingSystemFamilyIn;
 @synthesize browserFamilyIn = _browserFamilyIn;
 @synthesize timeZoneOffset = _timeZoneOffset;
 @synthesize interval = _interval;
+@synthesize mediaTypeIn = _mediaTypeIn;
+@synthesize sourceTypeIn = _sourceTypeIn;
 
 - (id)init
 {
@@ -38637,6 +38641,11 @@
 }
 
 - (KalturaFieldType)getTypeOfCategories
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfCategoriesIdsIn
 {
     return KFT_String;
 }
@@ -38671,6 +38680,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfCitiesIn
+{
+    return KFT_String;
+}
+
 - (KalturaFieldType)getTypeOfOperatingSystemFamilyIn
 {
     return KFT_String;
@@ -38687,6 +38701,16 @@
 }
 
 - (KalturaFieldType)getTypeOfInterval
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfMediaTypeIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSourceTypeIn
 {
     return KFT_String;
 }
@@ -38715,31 +38739,39 @@
     [aParams addIfDefinedKey:@"searchInTags" withBool:self.searchInTags];
     [aParams addIfDefinedKey:@"searchInAdminTags" withBool:self.searchInAdminTags];
     [aParams addIfDefinedKey:@"categories" withString:self.categories];
+    [aParams addIfDefinedKey:@"categoriesIdsIn" withString:self.categoriesIdsIn];
     [aParams addIfDefinedKey:@"customVar1In" withString:self.customVar1In];
     [aParams addIfDefinedKey:@"customVar2In" withString:self.customVar2In];
     [aParams addIfDefinedKey:@"customVar3In" withString:self.customVar3In];
     [aParams addIfDefinedKey:@"deviceIn" withString:self.deviceIn];
     [aParams addIfDefinedKey:@"countryIn" withString:self.countryIn];
     [aParams addIfDefinedKey:@"regionIn" withString:self.regionIn];
+    [aParams addIfDefinedKey:@"citiesIn" withString:self.citiesIn];
     [aParams addIfDefinedKey:@"operatingSystemFamilyIn" withString:self.operatingSystemFamilyIn];
     [aParams addIfDefinedKey:@"browserFamilyIn" withString:self.browserFamilyIn];
     [aParams addIfDefinedKey:@"timeZoneOffset" withInt:self.timeZoneOffset];
     [aParams addIfDefinedKey:@"interval" withString:self.interval];
+    [aParams addIfDefinedKey:@"mediaTypeIn" withString:self.mediaTypeIn];
+    [aParams addIfDefinedKey:@"sourceTypeIn" withString:self.sourceTypeIn];
 }
 
 - (void)dealloc
 {
     [self->_keywords release];
     [self->_categories release];
+    [self->_categoriesIdsIn release];
     [self->_customVar1In release];
     [self->_customVar2In release];
     [self->_customVar3In release];
     [self->_deviceIn release];
     [self->_countryIn release];
     [self->_regionIn release];
+    [self->_citiesIn release];
     [self->_operatingSystemFamilyIn release];
     [self->_browserFamilyIn release];
     [self->_interval release];
+    [self->_mediaTypeIn release];
+    [self->_sourceTypeIn release];
     [super dealloc];
 }
 
