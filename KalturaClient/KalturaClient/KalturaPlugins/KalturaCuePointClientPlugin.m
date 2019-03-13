@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2018  Kaltura Inc.
+// Copyright (C) 2006-2019  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -76,12 +76,39 @@
 {
     return 7;
 }
++ (int)OPEN_QUESTION
+{
+    return 8;
+}
 @end
 
 @implementation KalturaQuizOutputType
 + (int)PDF
 {
     return 1;
+}
+@end
+
+@implementation KalturaScoreType
++ (int)HIGHEST
+{
+    return 1;
+}
++ (int)LOWEST
+{
+    return 2;
+}
++ (int)LATEST
+{
+    return 3;
+}
++ (int)FIRST
+{
+    return 4;
+}
++ (int)AVERAGE
+{
+    return 5;
 }
 @end
 

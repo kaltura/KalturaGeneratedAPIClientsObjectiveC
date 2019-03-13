@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2018  Kaltura Inc.
+// Copyright (C) 2006-2019  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -654,6 +654,17 @@
     return 1;
 }
 + (int)AUTOMATIC
+{
+    return 2;
+}
+@end
+
+@implementation KalturaGroupUserRole
++ (int)MEMBER
+{
+    return 1;
+}
++ (int)MANAGER
 {
     return 2;
 }
@@ -3032,9 +3043,17 @@
 {
     return @"contentDistribution.DistributionFetchReport";
 }
++ (NSString*)CONVERT
+{
+    return @"0";
+}
 + (NSString*)DISTRIBUTION_SUBMIT
 {
     return @"contentDistribution.DistributionSubmit";
+}
++ (NSString*)DISTRIBUTION_SYNC
+{
+    return @"contentDistribution.DistributionSync";
 }
 + (NSString*)DISTRIBUTION_UPDATE
 {
@@ -3043,14 +3062,6 @@
 + (NSString*)DROP_FOLDER_CONTENT_PROCESSOR
 {
     return @"dropFolder.DropFolderContentProcessor";
-}
-+ (NSString*)CONVERT
-{
-    return @"0";
-}
-+ (NSString*)DISTRIBUTION_SYNC
-{
-    return @"contentDistribution.DistributionSync";
 }
 + (NSString*)DROP_FOLDER_WATCHER
 {
@@ -3063,6 +3074,14 @@
 + (NSString*)INTEGRATION
 {
     return @"integration.Integration";
+}
++ (NSString*)ENTRY_VENDOR_TASK_CSV
+{
+    return @"reach.EntryVendorTasksCsv";
+}
++ (NSString*)SYNC_REACH_CREDIT_TASK
+{
+    return @"reach.SyncReachCreditTask";
 }
 + (NSString*)SCHEDULED_TASK
 {
@@ -3302,6 +3321,10 @@
 @end
 
 @implementation KalturaBulkUploadObjectType
++ (NSString*)JOB
+{
+    return @"bulkUploadFilter.JOB";
+}
 + (NSString*)SCHEDULE_EVENT
 {
     return @"scheduleBulkUpload.SCHEDULE_EVENT";
@@ -3548,6 +3571,10 @@
 {
     return @"metadata.FieldMatch";
 }
++ (NSString*)EVENT_CATEGORY_ENTRY
+{
+    return @"reach.CategoryEntry";
+}
 + (NSString*)AUTHENTICATED
 {
     return @"1";
@@ -3612,6 +3639,21 @@
 {
     return @"16";
 }
++ (NSString*)BOOLEAN
+{
+    return @"17";
+}
+@end
+
+@implementation KalturaConfMapsSourceLocation
++ (NSString*)FS
+{
+    return @"FileSystem";
+}
++ (NSString*)DB
+{
+    return @"database";
+}
 @end
 
 @implementation KalturaContainerFormat
@@ -3626,6 +3668,10 @@
 + (NSString*)AVI
 {
     return @"avi";
+}
++ (NSString*)BIF
+{
+    return @"bif";
 }
 + (NSString*)BMP
 {
@@ -11294,6 +11340,10 @@
 {
     return @"+updatedAt";
 }
++ (NSString*)VERSION_ASC
+{
+    return @"+version";
+}
 + (NSString*)CREATED_AT_DESC
 {
     return @"-createdAt";
@@ -11301,6 +11351,10 @@
 + (NSString*)UPDATED_AT_DESC
 {
     return @"-updatedAt";
+}
++ (NSString*)VERSION_DESC
+{
+    return @"-version";
 }
 @end
 
@@ -11447,7 +11501,7 @@
 {
     return @"29";
 }
-+ (NSString*)CITIES
++ (NSString*)MAP_OVERLAY_CITY
 {
     return @"30";
 }
@@ -11466,6 +11520,46 @@
 + (NSString*)UNIQUE_USERS_PLAY
 {
     return @"35";
+}
++ (NSString*)MAP_OVERLAY_COUNTRY
+{
+    return @"36";
+}
++ (NSString*)MAP_OVERLAY_REGION
+{
+    return @"37";
+}
++ (NSString*)TOP_CONTENT_CREATOR
+{
+    return @"38";
+}
++ (NSString*)TOP_CONTENT_CONTRIBUTORS
+{
+    return @"39";
+}
++ (NSString*)APP_DOMAIN_UNIQUE_ACTIVE_USERS
+{
+    return @"40";
+}
++ (NSString*)TOP_SOURCES
+{
+    return @"41";
+}
++ (NSString*)VPAAS_USAGE_MULTI
+{
+    return @"42";
+}
++ (NSString*)PERCENTILES
+{
+    return @"43";
+}
++ (NSString*)CONTENT_REPORT_REASONS
+{
+    return @"44";
+}
++ (NSString*)PLAYER_RELATED_INTERACTIONS
+{
+    return @"45";
 }
 + (NSString*)PARTNER_USAGE
 {
@@ -11496,6 +11590,10 @@
 + (NSString*)DRM_POLICY
 {
     return @"drm.DRM_POLICY";
+}
++ (NSString*)ADD_ENTRY_VENDOR_TASK
+{
+    return @"reach.ADD_ENTRY_VENDOR_TASK";
 }
 + (NSString*)BLOCK
 {
@@ -22416,6 +22514,7 @@
 @end
 
 @interface KalturaGroupUser()
+@property (nonatomic,copy) NSString* id;
 @property (nonatomic,assign) int status;
 @property (nonatomic,assign) int partnerId;
 @property (nonatomic,assign) int createdAt;
@@ -22423,6 +22522,7 @@
 @end
 
 @implementation KalturaGroupUser
+@synthesize id = _id;
 @synthesize userId = _userId;
 @synthesize groupId = _groupId;
 @synthesize status = _status;
@@ -22430,6 +22530,7 @@
 @synthesize createdAt = _createdAt;
 @synthesize updatedAt = _updatedAt;
 @synthesize creationMode = _creationMode;
+@synthesize userRole = _userRole;
 
 - (id)init
 {
@@ -22441,7 +22542,13 @@
     self->_createdAt = KALTURA_UNDEF_INT;
     self->_updatedAt = KALTURA_UNDEF_INT;
     self->_creationMode = KALTURA_UNDEF_INT;
+    self->_userRole = KALTURA_UNDEF_INT;
     return self;
+}
+
+- (KalturaFieldType)getTypeOfId
+{
+    return KFT_String;
 }
 
 - (KalturaFieldType)getTypeOfUserId
@@ -22479,6 +22586,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfUserRole
+{
+    return KFT_Int;
+}
+
 - (void)setStatusFromString:(NSString*)aPropVal
 {
     self.status = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -22504,6 +22616,11 @@
     self.creationMode = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setUserRoleFromString:(NSString*)aPropVal
+{
+    self.userRole = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -22512,10 +22629,12 @@
     [aParams addIfDefinedKey:@"userId" withString:self.userId];
     [aParams addIfDefinedKey:@"groupId" withString:self.groupId];
     [aParams addIfDefinedKey:@"creationMode" withInt:self.creationMode];
+    [aParams addIfDefinedKey:@"userRole" withInt:self.userRole];
 }
 
 - (void)dealloc
 {
+    [self->_id release];
     [self->_userId release];
     [self->_groupId release];
     [super dealloc];
@@ -23192,6 +23311,7 @@
 @synthesize density = _density;
 @synthesize stripProfiles = _stripProfiles;
 @synthesize videoOffsetInPercentage = _videoOffsetInPercentage;
+@synthesize interval = _interval;
 
 - (id)init
 {
@@ -23213,6 +23333,7 @@
     self->_density = KALTURA_UNDEF_INT;
     self->_stripProfiles = KALTURA_UNDEF_BOOL;
     self->_videoOffsetInPercentage = KALTURA_UNDEF_INT;
+    self->_interval = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -23301,6 +23422,11 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfInterval
+{
+    return KFT_Int;
+}
+
 - (void)setCropTypeFromString:(NSString*)aPropVal
 {
     self.cropType = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -23376,6 +23502,11 @@
     self.videoOffsetInPercentage = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setIntervalFromString:(NSString*)aPropVal
+{
+    self.interval = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -23398,6 +23529,7 @@
     [aParams addIfDefinedKey:@"density" withInt:self.density];
     [aParams addIfDefinedKey:@"stripProfiles" withBool:self.stripProfiles];
     [aParams addIfDefinedKey:@"videoOffsetInPercentage" withInt:self.videoOffsetInPercentage];
+    [aParams addIfDefinedKey:@"interval" withInt:self.interval];
 }
 
 - (void)dealloc
@@ -26895,6 +27027,7 @@
 
 @implementation KalturaPlaybackContext
 @synthesize sources = _sources;
+@synthesize playbackCaptions = _playbackCaptions;
 @synthesize flavorAssets = _flavorAssets;
 @synthesize actions = _actions;
 @synthesize messages = _messages;
@@ -26907,6 +27040,16 @@
 - (NSString*)getObjectTypeOfSources
 {
     return @"KalturaPlaybackSource";
+}
+
+- (KalturaFieldType)getTypeOfPlaybackCaptions
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfPlaybackCaptions
+{
+    return @"KalturaCaptionPlaybackPluginData";
 }
 
 - (KalturaFieldType)getTypeOfFlavorAssets
@@ -26945,6 +27088,7 @@
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaPlaybackContext"];
     [aParams addIfDefinedKey:@"sources" withArray:self.sources];
+    [aParams addIfDefinedKey:@"playbackCaptions" withArray:self.playbackCaptions];
     [aParams addIfDefinedKey:@"flavorAssets" withArray:self.flavorAssets];
     [aParams addIfDefinedKey:@"actions" withArray:self.actions];
     [aParams addIfDefinedKey:@"messages" withArray:self.messages];
@@ -26953,6 +27097,7 @@
 - (void)dealloc
 {
     [self->_sources release];
+    [self->_playbackCaptions release];
     [self->_flavorAssets release];
     [self->_actions release];
     [self->_messages release];
@@ -27480,6 +27625,51 @@
 {
     [self->_columns release];
     [self->_results release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaReportResponseOptions
+@synthesize delimiter = _delimiter;
+@synthesize skipEmptyDates = _skipEmptyDates;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_skipEmptyDates = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfDelimiter
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfSkipEmptyDates
+{
+    return KFT_Bool;
+}
+
+- (void)setSkipEmptyDatesFromString:(NSString*)aPropVal
+{
+    self.skipEmptyDates = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaReportResponseOptions"];
+    [aParams addIfDefinedKey:@"delimiter" withString:self.delimiter];
+    [aParams addIfDefinedKey:@"skipEmptyDates" withBool:self.skipEmptyDates];
+}
+
+- (void)dealloc
+{
+    [self->_delimiter release];
     [super dealloc];
 }
 
@@ -31882,6 +32072,30 @@
 
 @end
 
+@implementation KalturaBooleanEventNotificationCondition
+@synthesize booleanEventNotificationIds = _booleanEventNotificationIds;
+
+- (KalturaFieldType)getTypeOfBooleanEventNotificationIds
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaBooleanEventNotificationCondition"];
+    [aParams addIfDefinedKey:@"booleanEventNotificationIds" withString:self.booleanEventNotificationIds];
+}
+
+- (void)dealloc
+{
+    [self->_booleanEventNotificationIds release];
+    [super dealloc];
+}
+
+@end
+
 @implementation KalturaBulkDownloadJobData
 @synthesize entryIds = _entryIds;
 @synthesize flavorParamsId = _flavorParamsId;
@@ -33451,7 +33665,7 @@
 
 - (NSString*)getObjectTypeOfOperationAttributes
 {
-    return @"KalturaObject";
+    return @"KalturaOperationAttributes";
 }
 
 - (void)setPartnerIdFromString:(NSString*)aPropVal
@@ -38437,10 +38651,15 @@
 
 @interface KalturaQuizUserEntry()
 @property (nonatomic,assign) double score;
+@property (nonatomic,assign) double calculatedScore;
+@property (nonatomic,assign) int version;
 @end
 
 @implementation KalturaQuizUserEntry
 @synthesize score = _score;
+@synthesize calculatedScore = _calculatedScore;
+@synthesize feedback = _feedback;
+@synthesize version = _version;
 
 - (id)init
 {
@@ -38448,6 +38667,8 @@
     if (self == nil)
         return nil;
     self->_score = KALTURA_UNDEF_FLOAT;
+    self->_calculatedScore = KALTURA_UNDEF_FLOAT;
+    self->_version = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -38456,9 +38677,34 @@
     return KFT_Float;
 }
 
+- (KalturaFieldType)getTypeOfCalculatedScore
+{
+    return KFT_Float;
+}
+
+- (KalturaFieldType)getTypeOfFeedback
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfVersion
+{
+    return KFT_Int;
+}
+
 - (void)setScoreFromString:(NSString*)aPropVal
 {
     self.score = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
+- (void)setCalculatedScoreFromString:(NSString*)aPropVal
+{
+    self.calculatedScore = [KalturaSimpleTypeParser parseFloat:aPropVal];
+}
+
+- (void)setVersionFromString:(NSString*)aPropVal
+{
+    self.version = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -38466,6 +38712,13 @@
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaQuizUserEntry"];
+    [aParams addIfDefinedKey:@"feedback" withString:self.feedback];
+}
+
+- (void)dealloc
+{
+    [self->_feedback release];
+    [super dealloc];
 }
 
 @end
@@ -38613,6 +38866,11 @@
 @synthesize interval = _interval;
 @synthesize mediaTypeIn = _mediaTypeIn;
 @synthesize sourceTypeIn = _sourceTypeIn;
+@synthesize ownerIdsIn = _ownerIdsIn;
+@synthesize entryOperator = _entryOperator;
+@synthesize entryCreatedAtGreaterThanOrEqual = _entryCreatedAtGreaterThanOrEqual;
+@synthesize entryCreatedAtLessThanOrEqual = _entryCreatedAtLessThanOrEqual;
+@synthesize entryIdIn = _entryIdIn;
 
 - (id)init
 {
@@ -38622,6 +38880,8 @@
     self->_searchInTags = KALTURA_UNDEF_BOOL;
     self->_searchInAdminTags = KALTURA_UNDEF_BOOL;
     self->_timeZoneOffset = KALTURA_UNDEF_INT;
+    self->_entryCreatedAtGreaterThanOrEqual = KALTURA_UNDEF_INT;
+    self->_entryCreatedAtLessThanOrEqual = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -38715,6 +38975,36 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfOwnerIdsIn
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfEntryOperator
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfEntryOperator
+{
+    return @"KalturaESearchEntryOperator";
+}
+
+- (KalturaFieldType)getTypeOfEntryCreatedAtGreaterThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfEntryCreatedAtLessThanOrEqual
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfEntryIdIn
+{
+    return KFT_String;
+}
+
 - (void)setSearchInTagsFromString:(NSString*)aPropVal
 {
     self.searchInTags = [KalturaSimpleTypeParser parseBool:aPropVal];
@@ -38728,6 +39018,16 @@
 - (void)setTimeZoneOffsetFromString:(NSString*)aPropVal
 {
     self.timeZoneOffset = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setEntryCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.entryCreatedAtGreaterThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setEntryCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal
+{
+    self.entryCreatedAtLessThanOrEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -38753,6 +39053,11 @@
     [aParams addIfDefinedKey:@"interval" withString:self.interval];
     [aParams addIfDefinedKey:@"mediaTypeIn" withString:self.mediaTypeIn];
     [aParams addIfDefinedKey:@"sourceTypeIn" withString:self.sourceTypeIn];
+    [aParams addIfDefinedKey:@"ownerIdsIn" withString:self.ownerIdsIn];
+    [aParams addIfDefinedKey:@"entryOperator" withObject:self.entryOperator];
+    [aParams addIfDefinedKey:@"entryCreatedAtGreaterThanOrEqual" withInt:self.entryCreatedAtGreaterThanOrEqual];
+    [aParams addIfDefinedKey:@"entryCreatedAtLessThanOrEqual" withInt:self.entryCreatedAtLessThanOrEqual];
+    [aParams addIfDefinedKey:@"entryIdIn" withString:self.entryIdIn];
 }
 
 - (void)dealloc
@@ -38772,6 +39077,9 @@
     [self->_interval release];
     [self->_mediaTypeIn release];
     [self->_sourceTypeIn release];
+    [self->_ownerIdsIn release];
+    [self->_entryOperator release];
+    [self->_entryIdIn release];
     [super dealloc];
 }
 
@@ -49911,6 +50219,13 @@
     return [self syncWithUserId:aUserId withGroupIds:aGroupIds withRemoveFromExistingGroups:KALTURA_UNDEF_BOOL];
 }
 
+- (KalturaGroupUser*)updateWithGroupUserId:(NSString*)aGroupUserId withGroupUser:(KalturaGroupUser*)aGroupUser
+{
+    [self.client.params addIfDefinedKey:@"groupUserId" withString:aGroupUserId];
+    [self.client.params addIfDefinedKey:@"groupUser" withObject:aGroupUser];
+    return [self.client queueObjectService:@"groupuser" withAction:@"update" withExpectedType:@"KalturaGroupUser"];
+}
+
 @end
 
 @implementation KalturaLiveChannelSegmentService
@@ -51244,12 +51559,18 @@
     return [self executeWithId:aId withParams:nil];
 }
 
-- (NSMutableArray*)getBaseTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withObjectIds:(NSString*)aObjectIds
+- (NSMutableArray*)getBaseTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withObjectIds:(NSString*)aObjectIds withResponseOptions:(KalturaReportResponseOptions*)aResponseOptions
 {
     [self.client.params addIfDefinedKey:@"reportType" withString:aReportType];
     [self.client.params addIfDefinedKey:@"reportInputFilter" withObject:aReportInputFilter];
     [self.client.params addIfDefinedKey:@"objectIds" withString:aObjectIds];
+    [self.client.params addIfDefinedKey:@"responseOptions" withObject:aResponseOptions];
     return [self.client queueArrayService:@"report" withAction:@"getBaseTotal" withExpectedType:@"KalturaReportBaseTotal"];
+}
+
+- (NSMutableArray*)getBaseTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withObjectIds:(NSString*)aObjectIds
+{
+    return [self getBaseTotalWithReportType:aReportType withReportInputFilter:aReportInputFilter withObjectIds:aObjectIds withResponseOptions:nil];
 }
 
 - (NSMutableArray*)getBaseTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter
@@ -51281,13 +51602,19 @@
     return [self getCsvFromStringParamsWithId:aId withParams:nil];
 }
 
-- (NSMutableArray*)getGraphsWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withObjectIds:(NSString*)aObjectIds
+- (NSMutableArray*)getGraphsWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withObjectIds:(NSString*)aObjectIds withResponseOptions:(KalturaReportResponseOptions*)aResponseOptions
 {
     [self.client.params addIfDefinedKey:@"reportType" withString:aReportType];
     [self.client.params addIfDefinedKey:@"reportInputFilter" withObject:aReportInputFilter];
     [self.client.params addIfDefinedKey:@"dimension" withString:aDimension];
     [self.client.params addIfDefinedKey:@"objectIds" withString:aObjectIds];
+    [self.client.params addIfDefinedKey:@"responseOptions" withObject:aResponseOptions];
     return [self.client queueArrayService:@"report" withAction:@"getGraphs" withExpectedType:@"KalturaReportGraph"];
+}
+
+- (NSMutableArray*)getGraphsWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withObjectIds:(NSString*)aObjectIds
+{
+    return [self getGraphsWithReportType:aReportType withReportInputFilter:aReportInputFilter withDimension:aDimension withObjectIds:aObjectIds withResponseOptions:nil];
 }
 
 - (NSMutableArray*)getGraphsWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension
@@ -51300,14 +51627,20 @@
     return [self getGraphsWithReportType:aReportType withReportInputFilter:aReportInputFilter withDimension:nil];
 }
 
-- (KalturaReportTable*)getTableWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder withObjectIds:(NSString*)aObjectIds
+- (KalturaReportTable*)getTableWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder withObjectIds:(NSString*)aObjectIds withResponseOptions:(KalturaReportResponseOptions*)aResponseOptions
 {
     [self.client.params addIfDefinedKey:@"reportType" withString:aReportType];
     [self.client.params addIfDefinedKey:@"reportInputFilter" withObject:aReportInputFilter];
     [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
     [self.client.params addIfDefinedKey:@"order" withString:aOrder];
     [self.client.params addIfDefinedKey:@"objectIds" withString:aObjectIds];
+    [self.client.params addIfDefinedKey:@"responseOptions" withObject:aResponseOptions];
     return [self.client queueObjectService:@"report" withAction:@"getTable" withExpectedType:@"KalturaReportTable"];
+}
+
+- (KalturaReportTable*)getTableWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder withObjectIds:(NSString*)aObjectIds
+{
+    return [self getTableWithReportType:aReportType withReportInputFilter:aReportInputFilter withPager:aPager withOrder:aOrder withObjectIds:aObjectIds withResponseOptions:nil];
 }
 
 - (KalturaReportTable*)getTableWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder
@@ -51320,12 +51653,18 @@
     return [self getTableWithReportType:aReportType withReportInputFilter:aReportInputFilter withPager:aPager withOrder:nil];
 }
 
-- (KalturaReportTotal*)getTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withObjectIds:(NSString*)aObjectIds
+- (KalturaReportTotal*)getTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withObjectIds:(NSString*)aObjectIds withResponseOptions:(KalturaReportResponseOptions*)aResponseOptions
 {
     [self.client.params addIfDefinedKey:@"reportType" withString:aReportType];
     [self.client.params addIfDefinedKey:@"reportInputFilter" withObject:aReportInputFilter];
     [self.client.params addIfDefinedKey:@"objectIds" withString:aObjectIds];
+    [self.client.params addIfDefinedKey:@"responseOptions" withObject:aResponseOptions];
     return [self.client queueObjectService:@"report" withAction:@"getTotal" withExpectedType:@"KalturaReportTotal"];
+}
+
+- (KalturaReportTotal*)getTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withObjectIds:(NSString*)aObjectIds
+{
+    return [self getTotalWithReportType:aReportType withReportInputFilter:aReportInputFilter withObjectIds:aObjectIds withResponseOptions:nil];
 }
 
 - (KalturaReportTotal*)getTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter
@@ -51333,7 +51672,7 @@
     return [self getTotalWithReportType:aReportType withReportInputFilter:aReportInputFilter withObjectIds:nil];
 }
 
-- (NSString*)getUrlForReportAsCsvWithReportTitle:(NSString*)aReportTitle withReportText:(NSString*)aReportText withHeaders:(NSString*)aHeaders withReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder withObjectIds:(NSString*)aObjectIds
+- (NSString*)getUrlForReportAsCsvWithReportTitle:(NSString*)aReportTitle withReportText:(NSString*)aReportText withHeaders:(NSString*)aHeaders withReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder withObjectIds:(NSString*)aObjectIds withResponseOptions:(KalturaReportResponseOptions*)aResponseOptions
 {
     [self.client.params addIfDefinedKey:@"reportTitle" withString:aReportTitle];
     [self.client.params addIfDefinedKey:@"reportText" withString:aReportText];
@@ -51344,7 +51683,13 @@
     [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
     [self.client.params addIfDefinedKey:@"order" withString:aOrder];
     [self.client.params addIfDefinedKey:@"objectIds" withString:aObjectIds];
+    [self.client.params addIfDefinedKey:@"responseOptions" withObject:aResponseOptions];
     return [self.client queueStringService:@"report" withAction:@"getUrlForReportAsCsv"];
+}
+
+- (NSString*)getUrlForReportAsCsvWithReportTitle:(NSString*)aReportTitle withReportText:(NSString*)aReportText withHeaders:(NSString*)aHeaders withReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder withObjectIds:(NSString*)aObjectIds
+{
+    return [self getUrlForReportAsCsvWithReportTitle:aReportTitle withReportText:aReportText withHeaders:aHeaders withReportType:aReportType withReportInputFilter:aReportInputFilter withDimension:aDimension withPager:aPager withOrder:aOrder withObjectIds:aObjectIds withResponseOptions:nil];
 }
 
 - (NSString*)getUrlForReportAsCsvWithReportTitle:(NSString*)aReportTitle withReportText:(NSString*)aReportText withHeaders:(NSString*)aHeaders withReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder
@@ -52331,11 +52676,11 @@
     return [self.client queueObjectService:@"userentry" withAction:@"submitQuiz" withExpectedType:@"KalturaQuizUserEntry"];
 }
 
-- (void)updateWithId:(int)aId withUserEntry:(KalturaUserEntry*)aUserEntry
+- (KalturaUserEntry*)updateWithId:(int)aId withUserEntry:(KalturaUserEntry*)aUserEntry
 {
     [self.client.params addIfDefinedKey:@"id" withInt:aId];
     [self.client.params addIfDefinedKey:@"userEntry" withObject:aUserEntry];
-    [self.client queueVoidService:@"userentry" withAction:@"update"];
+    return [self.client queueObjectService:@"userentry" withAction:@"update" withExpectedType:@"KalturaUserEntry"];
 }
 
 @end

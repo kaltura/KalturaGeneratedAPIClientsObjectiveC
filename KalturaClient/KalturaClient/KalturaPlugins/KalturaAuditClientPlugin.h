@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2018  Kaltura Inc.
+// Copyright (C) 2006-2019  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -347,7 +347,8 @@
 ///////////////////////// services /////////////////////////
 // @package Kaltura
 // @subpackage Client
-// Audit Trail service
+// The Audit Trail service allows you to keep track of changes made to various Kaltura objects. 
+//  This service is disabled by default.
 @interface KalturaAuditTrailService : KalturaServiceBase
 // Allows you to add an audit trail object and audit trail content associated with Kaltura object
 - (KalturaAuditTrail*)addWithAuditTrail:(KalturaAuditTrail*)aAuditTrail;

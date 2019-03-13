@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2018  Kaltura Inc.
+// Copyright (C) 2006-2019  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -129,6 +129,26 @@
 - (KalturaFieldType)getTypeOfSourceParamsId;
 - (void)setIsDefaultFromString:(NSString*)aPropVal;
 - (void)setSourceParamsIdFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaCaptionPlaybackPluginData : KalturaObjectBase
+@property (nonatomic,copy) NSString* label;
+@property (nonatomic,copy) NSString* format;
+@property (nonatomic,copy) NSString* language;
+@property (nonatomic,copy) NSString* webVttUrl;
+@property (nonatomic,copy) NSString* url;
+@property (nonatomic,assign) KALTURA_BOOL isDefault;
+@property (nonatomic,copy) NSString* languageCode;
+- (KalturaFieldType)getTypeOfLabel;
+- (KalturaFieldType)getTypeOfFormat;
+- (KalturaFieldType)getTypeOfLanguage;
+- (KalturaFieldType)getTypeOfWebVttUrl;
+- (KalturaFieldType)getTypeOfUrl;
+- (KalturaFieldType)getTypeOfIsDefault;
+- (KalturaFieldType)getTypeOfLanguageCode;
+- (void)setIsDefaultFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura

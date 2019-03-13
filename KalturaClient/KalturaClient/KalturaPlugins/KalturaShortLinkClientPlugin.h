@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2018  Kaltura Inc.
+// Copyright (C) 2006-2019  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -156,7 +156,7 @@
 - (KalturaShortLinkListResponse*)listWithFilter:(KalturaShortLinkFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaShortLinkListResponse*)listWithFilter:(KalturaShortLinkFilter*)aFilter;
 - (KalturaShortLinkListResponse*)list;
-// Update exisitng short link
+// Update existing short link
 - (KalturaShortLink*)updateWithId:(NSString*)aId withShortLink:(KalturaShortLink*)aShortLink;
 @end
 

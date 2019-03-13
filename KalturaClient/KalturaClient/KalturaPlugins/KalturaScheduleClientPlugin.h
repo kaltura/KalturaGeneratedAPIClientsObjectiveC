@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2018  Kaltura Inc.
+// Copyright (C) 2006-2019  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -40,6 +40,14 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaScheduleEventConflictType : NSObject
++ (int)RESOURCE_CONFLICT;
++ (int)BLACKOUT_CONFLICT;
++ (int)BOTH;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaScheduleEventRecurrenceType : NSObject
 + (int)NONE;
 + (int)RECURRING;
@@ -59,6 +67,7 @@
 @interface KalturaScheduleEventType : NSObject
 + (int)RECORD;
 + (int)LIVE_STREAM;
++ (int)BLACKOUT;
 @end
 
 // @package Kaltura
@@ -417,6 +426,11 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaBlackoutScheduleEvent : KalturaScheduleEvent
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaCameraScheduleResource : KalturaScheduleResource
 // URL of the stream
 @property (nonatomic,copy) NSString* streamUrl;
@@ -432,9 +446,13 @@
 @property (nonatomic,copy) NSString* entryIds;
 // Categories that associated with this event
 @property (nonatomic,copy) NSString* categoryIds;
+// Blackout schedule events the conflict with this event
+@property (nonatomic,retain,readonly) NSMutableArray* blackoutConflicts;	// of KalturaScheduleEvent elements
 - (KalturaFieldType)getTypeOfTemplateEntryId;
 - (KalturaFieldType)getTypeOfEntryIds;
 - (KalturaFieldType)getTypeOfCategoryIds;
+- (KalturaFieldType)getTypeOfBlackoutConflicts;
+- (NSString*)getObjectTypeOfBlackoutConflicts;
 @end
 
 // @package Kaltura
@@ -755,6 +773,11 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaBlackoutScheduleEventFilter : KalturaRecordScheduleEventBaseFilter
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaLiveStreamScheduleEventFilter : KalturaLiveStreamScheduleEventBaseFilter
 @end
 
@@ -782,6 +805,7 @@
 // Retrieve a KalturaScheduleEvent object by ID
 - (KalturaScheduleEvent*)getWithScheduleEventId:(int)aScheduleEventId;
 // List conflicting events for resourcesIds by event's dates
+- (KalturaScheduleEventListResponse*)getConflictsWithResourceIds:(NSString*)aResourceIds withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent withScheduleEventIdToIgnore:(NSString*)aScheduleEventIdToIgnore withScheduleEventConflictType:(int)aScheduleEventConflictType;
 - (KalturaScheduleEventListResponse*)getConflictsWithResourceIds:(NSString*)aResourceIds withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent withScheduleEventIdToIgnore:(NSString*)aScheduleEventIdToIgnore;
 - (KalturaScheduleEventListResponse*)getConflictsWithResourceIds:(NSString*)aResourceIds withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent;
 // List KalturaScheduleEvent objects
@@ -826,6 +850,7 @@
 // Retrieve a KalturaScheduleEventResource object by ID
 - (KalturaScheduleEventResource*)getWithScheduleEventId:(int)aScheduleEventId withScheduleResourceId:(int)aScheduleResourceId;
 // List KalturaScheduleEventResource objects
+- (KalturaScheduleEventResourceListResponse*)listWithFilter:(KalturaScheduleEventResourceFilter*)aFilter withPager:(KalturaFilterPager*)aPager withFilterBlackoutConflicts:(KALTURA_BOOL)aFilterBlackoutConflicts;
 - (KalturaScheduleEventResourceListResponse*)listWithFilter:(KalturaScheduleEventResourceFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaScheduleEventResourceListResponse*)listWithFilter:(KalturaScheduleEventResourceFilter*)aFilter;
 - (KalturaScheduleEventResourceListResponse*)list;

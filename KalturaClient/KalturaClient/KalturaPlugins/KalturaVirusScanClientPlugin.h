@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2018  Kaltura Inc.
+// Copyright (C) 2006-2019  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -199,7 +199,7 @@
 // Scan flavor asset according to virus scan profile
 - (int)scanWithFlavorAssetId:(NSString*)aFlavorAssetId withVirusScanProfileId:(int)aVirusScanProfileId;
 - (int)scanWithFlavorAssetId:(NSString*)aFlavorAssetId;
-// Update exisitng virus scan profile, it is possible to update the virus scan profile id too
+// Update existing virus scan profile, it is possible to update the virus scan profile id too
 - (KalturaVirusScanProfile*)updateWithVirusScanProfileId:(int)aVirusScanProfileId withVirusScanProfile:(KalturaVirusScanProfile*)aVirusScanProfile;
 @end
 

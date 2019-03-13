@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2018  Kaltura Inc.
+// Copyright (C) 2006-2019  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -38,6 +38,21 @@
     return 2;
 }
 + (int)CONFIDENTIAL_EVENT
+{
+    return 3;
+}
+@end
+
+@implementation KalturaScheduleEventConflictType
++ (int)RESOURCE_CONFLICT
+{
+    return 1;
+}
++ (int)BLACKOUT_CONFLICT
+{
+    return 2;
+}
++ (int)BOTH
 {
     return 3;
 }
@@ -81,6 +96,10 @@
 + (int)LIVE_STREAM
 {
     return 2;
+}
++ (int)BLACKOUT
+{
+    return 3;
 }
 @end
 
@@ -1159,6 +1178,16 @@
 
 @end
 
+@implementation KalturaBlackoutScheduleEvent
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaBlackoutScheduleEvent"];
+}
+
+@end
+
 @implementation KalturaCameraScheduleResource
 @synthesize streamUrl = _streamUrl;
 
@@ -1183,10 +1212,15 @@
 
 @end
 
+@interface KalturaEntryScheduleEvent()
+@property (nonatomic,retain) NSMutableArray* blackoutConflicts;
+@end
+
 @implementation KalturaEntryScheduleEvent
 @synthesize templateEntryId = _templateEntryId;
 @synthesize entryIds = _entryIds;
 @synthesize categoryIds = _categoryIds;
+@synthesize blackoutConflicts = _blackoutConflicts;
 
 - (KalturaFieldType)getTypeOfTemplateEntryId
 {
@@ -1201,6 +1235,16 @@
 - (KalturaFieldType)getTypeOfCategoryIds
 {
     return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfBlackoutConflicts
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfBlackoutConflicts
+{
+    return @"KalturaScheduleEvent";
 }
 
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
@@ -1218,6 +1262,7 @@
     [self->_templateEntryId release];
     [self->_entryIds release];
     [self->_categoryIds release];
+    [self->_blackoutConflicts release];
     [super dealloc];
 }
 
@@ -2393,6 +2438,16 @@
 
 @end
 
+@implementation KalturaBlackoutScheduleEventFilter
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaBlackoutScheduleEventFilter"];
+}
+
+@end
+
 @implementation KalturaLiveStreamScheduleEventFilter
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
@@ -2451,12 +2506,18 @@
     return [self.client queueObjectService:@"schedule_scheduleevent" withAction:@"get" withExpectedType:@"KalturaScheduleEvent"];
 }
 
-- (KalturaScheduleEventListResponse*)getConflictsWithResourceIds:(NSString*)aResourceIds withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent withScheduleEventIdToIgnore:(NSString*)aScheduleEventIdToIgnore
+- (KalturaScheduleEventListResponse*)getConflictsWithResourceIds:(NSString*)aResourceIds withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent withScheduleEventIdToIgnore:(NSString*)aScheduleEventIdToIgnore withScheduleEventConflictType:(int)aScheduleEventConflictType
 {
     [self.client.params addIfDefinedKey:@"resourceIds" withString:aResourceIds];
     [self.client.params addIfDefinedKey:@"scheduleEvent" withObject:aScheduleEvent];
     [self.client.params addIfDefinedKey:@"scheduleEventIdToIgnore" withString:aScheduleEventIdToIgnore];
+    [self.client.params addIfDefinedKey:@"scheduleEventConflictType" withInt:aScheduleEventConflictType];
     return [self.client queueObjectService:@"schedule_scheduleevent" withAction:@"getConflicts" withExpectedType:@"KalturaScheduleEventListResponse"];
+}
+
+- (KalturaScheduleEventListResponse*)getConflictsWithResourceIds:(NSString*)aResourceIds withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent withScheduleEventIdToIgnore:(NSString*)aScheduleEventIdToIgnore
+{
+    return [self getConflictsWithResourceIds:aResourceIds withScheduleEvent:aScheduleEvent withScheduleEventIdToIgnore:aScheduleEventIdToIgnore withScheduleEventConflictType:KALTURA_UNDEF_INT];
 }
 
 - (KalturaScheduleEventListResponse*)getConflictsWithResourceIds:(NSString*)aResourceIds withScheduleEvent:(KalturaScheduleEvent*)aScheduleEvent
@@ -2568,11 +2629,17 @@
     return [self.client queueObjectService:@"schedule_scheduleeventresource" withAction:@"get" withExpectedType:@"KalturaScheduleEventResource"];
 }
 
-- (KalturaScheduleEventResourceListResponse*)listWithFilter:(KalturaScheduleEventResourceFilter*)aFilter withPager:(KalturaFilterPager*)aPager
+- (KalturaScheduleEventResourceListResponse*)listWithFilter:(KalturaScheduleEventResourceFilter*)aFilter withPager:(KalturaFilterPager*)aPager withFilterBlackoutConflicts:(KALTURA_BOOL)aFilterBlackoutConflicts
 {
     [self.client.params addIfDefinedKey:@"filter" withObject:aFilter];
     [self.client.params addIfDefinedKey:@"pager" withObject:aPager];
+    [self.client.params addIfDefinedKey:@"filterBlackoutConflicts" withBool:aFilterBlackoutConflicts];
     return [self.client queueObjectService:@"schedule_scheduleeventresource" withAction:@"list" withExpectedType:@"KalturaScheduleEventResourceListResponse"];
+}
+
+- (KalturaScheduleEventResourceListResponse*)listWithFilter:(KalturaScheduleEventResourceFilter*)aFilter withPager:(KalturaFilterPager*)aPager
+{
+    return [self listWithFilter:aFilter withPager:aPager withFilterBlackoutConflicts:KALTURA_UNDEF_BOOL];
 }
 
 - (KalturaScheduleEventResourceListResponse*)listWithFilter:(KalturaScheduleEventResourceFilter*)aFilter

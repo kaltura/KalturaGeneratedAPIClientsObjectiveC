@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2018  Kaltura Inc.
+// Copyright (C) 2006-2019  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -90,6 +90,8 @@
 @property (nonatomic,assign) int showCorrectAfterSubmission;	// enum KalturaNullableBoolean
 @property (nonatomic,assign) int allowDownload;	// enum KalturaNullableBoolean
 @property (nonatomic,assign) int showGradeAfterSubmission;	// enum KalturaNullableBoolean
+@property (nonatomic,assign) int attemptsAllowed;
+@property (nonatomic,assign) int scoreType;	// enum KalturaScoreType
 - (KalturaFieldType)getTypeOfVersion;
 - (KalturaFieldType)getTypeOfUiAttributes;
 - (NSString*)getObjectTypeOfUiAttributes;
@@ -99,6 +101,8 @@
 - (KalturaFieldType)getTypeOfShowCorrectAfterSubmission;
 - (KalturaFieldType)getTypeOfAllowDownload;
 - (KalturaFieldType)getTypeOfShowGradeAfterSubmission;
+- (KalturaFieldType)getTypeOfAttemptsAllowed;
+- (KalturaFieldType)getTypeOfScoreType;
 - (void)setVersionFromString:(NSString*)aPropVal;
 - (void)setShowResultOnAnswerFromString:(NSString*)aPropVal;
 - (void)setShowCorrectKeyOnAnswerFromString:(NSString*)aPropVal;
@@ -106,6 +110,8 @@
 - (void)setShowCorrectAfterSubmissionFromString:(NSString*)aPropVal;
 - (void)setAllowDownloadFromString:(NSString*)aPropVal;
 - (void)setShowGradeAfterSubmissionFromString:(NSString*)aPropVal;
+- (void)setAttemptsAllowedFromString:(NSString*)aPropVal;
+- (void)setScoreTypeFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -114,17 +120,21 @@
 @property (nonatomic,copy) NSString* parentId;	// insertonly
 @property (nonatomic,copy) NSString* quizUserEntryId;	// insertonly
 @property (nonatomic,copy) NSString* answerKey;
+@property (nonatomic,copy) NSString* openAnswer;
 @property (nonatomic,assign,readonly) int isCorrect;	// enum KalturaNullableBoolean
 // Array of string
 @property (nonatomic,retain,readonly) NSMutableArray* correctAnswerKeys;	// of KalturaString elements
 @property (nonatomic,copy,readonly) NSString* explanation;
+@property (nonatomic,copy) NSString* feedback;
 - (KalturaFieldType)getTypeOfParentId;
 - (KalturaFieldType)getTypeOfQuizUserEntryId;
 - (KalturaFieldType)getTypeOfAnswerKey;
+- (KalturaFieldType)getTypeOfOpenAnswer;
 - (KalturaFieldType)getTypeOfIsCorrect;
 - (KalturaFieldType)getTypeOfCorrectAnswerKeys;
 - (NSString*)getObjectTypeOfCorrectAnswerKeys;
 - (KalturaFieldType)getTypeOfExplanation;
+- (KalturaFieldType)getTypeOfFeedback;
 - (void)setIsCorrectFromString:(NSString*)aPropVal;
 @end
 
@@ -216,6 +226,9 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaQuizUserEntryFilter : KalturaQuizUserEntryBaseFilter
+@property (nonatomic,assign) int versionEqual;
+- (KalturaFieldType)getTypeOfVersionEqual;
+- (void)setVersionEqualFromString:(NSString*)aPropVal;
 @end
 
 ///////////////////////// services /////////////////////////

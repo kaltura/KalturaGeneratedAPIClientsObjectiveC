@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2018  Kaltura Inc.
+// Copyright (C) 2006-2019  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -29,7 +29,7 @@
 // @subpackage Client
 #import "KalturaClientBase.h"
 
-#define API_VERSION @"14.10.0"
+#define API_VERSION @"14.16.0"
 
 ///////////////////////// enums /////////////////////////
 // @package Kaltura
@@ -328,6 +328,13 @@
 @interface KalturaGroupUserCreationMode : NSObject
 + (int)MANUAL;
 + (int)AUTOMATIC;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaGroupUserRole : NSObject
++ (int)MEMBER;
++ (int)MANAGER;
 @end
 
 // @package Kaltura
@@ -1266,14 +1273,16 @@
 + (NSString*)DISTRIBUTION_DISABLE;
 + (NSString*)DISTRIBUTION_ENABLE;
 + (NSString*)DISTRIBUTION_FETCH_REPORT;
++ (NSString*)CONVERT;
 + (NSString*)DISTRIBUTION_SUBMIT;
++ (NSString*)DISTRIBUTION_SYNC;
 + (NSString*)DISTRIBUTION_UPDATE;
 + (NSString*)DROP_FOLDER_CONTENT_PROCESSOR;
-+ (NSString*)CONVERT;
-+ (NSString*)DISTRIBUTION_SYNC;
 + (NSString*)DROP_FOLDER_WATCHER;
 + (NSString*)EVENT_NOTIFICATION_HANDLER;
 + (NSString*)INTEGRATION;
++ (NSString*)ENTRY_VENDOR_TASK_CSV;
++ (NSString*)SYNC_REACH_CREDIT_TASK;
 + (NSString*)SCHEDULED_TASK;
 + (NSString*)INDEX_TAGS;
 + (NSString*)TAG_RESOLVE;
@@ -1342,6 +1351,7 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaBulkUploadObjectType : NSObject
++ (NSString*)JOB;
 + (NSString*)SCHEDULE_EVENT;
 + (NSString*)SCHEDULE_RESOURCE;
 + (NSString*)ENTRY;
@@ -1446,6 +1456,7 @@
 + (NSString*)METADATA_FIELD_CHANGED;
 + (NSString*)METADATA_FIELD_COMPARE;
 + (NSString*)METADATA_FIELD_MATCH;
++ (NSString*)EVENT_CATEGORY_ENTRY;
 + (NSString*)AUTHENTICATED;
 + (NSString*)COUNTRY;
 + (NSString*)IP_ADDRESS;
@@ -1462,6 +1473,14 @@
 + (NSString*)ACTIVE_EDGE_VALIDATE;
 + (NSString*)ANONYMOUS_IP;
 + (NSString*)ASSET_TYPE;
++ (NSString*)BOOLEAN;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaConfMapsSourceLocation : NSObject
++ (NSString*)FS;
++ (NSString*)DB;
 @end
 
 // @package Kaltura
@@ -1470,6 +1489,7 @@
 + (NSString*)_3GP;
 + (NSString*)APPLEHTTP;
 + (NSString*)AVI;
++ (NSString*)BIF;
 + (NSString*)BMP;
 + (NSString*)COPY;
 + (NSString*)FLV;
@@ -3816,8 +3836,10 @@
 @interface KalturaQuizUserEntryOrderBy : NSObject
 + (NSString*)CREATED_AT_ASC;
 + (NSString*)UPDATED_AT_ASC;
++ (NSString*)VERSION_ASC;
 + (NSString*)CREATED_AT_DESC;
 + (NSString*)UPDATED_AT_DESC;
++ (NSString*)VERSION_DESC;
 @end
 
 // @package Kaltura
@@ -3867,11 +3889,21 @@
 + (NSString*)ENTRY_USAGE;
 + (NSString*)REACH_USAGE;
 + (NSString*)TOP_CUSTOM_VAR1;
-+ (NSString*)CITIES;
++ (NSString*)MAP_OVERLAY_CITY;
 + (NSString*)OPERATING_SYSTEM_FAMILIES;
 + (NSString*)BROWSERS_FAMILIES;
 + (NSString*)USER_ENGAGEMENT_TIMELINE;
 + (NSString*)UNIQUE_USERS_PLAY;
++ (NSString*)MAP_OVERLAY_COUNTRY;
++ (NSString*)MAP_OVERLAY_REGION;
++ (NSString*)TOP_CONTENT_CREATOR;
++ (NSString*)TOP_CONTENT_CONTRIBUTORS;
++ (NSString*)APP_DOMAIN_UNIQUE_ACTIVE_USERS;
++ (NSString*)TOP_SOURCES;
++ (NSString*)VPAAS_USAGE_MULTI;
++ (NSString*)PERCENTILES;
++ (NSString*)CONTENT_REPORT_REASONS;
++ (NSString*)PLAYER_RELATED_INTERACTIONS;
 + (NSString*)PARTNER_USAGE;
 @end
 
@@ -3888,6 +3920,7 @@
 // @subpackage Client
 @interface KalturaRuleActionType : NSObject
 + (NSString*)DRM_POLICY;
++ (NSString*)ADD_ENTRY_VENDOR_TASK;
 + (NSString*)BLOCK;
 + (NSString*)PREVIEW;
 + (NSString*)LIMIT_FLAVORS;
@@ -7031,6 +7064,7 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaGroupUser : KalturaObjectBase
+@property (nonatomic,copy,readonly) NSString* id;
 @property (nonatomic,copy) NSString* userId;	// insertonly
 @property (nonatomic,copy) NSString* groupId;	// insertonly
 @property (nonatomic,assign,readonly) int status;	// enum KalturaGroupUserStatus
@@ -7040,6 +7074,8 @@
 // Last update date as Unix timestamp (In seconds)
 @property (nonatomic,assign,readonly) int updatedAt;
 @property (nonatomic,assign) int creationMode;	// enum KalturaGroupUserCreationMode, insertonly
+@property (nonatomic,assign) int userRole;	// enum KalturaGroupUserRole
+- (KalturaFieldType)getTypeOfId;
 - (KalturaFieldType)getTypeOfUserId;
 - (KalturaFieldType)getTypeOfGroupId;
 - (KalturaFieldType)getTypeOfStatus;
@@ -7047,11 +7083,13 @@
 - (KalturaFieldType)getTypeOfCreatedAt;
 - (KalturaFieldType)getTypeOfUpdatedAt;
 - (KalturaFieldType)getTypeOfCreationMode;
+- (KalturaFieldType)getTypeOfUserRole;
 - (void)setStatusFromString:(NSString*)aPropVal;
 - (void)setPartnerIdFromString:(NSString*)aPropVal;
 - (void)setCreatedAtFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
 - (void)setCreationModeFromString:(NSString*)aPropVal;
+- (void)setUserRoleFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -7266,6 +7304,8 @@
 @property (nonatomic,assign) KALTURA_BOOL stripProfiles;
 // Create thumbnail from the videoLengthpercentage second
 @property (nonatomic,assign) int videoOffsetInPercentage;
+// interval in seconds for creating thumbnail
+@property (nonatomic,assign) int interval;
 - (KalturaFieldType)getTypeOfCropType;
 - (KalturaFieldType)getTypeOfQuality;
 - (KalturaFieldType)getTypeOfCropX;
@@ -7283,6 +7323,7 @@
 - (KalturaFieldType)getTypeOfDensity;
 - (KalturaFieldType)getTypeOfStripProfiles;
 - (KalturaFieldType)getTypeOfVideoOffsetInPercentage;
+- (KalturaFieldType)getTypeOfInterval;
 - (void)setCropTypeFromString:(NSString*)aPropVal;
 - (void)setQualityFromString:(NSString*)aPropVal;
 - (void)setCropXFromString:(NSString*)aPropVal;
@@ -7298,6 +7339,7 @@
 - (void)setDensityFromString:(NSString*)aPropVal;
 - (void)setStripProfilesFromString:(NSString*)aPropVal;
 - (void)setVideoOffsetInPercentageFromString:(NSString*)aPropVal;
+- (void)setIntervalFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -8244,6 +8286,7 @@
 // @subpackage Client
 @interface KalturaPlaybackContext : KalturaObjectBase
 @property (nonatomic,retain) NSMutableArray* sources;	// of KalturaPlaybackSource elements
+@property (nonatomic,retain) NSMutableArray* playbackCaptions;	// of KalturaCaptionPlaybackPluginData elements
 @property (nonatomic,retain) NSMutableArray* flavorAssets;	// of KalturaFlavorAsset elements
 // Array of actions as received from the rules that invalidated
 @property (nonatomic,retain) NSMutableArray* actions;	// of KalturaRuleAction elements
@@ -8251,6 +8294,8 @@
 @property (nonatomic,retain) NSMutableArray* messages;	// of KalturaAccessControlMessage elements
 - (KalturaFieldType)getTypeOfSources;
 - (NSString*)getObjectTypeOfSources;
+- (KalturaFieldType)getTypeOfPlaybackCaptions;
+- (NSString*)getObjectTypeOfPlaybackCaptions;
 - (KalturaFieldType)getTypeOfFlavorAssets;
 - (NSString*)getObjectTypeOfFlavorAssets;
 - (KalturaFieldType)getTypeOfActions;
@@ -8407,6 +8452,16 @@
 - (KalturaFieldType)getTypeOfColumns;
 - (KalturaFieldType)getTypeOfResults;
 - (NSString*)getObjectTypeOfResults;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaReportResponseOptions : KalturaObjectBase
+@property (nonatomic,copy) NSString* delimiter;
+@property (nonatomic,assign) KALTURA_BOOL skipEmptyDates;
+- (KalturaFieldType)getTypeOfDelimiter;
+- (KalturaFieldType)getTypeOfSkipEmptyDates;
+- (void)setSkipEmptyDatesFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -9553,6 +9608,14 @@
 
 // @package Kaltura
 // @subpackage Client
+@interface KalturaBooleanEventNotificationCondition : KalturaCondition
+// The boolean event notification ids
+@property (nonatomic,copy) NSString* booleanEventNotificationIds;
+- (KalturaFieldType)getTypeOfBooleanEventNotificationIds;
+@end
+
+// @package Kaltura
+// @subpackage Client
 @interface KalturaBulkDownloadJobData : KalturaJobData
 // Comma separated list of entry ids
 @property (nonatomic,copy) NSString* entryIds;
@@ -9969,7 +10032,7 @@
 // $priority
 @property (nonatomic,assign) int priority;
 // clip operations
-@property (nonatomic,retain) NSMutableArray* operationAttributes;	// of KalturaObject elements
+@property (nonatomic,retain) NSMutableArray* operationAttributes;	// of KalturaOperationAttributes elements
 - (KalturaFieldType)getTypeOfPartnerId;
 - (KalturaFieldType)getTypeOfPriority;
 - (KalturaFieldType)getTypeOfOperationAttributes;
@@ -11286,8 +11349,16 @@
 // @subpackage Client
 @interface KalturaQuizUserEntry : KalturaUserEntry
 @property (nonatomic,assign,readonly) double score;
+@property (nonatomic,assign,readonly) double calculatedScore;
+@property (nonatomic,copy) NSString* feedback;
+@property (nonatomic,assign,readonly) int version;
 - (KalturaFieldType)getTypeOfScore;
+- (KalturaFieldType)getTypeOfCalculatedScore;
+- (KalturaFieldType)getTypeOfFeedback;
+- (KalturaFieldType)getTypeOfVersion;
 - (void)setScoreFromString:(NSString*)aPropVal;
+- (void)setCalculatedScoreFromString:(NSString*)aPropVal;
+- (void)setVersionFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -11361,6 +11432,14 @@
 @property (nonatomic,copy) NSString* mediaTypeIn;
 // Filter by source types
 @property (nonatomic,copy) NSString* sourceTypeIn;
+// Filter by entry owner
+@property (nonatomic,copy) NSString* ownerIdsIn;
+@property (nonatomic,retain) KalturaESearchEntryOperator* entryOperator;
+// Entry created at greater than or equal as Unix timestamp
+@property (nonatomic,assign) int entryCreatedAtGreaterThanOrEqual;
+// Entry created at less than or equal as Unix timestamp
+@property (nonatomic,assign) int entryCreatedAtLessThanOrEqual;
+@property (nonatomic,copy) NSString* entryIdIn;
 - (KalturaFieldType)getTypeOfKeywords;
 - (KalturaFieldType)getTypeOfSearchInTags;
 - (KalturaFieldType)getTypeOfSearchInAdminTags;
@@ -11379,9 +11458,17 @@
 - (KalturaFieldType)getTypeOfInterval;
 - (KalturaFieldType)getTypeOfMediaTypeIn;
 - (KalturaFieldType)getTypeOfSourceTypeIn;
+- (KalturaFieldType)getTypeOfOwnerIdsIn;
+- (KalturaFieldType)getTypeOfEntryOperator;
+- (NSString*)getObjectTypeOfEntryOperator;
+- (KalturaFieldType)getTypeOfEntryCreatedAtGreaterThanOrEqual;
+- (KalturaFieldType)getTypeOfEntryCreatedAtLessThanOrEqual;
+- (KalturaFieldType)getTypeOfEntryIdIn;
 - (void)setSearchInTagsFromString:(NSString*)aPropVal;
 - (void)setSearchInAdminTagsFromString:(NSString*)aPropVal;
 - (void)setTimeZoneOffsetFromString:(NSString*)aPropVal;
+- (void)setEntryCreatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
+- (void)setEntryCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -14426,7 +14513,7 @@
 - (KalturaBaseEntry*)updateContentWithEntryId:(NSString*)aEntryId withResource:(KalturaResource*)aResource;
 // Update entry thumbnail from a different entry by a specified time offset (in seconds).
 - (KalturaBaseEntry*)updateThumbnailFromSourceEntryWithEntryId:(NSString*)aEntryId withSourceEntryId:(NSString*)aSourceEntryId withTimeOffset:(int)aTimeOffset;
-// Update entry thumbnail using url.
+// Update entry thumbnail using URL.
 - (KalturaBaseEntry*)updateThumbnailFromUrlWithEntryId:(NSString*)aEntryId withUrl:(NSString*)aUrl;
 // Update entry thumbnail using a raw jpeg file.
 - (KalturaBaseEntry*)updateThumbnailJpegWithEntryId:(NSString*)aEntryId withFileData:(NSString*)aFileData;
@@ -14539,7 +14626,7 @@
 - (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData withBulkUploadCategoryUserData:(KalturaBulkUploadCategoryUserData*)aBulkUploadCategoryUserData;
 - (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData withBulkUploadData:(KalturaBulkUploadJobData*)aBulkUploadData;
 - (KalturaBulkUpload*)addFromBulkUploadWithFileData:(NSString*)aFileData;
-// Copy all memeber from parent category
+// Copy all member from parent category
 - (void)copyFromCategoryWithCategoryId:(int)aCategoryId;
 // reject CategoryUser
 - (KalturaCategoryUser*)deactivateWithCategoryId:(int)aCategoryId withUserId:(NSString*)aUserId;
@@ -14611,7 +14698,7 @@
 - (KalturaDataListResponse*)listWithFilter:(KalturaDataEntryFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaDataListResponse*)listWithFilter:(KalturaDataEntryFilter*)aFilter;
 - (KalturaDataListResponse*)list;
-// serve action returan the file from dataContent field.
+// return the file from dataContent field.
 - (NSString*)serveWithEntryId:(NSString*)aEntryId withVersion:(int)aVersion withForceProxy:(KALTURA_BOOL)aForceProxy;
 - (NSString*)serveWithEntryId:(NSString*)aEntryId withVersion:(int)aVersion;
 - (NSString*)serveWithEntryId:(NSString*)aEntryId;
@@ -14634,7 +14721,7 @@
 - (KalturaDeliveryProfileListResponse*)listWithFilter:(KalturaDeliveryProfileFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaDeliveryProfileListResponse*)listWithFilter:(KalturaDeliveryProfileFilter*)aFilter;
 - (KalturaDeliveryProfileListResponse*)list;
-// Update exisiting delivery
+// Update existing delivery profile
 - (KalturaDeliveryProfile*)updateWithId:(NSString*)aId withDelivery:(KalturaDeliveryProfile*)aDelivery;
 @end
 
@@ -14792,6 +14879,8 @@
 - (KalturaBulkUpload*)syncWithUserId:(NSString*)aUserId withGroupIds:(NSString*)aGroupIds withRemoveFromExistingGroups:(KALTURA_BOOL)aRemoveFromExistingGroups withCreateNewGroups:(KALTURA_BOOL)aCreateNewGroups;
 - (KalturaBulkUpload*)syncWithUserId:(NSString*)aUserId withGroupIds:(NSString*)aGroupIds withRemoveFromExistingGroups:(KALTURA_BOOL)aRemoveFromExistingGroups;
 - (KalturaBulkUpload*)syncWithUserId:(NSString*)aUserId withGroupIds:(NSString*)aGroupIds;
+// update GroupUser
+- (KalturaGroupUser*)updateWithGroupUserId:(NSString*)aGroupUserId withGroupUser:(KalturaGroupUser*)aGroupUser;
 @end
 
 // @package Kaltura
@@ -14893,7 +14982,7 @@
 - (KalturaLiveStreamEntry*)authenticateWithEntryId:(NSString*)aEntryId withToken:(NSString*)aToken withHostname:(NSString*)aHostname withMediaServerIndex:(NSString*)aMediaServerIndex;
 - (KalturaLiveStreamEntry*)authenticateWithEntryId:(NSString*)aEntryId withToken:(NSString*)aToken withHostname:(NSString*)aHostname;
 - (KalturaLiveStreamEntry*)authenticateWithEntryId:(NSString*)aEntryId withToken:(NSString*)aToken;
-// Creates perioding metadata sync-point events on a live stream
+// Creates periodic metadata sync-point events on a live stream
 - (void)createPeriodicSyncPointsWithEntryId:(NSString*)aEntryId withInterval:(int)aInterval withDuration:(int)aDuration;
 // Create recorded entry id if it doesn't exist and make sure it happens on the DC that the live entry was created on.
 - (KalturaLiveEntry*)createRecordedEntryWithEntryId:(NSString*)aEntryId withMediaServerIndex:(NSString*)aMediaServerIndex withLiveEntryStatus:(int)aLiveEntryStatus;
@@ -14967,7 +15056,7 @@
 // Copy flavor asset into new entry
 - (KalturaMediaEntry*)addFromFlavorAssetWithSourceFlavorAssetId:(NSString*)aSourceFlavorAssetId withMediaEntry:(KalturaMediaEntry*)aMediaEntry;
 - (KalturaMediaEntry*)addFromFlavorAssetWithSourceFlavorAssetId:(NSString*)aSourceFlavorAssetId;
-// Add new entry after the file was recored on the server and the token id exists
+// Add new entry after the file was recorded on the server and the token id exists
 - (KalturaMediaEntry*)addFromRecordedWebcamWithMediaEntry:(KalturaMediaEntry*)aMediaEntry withWebcamTokenId:(NSString*)aWebcamTokenId;
 // Adds new media entry by importing the media file from a search provider.
 // 	 This action should be used with the search service result.
@@ -15039,7 +15128,7 @@
 // 	 If flavor params id not specified, source flavor will be used by default
 - (KalturaMediaEntry*)updateThumbnailFromSourceEntryWithEntryId:(NSString*)aEntryId withSourceEntryId:(NSString*)aSourceEntryId withTimeOffset:(int)aTimeOffset withFlavorParamsId:(int)aFlavorParamsId;
 - (KalturaMediaEntry*)updateThumbnailFromSourceEntryWithEntryId:(NSString*)aEntryId withSourceEntryId:(NSString*)aSourceEntryId withTimeOffset:(int)aTimeOffset;
-// Update entry thumbnail using url
+// Update entry thumbnail using URL
 - (KalturaBaseEntry*)updateThumbnailFromUrlWithEntryId:(NSString*)aEntryId withUrl:(NSString*)aUrl;
 // Update media entry thumbnail using a raw jpeg file
 - (KalturaMediaEntry*)updateThumbnailJpegWithEntryId:(NSString*)aEntryId withFileData:(NSString*)aFileData;
@@ -15057,7 +15146,7 @@
 - (KalturaMixEntry*)addWithMixEntry:(KalturaMixEntry*)aMixEntry;
 // Anonymously rank a mix entry, no validation is done on duplicate rankings
 - (void)anonymousRankWithEntryId:(NSString*)aEntryId withRank:(int)aRank;
-// Appends a media entry to a the end of the mix timeline, this will save the mix timeline as a new version.
+// Appends a media entry to the end of the mix timeline, this will save the mix timeline as a new version.
 - (KalturaMixEntry*)appendMediaEntryWithMixEntryId:(NSString*)aMixEntryId withMediaEntryId:(NSString*)aMediaEntryId;
 // Clones an existing mix.
 - (KalturaMixEntry*)cloneWithEntryId:(NSString*)aEntryId;
@@ -15111,14 +15200,14 @@
 - (KalturaPartnerStatistics*)getStatistics;
 // Get usage statistics for a partner
 // 	 Calculation is done according to partner's package
-// 	 Additional data returned is a graph points of streaming usage in a timeframe
+// 	 Additional data returned is a graph points of streaming usage in a time frame
 // 	 The resolution can be "days" or "months"
 - (KalturaPartnerUsage*)getUsageWithYear:(int)aYear withMonth:(int)aMonth withResolution:(NSString*)aResolution;
 - (KalturaPartnerUsage*)getUsageWithYear:(int)aYear withMonth:(int)aMonth;
 - (KalturaPartnerUsage*)getUsageWithYear:(int)aYear;
 - (KalturaPartnerUsage*)getUsage;
 // List partners by filter with paging support
-// 	 Current implementation will only list the sub partners of the partner initiating the api call (using the current KS).
+// 	 Current implementation will only list the sub partners of the partner initiating the API call (using the current KS).
 // 	 This action is only partially implemented to support listing sub partners of a VAR partner.
 - (KalturaPartnerListResponse*)listWithFilter:(KalturaPartnerFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaPartnerListResponse*)listWithFilter:(KalturaPartnerFilter*)aFilter;
@@ -15185,7 +15274,7 @@
 // @package Kaltura
 // @subpackage Client
 // Playlist service lets you create,manage and play your playlists
-//  Playlists could be static (containing a fixed list of entries) or dynamic (baseed on a filter)
+//  Playlists could be static (containing a fixed list of entries) or dynamic (based on a filter)
 @interface KalturaPlaylistService : KalturaServiceBase
 // Add new playlist
 // 	 Note that all entries used in a playlist will become public and may appear in KalturaNetwork
@@ -15206,7 +15295,7 @@
 - (NSMutableArray*)executeFromContentWithPlaylistType:(int)aPlaylistType withPlaylistContent:(NSString*)aPlaylistContent withDetailed:(NSString*)aDetailed withPager:(KalturaFilterPager*)aPager;
 - (NSMutableArray*)executeFromContentWithPlaylistType:(int)aPlaylistType withPlaylistContent:(NSString*)aPlaylistContent withDetailed:(NSString*)aDetailed;
 - (NSMutableArray*)executeFromContentWithPlaylistType:(int)aPlaylistType withPlaylistContent:(NSString*)aPlaylistContent;
-// Revrieve playlist for playing purpose, based on media entry filters
+// Retrieve playlist for playing purpose, based on media entry filters
 - (NSMutableArray*)executeFromFiltersWithFilters:(NSArray*)aFilters withTotalResults:(int)aTotalResults withDetailed:(NSString*)aDetailed withPager:(KalturaFilterPager*)aPager;
 - (NSMutableArray*)executeFromFiltersWithFilters:(NSArray*)aFilters withTotalResults:(int)aTotalResults withDetailed:(NSString*)aDetailed;
 - (NSMutableArray*)executeFromFiltersWithFilters:(NSArray*)aFilters withTotalResults:(int)aTotalResults;
@@ -15220,7 +15309,7 @@
 - (KalturaPlaylistListResponse*)listWithFilter:(KalturaPlaylistFilter*)aFilter;
 - (KalturaPlaylistListResponse*)list;
 // Update existing playlist
-// 	 Note - you cannot change playlist type. updated playlist must be of the same type.
+// 	 Note - you cannot change playlist type. Updated playlist must be of the same type.
 - (KalturaPlaylist*)updateWithId:(NSString*)aId withPlaylist:(KalturaPlaylist*)aPlaylist withUpdateStats:(KALTURA_BOOL)aUpdateStats;
 - (KalturaPlaylist*)updateWithId:(NSString*)aId withPlaylist:(KalturaPlaylist*)aPlaylist;
 @end
@@ -15231,7 +15320,8 @@
 @interface KalturaReportService : KalturaServiceBase
 - (KalturaReportResponse*)executeWithId:(int)aId withParams:(NSArray*)aParams;
 - (KalturaReportResponse*)executeWithId:(int)aId;
-// report getBaseTotal action allows to get a the total base for storage reports
+// report getBaseTotal action allows to get the total base for storage reports
+- (NSMutableArray*)getBaseTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withObjectIds:(NSString*)aObjectIds withResponseOptions:(KalturaReportResponseOptions*)aResponseOptions;
 - (NSMutableArray*)getBaseTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withObjectIds:(NSString*)aObjectIds;
 - (NSMutableArray*)getBaseTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter;
 - (NSString*)getCsvWithId:(int)aId withParams:(NSArray*)aParams;
@@ -15240,17 +15330,21 @@
 - (NSString*)getCsvFromStringParamsWithId:(int)aId withParams:(NSString*)aParams;
 - (NSString*)getCsvFromStringParamsWithId:(int)aId;
 // report getGraphs action allows to get a graph data for a specific report.
+- (NSMutableArray*)getGraphsWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withObjectIds:(NSString*)aObjectIds withResponseOptions:(KalturaReportResponseOptions*)aResponseOptions;
 - (NSMutableArray*)getGraphsWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withObjectIds:(NSString*)aObjectIds;
 - (NSMutableArray*)getGraphsWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension;
 - (NSMutableArray*)getGraphsWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter;
 // report getTable action allows to get a graph data for a specific report.
+- (KalturaReportTable*)getTableWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder withObjectIds:(NSString*)aObjectIds withResponseOptions:(KalturaReportResponseOptions*)aResponseOptions;
 - (KalturaReportTable*)getTableWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder withObjectIds:(NSString*)aObjectIds;
 - (KalturaReportTable*)getTableWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder;
 - (KalturaReportTable*)getTableWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withPager:(KalturaFilterPager*)aPager;
 // report getTotal action allows to get a graph data for a specific report.
+- (KalturaReportTotal*)getTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withObjectIds:(NSString*)aObjectIds withResponseOptions:(KalturaReportResponseOptions*)aResponseOptions;
 - (KalturaReportTotal*)getTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withObjectIds:(NSString*)aObjectIds;
 - (KalturaReportTotal*)getTotalWithReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter;
-// will create a Csv file for the given report and return the URL to access it
+// will create a CSV file for the given report and return the URL to access it
+- (NSString*)getUrlForReportAsCsvWithReportTitle:(NSString*)aReportTitle withReportText:(NSString*)aReportText withHeaders:(NSString*)aHeaders withReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder withObjectIds:(NSString*)aObjectIds withResponseOptions:(KalturaReportResponseOptions*)aResponseOptions;
 - (NSString*)getUrlForReportAsCsvWithReportTitle:(NSString*)aReportTitle withReportText:(NSString*)aReportText withHeaders:(NSString*)aHeaders withReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder withObjectIds:(NSString*)aObjectIds;
 - (NSString*)getUrlForReportAsCsvWithReportTitle:(NSString*)aReportTitle withReportText:(NSString*)aReportText withHeaders:(NSString*)aHeaders withReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withPager:(KalturaFilterPager*)aPager withOrder:(NSString*)aOrder;
 - (NSString*)getUrlForReportAsCsvWithReportTitle:(NSString*)aReportTitle withReportText:(NSString*)aReportText withHeaders:(NSString*)aHeaders withReportType:(NSString*)aReportType withReportInputFilter:(KalturaReportInputFilter*)aReportInputFilter withDimension:(NSString*)aDimension withPager:(KalturaFilterPager*)aPager;
@@ -15418,7 +15512,8 @@
 
 // @package Kaltura
 // @subpackage Client
-// Storage Profiles service
+// The Storage Profile service allows you to export your Kaltura content to external storage volumes.
+//  This service is disabled by default, please contact your account manager if you wish to enable it for your partner.
 @interface KalturaStorageProfileService : KalturaServiceBase
 // Adds a storage profile to the Kaltura DB.
 - (KalturaStorageProfile*)addWithStorageProfile:(KalturaStorageProfile*)aStorageProfile;
@@ -15448,7 +15543,7 @@
 - (KalturaBaseSyndicationFeedListResponse*)listWithFilter:(KalturaBaseSyndicationFeedFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaBaseSyndicationFeedListResponse*)listWithFilter:(KalturaBaseSyndicationFeedFilter*)aFilter;
 - (KalturaBaseSyndicationFeedListResponse*)list;
-// request conversion for all entries that doesnt have the required flavor param
+// request conversion for all entries that doesn't have the required flavor param
 // 	 returns a comma-separated ids of conversion jobs
 - (NSString*)requestConversionWithFeedId:(NSString*)aFeedId;
 // Update Syndication Feed by ID
@@ -15619,7 +15714,7 @@
 - (KalturaUserEntryListResponse*)list;
 // Submits the quiz so that it's status will be submitted and calculates the score for the quiz
 - (KalturaQuizUserEntry*)submitQuizWithId:(int)aId;
-- (void)updateWithId:(int)aId withUserEntry:(KalturaUserEntry*)aUserEntry;
+- (KalturaUserEntry*)updateWithId:(int)aId withUserEntry:(KalturaUserEntry*)aUserEntry;
 @end
 
 // @package Kaltura
@@ -15738,7 +15833,7 @@
 - (KalturaWidgetListResponse*)listWithFilter:(KalturaWidgetFilter*)aFilter withPager:(KalturaFilterPager*)aPager;
 - (KalturaWidgetListResponse*)listWithFilter:(KalturaWidgetFilter*)aFilter;
 - (KalturaWidgetListResponse*)list;
-// Update exisiting widget
+// Update existing widget
 - (KalturaWidget*)updateWithId:(NSString*)aId withWidget:(KalturaWidget*)aWidget;
 @end
 

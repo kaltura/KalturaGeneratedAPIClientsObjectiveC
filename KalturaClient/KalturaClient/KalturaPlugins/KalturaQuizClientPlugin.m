@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2018  Kaltura Inc.
+// Copyright (C) 2006-2019  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -194,6 +194,8 @@
 @synthesize showCorrectAfterSubmission = _showCorrectAfterSubmission;
 @synthesize allowDownload = _allowDownload;
 @synthesize showGradeAfterSubmission = _showGradeAfterSubmission;
+@synthesize attemptsAllowed = _attemptsAllowed;
+@synthesize scoreType = _scoreType;
 
 - (id)init
 {
@@ -207,6 +209,8 @@
     self->_showCorrectAfterSubmission = KALTURA_UNDEF_INT;
     self->_allowDownload = KALTURA_UNDEF_INT;
     self->_showGradeAfterSubmission = KALTURA_UNDEF_INT;
+    self->_attemptsAllowed = KALTURA_UNDEF_INT;
+    self->_scoreType = KALTURA_UNDEF_INT;
     return self;
 }
 
@@ -255,6 +259,16 @@
     return KFT_Int;
 }
 
+- (KalturaFieldType)getTypeOfAttemptsAllowed
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfScoreType
+{
+    return KFT_Int;
+}
+
 - (void)setVersionFromString:(NSString*)aPropVal
 {
     self.version = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -290,6 +304,16 @@
     self.showGradeAfterSubmission = [KalturaSimpleTypeParser parseInt:aPropVal];
 }
 
+- (void)setAttemptsAllowedFromString:(NSString*)aPropVal
+{
+    self.attemptsAllowed = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setScoreTypeFromString:(NSString*)aPropVal
+{
+    self.scoreType = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
@@ -302,6 +326,8 @@
     [aParams addIfDefinedKey:@"showCorrectAfterSubmission" withInt:self.showCorrectAfterSubmission];
     [aParams addIfDefinedKey:@"allowDownload" withInt:self.allowDownload];
     [aParams addIfDefinedKey:@"showGradeAfterSubmission" withInt:self.showGradeAfterSubmission];
+    [aParams addIfDefinedKey:@"attemptsAllowed" withInt:self.attemptsAllowed];
+    [aParams addIfDefinedKey:@"scoreType" withInt:self.scoreType];
 }
 
 - (void)dealloc
@@ -322,9 +348,11 @@
 @synthesize parentId = _parentId;
 @synthesize quizUserEntryId = _quizUserEntryId;
 @synthesize answerKey = _answerKey;
+@synthesize openAnswer = _openAnswer;
 @synthesize isCorrect = _isCorrect;
 @synthesize correctAnswerKeys = _correctAnswerKeys;
 @synthesize explanation = _explanation;
+@synthesize feedback = _feedback;
 
 - (id)init
 {
@@ -350,6 +378,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfOpenAnswer
+{
+    return KFT_String;
+}
+
 - (KalturaFieldType)getTypeOfIsCorrect
 {
     return KFT_Int;
@@ -370,6 +403,11 @@
     return KFT_String;
 }
 
+- (KalturaFieldType)getTypeOfFeedback
+{
+    return KFT_String;
+}
+
 - (void)setIsCorrectFromString:(NSString*)aPropVal
 {
     self.isCorrect = [KalturaSimpleTypeParser parseInt:aPropVal];
@@ -383,6 +421,8 @@
     [aParams addIfDefinedKey:@"parentId" withString:self.parentId];
     [aParams addIfDefinedKey:@"quizUserEntryId" withString:self.quizUserEntryId];
     [aParams addIfDefinedKey:@"answerKey" withString:self.answerKey];
+    [aParams addIfDefinedKey:@"openAnswer" withString:self.openAnswer];
+    [aParams addIfDefinedKey:@"feedback" withString:self.feedback];
 }
 
 - (void)dealloc
@@ -390,8 +430,10 @@
     [self->_parentId release];
     [self->_quizUserEntryId release];
     [self->_answerKey release];
+    [self->_openAnswer release];
     [self->_correctAnswerKeys release];
     [self->_explanation release];
+    [self->_feedback release];
     [super dealloc];
 }
 
@@ -702,11 +744,33 @@
 @end
 
 @implementation KalturaQuizUserEntryFilter
+@synthesize versionEqual = _versionEqual;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_versionEqual = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfVersionEqual
+{
+    return KFT_Int;
+}
+
+- (void)setVersionEqualFromString:(NSString*)aPropVal
+{
+    self.versionEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaQuizUserEntryFilter"];
+    [aParams addIfDefinedKey:@"versionEqual" withInt:self.versionEqual];
 }
 
 @end

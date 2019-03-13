@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2018  Kaltura Inc.
+// Copyright (C) 2006-2019  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -49,12 +49,23 @@
 + (int)FILL_IN_BLANK;
 + (int)HOT_SPOT;
 + (int)GO_TO;
++ (int)OPEN_QUESTION;
 @end
 
 // @package Kaltura
 // @subpackage Client
 @interface KalturaQuizOutputType : NSObject
 + (int)PDF;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaScoreType : NSObject
++ (int)HIGHEST;
++ (int)LOWEST;
++ (int)LATEST;
++ (int)FIRST;
++ (int)AVERAGE;
 @end
 
 // @package Kaltura

@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2018  Kaltura Inc.
+// Copyright (C) 2006-2019  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -67,6 +67,38 @@
     [self->_filter release];
     [self->_templateObject release];
     [super dealloc];
+}
+
+@end
+
+@implementation KalturaBulkUploadResultJob
+@synthesize jobObjectId = _jobObjectId;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_jobObjectId = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfJobObjectId
+{
+    return KFT_Int;
+}
+
+- (void)setJobObjectIdFromString:(NSString*)aPropVal
+{
+    self.jobObjectId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaBulkUploadResultJob"];
+    [aParams addIfDefinedKey:@"jobObjectId" withInt:self.jobObjectId];
 }
 
 @end

@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2018  Kaltura Inc.
+// Copyright (C) 2006-2019  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -472,12 +472,12 @@
 @interface KalturaMetadataService : KalturaServiceBase
 // Allows you to add a metadata object and metadata content associated with Kaltura object
 - (KalturaMetadata*)addWithMetadataProfileId:(int)aMetadataProfileId withObjectType:(NSString*)aObjectType withObjectId:(NSString*)aObjectId withXmlData:(NSString*)aXmlData;
-// Allows you to add a metadata xml data from remote URL.
+// Allows you to add a metadata XML data from remote URL.
 // 	 Enables different permissions than addFromUrl action.
 - (KalturaMetadata*)addFromBulkWithMetadataProfileId:(int)aMetadataProfileId withObjectType:(NSString*)aObjectType withObjectId:(NSString*)aObjectId withUrl:(NSString*)aUrl;
 // Allows you to add a metadata object and metadata file associated with Kaltura object
 - (KalturaMetadata*)addFromFileWithMetadataProfileId:(int)aMetadataProfileId withObjectType:(NSString*)aObjectType withObjectId:(NSString*)aObjectId withXmlFile:(NSString*)aXmlFile;
-// Allows you to add a metadata xml data from remote URL
+// Allows you to add a metadata XML data from remote URL
 - (KalturaMetadata*)addFromUrlWithMetadataProfileId:(int)aMetadataProfileId withObjectType:(NSString*)aObjectType withObjectId:(NSString*)aObjectId withUrl:(NSString*)aUrl;
 // Delete an existing metadata
 - (void)deleteWithId:(int)aId;
@@ -538,7 +538,7 @@
 - (KalturaMetadataProfile*)updateWithId:(int)aId withMetadataProfile:(KalturaMetadataProfile*)aMetadataProfile;
 // Update an existing metadata object definition file
 - (KalturaMetadataProfile*)updateDefinitionFromFileWithId:(int)aId withXsdFile:(NSString*)aXsdFile;
-// Update an existing metadata object xslt file
+// Update an existing metadata object XSLT file
 - (KalturaMetadataProfile*)updateTransformationFromFileWithId:(int)aId withXsltFile:(NSString*)aXsltFile;
 // Update an existing metadata object views file
 - (KalturaMetadataProfile*)updateViewsFromFileWithId:(int)aId withViewsFile:(NSString*)aViewsFile;

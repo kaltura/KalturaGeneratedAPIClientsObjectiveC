@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2018  Kaltura Inc.
+// Copyright (C) 2006-2019  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -314,6 +314,91 @@
     [self->_language release];
     [self->_label release];
     [self->_format release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaCaptionPlaybackPluginData
+@synthesize label = _label;
+@synthesize format = _format;
+@synthesize language = _language;
+@synthesize webVttUrl = _webVttUrl;
+@synthesize url = _url;
+@synthesize isDefault = _isDefault;
+@synthesize languageCode = _languageCode;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_isDefault = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfLabel
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfFormat
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfLanguage
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfWebVttUrl
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfUrl
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfIsDefault
+{
+    return KFT_Bool;
+}
+
+- (KalturaFieldType)getTypeOfLanguageCode
+{
+    return KFT_String;
+}
+
+- (void)setIsDefaultFromString:(NSString*)aPropVal
+{
+    self.isDefault = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaCaptionPlaybackPluginData"];
+    [aParams addIfDefinedKey:@"label" withString:self.label];
+    [aParams addIfDefinedKey:@"format" withString:self.format];
+    [aParams addIfDefinedKey:@"language" withString:self.language];
+    [aParams addIfDefinedKey:@"webVttUrl" withString:self.webVttUrl];
+    [aParams addIfDefinedKey:@"url" withString:self.url];
+    [aParams addIfDefinedKey:@"isDefault" withBool:self.isDefault];
+    [aParams addIfDefinedKey:@"languageCode" withString:self.languageCode];
+}
+
+- (void)dealloc
+{
+    [self->_label release];
+    [self->_format release];
+    [self->_language release];
+    [self->_webVttUrl release];
+    [self->_url release];
+    [self->_languageCode release];
     [super dealloc];
 }
 
