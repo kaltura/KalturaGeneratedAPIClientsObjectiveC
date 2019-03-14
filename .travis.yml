@@ -1,5 +1,7 @@
 language: objective-c
-script: xcodebuild -project KalturaClient/KalturaClient.xcodeproj -sdk iphonesimulator VALID_ARCHS="arm64 armv7 i386 x86_64" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" && export PATH=~/:$PATH &&  xcodebuild VALID_ARCHS="arm64 armv7 i386 x86_64" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" -project KalturaClientTester/KalturaClientTester.xcodeproj -sdk iphonesimulator
+script: 
+    - sed -e "s#@YOUR_PARTNER_ID@#$PARTNER_ID#g" -e "s#@YOUR_ADMIN_SECRET@#$ADMIN_SECRET#g" -e "s#@SERVICE_URL@#https://www.kaltura.com#g" -i KalturaClientTester/KalturaClientTester/KalturaClientTester.m
+    - xcodebuild -project KalturaClient/KalturaClient.xcodeproj -sdk iphonesimulator VALID_ARCHS="arm64 armv7 i386 x86_64" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" && export PATH=~/:$PATH &&  xcodebuild VALID_ARCHS="arm64 armv7 i386 x86_64" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" -project KalturaClientTester/KalturaClientTester.xcodeproj -sdk iphonesimulator
 notifications:
   email:
     recipients:
