@@ -3,7 +3,7 @@ osx_image: xcode10.1
 xcode_sdk: iphonesimulator12.1
 script: 
     - sed -e "s#@YOUR_PARTNER_ID@#$PARTNER_ID#g" -e "s#@YOUR_ADMIN_SECRET@#$ADMIN_SECRET#g" -e "s#@SERVICE_URL@#https://www.kaltura.com#g" KalturaClientTester/KalturaClientTester/KalturaClientTester.m > KalturaClientTester/KalturaClientTester/KalturaClientTester.mod && mv KalturaClientTester/KalturaClientTester/KalturaClientTester.mod KalturaClientTester/KalturaClientTester/KalturaClientTester.m
-    - xcodebuild -project KalturaClient/KalturaClient.xcodeproj -sdk iphonesimulator VALID_ARCHS="arm64 armv7 i386 x86_64" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" && export PATH=~/:$PATH &&  xcodebuild VALID_ARCHS="arm64 armv7 i386 x86_64" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" -project KalturaClientTester/KalturaClientTester.xcodeproj -sdk iphonesimulator
+    - xcodebuild -project KalturaClient/KalturaClient.xcodeproj -sdk iphonesimulator VALID_ARCHS="arm64 armv7 i386 x86_64"  -destination 'platform=iOS Simulator,name=iPhone X,OS=12.0' CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" && export PATH=~/:$PATH &&  xcodebuild VALID_ARCHS="arm64 armv7 i386 x86_64" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" -project KalturaClientTester/KalturaClientTester.xcodeproj -sdk iphonesimulator
 notifications:
   email:
     recipients:
