@@ -226,9 +226,6 @@
 // @package Kaltura
 // @subpackage Client
 @interface KalturaQuizUserEntryFilter : KalturaQuizUserEntryBaseFilter
-@property (nonatomic,assign) int versionEqual;
-- (KalturaFieldType)getTypeOfVersionEqual;
-- (void)setVersionEqualFromString:(NSString*)aPropVal;
 @end
 
 ///////////////////////// services /////////////////////////

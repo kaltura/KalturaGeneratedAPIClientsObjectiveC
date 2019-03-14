@@ -3836,10 +3836,8 @@
 @interface KalturaQuizUserEntryOrderBy : NSObject
 + (NSString*)CREATED_AT_ASC;
 + (NSString*)UPDATED_AT_ASC;
-+ (NSString*)VERSION_ASC;
 + (NSString*)CREATED_AT_DESC;
 + (NSString*)UPDATED_AT_DESC;
-+ (NSString*)VERSION_DESC;
 @end
 
 // @package Kaltura
@@ -3904,6 +3902,7 @@
 + (NSString*)PERCENTILES;
 + (NSString*)CONTENT_REPORT_REASONS;
 + (NSString*)PLAYER_RELATED_INTERACTIONS;
++ (NSString*)PLAYBACK_RATE;
 + (NSString*)PARTNER_USAGE;
 @end
 
@@ -4936,6 +4935,79 @@
 - (void)setEnforceEntitlementFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtFromString:(NSString*)aPropVal;
 - (void)setUseCategoryEntriesFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaBaseUser : KalturaObjectBase
+@property (nonatomic,copy) NSString* id;
+@property (nonatomic,assign,readonly) int partnerId;
+@property (nonatomic,copy) NSString* screenName;
+@property (nonatomic,copy) NSString* fullName;
+@property (nonatomic,copy) NSString* email;
+@property (nonatomic,copy) NSString* country;
+@property (nonatomic,copy) NSString* state;
+@property (nonatomic,copy) NSString* city;
+@property (nonatomic,copy) NSString* zip;
+@property (nonatomic,copy) NSString* thumbnailUrl;
+@property (nonatomic,copy) NSString* description;
+@property (nonatomic,copy) NSString* tags;
+// Admin tags can be updated only by using an admin session
+@property (nonatomic,copy) NSString* adminTags;
+@property (nonatomic,assign) int status;	// enum KalturaUserStatus
+// Creation date as Unix timestamp (In seconds)
+@property (nonatomic,assign,readonly) int createdAt;
+// Last update date as Unix timestamp (In seconds)
+@property (nonatomic,assign,readonly) int updatedAt;
+// Can be used to store various partner related data as a string
+@property (nonatomic,copy) NSString* partnerData;
+@property (nonatomic,assign) int indexedPartnerDataInt;
+@property (nonatomic,copy) NSString* indexedPartnerDataString;
+@property (nonatomic,assign,readonly) int storageSize;
+@property (nonatomic,copy) NSString* language;	// enum KalturaLanguageCode
+@property (nonatomic,assign,readonly) int lastLoginTime;
+@property (nonatomic,assign,readonly) int statusUpdatedAt;
+@property (nonatomic,assign,readonly) int deletedAt;
+@property (nonatomic,copy) NSString* allowedPartnerIds;
+@property (nonatomic,copy) NSString* allowedPartnerPackages;
+@property (nonatomic,assign) int userMode;	// enum KalturaUserMode
+- (KalturaFieldType)getTypeOfId;
+- (KalturaFieldType)getTypeOfPartnerId;
+- (KalturaFieldType)getTypeOfScreenName;
+- (KalturaFieldType)getTypeOfFullName;
+- (KalturaFieldType)getTypeOfEmail;
+- (KalturaFieldType)getTypeOfCountry;
+- (KalturaFieldType)getTypeOfState;
+- (KalturaFieldType)getTypeOfCity;
+- (KalturaFieldType)getTypeOfZip;
+- (KalturaFieldType)getTypeOfThumbnailUrl;
+- (KalturaFieldType)getTypeOfDescription;
+- (KalturaFieldType)getTypeOfTags;
+- (KalturaFieldType)getTypeOfAdminTags;
+- (KalturaFieldType)getTypeOfStatus;
+- (KalturaFieldType)getTypeOfCreatedAt;
+- (KalturaFieldType)getTypeOfUpdatedAt;
+- (KalturaFieldType)getTypeOfPartnerData;
+- (KalturaFieldType)getTypeOfIndexedPartnerDataInt;
+- (KalturaFieldType)getTypeOfIndexedPartnerDataString;
+- (KalturaFieldType)getTypeOfStorageSize;
+- (KalturaFieldType)getTypeOfLanguage;
+- (KalturaFieldType)getTypeOfLastLoginTime;
+- (KalturaFieldType)getTypeOfStatusUpdatedAt;
+- (KalturaFieldType)getTypeOfDeletedAt;
+- (KalturaFieldType)getTypeOfAllowedPartnerIds;
+- (KalturaFieldType)getTypeOfAllowedPartnerPackages;
+- (KalturaFieldType)getTypeOfUserMode;
+- (void)setPartnerIdFromString:(NSString*)aPropVal;
+- (void)setStatusFromString:(NSString*)aPropVal;
+- (void)setCreatedAtFromString:(NSString*)aPropVal;
+- (void)setUpdatedAtFromString:(NSString*)aPropVal;
+- (void)setIndexedPartnerDataIntFromString:(NSString*)aPropVal;
+- (void)setStorageSizeFromString:(NSString*)aPropVal;
+- (void)setLastLoginTimeFromString:(NSString*)aPropVal;
+- (void)setStatusUpdatedAtFromString:(NSString*)aPropVal;
+- (void)setDeletedAtFromString:(NSString*)aPropVal;
+- (void)setUserModeFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -6275,103 +6347,35 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaUser : KalturaObjectBase
-@property (nonatomic,copy) NSString* id;
-@property (nonatomic,assign,readonly) int partnerId;
+@interface KalturaUser : KalturaBaseUser
 @property (nonatomic,assign) int type;	// enum KalturaUserType
-@property (nonatomic,copy) NSString* screenName;
-@property (nonatomic,copy) NSString* fullName;
-@property (nonatomic,copy) NSString* email;
 @property (nonatomic,assign) int dateOfBirth;
-@property (nonatomic,copy) NSString* country;
-@property (nonatomic,copy) NSString* state;
-@property (nonatomic,copy) NSString* city;
-@property (nonatomic,copy) NSString* zip;
-@property (nonatomic,copy) NSString* thumbnailUrl;
-@property (nonatomic,copy) NSString* description;
-@property (nonatomic,copy) NSString* tags;
-// Admin tags can be updated only by using an admin session
-@property (nonatomic,copy) NSString* adminTags;
 @property (nonatomic,assign) int gender;	// enum KalturaGender
-@property (nonatomic,assign) int status;	// enum KalturaUserStatus
-// Creation date as Unix timestamp (In seconds)
-@property (nonatomic,assign,readonly) int createdAt;
-// Last update date as Unix timestamp (In seconds)
-@property (nonatomic,assign,readonly) int updatedAt;
-// Can be used to store various partner related data as a string
-@property (nonatomic,copy) NSString* partnerData;
-@property (nonatomic,assign) int indexedPartnerDataInt;
-@property (nonatomic,copy) NSString* indexedPartnerDataString;
-@property (nonatomic,assign,readonly) int storageSize;
-@property (nonatomic,copy) NSString* password;	// insertonly
-@property (nonatomic,copy) NSString* firstName;
-@property (nonatomic,copy) NSString* lastName;
 @property (nonatomic,assign) KALTURA_BOOL isAdmin;
-@property (nonatomic,copy) NSString* language;	// enum KalturaLanguageCode
-@property (nonatomic,assign,readonly) int lastLoginTime;
-@property (nonatomic,assign,readonly) int statusUpdatedAt;
-@property (nonatomic,assign,readonly) int deletedAt;
-@property (nonatomic,assign) KALTURA_BOOL loginEnabled;	// insertonly
 @property (nonatomic,copy) NSString* roleIds;
 @property (nonatomic,copy,readonly) NSString* roleNames;
 @property (nonatomic,assign) KALTURA_BOOL isAccountOwner;	// insertonly
-@property (nonatomic,copy) NSString* allowedPartnerIds;
-@property (nonatomic,copy) NSString* allowedPartnerPackages;
-@property (nonatomic,assign) int userMode;	// enum KalturaUserMode
-- (KalturaFieldType)getTypeOfId;
-- (KalturaFieldType)getTypeOfPartnerId;
+@property (nonatomic,copy) NSString* password;	// insertonly
+@property (nonatomic,copy) NSString* firstName;
+@property (nonatomic,copy) NSString* lastName;
+@property (nonatomic,assign) KALTURA_BOOL loginEnabled;	// insertonly
 - (KalturaFieldType)getTypeOfType;
-- (KalturaFieldType)getTypeOfScreenName;
-- (KalturaFieldType)getTypeOfFullName;
-- (KalturaFieldType)getTypeOfEmail;
 - (KalturaFieldType)getTypeOfDateOfBirth;
-- (KalturaFieldType)getTypeOfCountry;
-- (KalturaFieldType)getTypeOfState;
-- (KalturaFieldType)getTypeOfCity;
-- (KalturaFieldType)getTypeOfZip;
-- (KalturaFieldType)getTypeOfThumbnailUrl;
-- (KalturaFieldType)getTypeOfDescription;
-- (KalturaFieldType)getTypeOfTags;
-- (KalturaFieldType)getTypeOfAdminTags;
 - (KalturaFieldType)getTypeOfGender;
-- (KalturaFieldType)getTypeOfStatus;
-- (KalturaFieldType)getTypeOfCreatedAt;
-- (KalturaFieldType)getTypeOfUpdatedAt;
-- (KalturaFieldType)getTypeOfPartnerData;
-- (KalturaFieldType)getTypeOfIndexedPartnerDataInt;
-- (KalturaFieldType)getTypeOfIndexedPartnerDataString;
-- (KalturaFieldType)getTypeOfStorageSize;
-- (KalturaFieldType)getTypeOfPassword;
-- (KalturaFieldType)getTypeOfFirstName;
-- (KalturaFieldType)getTypeOfLastName;
 - (KalturaFieldType)getTypeOfIsAdmin;
-- (KalturaFieldType)getTypeOfLanguage;
-- (KalturaFieldType)getTypeOfLastLoginTime;
-- (KalturaFieldType)getTypeOfStatusUpdatedAt;
-- (KalturaFieldType)getTypeOfDeletedAt;
-- (KalturaFieldType)getTypeOfLoginEnabled;
 - (KalturaFieldType)getTypeOfRoleIds;
 - (KalturaFieldType)getTypeOfRoleNames;
 - (KalturaFieldType)getTypeOfIsAccountOwner;
-- (KalturaFieldType)getTypeOfAllowedPartnerIds;
-- (KalturaFieldType)getTypeOfAllowedPartnerPackages;
-- (KalturaFieldType)getTypeOfUserMode;
-- (void)setPartnerIdFromString:(NSString*)aPropVal;
+- (KalturaFieldType)getTypeOfPassword;
+- (KalturaFieldType)getTypeOfFirstName;
+- (KalturaFieldType)getTypeOfLastName;
+- (KalturaFieldType)getTypeOfLoginEnabled;
 - (void)setTypeFromString:(NSString*)aPropVal;
 - (void)setDateOfBirthFromString:(NSString*)aPropVal;
 - (void)setGenderFromString:(NSString*)aPropVal;
-- (void)setStatusFromString:(NSString*)aPropVal;
-- (void)setCreatedAtFromString:(NSString*)aPropVal;
-- (void)setUpdatedAtFromString:(NSString*)aPropVal;
-- (void)setIndexedPartnerDataIntFromString:(NSString*)aPropVal;
-- (void)setStorageSizeFromString:(NSString*)aPropVal;
 - (void)setIsAdminFromString:(NSString*)aPropVal;
-- (void)setLastLoginTimeFromString:(NSString*)aPropVal;
-- (void)setStatusUpdatedAtFromString:(NSString*)aPropVal;
-- (void)setDeletedAtFromString:(NSString*)aPropVal;
-- (void)setLoginEnabledFromString:(NSString*)aPropVal;
 - (void)setIsAccountOwnerFromString:(NSString*)aPropVal;
-- (void)setUserModeFromString:(NSString*)aPropVal;
+- (void)setLoginEnabledFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -9438,11 +9442,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaAdminUser : KalturaUser
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaAmazonS3StorageProfile : KalturaStorageProfile
 @property (nonatomic,copy) NSString* filesPermissionInS3;	// enum KalturaAmazonS3StorageProfileFilesPermissionLevel
 @property (nonatomic,copy) NSString* s3Region;
@@ -12246,6 +12245,11 @@
 - (void)setCreatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtGreaterThanOrEqualFromString:(NSString*)aPropVal;
 - (void)setUpdatedAtLessThanOrEqualFromString:(NSString*)aPropVal;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaAdminUser : KalturaUser
 @end
 
 // @package Kaltura

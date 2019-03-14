@@ -744,33 +744,11 @@
 @end
 
 @implementation KalturaQuizUserEntryFilter
-@synthesize versionEqual = _versionEqual;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_versionEqual = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfVersionEqual
-{
-    return KFT_Int;
-}
-
-- (void)setVersionEqualFromString:(NSString*)aPropVal
-{
-    self.versionEqual = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
     [super toParams:aParams isSuper:YES];
     if (!aIsSuper)
         [aParams putKey:@"objectType" withString:@"KalturaQuizUserEntryFilter"];
-    [aParams addIfDefinedKey:@"versionEqual" withInt:self.versionEqual];
 }
 
 @end
