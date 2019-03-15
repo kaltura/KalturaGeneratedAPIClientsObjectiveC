@@ -28,7 +28,87 @@
 #import "KalturaGroupClientPlugin.h"
 
 ///////////////////////// enums /////////////////////////
+@implementation KalturaESearchGroupFieldName
++ (NSString*)CREATED_AT
+{
+    return @"created_at";
+}
++ (NSString*)EMAIL
+{
+    return @"email";
+}
++ (NSString*)FIRST_NAME
+{
+    return @"first_name";
+}
++ (NSString*)GROUP_IDS
+{
+    return @"group_ids";
+}
++ (NSString*)LAST_NAME
+{
+    return @"last_name";
+}
++ (NSString*)PERMISSION_NAMES
+{
+    return @"permission_names";
+}
++ (NSString*)ROLE_IDS
+{
+    return @"role_ids";
+}
++ (NSString*)SCREEN_NAME
+{
+    return @"screen_name";
+}
++ (NSString*)TAGS
+{
+    return @"tags";
+}
++ (NSString*)UPDATED_AT
+{
+    return @"updated_at";
+}
++ (NSString*)USER_ID
+{
+    return @"user_id";
+}
+@end
+
+@implementation KalturaESearchGroupOrderByFieldName
++ (NSString*)CREATED_AT
+{
+    return @"created_at";
+}
++ (NSString*)MEMBERS_COUNT
+{
+    return @"members_count";
+}
++ (NSString*)USER_ID
+{
+    return @"puser_id";
+}
++ (NSString*)SCREEN_NAME
+{
+    return @"screen_name";
+}
++ (NSString*)UPDATED_AT
+{
+    return @"updated_at";
+}
+@end
+
 ///////////////////////// classes /////////////////////////
+@implementation KalturaESearchGroupBaseItem
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchGroupBaseItem"];
+}
+
+@end
+
 @interface KalturaGroup()
 @property (nonatomic,assign) int membersCount;
 @end
@@ -64,6 +144,56 @@
 
 @end
 
+@implementation KalturaESearchGroupOperator
+@synthesize operator = _operator;
+@synthesize searchItems = _searchItems;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_operator = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfOperator
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfSearchItems
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfSearchItems
+{
+    return @"KalturaESearchGroupBaseItem";
+}
+
+- (void)setOperatorFromString:(NSString*)aPropVal
+{
+    self.operator = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchGroupOperator"];
+    [aParams addIfDefinedKey:@"operator" withInt:self.operator];
+    [aParams addIfDefinedKey:@"searchItems" withArray:self.searchItems];
+}
+
+- (void)dealloc
+{
+    [self->_searchItems release];
+    [super dealloc];
+}
+
+@end
+
 @interface KalturaGroupListResponse()
 @property (nonatomic,retain) NSMutableArray* objects;
 @end
@@ -91,6 +221,159 @@
 - (void)dealloc
 {
     [self->_objects release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaESearchAbstractGroupItem
+@synthesize searchTerm = _searchTerm;
+@synthesize itemType = _itemType;
+@synthesize range = _range;
+@synthesize addHighlight = _addHighlight;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_itemType = KALTURA_UNDEF_INT;
+    self->_addHighlight = KALTURA_UNDEF_BOOL;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfSearchTerm
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfItemType
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfRange
+{
+    return KFT_Object;
+}
+
+- (NSString*)getObjectTypeOfRange
+{
+    return @"KalturaESearchRange";
+}
+
+- (KalturaFieldType)getTypeOfAddHighlight
+{
+    return KFT_Bool;
+}
+
+- (void)setItemTypeFromString:(NSString*)aPropVal
+{
+    self.itemType = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setAddHighlightFromString:(NSString*)aPropVal
+{
+    self.addHighlight = [KalturaSimpleTypeParser parseBool:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchAbstractGroupItem"];
+    [aParams addIfDefinedKey:@"searchTerm" withString:self.searchTerm];
+    [aParams addIfDefinedKey:@"itemType" withInt:self.itemType];
+    [aParams addIfDefinedKey:@"range" withObject:self.range];
+    [aParams addIfDefinedKey:@"addHighlight" withBool:self.addHighlight];
+}
+
+- (void)dealloc
+{
+    [self->_searchTerm release];
+    [self->_range release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaESearchGroupItem
+@synthesize fieldName = _fieldName;
+
+- (KalturaFieldType)getTypeOfFieldName
+{
+    return KFT_String;
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchGroupItem"];
+    [aParams addIfDefinedKey:@"fieldName" withString:self.fieldName];
+}
+
+- (void)dealloc
+{
+    [self->_fieldName release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaESearchGroupMetadataItem
+@synthesize xpath = _xpath;
+@synthesize metadataProfileId = _metadataProfileId;
+@synthesize metadataFieldId = _metadataFieldId;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_metadataProfileId = KALTURA_UNDEF_INT;
+    self->_metadataFieldId = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfXpath
+{
+    return KFT_String;
+}
+
+- (KalturaFieldType)getTypeOfMetadataProfileId
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfMetadataFieldId
+{
+    return KFT_Int;
+}
+
+- (void)setMetadataProfileIdFromString:(NSString*)aPropVal
+{
+    self.metadataProfileId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)setMetadataFieldIdFromString:(NSString*)aPropVal
+{
+    self.metadataFieldId = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchGroupMetadataItem"];
+    [aParams addIfDefinedKey:@"xpath" withString:self.xpath];
+    [aParams addIfDefinedKey:@"metadataProfileId" withInt:self.metadataProfileId];
+    [aParams addIfDefinedKey:@"metadataFieldId" withInt:self.metadataFieldId];
+}
+
+- (void)dealloc
+{
+    [self->_xpath release];
     [super dealloc];
 }
 

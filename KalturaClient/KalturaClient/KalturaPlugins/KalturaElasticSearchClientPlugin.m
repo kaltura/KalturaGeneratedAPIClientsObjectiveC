@@ -506,76 +506,6 @@
 }
 @end
 
-@implementation KalturaESearchGroupFieldName
-+ (NSString*)CREATED_AT
-{
-    return @"created_at";
-}
-+ (NSString*)EMAIL
-{
-    return @"email";
-}
-+ (NSString*)FIRST_NAME
-{
-    return @"first_name";
-}
-+ (NSString*)GROUP_IDS
-{
-    return @"group_ids";
-}
-+ (NSString*)LAST_NAME
-{
-    return @"last_name";
-}
-+ (NSString*)PERMISSION_NAMES
-{
-    return @"permission_names";
-}
-+ (NSString*)ROLE_IDS
-{
-    return @"role_ids";
-}
-+ (NSString*)SCREEN_NAME
-{
-    return @"screen_name";
-}
-+ (NSString*)TAGS
-{
-    return @"tags";
-}
-+ (NSString*)UPDATED_AT
-{
-    return @"updated_at";
-}
-+ (NSString*)USER_ID
-{
-    return @"user_id";
-}
-@end
-
-@implementation KalturaESearchGroupOrderByFieldName
-+ (NSString*)CREATED_AT
-{
-    return @"created_at";
-}
-+ (NSString*)MEMBERS_COUNT
-{
-    return @"members_count";
-}
-+ (NSString*)USER_ID
-{
-    return @"puser_id";
-}
-+ (NSString*)SCREEN_NAME
-{
-    return @"screen_name";
-}
-+ (NSString*)UPDATED_AT
-{
-    return @"updated_at";
-}
-@end
-
 @implementation KalturaESearchSortOrder
 + (NSString*)ORDER_BY_ASC
 {
@@ -1730,66 +1660,6 @@
 
 @end
 
-@implementation KalturaESearchUserOperator
-@synthesize operator = _operator;
-@synthesize searchItems = _searchItems;
-
-- (id)init
-{
-    self = [super init];
-    if (self == nil)
-        return nil;
-    self->_operator = KALTURA_UNDEF_INT;
-    return self;
-}
-
-- (KalturaFieldType)getTypeOfOperator
-{
-    return KFT_Int;
-}
-
-- (KalturaFieldType)getTypeOfSearchItems
-{
-    return KFT_Array;
-}
-
-- (NSString*)getObjectTypeOfSearchItems
-{
-    return @"KalturaESearchUserBaseItem";
-}
-
-- (void)setOperatorFromString:(NSString*)aPropVal
-{
-    self.operator = [KalturaSimpleTypeParser parseInt:aPropVal];
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaESearchUserOperator"];
-    [aParams addIfDefinedKey:@"operator" withInt:self.operator];
-    [aParams addIfDefinedKey:@"searchItems" withArray:self.searchItems];
-}
-
-- (void)dealloc
-{
-    [self->_searchItems release];
-    [super dealloc];
-}
-
-@end
-
-@implementation KalturaESearchGroupOperator
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaESearchGroupOperator"];
-}
-
-@end
-
 @implementation KalturaESearchGroupParams
 @synthesize searchOperator = _searchOperator;
 
@@ -1994,6 +1864,56 @@
 - (void)dealloc
 {
     [self->_sortField release];
+    [super dealloc];
+}
+
+@end
+
+@implementation KalturaESearchUserOperator
+@synthesize operator = _operator;
+@synthesize searchItems = _searchItems;
+
+- (id)init
+{
+    self = [super init];
+    if (self == nil)
+        return nil;
+    self->_operator = KALTURA_UNDEF_INT;
+    return self;
+}
+
+- (KalturaFieldType)getTypeOfOperator
+{
+    return KFT_Int;
+}
+
+- (KalturaFieldType)getTypeOfSearchItems
+{
+    return KFT_Array;
+}
+
+- (NSString*)getObjectTypeOfSearchItems
+{
+    return @"KalturaESearchUserBaseItem";
+}
+
+- (void)setOperatorFromString:(NSString*)aPropVal
+{
+    self.operator = [KalturaSimpleTypeParser parseInt:aPropVal];
+}
+
+- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
+{
+    [super toParams:aParams isSuper:YES];
+    if (!aIsSuper)
+        [aParams putKey:@"objectType" withString:@"KalturaESearchUserOperator"];
+    [aParams addIfDefinedKey:@"operator" withInt:self.operator];
+    [aParams addIfDefinedKey:@"searchItems" withArray:self.searchItems];
+}
+
+- (void)dealloc
+{
+    [self->_searchItems release];
     [super dealloc];
 }
 
@@ -2535,30 +2455,6 @@
 
 @end
 
-@implementation KalturaESearchGroupItem
-@synthesize fieldName = _fieldName;
-
-- (KalturaFieldType)getTypeOfFieldName
-{
-    return KFT_String;
-}
-
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaESearchGroupItem"];
-    [aParams addIfDefinedKey:@"fieldName" withString:self.fieldName];
-}
-
-- (void)dealloc
-{
-    [self->_fieldName release];
-    [super dealloc];
-}
-
-@end
-
 @implementation KalturaESearchUnifiedItem
 - (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
 {
@@ -2718,16 +2614,6 @@
     [self->_searchTerm release];
     [self->_range release];
     [super dealloc];
-}
-
-@end
-
-@implementation KalturaESearchGroupMetadataItem
-- (void)toParams:(KalturaParams*)aParams isSuper:(BOOL)aIsSuper
-{
-    [super toParams:aParams isSuper:YES];
-    if (!aIsSuper)
-        [aParams putKey:@"objectType" withString:@"KalturaESearchGroupMetadataItem"];
 }
 
 @end

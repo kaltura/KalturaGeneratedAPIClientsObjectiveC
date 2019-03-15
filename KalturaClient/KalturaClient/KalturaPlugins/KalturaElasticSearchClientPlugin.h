@@ -194,32 +194,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaESearchGroupFieldName : NSObject
-+ (NSString*)CREATED_AT;
-+ (NSString*)EMAIL;
-+ (NSString*)FIRST_NAME;
-+ (NSString*)GROUP_IDS;
-+ (NSString*)LAST_NAME;
-+ (NSString*)PERMISSION_NAMES;
-+ (NSString*)ROLE_IDS;
-+ (NSString*)SCREEN_NAME;
-+ (NSString*)TAGS;
-+ (NSString*)UPDATED_AT;
-+ (NSString*)USER_ID;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaESearchGroupOrderByFieldName : NSObject
-+ (NSString*)CREATED_AT;
-+ (NSString*)MEMBERS_COUNT;
-+ (NSString*)USER_ID;
-+ (NSString*)SCREEN_NAME;
-+ (NSString*)UPDATED_AT;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaESearchSortOrder : NSObject
 + (NSString*)ORDER_BY_ASC;
 + (NSString*)ORDER_BY_DESC;
@@ -547,22 +521,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaESearchUserOperator : KalturaESearchUserBaseItem
-@property (nonatomic,assign) int operator;	// enum KalturaESearchOperatorType
-@property (nonatomic,retain) NSMutableArray* searchItems;	// of KalturaESearchUserBaseItem elements
-- (KalturaFieldType)getTypeOfOperator;
-- (KalturaFieldType)getTypeOfSearchItems;
-- (NSString*)getObjectTypeOfSearchItems;
-- (void)setOperatorFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaESearchGroupOperator : KalturaESearchUserOperator
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaESearchGroupParams : KalturaESearchParams
 @property (nonatomic,retain) KalturaESearchGroupOperator* searchOperator;
 - (KalturaFieldType)getTypeOfSearchOperator;
@@ -610,6 +568,17 @@
 @interface KalturaESearchUserOrderByItem : KalturaESearchOrderByItem
 @property (nonatomic,copy) NSString* sortField;	// enum KalturaESearchUserOrderByFieldName
 - (KalturaFieldType)getTypeOfSortField;
+@end
+
+// @package Kaltura
+// @subpackage Client
+@interface KalturaESearchUserOperator : KalturaESearchUserBaseItem
+@property (nonatomic,assign) int operator;	// enum KalturaESearchOperatorType
+@property (nonatomic,retain) NSMutableArray* searchItems;	// of KalturaESearchUserBaseItem elements
+- (KalturaFieldType)getTypeOfOperator;
+- (KalturaFieldType)getTypeOfSearchItems;
+- (NSString*)getObjectTypeOfSearchItems;
+- (void)setOperatorFromString:(NSString*)aPropVal;
 @end
 
 // @package Kaltura
@@ -740,13 +709,6 @@
 
 // @package Kaltura
 // @subpackage Client
-@interface KalturaESearchGroupItem : KalturaESearchAbstractUserItem
-@property (nonatomic,copy) NSString* fieldName;	// enum KalturaESearchGroupFieldName
-- (KalturaFieldType)getTypeOfFieldName;
-@end
-
-// @package Kaltura
-// @subpackage Client
 @interface KalturaESearchUnifiedItem : KalturaESearchAbstractEntryItem
 @end
 
@@ -784,11 +746,6 @@
 - (KalturaFieldType)getTypeOfAddHighlight;
 - (void)setItemTypeFromString:(NSString*)aPropVal;
 - (void)setAddHighlightFromString:(NSString*)aPropVal;
-@end
-
-// @package Kaltura
-// @subpackage Client
-@interface KalturaESearchGroupMetadataItem : KalturaESearchUserMetadataItem
 @end
 
 // @package Kaltura
@@ -832,6 +789,9 @@
 ///////////////////////// services /////////////////////////
 // @package Kaltura
 // @subpackage Client
+@class KalturaESearchGroupResponse;
+@class KalturaESearchGroupParams;
+@class KalturaPager;
 @interface KalturaESearchService : KalturaServiceBase
 - (KalturaESearchCategoryResponse*)searchCategoryWithSearchParams:(KalturaESearchCategoryParams*)aSearchParams withPager:(KalturaPager*)aPager;
 - (KalturaESearchCategoryResponse*)searchCategoryWithSearchParams:(KalturaESearchCategoryParams*)aSearchParams;
